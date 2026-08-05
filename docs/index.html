@@ -572,17 +572,14 @@
             );
           }
 
-          // 重複除外 (De-duplication): 同一アイテムID + 同一品質の二重表示を防止
+          // 重複除外
           const seenKeys = new Set();
           const uniqueItems = [];
           
           for (const item of items) {
             const q = item.quality || "NONE";
-            // 識別キー: item_id + quality
             const dupKey = `${item.item_id}_${q}`;
             
-            // NONEとNQの同一アイテムダブりも防止
-            const genericKey = `${item.item_id}_GENERIC`;
             if (q === "NONE" && seenKeys.has(`${item.item_id}_NQ`)) continue;
             if (q === "NQ" && seenKeys.has(`${item.item_id}_NONE`)) continue;
 
@@ -664,6 +661,12 @@
               ? Number(item.velocity).toFixed(1) 
               : '0.0';
 
+            // リテイナー出品枠数の確実な復活表示（例: (45出品)）
+            let listingsText = "";
+            if (item.listings_count && item.listings_count > 0) {
+              listingsText = ` (${item.listings_count}出品)`;
+            }
+
             return `
               <div class="item-card">
                 <div class="item-card-header">
@@ -684,7 +687,7 @@
 
                 <div class="item-sub-grid">
                   <div>平均: ${avgPriceStr}</div>
-                  <div>在庫: ${unitsStr}</div>
+                  <div>在庫: ${unitsStr}${listingsText}</div>
                 </div>
 
                 ${crossProfitBox}
