@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FF14 Market Board Analytics - JP DC High-Velocity Items</title>
+  <title>FF14 Market Analytics - 4 DC Multi-View</title>
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
   <style>
     :root {
       --bg-dark: #0b0f19;
-      --card-bg: rgba(22, 30, 49, 0.75);
+      --card-bg: rgba(22, 30, 49, 0.85);
       --card-border: rgba(255, 255, 255, 0.08);
       --accent-blue: #00d2ff;
       --accent-purple: #7928ca;
@@ -39,62 +39,69 @@
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1600px;
       margin: 0 auto;
     }
 
+    /* Header & Filter Bar */
     header {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 1.5rem;
+      gap: 1rem;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.8rem;
     }
 
     .brand-icon {
-      width: 48px;
-      height: 48px;
+      width: 42px;
+      height: 42px;
       background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      border-radius: 12px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: white;
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
     }
 
     h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 800;
       background: linear-gradient(to right, #ffffff, #94a3b8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
+    .header-badges {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
     .status-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       background: rgba(0, 210, 255, 0.1);
       border: 1px solid rgba(0, 210, 255, 0.2);
       color: var(--accent-blue);
-      padding: 0.4rem 0.8rem;
+      padding: 0.35rem 0.75rem;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
     }
 
@@ -105,9 +112,9 @@
       background: rgba(255, 183, 3, 0.15);
       border: 1px solid rgba(255, 183, 3, 0.3);
       color: var(--accent-gold);
-      padding: 0.4rem 0.8rem;
+      padding: 0.35rem 0.75rem;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
     }
 
@@ -126,96 +133,11 @@
       100% { opacity: 0.4; }
     }
 
-    /* DC Selector Tabs */
-    .dc-tabs {
-      display: flex;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-      overflow-x: auto;
-      padding-bottom: 0.5rem;
-    }
-
-    .dc-tab {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 0.65rem 1.25rem;
-      border-radius: 12px;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      white-space: nowrap;
-    }
-
-    .dc-tab:hover {
-      border-color: rgba(0, 210, 255, 0.4);
-      color: #ffffff;
-    }
-
-    .dc-tab.active {
-      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(121, 40, 202, 0.2));
-      border-color: var(--accent-blue);
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
-    }
-
-    /* Stats Overview Cards */
-    .overview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2rem;
-    }
-
-    .stat-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(0, 210, 255, 0.3);
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .stat-value {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    /* Controls & Filter Bar */
-    .controls-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-
+    /* Global Search Box */
     .search-box {
       position: relative;
-      flex: 1;
-      min-width: 280px;
+      width: 100%;
+      margin-bottom: 1.5rem;
     }
 
     .search-box i {
@@ -231,7 +153,7 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 0.75rem 1rem 0.75rem 2.8rem;
+      padding: 0.7rem 1rem 0.7rem 2.8rem;
       color: var(--text-main);
       font-size: 0.95rem;
       outline: none;
@@ -242,106 +164,175 @@
       border-color: var(--accent-blue);
     }
 
-    /* Data Table Card */
-    .table-card {
+    /* 4-Column DC Grid Layout */
+    .dc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .dc-column {
       background: var(--card-bg);
       backdrop-filter: blur(16px);
       border: 1px solid var(--card-border);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 180px);
+      min-height: 600px;
     }
 
-    .table-container {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-
-    th {
-      background: rgba(15, 23, 42, 0.6);
+    .dc-column-header {
       padding: 1rem 1.25rem;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.8);
       border-bottom: 1px solid var(--card-border);
-      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
     }
 
-    td {
-      padding: 1.1rem 1.25rem;
-      border-bottom: 1px solid var(--card-border);
-      font-size: 0.95rem;
-    }
-
-    tbody tr {
-      transition: background 0.15s ease;
-    }
-
-    tbody tr:hover {
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .rank-cell {
+    .dc-name {
       font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--accent-gold);
-      width: 60px;
-    }
-
-    .item-name {
-      font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 800;
       color: #ffffff;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
 
-    .item-id {
+    .dc-count-badge {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--accent-blue);
       font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+    }
+
+    /* Scrollable Item List */
+    .dc-item-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* Custom Scrollbar */
+    .dc-item-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .dc-item-list::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .dc-item-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+    }
+
+    .dc-item-list::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-blue);
+    }
+
+    /* Compact Item Card */
+    .item-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.85rem;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .item-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 210, 255, 0.3);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .item-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      gap: 0.5rem;
+    }
+
+    .rank-tag {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--accent-gold);
+    }
+
+    .item-card-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #ffffff;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .item-card-id {
+      font-size: 0.7rem;
       color: var(--text-muted);
       background: rgba(255, 255, 255, 0.05);
-      padding: 0.2rem 0.4rem;
+      padding: 0.1rem 0.3rem;
       border-radius: 4px;
+      white-space: nowrap;
     }
 
-    .velocity-tag {
-      display: inline-flex;
+    .item-stats-row {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 0.3rem;
-      color: #4ade80;
-      font-weight: 700;
-      font-family: 'Outfit', sans-serif;
-    }
-
-    .price-value {
-      font-weight: 600;
-      color: #f8fafc;
-    }
-
-    .sub-info {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: block;
-      margin-top: 0.2rem;
-    }
-
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      color: var(--text-muted);
+      margin-bottom: 0.4rem;
       font-size: 0.85rem;
     }
 
+    .velocity-badge {
+      color: #4ade80;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      font-size: 0.85rem;
+    }
+
+    .price-main {
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .item-sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.06);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .nq-badge { color: var(--badge-nq); font-weight: 600; }
+    .hq-badge { color: var(--badge-hq); font-weight: 600; }
+
+    /* Responsive Grid */
+    @media (max-width: 1400px) {
+      .dc-grid { grid-template-columns: repeat(2, 1fr); }
+      .dc-column { height: 550px; }
+    }
+
     @media (max-width: 768px) {
-      h1 { font-size: 1.4rem; }
-      td, th { padding: 0.75rem; font-size: 0.85rem; }
+      .dc-grid { grid-template-columns: 1fr; }
+      .dc-column { height: 500px; }
+      h1 { font-size: 1.3rem; }
     }
   </style>
 </head>
@@ -353,85 +344,78 @@
         <div class="brand-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
         <div>
           <h1>FF14 Market Board Analytics</h1>
-          <div style="display: flex; gap: 0.5rem; margin-top: 0.4rem; flex-wrap: wrap;">
-            <div class="filter-badge">
-              <i class="fa-solid fa-filter"></i> 1日50個以上売れる超高流動品
-            </div>
-            <div class="status-badge" id="lastUpdatedBadge">
-              <span class="status-dot"></span> データを読み込み中...
-            </div>
-          </div>
+        </div>
+      </div>
+
+      <div class="header-badges">
+        <div class="filter-badge">
+          <i class="fa-solid fa-fire"></i> 1日50個以上売れる超高流動品
+        </div>
+        <div class="status-badge" id="lastUpdatedBadge">
+          <span class="status-dot"></span> 読み込み中...
         </div>
       </div>
     </header>
 
-    <!-- DC Selection Tabs -->
-    <div class="dc-tabs" id="dcTabs">
-      <button class="dc-tab active" data-dc="Mana"><i class="fa-solid fa-server"></i> Mana</button>
-      <button class="dc-tab" data-dc="Elemental"><i class="fa-solid fa-server"></i> Elemental</button>
-      <button class="dc-tab" data-dc="Gaia"><i class="fa-solid fa-server"></i> Gaia</button>
-      <button class="dc-tab" data-dc="Meteor"><i class="fa-solid fa-server"></i> Meteor</button>
+    <!-- Global Search Input -->
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="searchInput" class="search-input" placeholder="全DC横断アイテム検索 (名前またはID)...">
     </div>
 
-    <!-- Overview Cards -->
-    <div class="overview-grid">
-      <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-server"></i> 選択中データセンター</div>
-        <div class="stat-value" id="statScope">Mana DC</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-bolt"></i> 爆速回転アイテム数 (>=50/日)</div>
-        <div class="stat-value" id="statTotalItems">-</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-crown"></i> 最高取引速度アイテム</div>
-        <div class="stat-value" id="statTopItem" style="font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">-</div>
-      </div>
-    </div>
+    <!-- 4 DC Multi-Column Layout -->
+    <div class="dc-grid">
 
-    <!-- Controls -->
-    <div class="controls-bar">
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" class="search-input" placeholder="高回転アイテム名またはIDでリアルタイム検索...">
+      <!-- Mana DC Column -->
+      <div class="dc-column">
+        <div class="dc-column-header">
+          <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> Mana</div>
+          <span class="dc-count-badge" id="count-Mana">0件</span>
+        </div>
+        <div class="dc-item-list" id="list-Mana">
+          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...</div>
+        </div>
       </div>
-    </div>
 
-    <!-- Data Table -->
-    <div class="table-card">
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>順位</th>
-              <th>アイテム名 (ID)</th>
-              <th>1日平均販売数</th>
-              <th>最安値</th>
-              <th>平均価格</th>
-              <th>NQ / HQ 最安値</th>
-              <th>出品在庫数</th>
-            </tr>
-          </thead>
-          <tbody id="marketTableBody">
-            <tr>
-              <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-muted);">
-                <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                <p>超高回転市場データを読み込み中...</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Elemental DC Column -->
+      <div class="dc-column">
+        <div class="dc-column-header">
+          <div class="dc-name"><i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental</div>
+          <span class="dc-count-badge" id="count-Elemental">0件</span>
+        </div>
+        <div class="dc-item-list" id="list-Elemental">
+          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...</div>
+        </div>
       </div>
-    </div>
 
-    <footer>
-      <p>FF14 High-Velocity Market Analytics &copy; 2026 | Pool Threshold: &ge; 50.0 sales/day</p>
-    </footer>
+      <!-- Gaia DC Column -->
+      <div class="dc-column">
+        <div class="dc-column-header">
+          <div class="dc-name"><i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia</div>
+          <span class="dc-count-badge" id="count-Gaia">0件</span>
+        </div>
+        <div class="dc-item-list" id="list-Gaia">
+          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...</div>
+        </div>
+      </div>
+
+      <!-- Meteor DC Column -->
+      <div class="dc-column">
+        <div class="dc-column-header">
+          <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor</div>
+          <span class="dc-count-badge" id="count-Meteor">0件</span>
+        </div>
+        <div class="dc-item-list" id="list-Meteor">
+          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <script>
+    const DATACENTERS = ["Mana", "Elemental", "Gaia", "Meteor"];
     let allDcData = {};
-    let currentDc = "Mana";
 
     async function loadData() {
       try {
@@ -444,86 +428,72 @@
         `;
 
         allDcData = data.data || {};
-        switchDc(currentDc);
+        renderAllColumns();
 
       } catch (err) {
         console.error(err);
-        document.getElementById('marketTableBody').innerHTML = `
-          <tr>
-            <td colspan="7" style="text-align: center; padding: 3rem; color: #ef4444;">
-              <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem;"></i>
-              <p>データの読み込みに失敗しました。時間をおいて再読み込みしてください。</p>
-            </td>
-          </tr>
-        `;
+        DATACENTERS.forEach(dc => {
+          document.getElementById(`list-${dc}`).innerHTML = `
+            <div style="text-align:center; padding:2rem; color:#ef4444;">
+              <i class="fa-solid fa-triangle-exclamation"></i> データ取得エラー
+            </div>
+          `;
+        });
       }
     }
 
-    function switchDc(dcName) {
-      currentDc = dcName;
-      document.getElementById('statScope').innerText = `${dcName} DC`;
+    function renderAllColumns(searchTerm = "") {
+      DATACENTERS.forEach(dc => {
+        const rawItems = allDcData[dc] || [];
+        
+        // Search Filter
+        let items = rawItems;
+        if (searchTerm) {
+          items = rawItems.filter(item => 
+            item.item_name.toLowerCase().includes(searchTerm) ||
+            item.item_id.toString().includes(searchTerm)
+          );
+        }
 
-      const items = allDcData[dcName] || [];
-      document.getElementById('statTotalItems').innerText = `${items.length} 件`;
+        document.getElementById(`count-${dc}`).innerText = `${items.length}件`;
+        const listEl = document.getElementById(`list-${dc}`);
 
-      if (items.length > 0) {
-        document.getElementById('statTopItem').innerText = items[0].item_name;
-      } else {
-        document.getElementById('statTopItem').innerText = '-';
-      }
+        if (items.length === 0) {
+          listEl.innerHTML = `
+            <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.85rem;">
+              高回転アイテム未検知
+            </div>
+          `;
+          return;
+        }
 
-      document.getElementById('searchInput').value = '';
-      renderTable(items);
-    }
+        listEl.innerHTML = items.map((item, idx) => {
+          const nqPrice = item.min_price_nq ? `${item.min_price_nq.toLocaleString()}G` : '-';
+          const hqPrice = item.min_price_hq ? `${item.min_price_hq.toLocaleString()}G` : '-';
 
-    function renderTable(items) {
-      const tbody = document.getElementById('marketTableBody');
-      if (!items || items.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="7" style="text-align: center; padding: 2rem; color: var(--text-muted);">
-              現在 ${currentDc} DC で「1日平均50個以上」売れている高回転アイテムはプール未検知か蓄積待ちです。
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      tbody.innerHTML = items.map((item, idx) => {
-        const nqStr = item.min_price_nq ? `${item.min_price_nq.toLocaleString()} Gil` : '-';
-        const hqStr = item.min_price_hq ? `${item.min_price_hq.toLocaleString()} Gil` : '-';
-
-        return `
-          <tr>
-            <td class="rank-cell">#${idx + 1}</td>
-            <td>
-              <div class="item-name">
-                ${escapeHtml(item.item_name)}
-                <span class="item-id">ID:${item.item_id}</span>
+          return `
+            <div class="item-card">
+              <div class="item-card-header">
+                <span class="rank-tag">#${idx + 1}</span>
+                <span class="item-card-title">${escapeHtml(item.item_name)}</span>
+                <span class="item-card-id">ID:${item.item_id}</span>
               </div>
-            </td>
-            <td>
-              <span class="velocity-tag">
-                <i class="fa-solid fa-bolt"></i> ${item.velocity.toFixed(1)} 個/日
-              </span>
-            </td>
-            <td>
-              <span class="price-value">${item.min_price.toLocaleString()} Gil</span>
-            </td>
-            <td>
-              <span class="price-value" style="color: #cbd5e1;">${item.avg_price.toLocaleString()} Gil</span>
-            </td>
-            <td>
-              <span class="sub-info"><strong style="color: var(--badge-nq);">NQ:</strong> ${nqStr}</span>
-              <span class="sub-info"><strong style="color: var(--badge-hq);">HQ:</strong> ${hqStr}</span>
-            </td>
-            <td>
-              <span>${item.units_for_sale.toLocaleString()} 個</span>
-              <span class="sub-info">(${item.listings_count} 出品)</span>
-            </td>
-          </tr>
-        `;
-      }).join('');
+              
+              <div class="item-stats-row">
+                <span class="velocity-badge"><i class="fa-solid fa-bolt"></i> ${item.velocity.toFixed(1)} 個/日</span>
+                <span class="price-main">${item.min_price.toLocaleString()} Gil</span>
+              </div>
+
+              <div class="item-sub-grid">
+                <div><span class="nq-badge">NQ:</span> ${nqPrice}</div>
+                <div><span class="hq-badge">HQ:</span> ${hqPrice}</div>
+                <div>平均: ${item.avg_price.toLocaleString()}G</div>
+                <div>在庫: ${item.units_for_sale.toLocaleString()}個</div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      });
     }
 
     function escapeHtml(str) {
@@ -538,31 +508,10 @@
       });
     }
 
-    document.querySelectorAll('.dc-tab').forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        document.querySelectorAll('.dc-tab').forEach(t => t.classList.remove('active'));
-        const targetTab = e.currentTarget;
-        targetTab.classList.add('active');
-        const dc = targetTab.getAttribute('data-dc');
-        switchDc(dc);
-      });
-    });
-
+    // Global Search Event
     document.getElementById('searchInput').addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase().trim();
-      const items = allDcData[currentDc] || [];
-
-      if (!term) {
-        renderTable(items);
-        return;
-      }
-
-      const filtered = items.filter(item => 
-        item.item_name.toLowerCase().includes(term) ||
-        item.item_id.toString().includes(term)
-      );
-
-      renderTable(filtered);
+      renderAllColumns(term);
     });
 
     loadData();
