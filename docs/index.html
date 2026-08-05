@@ -601,8 +601,8 @@
           <div style="display:flex;align-items:center;gap:0.4rem;">
             <div class="sort-toggle-group">
               <button class="sort-toggle-btn active" data-dc="Mana" data-sort="velocity" onclick="setSort('Mana','velocity')">売買数</button>
-              <button class="sort-toggle-btn" data-dc="Mana" data-sort="revenue" onclick="setSort('Mana','revenue')">日商</button>
-              <button class="sort-toggle-btn" data-dc="Mana" data-sort="avg_price" onclick="setSort('Mana','avg_price')">平均額</button>
+              <button class="sort-toggle-btn" data-dc="Mana" data-sort="revenue" onclick="setSort('Mana','revenue')">流通ギル</button>
+              <button class="sort-toggle-btn" data-dc="Mana" data-sort="avg_price" onclick="setSort('Mana','avg_price')">平均単価</button>
             </div>
             <span class="dc-count-badge" id="count-Mana">0件</span>
           </div>
@@ -618,8 +618,8 @@
           <div style="display:flex;align-items:center;gap:0.4rem;">
             <div class="sort-toggle-group">
               <button class="sort-toggle-btn active" data-dc="Elemental" data-sort="velocity" onclick="setSort('Elemental','velocity')">売買数</button>
-              <button class="sort-toggle-btn" data-dc="Elemental" data-sort="revenue" onclick="setSort('Elemental','revenue')">日商</button>
-              <button class="sort-toggle-btn" data-dc="Elemental" data-sort="avg_price" onclick="setSort('Elemental','avg_price')">平均額</button>
+              <button class="sort-toggle-btn" data-dc="Elemental" data-sort="revenue" onclick="setSort('Elemental','revenue')">流通ギル</button>
+              <button class="sort-toggle-btn" data-dc="Elemental" data-sort="avg_price" onclick="setSort('Elemental','avg_price')">平均単価</button>
             </div>
             <span class="dc-count-badge" id="count-Elemental">0件</span>
           </div>
@@ -635,8 +635,8 @@
           <div style="display:flex;align-items:center;gap:0.4rem;">
             <div class="sort-toggle-group">
               <button class="sort-toggle-btn active" data-dc="Gaia" data-sort="velocity" onclick="setSort('Gaia','velocity')">売買数</button>
-              <button class="sort-toggle-btn" data-dc="Gaia" data-sort="revenue" onclick="setSort('Gaia','revenue')">日商</button>
-              <button class="sort-toggle-btn" data-dc="Gaia" data-sort="avg_price" onclick="setSort('Gaia','avg_price')">平均額</button>
+              <button class="sort-toggle-btn" data-dc="Gaia" data-sort="revenue" onclick="setSort('Gaia','revenue')">流通ギル</button>
+              <button class="sort-toggle-btn" data-dc="Gaia" data-sort="avg_price" onclick="setSort('Gaia','avg_price')">平均単価</button>
             </div>
             <span class="dc-count-badge" id="count-Gaia">0件</span>
           </div>
@@ -652,8 +652,8 @@
           <div style="display:flex;align-items:center;gap:0.4rem;">
             <div class="sort-toggle-group">
               <button class="sort-toggle-btn active" data-dc="Meteor" data-sort="velocity" onclick="setSort('Meteor','velocity')">売買数</button>
-              <button class="sort-toggle-btn" data-dc="Meteor" data-sort="revenue" onclick="setSort('Meteor','revenue')">日商</button>
-              <button class="sort-toggle-btn" data-dc="Meteor" data-sort="avg_price" onclick="setSort('Meteor','avg_price')">平均額</button>
+              <button class="sort-toggle-btn" data-dc="Meteor" data-sort="revenue" onclick="setSort('Meteor','revenue')">流通ギル</button>
+              <button class="sort-toggle-btn" data-dc="Meteor" data-sort="avg_price" onclick="setSort('Meteor','avg_price')">平均単価</button>
             </div>
             <span class="dc-count-badge" id="count-Meteor">0件</span>
           </div>
@@ -821,28 +821,25 @@
 
             let cleanTitle = escapeHtml(displayTitle).replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
 
-            const minPriceStr = (item.min_price !== undefined && item.min_price !== null) 
-              ? `${Number(item.min_price).toLocaleString()}G` 
-              : '-';
+            const minPriceVal = (item.min_price !== undefined && item.min_price !== null) ? Math.round(Number(item.min_price)) : null;
+            const minPriceStr = (minPriceVal !== null) ? `${minPriceVal.toLocaleString()}G` : '-';
 
-            const avgPriceStr = (item.avg_price !== undefined && item.avg_price !== null) 
-              ? `${Number(item.avg_price).toLocaleString()}G` 
-              : '-';
+            const avgPriceVal = (item.avg_price !== undefined && item.avg_price !== null) ? Math.round(Number(item.avg_price)) : null;
+            const avgPriceStr = (avgPriceVal !== null) ? `${avgPriceVal.toLocaleString()}G` : '-';
 
-            const hMin = (item.hist_min !== undefined && item.hist_min !== null) ? Number(item.hist_min) : Number(item.min_price || 0);
-            const hMax = (item.hist_max !== undefined && item.hist_max !== null) ? Number(item.hist_max) : Number(item.max_price || hMin);
+            const hMin = (item.hist_min !== undefined && item.hist_min !== null) ? Math.round(Number(item.hist_min)) : (minPriceVal || 0);
+            const hMax = (item.hist_max !== undefined && item.hist_max !== null) ? Math.round(Number(item.hist_max)) : hMin;
 
             let historyText = "";
             if (hMin === hMax) {
-              historyText = `過去取引: ${hMin.toLocaleString()}G (固定価格帯)`;
+              historyText = `過去取引: ${hMin.toLocaleString()}G/個 (固定価格帯)`;
             } else {
               historyText = `過去取引: 最安 ${hMin.toLocaleString()}G 〜 最高 ${hMax.toLocaleString()}G`;
             }
 
             const vel = (item.velocity !== undefined && item.velocity !== null) ? Number(item.velocity) : 0;
-            const velStr = vel.toFixed(1);
-            const avgPrice = (item.avg_price !== undefined && item.avg_price !== null) ? Number(item.avg_price) : 0;
-            const dailyRevenue = Math.round(avgPrice * vel);
+            const velStr = Math.round(vel).toLocaleString();
+            const dailyRevenue = Math.round((avgPriceVal || 0) * vel);
             const dailyRevenueStr = dailyRevenue.toLocaleString() + 'G';
 
             // Item icon
@@ -868,13 +865,13 @@
                 </div>
                 
                 <div class="item-stats-row">
-                  <span class="stat-badge stat-vel"><i class="fa-solid fa-bolt"></i> ${velStr} 個/日</span>
-                  <span class="stat-badge stat-rev"><i class="fa-solid fa-coins"></i> 日商: ${dailyRevenueStr}</span>
+                  <span class="stat-badge stat-vel"><i class="fa-solid fa-bolt"></i> 売買数: ${velStr}個/日</span>
+                  <span class="stat-badge stat-rev"><i class="fa-solid fa-coins"></i> 流通ギル: ${dailyRevenueStr}/日</span>
                 </div>
 
                 <div class="item-sub-grid">
-                  <span class="stat-sub-item stat-min"><i class="fa-solid fa-tag"></i> 最安: <strong>${minPriceStr}</strong></span>
-                  <span class="stat-sub-item stat-avg"><i class="fa-solid fa-scale-balanced"></i> 平均: <strong>${avgPriceStr}</strong></span>
+                  <span class="stat-sub-item stat-min"><i class="fa-solid fa-tag"></i> 最安単価: <strong>${minPriceStr}/個</strong></span>
+                  <span class="stat-sub-item stat-avg"><i class="fa-solid fa-scale-balanced"></i> 平均単価: <strong>${avgPriceStr}/個</strong></span>
                 </div>
 
                 <div class="history-range-row">
