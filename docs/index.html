@@ -877,10 +877,11 @@
         if (!res.ok) throw new Error('Data fetch failed');
         const data = await res.json();
 
-        const formattedLastUpdated = formatTimeJST(data.last_updated);
-        document.getElementById('lastUpdatedBadge').innerHTML = `
-          <span class="status-dot"></span> 最終更新: ${formattedLastUpdated}
-        `;
+        const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
+        if (lastUpdatedEl) {
+          const formattedLastUpdated = formatTimeJST(data.last_updated);
+          lastUpdatedEl.innerHTML = `<span class="status-dot"></span> 最終更新: ${formattedLastUpdated}`;
+        }
 
         allDcData = data.data || {};
         renderAllColumns();
