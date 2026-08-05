@@ -98,20 +98,31 @@ def init_db(db_path="data/market_data.db"):
 def clean_name(raw_name):
     return re.sub(r'\s*\[(NQ|HQ)\]\s*$', '', raw_name).strip()
 
-def resolve_item_metadata_batch(item_ids):
+def resolve_item_metadata_batch(conn, item_ids):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
     meta_map = {}
     
+    # 1. Known items map
     for iid in item_ids:
         if iid in KNOWN_70_ITEMS:
             name, can_hq = KNOWN_70_ITEMS[iid]
             meta_map[iid] = {"name": name, "can_be_hq": can_hq}
 
+    # 2. Check item_metadata DB cache
     missing_ids = [x for x in item_ids if x not in meta_map]
-    for iid in missing_ids:
+    if missing_ids and conn:
+        cursor = conn.cursor()
+        placeholders = ','.join(['?'] * len(missing_ids))
+        cursor.execute(f"SELECT item_id, category, can_be_hq FROM item_metadata WHERE item_id IN ({placeholders})", list(missing_ids))
+        for row in cursor.fetchall():
+            meta_map[row[0]] = {"name": f"Item {row[0]}", "can_be_hq": bool(row[2])}
+
+    # 3. Fallback to XIVAPI / Garland for truly unknown items
+    still_missing = [x for x in item_ids if x not in meta_map]
+    for iid in still_missing:
         try:
             x_single = f"https://xivapi.com/Item/{iid}?language=ja"
-            xr = requests.get(x_single, headers=headers, timeout=3)
+            xr = requests.get(x_single, headers=headers, timeout=5)
             if xr.status_code == 200:
                 xdata = xr.json()
                 name = xdata.get("Name_ja")
@@ -124,7 +135,7 @@ def resolve_item_metadata_batch(item_ids):
 
         try:
             g_url = f"https://www.garlandtools.org/db/doc/item/ja/3/{iid}.json"
-            gr = requests.get(g_url, headers=headers, timeout=3)
+            gr = requests.get(g_url, headers=headers, timeout=5)
             if gr.status_code == 200:
                 g_data = gr.json()
                 name = g_data.get('item', {}).get('name')
@@ -139,6 +150,9 @@ def resolve_item_metadata_batch(item_ids):
 
 def fetch_and_cache_metadata(conn, item_ids):
     """Fetch item metadata from XIVAPI/Garland, cache in DB, return dict."""
+    if not item_ids:
+        return {}
+        
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
     cursor = conn.cursor()
     
@@ -382,18 +396,22 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         return
 
     items_data = {}
-    chunk_size = 10
+    chunk_size = 50
     for i in range(0, len(target_ids), chunk_size):
         chunk = target_ids[i:i + chunk_size]
         ids_str = ",".join(map(str, chunk))
         detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}?entriesToReturn=100"
         
-        try:
-            d_res = requests.get(detail_url, headers=headers, timeout=15)
-            if d_res.status_code == 200:
-                items_data.update(d_res.json().get('items', {}))
-        except Exception as e:
-            print(f"[{scope_name}] Detail fetch error: {e}")
+        for attempt in range(2):
+            try:
+                d_res = requests.get(detail_url, headers=headers, timeout=15)
+                if d_res.status_code == 200:
+                    items_data.update(d_res.json().get('items', {}))
+                    break
+            except Exception as e:
+                if attempt == 1:
+                    print(f"[{scope_name}] Detail fetch error (attempt {attempt+1}): {e}")
+                time.sleep(1)
             
         time.sleep(0.1)
 
@@ -401,7 +419,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         return
 
     all_item_ids = [int(k) for k in items_data.keys()]
-    name_map = resolve_item_metadata_batch(all_item_ids)
+    name_map = resolve_item_metadata_batch(conn, all_item_ids)
 
     high_velocity_count = 0
 
