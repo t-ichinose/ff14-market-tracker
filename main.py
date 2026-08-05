@@ -281,6 +281,25 @@ def export_web_json(conn, output_path="docs/data.json"):
 
             raw_name = clean_name(raw_name)
 
+            # Query history points for the past 30 days
+            h_cursor = conn.cursor()
+            h_cursor.execute("""
+            SELECT timestamp, min_price, avg_price, units_for_sale, daily_sale_velocity
+            FROM market_logs
+            WHERE scope = ? AND item_key = ? AND timestamp >= datetime('now', '-30 days')
+            ORDER BY id ASC
+            """, (r[1], r[2]))
+            h_rows = h_cursor.fetchall()
+            history_points = []
+            for hr in h_rows:
+                history_points.append({
+                    "timestamp": hr[0],
+                    "min_price": hr[1],
+                    "avg_price": hr[2],
+                    "units_for_sale": hr[3],
+                    "velocity": hr[4]
+                })
+
             item_obj = {
                 "timestamp": r[0],
                 "scope": r[1],
@@ -293,7 +312,8 @@ def export_web_json(conn, output_path="docs/data.json"):
                 "hist_min": h_min,
                 "hist_max": h_max,
                 "units_for_sale": r[11],
-                "last_upload_time": r[12]
+                "last_upload_time": r[12],
+                "history_points": history_points
             }
             items.append(item_obj)
             
@@ -333,6 +353,18 @@ def export_web_json(conn, output_path="docs/data.json"):
         
     print(f"Exported enriched web JSON to {output_path}")
     ensure_items_search_json("docs/items_search.json")
+
+def cleanup_old_logs(conn, days=30):
+    """Delete market logs older than `days` days."""
+    try:
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM market_logs WHERE timestamp < datetime('now', '-' || ? || ' days')", (str(days),))
+        deleted_count = cursor.rowcount
+        conn.commit()
+        if deleted_count > 0:
+            print(f"[Cleanup] Deleted {deleted_count} logs older than {days} days.")
+    except Exception as e:
+        print(f"[Cleanup] Error cleaning up old logs: {e}")
 
 def ensure_items_search_json(output_path="docs/items_search.json"):
     if os.path.exists(output_path) and os.path.getsize(output_path) > 100000:
@@ -483,6 +515,7 @@ def fetch_and_save_all():
         print(f"--- Processing DC: {scope} (Exact DC Listings Stock) ---")
         process_dc_pipeline(scope, conn, now_str)
 
+    cleanup_old_logs(conn, 30)
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()

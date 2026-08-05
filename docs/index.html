@@ -8,11 +8,12 @@
   <meta http-equiv="Expires" content="0">
 
   <title>FF14 Market Analytics - Enriched Pro Dashboard</title>
-  <!-- Google Fonts & Icons -->
+  <!-- Google Fonts & Icons & Chart.js -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <style>
     :root {
@@ -32,6 +33,98 @@
       --badge-nq-bg: rgba(59, 130, 246, 0.15);
       --badge-nq-border: rgba(59, 130, 246, 0.4);
       --badge-nq-text: #60a5fa;
+    }
+
+    /* Modal & Chart Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-card {
+      background: rgba(22, 30, 49, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      width: 92%;
+      max-width: 850px;
+      padding: 1.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      transform: translateY(20px);
+      transition: transform 0.25s ease;
+    }
+    .modal-overlay.active .modal-card {
+      transform: translateY(0);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+    .modal-title-box {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+    }
+    .chart-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(121, 40, 202, 0.2);
+      border: 1px solid rgba(121, 40, 202, 0.4);
+      color: #c084fc;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 0.6rem;
+      width: 100%;
+      justify-content: center;
+    }
+    .chart-btn:hover {
+      background: rgba(121, 40, 202, 0.45);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(121, 40, 202, 0.4);
     }
 
     * {
@@ -91,6 +184,7 @@
       font-weight: 800;
       background: linear-gradient(to right, #ffffff, #94a3b8);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -550,10 +644,30 @@
     </div>
   </div>
 
+  <!-- Chart Modal -->
+  <div class="modal-overlay" id="chartModal" onclick="closeChartModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <img id="modalItemIcon" src="" style="width:36px;height:36px;border-radius:6px;display:none;" />
+          <div>
+            <h2 id="modalItemTitle" style="font-size:1.2rem;font-weight:700;color:#fff;">価格・在庫推移</h2>
+            <div id="modalItemSub" style="font-size:0.8rem;color:var(--text-muted);">データセンター: Mana</div>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeChartModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="chart-container">
+        <canvas id="priceChartCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
   <script>
     const DATACENTERS = ["Mana", "Elemental", "Gaia", "Meteor"];
     let allDcData = {};
     const sortMode = { Mana: 'velocity', Elemental: 'velocity', Gaia: 'velocity', Meteor: 'velocity' };
+    let priceChart = null;
 
     function setSort(dc, mode) {
       sortMode[dc] = mode;
@@ -564,8 +678,6 @@
       const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
       renderAllColumns(searchTerm);
     }
-
-
 
     async function loadData() {
       try {
@@ -651,8 +763,6 @@
 
             let cleanTitle = escapeHtml(displayTitle).replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
 
-
-
             const minPriceStr = (item.min_price !== undefined && item.min_price !== null) 
               ? `${Number(item.min_price).toLocaleString()}G` 
               : '-';
@@ -712,6 +822,10 @@
                 <div class="history-range-row">
                   <i class="fa-solid fa-clock-rotate-left"></i> ${historyText}
                 </div>
+
+                <button class="chart-btn" onclick="openChartModal('${dc}', ${item.item_id})">
+                  <i class="fa-solid fa-chart-line"></i> 📈 推移グラフ
+                </button>
               </div>
             `;
           }).join('');
@@ -719,6 +833,129 @@
           console.error(`Error rendering column ${dc}:`, colErr);
         }
       });
+    }
+
+    function openChartModal(dc, itemId) {
+      const items = allDcData[dc] || [];
+      const item = items.find(i => i.item_id === itemId || i.item_id === Number(itemId));
+      if (!item) return;
+
+      const history = item.history_points || [];
+      const modal = document.getElementById('chartModal');
+      const modalTitle = document.getElementById('modalItemTitle');
+      const modalSub = document.getElementById('modalItemSub');
+      const modalIcon = document.getElementById('modalItemIcon');
+
+      let displayTitle = item.item_name || `Item ${item.item_id}`;
+      if (allItemSearchDict[item.item_id]) {
+        displayTitle = allItemSearchDict[item.item_id];
+      }
+      modalTitle.innerText = displayTitle.replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
+      modalSub.innerText = `${dc} データセンター | 直近の推移 (データ履歴: ${history.length}件)`;
+
+      const meta = item.meta || {};
+      if (meta.icon_url) {
+        modalIcon.src = meta.icon_url;
+        modalIcon.style.display = 'block';
+      } else {
+        modalIcon.style.display = 'none';
+      }
+
+      modal.classList.add('active');
+
+      const labels = history.map(h => h.timestamp ? h.timestamp.replace(/^\d{4}-/, '') : '');
+      const avgPrices = history.map(h => h.avg_price);
+      const minPrices = history.map(h => h.min_price);
+      const stockUnits = history.map(h => h.units_for_sale);
+
+      const ctx = document.getElementById('priceChartCanvas').getContext('2d');
+      if (priceChart) {
+        priceChart.destroy();
+      }
+
+      priceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels.length > 0 ? labels : [item.timestamp ? item.timestamp.replace(/^\d{4}-/, '') : '現在'],
+          datasets: [
+            {
+              label: '平均価格 (G)',
+              data: avgPrices.length > 0 ? avgPrices : [item.avg_price],
+              borderColor: '#a855f7',
+              backgroundColor: 'rgba(168, 85, 247, 0.15)',
+              fill: true,
+              tension: 0.3,
+              yAxisID: 'yPrice'
+            },
+            {
+              label: '出品最安値 (G)',
+              data: minPrices.length > 0 ? minPrices : [item.min_price],
+              borderColor: '#4ade80',
+              backgroundColor: 'transparent',
+              borderDash: [4, 4],
+              tension: 0.3,
+              yAxisID: 'yPrice'
+            },
+            {
+              label: '出品在庫数 (個)',
+              data: stockUnits.length > 0 ? stockUnits : [item.units_for_sale],
+              borderColor: '#ffb703',
+              backgroundColor: 'transparent',
+              tension: 0.3,
+              yAxisID: 'yStock'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          plugins: {
+            legend: {
+              labels: { color: '#94a3b8', font: { family: 'Inter' } }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(15, 23, 42, 0.95)',
+              titleColor: '#f8fafc',
+              bodyColor: '#cbd5e1',
+              borderColor: 'rgba(255, 255, 255, 0.15)',
+              borderWidth: 1,
+              padding: 10
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8' }
+            },
+            yPrice: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              title: { display: true, text: '価格 (Gil)', color: '#a855f7' },
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8' }
+            },
+            yStock: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: { display: true, text: '在庫数 (個)', color: '#ffb703' },
+              grid: { drawOnChartArea: false },
+              ticks: { color: '#ffb703' }
+            }
+          }
+        }
+      });
+    }
+
+    function closeChartModal(e) {
+      if (!e || e.target.id === 'chartModal' || e.target.closest('.modal-close-btn')) {
+        document.getElementById('chartModal').classList.remove('active');
+      }
     }
 
     function escapeHtml(str) {
