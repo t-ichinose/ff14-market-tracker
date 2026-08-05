@@ -572,10 +572,30 @@
             );
           }
 
-          document.getElementById(`count-${dc}`).innerText = `${items.length}件`;
+          // 重複除外 (De-duplication): 同一アイテムID + 同一品質の二重表示を防止
+          const seenKeys = new Set();
+          const uniqueItems = [];
+          
+          for (const item of items) {
+            const q = item.quality || "NONE";
+            // 識別キー: item_id + quality
+            const dupKey = `${item.item_id}_${q}`;
+            
+            // NONEとNQの同一アイテムダブりも防止
+            const genericKey = `${item.item_id}_GENERIC`;
+            if (q === "NONE" && seenKeys.has(`${item.item_id}_NQ`)) continue;
+            if (q === "NQ" && seenKeys.has(`${item.item_id}_NONE`)) continue;
+
+            if (!seenKeys.has(dupKey)) {
+              seenKeys.add(dupKey);
+              uniqueItems.push(item);
+            }
+          }
+
+          document.getElementById(`count-${dc}`).innerText = `${uniqueItems.length}件`;
           const listEl = document.getElementById(`list-${dc}`);
 
-          if (items.length === 0) {
+          if (uniqueItems.length === 0) {
             listEl.innerHTML = `
               <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.85rem;">
                 高回転アイテム未検知
@@ -584,7 +604,7 @@
             return;
           }
 
-          listEl.innerHTML = items.map((item, idx) => {
+          listEl.innerHTML = uniqueItems.map((item, idx) => {
             const q = item.quality || "NONE";
             let qualityBadge = "";
             
