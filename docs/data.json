@@ -280,7 +280,18 @@
         "hist_max": 4588,
         "units_for_sale": 709,
         "last_upload_time": "2026-08-05 03:46:22",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20708.png",
+          "description": "理性を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -303,6 +314,17 @@
           "high_price": 495,
           "profit_gil": 70,
           "profit_rate": 17.5
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20708.png",
+          "description": "理性を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -326,6 +348,17 @@
           "high_price": 2500,
           "profit_gil": 175,
           "profit_rate": 8.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20710.png",
+          "description": "力を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -376,6 +409,17 @@
           "high_price": 1000,
           "profit_gil": 450,
           "profit_rate": 90.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24229.png",
+          "description": "熱して膨張したトウモロコシに、キャラメルソースを絡めた菓子。弾ける際の音や見た目から大人子供問わずに大人気だとか<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -399,6 +443,17 @@
           "high_price": 2384,
           "profit_gil": 214,
           "profit_rate": 10.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24229.png",
+          "description": "熱して膨張したトウモロコシに、キャラメルソースを絡めた菓子。弾ける際の音や見た目から大人子供問わずに大人気だとか<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -415,7 +470,18 @@
         "hist_max": 838,
         "units_for_sale": 3214,
         "last_upload_time": "2026-08-04 20:56:08",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22414.png",
+          "description": "切り出されたコーディアの丸材",
+          "category": "50",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -438,6 +504,17 @@
           "high_price": 250,
           "profit_gil": 87,
           "profit_rate": 58.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21471.png",
+          "description": "ロードクロサイトを含んでいると思しき原石",
+          "category": "48",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -461,6 +538,17 @@
           "high_price": 250,
           "profit_gil": 40,
           "profit_rate": 20.3
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21471.png",
+          "description": "ロードクロサイトを含んでいると思しき原石",
+          "category": "48",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -619,6 +707,17 @@
           "high_price": 2000,
           "profit_gil": 900,
           "profit_rate": 90.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24119.png",
+          "description": "ポポトをロネークの乳で煮込んだクリームスープ<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -635,7 +734,18 @@
         "hist_max": 2988,
         "units_for_sale": 7091,
         "last_upload_time": "2026-08-05 03:07:27",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24119.png",
+          "description": "ポポトをロネークの乳で煮込んだクリームスープ<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -739,7 +849,18 @@
         "hist_max": 2905,
         "units_for_sale": 1448,
         "last_upload_time": "2026-08-05 02:25:25",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20661.png",
+          "description": "木材の内部まで浸透して保護する、防腐加工塗料",
+          "category": "54",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -904,7 +1025,18 @@
         "hist_max": 1500,
         "units_for_sale": 1610,
         "last_upload_time": "2026-08-05 01:20:26",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/25011.png",
+          "description": "ノパルに付着する小型の虫から作られた、深い赤色を発色する染料",
+          "category": "54",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -954,7 +1086,18 @@
         "hist_max": 1790,
         "units_for_sale": 2024,
         "last_upload_time": "2026-08-04 19:28:26",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21492.png",
+          "description": "落雷によってガラス化した珪岩",
+          "category": "48",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -970,7 +1113,18 @@
         "hist_max": 1790,
         "units_for_sale": 2024,
         "last_upload_time": "2026-08-04 19:28:26",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21492.png",
+          "description": "落雷によってガラス化した珪岩",
+          "category": "48",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1101,7 +1255,18 @@
         "hist_max": 2999,
         "units_for_sale": 892,
         "last_upload_time": "2026-08-05 02:01:54",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21820.png",
+          "description": "古代からトラル大陸に棲息する哺乳類の粗皮",
+          "category": "52",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1117,7 +1282,18 @@
         "hist_max": 2999,
         "units_for_sale": 892,
         "last_upload_time": "2026-08-05 02:01:54",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21820.png",
+          "description": "古代からトラル大陸に棲息する哺乳類の粗皮",
+          "category": "52",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1221,7 +1397,18 @@
         "hist_max": 2500,
         "units_for_sale": 1597,
         "last_upload_time": "2026-08-05 00:39:50",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21616.png",
+          "description": "古代からトラル大陸に棲息する鳥類の毛",
+          "category": "51",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1244,6 +1431,17 @@
           "high_price": 3191,
           "profit_gil": 1231,
           "profit_rate": 68.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21616.png",
+          "description": "古代からトラル大陸に棲息する鳥類の毛",
+          "category": "51",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -1429,7 +1627,18 @@
         "hist_max": 9299,
         "units_for_sale": 1346,
         "last_upload_time": "2026-08-04 23:12:58",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/t/23624.png",
+          "description": "遺物を発見するために必要な、探索ドローンの燃料<br>[クラフター・ギャザラーでのみ使用可能]<br>[コスモエクスプローラー専用アイテム]",
+          "category": "61",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1526,7 +1735,18 @@
         "hist_max": 6890,
         "units_for_sale": 1612,
         "last_upload_time": "2026-08-04 21:22:19",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24116.png",
+          "description": "ガーリックやオニオンをロネークの乳で煮込んだ、味の深みが特徴的なグラタン<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1569,7 +1789,18 @@
         "hist_max": 6890,
         "units_for_sale": 1612,
         "last_upload_time": "2026-08-05 03:07:13",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24116.png",
+          "description": "ガーリックやオニオンをロネークの乳で煮込んだ、味の深みが特徴的なグラタン<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1727,7 +1958,18 @@
         "hist_max": 2000,
         "units_for_sale": 4883,
         "last_upload_time": "2026-08-05 02:10:31",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/29259.png",
+          "description": "雷鳴を身に宿した黄金色の淡水魚<br>[魚拓額縁G2に設定可能]",
+          "category": "47",
+          "item_level": 730,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -1743,7 +1985,18 @@
         "hist_max": 2000,
         "units_for_sale": 669,
         "last_upload_time": "2026-08-05 01:54:34",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/29259.png",
+          "description": "雷鳴を身に宿した黄金色の淡水魚<br>[魚拓額縁G2に設定可能]",
+          "category": "47",
+          "item_level": 730,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1759,7 +2012,18 @@
         "hist_max": 9299,
         "units_for_sale": 1346,
         "last_upload_time": "2026-08-05 03:27:50",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/t/23624.png",
+          "description": "遺物を発見するために必要な、探索ドローンの燃料<br>[クラフター・ギャザラーでのみ使用可能]<br>[コスモエクスプローラー専用アイテム]",
+          "category": "61",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -1870,6 +2134,17 @@
           "high_price": 1499,
           "profit_gil": 224,
           "profit_rate": 18.7
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22701.png",
+          "description": "従来の錬金薬を濃縮し、性能を向上させた錬金薬",
+          "category": "54",
+          "item_level": 720,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -2028,6 +2303,17 @@
           "high_price": 1605,
           "profit_gil": 324,
           "profit_rate": 27.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22701.png",
+          "description": "従来の錬金薬を濃縮し、性能を向上させた錬金薬",
+          "category": "54",
+          "item_level": 720,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -2159,7 +2445,18 @@
         "hist_max": 4910,
         "units_for_sale": 1591,
         "last_upload_time": "2026-08-05 02:10:42",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24107.png",
+          "description": "ウナギとポポトをひと口大に切り、パウダー状にしたサベネアンパプリカで煮込んだ料理<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 750,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2263,7 +2560,18 @@
         "hist_max": 3964,
         "units_for_sale": 509,
         "last_upload_time": "2026-08-05 02:14:25",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22805.png",
+          "description": "装備品を染色するための万能染料",
+          "category": "55",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2286,6 +2594,17 @@
           "high_price": 4130,
           "profit_gil": 272,
           "profit_rate": 7.5
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24107.png",
+          "description": "ウナギとポポトをひと口大に切り、パウダー状にしたサベネアンパプリカで煮込んだ料理<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 750,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -2383,7 +2702,18 @@
         "hist_max": 3964,
         "units_for_sale": 509,
         "last_upload_time": "2026-08-05 04:02:10",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22805.png",
+          "description": "装備品を染色するための万能染料",
+          "category": "55",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2922,6 +3252,17 @@
           "high_price": 2500,
           "profit_gil": 175,
           "profit_rate": 8.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20710.png",
+          "description": "力を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -2945,6 +3286,17 @@
           "high_price": 3000,
           "profit_gil": 350,
           "profit_rate": 14.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20709.png",
+          "description": "器用さを高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3069,7 +3421,18 @@
         "hist_max": 350,
         "units_for_sale": 2689,
         "last_upload_time": "2026-08-04 22:58:53",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/25240.png",
+          "description": "紫色をした珍しい品種のトラルコーン。粒が硬く、熱すると弾けるという特徴がある",
+          "category": "45",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3085,7 +3448,18 @@
         "hist_max": 698,
         "units_for_sale": 2689,
         "last_upload_time": "2026-08-04 22:58:53",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/25240.png",
+          "description": "紫色をした珍しい品種のトラルコーン。粒が硬く、熱すると弾けるという特徴がある",
+          "category": "45",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3128,7 +3502,18 @@
         "hist_max": 110,
         "units_for_sale": 3480,
         "last_upload_time": "2026-08-04 22:24:30",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20628.png",
+          "description": "体力回復の効能がある水薬",
+          "category": "44",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3144,7 +3529,18 @@
         "hist_max": 220,
         "units_for_sale": 3572,
         "last_upload_time": "2026-08-04 17:17:16",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21475.png",
+          "description": "ローズガーネットを含んでいると思しき原石",
+          "category": "48",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -3221,7 +3617,18 @@
         "hist_max": 470,
         "units_for_sale": 3480,
         "last_upload_time": "2026-08-04 22:24:30",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20628.png",
+          "description": "体力回復の効能がある水薬",
+          "category": "44",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3298,7 +3705,18 @@
         "hist_max": 300,
         "units_for_sale": 1238,
         "last_upload_time": "2026-08-05 03:11:45",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22811.png",
+          "description": "装備品を染色するための万能染料",
+          "category": "55",
+          "item_level": 1,
+          "shop_price": 216,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -3314,7 +3732,18 @@
         "hist_max": 103,
         "units_for_sale": 1238,
         "last_upload_time": "2026-08-05 01:37:44",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22811.png",
+          "description": "装備品を染色するための万能染料",
+          "category": "55",
+          "item_level": 1,
+          "shop_price": 216,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -3337,6 +3766,17 @@
           "high_price": 250,
           "profit_gil": 40,
           "profit_rate": 20.3
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21471.png",
+          "description": "ロードクロサイトを含んでいると思しき原石",
+          "category": "48",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3360,6 +3800,17 @@
           "high_price": 250,
           "profit_gil": 87,
           "profit_rate": 58.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21471.png",
+          "description": "ロードクロサイトを含んでいると思しき原石",
+          "category": "48",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3437,7 +3888,18 @@
         "hist_max": 2900,
         "units_for_sale": 1843,
         "last_upload_time": "2026-08-05 04:07:33",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20674.png",
+          "description": "トラル大陸に豊富に生育する、生命力の強い植物から抽出したエキス",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3460,6 +3922,17 @@
           "high_price": 2384,
           "profit_gil": 214,
           "profit_rate": 10.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24229.png",
+          "description": "熱して膨張したトウモロコシに、キャラメルソースを絡めた菓子。弾ける際の音や見た目から大人子供問わずに大人気だとか<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3483,6 +3956,17 @@
           "high_price": 1000,
           "profit_gil": 450,
           "profit_rate": 90.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24229.png",
+          "description": "熱して膨張したトウモロコシに、キャラメルソースを絡めた菓子。弾ける際の音や見た目から大人子供問わずに大人気だとか<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3506,6 +3990,17 @@
           "high_price": 89,
           "profit_gil": 24,
           "profit_rate": 40.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22427.png",
+          "description": "切り出されたエレクトロパインの丸材。強い雷属性のエーテルを帯びており、取り扱いには注意が必要",
+          "category": "50",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3522,7 +4017,18 @@
         "hist_max": 4835,
         "units_for_sale": 9526,
         "last_upload_time": "2026-08-05 03:02:06",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24119.png",
+          "description": "ポポトをロネークの乳で煮込んだクリームスープ<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -3545,6 +4051,17 @@
           "high_price": 2000,
           "profit_gil": 900,
           "profit_rate": 90.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24119.png",
+          "description": "ポポトをロネークの乳で煮込んだクリームスープ<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3561,7 +4078,18 @@
         "hist_max": 2000,
         "units_for_sale": 641,
         "last_upload_time": "2026-08-04 15:53:52",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/27501.png",
+          "description": "焙煎すると優れたなめし材になることで知られるコーヒー豆",
+          "category": "54",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -3577,7 +4105,18 @@
         "hist_max": 2005,
         "units_for_sale": 641,
         "last_upload_time": "2026-08-04 15:53:52",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/27501.png",
+          "description": "焙煎すると優れたなめし材になることで知られるコーヒー豆",
+          "category": "54",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -3593,7 +4132,18 @@
         "hist_max": 389,
         "units_for_sale": 3650,
         "last_upload_time": "2026-08-05 02:06:07",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/25033.png",
+          "description": "オルコ・パチャのごく限られた場所にのみ生育する、高品質な繊維植物",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3609,7 +4159,18 @@
         "hist_max": 1950,
         "units_for_sale": 27487,
         "last_upload_time": "2026-08-05 02:06:07",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/25033.png",
+          "description": "オルコ・パチャのごく限られた場所にのみ生育する、高品質な繊維植物",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -3686,6 +4247,17 @@
           "high_price": 3191,
           "profit_gil": 1231,
           "profit_rate": 68.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21616.png",
+          "description": "古代からトラル大陸に棲息する鳥類の毛",
+          "category": "51",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3756,7 +4328,18 @@
         "hist_max": 1500,
         "units_for_sale": 1858,
         "last_upload_time": "2026-08-04 18:30:09",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20709.png",
+          "description": "器用さを高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3914,7 +4497,18 @@
         "hist_max": 3500,
         "units_for_sale": 1083,
         "last_upload_time": "2026-08-04 15:51:09",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21820.png",
+          "description": "古代からトラル大陸に棲息する哺乳類の粗皮",
+          "category": "52",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -4695,6 +5289,17 @@
           "high_price": 1605,
           "profit_gil": 324,
           "profit_rate": 27.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22701.png",
+          "description": "従来の錬金薬を濃縮し、性能を向上させた錬金薬",
+          "category": "54",
+          "item_level": 720,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -4718,6 +5323,17 @@
           "high_price": 1499,
           "profit_gil": 224,
           "profit_rate": 18.7
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22701.png",
+          "description": "従来の錬金薬を濃縮し、性能を向上させた錬金薬",
+          "category": "54",
+          "item_level": 720,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5365,6 +5981,17 @@
           "high_price": 495,
           "profit_gil": 71,
           "profit_rate": 17.8
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20709.png",
+          "description": "器用さを高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5388,6 +6015,17 @@
           "high_price": 3000,
           "profit_gil": 350,
           "profit_rate": 14.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20709.png",
+          "description": "器用さを高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5404,7 +6042,18 @@
         "hist_max": 4700,
         "units_for_sale": 780,
         "last_upload_time": "2026-08-05 02:15:46",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20708.png",
+          "description": "理性を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -5427,6 +6076,17 @@
           "high_price": 495,
           "profit_gil": 70,
           "profit_rate": 17.5
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20708.png",
+          "description": "理性を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5450,6 +6110,17 @@
           "high_price": 1000,
           "profit_gil": 450,
           "profit_rate": 90.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24229.png",
+          "description": "熱して膨張したトウモロコシに、キャラメルソースを絡めた菓子。弾ける際の音や見た目から大人子供問わずに大人気だとか<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5473,6 +6144,17 @@
           "high_price": 89,
           "profit_gil": 24,
           "profit_rate": 40.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22427.png",
+          "description": "切り出されたエレクトロパインの丸材。強い雷属性のエーテルを帯びており、取り扱いには注意が必要",
+          "category": "50",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5496,6 +6178,17 @@
           "high_price": 2384,
           "profit_gil": 214,
           "profit_rate": 10.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24229.png",
+          "description": "熱して膨張したトウモロコシに、キャラメルソースを絡めた菓子。弾ける際の音や見た目から大人子供問わずに大人気だとか<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5539,7 +6232,18 @@
         "hist_max": 2096,
         "units_for_sale": 3661,
         "last_upload_time": "2026-08-05 04:00:05",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21248.png",
+          "description": "精選によって得られた、大粒のクリスタルの粉末",
+          "category": "54",
+          "item_level": 730,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5555,7 +6259,18 @@
         "hist_max": 3199,
         "units_for_sale": 2005,
         "last_upload_time": "2026-08-05 04:02:09",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20674.png",
+          "description": "トラル大陸に豊富に生育する、生命力の強い植物から抽出したエキス",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -5598,7 +6313,18 @@
         "hist_max": 100,
         "units_for_sale": 3500,
         "last_upload_time": "2026-08-05 00:30:22",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22678.png",
+          "description": "ミネラルの含有量が少なく、口当たりが滑らかな水",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5614,7 +6340,18 @@
         "hist_max": 400,
         "units_for_sale": 3500,
         "last_upload_time": "2026-08-05 04:08:54",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22678.png",
+          "description": "ミネラルの含有量が少なく、口当たりが滑らかな水",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5630,7 +6367,18 @@
         "hist_max": 1000,
         "units_for_sale": 31754,
         "last_upload_time": "2026-08-05 04:09:22",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22709.png",
+          "description": "良質な蝋が採れるロウヤシの葉。蝋は幅広い用途に用いられる",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -5646,7 +6394,18 @@
         "hist_max": 2300,
         "units_for_sale": 6010,
         "last_upload_time": "2026-08-04 19:01:03",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/25011.png",
+          "description": "ノパルに付着する小型の虫から作られた、深い赤色を発色する染料",
+          "category": "54",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -5662,7 +6421,18 @@
         "hist_max": 1100,
         "units_for_sale": 2754,
         "last_upload_time": "2026-08-04 19:01:03",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/25011.png",
+          "description": "ノパルに付着する小型の虫から作られた、深い赤色を発色する染料",
+          "category": "54",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -5678,7 +6448,18 @@
         "hist_max": 2505,
         "units_for_sale": 2005,
         "last_upload_time": "2026-08-05 01:50:39",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20674.png",
+          "description": "トラル大陸に豊富に生育する、生命力の強い植物から抽出したエキス",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5829,7 +6610,18 @@
         "hist_max": 778,
         "units_for_sale": 3515,
         "last_upload_time": "2026-08-05 04:01:15",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21206.png",
+          "description": "高密度の軽銀を含有する鉱石",
+          "category": "48",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6034,7 +6826,18 @@
         "hist_max": 3000,
         "units_for_sale": 11928,
         "last_upload_time": "2026-08-05 02:19:34",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21462.png",
+          "description": "シャーローニ荒野で採集された石炭を高温で乾留した燃料",
+          "category": "54",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -6138,6 +6941,17 @@
           "high_price": 20000,
           "profit_gil": 1000,
           "profit_rate": 5.6
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/23541.png",
+          "description": "遺物を発見するために必要な、探索ドローンの燃料<br>[クラフター・ギャザラーでのみ使用可能]<br>[コスモエクスプローラー専用アイテム]",
+          "category": "61",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6154,7 +6968,18 @@
         "hist_max": 20000,
         "units_for_sale": 3126,
         "last_upload_time": "2026-08-04 23:14:45",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/23541.png",
+          "description": "遺物を発見するために必要な、探索ドローンの燃料<br>[クラフター・ギャザラーでのみ使用可能]<br>[コスモエクスプローラー専用アイテム]",
+          "category": "61",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -6400,6 +7225,17 @@
           "high_price": 3191,
           "profit_gil": 1231,
           "profit_rate": 68.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21616.png",
+          "description": "古代からトラル大陸に棲息する鳥類の毛",
+          "category": "51",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6504,7 +7340,18 @@
         "hist_max": 4444,
         "units_for_sale": 427,
         "last_upload_time": "2026-08-04 21:48:51",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/29259.png",
+          "description": "雷鳴を身に宿した黄金色の淡水魚<br>[魚拓額縁G2に設定可能]",
+          "category": "47",
+          "item_level": 730,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6574,7 +7421,18 @@
         "hist_max": 3200,
         "units_for_sale": 658,
         "last_upload_time": "2026-08-05 04:10:15",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22663.png",
+          "description": "金属の表面に被膜を形成し、着色を可能にするための錬金薬",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -6671,7 +7529,18 @@
         "hist_max": 1991,
         "units_for_sale": 1,
         "last_upload_time": "2026-08-05 02:07:50",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21479.png",
+          "description": "エバーキープ内で製造されている高精度の研磨剤",
+          "category": "48",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6687,7 +7556,18 @@
         "hist_max": 2980,
         "units_for_sale": 1076,
         "last_upload_time": "2026-08-05 02:07:50",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21479.png",
+          "description": "エバーキープ内で製造されている高精度の研磨剤",
+          "category": "48",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -6703,7 +7583,18 @@
         "hist_max": 2555,
         "units_for_sale": 1085,
         "last_upload_time": "2026-08-04 23:24:01",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22652.png",
+          "description": "エバーキープで作られた人工の樹脂",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6719,7 +7610,18 @@
         "hist_max": 4000,
         "units_for_sale": 1085,
         "last_upload_time": "2026-08-05 04:10:32",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22652.png",
+          "description": "エバーキープで作られた人工の樹脂",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6938,7 +7840,18 @@
         "hist_max": 2300,
         "units_for_sale": 816,
         "last_upload_time": "2026-08-05 03:50:20",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22654.png",
+          "description": "雷属性エーテル遮断加工のための特殊な塗料",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -7617,6 +8530,17 @@
           "high_price": 1605,
           "profit_gil": 324,
           "profit_rate": 27.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22701.png",
+          "description": "従来の錬金薬を濃縮し、性能を向上させた錬金薬",
+          "category": "54",
+          "item_level": 720,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -7667,7 +8591,18 @@
         "hist_max": 1,
         "units_for_sale": 1793,
         "last_upload_time": "2026-08-03 04:19:45",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21463.png",
+          "description": "万能染料に使われる顔料。細かな調合によってさまざまな色合いを生み出せる",
+          "category": "55",
+          "item_level": 28,
+          "shop_price": 97,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -7683,7 +8618,18 @@
         "hist_max": 99,
         "units_for_sale": 1793,
         "last_upload_time": "2026-08-03 04:19:45",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21463.png",
+          "description": "万能染料に使われる顔料。細かな調合によってさまざまな色合いを生み出せる",
+          "category": "55",
+          "item_level": 28,
+          "shop_price": 97,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:17:39",
@@ -8114,6 +9060,17 @@
           "high_price": 2500,
           "profit_gil": 175,
           "profit_rate": 8.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20710.png",
+          "description": "力を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -8130,7 +9087,18 @@
         "hist_max": 2500,
         "units_for_sale": 25058,
         "last_upload_time": "2026-08-04 18:02:08",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20710.png",
+          "description": "力を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -8153,6 +9121,17 @@
           "high_price": 495,
           "profit_gil": 70,
           "profit_rate": 17.5
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20708.png",
+          "description": "理性を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -8169,7 +9148,18 @@
         "hist_max": 3300,
         "units_for_sale": 1531,
         "last_upload_time": "2026-08-05 04:15:40",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20708.png",
+          "description": "理性を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -8226,6 +9216,17 @@
           "high_price": 495,
           "profit_gil": 71,
           "profit_rate": 17.8
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20709.png",
+          "description": "器用さを高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -8249,6 +9250,17 @@
           "high_price": 3000,
           "profit_gil": 350,
           "profit_rate": 14.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20709.png",
+          "description": "器用さを高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -8265,7 +9277,18 @@
         "hist_max": 400,
         "units_for_sale": 21227,
         "last_upload_time": "2026-08-05 02:00:56",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/25033.png",
+          "description": "オルコ・パチャのごく限られた場所にのみ生育する、高品質な繊維植物",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -8308,7 +9331,18 @@
         "hist_max": 4690,
         "units_for_sale": 2713,
         "last_upload_time": "2026-08-04 18:53:17",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/26527.png",
+          "description": "古銭の詰まった箱<br>サポートジョブアクション「ぜになげ」の使用で消費される<br>[クレセントアイル専用アイテム]",
+          "category": "61",
+          "item_level": 1,
+          "shop_price": 10000,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -8324,7 +9358,18 @@
         "hist_max": 2300,
         "units_for_sale": 2835,
         "last_upload_time": "2026-08-05 03:30:27",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20603.png",
+          "description": "体力、魔力回復の効能がある水薬<br>サポートジョブアクション「マギ・ポーション」「マギ・エーテル」の使用で消費される<br>[クレセントアイル専用アイテム]",
+          "category": "44",
+          "item_level": 1,
+          "shop_price": 10000,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -8367,7 +9412,18 @@
         "hist_max": 2300,
         "units_for_sale": 2835,
         "last_upload_time": "2026-08-04 21:15:32",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20603.png",
+          "description": "体力、魔力回復の効能がある水薬<br>サポートジョブアクション「マギ・ポーション」「マギ・エーテル」の使用で消費される<br>[クレセントアイル専用アイテム]",
+          "category": "44",
+          "item_level": 1,
+          "shop_price": 10000,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -8390,6 +9446,17 @@
           "high_price": 2384,
           "profit_gil": 214,
           "profit_rate": 10.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24229.png",
+          "description": "熱して膨張したトウモロコシに、キャラメルソースを絡めた菓子。弾ける際の音や見た目から大人子供問わずに大人気だとか<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -8413,6 +9480,17 @@
           "high_price": 1000,
           "profit_gil": 450,
           "profit_rate": 90.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24229.png",
+          "description": "熱して膨張したトウモロコシに、キャラメルソースを絡めた菓子。弾ける際の音や見た目から大人子供問わずに大人気だとか<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -8429,7 +9507,18 @@
         "hist_max": 300,
         "units_for_sale": 3762,
         "last_upload_time": "2026-08-05 01:51:49",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22709.png",
+          "description": "良質な蝋が採れるロウヤシの葉。蝋は幅広い用途に用いられる",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -8445,7 +9534,18 @@
         "hist_max": 300,
         "units_for_sale": 25366,
         "last_upload_time": "2026-08-05 01:51:49",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22709.png",
+          "description": "良質な蝋が採れるロウヤシの葉。蝋は幅広い用途に用いられる",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -8461,7 +9561,18 @@
         "hist_max": 2800,
         "units_for_sale": 1448,
         "last_upload_time": "2026-08-05 01:14:47",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20674.png",
+          "description": "トラル大陸に豊富に生育する、生命力の強い植物から抽出したエキス",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:40:49",
@@ -8477,7 +9588,18 @@
         "hist_max": 2800,
         "units_for_sale": 18381,
         "last_upload_time": "2026-08-05 01:14:47",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20674.png",
+          "description": "トラル大陸に豊富に生育する、生命力の強い植物から抽出したエキス",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -8493,7 +9615,18 @@
         "hist_max": 205,
         "units_for_sale": 2888,
         "last_upload_time": "2026-08-04 15:52:54",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21475.png",
+          "description": "ローズガーネットを含んでいると思しき原石",
+          "category": "48",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -8590,7 +9723,18 @@
         "hist_max": 2980,
         "units_for_sale": 1809,
         "last_upload_time": "2026-08-05 00:41:04",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20661.png",
+          "description": "木材の内部まで浸透して保護する、防腐加工塗料",
+          "category": "54",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -8613,6 +9757,17 @@
           "high_price": 3191,
           "profit_gil": 1231,
           "profit_rate": 68.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21616.png",
+          "description": "古代からトラル大陸に棲息する鳥類の毛",
+          "category": "51",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -8853,7 +10008,18 @@
         "hist_max": 10000,
         "units_for_sale": 666,
         "last_upload_time": "2026-08-04 19:03:26",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/t/23624.png",
+          "description": "遺物を発見するために必要な、探索ドローンの燃料<br>[クラフター・ギャザラーでのみ使用可能]<br>[コスモエクスプローラー専用アイテム]",
+          "category": "61",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -8869,7 +10035,18 @@
         "hist_max": 10000,
         "units_for_sale": 666,
         "last_upload_time": "2026-08-05 02:55:15",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/t/23624.png",
+          "description": "遺物を発見するために必要な、探索ドローンの燃料<br>[クラフター・ギャザラーでのみ使用可能]<br>[コスモエクスプローラー専用アイテム]",
+          "category": "61",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -8885,7 +10062,18 @@
         "hist_max": 2999,
         "units_for_sale": 16639,
         "last_upload_time": "2026-08-04 18:11:18",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22648.png",
+          "description": "トラル大陸の伝統的な織物に用いられている、鮮やかな赤色を発色する染料",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:40:49",
@@ -8901,7 +10089,18 @@
         "hist_max": 2999,
         "units_for_sale": 1020,
         "last_upload_time": "2026-08-04 18:11:18",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22648.png",
+          "description": "トラル大陸の伝統的な織物に用いられている、鮮やかな赤色を発色する染料",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -9093,6 +10292,17 @@
           "high_price": 20000,
           "profit_gil": 1000,
           "profit_rate": 5.6
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/23541.png",
+          "description": "遺物を発見するために必要な、探索ドローンの燃料<br>[クラフター・ギャザラーでのみ使用可能]<br>[コスモエクスプローラー専用アイテム]",
+          "category": "61",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -9109,7 +10319,18 @@
         "hist_max": 19000,
         "units_for_sale": 7193,
         "last_upload_time": "2026-08-04 23:56:55",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/23541.png",
+          "description": "遺物を発見するために必要な、探索ドローンの燃料<br>[クラフター・ギャザラーでのみ使用可能]<br>[コスモエクスプローラー専用アイテム]",
+          "category": "61",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -9450,6 +10671,17 @@
           "high_price": 4130,
           "profit_gil": 272,
           "profit_rate": 7.5
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24107.png",
+          "description": "ウナギとポポトをひと口大に切り、パウダー状にしたサベネアンパプリカで煮込んだ料理<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 750,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -9520,7 +10752,18 @@
         "hist_max": 2500,
         "units_for_sale": 969,
         "last_upload_time": "2026-08-04 14:55:03",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/20708.png",
+          "description": "理性を高める薬。持続時間に優れる<br>効果時間 0:30",
+          "category": "44",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
