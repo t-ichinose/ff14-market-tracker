@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FF14 Market Analytics - NQ/HQ Separated View</title>
+  <title>FF14 Market Analytics - HQ-Aware Multi-View</title>
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -284,7 +284,6 @@
       display: inline-flex;
       align-items: center;
       gap: 0.2rem;
-
     }
 
     .quality-hq {
@@ -374,7 +373,7 @@
 
       <div class="header-badges">
         <div class="filter-badge">
-          <i class="fa-solid fa-fire"></i> 1日50個以上売れる超高流動品 (NQ/HQ独立表示)
+          <i class="fa-solid fa-fire"></i> 1日50個以上売れる超高流動品
         </div>
         <div class="status-badge" id="lastUpdatedBadge">
           <span class="status-dot"></span> 読み込み中...
@@ -486,16 +485,26 @@
         }
 
         listEl.innerHTML = items.map((item, idx) => {
-          const isHQ = item.quality === "HQ" || item.item_name.includes("[HQ]");
-          const qualityBadge = isHQ 
-            ? `<span class="quality-badge quality-hq"><i class="fa-solid fa-crown"></i> HQ</span>`
-            : `<span class="quality-badge quality-nq"><i class="fa-solid fa-box"></i> NQ</span>`;
+          const q = item.quality || "NONE";
+          let qualityBadge = "";
+          
+          if (q === "HQ" || item.item_name.includes("[HQ]")) {
+            qualityBadge = `<span class="quality-badge quality-hq"><i class="fa-solid fa-crown"></i> HQ</span>`;
+          } else if (q === "NQ" || item.item_name.includes("[NQ]")) {
+            qualityBadge = `<span class="quality-badge quality-nq"><i class="fa-solid fa-box"></i> NQ</span>`;
+          }
+
+          // HQ区分が存在しないアイテムは [NQ] / [HQ] の文字をキレイに除去
+          let cleanTitle = escapeHtml(item.item_name);
+          if (q === "NONE") {
+            cleanTitle = cleanTitle.replace(/\s*\[(NQ|HQ)\]\s*$/, "");
+          }
 
           return `
             <div class="item-card">
               <div class="item-card-header">
                 <span class="rank-tag">#${idx + 1}</span>
-                <span class="item-card-title">${escapeHtml(item.item_name)}</span>
+                <span class="item-card-title">${cleanTitle}</span>
                 ${qualityBadge}
               </div>
               

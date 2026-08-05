@@ -10,12 +10,9 @@ VELOCITY_THRESHOLD = 50.0  # 1日平均50個以上の高回転品のみ
 
 def init_db(db_path="data/market_data.db"):
     os.makedirs("data", exist_ok=True)
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(db_path, timeout=30)
     cursor = conn.cursor()
     
-    # 完全に新しいロジックに更新するためプールテーブルをクリーン初期化
-    cursor.execute("DROP TABLE IF EXISTS items_pool")
-
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS items_pool (
         scope TEXT,
@@ -186,14 +183,14 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         nq_min = data.get("minPriceNQ") or data.get("minPrice", 0)
         hq_min = data.get("minPriceHQ") or 0
 
-        # HQが存在するか厳密判定 (hq_min > 0 または hq_vel > 0)
+        # HQが存在するか判定 (hq_min > 0 または hq_vel > 0)
         has_hq = (hq_min > 0 or hq_vel > 0)
 
         if not has_hq:
-            # HQが存在しないアイテム（マテリア・シャード・家具・一部素材など）
+            # HQが存在しないアイテム（マテリア、家具、一部素材等）
             qualities = [("NONE", base_name, total_vel, nq_min)]
         else:
-            # HQが存在するアイテム（装備・薬品・料理など）
+            # HQが存在するアイテム
             qualities = [
                 ("NQ", f"{base_name} [NQ]", nq_vel, nq_min),
                 ("HQ", f"{base_name} [HQ]", hq_vel, hq_min)
@@ -208,6 +205,8 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 INSERT INTO items_pool (scope, item_key, item_id, item_name, quality, added_at, last_velocity, is_active)
                 VALUES (?, ?, ?, ?, ?, ?, ?, 1)
                 ON CONFLICT(scope, item_key) DO UPDATE SET
+                    item_name = excluded.item_name,
+                    quality = excluded.quality,
                     last_velocity = excluded.last_velocity,
                     is_active = 1
                 """, (scope_name, item_key, item_id, full_name, q_type, now_str, vel))
