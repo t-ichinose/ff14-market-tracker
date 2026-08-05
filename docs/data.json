@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-05 11:07:06",
+  "last_updated": "2026-08-05 11:14:19",
   "datacenters": [
     "Elemental",
     "Gaia",
@@ -14,14 +14,24 @@
         "scope": "Elemental",
         "item_key": "49238_HQ",
         "item_id": 49238,
-        "item_name": "Unknown (49238) [HQ]",
+        "item_name": "Unknown (49238)",
         "quality": "HQ",
         "velocity": 422.7143,
         "min_price": 3200,
         "avg_price": 3745.6,
         "units_for_sale": 3,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 22:07:51"
+        "last_upload_time": "2026-08-04 22:07:51",
+        "days_to_clear": 0.0,
+        "discount_rate": 14.6,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 2500,
+          "high_scope": "Elemental",
+          "high_price": 3200,
+          "profit_gil": 540,
+          "profit_rate": 21.6
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -35,7 +45,10 @@
         "avg_price": 181.8,
         "units_for_sale": 88,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 22:08:44"
+        "last_upload_time": "2026-08-04 22:08:44",
+        "days_to_clear": 0.3,
+        "discount_rate": 62.6,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -49,7 +62,10 @@
         "avg_price": 216.3,
         "units_for_sale": 4,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:33:53"
+        "last_upload_time": "2026-08-05 01:33:53",
+        "days_to_clear": 0.0,
+        "discount_rate": 41.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -63,7 +79,10 @@
         "avg_price": 2781.9,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 02:02:33"
+        "last_upload_time": "2026-08-05 02:02:33",
+        "days_to_clear": 0.0,
+        "discount_rate": 2.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -77,7 +96,10 @@
         "avg_price": 239.2,
         "units_for_sale": 3,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 16:27:21"
+        "last_upload_time": "2026-08-04 16:27:21",
+        "days_to_clear": 0.0,
+        "discount_rate": 99.6,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -91,7 +113,10 @@
         "avg_price": 167.4,
         "units_for_sale": 58,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 21:02:34"
+        "last_upload_time": "2026-08-04 21:02:34",
+        "days_to_clear": 0.4,
+        "discount_rate": 94.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -105,7 +130,17 @@
         "avg_price": 1194.4,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:22:57"
+        "last_upload_time": "2026-08-05 00:22:57",
+        "days_to_clear": 0.0,
+        "discount_rate": 81.8,
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 217,
+          "high_scope": "Meteor",
+          "high_price": 770,
+          "profit_gil": 514,
+          "profit_rate": 236.9
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -119,7 +154,10 @@
         "avg_price": 188.7,
         "units_for_sale": 11,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:37:24"
+        "last_upload_time": "2026-08-05 00:37:24",
+        "days_to_clear": 0.1,
+        "discount_rate": 52.8,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -133,7 +171,10 @@
         "avg_price": 2985.1,
         "units_for_sale": 4,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:54:34"
+        "last_upload_time": "2026-08-05 01:54:34",
+        "days_to_clear": 0.0,
+        "discount_rate": 33.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -147,35 +188,51 @@
         "avg_price": 2855.2,
         "units_for_sale": 2,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 02:02:34"
+        "last_upload_time": "2026-08-05 02:02:34",
+        "days_to_clear": 0.0,
+        "discount_rate": 33.5,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 1500,
+          "high_scope": "Elemental",
+          "high_price": 1900,
+          "profit_gil": 305,
+          "profit_rate": 20.3
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Elemental",
         "item_key": "27838_HQ",
         "item_id": 27838,
-        "item_name": "フラントーヨオイル [HQ]",
+        "item_name": "フラントーヨオイル",
         "quality": "HQ",
         "velocity": 86.57143,
         "min_price": 250,
         "avg_price": 564.9,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 17:46:07"
+        "last_upload_time": "2026-08-04 17:46:07",
+        "days_to_clear": 0.0,
+        "discount_rate": 55.7,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Elemental",
         "item_key": "27838_NQ",
         "item_id": 27838,
-        "item_name": "フラントーヨオイル [NQ]",
+        "item_name": "フラントーヨオイル",
         "quality": "NQ",
         "velocity": 71.14286,
         "min_price": 100,
         "avg_price": 564.9,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 17:46:07"
+        "last_upload_time": "2026-08-04 17:46:07",
+        "days_to_clear": 0.0,
+        "discount_rate": 82.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -189,21 +246,27 @@
         "avg_price": 744.5,
         "units_for_sale": 7,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 18:06:40"
+        "last_upload_time": "2026-08-04 18:06:40",
+        "days_to_clear": 0.1,
+        "discount_rate": 70.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Elemental",
         "item_key": "5276_NQ",
         "item_id": 5276,
-        "item_name": "ハードレザー [NQ]",
+        "item_name": "ハードレザー",
         "quality": "NQ",
         "velocity": 52.857143,
         "min_price": 5,
         "avg_price": 152.7,
         "units_for_sale": 68,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 21:08:37"
+        "last_upload_time": "2026-08-04 21:08:37",
+        "days_to_clear": 1.3,
+        "discount_rate": 96.7,
+        "cross_info": null
       }
     ],
     "Gaia": [
@@ -219,7 +282,10 @@
         "avg_price": 149.8,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:38:43"
+        "last_upload_time": "2026-08-05 01:38:43",
+        "days_to_clear": 0.2,
+        "discount_rate": 16.6,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -233,7 +299,10 @@
         "avg_price": 200.8,
         "units_for_sale": 40,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 17:31:42"
+        "last_upload_time": "2026-08-04 17:31:42",
+        "days_to_clear": 0.1,
+        "discount_rate": 44.7,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -247,7 +316,10 @@
         "avg_price": 358.6,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 18:49:00"
+        "last_upload_time": "2026-08-04 18:49:00",
+        "days_to_clear": 0.2,
+        "discount_rate": 0.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -261,7 +333,10 @@
         "avg_price": 431.9,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 22:58:53"
+        "last_upload_time": "2026-08-04 22:58:53",
+        "days_to_clear": 0.3,
+        "discount_rate": 19.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -275,49 +350,68 @@
         "avg_price": 341.4,
         "units_for_sale": 9,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 17:17:16"
+        "last_upload_time": "2026-08-04 17:17:16",
+        "days_to_clear": 0.0,
+        "discount_rate": 41.4,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Gaia",
         "item_key": "26529_NQ",
         "item_id": 26529,
-        "item_name": "クリプトメリア原木 [NQ]",
+        "item_name": "クリプトメリア原木",
         "quality": "NQ",
         "velocity": 305.85715,
         "min_price": 5800,
         "avg_price": 6391.8,
         "units_for_sale": 50,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 16:41:55"
+        "last_upload_time": "2026-08-04 16:41:55",
+        "days_to_clear": 0.2,
+        "discount_rate": 9.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Gaia",
         "item_key": "5059_NQ",
         "item_id": 5059,
-        "item_name": "コバルトインゴット [NQ]",
+        "item_name": "コバルトインゴット",
         "quality": "NQ",
         "velocity": 257.7143,
         "min_price": 500,
         "avg_price": 694.2,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:56:46"
+        "last_upload_time": "2026-08-05 00:56:46",
+        "days_to_clear": 0.4,
+        "discount_rate": 28.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Gaia",
         "item_key": "49240_HQ",
         "item_id": 49240,
-        "item_name": "Unknown (49240) [HQ]",
+        "item_name": "Unknown (49240)",
         "quality": "HQ",
         "velocity": 246.0,
         "min_price": 2295,
         "avg_price": 3006.9,
         "units_for_sale": 3,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:02:04"
+        "last_upload_time": "2026-08-05 01:02:04",
+        "days_to_clear": 0.0,
+        "discount_rate": 23.7,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 2146,
+          "high_scope": "Mana",
+          "high_price": 2384,
+          "profit_gil": 118,
+          "profit_rate": 5.5
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -331,7 +425,17 @@
         "avg_price": 107.5,
         "units_for_sale": 18,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 12:09:02"
+        "last_upload_time": "2026-08-04 12:09:02",
+        "days_to_clear": 0.1,
+        "discount_rate": 44.2,
+        "cross_info": {
+          "cheap_scope": "Gaia",
+          "cheap_price": 60,
+          "high_scope": "Mana",
+          "high_price": 89,
+          "profit_gil": 24,
+          "profit_rate": 40.0
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -345,7 +449,10 @@
         "avg_price": 652.2,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:55:54"
+        "last_upload_time": "2026-08-05 01:55:54",
+        "days_to_clear": 0.5,
+        "discount_rate": 40.4,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -359,7 +466,10 @@
         "avg_price": 1050.2,
         "units_for_sale": 72,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 12:33:07"
+        "last_upload_time": "2026-08-04 12:33:07",
+        "days_to_clear": 0.4,
+        "discount_rate": 42.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -373,21 +483,27 @@
         "avg_price": 134.8,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-03 15:08:59"
+        "last_upload_time": "2026-08-03 15:08:59",
+        "days_to_clear": 0.6,
+        "discount_rate": 55.5,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Gaia",
         "item_key": "26531_HQ",
         "item_id": 26531,
-        "item_name": "ピュアチタン鉱 [HQ]",
+        "item_name": "ピュアチタン鉱",
         "quality": "HQ",
         "velocity": 126.42857,
         "min_price": 5799,
         "avg_price": 5888.2,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 16:41:40"
+        "last_upload_time": "2026-08-04 16:41:40",
+        "days_to_clear": 0.8,
+        "discount_rate": 1.5,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -401,21 +517,27 @@
         "avg_price": 62.3,
         "units_for_sale": 10,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 20:54:00"
+        "last_upload_time": "2026-08-04 20:54:00",
+        "days_to_clear": 0.1,
+        "discount_rate": 75.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Gaia",
         "item_key": "26531_NQ",
         "item_id": 26531,
-        "item_name": "ピュアチタン鉱 [NQ]",
+        "item_name": "ピュアチタン鉱",
         "quality": "NQ",
         "velocity": 118.71429,
         "min_price": 5799,
         "avg_price": 5888.2,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 16:41:40"
+        "last_upload_time": "2026-08-04 16:41:40",
+        "days_to_clear": 0.8,
+        "discount_rate": 1.5,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -429,7 +551,10 @@
         "avg_price": 82.3,
         "units_for_sale": 10,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 21:52:26"
+        "last_upload_time": "2026-08-04 21:52:26",
+        "days_to_clear": 0.1,
+        "discount_rate": 76.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -443,7 +568,10 @@
         "avg_price": 151.3,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 21:54:19"
+        "last_upload_time": "2026-08-04 21:54:19",
+        "days_to_clear": 1.0,
+        "discount_rate": 80.2,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -457,7 +585,10 @@
         "avg_price": 1365.6,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 16:34:00"
+        "last_upload_time": "2026-08-04 16:34:00",
+        "days_to_clear": 1.1,
+        "discount_rate": 26.8,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -471,35 +602,51 @@
         "avg_price": 427.4,
         "units_for_sale": 5,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:53:58"
+        "last_upload_time": "2026-08-05 01:53:58",
+        "days_to_clear": 0.1,
+        "discount_rate": 29.8,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Gaia",
         "item_key": "26529_HQ",
         "item_id": 26529,
-        "item_name": "クリプトメリア原木 [HQ]",
+        "item_name": "クリプトメリア原木",
         "quality": "HQ",
         "velocity": 75.71429,
         "min_price": 5800,
         "avg_price": 6391.8,
         "units_for_sale": 50,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 16:41:55"
+        "last_upload_time": "2026-08-04 16:41:55",
+        "days_to_clear": 0.7,
+        "discount_rate": 9.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Gaia",
         "item_key": "12519_NQ",
         "item_id": 12519,
-        "item_name": "ミスライトインゴット [NQ]",
+        "item_name": "ミスライトインゴット",
         "quality": "NQ",
         "velocity": 52.285713,
         "min_price": 1800,
         "avg_price": 2205.3,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 21:56:47"
+        "last_upload_time": "2026-08-04 21:56:47",
+        "days_to_clear": 0.0,
+        "discount_rate": 18.4,
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 1000,
+          "high_scope": "Gaia",
+          "high_price": 1800,
+          "profit_gil": 710,
+          "profit_rate": 71.0
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -513,7 +660,10 @@
         "avg_price": 1808.8,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:29:31"
+        "last_upload_time": "2026-08-05 00:29:31",
+        "days_to_clear": 2.0,
+        "discount_rate": 19.9,
+        "cross_info": null
       }
     ],
     "Mana": [
@@ -529,49 +679,75 @@
         "avg_price": 179.3,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:22:53"
+        "last_upload_time": "2026-08-05 01:22:53",
+        "days_to_clear": 0.2,
+        "discount_rate": 10.8,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "49235_HQ",
         "item_id": 49235,
-        "item_name": "Unknown (49235) [HQ]",
+        "item_name": "Unknown (49235)",
         "quality": "HQ",
         "velocity": 463.2857,
         "min_price": 2600,
         "avg_price": 2991.9,
         "units_for_sale": 3,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 02:01:43"
+        "last_upload_time": "2026-08-05 02:01:43",
+        "days_to_clear": 0.0,
+        "discount_rate": 13.1,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "49238_HQ",
         "item_id": 49238,
-        "item_name": "Unknown (49238) [HQ]",
+        "item_name": "Unknown (49238)",
         "quality": "HQ",
         "velocity": 460.2857,
         "min_price": 2725,
         "avg_price": 3418.2,
         "units_for_sale": 3,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 02:03:43"
+        "last_upload_time": "2026-08-05 02:03:43",
+        "days_to_clear": 0.0,
+        "discount_rate": 20.3,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 2500,
+          "high_scope": "Elemental",
+          "high_price": 3200,
+          "profit_gil": 540,
+          "profit_rate": 21.6
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "49240_HQ",
         "item_id": 49240,
-        "item_name": "Unknown (49240) [HQ]",
+        "item_name": "Unknown (49240)",
         "quality": "HQ",
         "velocity": 383.14285,
         "min_price": 2384,
         "avg_price": 2861.4,
         "units_for_sale": 3,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:29:28"
+        "last_upload_time": "2026-08-05 01:29:28",
+        "days_to_clear": 0.0,
+        "discount_rate": 16.7,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 2146,
+          "high_scope": "Mana",
+          "high_price": 2384,
+          "profit_gil": 118,
+          "profit_rate": 5.5
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -585,7 +761,17 @@
         "avg_price": 97.3,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:28:54"
+        "last_upload_time": "2026-08-05 00:28:54",
+        "days_to_clear": 0.3,
+        "discount_rate": 8.5,
+        "cross_info": {
+          "cheap_scope": "Gaia",
+          "cheap_price": 60,
+          "high_scope": "Mana",
+          "high_price": 89,
+          "profit_gil": 24,
+          "profit_rate": 40.0
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -599,7 +785,10 @@
         "avg_price": 195.9,
         "units_for_sale": 26,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 18:23:27"
+        "last_upload_time": "2026-08-04 18:23:27",
+        "days_to_clear": 0.1,
+        "discount_rate": 49.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -613,7 +802,10 @@
         "avg_price": 157.1,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:30:22"
+        "last_upload_time": "2026-08-05 00:30:22",
+        "days_to_clear": 0.3,
+        "discount_rate": 36.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -627,7 +819,10 @@
         "avg_price": 2040.2,
         "units_for_sale": 50,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 19:01:03"
+        "last_upload_time": "2026-08-04 19:01:03",
+        "days_to_clear": 0.2,
+        "discount_rate": 46.1,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -641,7 +836,10 @@
         "avg_price": 2673.9,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:50:39"
+        "last_upload_time": "2026-08-05 01:50:39",
+        "days_to_clear": 0.0,
+        "discount_rate": 6.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -655,7 +853,10 @@
         "avg_price": 1423.8,
         "units_for_sale": 30,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:07:26"
+        "last_upload_time": "2026-08-05 00:07:26",
+        "days_to_clear": 0.1,
+        "discount_rate": 23.2,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -669,7 +870,10 @@
         "avg_price": 420.3,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 21:26:09"
+        "last_upload_time": "2026-08-04 21:26:09",
+        "days_to_clear": 0.4,
+        "discount_rate": 42.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -683,7 +887,10 @@
         "avg_price": 184.8,
         "units_for_sale": 28,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 15:57:59"
+        "last_upload_time": "2026-08-04 15:57:59",
+        "days_to_clear": 0.1,
+        "discount_rate": 42.1,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -697,7 +904,10 @@
         "avg_price": 126.3,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:20:52"
+        "last_upload_time": "2026-08-05 01:20:52",
+        "days_to_clear": 0.0,
+        "discount_rate": 20.8,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -711,7 +921,10 @@
         "avg_price": 91.6,
         "units_for_sale": 27,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 23:32:29"
+        "last_upload_time": "2026-08-04 23:32:29",
+        "days_to_clear": 0.1,
+        "discount_rate": 56.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -725,7 +938,10 @@
         "avg_price": 179.4,
         "units_for_sale": 30,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 22:55:54"
+        "last_upload_time": "2026-08-04 22:55:54",
+        "days_to_clear": 0.2,
+        "discount_rate": 59.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -739,7 +955,10 @@
         "avg_price": 22009.5,
         "units_for_sale": 2,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 23:14:45"
+        "last_upload_time": "2026-08-04 23:14:45",
+        "days_to_clear": 0.0,
+        "discount_rate": 9.1,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -753,7 +972,10 @@
         "avg_price": 218.1,
         "units_for_sale": 2,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 14:51:33"
+        "last_upload_time": "2026-08-04 14:51:33",
+        "days_to_clear": 0.0,
+        "discount_rate": 52.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -767,7 +989,10 @@
         "avg_price": 1168.0,
         "units_for_sale": 90,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 00:03:55"
+        "last_upload_time": "2026-08-04 00:03:55",
+        "days_to_clear": 0.6,
+        "discount_rate": 22.5,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -781,7 +1006,10 @@
         "avg_price": 328.4,
         "units_for_sale": 5,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:13:06"
+        "last_upload_time": "2026-08-05 00:13:06",
+        "days_to_clear": 0.0,
+        "discount_rate": 54.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -795,7 +1023,10 @@
         "avg_price": 198.8,
         "units_for_sale": 2,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 09:48:31"
+        "last_upload_time": "2026-08-04 09:48:31",
+        "days_to_clear": 0.0,
+        "discount_rate": 54.7,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -809,7 +1040,10 @@
         "avg_price": 98.7,
         "units_for_sale": 11,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 23:32:44"
+        "last_upload_time": "2026-08-04 23:32:44",
+        "days_to_clear": 0.1,
+        "discount_rate": 99.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -823,35 +1057,44 @@
         "avg_price": 507.0,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 18:23:53"
+        "last_upload_time": "2026-08-04 18:23:53",
+        "days_to_clear": 0.7,
+        "discount_rate": 68.4,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "7017_NQ",
         "item_id": 7017,
-        "item_name": "ワニス [NQ]",
+        "item_name": "ワニス",
         "quality": "NQ",
         "velocity": 131.42857,
         "min_price": 690,
         "avg_price": 989.2,
         "units_for_sale": 4,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:55:34"
+        "last_upload_time": "2026-08-05 01:55:34",
+        "days_to_clear": 0.0,
+        "discount_rate": 30.2,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "5069_NQ",
         "item_id": 5069,
-        "item_name": "ゴールドインゴット [NQ]",
+        "item_name": "ゴールドインゴット",
         "quality": "NQ",
         "velocity": 131.28572,
         "min_price": 4,
         "avg_price": 10.9,
         "units_for_sale": 60,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:21:18"
+        "last_upload_time": "2026-08-05 01:21:18",
+        "days_to_clear": 0.5,
+        "discount_rate": 63.3,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -865,7 +1108,10 @@
         "avg_price": 2430.7,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 17:23:14"
+        "last_upload_time": "2026-08-04 17:23:14",
+        "days_to_clear": 0.0,
+        "discount_rate": 18.1,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -879,7 +1125,10 @@
         "avg_price": 4063.3,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 23:24:01"
+        "last_upload_time": "2026-08-04 23:24:01",
+        "days_to_clear": 0.8,
+        "discount_rate": 37.1,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -893,7 +1142,10 @@
         "avg_price": 165.2,
         "units_for_sale": 10,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 22:34:33"
+        "last_upload_time": "2026-08-04 22:34:33",
+        "days_to_clear": 0.1,
+        "discount_rate": 90.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -907,7 +1159,17 @@
         "avg_price": 332.6,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:13:11"
+        "last_upload_time": "2026-08-05 00:13:11",
+        "days_to_clear": 0.0,
+        "discount_rate": 36.9,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 100,
+          "high_scope": "Mana",
+          "high_price": 210,
+          "profit_gil": 99,
+          "profit_rate": 99.0
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -921,21 +1183,27 @@
         "avg_price": 289.8,
         "units_for_sale": 3,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:13:54"
+        "last_upload_time": "2026-08-05 00:13:54",
+        "days_to_clear": 0.0,
+        "discount_rate": 54.8,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "5059_NQ",
         "item_id": 5059,
-        "item_name": "コバルトインゴット [NQ]",
+        "item_name": "コバルトインゴット",
         "quality": "NQ",
         "velocity": 96.28571,
         "min_price": 550,
         "avg_price": 659.0,
         "units_for_sale": 2,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 21:20:57"
+        "last_upload_time": "2026-08-04 21:20:57",
+        "days_to_clear": 0.0,
+        "discount_rate": 16.5,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -949,35 +1217,51 @@
         "avg_price": 6772.7,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:57:57"
+        "last_upload_time": "2026-08-05 01:57:57",
+        "days_to_clear": 0.0,
+        "discount_rate": 23.0,
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 5215,
+          "high_scope": "Meteor",
+          "high_price": 5799,
+          "profit_gil": 294,
+          "profit_rate": 5.6
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "5067_HQ",
         "item_id": 5067,
-        "item_name": "ローズゴールドインゴット [HQ]",
+        "item_name": "ローズゴールドインゴット",
         "quality": "HQ",
         "velocity": 85.28571,
         "min_price": 90,
         "avg_price": 274.7,
         "units_for_sale": 2,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:10:47"
+        "last_upload_time": "2026-08-05 00:10:47",
+        "days_to_clear": 0.0,
+        "discount_rate": 67.2,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "5069_HQ",
         "item_id": 5069,
-        "item_name": "ゴールドインゴット [HQ]",
+        "item_name": "ゴールドインゴット",
         "quality": "HQ",
         "velocity": 78.14286,
         "min_price": 1,
         "avg_price": 10.9,
         "units_for_sale": 60,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:21:18"
+        "last_upload_time": "2026-08-05 01:21:18",
+        "days_to_clear": 0.8,
+        "discount_rate": 90.8,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -991,7 +1275,10 @@
         "avg_price": 717.6,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 18:05:59"
+        "last_upload_time": "2026-08-04 18:05:59",
+        "days_to_clear": 0.0,
+        "discount_rate": 72.1,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1005,7 +1292,10 @@
         "avg_price": 314.4,
         "units_for_sale": 11,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 14:32:11"
+        "last_upload_time": "2026-08-04 14:32:11",
+        "days_to_clear": 0.2,
+        "discount_rate": 60.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1019,7 +1309,10 @@
         "avg_price": 657.2,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 14:57:21"
+        "last_upload_time": "2026-08-04 14:57:21",
+        "days_to_clear": 0.0,
+        "discount_rate": 67.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1033,21 +1326,27 @@
         "avg_price": 130.7,
         "units_for_sale": 15,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 16:50:25"
+        "last_upload_time": "2026-08-04 16:50:25",
+        "days_to_clear": 0.2,
+        "discount_rate": 32.7,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "5067_NQ",
         "item_id": 5067,
-        "item_name": "ローズゴールドインゴット [NQ]",
+        "item_name": "ローズゴールドインゴット",
         "quality": "NQ",
         "velocity": 65.71429,
         "min_price": 90,
         "avg_price": 274.7,
         "units_for_sale": 2,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:10:47"
+        "last_upload_time": "2026-08-05 00:10:47",
+        "days_to_clear": 0.0,
+        "discount_rate": 67.2,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1061,35 +1360,51 @@
         "avg_price": 234.8,
         "units_for_sale": 13,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 10:38:37"
+        "last_upload_time": "2026-08-04 10:38:37",
+        "days_to_clear": 0.2,
+        "discount_rate": 36.1,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "12519_NQ",
         "item_id": 12519,
-        "item_name": "ミスライトインゴット [NQ]",
+        "item_name": "ミスライトインゴット",
         "quality": "NQ",
         "velocity": 63.714287,
         "min_price": 1000,
         "avg_price": 2284.7,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 17:07:12"
+        "last_upload_time": "2026-08-04 17:07:12",
+        "days_to_clear": 0.0,
+        "discount_rate": 56.2,
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 1000,
+          "high_scope": "Gaia",
+          "high_price": 1800,
+          "profit_gil": 710,
+          "profit_rate": 71.0
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Mana",
         "item_key": "5059_HQ",
         "item_id": 5059,
-        "item_name": "コバルトインゴット [HQ]",
+        "item_name": "コバルトインゴット",
         "quality": "HQ",
         "velocity": 60.42857,
         "min_price": 600,
         "avg_price": 659.0,
         "units_for_sale": 2,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 21:20:57"
+        "last_upload_time": "2026-08-04 21:20:57",
+        "days_to_clear": 0.0,
+        "discount_rate": 9.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1103,7 +1418,10 @@
         "avg_price": 398.6,
         "units_for_sale": 71,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 13:10:13"
+        "last_upload_time": "2026-08-04 13:10:13",
+        "days_to_clear": 1.2,
+        "discount_rate": 5.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1117,7 +1435,10 @@
         "avg_price": 139.3,
         "units_for_sale": 6,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 19:07:13"
+        "last_upload_time": "2026-08-04 19:07:13",
+        "days_to_clear": 0.1,
+        "discount_rate": 56.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1131,7 +1452,10 @@
         "avg_price": 55.9,
         "units_for_sale": 2,
         "listings_count": 1,
-        "last_upload_time": "2026-08-03 04:19:45"
+        "last_upload_time": "2026-08-03 04:19:45",
+        "days_to_clear": 0.0,
+        "discount_rate": 98.2,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1145,7 +1469,10 @@
         "avg_price": 927.1,
         "units_for_sale": 9,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:09:24"
+        "last_upload_time": "2026-08-05 01:09:24",
+        "days_to_clear": 0.2,
+        "discount_rate": 46.1,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1159,7 +1486,10 @@
         "avg_price": 391.9,
         "units_for_sale": 6,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 12:15:09"
+        "last_upload_time": "2026-08-04 12:15:09",
+        "days_to_clear": 0.1,
+        "discount_rate": 74.5,
+        "cross_info": null
       }
     ],
     "Meteor": [
@@ -1175,7 +1505,10 @@
         "avg_price": 405.2,
         "units_for_sale": 9,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 20:51:33"
+        "last_upload_time": "2026-08-04 20:51:33",
+        "days_to_clear": 0.0,
+        "discount_rate": 26.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1189,49 +1522,68 @@
         "avg_price": 448.8,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 22:37:00"
+        "last_upload_time": "2026-08-04 22:37:00",
+        "days_to_clear": 0.2,
+        "discount_rate": 11.5,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Meteor",
         "item_key": "49234_HQ",
         "item_id": 49234,
-        "item_name": "Unknown (49234) [HQ]",
+        "item_name": "Unknown (49234)",
         "quality": "HQ",
         "velocity": 466.7143,
         "min_price": 2500,
         "avg_price": 3610.6,
         "units_for_sale": 3,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 18:02:08"
+        "last_upload_time": "2026-08-04 18:02:08",
+        "days_to_clear": 0.0,
+        "discount_rate": 30.8,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Meteor",
         "item_key": "49238_HQ",
         "item_id": 49238,
-        "item_name": "Unknown (49238) [HQ]",
+        "item_name": "Unknown (49238)",
         "quality": "HQ",
         "velocity": 457.57144,
         "min_price": 2500,
         "avg_price": 4164.9,
         "units_for_sale": 6,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 17:59:09"
+        "last_upload_time": "2026-08-04 17:59:09",
+        "days_to_clear": 0.0,
+        "discount_rate": 40.0,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 2500,
+          "high_scope": "Elemental",
+          "high_price": 3200,
+          "profit_gil": 540,
+          "profit_rate": 21.6
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Meteor",
         "item_key": "49235_HQ",
         "item_id": 49235,
-        "item_name": "Unknown (49235) [HQ]",
+        "item_name": "Unknown (49235)",
         "quality": "HQ",
         "velocity": 401.0,
         "min_price": 2500,
         "avg_price": 3991.6,
         "units_for_sale": 11,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 23:16:41"
+        "last_upload_time": "2026-08-04 23:16:41",
+        "days_to_clear": 0.0,
+        "discount_rate": 37.4,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1245,7 +1597,10 @@
         "avg_price": 3281.6,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 18:53:17"
+        "last_upload_time": "2026-08-04 18:53:17",
+        "days_to_clear": 0.3,
+        "discount_rate": 14.7,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1259,21 +1614,34 @@
         "avg_price": 2611.9,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 21:15:32"
+        "last_upload_time": "2026-08-04 21:15:32",
+        "days_to_clear": 0.3,
+        "discount_rate": 31.1,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Meteor",
         "item_key": "49240_HQ",
         "item_id": 49240,
-        "item_name": "Unknown (49240) [HQ]",
+        "item_name": "Unknown (49240)",
         "quality": "HQ",
         "velocity": 322.14285,
         "min_price": 2146,
         "avg_price": 2742.4,
         "units_for_sale": 3,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:51:22"
+        "last_upload_time": "2026-08-05 01:51:22",
+        "days_to_clear": 0.0,
+        "discount_rate": 21.7,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 2146,
+          "high_scope": "Mana",
+          "high_price": 2384,
+          "profit_gil": 118,
+          "profit_rate": 5.5
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1287,7 +1655,10 @@
         "avg_price": 638.9,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:51:49"
+        "last_upload_time": "2026-08-05 01:51:49",
+        "days_to_clear": 0.3,
+        "discount_rate": 53.2,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1301,7 +1672,10 @@
         "avg_price": 2574.6,
         "units_for_sale": 20,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 01:14:47"
+        "last_upload_time": "2026-08-05 01:14:47",
+        "days_to_clear": 0.1,
+        "discount_rate": 2.9,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1315,7 +1689,10 @@
         "avg_price": 237.6,
         "units_for_sale": 27,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 11:56:47"
+        "last_upload_time": "2026-08-04 11:56:47",
+        "days_to_clear": 0.1,
+        "discount_rate": 49.5,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1329,7 +1706,10 @@
         "avg_price": 2809.2,
         "units_for_sale": 30,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:41:04"
+        "last_upload_time": "2026-08-05 00:41:04",
+        "days_to_clear": 0.1,
+        "discount_rate": 11.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1343,7 +1723,17 @@
         "avg_price": 1619.5,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 16:42:39"
+        "last_upload_time": "2026-08-04 16:42:39",
+        "days_to_clear": 0.0,
+        "discount_rate": 52.5,
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 217,
+          "high_scope": "Meteor",
+          "high_price": 770,
+          "profit_gil": 514,
+          "profit_rate": 236.9
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1357,7 +1747,10 @@
         "avg_price": 4683.9,
         "units_for_sale": 36,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 21:49:42"
+        "last_upload_time": "2026-08-04 21:49:42",
+        "days_to_clear": 0.3,
+        "discount_rate": 14.6,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1371,7 +1764,10 @@
         "avg_price": 5932.4,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 22:42:28"
+        "last_upload_time": "2026-08-04 22:42:28",
+        "days_to_clear": 0.0,
+        "discount_rate": 15.7,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1385,7 +1781,17 @@
         "avg_price": 7611.1,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 23:30:19"
+        "last_upload_time": "2026-08-04 23:30:19",
+        "days_to_clear": 0.0,
+        "discount_rate": 23.8,
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 5215,
+          "high_scope": "Meteor",
+          "high_price": 5799,
+          "profit_gil": 294,
+          "profit_rate": 5.6
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1399,7 +1805,17 @@
         "avg_price": 473.1,
         "units_for_sale": 3,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 22:40:47"
+        "last_upload_time": "2026-08-04 22:40:47",
+        "days_to_clear": 0.0,
+        "discount_rate": 78.9,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 100,
+          "high_scope": "Mana",
+          "high_price": 210,
+          "profit_gil": 99,
+          "profit_rate": 99.0
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1413,7 +1829,10 @@
         "avg_price": 135.8,
         "units_for_sale": 99,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 08:18:10"
+        "last_upload_time": "2026-08-04 08:18:10",
+        "days_to_clear": 1.1,
+        "discount_rate": 64.7,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1427,7 +1846,17 @@
         "avg_price": 2108.1,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 12:08:02"
+        "last_upload_time": "2026-08-04 12:08:02",
+        "days_to_clear": 0.0,
+        "discount_rate": 28.8,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 1500,
+          "high_scope": "Elemental",
+          "high_price": 1900,
+          "profit_gil": 305,
+          "profit_rate": 20.3
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1441,7 +1870,10 @@
         "avg_price": 327.4,
         "units_for_sale": 8,
         "listings_count": 1,
-        "last_upload_time": "2026-08-04 19:16:24"
+        "last_upload_time": "2026-08-04 19:16:24",
+        "days_to_clear": 0.1,
+        "discount_rate": 42.0,
+        "cross_info": null
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -1455,7 +1887,10 @@
         "avg_price": 529.2,
         "units_for_sale": 1,
         "listings_count": 1,
-        "last_upload_time": "2026-08-05 00:40:09"
+        "last_upload_time": "2026-08-05 00:40:09",
+        "days_to_clear": 0.0,
+        "discount_rate": 27.2,
+        "cross_info": null
       }
     ]
   }

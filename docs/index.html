@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FF14 Market Analytics - HQ-Aware Multi-View</title>
+  <title>FF14 Market Analytics - Enriched Pro Dashboard</title>
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +18,8 @@
       --accent-blue: #00d2ff;
       --accent-purple: #7928ca;
       --accent-gold: #ffb703;
+      --accent-green: #4ade80;
+      --accent-red: #f87171;
       --text-main: #f1f5f9;
       --text-muted: #94a3b8;
       --badge-hq-bg: rgba(239, 68, 68, 0.15);
@@ -239,12 +241,16 @@
       background: var(--accent-blue);
     }
 
+    /* Enhanced Item Card */
     .item-card {
       background: rgba(15, 23, 42, 0.6);
       border: 1px solid var(--card-border);
       border-radius: 12px;
       padding: 0.85rem;
       transition: transform 0.15s ease, border-color 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
     }
 
     .item-card:hover {
@@ -257,7 +263,6 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 0.5rem;
       gap: 0.5rem;
     }
 
@@ -298,25 +303,15 @@
       color: var(--badge-nq-text);
     }
 
-    .item-card-id {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.05);
-      padding: 0.1rem 0.3rem;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
-
     .item-stats-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.4rem;
       font-size: 0.85rem;
     }
 
     .velocity-badge {
-      color: #4ade80;
+      color: var(--accent-green);
       font-weight: 700;
       font-family: 'Outfit', sans-serif;
       display: inline-flex;
@@ -346,6 +341,58 @@
       border-top: 1px dashed rgba(255, 255, 255, 0.06);
       font-size: 0.75rem;
       color: var(--text-muted);
+    }
+
+    /* Analytics Badges */
+    .analytics-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.2rem;
+    }
+
+    .tag-stock {
+      font-size: 0.7rem;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .tag-discount {
+      font-size: 0.7rem;
+      background: rgba(248, 113, 113, 0.15);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #f87171;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* Cross-DC Profit Banner */
+    .cross-profit-box {
+      background: linear-gradient(135deg, rgba(121, 40, 202, 0.25), rgba(0, 210, 255, 0.25));
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      border-radius: 8px;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.73rem;
+      margin-top: 0.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .profit-route {
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+
+    .profit-rate {
+      color: var(--accent-gold);
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
     }
 
     @media (max-width: 1400px) {
@@ -494,10 +541,33 @@
             qualityBadge = `<span class="quality-badge quality-nq"><i class="fa-solid fa-box"></i> NQ</span>`;
           }
 
-          // HQ区分が存在しないアイテムは [NQ] / [HQ] の文字をキレイに除去
           let cleanTitle = escapeHtml(item.item_name);
           if (q === "NONE") {
             cleanTitle = cleanTitle.replace(/\s*\[(NQ|HQ)\]\s*$/, "");
+          }
+
+          // 1. 在庫消化日数タグ
+          let stockTag = "";
+          if (item.days_to_clear !== undefined && item.days_to_clear <= 3.0) {
+            stockTag = `<span class="tag-stock"><i class="fa-solid fa-hourglass-half"></i> 消化: 約${item.days_to_clear.toFixed(1)}日分</span>`;
+          }
+
+          // 2. 割安度タグ
+          let discountTag = "";
+          if (item.discount_rate !== undefined && item.discount_rate >= 15.0) {
+            discountTag = `<span class="tag-discount"><i class="fa-solid fa-tags"></i> 割安 ${item.discount_rate.toFixed(0)}% OFF</span>`;
+          }
+
+          // 3. クロスDC転売利益バナー
+          let crossProfitBox = "";
+          if (item.cross_info && item.cross_info.profit_rate >= 10.0) {
+            const ci = item.cross_info;
+            crossProfitBox = `
+              <div class="cross-profit-box">
+                <span class="profit-route"><i class="fa-solid fa-arrow-right-arrow-left"></i> 買: ${ci.cheap_scope} (${ci.cheap_price.toLocaleString()}G)</span>
+                <span class="profit-rate">+${ci.profit_gil.toLocaleString()}G (${ci.profit_rate}%)</span>
+              </div>
+            `;
           }
 
           return `
@@ -513,10 +583,17 @@
                 <span class="price-main"><span class="price-label">最安:</span>${item.min_price.toLocaleString()}G</span>
               </div>
 
+              <div class="analytics-tag-row">
+                ${stockTag}
+                ${discountTag}
+              </div>
+
               <div class="item-sub-grid">
                 <div>平均: ${item.avg_price.toLocaleString()}G</div>
                 <div>在庫: ${item.units_for_sale.toLocaleString()}個 (${item.listings_count}出品)</div>
               </div>
+
+              ${crossProfitBox}
             </div>
           `;
         }).join('');

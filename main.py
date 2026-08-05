@@ -14,12 +14,8 @@ def init_db(db_path="data/market_data.db"):
     conn = sqlite3.connect(db_path, timeout=30)
     cursor = conn.cursor()
     
-    # テーブルを完全クリアして古い汚れたアイテム名を抹消
-    cursor.execute("DROP TABLE IF EXISTS items_pool")
-    cursor.execute("DROP TABLE IF EXISTS market_logs")
-
     cursor.execute("""
-    CREATE TABLE items_pool (
+    CREATE TABLE IF NOT EXISTS items_pool (
         scope TEXT,
         item_key TEXT,
         item_id INTEGER,
@@ -33,7 +29,7 @@ def init_db(db_path="data/market_data.db"):
     """)
     
     cursor.execute("""
-    CREATE TABLE market_logs (
+    CREATE TABLE IF NOT EXISTS market_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         timestamp TEXT,
         scope TEXT,
@@ -50,22 +46,23 @@ def init_db(db_path="data/market_data.db"):
     )
     """)
     
-    cursor.execute("CREATE INDEX idx_timestamp ON market_logs(timestamp)")
-    cursor.execute("CREATE INDEX idx_scope_key ON market_logs(scope, item_key)")
-    cursor.execute("CREATE INDEX idx_pool_active ON items_pool(scope, is_active)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON market_logs(timestamp)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_scope_key ON market_logs(scope, item_key)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_pool_active ON items_pool(scope, is_active)")
     
     conn.commit()
     return conn
 
 def clean_name(raw_name):
-    # 名前に含まれる [NQ] や [HQ] などの末尾タグを完全に消去して純粋なアイテム名にする
     return re.sub(r'\s*\[(NQ|HQ)\]\s*$', '', raw_name).strip()
 
 def export_web_json(conn, output_path="docs/data.json"):
     os.makedirs("docs", exist_ok=True)
     cursor = conn.cursor()
     
-    web_data_by_scope = {}
+    # 1. 各DCの最新ログを取得
+    raw_data_by_scope = {}
+    item_cross_dc = {}  # 全DCでのクロス分析用キー辞書
     
     for scope in JP_DATACENTERS:
         cursor.execute("""
@@ -82,12 +79,12 @@ def export_web_json(conn, output_path="docs/data.json"):
         rows = cursor.fetchall()
         items = []
         for r in rows:
-            items.append({
+            item_obj = {
                 "timestamp": r[0],
                 "scope": r[1],
                 "item_key": r[2],
                 "item_id": r[3],
-                "item_name": clean_name(r[4]),  # 純粋なアイテム名
+                "item_name": clean_name(r[4]),
                 "quality": r[5],
                 "velocity": r[6],
                 "min_price": r[7],
@@ -95,8 +92,74 @@ def export_web_json(conn, output_path="docs/data.json"):
                 "units_for_sale": r[9],
                 "listings_count": r[10],
                 "last_upload_time": r[11]
+            }
+            items.append(item_obj)
+            
+            # クロスDC用に記録
+            ikey = r[2]
+            if ikey not in item_cross_dc:
+                item_cross_dc[ikey] = []
+            item_cross_dc[ikey].append({
+                "scope": r[1],
+                "min_price": r[7],
+                "velocity": r[6]
             })
-        web_data_by_scope[scope] = items
+            
+        raw_data_by_scope[scope] = items
+
+    # 2. 全DC間での価格比較（最安仕入れDC ➔ 最高販売DC 利益計算）
+    cross_analytics = {}
+    for ikey, dc_list in item_cross_dc.items():
+        valid_prices = [x for x in dc_list if x["min_price"] > 0]
+        if len(valid_prices) >= 2:
+            sorted_by_price = sorted(valid_prices, key=lambda x: x["min_price"])
+            cheapest = sorted_by_price[0]
+            highest = sorted_by_price[-1]
+            
+            cheap_price = cheapest["min_price"]
+            high_price = highest["min_price"]
+            
+            # 手数料5%考慮の想定純利益
+            profit_gil = int(high_price * 0.95 - cheap_price)
+            profit_rate = round((profit_gil / cheap_price) * 100, 1) if cheap_price > 0 else 0.0
+            
+            if profit_gil > 0 and profit_rate >= 10.0: # 利益10%以上
+                cross_analytics[ikey] = {
+                    "cheap_scope": cheapest["scope"],
+                    "cheap_price": cheap_price,
+                    "high_scope": highest["scope"],
+                    "high_price": high_price,
+                    "profit_gil": profit_gil,
+                    "profit_rate": profit_rate
+                }
+
+    # 3. アイテムデータに計算指標を添付
+    final_data_by_scope = {}
+    for scope, items in raw_data_by_scope.items():
+        enriched_items = []
+        for item in items:
+            ikey = item["item_key"]
+            vel = item["velocity"]
+            min_p = item["min_price"]
+            avg_p = item["avg_price"]
+            units = item["units_for_sale"]
+            
+            # 在庫消化日数 = 在庫数 / 1日販売数
+            days_to_clear = round(units / vel, 1) if vel > 0 else 999.0
+            
+            # 割安率 = (平均価格 - 最安値) / 平均価格
+            discount_rate = round(((avg_p - min_p) / avg_p) * 100, 1) if avg_p > min_p else 0.0
+            
+            # DC間利益データ
+            cross_info = cross_analytics.get(ikey)
+            
+            item["days_to_clear"] = days_to_clear
+            item["discount_rate"] = discount_rate
+            item["cross_info"] = cross_info
+            
+            enriched_items.append(item)
+            
+        final_data_by_scope[scope] = enriched_items
 
     last_updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
@@ -104,13 +167,13 @@ def export_web_json(conn, output_path="docs/data.json"):
         "last_updated": last_updated,
         "datacenters": JP_DATACENTERS,
         "velocity_threshold": VELOCITY_THRESHOLD,
-        "data": web_data_by_scope
+        "data": final_data_by_scope
     }
     
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(web_data, f, ensure_ascii=False, indent=2)
         
-    print(f"Exported clean web JSON to {output_path}")
+    print(f"Exported enriched web JSON to {output_path}")
 
 def process_dc_pipeline(scope_name: str, conn, now_str: str):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
@@ -197,13 +260,12 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         nq_min = data.get("minPriceNQ") or data.get("minPrice", 0)
         hq_min = data.get("minPriceHQ") or 0
 
-        # XIVAPIの CanBeHq フラグで絶対判定！ (CanBeHq == False ならHQ不可アイテム)
         if not can_be_hq:
             qualities = [("NONE", pure_name, total_vel, nq_min)]
         else:
             qualities = [
-                ("NQ", pure_name, nq_vel, nq_min),
-                ("HQ", pure_name, hq_vel, hq_min)
+                ("NQ", f"{pure_name} [NQ]", nq_vel, nq_min),
+                ("HQ", f"{pure_name} [HQ]", hq_vel, hq_min)
             ]
 
         for q_type, item_display_name, vel, price in qualities:
@@ -246,13 +308,13 @@ def fetch_and_save_all():
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (XIVAPI CanBeHq Strict Check) ---")
+        print(f"--- Processing DC: {scope} (Enriched Analytics) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()
-    print(f"All 4 JP Datacenters pipeline completed (XIVAPI CanBeHq Strict Check)!")
+    print(f"All 4 JP Datacenters pipeline completed (Enriched Analytics, Threshold >= {VELOCITY_THRESHOLD})!")
 
 if __name__ == "__main__":
     fetch_and_save_all()
