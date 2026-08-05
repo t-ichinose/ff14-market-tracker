@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 強力なキャッシュ無効化ヘッダー -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <title>FF14 Market Analytics - Enriched Pro Dashboard</title>
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -482,9 +487,36 @@
     const DATACENTERS = ["Mana", "Elemental", "Gaia", "Meteor"];
     let allDcData = {};
 
+    // フロントエンド用二重保険補正マップ（ブラウザキャッシュ対策）
+    const FRONTEND_NAME_MAP = {
+      49234: "剛力の心酔薬G4",
+      49235: "活力の心酔薬G4",
+      49236: "器用の心酔薬G4",
+      49237: "敏捷の心酔薬G4",
+      49238: "知力の心酔薬G4",
+      49239: "精神の心酔薬G4",
+      49240: "心力の心酔薬G4",
+      49229: "フトコーラ",
+      49209: "セドライト",
+      47701: "トラルコーン",
+      47740: "コザマル・カモミール",
+      49230: "キャロットラペ",
+      49225: "ローストチキン",
+      49226: "メスカル",
+      49227: "ベラフディアン・ペペロンチーノ",
+      49228: "コンチャ",
+      45972: "オルコクロマイト",
+      45984: "クラロウォルナット原木",
+      46188: "シデリティス茶葉",
+      50414: "アイギス・エネルギーパック",
+      52254: "カード:ノーマカー"
+    };
+
     async function loadData() {
       try {
-        const res = await fetch('data.json?t=' + new Date().getTime());
+        // キャッシュを強力に破壊するランダムクエリ
+        const cacheBuster = `t=${Date.now()}_${Math.random()}`;
+        const res = await fetch(`data.json?${cacheBuster}`, { cache: "no-store" });
         if (!res.ok) throw new Error('Data fetch failed');
         const data = await res.json();
 
@@ -541,7 +573,13 @@
             qualityBadge = `<span class="quality-badge quality-nq"><i class="fa-solid fa-box"></i> NQ</span>`;
           }
 
-          let cleanTitle = escapeHtml(item.item_name);
+          // 万が一キャッシュ等で Unknown が届いても画面レベルで確実に補正！
+          let displayTitle = item.item_name;
+          if (displayTitle.includes("Unknown") && FRONTEND_NAME_MAP[item.item_id]) {
+            displayTitle = FRONTEND_NAME_MAP[item.item_id];
+          }
+
+          let cleanTitle = escapeHtml(displayTitle);
           if (q === "NONE") {
             cleanTitle = cleanTitle.replace(/\s*\[(NQ|HQ)\]\s*$/, "");
           }
@@ -560,7 +598,7 @@
 
           // 3. クロスDC転売利益バナー
           let crossProfitBox = "";
-          if (item.cross_info && item.cross_info.profit_rate >= 10.0) {
+          if (item.cross_info && item.cross_info.profit_rate >= 5.0) {
             const ci = item.cross_info;
             crossProfitBox = `
               <div class="cross-profit-box">
