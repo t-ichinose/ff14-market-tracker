@@ -1,7 +1,7 @@
 import requests
 import csv
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 def fetch_and_save():
     scope_name = "Mana"
@@ -40,10 +40,24 @@ def fetch_and_save():
     parsed_list = []
     for item_id, data in items_data.items():
         velocity = data.get("dailySaleVelocity") or 0.0
+        
+        # UNIXタイムスタンプ(ミリ秒)を日時に変換
+        last_upload_ms = data.get("lastUploadTime")
+        last_upload_str = ""
+        if last_upload_ms:
+            last_upload_dt = datetime.fromtimestamp(last_upload_ms / 1000, tz=timezone.utc)
+            last_upload_str = last_upload_dt.strftime("%Y-%m-%d %H:%M:%S")
+
         parsed_list.append({
             "item_id": int(item_id),
             "velocity": float(velocity),
-            "min_price": data.get("minPrice", 0)
+            "min_price": data.get("minPrice", 0),
+            "avg_price": round(data.get("averagePrice", 0), 1),
+            "min_price_nq": data.get("minPriceNQ", 0),
+            "min_price_hq": data.get("minPriceHQ", 0),
+            "units_for_sale": data.get("unitsForSale", 0),
+            "listings_count": data.get("listingsCount", 0),
+            "last_upload_time": last_upload_str
         })
     
     parsed_list.sort(key=lambda x: x["velocity"], reverse=True)
@@ -74,17 +88,28 @@ def fetch_and_save():
 
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+    headers_row = [
+        "日時", "スコープ", "アイテムID", "アイテム名", 
+        "1日平均販売数(個/日)", "最安値(Gil)", "平均価格(Gil)", 
+        "NQ最安値(Gil)", "HQ最安値(Gil)", "総出品数量", "出品件数", "データ更新日時(UTC)"
+    ]
+
     with open(csv_path, mode="a", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
         if not file_exists:
-            writer.writerow(["日時", "スコープ", "アイテムID", "アイテム名", "1日平均販売数(個/日)", "最安値(Gil)"])
+            writer.writerow(headers_row)
         
         for item in top_items:
             i_id = item["item_id"]
             name = name_map.get(i_id, f"Unknown ({i_id})")
-            writer.writerow([now_str, scope_name, i_id, name, f"{item['velocity']:.1f}", item["min_price"]])
+            writer.writerow([
+                now_str, scope_name, i_id, name, 
+                f"{item['velocity']:.1f}", item["min_price"], item["avg_price"],
+                item["min_price_nq"], item["min_price_hq"], item["units_for_sale"],
+                item["listings_count"], item["last_upload_time"]
+            ])
 
-    print("Successfully saved data to CSV!")
+    print("Successfully saved rich data to CSV!")
 
 if __name__ == "__main__":
     fetch_and_save()
