@@ -306,6 +306,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.45rem;
+      cursor: pointer;
     }
 
     .item-card:hover {
@@ -314,11 +315,90 @@
       background: rgba(15, 23, 42, 0.85);
     }
 
+    .item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.3);
+      flex-shrink: 0;
+      image-rendering: pixelated;
+    }
+
+    .item-detail-panel {
+      display: none;
+      margin-top: 0.3rem;
+      padding: 0.6rem 0.7rem;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      animation: detailSlide 0.2s ease;
+    }
+
+    .item-detail-panel.open {
+      display: block;
+    }
+
+    @keyframes detailSlide {
+      from { opacity: 0; max-height: 0; }
+      to { opacity: 1; max-height: 300px; }
+    }
+
+    .detail-desc {
+      color: #cbd5e1;
+      font-size: 0.78rem;
+      margin-bottom: 0.4rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px dashed rgba(255,255,255,0.06);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.2rem 0.8rem;
+    }
+
+    .detail-grid span.label {
+      color: var(--text-muted);
+    }
+
+    .detail-grid span.value {
+      color: #e2e8f0;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .detail-lodestone-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+      color: var(--accent-blue);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .detail-lodestone-link:hover {
+      color: var(--accent-purple);
+    }
+
     .item-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .item-header-text {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 0.5rem;
+      flex: 1;
+      min-width: 0;
     }
 
     .rank-tag {
@@ -737,12 +817,48 @@
             const dailyRevenue = Math.round(avgPrice * vel);
             const dailyRevenueStr = dailyRevenue.toLocaleString() + 'G';
 
+            // Item metadata for details panel
+            const meta = item.meta || {};
+            const iconUrl = meta.icon_url || '';
+            const iconImg = iconUrl ? `<img class="item-icon" src="${iconUrl}" alt="" loading="lazy" onerror="this.style.display='none'">` : '';
+            const cardId = `card-${dc}-${item.item_id}-${q}-${idx}`;
+
+            // Detail panel content
+            const desc = meta.description ? escapeHtml(meta.description) : '';
+            const category = meta.category || '';
+            const itemLevel = meta.item_level || '';
+            const shopPrice = meta.shop_price ? Number(meta.shop_price).toLocaleString() + 'G' : '-';
+            const buybackPrice = meta.buyback_price ? Number(meta.buyback_price).toLocaleString() + 'G' : '-';
+            const stackSize = meta.stack_size || '-';
+
+            let detailPanel = '';
+            if (desc || category) {
+              detailPanel = `
+                <div class="item-detail-panel" id="${cardId}">
+                  ${desc ? `<div class="detail-desc">${desc}</div>` : ''}
+                  <div class="detail-grid">
+                    ${category ? `<span class="label">カテゴリ</span><span class="value">${escapeHtml(category)}</span>` : ''}
+                    ${itemLevel ? `<span class="label">IL</span><span class="value">${itemLevel}</span>` : ''}
+                    <span class="label">スタック</span><span class="value">${stackSize}</span>
+                    <span class="label">SHOP販売</span><span class="value">${shopPrice}</span>
+                    <span class="label">買取価格</span><span class="value">${buybackPrice}</span>
+                  </div>
+                  <a class="detail-lodestone-link" href="https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}" target="_blank" rel="noopener" onclick="event.stopPropagation();">
+                    <i class="fa-solid fa-up-right-from-square"></i> Lodestoneで検索
+                  </a>
+                </div>
+              `;
+            }
+
             return `
-              <div class="item-card">
+              <div class="item-card" onclick="toggleDetail('${cardId}')">
                 <div class="item-card-header">
-                  <span class="rank-tag">#${idx + 1}</span>
-                  <span class="item-card-title">${cleanTitle}</span>
-                  ${qualityBadge}
+                  ${iconImg}
+                  <div class="item-header-text">
+                    <span class="rank-tag">#${idx + 1}</span>
+                    <span class="item-card-title">${cleanTitle}</span>
+                    ${qualityBadge}
+                  </div>
                 </div>
                 
                 <div class="item-stats-row">
@@ -760,6 +876,8 @@
                 </div>
 
                 ${crossProfitBox}
+
+                ${detailPanel}
               </div>
             `;
           }).join('');
@@ -780,6 +898,13 @@
           "'": '&#039;'
         }[m];
       });
+    }
+
+    function toggleDetail(cardId) {
+      const panel = document.getElementById(cardId);
+      if (panel) {
+        panel.classList.toggle('open');
+      }
     }
 
     document.getElementById('searchInput').addEventListener('input', (e) => {
