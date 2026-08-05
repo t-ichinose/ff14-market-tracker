@@ -1055,6 +1055,20 @@
     setInterval(loadData, 60000);
     loadData();
 
+    // Load full 16,843 marketable items index for instant Japanese search
+    let allItemSearchDict = {};
+    async function loadItemSearchDict() {
+      try {
+        const res = await fetch('items_search.json');
+        if (res.ok) {
+          allItemSearchDict = await res.json();
+        }
+      } catch (e) {
+        console.warn("Could not load items_search.json:", e);
+      }
+    }
+    loadItemSearchDict();
+
     // Modal Search System
     function openSearchModal() {
       document.getElementById('searchModal').classList.add('active');
@@ -1081,7 +1095,7 @@
       }
       searchDebounce = setTimeout(() => {
         showModalSuggestions(query);
-      }, 200);
+      }, 150);
     });
 
     document.getElementById('modalItemSearchInput').addEventListener('keydown', (e) => {
@@ -1095,6 +1109,15 @@
       const suggestionsEl = document.getElementById('modalSearchSuggestions');
       const matchedMap = new Map();
 
+      // 1. Search in full 16,843 items_search.json index
+      for (const [idStr, name] of Object.entries(allItemSearchDict)) {
+        if (name.toLowerCase().includes(q) || idStr.includes(q)) {
+          matchedMap.set(Number(idStr), name);
+          if (matchedMap.size >= 20) break;
+        }
+      }
+
+      // 2. Search in active dashboard cards
       DATACENTERS.forEach(dc => {
         (allDcData[dc] || []).forEach(item => {
           const name = item.item_name || '';
@@ -1109,7 +1132,7 @@
 
       let chips = [];
       matchedMap.forEach((name, id) => {
-        chips.push(`<div class="suggestion-chip" onclick="selectModalItem(${id}, '${escapeHtml(name)}')"><i class="fa-solid fa-bolt"></i> ${escapeHtml(name)} (${id})</div>`);
+        chips.push(`<div class="suggestion-chip" onclick="selectModalItem(${id}, '${escapeHtml(name)}')"><i class="fa-solid fa-box"></i> ${escapeHtml(name)} (${id})</div>`);
       });
 
       if (/^\d+$/.test(query) && !matchedMap.has(Number(query))) {
@@ -1117,9 +1140,9 @@
       }
 
       if (chips.length > 0) {
-        suggestionsEl.innerHTML = chips.slice(0, 14).join('');
+        suggestionsEl.innerHTML = chips.slice(0, 15).join('');
       } else {
-        suggestionsEl.innerHTML = `<div class="suggestion-chip" onclick="executeModalSearch()"><i class="fa-solid fa-magnifying-glass"></i> "${escapeHtml(query)}" をXIVAPIで検索...</div>`;
+        suggestionsEl.innerHTML = `<div class="suggestion-chip" onclick="executeModalSearch()"><i class="fa-solid fa-magnifying-glass"></i> "${escapeHtml(query)}" を検索...</div>`;
       }
     }
 
@@ -1130,6 +1153,15 @@
       if (/^\d+$/.test(input)) {
         selectModalItem(Number(input), `アイテム ID:${input}`);
         return;
+      }
+
+      // Check full item dictionary first
+      const q = input.toLowerCase();
+      for (const [idStr, name] of Object.entries(allItemSearchDict)) {
+        if (name.toLowerCase() === q || name.toLowerCase().includes(q)) {
+          selectModalItem(Number(idStr), name);
+          return;
+        }
       }
 
       const resultArea = document.getElementById('modalResultArea');

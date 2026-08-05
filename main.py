@@ -374,6 +374,32 @@ def export_web_json(conn, output_path="docs/data.json"):
         json.dump(web_data, f, ensure_ascii=False, indent=2)
         
     print(f"Exported enriched web JSON to {output_path}")
+    ensure_items_search_json("docs/items_search.json")
+
+def ensure_items_search_json(output_path="docs/items_search.json"):
+    if os.path.exists(output_path) and os.path.getsize(output_path) > 100000:
+        return
+    print("Building docs/items_search.json index (16,843 marketable items)...")
+    try:
+        import csv, io
+        headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
+        marketable = set(requests.get('https://universalis.app/api/v2/marketable', headers=headers, timeout=10).json())
+        text = requests.get('https://raw.githubusercontent.com/xivapi/ffxiv-datamining/master/csv/ja/Item.csv', headers=headers, timeout=15).content.decode('utf-8')
+        reader = csv.reader(io.StringIO(text))
+        next(reader)
+        next(reader)
+        items = {}
+        for r in reader:
+            if r[0].isdigit():
+                iid = int(r[0])
+                name = r[1].strip()
+                if iid in marketable and name:
+                    items[iid] = name
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(items, f, ensure_ascii=False)
+        print(f"Exported full items search index ({len(items)} items) to {output_path}")
+    except Exception as e:
+        print(f"Error building items_search.json: {e}")
 
 def process_dc_pipeline(scope_name: str, conn, now_str: str):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
