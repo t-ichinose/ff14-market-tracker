@@ -76,20 +76,6 @@ def init_db(db_path="data/market_data.db"):
     )
     """)
     
-    # hist_min, hist_max カラムの自動追加
-    try:
-        cursor.execute("ALTER TABLE market_logs ADD COLUMN hist_min INTEGER DEFAULT 0")
-    except Exception:
-        pass
-    try:
-        cursor.execute("ALTER TABLE market_logs ADD COLUMN hist_max INTEGER DEFAULT 0")
-    except Exception:
-        pass
-
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON market_logs(timestamp)")
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_scope_key ON market_logs(scope, item_key)")
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_pool_active ON items_pool(scope, is_active)")
-    
     conn.commit()
     return conn
 
@@ -164,6 +150,10 @@ def export_web_json(conn, output_path="docs/data.json"):
             min_p = r[7]
             h_min = r[9] if (r[9] and r[9] > 0) else min_p
             h_max = r[10] if (r[10] and r[10] >= h_min) else h_min
+            h_avg = r[8] if r[8] else h_min
+
+            if h_avg < h_min: h_avg = float(h_min)
+            if h_avg > h_max: h_avg = float(h_max)
 
             item_obj = {
                 "timestamp": r[0],
@@ -173,10 +163,10 @@ def export_web_json(conn, output_path="docs/data.json"):
                 "item_name": clean_name(r[4]),
                 "quality": r[5],
                 "velocity": r[6],
-                "min_price": min_p,            # 出品最安値
-                "avg_price": r[8],             # API公式取引平均単価
-                "hist_min": h_min,             # 直近取引の最低価格
-                "hist_max": h_max,             # 直近取引の最高価格
+                "min_price": min_p,
+                "avg_price": h_avg,
+                "hist_min": h_min,
+                "hist_max": h_max,
                 "units_for_sale": r[11],
                 "last_upload_time": r[12]
             }
@@ -267,7 +257,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
     for i in range(0, len(target_ids), chunk_size):
         chunk = target_ids[i:i + chunk_size]
         ids_str = ",".join(map(str, chunk))
-        detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}"
+        detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}?entriesToReturn=100"
         
         try:
             d_res = requests.get(detail_url, headers=headers, timeout=15)
@@ -298,22 +288,23 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
             last_upload_dt = datetime.fromtimestamp(last_upload_ms / 1000, tz=timezone.utc)
             last_upload_str = last_upload_dt.strftime("%Y-%m-%d %H:%M:%S")
 
-        avg_price = round(data.get("averagePrice", 0), 1)
         units_for_sale = data.get("unitsForSale", 0)
 
-        # 直近取引履歴 recentHistory から最低売買価格・最高売買価格を精密抽出
+        # 同一の取引履歴データセット(recentHistory)から完全同期待算！
         history = data.get("recentHistory", [])
-        if history:
-            prices = [h.get("pricePerUnit", 0) for h in history if h.get("pricePerUnit", 0) > 0]
-            if prices:
-                h_min = min(prices)
-                h_max = max(prices)
-            else:
-                h_min = data.get("minPrice", 0)
-                h_max = data.get("maxPrice", h_min)
+        prices = [h.get("pricePerUnit", 0) for h in history if h.get("pricePerUnit", 0) > 0]
+        
+        if prices:
+            h_min = min(prices)
+            h_max = max(prices)
+            h_avg = round(sum(prices) / len(prices), 1)
         else:
             h_min = data.get("minPrice", 0)
             h_max = data.get("maxPrice", h_min)
+            h_avg = round(data.get("averagePrice", h_min), 1)
+
+        if h_avg < h_min: h_avg = float(h_min)
+        if h_avg > h_max: h_avg = float(h_max)
 
         nq_vel = float(data.get("nqSaleVelocity") or 0.0)
         hq_vel = float(data.get("hqSaleVelocity") or 0.0)
@@ -322,17 +313,17 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         nq_min = data.get("minPriceNQ") or data.get("minPrice", 0)
         hq_min = data.get("minPriceHQ") or 0
 
-        has_hq = can_be_hq or (hq_min > 0 or hq_vel > 0)
+        has_hq = can_be_hq or (hq_vel > 0)
 
         if not has_hq:
-            qualities = [("NONE", pure_name, total_vel, nq_min, h_min, h_max)]
+            qualities = [("NONE", pure_name, total_vel, nq_min, h_min, h_max, h_avg)]
         else:
             qualities = [
-                ("NQ", f"{pure_name} [NQ]", nq_vel, nq_min, h_min, h_max),
-                ("HQ", f"{pure_name} [HQ]", hq_vel, hq_min, h_min, h_max)
+                ("NQ", f"{pure_name} [NQ]", nq_vel, nq_min, h_min, h_max, h_avg),
+                ("HQ", f"{pure_name} [HQ]", hq_vel, hq_min, h_min, h_max, h_avg)
             ]
 
-        for q_type, item_display_name, vel, price, hm_min, hm_max in qualities:
+        for q_type, item_display_name, vel, price, hm_min, hm_max, hm_avg in qualities:
             item_key = f"{item_id}_{q_type}"
 
             if vel >= VELOCITY_THRESHOLD:
@@ -355,7 +346,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)
                 """, (
                     now_str, scope_name, item_key, item_id, item_display_name, q_type,
-                    vel, price, avg_price, hm_min, hm_max, units_for_sale, last_upload_str
+                    vel, price, hm_avg, hm_min, hm_max, units_for_sale, last_upload_str
                 ))
             else:
                 cursor.execute("""
@@ -372,7 +363,7 @@ def fetch_and_save_all():
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (Average Price + History Range) ---")
+        print(f"--- Processing DC: {scope} (Synchronized History Min/Max/Avg) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
