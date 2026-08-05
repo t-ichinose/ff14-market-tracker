@@ -1216,23 +1216,32 @@
     let lastSearchResults = [];
 
     async function executeModalSearch() {
+      document.getElementById('modalSearchSuggestions').innerHTML = '';
       const input = document.getElementById('modalItemSearchInput').value.trim();
       if (!input) return;
 
       if (/^\d+$/.test(input)) {
-        selectModalItem(Number(input), `アイテム ID:${input}`);
+        selectModalItem(Number(input));
         return;
       }
 
       const q = input.toLowerCase();
       const matched = [];
 
-      // Step 1: Collect all partial matches from 16,843 item index
+      // Collect all partial matches from 16,843 item index
       for (const [idStr, name] of Object.entries(allItemSearchDict)) {
-        if (name.toLowerCase().includes(q) || idStr.includes(q)) {
-          matched.push({ id: Number(idStr), name: name });
+        const nameLower = name.toLowerCase();
+        if (nameLower.includes(q) || idStr.includes(q)) {
+          // Calculate score for sorting: exact match = 0, startsWith = 1, includes = 2
+          let score = 2;
+          if (nameLower === q) score = 0;
+          else if (nameLower.startsWith(q)) score = 1;
+          matched.push({ id: Number(idStr), name: name, score: score });
         }
       }
+
+      // Sort by relevance score, then length
+      matched.sort((a, b) => a.score - b.score || a.name.length - b.name.length);
 
       lastSearchKeyword = input;
       lastSearchResults = matched;
@@ -1240,7 +1249,7 @@
       if (matched.length === 0) {
         // Fallback: try XIVAPI search if local index missed
         const resultArea = document.getElementById('modalResultArea');
-        resultArea.innerHTML = `<div class="modal-empty-state"><i class="fa-solid fa-spinner fa-spin" style="font-size:2rem;color:var(--accent-blue);"></i><p style="margin-top:0.8rem;">検索中...</p></div>`;
+        resultArea.innerHTML = `<div class="modal-empty-state"><i class="fa-solid fa-spinner fa-spin" style="font-size:2rem;color:var(--accent-blue);"></i><p style="margin-top:0.8rem;">"${escapeHtml(input)}" を検索中...</p></div>`;
 
         try {
           const url = `https://xivapi.com/search?string=${encodeURIComponent(input)}&indexes=item&language=ja`;
@@ -1248,7 +1257,7 @@
           const data = await res.json();
 
           if (data.Results && data.Results.length > 0) {
-            data.Results.forEach(r => matched.push({ id: r.ID, name: r.Name }));
+            data.Results.forEach(r => matched.push({ id: r.ID, name: r.Name, score: 0 }));
             lastSearchResults = matched;
             renderCandidateList(input, matched);
           } else {
@@ -1257,9 +1266,6 @@
         } catch (err) {
           resultArea.innerHTML = `<div class="modal-empty-state"><i class="fa-solid fa-circle-exclamation" style="font-size:2rem;color:var(--accent-gold);"></i><p style="margin-top:0.8rem;">"${escapeHtml(input)}" に該当するアイテムが見つかりませんでした。</p></div>`;
         }
-      } else if (matched.length === 1) {
-        // Single exact match -> directly show details
-        selectModalItem(matched[0].id, matched[0].name);
       } else {
         // Step 1: Render candidate list
         renderCandidateList(input, matched);
@@ -1267,8 +1273,13 @@
     }
 
     function renderCandidateList(keyword, candidates) {
+      document.getElementById('modalSearchSuggestions').innerHTML = '';
       const resultArea = document.getElementById('modalResultArea');
-      let cardsHtml = candidates.map(c => `
+      
+      const displayCandidates = candidates.slice(0, 40);
+      const overflowText = candidates.length > 40 ? ` （上位40件を表示 / 全${candidates.length}件）` : ` (${candidates.length}件)`;
+
+      let cardsHtml = displayCandidates.map(c => `
         <div class="candidate-card" onclick="selectModalItem(${c.id})">
           <div>
             <div class="candidate-name">${escapeHtml(c.name)}</div>
@@ -1280,7 +1291,7 @@
 
       resultArea.innerHTML = `
         <div class="candidate-list-header">
-          <span><i class="fa-solid fa-list-check" style="color:var(--accent-blue);"></i> "${escapeHtml(keyword)}" の該当アイテム (${candidates.length}件) - 確定するアイテムを選択してください</span>
+          <span><i class="fa-solid fa-list-check" style="color:var(--accent-blue);"></i> "${escapeHtml(keyword)}" の該当アイテム${overflowText} - 確定するアイテムを選択してください</span>
         </div>
         <div class="candidate-grid">
           ${cardsHtml}
