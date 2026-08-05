@@ -1217,11 +1217,11 @@
 
       let chips = [];
       matchedMap.forEach((name, id) => {
-        chips.push(`<div class="suggestion-chip" onclick="selectModalItem(${id}, '${escapeHtml(name)}')"><i class="fa-solid fa-box"></i> ${escapeHtml(name)} (${id})</div>`);
+        chips.push(`<div class="suggestion-chip" onclick="selectModalItem(${id})"><i class="fa-solid fa-box"></i> ${escapeHtml(name)} (${id})</div>`);
       });
 
       if (/^\d+$/.test(query) && !matchedMap.has(Number(query))) {
-        chips.unshift(`<div class="suggestion-chip" onclick="selectModalItem(${query}, 'アイテム ID:${query}')"><i class="fa-solid fa-hashtag"></i> アイテム ID:${query} を即時検索</div>`);
+        chips.unshift(`<div class="suggestion-chip" onclick="selectModalItem(${query})"><i class="fa-solid fa-hashtag"></i> アイテム ID:${query} を即時検索</div>`);
       }
 
       if (chips.length > 0) {
@@ -1288,7 +1288,7 @@
     function renderCandidateList(keyword, candidates) {
       const resultArea = document.getElementById('modalResultArea');
       let cardsHtml = candidates.map(c => `
-        <div class="candidate-card" onclick="selectModalItem(${c.id}, '${escapeHtml(c.name)}')">
+        <div class="candidate-card" onclick="selectModalItem(${c.id})">
           <div>
             <div class="candidate-name">${escapeHtml(c.name)}</div>
             <div class="candidate-meta">アイテム ID: ${c.id}</div>

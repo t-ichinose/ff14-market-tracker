@@ -299,12 +299,19 @@ def export_web_json(conn, output_path="docs/data.json"):
             if h_avg < h_min: h_avg = float(h_min)
             if h_avg > h_max: h_avg = float(h_max)
 
+            item_id = r[3]
+            raw_name = clean_name(r[4])
+            if (raw_name.startswith("Item ") or "Unknown" in raw_name) and str(item_id) in items_search:
+                raw_name = items_search[str(item_id)]
+            elif (raw_name.startswith("Item ") or "Unknown" in raw_name) and item_id in items_search:
+                raw_name = items_search[item_id]
+
             item_obj = {
                 "timestamp": r[0],
                 "scope": r[1],
                 "item_key": r[2],
-                "item_id": r[3],
-                "item_name": clean_name(r[4]),
+                "item_id": item_id,
+                "item_name": raw_name,
                 "quality": r[5],
                 "velocity": r[6],
                 "min_price": min_p,
