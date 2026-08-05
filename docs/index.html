@@ -653,9 +653,11 @@
               historyText = `過去取引: 最安 ${hMin.toLocaleString()}G 〜 最高 ${hMax.toLocaleString()}G`;
             }
 
-            const velStr = (item.velocity !== undefined && item.velocity !== null) 
-              ? Number(item.velocity).toFixed(1) 
-              : '0.0';
+            const vel = (item.velocity !== undefined && item.velocity !== null) ? Number(item.velocity) : 0;
+            const velStr = vel.toFixed(1);
+            const avgPrice = (item.avg_price !== undefined && item.avg_price !== null) ? Number(item.avg_price) : 0;
+            const dailyRevenue = Math.round(avgPrice * vel);
+            const dailyRevenueStr = dailyRevenue.toLocaleString() + 'G';
 
             return `
               <div class="item-card">
@@ -667,11 +669,12 @@
                 
                 <div class="item-stats-row">
                   <span class="velocity-badge"><i class="fa-solid fa-bolt"></i> ${velStr} 個/日</span>
-                  <span class="price-main"><span class="price-label">平均単価:</span>${avgPriceStr}</span>
+                  <span class="price-main"><span class="price-label">推定日商:</span>${dailyRevenueStr}</span>
                 </div>
 
                 <div class="item-sub-grid">
                   <div><span style="color:var(--text-muted);">出品最安:</span> <strong style="color:#ffffff;">${minPriceStr}</strong></div>
+                  <div style="text-align:right;"><span style="color:var(--text-muted);">平均:</span> <strong style="color:#ffffff;">${avgPriceStr}</strong></div>
                 </div>
 
                 <div class="history-range-row">
