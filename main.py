@@ -3,6 +3,7 @@ import sqlite3
 import os
 import json
 import time
+import re
 from datetime import datetime, timezone
 
 JP_DATACENTERS = ["Elemental", "Gaia", "Mana", "Meteor"]
@@ -13,8 +14,12 @@ def init_db(db_path="data/market_data.db"):
     conn = sqlite3.connect(db_path, timeout=30)
     cursor = conn.cursor()
     
+    # テーブルを完全クリアして古い汚れたアイテム名を抹消
+    cursor.execute("DROP TABLE IF EXISTS items_pool")
+    cursor.execute("DROP TABLE IF EXISTS market_logs")
+
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS items_pool (
+    CREATE TABLE items_pool (
         scope TEXT,
         item_key TEXT,
         item_id INTEGER,
@@ -28,7 +33,7 @@ def init_db(db_path="data/market_data.db"):
     """)
     
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS market_logs (
+    CREATE TABLE market_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         timestamp TEXT,
         scope TEXT,
@@ -45,12 +50,16 @@ def init_db(db_path="data/market_data.db"):
     )
     """)
     
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON market_logs(timestamp)")
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_scope_key ON market_logs(scope, item_key)")
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_pool_active ON items_pool(scope, is_active)")
+    cursor.execute("CREATE INDEX idx_timestamp ON market_logs(timestamp)")
+    cursor.execute("CREATE INDEX idx_scope_key ON market_logs(scope, item_key)")
+    cursor.execute("CREATE INDEX idx_pool_active ON items_pool(scope, is_active)")
     
     conn.commit()
     return conn
+
+def clean_name(raw_name):
+    # 名前に含まれる [NQ] や [HQ] などの末尾タグを完全に消去して純粋なアイテム名にする
+    return re.sub(r'\s*\[(NQ|HQ)\]\s*$', '', raw_name).strip()
 
 def export_web_json(conn, output_path="docs/data.json"):
     os.makedirs("docs", exist_ok=True)
@@ -78,7 +87,7 @@ def export_web_json(conn, output_path="docs/data.json"):
                 "scope": r[1],
                 "item_key": r[2],
                 "item_id": r[3],
-                "item_name": r[4],
+                "item_name": clean_name(r[4]),  # 純粋なアイテム名
                 "quality": r[5],
                 "velocity": r[6],
                 "min_price": r[7],
@@ -101,7 +110,7 @@ def export_web_json(conn, output_path="docs/data.json"):
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(web_data, f, ensure_ascii=False, indent=2)
         
-    print(f"Exported web JSON (HQ-aware) to {output_path}")
+    print(f"Exported clean web JSON to {output_path}")
 
 def process_dc_pipeline(scope_name: str, conn, now_str: str):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
@@ -147,7 +156,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
     for i in range(0, len(all_item_ids), 50):
         ids_chunk = all_item_ids[i:i + 50]
         top_ids_str = ",".join(str(x) for x in ids_chunk)
-        xivapi_url = f"https://xivapi.com/Item?ids={top_ids_str}&columns=ID,Name_ja&language=ja"
+        xivapi_url = f"https://xivapi.com/Item?ids={top_ids_str}&columns=ID,Name_ja,CanBeHq&language=ja"
         
         try:
             x_res = requests.get(xivapi_url, headers=headers, timeout=10)
@@ -155,7 +164,10 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 results = x_res.json().get("Results", [])
                 for item in results:
                     if isinstance(item, dict) and "ID" in item:
-                        name_map[item["ID"]] = item.get("Name_ja", "Unknown")
+                        name_map[item["ID"]] = {
+                            "name": clean_name(item.get("Name_ja", "Unknown")),
+                            "can_be_hq": bool(item.get("CanBeHq", 0))
+                        }
         except Exception as e:
             print(f"[{scope_name}] XIVAPI error: {e}")
         time.sleep(0.1)
@@ -164,7 +176,9 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
 
     for item_id_str, data in items_data.items():
         item_id = int(item_id_str)
-        base_name = name_map.get(item_id, f"Unknown ({item_id})")
+        item_meta = name_map.get(item_id, {"name": f"Unknown ({item_id})", "can_be_hq": False})
+        pure_name = item_meta["name"]
+        can_be_hq = item_meta["can_be_hq"]
         
         last_upload_ms = data.get("lastUploadTime")
         last_upload_str = ""
@@ -183,20 +197,16 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         nq_min = data.get("minPriceNQ") or data.get("minPrice", 0)
         hq_min = data.get("minPriceHQ") or 0
 
-        # HQが存在するか判定 (hq_min > 0 または hq_vel > 0)
-        has_hq = (hq_min > 0 or hq_vel > 0)
-
-        if not has_hq:
-            # HQが存在しないアイテム（マテリア、家具、一部素材等）
-            qualities = [("NONE", base_name, total_vel, nq_min)]
+        # XIVAPIの CanBeHq フラグで絶対判定！ (CanBeHq == False ならHQ不可アイテム)
+        if not can_be_hq:
+            qualities = [("NONE", pure_name, total_vel, nq_min)]
         else:
-            # HQが存在するアイテム
             qualities = [
-                ("NQ", f"{base_name} [NQ]", nq_vel, nq_min),
-                ("HQ", f"{base_name} [HQ]", hq_vel, hq_min)
+                ("NQ", pure_name, nq_vel, nq_min),
+                ("HQ", pure_name, hq_vel, hq_min)
             ]
 
-        for q_type, full_name, vel, price in qualities:
+        for q_type, item_display_name, vel, price in qualities:
             item_key = f"{item_id}_{q_type}"
 
             if vel >= VELOCITY_THRESHOLD:
@@ -209,7 +219,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                     quality = excluded.quality,
                     last_velocity = excluded.last_velocity,
                     is_active = 1
-                """, (scope_name, item_key, item_id, full_name, q_type, now_str, vel))
+                """, (scope_name, item_key, item_id, item_display_name, q_type, now_str, vel))
 
                 cursor.execute("""
                 INSERT INTO market_logs (
@@ -218,7 +228,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                     units_for_sale, listings_count, last_upload_time
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
-                    now_str, scope_name, item_key, item_id, full_name, q_type,
+                    now_str, scope_name, item_key, item_id, item_display_name, q_type,
                     vel, price, avg_price, units_for_sale, listings_count, last_upload_str
                 ))
             else:
@@ -228,7 +238,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 WHERE scope = ? AND item_key = ?
                 """, (vel, scope_name, item_key))
 
-    print(f"[{scope_name}] Processed items -> High Velocity Cards (>= {VELOCITY_THRESHOLD}/day): {high_velocity_count} cards.")
+    print(f"[{scope_name}] Processed -> High Velocity Cards (>= {VELOCITY_THRESHOLD}/day): {high_velocity_count} cards.")
 
 def fetch_and_save_all():
     db_path = "data/market_data.db"
@@ -236,13 +246,13 @@ def fetch_and_save_all():
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (HQ-aware) ---")
+        print(f"--- Processing DC: {scope} (XIVAPI CanBeHq Strict Check) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()
-    print(f"All 4 JP Datacenters pipeline completed (HQ-aware, Threshold >= {VELOCITY_THRESHOLD})!")
+    print(f"All 4 JP Datacenters pipeline completed (XIVAPI CanBeHq Strict Check)!")
 
 if __name__ == "__main__":
     fetch_and_save_all()
