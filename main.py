@@ -13,7 +13,12 @@ def init_db(db_path="data/market_data.db"):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
-    # 1. 注目アイテムプールテーブル (NQ/HQ独立)
+    # 既存のテーブル構造が古い場合はドロップして新構造で作成（安全性向上）
+    cursor.execute("PRAGMA table_info(items_pool)")
+    columns = [row[1] for row in cursor.fetchall()]
+    if columns and "item_key" not in columns:
+        cursor.execute("DROP TABLE IF EXISTS items_pool")
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS items_pool (
         scope TEXT,
@@ -28,7 +33,13 @@ def init_db(db_path="data/market_data.db"):
     )
     """)
     
-    # 2. 相場ログテーブル
+    cursor.execute("PRAGMA table_info(market_logs)")
+    log_columns = [row[1] for row in cursor.fetchall()]
+    if log_columns and "item_key" not in log_columns:
+        cursor.execute("ALTER TABLE market_logs ADD COLUMN item_key TEXT")
+    if log_columns and "quality" not in log_columns:
+        cursor.execute("ALTER TABLE market_logs ADD COLUMN quality TEXT")
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS market_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -46,17 +57,6 @@ def init_db(db_path="data/market_data.db"):
         last_upload_time TEXT
     )
     """)
-    
-    # カラムの安全追加（マイグレーション）
-    try:
-        cursor.execute("ALTER TABLE market_logs ADD COLUMN item_key TEXT")
-    except Exception:
-        pass
-
-    try:
-        cursor.execute("ALTER TABLE market_logs ADD COLUMN quality TEXT")
-    except Exception:
-        pass
     
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON market_logs(timestamp)")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_scope_key ON market_logs(scope, item_key)")
@@ -144,7 +144,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}?listings=1"
         
         try:
-            d_res = requests.get(detail_url, headers=headers, timeout=10)
+            d_res = requests.get(detail_url, headers=headers, timeout=15)
             if d_res.status_code == 200:
                 items_data.update(d_res.json().get('items', {}))
         except Exception as e:
