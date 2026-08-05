@@ -535,11 +535,7 @@
       try {
         const cacheBuster = `t=${Date.now()}_${Math.random()}`;
         const res = await fetch(`data.json?${cacheBuster}`, { 
-          cache: "no-store",
-          headers: {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache'
-          }
+          cache: "no-store"
         });
         if (!res.ok) throw new Error('Data fetch failed');
         const data = await res.json();
@@ -552,7 +548,7 @@
         renderAllColumns();
 
       } catch (err) {
-        console.error(err);
+        console.error("loadData error:", err);
         DATACENTERS.forEach(dc => {
           document.getElementById(`list-${dc}`).innerHTML = `
             <div style="text-align:center; padding:2rem; color:#ef4444;">
@@ -565,108 +561,125 @@
 
     function renderAllColumns(searchTerm = "") {
       DATACENTERS.forEach(dc => {
-        const rawItems = allDcData[dc] || [];
-        
-        let items = rawItems;
-        if (searchTerm) {
-          items = rawItems.filter(item => 
-            item.item_name.toLowerCase().includes(searchTerm) ||
-            item.item_id.toString().includes(searchTerm)
-          );
-        }
-
-        document.getElementById(`count-${dc}`).innerText = `${items.length}件`;
-        const listEl = document.getElementById(`list-${dc}`);
-
-        if (items.length === 0) {
-          listEl.innerHTML = `
-            <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.85rem;">
-              高回転アイテム未検知
-            </div>
-          `;
-          return;
-        }
-
-        listEl.innerHTML = items.map((item, idx) => {
-          const q = item.quality || "NONE";
-          let qualityBadge = "";
+        try {
+          const rawItems = allDcData[dc] || [];
           
-          if (q === "HQ" || item.item_name.includes("[HQ]")) {
-            qualityBadge = `<span class="quality-badge quality-hq"><i class="fa-solid fa-crown"></i> HQ</span>`;
-          } else if (q === "NQ" || item.item_name.includes("[NQ]")) {
-            qualityBadge = `<span class="quality-badge quality-nq"><i class="fa-solid fa-box"></i> NQ</span>`;
+          let items = rawItems;
+          if (searchTerm) {
+            items = rawItems.filter(item => 
+              item.item_name.toLowerCase().includes(searchTerm) ||
+              item.item_id.toString().includes(searchTerm)
+            );
           }
 
-          let displayTitle = item.item_name;
-          if (displayTitle.includes("Unknown") && FRONTEND_NAME_MAP[item.item_id]) {
-            displayTitle = FRONTEND_NAME_MAP[item.item_id];
-          }
+          document.getElementById(`count-${dc}`).innerText = `${items.length}件`;
+          const listEl = document.getElementById(`list-${dc}`);
 
-          let cleanTitle = escapeHtml(displayTitle);
-          if (q === "NONE") {
-            cleanTitle = cleanTitle.replace(/\s*\[(NQ|HQ)\]\s*$/, "");
-          }
-
-          // 1. 在庫消化日数タグ
-          let stockTag = "";
-          if (item.days_to_clear !== undefined && item.days_to_clear <= 3.0) {
-            stockTag = `<span class="tag-stock"><i class="fa-solid fa-hourglass-half"></i> 消化: 約${item.days_to_clear.toFixed(1)}日分</span>`;
-          }
-
-          // 2. 割安度タグ
-          let discountTag = "";
-          if (item.discount_rate !== undefined && item.discount_rate >= 15.0) {
-            discountTag = `<span class="tag-discount"><i class="fa-solid fa-tags"></i> 割安 ${item.discount_rate.toFixed(0)}% OFF</span>`;
-          }
-
-          // 3. クロスDC転売利益バナー
-          let crossProfitBox = "";
-          if (item.cross_info && item.cross_info.profit_rate >= 5.0) {
-            const ci = item.cross_info;
-            crossProfitBox = `
-              <div class="cross-profit-box">
-                <span class="profit-route"><i class="fa-solid fa-arrow-right-arrow-left"></i> 買: ${ci.cheap_scope} (${ci.cheap_price.toLocaleString()}G)</span>
-                <span class="profit-rate">+${ci.profit_gil.toLocaleString()}G (${ci.profit_rate}%)</span>
+          if (items.length === 0) {
+            listEl.innerHTML = `
+              <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.85rem;">
+                高回転アイテム未検知
               </div>
             `;
+            return;
           }
 
-          // 出品枠数表示のスマートクリーン化（1出品固定の誤解表記を完全に防止）
-          const lc = item.listings_count;
-          const listingsStr = (lc && lc > 1) ? ` (${lc.toLocaleString()}出品)` : '';
+          listEl.innerHTML = items.map((item, idx) => {
+            const q = item.quality || "NONE";
+            let qualityBadge = "";
+            
+            if (q === "HQ" || (item.item_name && item.item_name.includes("[HQ]"))) {
+              qualityBadge = `<span class="quality-badge quality-hq"><i class="fa-solid fa-crown"></i> HQ</span>`;
+            } else if (q === "NQ" || (item.item_name && item.item_name.includes("[NQ]"))) {
+              qualityBadge = `<span class="quality-badge quality-nq"><i class="fa-solid fa-box"></i> NQ</span>`;
+            }
 
-          return `
-            <div class="item-card">
-              <div class="item-card-header">
-                <span class="rank-tag">#${idx + 1}</span>
-                <span class="item-card-title">${cleanTitle}</span>
-                ${qualityBadge}
-              </div>
-              
-              <div class="item-stats-row">
-                <span class="velocity-badge"><i class="fa-solid fa-bolt"></i> ${item.velocity.toFixed(1)} 個/日</span>
-                <span class="price-main"><span class="price-label">最安:</span>${item.min_price.toLocaleString()}G</span>
-              </div>
+            let displayTitle = item.item_name || `Item ${item.item_id}`;
+            if (displayTitle.includes("Unknown") && FRONTEND_NAME_MAP[item.item_id]) {
+              displayTitle = FRONTEND_NAME_MAP[item.item_id];
+            }
 
-              <div class="analytics-tag-row">
-                ${stockTag}
-                ${discountTag}
-              </div>
+            let cleanTitle = escapeHtml(displayTitle);
+            if (q === "NONE") {
+              cleanTitle = cleanTitle.replace(/\s*\[(NQ|HQ)\]\s*$/, "");
+            }
 
-              <div class="item-sub-grid">
-                <div>平均: ${item.avg_price.toLocaleString()}G</div>
-                <div>在庫: ${item.units_for_sale.toLocaleString()}個${listingsStr}</div>
-              </div>
+            // 1. 在庫消化日数タグ
+            let stockTag = "";
+            if (item.days_to_clear !== undefined && item.days_to_clear !== null && item.days_to_clear <= 3.0) {
+              stockTag = `<span class="tag-stock"><i class="fa-solid fa-hourglass-half"></i> 消化: 約${Number(item.days_to_clear).toFixed(1)}日分</span>`;
+            }
 
-              ${crossProfitBox}
-            </div>
-          `;
-        }).join('');
+            // 2. 割安度タグ
+            let discountTag = "";
+            if (item.discount_rate !== undefined && item.discount_rate !== null && item.discount_rate >= 15.0) {
+              discountTag = `<span class="tag-discount"><i class="fa-solid fa-tags"></i> 割安 ${Number(item.discount_rate).toFixed(0)}% OFF</span>`;
+            }
+
+            // 3. クロスDC転売利益バナー
+            let crossProfitBox = "";
+            if (item.cross_info && item.cross_info.profit_rate >= 5.0) {
+              const ci = item.cross_info;
+              crossProfitBox = `
+                <div class="cross-profit-box">
+                  <span class="profit-route"><i class="fa-solid fa-arrow-right-arrow-left"></i> 買: ${ci.cheap_scope} (${Number(ci.cheap_price).toLocaleString()}G)</span>
+                  <span class="profit-rate">+${Number(ci.profit_gil).toLocaleString()}G (${ci.profit_rate}%)</span>
+                </div>
+              `;
+            }
+
+            const unitsStr = (item.units_for_sale !== undefined && item.units_for_sale !== null) 
+              ? `${Number(item.units_for_sale).toLocaleString()}個` 
+              : '-';
+
+            const minPriceStr = (item.min_price !== undefined && item.min_price !== null) 
+              ? `${Number(item.min_price).toLocaleString()}G` 
+              : '-';
+
+            const avgPriceStr = (item.avg_price !== undefined && item.avg_price !== null) 
+              ? `${Number(item.avg_price).toLocaleString()}G` 
+              : '-';
+
+            const velStr = (item.velocity !== undefined && item.velocity !== null) 
+              ? Number(item.velocity).toFixed(1) 
+              : '0.0';
+
+            return `
+              <div class="item-card">
+                <div class="item-card-header">
+                  <span class="rank-tag">#${idx + 1}</span>
+                  <span class="item-card-title">${cleanTitle}</span>
+                  ${qualityBadge}
+                </div>
+                
+                <div class="item-stats-row">
+                  <span class="velocity-badge"><i class="fa-solid fa-bolt"></i> ${velStr} 個/日</span>
+                  <span class="price-main"><span class="price-label">最安:</span>${minPriceStr}</span>
+                </div>
+
+                <div class="analytics-tag-row">
+                  ${stockTag}
+                  ${discountTag}
+                </div>
+
+                <div class="item-sub-grid">
+                  <div>平均: ${avgPriceStr}</div>
+                  <div>在庫: ${unitsStr}</div>
+                </div>
+
+                ${crossProfitBox}
+              </div>
+            `;
+          }).join('');
+        } catch (colErr) {
+          console.error(`Error rendering column ${dc}:`, colErr);
+        }
       });
     }
 
     function escapeHtml(str) {
-      return str.replace(/[&<>"']/g, function(m) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function(m) {
         return {
           '&': '&amp;',
           '<': '&lt;',
