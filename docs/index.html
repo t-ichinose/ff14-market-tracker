@@ -1027,10 +1027,7 @@
               displayTitle = FRONTEND_NAME_MAP[item.item_id];
             }
 
-            let cleanTitle = escapeHtml(displayTitle);
-            if (q === "NONE") {
-              cleanTitle = cleanTitle.replace(/\s*\[(NQ|HQ)\]\s*$/, "");
-            }
+            let cleanTitle = escapeHtml(displayTitle).replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
 
             // 完全修正したクロスDC転売利益バナー (買 ➔ 売 の両方を確実に美しく表示)
             let crossProfitBox = "";

@@ -306,6 +306,8 @@ def export_web_json(conn, output_path="docs/data.json"):
             elif (raw_name.startswith("Item ") or "Unknown" in raw_name) and item_id in items_search:
                 raw_name = items_search[item_id]
 
+            raw_name = clean_name(raw_name)
+
             item_obj = {
                 "timestamp": r[0],
                 "scope": r[1],
