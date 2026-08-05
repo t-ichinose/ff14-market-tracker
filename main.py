@@ -339,7 +339,7 @@ def export_web_json(conn, output_path="docs/data.json"):
             
         final_data_by_scope[scope] = enriched_items
 
-    last_updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    last_updated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     
     web_data = {
         "last_updated": last_updated,
@@ -509,7 +509,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
 def fetch_and_save_all():
     db_path = "data/market_data.db"
     conn = init_db(db_path)
-    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     for scope in JP_DATACENTERS:
         print(f"--- Processing DC: {scope} (Exact DC Listings Stock) ---")

@@ -679,6 +679,39 @@
       renderAllColumns(searchTerm);
     }
 
+    function formatTimeJST(rawTimeStr) {
+      if (!rawTimeStr) return '-';
+      let str = String(rawTimeStr).trim();
+      if (!str.endsWith('Z') && !str.includes('+')) {
+        str = str.replace(' ', 'T') + 'Z';
+      }
+      const d = new Date(str);
+      if (isNaN(d.getTime())) return rawTimeStr;
+      
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const hours = String(d.getHours()).padStart(2, '0');
+      const minutes = String(d.getMinutes()).padStart(2, '0');
+      const seconds = String(d.getSeconds()).padStart(2, '0');
+      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} (JST)`;
+    }
+
+    function formatChartLabelJST(rawTimeStr) {
+      if (!rawTimeStr) return '';
+      let str = String(rawTimeStr).trim();
+      if (!str.endsWith('Z') && !str.includes('+')) {
+        str = str.replace(' ', 'T') + 'Z';
+      }
+      const d = new Date(str);
+      if (isNaN(d.getTime())) return rawTimeStr.replace(/^\d{4}-/, '');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const hours = String(d.getHours()).padStart(2, '0');
+      const minutes = String(d.getMinutes()).padStart(2, '0');
+      return `${month}-${day} ${hours}:${minutes}`;
+    }
+
     async function loadData() {
       try {
         const cacheBuster = `t=${Date.now()}_${Math.random()}`;
@@ -688,8 +721,9 @@
         if (!res.ok) throw new Error('Data fetch failed');
         const data = await res.json();
 
+        const formattedLastUpdated = formatTimeJST(data.last_updated);
         document.getElementById('lastUpdatedBadge').innerHTML = `
-          <span class="status-dot"></span> 最終更新: ${data.last_updated} (UTC)
+          <span class="status-dot"></span> 最終更新: ${formattedLastUpdated}
         `;
 
         allDcData = data.data || {};
@@ -863,7 +897,7 @@
 
       modal.classList.add('active');
 
-      const labels = history.map(h => h.timestamp ? h.timestamp.replace(/^\d{4}-/, '') : '');
+      const labels = history.map(h => formatChartLabelJST(h.timestamp));
       const avgPrices = history.map(h => h.avg_price);
       const minPrices = history.map(h => h.min_price);
       const stockUnits = history.map(h => h.units_for_sale);
@@ -876,7 +910,7 @@
       priceChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: labels.length > 0 ? labels : [item.timestamp ? item.timestamp.replace(/^\d{4}-/, '') : '現在'],
+          labels: labels.length > 0 ? labels : [formatChartLabelJST(item.timestamp) || '現在'],
           datasets: [
             {
               label: '平均価格 (G)',
