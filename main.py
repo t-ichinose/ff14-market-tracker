@@ -67,16 +67,13 @@ def init_db(db_path="data/market_data.db"):
         quality TEXT,
         daily_sale_velocity REAL,
         min_price INTEGER,
+        max_price INTEGER DEFAULT 0,
         avg_price REAL,
         units_for_sale INTEGER,
         listings_count INTEGER,
         last_upload_time TEXT
     )
     """)
-    
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON market_logs(timestamp)")
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_scope_key ON market_logs(scope, item_key)")
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_pool_active ON items_pool(scope, is_active)")
     
     conn.commit()
     return conn
@@ -133,8 +130,8 @@ def export_web_json(conn, output_path="docs/data.json"):
     for scope in JP_DATACENTERS:
         cursor.execute("""
         SELECT ml.timestamp, ml.scope, ml.item_key, ml.item_id, ml.item_name, ml.quality,
-               ml.daily_sale_velocity, ml.min_price, ml.avg_price,
-               ml.units_for_sale, ml.listings_count, ml.last_upload_time
+               ml.daily_sale_velocity, ml.min_price, ml.max_price, ml.avg_price,
+               ml.units_for_sale, ml.last_upload_time
         FROM market_logs ml
         INNER JOIN (
             SELECT scope, item_key, MAX(id) as max_id
@@ -149,6 +146,9 @@ def export_web_json(conn, output_path="docs/data.json"):
         rows = cursor.fetchall()
         items = []
         for r in rows:
+            min_p = r[7]
+            max_p = r[8] if (r[8] and r[8] >= min_p) else min_p
+            
             item_obj = {
                 "timestamp": r[0],
                 "scope": r[1],
@@ -157,10 +157,10 @@ def export_web_json(conn, output_path="docs/data.json"):
                 "item_name": clean_name(r[4]),
                 "quality": r[5],
                 "velocity": r[6],
-                "min_price": r[7],
-                "avg_price": r[8],
-                "units_for_sale": r[9],
-                "listings_count": r[10],
+                "min_price": min_p,
+                "max_price": max_p,
+                "avg_price": r[9],
+                "units_for_sale": r[10],
                 "last_upload_time": r[11]
             }
             items.append(item_obj)
@@ -205,19 +205,8 @@ def export_web_json(conn, output_path="docs/data.json"):
         enriched_items = []
         for item in items:
             ikey = item["item_key"]
-            vel = item["velocity"]
-            min_p = item["min_price"]
-            avg_p = item["avg_price"]
-            units = item["units_for_sale"]
-            
-            days_to_clear = round(units / vel, 1) if vel > 0 else 999.0
-            discount_rate = round(((avg_p - min_p) / avg_p) * 100, 1) if avg_p > min_p else 0.0
             cross_info = cross_analytics.get(ikey)
-            
-            item["days_to_clear"] = days_to_clear
-            item["discount_rate"] = discount_rate
             item["cross_info"] = cross_info
-            
             enriched_items.append(item)
             
         final_data_by_scope[scope] = enriched_items
@@ -261,7 +250,6 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
     for i in range(0, len(target_ids), chunk_size):
         chunk = target_ids[i:i + chunk_size]
         ids_str = ",".join(map(str, chunk))
-        # 制限パラメータを撤去し、全出品リスト(最大100件)を取得！
         detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}"
         
         try:
@@ -296,9 +284,18 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         avg_price = round(data.get("averagePrice", 0), 1)
         units_for_sale = data.get("unitsForSale", 0)
         
-        # 本物の出品枠数 len(listings) を正確にカウント！
-        listings_list = data.get("listings", [])
-        listings_count = len(listings_list)
+        # 正しい最高出品額(max_price)の算出（ネタ高額出品99,999,999Gを除外した現実的な最高出品価格）
+        listings = data.get("listings", [])
+        if listings:
+            all_prices = sorted([l.get("pricePerUnit", 0) for l in listings if l.get("pricePerUnit", 0) > 0])
+            if all_prices:
+                # 90パーセンタイル（上位常識範囲内）の価格を現実的な最高出品額とする
+                p90_idx = int(len(all_prices) * 0.9)
+                calc_max = all_prices[p90_idx] if p90_idx < len(all_prices) else all_prices[-1]
+            else:
+                calc_max = data.get("maxPrice") or data.get("minPrice", 0)
+        else:
+            calc_max = data.get("maxPrice") or data.get("minPrice", 0)
 
         nq_vel = float(data.get("nqSaleVelocity") or 0.0)
         hq_vel = float(data.get("hqSaleVelocity") or 0.0)
@@ -310,14 +307,14 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         has_hq = can_be_hq or (hq_min > 0 or hq_vel > 0)
 
         if not has_hq:
-            qualities = [("NONE", pure_name, total_vel, nq_min)]
+            qualities = [("NONE", pure_name, total_vel, nq_min, calc_max)]
         else:
             qualities = [
-                ("NQ", f"{pure_name} [NQ]", nq_vel, nq_min),
-                ("HQ", f"{pure_name} [HQ]", hq_vel, hq_min)
+                ("NQ", f"{pure_name} [NQ]", nq_vel, nq_min, calc_max),
+                ("HQ", f"{pure_name} [HQ]", hq_vel, hq_min, calc_max)
             ]
 
-        for q_type, item_display_name, vel, price in qualities:
+        for q_type, item_display_name, vel, price, max_p in qualities:
             item_key = f"{item_id}_{q_type}"
 
             if vel >= VELOCITY_THRESHOLD:
@@ -335,12 +332,12 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 cursor.execute("""
                 INSERT INTO market_logs (
                     timestamp, scope, item_key, item_id, item_name, quality,
-                    daily_sale_velocity, min_price, avg_price,
+                    daily_sale_velocity, min_price, max_price, avg_price,
                     units_for_sale, listings_count, last_upload_time
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)
                 """, (
                     now_str, scope_name, item_key, item_id, item_display_name, q_type,
-                    vel, price, avg_price, units_for_sale, listings_count, last_upload_str
+                    vel, price, max_p, avg_price, units_for_sale, last_upload_str
                 ))
             else:
                 cursor.execute("""
@@ -357,13 +354,13 @@ def fetch_and_save_all():
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (Full Real Listings) ---")
+        print(f"--- Processing DC: {scope} (Realistic Max Prices) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()
-    print(f"All 4 JP Datacenters pipeline completed (Full Real Listings, Threshold >= {VELOCITY_THRESHOLD})!")
+    print(f"All 4 JP Datacenters pipeline completed (Threshold >= {VELOCITY_THRESHOLD})!")
 
 if __name__ == "__main__":
     fetch_and_save_all()

@@ -367,34 +367,6 @@
       color: var(--text-muted);
     }
 
-    /* Analytics Badges */
-    .analytics-tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      margin-top: 0.2rem;
-    }
-
-    .tag-stock {
-      font-size: 0.7rem;
-      background: rgba(74, 222, 128, 0.1);
-      border: 1px solid rgba(74, 222, 128, 0.3);
-      color: #4ade80;
-      padding: 0.1rem 0.4rem;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-
-    .tag-discount {
-      font-size: 0.7rem;
-      background: rgba(248, 113, 113, 0.15);
-      border: 1px solid rgba(248, 113, 113, 0.3);
-      color: #f87171;
-      padding: 0.1rem 0.4rem;
-      border-radius: 4px;
-      font-weight: 700;
-    }
-
     /* Cross-DC Profit Banner */
     .cross-profit-box {
       background: linear-gradient(135deg, rgba(121, 40, 202, 0.25), rgba(0, 210, 255, 0.25));
@@ -621,19 +593,7 @@
               cleanTitle = cleanTitle.replace(/\s*\[(NQ|HQ)\]\s*$/, "");
             }
 
-            // 1. 在庫消化日数タグ
-            let stockTag = "";
-            if (item.days_to_clear !== undefined && item.days_to_clear !== null && item.days_to_clear <= 3.0) {
-              stockTag = `<span class="tag-stock"><i class="fa-solid fa-hourglass-half"></i> 消化: 約${Number(item.days_to_clear).toFixed(1)}日分</span>`;
-            }
-
-            // 2. 割安度タグ
-            let discountTag = "";
-            if (item.discount_rate !== undefined && item.discount_rate !== null && item.discount_rate >= 15.0) {
-              discountTag = `<span class="tag-discount"><i class="fa-solid fa-tags"></i> 割安 ${Number(item.discount_rate).toFixed(0)}% OFF</span>`;
-            }
-
-            // 3. クロスDC転売利益バナー
+            // クロスDC転売利益バナー
             let crossProfitBox = "";
             if (item.cross_info && item.cross_info.profit_rate >= 5.0) {
               const ci = item.cross_info;
@@ -653,6 +613,10 @@
               ? `${Number(item.min_price).toLocaleString()}G` 
               : '-';
 
+            const maxPriceStr = (item.max_price !== undefined && item.max_price !== null) 
+              ? `${Number(item.max_price).toLocaleString()}G` 
+              : minPriceStr;
+
             const avgPriceStr = (item.avg_price !== undefined && item.avg_price !== null) 
               ? `${Number(item.avg_price).toLocaleString()}G` 
               : '-';
@@ -660,12 +624,6 @@
             const velStr = (item.velocity !== undefined && item.velocity !== null) 
               ? Number(item.velocity).toFixed(1) 
               : '0.0';
-
-            // リテイナー出品枠数の確実な復活表示（例: (45出品)）
-            let listingsText = "";
-            if (item.listings_count && item.listings_count > 0) {
-              listingsText = ` (${item.listings_count}出品)`;
-            }
 
             return `
               <div class="item-card">
@@ -677,17 +635,13 @@
                 
                 <div class="item-stats-row">
                   <span class="velocity-badge"><i class="fa-solid fa-bolt"></i> ${velStr} 個/日</span>
-                  <span class="price-main"><span class="price-label">最安:</span>${minPriceStr}</span>
-                </div>
-
-                <div class="analytics-tag-row">
-                  ${stockTag}
-                  ${discountTag}
+                  <span class="price-main"><span class="price-label">平均:</span>${avgPriceStr}</span>
                 </div>
 
                 <div class="item-sub-grid">
-                  <div>平均: ${avgPriceStr}</div>
-                  <div>在庫: ${unitsStr}${listingsText}</div>
+                  <div>最安: ${minPriceStr}</div>
+                  <div>最高: ${maxPriceStr}</div>
+                  <div>在庫: ${unitsStr}</div>
                 </div>
 
                 ${crossProfitBox}
