@@ -2,8 +2,8 @@ name: FF14 Market Tracker
 
 on:
   schedule:
-    # 1時間ごとに自動実行 (UTC基準)
-    - cron: '0 * * * *'
+    # 30分ごとに自動実行 (UTC基準)
+    - cron: '*/30 * * * *'
   workflow_dispatch: # 手動実行ボタンも有効化
 
 jobs:
