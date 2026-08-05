@@ -684,6 +684,89 @@
       gap: 0.4rem;
     }
 
+    /* 2-Step Candidate List Styling */
+    .candidate-list-header {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.65rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .candidate-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.65rem;
+    }
+
+    .candidate-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .candidate-card:hover {
+      background: rgba(0, 210, 255, 0.12);
+      border-color: var(--accent-blue);
+      transform: translateY(-1px);
+    }
+
+    .candidate-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #ffffff;
+    }
+
+    .candidate-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    .candidate-select-btn {
+      background: rgba(0, 210, 255, 0.15);
+      border: 1px solid var(--accent-blue);
+      color: var(--accent-blue);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.65rem;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .modal-back-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      padding: 0.3rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s ease;
+    }
+
+    .modal-back-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
     .modal-empty-state {
       text-align: center;
       padding: 3rem 1rem;
@@ -1148,6 +1231,9 @@
       }
     }
 
+    let lastSearchKeyword = '';
+    let lastSearchResults = [];
+
     async function executeModalSearch() {
       const input = document.getElementById('modalItemSearchInput').value.trim();
       if (!input) return;
@@ -1157,32 +1243,68 @@
         return;
       }
 
-      // Check full item dictionary first
       const q = input.toLowerCase();
+      const matched = [];
+
+      // Step 1: Collect all partial matches from 16,843 item index
       for (const [idStr, name] of Object.entries(allItemSearchDict)) {
-        if (name.toLowerCase() === q || name.toLowerCase().includes(q)) {
-          selectModalItem(Number(idStr), name);
-          return;
+        if (name.toLowerCase().includes(q) || idStr.includes(q)) {
+          matched.push({ id: Number(idStr), name: name });
         }
       }
 
-      const resultArea = document.getElementById('modalResultArea');
-      resultArea.innerHTML = `<div class="modal-empty-state"><i class="fa-solid fa-spinner fa-spin" style="font-size:2rem;color:var(--accent-blue);"></i><p style="margin-top:0.8rem;">XIVAPIでアイテム "${escapeHtml(input)}" を検索中...</p></div>`;
+      lastSearchKeyword = input;
+      lastSearchResults = matched;
 
-      try {
-        const url = `https://xivapi.com/search?string=${encodeURIComponent(input)}&indexes=item&language=ja`;
-        const res = await fetch(url);
-        const data = await res.json();
+      if (matched.length === 0) {
+        // Fallback: try XIVAPI search if local index missed
+        const resultArea = document.getElementById('modalResultArea');
+        resultArea.innerHTML = `<div class="modal-empty-state"><i class="fa-solid fa-spinner fa-spin" style="font-size:2rem;color:var(--accent-blue);"></i><p style="margin-top:0.8rem;">検索中...</p></div>`;
 
-        if (data.Results && data.Results.length > 0) {
-          const first = data.Results[0];
-          selectModalItem(first.ID, first.Name);
-        } else {
+        try {
+          const url = `https://xivapi.com/search?string=${encodeURIComponent(input)}&indexes=item&language=ja`;
+          const res = await fetch(url);
+          const data = await res.json();
+
+          if (data.Results && data.Results.length > 0) {
+            data.Results.forEach(r => matched.push({ id: r.ID, name: r.Name }));
+            lastSearchResults = matched;
+            renderCandidateList(input, matched);
+          } else {
+            resultArea.innerHTML = `<div class="modal-empty-state"><i class="fa-solid fa-circle-exclamation" style="font-size:2rem;color:var(--accent-gold);"></i><p style="margin-top:0.8rem;">"${escapeHtml(input)}" に該当するアイテムが見つかりませんでした。</p></div>`;
+          }
+        } catch (err) {
           resultArea.innerHTML = `<div class="modal-empty-state"><i class="fa-solid fa-circle-exclamation" style="font-size:2rem;color:var(--accent-gold);"></i><p style="margin-top:0.8rem;">"${escapeHtml(input)}" に該当するアイテムが見つかりませんでした。</p></div>`;
         }
-      } catch (err) {
-        resultArea.innerHTML = `<div class="modal-empty-state"><i class="fa-solid fa-triangle-exclamation" style="font-size:2rem;color:#ef4444;"></i><p style="margin-top:0.8rem;">検索エラー: ${escapeHtml(err.message)}</p></div>`;
+      } else if (matched.length === 1) {
+        // Single exact match -> directly show details
+        selectModalItem(matched[0].id, matched[0].name);
+      } else {
+        // Step 1: Render candidate list
+        renderCandidateList(input, matched);
       }
+    }
+
+    function renderCandidateList(keyword, candidates) {
+      const resultArea = document.getElementById('modalResultArea');
+      let cardsHtml = candidates.map(c => `
+        <div class="candidate-card" onclick="selectModalItem(${c.id}, '${escapeHtml(c.name)}')">
+          <div>
+            <div class="candidate-name">${escapeHtml(c.name)}</div>
+            <div class="candidate-meta">アイテム ID: ${c.id}</div>
+          </div>
+          <div class="candidate-select-btn">取引データを表示 <i class="fa-solid fa-chevron-right"></i></div>
+        </div>
+      `).join('');
+
+      resultArea.innerHTML = `
+        <div class="candidate-list-header">
+          <span><i class="fa-solid fa-list-check" style="color:var(--accent-blue);"></i> "${escapeHtml(keyword)}" の該当アイテム (${candidates.length}件) - 確定するアイテムを選択してください</span>
+        </div>
+        <div class="candidate-grid">
+          ${cardsHtml}
+        </div>
+      `;
     }
 
     async function fetchWithTimeout(resource, options = {}) {
@@ -1225,6 +1347,10 @@
 
         const uniResults = await Promise.all(uniPromises);
 
+        const backBtnHtml = (lastSearchResults && lastSearchResults.length > 1) 
+          ? `<button class="modal-back-btn" onclick="renderCandidateList('${escapeHtml(lastSearchKeyword)}', lastSearchResults)"><i class="fa-solid fa-arrow-left"></i> 候補一覧に戻る</button>`
+          : '';
+
         let headerHtml = `
           <div class="modal-item-summary">
             <div class="modal-item-info">
@@ -1233,9 +1359,12 @@
                 <div class="modal-item-meta">アイテム ID: ${itemId}</div>
               </div>
             </div>
-            <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" style="font-size:0.85rem;" title="Lodestoneで確認">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> Lodestone
-            </a>
+            <div style="display:flex;align-items:center;gap:0.6rem;">
+              ${backBtnHtml}
+              <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" style="font-size:0.85rem;" title="Lodestoneで確認">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Lodestone
+              </a>
+            </div>
           </div>
         `;
 
