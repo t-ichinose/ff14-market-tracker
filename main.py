@@ -38,7 +38,6 @@ def export_web_json(conn, output_path="docs/data.json"):
     os.makedirs("docs", exist_ok=True)
     cursor = conn.cursor()
     
-    # 過去最新のデータをアイテムごとに取得（最新タイムスタンプのデータ）
     cursor.execute("""
     SELECT timestamp, scope, item_id, item_name, daily_sale_velocity,
            min_price, avg_price, min_price_nq, min_price_hq,
@@ -102,7 +101,8 @@ def fetch_and_save():
     for i in range(0, len(recent_items), chunk_size):
         chunk = recent_items[i:i + chunk_size]
         ids_str = ",".join(map(str, chunk))
-        detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}?listings=1&entries=5"
+        # dailySaleVelocityを正しく全履歴から計算させるため entries パラメータを削除
+        detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}?listings=1"
         
         try:
             d_res = requests.get(detail_url, headers=headers, timeout=10)
@@ -113,7 +113,8 @@ def fetch_and_save():
 
     parsed_list = []
     for item_id, data in items_data.items():
-        velocity = data.get("dailySaleVelocity") or 0.0
+        # dailySaleVelocity または regularSaleVelocity から数値を取得
+        velocity = data.get("dailySaleVelocity") or data.get("regularSaleVelocity") or 0.0
         
         last_upload_ms = data.get("lastUploadTime")
         last_upload_str = ""
@@ -179,11 +180,10 @@ def fetch_and_save():
 
     conn.commit()
     
-    # Web表示用JSON出力
     export_web_json(conn, "docs/data.json")
     
     conn.close()
-    print("Successfully saved data & updated web JSON!")
+    print("Successfully saved data & updated web JSON with correct velocity!")
 
 if __name__ == "__main__":
     fetch_and_save()
