@@ -146,9 +146,6 @@ def export_web_json(conn, output_path="docs/data.json"):
         rows = cursor.fetchall()
         items = []
         for r in rows:
-            min_p = r[7]
-            max_p = r[8] if (r[8] and r[8] >= min_p) else min_p
-            
             item_obj = {
                 "timestamp": r[0],
                 "scope": r[1],
@@ -157,8 +154,8 @@ def export_web_json(conn, output_path="docs/data.json"):
                 "item_name": clean_name(r[4]),
                 "quality": r[5],
                 "velocity": r[6],
-                "min_price": min_p,
-                "max_price": max_p,
+                "min_price": r[7],
+                "max_price": r[8],
                 "avg_price": r[9],
                 "units_for_sale": r[10],
                 "last_upload_time": r[11]
@@ -281,40 +278,40 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
             last_upload_dt = datetime.fromtimestamp(last_upload_ms / 1000, tz=timezone.utc)
             last_upload_str = last_upload_dt.strftime("%Y-%m-%d %H:%M:%S")
 
-        avg_price = round(data.get("averagePrice", 0), 1)
         units_for_sale = data.get("unitsForSale", 0)
-        
-        # 正しい最高出品額(max_price)の算出（ネタ高額出品99,999,999Gを除外した現実的な最高出品価格）
-        listings = data.get("listings", [])
-        if listings:
-            all_prices = sorted([l.get("pricePerUnit", 0) for l in listings if l.get("pricePerUnit", 0) > 0])
-            if all_prices:
-                # 90パーセンタイル（上位常識範囲内）の価格を現実的な最高出品額とする
-                p90_idx = int(len(all_prices) * 0.9)
-                calc_max = all_prices[p90_idx] if p90_idx < len(all_prices) else all_prices[-1]
+
+        # 直近取引履歴 (recentHistory) からの最低取引額、最高取引額、平均取引額を正確に算出
+        history = data.get("recentHistory", [])
+        if history:
+            prices = [h.get("pricePerUnit", 0) for h in history if h.get("pricePerUnit", 0) > 0]
+            if prices:
+                hist_min = min(prices)
+                hist_max = max(prices)
+                hist_avg = round(sum(prices) / len(prices), 1)
             else:
-                calc_max = data.get("maxPrice") or data.get("minPrice", 0)
+                hist_min = data.get("minPrice", 0)
+                hist_max = data.get("maxPrice", hist_min)
+                hist_avg = round(data.get("averagePrice", hist_min), 1)
         else:
-            calc_max = data.get("maxPrice") or data.get("minPrice", 0)
+            hist_min = data.get("minPrice", 0)
+            hist_max = data.get("maxPrice", hist_min)
+            hist_avg = round(data.get("averagePrice", hist_min), 1)
 
         nq_vel = float(data.get("nqSaleVelocity") or 0.0)
         hq_vel = float(data.get("hqSaleVelocity") or 0.0)
         total_vel = float(data.get("dailySaleVelocity") or data.get("regularSaleVelocity") or 0.0)
-        
-        nq_min = data.get("minPriceNQ") or data.get("minPrice", 0)
-        hq_min = data.get("minPriceHQ") or 0
 
-        has_hq = can_be_hq or (hq_min > 0 or hq_vel > 0)
+        has_hq = can_be_hq or (hq_vel > 0)
 
         if not has_hq:
-            qualities = [("NONE", pure_name, total_vel, nq_min, calc_max)]
+            qualities = [("NONE", pure_name, total_vel, hist_min, hist_max, hist_avg)]
         else:
             qualities = [
-                ("NQ", f"{pure_name} [NQ]", nq_vel, nq_min, calc_max),
-                ("HQ", f"{pure_name} [HQ]", hq_vel, hq_min, calc_max)
+                ("NQ", f"{pure_name} [NQ]", nq_vel, hist_min, hist_max, hist_avg),
+                ("HQ", f"{pure_name} [HQ]", hq_vel, hist_min, hist_max, hist_avg)
             ]
 
-        for q_type, item_display_name, vel, price, max_p in qualities:
+        for q_type, item_display_name, vel, h_min, h_max, h_avg in qualities:
             item_key = f"{item_id}_{q_type}"
 
             if vel >= VELOCITY_THRESHOLD:
@@ -337,7 +334,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)
                 """, (
                     now_str, scope_name, item_key, item_id, item_display_name, q_type,
-                    vel, price, max_p, avg_price, units_for_sale, last_upload_str
+                    vel, h_min, h_max, h_avg, units_for_sale, last_upload_str
                 ))
             else:
                 cursor.execute("""
@@ -354,7 +351,7 @@ def fetch_and_save_all():
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (Realistic Max Prices) ---")
+        print(f"--- Processing DC: {scope} (Recent History Min/Max/Avg) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
