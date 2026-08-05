@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FF14 Market Analytics - 4 DC Multi-View</title>
+  <title>FF14 Market Analytics - NQ/HQ Separated View</title>
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,8 +20,12 @@
       --accent-gold: #ffb703;
       --text-main: #f1f5f9;
       --text-muted: #94a3b8;
-      --badge-hq: #ef4444;
-      --badge-nq: #3b82f6;
+      --badge-hq-bg: rgba(239, 68, 68, 0.15);
+      --badge-hq-border: rgba(239, 68, 68, 0.4);
+      --badge-hq-text: #f87171;
+      --badge-nq-bg: rgba(59, 130, 246, 0.15);
+      --badge-nq-border: rgba(59, 130, 246, 0.4);
+      --badge-nq-text: #60a5fa;
     }
 
     * {
@@ -272,6 +276,29 @@
       flex: 1;
     }
 
+    .quality-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+
+    }
+
+    .quality-hq {
+      background: var(--badge-hq-bg);
+      border: 1px solid var(--badge-hq-border);
+      color: var(--badge-hq-text);
+    }
+
+    .quality-nq {
+      background: var(--badge-nq-bg);
+      border: 1px solid var(--badge-nq-border);
+      color: var(--badge-nq-text);
+    }
+
     .item-card-id {
       font-size: 0.7rem;
       color: var(--text-muted);
@@ -322,9 +349,6 @@
       color: var(--text-muted);
     }
 
-    .nq-badge { color: var(--badge-nq); font-weight: 600; }
-    .hq-badge { color: var(--badge-hq); font-weight: 600; }
-
     @media (max-width: 1400px) {
       .dc-grid { grid-template-columns: repeat(2, 1fr); }
       .dc-column { height: 550px; }
@@ -350,7 +374,7 @@
 
       <div class="header-badges">
         <div class="filter-badge">
-          <i class="fa-solid fa-fire"></i> 1日50個以上売れる超高流動品
+          <i class="fa-solid fa-fire"></i> 1日50個以上売れる超高流動品 (NQ/HQ独立表示)
         </div>
         <div class="status-badge" id="lastUpdatedBadge">
           <span class="status-dot"></span> 読み込み中...
@@ -462,15 +486,17 @@
         }
 
         listEl.innerHTML = items.map((item, idx) => {
-          const nqPrice = item.min_price_nq ? `${item.min_price_nq.toLocaleString()}G` : '-';
-          const hqPrice = item.min_price_hq ? `${item.min_price_hq.toLocaleString()}G` : '-';
+          const isHQ = item.quality === "HQ" || item.item_name.includes("[HQ]");
+          const qualityBadge = isHQ 
+            ? `<span class="quality-badge quality-hq"><i class="fa-solid fa-crown"></i> HQ</span>`
+            : `<span class="quality-badge quality-nq"><i class="fa-solid fa-box"></i> NQ</span>`;
 
           return `
             <div class="item-card">
               <div class="item-card-header">
                 <span class="rank-tag">#${idx + 1}</span>
                 <span class="item-card-title">${escapeHtml(item.item_name)}</span>
-                <span class="item-card-id">ID:${item.item_id}</span>
+                ${qualityBadge}
               </div>
               
               <div class="item-stats-row">
@@ -479,10 +505,8 @@
               </div>
 
               <div class="item-sub-grid">
-                <div><span class="nq-badge">NQ:</span> ${nqPrice}</div>
-                <div><span class="hq-badge">HQ:</span> ${hqPrice}</div>
                 <div>平均: ${item.avg_price.toLocaleString()}G</div>
-                <div>在庫: ${item.units_for_sale.toLocaleString()}個</div>
+                <div>在庫: ${item.units_for_sale.toLocaleString()}個 (${item.listings_count}出品)</div>
               </div>
             </div>
           `;
