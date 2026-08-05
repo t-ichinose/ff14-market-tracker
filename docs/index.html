@@ -1183,6 +1183,23 @@
       }
     }
 
+    async function fetchWithTimeout(resource, options = {}) {
+      const { timeout = 6000 } = options;
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), timeout);
+      try {
+        const response = await fetch(resource, {
+          ...options,
+          signal: controller.signal
+        });
+        clearTimeout(id);
+        return response;
+      } catch (error) {
+        clearTimeout(id);
+        return null;
+      }
+    }
+
     async function selectModalItem(itemId, itemName) {
       document.getElementById('modalSearchSuggestions').innerHTML = '';
       const resultArea = document.getElementById('modalResultArea');
@@ -1193,35 +1210,25 @@
         </div>
       `;
 
+      const displayName = allItemSearchDict[itemId] || itemName || `アイテム ID: ${itemId}`;
+      const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayName)}`;
+
       try {
         const dcs = ["Mana", "Elemental", "Gaia", "Meteor"];
         const uniPromises = dcs.map(dc => 
-          fetch(`https://universalis.app/api/v2/${dc}/${itemId}?entriesToReturn=100`)
-            .then(r => r.ok ? r.json() : null)
+          fetchWithTimeout(`https://universalis.app/api/v2/${dc}/${itemId}?entriesToReturn=100`, { timeout: 6000 })
+            .then(r => (r && r.ok) ? r.json() : null)
             .catch(() => null)
         );
 
-        const xivPromise = fetch(`https://xivapi.com/Item/${itemId}?language=ja`)
-          .then(r => r.ok ? r.json() : null)
-          .catch(() => null);
-
-        const [xivData, ...uniResults] = await Promise.all([xivPromise, ...uniPromises]);
-
-        const displayName = (xivData && xivData.Name_ja) ? xivData.Name_ja : itemName;
-        const iconPath = (xivData && (xivData.IconHD || xivData.Icon)) ? (xivData.IconHD || xivData.Icon) : '';
-        const iconUrl = iconPath ? `https://xivapi.com${iconPath}` : '';
-        const category = (xivData && xivData.ItemUICategory) ? (xivData.ItemUICategory.Name_ja || xivData.ItemUICategory.Name || '') : '';
-        const ilvl = (xivData && xivData.LevelItem) ? xivData.LevelItem : '';
-
-        const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayName)}`;
+        const uniResults = await Promise.all(uniPromises);
 
         let headerHtml = `
           <div class="modal-item-summary">
             <div class="modal-item-info">
-              ${iconUrl ? `<img class="modal-item-icon" src="${iconUrl}" alt="">` : ''}
               <div>
                 <div class="modal-item-name">${escapeHtml(displayName)}</div>
-                <div class="modal-item-meta">${category ? escapeHtml(category) + ' | ' : ''}${ilvl ? 'IL' + ilvl + ' | ' : ''}アイテム ID: ${itemId}</div>
+                <div class="modal-item-meta">アイテム ID: ${itemId}</div>
               </div>
             </div>
             <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" style="font-size:0.85rem;" title="Lodestoneで確認">
