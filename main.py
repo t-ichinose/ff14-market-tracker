@@ -70,18 +70,21 @@ def init_db(db_path="data/market_data.db"):
 def clean_name(raw_name):
     return re.sub(r'\s*\[(NQ|HQ)\]\s*$', '', raw_name).strip()
 
+def load_items_search():
+    if os.path.exists("docs/items_search.json"):
+        try:
+            with open("docs/items_search.json", "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
 def resolve_item_metadata_batch(conn, item_ids):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
     meta_map = {}
     
     # Load full 16,843 items search dictionary if available
-    items_search = {}
-    if os.path.exists("docs/items_search.json"):
-        try:
-            with open("docs/items_search.json", "r", encoding="utf-8") as f:
-                items_search = json.load(f)
-        except Exception:
-            pass
+    items_search = load_items_search()
 
     # 1. Check item_metadata DB cache for real can_be_hq & name
     if item_ids and conn:
@@ -238,6 +241,7 @@ def fetch_and_cache_metadata(conn, item_ids):
 def export_web_json(conn, output_path="docs/data.json"):
     os.makedirs("docs", exist_ok=True)
     cursor = conn.cursor()
+    items_search = load_items_search()
     
     raw_data_by_scope = {}
     
