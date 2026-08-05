@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FF14 Market Board Analytics - Mana DC</title>
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --card-bg: rgba(22, 30, 49, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-blue: #00d2ff;
+      --accent-purple: #7928ca;
+      --accent-gold: #ffb703;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --badge-hq: #ef4444;
+      --badge-nq: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(121, 40, 202, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 210, 255, 0.12) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0, 210, 255, 0.1);
+      border: 1px solid rgba(0, 210, 255, 0.2);
+      color: var(--accent-blue);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-blue);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-blue);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    /* Stats Overview Cards */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 210, 255, 0.3);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* Controls & Filter Bar */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.75rem 1rem 0.75rem 2.8rem;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-blue);
+    }
+
+    /* Data Table Card */
+    .table-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(15, 23, 42, 0.6);
+      padding: 1rem 1.25rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--card-border);
+      font-weight: 700;
+    }
+
+    td {
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid var(--card-border);
+      font-size: 0.95rem;
+    }
+
+    tbody tr {
+      transition: background 0.15s ease;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .rank-cell {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent-gold);
+      width: 60px;
+    }
+
+    .item-name {
+      font-weight: 600;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .item-id {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .velocity-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: #4ade80;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .price-value {
+      font-weight: 600;
+      color: #f8fafc;
+    }
+
+    .sub-info {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 1.4rem; }
+      td, th { padding: 0.75rem; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="brand-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div>
+          <h1>FF14 Market Board Analytics</h1>
+          <div class="status-badge" id="lastUpdatedBadge">
+            <span class="status-dot"></span> データを読み込み中...
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Overview Cards -->
+    <div class="overview-grid">
+      <div class="stat-card">
+        <div class="stat-label"><i class="fa-solid fa-server"></i> 対象スコープ</div>
+        <div class="stat-value" id="statScope">Mana DC</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-body">
+          <div class="stat-label"><i class="fa-solid fa-fire"></i> 監視アクティブ数</div>
+          <div class="stat-value" id="statTotalItems">-</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label"><i class="fa-solid fa-crown"></i> 最高取引速度アイテム</div>
+        <div class="stat-value" id="statTopItem" style="font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">-</div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-bar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="アイテム名またはIDでリアルタイム検索...">
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="table-card">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>順位</th>
+              <th>アイテム名 (ID)</th>
+              <th>1日平均販売数</th>
+              <th>最安値</th>
+              <th>平均価格</th>
+              <th>NQ / HQ 最安値</th>
+              <th>出品在庫数</th>
+            </tr>
+          </thead>
+          <tbody id="marketTableBody">
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <p>最新の市場データを取得中...</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      <p>FF14 Market Board Analytics &copy; 2026 | Powered by Universalis API & XIVAPI</p>
+    </footer>
+  </div>
+
+  <script>
+    let globalItems = [];
+
+    async function loadData() {
+      try {
+        const res = await fetch('data.json?t=' + new Date().getTime());
+        if (!res.ok) throw new Error('Data fetch failed');
+        const data = await res.json();
+
+        // Stats Update
+        document.getElementById('lastUpdatedBadge').innerHTML = `
+          <span class="status-dot"></span> 最終更新: ${data.last_updated} (UTC)
+        `;
+        document.getElementById('statScope').innerText = `${data.scope} DC`;
+        document.getElementById('statTotalItems').innerText = `${data.total_items} 件`;
+
+        globalItems = data.items || [];
+        if (globalItems.length > 0) {
+          document.getElementById('statTopItem').innerText = globalItems[0].item_name;
+        }
+
+        renderTable(globalItems);
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('marketTableBody').innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 3rem; color: #ef4444;">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem;"></i>
+              <p>データの読み込みに失敗しました。時間をおいて再読み込みしてください。</p>
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    function renderTable(items) {
+      const tbody = document.getElementById('marketTableBody');
+      if (items.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+              該当するアイテムが見つかりませんでした。
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = items.map((item, idx) => {
+        const nqStr = item.min_price_nq ? `${item.min_price_nq.toLocaleString()} Gil` : '-';
+        const hqStr = item.min_price_hq ? `${item.min_price_hq.toLocaleString()} Gil` : '-';
+
+        return `
+          <tr>
+            <td class="rank-cell">#${idx + 1}</td>
+            <td>
+              <div class="item-name">
+                ${escapeHtml(item.item_name)}
+                <span class="item-id">ID:${item.item_id}</span>
+              </div>
+            </td>
+            <td>
+              <span class="velocity-tag">
+                <i class="fa-solid fa-bolt"></i> ${item.velocity.toFixed(1)} 個/日
+              </span>
+            </td>
+            <td>
+              <span class="price-value">${item.min_price.toLocaleString()} Gil</span>
+            </td>
+            <td>
+              <span class="price-value" style="color: #cbd5e1;">${item.avg_price.toLocaleString()} Gil</span>
+            </td>
+            <td>
+              <span class="sub-info"><strong style="color: var(--badge-nq);">NQ:</strong> ${nqStr}</span>
+              <span class="sub-info"><strong style="color: var(--badge-hq);">HQ:</strong> ${hqStr}</span>
+            </td>
+            <td>
+              <span>${item.units_for_sale.toLocaleString()} 個</span>
+              <span class="sub-info">(${item.listings_count} 出品)</span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, function(m) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[m];
+      });
+    }
+
+    // Search Filter
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      if (!term) {
+        renderTable(globalItems);
+        return;
+      }
+
+      const filtered = globalItems.filter(item => 
+        item.item_name.toLowerCase().includes(term) ||
+        item.item_id.toString().includes(term)
+      );
+
+      renderTable(filtered);
+    });
+
+    // Initial Load
+    loadData();
+  </script>
+</body>
+</html>

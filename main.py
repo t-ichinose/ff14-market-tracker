@@ -1,6 +1,7 @@
 import requests
 import sqlite3
 import os
+import json
 from datetime import datetime, timezone
 
 def init_db(db_path="data/market_data.db"):
@@ -8,7 +9,6 @@ def init_db(db_path="data/market_data.db"):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
-    # テーブル作成
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS market_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,7 +27,6 @@ def init_db(db_path="data/market_data.db"):
     )
     """)
     
-    # 高速検索用インデックス
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON market_logs(timestamp)")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_item_id ON market_logs(item_id)")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_velocity ON market_logs(daily_sale_velocity)")
@@ -35,16 +34,62 @@ def init_db(db_path="data/market_data.db"):
     conn.commit()
     return conn
 
+def export_web_json(conn, output_path="docs/data.json"):
+    os.makedirs("docs", exist_ok=True)
+    cursor = conn.cursor()
+    
+    # 過去最新のデータをアイテムごとに取得（最新タイムスタンプのデータ）
+    cursor.execute("""
+    SELECT timestamp, scope, item_id, item_name, daily_sale_velocity,
+           min_price, avg_price, min_price_nq, min_price_hq,
+           units_for_sale, listings_count, last_upload_time
+    FROM market_logs
+    WHERE timestamp = (SELECT MAX(timestamp) FROM market_logs)
+    ORDER BY daily_sale_velocity DESC
+    """)
+    
+    rows = cursor.fetchall()
+    
+    items = []
+    for r in rows:
+        items.append({
+            "timestamp": r[0],
+            "scope": r[1],
+            "item_id": r[2],
+            "item_name": r[3],
+            "velocity": r[4],
+            "min_price": r[5],
+            "avg_price": r[6],
+            "min_price_nq": r[7],
+            "min_price_hq": r[8],
+            "units_for_sale": r[9],
+            "listings_count": r[10],
+            "last_upload_time": r[11]
+        })
+        
+    last_updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    web_data = {
+        "last_updated": last_updated,
+        "scope": "Mana",
+        "total_items": len(items),
+        "items": items
+    }
+    
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(web_data, f, ensure_ascii=False, indent=2)
+        
+    print(f"Exported web JSON to {output_path}")
+
 def fetch_and_save():
     scope_name = "Mana"
     recent_url = "https://universalis.app/api/v2/extra/stats/recently-updated"
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
     
-    # 1. 直近更新アイテムIDを取得（20件）
     try:
         res = requests.get(recent_url, headers=headers, timeout=10)
         res.raise_for_status()
-        recent_items = res.json().get('items', [])[:20]
+        recent_items = res.json().get('items', [])[:25]
     except Exception as e:
         print(f"Error fetching recently updated: {e}")
         return
@@ -52,7 +97,6 @@ def fetch_and_save():
     if not recent_items:
         return
 
-    # 2. 10件ずつ小分けで詳細取得
     items_data = {}
     chunk_size = 10
     for i in range(0, len(recent_items), chunk_size):
@@ -67,7 +111,6 @@ def fetch_and_save():
         except Exception as e:
             print(f"Error fetching detail chunk: {e}")
 
-    # 3. 販売速度順にソート（上位10件）
     parsed_list = []
     for item_id, data in items_data.items():
         velocity = data.get("dailySaleVelocity") or 0.0
@@ -91,12 +134,11 @@ def fetch_and_save():
         })
     
     parsed_list.sort(key=lambda x: x["velocity"], reverse=True)
-    top_items = parsed_list[:10]
+    top_items = parsed_list[:15]
 
     if not top_items:
         return
 
-    # 4. XIVAPIで日本語名取得
     top_ids_str = ",".join(str(x["item_id"]) for x in top_items)
     xivapi_url = f"https://xivapi.com/Item?ids={top_ids_str}&columns=ID,Name_ja&language=ja"
     
@@ -111,7 +153,6 @@ def fetch_and_save():
     except Exception as e:
         print(f"Error fetching XIVAPI names: {e}")
 
-    # 5. SQLiteデータベースに保存
     db_path = "data/market_data.db"
     conn = init_db(db_path)
     cursor = conn.cursor()
@@ -137,9 +178,12 @@ def fetch_and_save():
         ))
 
     conn.commit()
+    
+    # Web表示用JSON出力
+    export_web_json(conn, "docs/data.json")
+    
     conn.close()
-
-    print("Successfully saved data to SQLite Database (data/market_data.db)!")
+    print("Successfully saved data & updated web JSON!")
 
 if __name__ == "__main__":
     fetch_and_save()
