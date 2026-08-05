@@ -9,7 +9,6 @@ from datetime import datetime, timezone
 JP_DATACENTERS = ["Elemental", "Gaia", "Mana", "Meteor"]
 VELOCITY_THRESHOLD = 50.0
 
-# 49200番台を含む最新黄金のレガシー商材の確実なローカル辞書
 KNOWN_70_ITEMS = {
     49234: ("剛力の心酔薬G4", True),
     49235: ("活力の心酔薬G4", True),
@@ -23,6 +22,19 @@ KNOWN_70_ITEMS = {
     47701: ("トラルコーン", False),
     47740: ("コザマル・カモミール", False),
     49230: ("キャロットラペ", True),
+    49225: ("ローストチキン", True),
+    49226: ("メスカル", True),
+    49227: ("ベラフディアン・ペペロンチーノ", True),
+    49228: ("コンチャ", True),
+    49205: ("ロイヤルウパー", False),
+    49206: ("スイートバナナ", False),
+    49207: ("サンチアゴトマト", False),
+    49208: ("ウカマウピメント", False),
+    45972: ("オルコクロマイト", False),
+    45984: ("クラロウォルナット原木", False),
+    46188: ("シデリティス茶葉", False),
+    50414: ("アイギス・エネルギーパック", False),
+    52254: ("カード:ノーマカー", False),
 }
 
 def init_db(db_path="data/market_data.db"):
@@ -76,16 +88,13 @@ def resolve_item_metadata_batch(item_ids):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
     meta_map = {}
     
-    # 0. 既知辞書チェック
     for iid in item_ids:
         if iid in KNOWN_70_ITEMS:
             name, can_hq = KNOWN_70_ITEMS[iid]
             meta_map[iid] = {"name": name, "can_be_hq": can_hq}
 
-    # 1. XIVAPI Single / Garland API
     missing_ids = [x for x in item_ids if x not in meta_map]
     for iid in missing_ids:
-        # XIVAPI Single
         try:
             x_single = f"https://xivapi.com/Item/{iid}?language=ja"
             xr = requests.get(x_single, headers=headers, timeout=3)
@@ -99,7 +108,6 @@ def resolve_item_metadata_batch(item_ids):
         except Exception:
             pass
 
-        # Garland API Fallback
         try:
             g_url = f"https://www.garlandtools.org/db/doc/item/ja/3/{iid}.json"
             gr = requests.get(g_url, headers=headers, timeout=3)
@@ -249,7 +257,8 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
     for i in range(0, len(target_ids), chunk_size):
         chunk = target_ids[i:i + chunk_size]
         ids_str = ",".join(map(str, chunk))
-        detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}?listings=1"
+        # entries=0 を指定して正確な listingsCount と unitsForSale を最速取得！
+        detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}?entries=0"
         
         try:
             d_res = requests.get(detail_url, headers=headers, timeout=15)
@@ -340,7 +349,6 @@ def fetch_and_save_all():
     conn = init_db(db_path)
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # DB内の既存 Unknown レコードを本物の名前に一括補正
     cursor = conn.cursor()
     cursor.execute("SELECT DISTINCT item_id FROM items_pool WHERE item_name LIKE 'Unknown%'")
     unknown_ids = [row[0] for row in cursor.fetchall()]
@@ -353,13 +361,13 @@ def fetch_and_save_all():
         conn.commit()
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (Dawntrail 7.0 Item Resolution) ---")
+        print(f"--- Processing DC: {scope} (Accurate Listings Count) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()
-    print(f"All 4 JP Datacenters pipeline completed (Dawntrail 7.0 Item Resolution, Threshold >= {VELOCITY_THRESHOLD})!")
+    print(f"All 4 JP Datacenters pipeline completed (Accurate Listings Count, Threshold >= {VELOCITY_THRESHOLD})!")
 
 if __name__ == "__main__":
     fetch_and_save_all()
