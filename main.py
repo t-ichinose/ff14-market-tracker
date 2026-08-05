@@ -111,24 +111,28 @@ def resolve_item_metadata_batch(conn, item_ids):
         except Exception:
             pass
 
-    # 1. Known items map & items_search dictionary
+    # 1. Known items map
     for iid in item_ids:
         if iid in KNOWN_70_ITEMS:
             name, can_hq = KNOWN_70_ITEMS[iid]
             meta_map[iid] = {"name": name, "can_be_hq": can_hq}
-        elif str(iid) in items_search:
-            meta_map[iid] = {"name": items_search[str(iid)], "can_be_hq": True}
-        elif iid in items_search:
-            meta_map[iid] = {"name": items_search[iid], "can_be_hq": True}
 
-    # 2. Check item_metadata DB cache for any remaining
-    missing_ids = [x for x in item_ids if x not in meta_map]
-    if missing_ids and conn:
+    # 2. Check item_metadata DB cache for real can_be_hq & name
+    if item_ids and conn:
         cursor = conn.cursor()
-        placeholders = ','.join(['?'] * len(missing_ids))
-        cursor.execute(f"SELECT item_id, category, can_be_hq FROM item_metadata WHERE item_id IN ({placeholders})", list(missing_ids))
+        placeholders = ','.join(['?'] * len(item_ids))
+        cursor.execute(f"SELECT item_id, can_be_hq FROM item_metadata WHERE item_id IN ({placeholders})", list(item_ids))
         for row in cursor.fetchall():
-            meta_map[row[0]] = {"name": f"Unknown ({row[0]})", "can_be_hq": bool(row[2])}
+            iid = row[0]
+            can_hq_db = bool(row[1])
+            name = items_search.get(str(iid)) or items_search.get(iid) or f"Item {iid}"
+            meta_map[iid] = {"name": name, "can_be_hq": can_hq_db}
+
+    # 3. Fill remaining from items_search dictionary (default can_be_hq=False for safety)
+    for iid in item_ids:
+        if iid not in meta_map:
+            name = items_search.get(str(iid)) or items_search.get(iid) or f"Item {iid}"
+            meta_map[iid] = {"name": name, "can_be_hq": False}
 
     # 3. Fallback to XIVAPI / Garland for truly unknown items
     still_missing = [x for x in item_ids if x not in meta_map]
@@ -509,7 +513,8 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         nq_min = data.get("minPriceNQ") or data.get("minPrice", 0)
         hq_min = data.get("minPriceHQ") or 0
 
-        has_hq = can_be_hq or (hq_vel > 0)
+        # NQ/HQ distinction ONLY for items that actually can be HQ
+        has_hq = can_be_hq and ((hq_vel > 0) or (hq_min > 0))
 
         if not has_hq:
             qualities = [("NONE", pure_name, total_vel, nq_min, h_min, h_max, h_avg)]
