@@ -23,7 +23,18 @@
         "hist_max": 12,
         "units_for_sale": 280632,
         "last_upload_time": "2026-08-05 01:40:56",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020017_hr1.png",
+          "description": "雷の媒質の樹状結晶",
+          "category": "クリスタル",
+          "item_level": 50,
+          "shop_price": 990,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -39,7 +50,18 @@
         "hist_max": 50,
         "units_for_sale": 233000,
         "last_upload_time": "2026-08-05 02:04:49",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020012_hr1.png",
+          "description": "土の媒質の結晶",
+          "category": "クリスタル",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -55,7 +77,18 @@
         "hist_max": 43,
         "units_for_sale": 67799,
         "last_upload_time": "2026-08-05 02:51:05",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020001_hr1.png",
+          "description": "炎の媒質の小結晶",
+          "category": "クリスタル",
+          "item_level": 1,
+          "shop_price": 9,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -71,7 +104,18 @@
         "hist_max": 43,
         "units_for_sale": 67799,
         "last_upload_time": "2026-08-05 01:57:58",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020001_hr1.png",
+          "description": "炎の媒質の小結晶",
+          "category": "クリスタル",
+          "item_level": 1,
+          "shop_price": 9,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -87,7 +131,18 @@
         "hist_max": 42,
         "units_for_sale": 44594,
         "last_upload_time": "2026-08-05 00:25:18",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020003_hr1.png",
+          "description": "氷の媒質の小結晶",
+          "category": "クリスタル",
+          "item_level": 1,
+          "shop_price": 9,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -110,6 +165,17 @@
           "high_price": 40,
           "profit_gil": 6,
           "profit_rate": 18.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020008_hr1.png",
+          "description": "水の媒質の結晶",
+          "category": "クリスタル",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -126,7 +192,18 @@
         "hist_max": 1709,
         "units_for_sale": 3960,
         "last_upload_time": "2026-08-05 04:05:46",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021003_hr1.png",
+          "description": "ダークマタークラスターを魔導機械の修理に用いるために切り出した補材\n\n[飛空艇・潜水艦パーツ向け修理材料]",
+          "category": "雑貨",
+          "item_level": 70,
+          "shop_price": 2772,
+          "buyback_price": 10,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -142,7 +219,18 @@
         "hist_max": 497,
         "units_for_sale": 3891,
         "last_upload_time": "2026-08-05 04:01:52",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020407_hr1.png",
+          "description": "他物質への同化特性を持つ精神感応型物質",
+          "category": "触媒",
+          "item_level": 70,
+          "shop_price": 693,
+          "buyback_price": 10,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -165,6 +253,17 @@
           "high_price": 140,
           "profit_gil": 13,
           "profit_rate": 10.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/026000/026235_hr1.png",
+          "description": "魔法の光で記憶させた武具の幻影を映し出す小結晶\n\n[武具投影に必要]",
+          "category": "触媒",
+          "item_level": 35,
+          "shop_price": 1000,
+          "buyback_price": 24,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -243,7 +342,18 @@
         "hist_max": 120,
         "units_for_sale": 11339,
         "last_upload_time": "2026-08-05 02:30:06",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023944_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[製作Lv80レシピ用]",
+          "category": "錬金術材",
+          "item_level": 430,
+          "shop_price": 210,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -367,7 +477,18 @@
         "hist_max": 789,
         "units_for_sale": 3539,
         "last_upload_time": "2026-08-04 22:41:31",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021213_hr1.png",
+          "description": "白金を含有する鉱石",
+          "category": "石材",
+          "item_level": 80,
+          "shop_price": 475,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -383,7 +504,18 @@
         "hist_max": 160,
         "units_for_sale": 26660,
         "last_upload_time": "2026-08-05 02:14:15",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025020_hr1.png",
+          "description": "渋みがあるが薬効に優れた茶葉",
+          "category": "食材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -399,7 +531,18 @@
         "hist_max": 179,
         "units_for_sale": 2188,
         "last_upload_time": "2026-08-05 03:25:35",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021212_hr1.png",
+          "description": "黄金を含有する鉱石",
+          "category": "石材",
+          "item_level": 55,
+          "shop_price": 326,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -415,7 +558,18 @@
         "hist_max": 480,
         "units_for_sale": 2783,
         "last_upload_time": "2026-08-05 04:06:26",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025103_hr1.png",
+          "description": "パームシロップを煮詰めて作った甘味料",
+          "category": "食材",
+          "item_level": 530,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -431,7 +585,18 @@
         "hist_max": 300,
         "units_for_sale": 2540,
         "last_upload_time": "2026-08-04 23:38:05",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025008_hr1.png",
+          "description": "コザマル・カに自生する薬草。高温多湿な環境も厭わずに生える",
+          "category": "錬金術材",
+          "item_level": 660,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -486,7 +651,18 @@
         "hist_max": 249,
         "units_for_sale": 1483,
         "last_upload_time": "2026-08-05 01:33:53",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022425_hr1.png",
+          "description": "切り出されたクラロウォルナットの丸材",
+          "category": "木材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -509,6 +685,17 @@
           "high_price": 258,
           "profit_gil": 45,
           "profit_rate": 22.5
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020818_hr1.png",
+          "description": "蛮神の祝福を受けたらしい霊銀塊",
+          "category": "金属材",
+          "item_level": 210,
+          "shop_price": 4158,
+          "buyback_price": 8,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -525,7 +712,18 @@
         "hist_max": 249,
         "units_for_sale": 1483,
         "last_upload_time": "2026-08-05 04:03:32",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022425_hr1.png",
+          "description": "切り出されたクラロウォルナットの丸材",
+          "category": "木材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -557,7 +755,18 @@
         "hist_max": 195,
         "units_for_sale": 3260,
         "last_upload_time": "2026-08-05 01:18:32",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023974_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[高難易度レシピ用]",
+          "category": "食材",
+          "item_level": 511,
+          "shop_price": 210,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -573,7 +782,18 @@
         "hist_max": 1498,
         "units_for_sale": 1281,
         "last_upload_time": "2026-08-05 02:38:29",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022402_hr1.png",
+          "description": "化石と化した古代の樹木",
+          "category": "木材",
+          "item_level": 90,
+          "shop_price": 498,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -589,7 +809,18 @@
         "hist_max": 999,
         "units_for_sale": 3513,
         "last_upload_time": "2026-08-05 04:04:58",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022678_hr1.png",
+          "description": "地下水脈から湧いた天然水",
+          "category": "錬金術材",
+          "item_level": 415,
+          "shop_price": 630,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:17:39",
@@ -612,6 +843,17 @@
           "high_price": 500,
           "profit_gil": 466,
           "profit_rate": 5177.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022642_hr1.png",
+          "description": "ロイヤルメープルから採取した樹液",
+          "category": "食材",
+          "item_level": 656,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -635,6 +877,17 @@
           "high_price": 370,
           "profit_gil": 151,
           "profit_rate": 75.5
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022413_hr1.png",
+          "description": "切り出されたトウヒの丸材",
+          "category": "木材",
+          "item_level": 55,
+          "shop_price": 304,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -674,6 +927,17 @@
           "high_price": 111,
           "profit_gil": 5,
           "profit_rate": 5.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022614_hr1.png",
+          "description": "発泡する天然水",
+          "category": "錬金術材",
+          "item_level": 11,
+          "shop_price": 16,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -722,7 +986,18 @@
         "hist_max": 100,
         "units_for_sale": 1159,
         "last_upload_time": "2026-08-05 01:52:48",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025203_hr1.png",
+          "description": "オニオンに似た、得体の知れない白色の球根",
+          "category": "食材",
+          "item_level": 545,
+          "shop_price": 99999,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -738,7 +1013,18 @@
         "hist_max": 880,
         "units_for_sale": 3310,
         "last_upload_time": "2026-08-04 14:40:34",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023936_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材。\n\n焔霊風時のみ採集可能\n\n[イシュガルド復興事業専用][検品済み]\n\n[高難易度レシピ用]",
+          "category": "石材",
+          "item_level": 511,
+          "shop_price": 210,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 2
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -754,7 +1040,18 @@
         "hist_max": 480,
         "units_for_sale": 2783,
         "last_upload_time": "2026-08-05 04:06:26",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025103_hr1.png",
+          "description": "パームシロップを煮詰めて作った甘味料",
+          "category": "食材",
+          "item_level": 530,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -777,6 +1074,17 @@
           "high_price": 490,
           "profit_gil": 365,
           "profit_rate": 365.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025215_hr1.png",
+          "description": "北洋諸島原産の香り高い根菜。食べるほどクセになるらしいチョコボの飼料\n\n使用すると呼びだしたマイチョコボの取得経験値が一時的に増加する",
+          "category": "雑貨",
+          "item_level": 55,
+          "shop_price": 348,
+          "buyback_price": 6,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -832,6 +1140,17 @@
           "high_price": 550,
           "profit_gil": 422,
           "profit_rate": 422.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020802_hr1.png",
+          "description": "製錬、鋳造された鏡鉄塊",
+          "category": "金属材",
+          "item_level": 43,
+          "shop_price": 763,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
         }
       },
       {
@@ -848,7 +1167,18 @@
         "hist_max": 70,
         "units_for_sale": 1873,
         "last_upload_time": "2026-08-04 17:32:41",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022414_hr1.png",
+          "description": "切り出されたクロガキの丸材",
+          "category": "木材",
+          "item_level": 273,
+          "shop_price": 540,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -864,7 +1194,18 @@
         "hist_max": 100,
         "units_for_sale": 2671,
         "last_upload_time": "2026-08-04 18:20:33",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023897_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[製作Lv20レシピ用]",
+          "category": "石材",
+          "item_level": 20,
+          "shop_price": 60,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -919,7 +1260,18 @@
         "hist_max": 65,
         "units_for_sale": 1051,
         "last_upload_time": "2026-08-05 02:35:19",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025211_hr1.png",
+          "description": "爽快な香りが漂う、薬効のある葉菜",
+          "category": "錬金術材",
+          "item_level": 685,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -935,7 +1287,18 @@
         "hist_max": 3794,
         "units_for_sale": 1867,
         "last_upload_time": "2026-08-04 15:18:16",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020034_hr1.png",
+          "description": "記憶が秘められた結晶片",
+          "category": "その他",
+          "item_level": 1,
+          "shop_price": 19,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -951,7 +1314,18 @@
         "hist_max": 180,
         "units_for_sale": 1598,
         "last_upload_time": "2026-08-04 22:14:16",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021211_hr1.png",
+          "description": "白目を含有する鉱石",
+          "category": "石材",
+          "item_level": 525,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -967,7 +1341,18 @@
         "hist_max": 154,
         "units_for_sale": 1215,
         "last_upload_time": "2026-08-04 21:02:34",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021205_hr1.png",
+          "description": "高硬度のクロムを含有する高山鉱石",
+          "category": "石材",
+          "item_level": 650,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -983,7 +1368,18 @@
         "hist_max": 154,
         "units_for_sale": 1215,
         "last_upload_time": "2026-08-04 21:02:34",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021205_hr1.png",
+          "description": "高硬度のクロムを含有する高山鉱石",
+          "category": "石材",
+          "item_level": 650,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1006,6 +1402,17 @@
           "high_price": 394,
           "profit_gil": 74,
           "profit_rate": 24.7
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021957_hr1.png",
+          "description": "強靱なワイバーンの翼",
+          "category": "錬金術材",
+          "item_level": 130,
+          "shop_price": 823,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -1038,7 +1445,18 @@
         "hist_max": 105,
         "units_for_sale": 503,
         "last_upload_time": "2026-08-04 17:38:20",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025156_hr1.png",
+          "description": "異臭を放つカブスのゲル状肉",
+          "category": "錬金術材",
+          "item_level": 418,
+          "shop_price": 2491,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1054,7 +1472,18 @@
         "hist_max": 300,
         "units_for_sale": 1839,
         "last_upload_time": "2026-08-04 19:55:45",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021653_hr1.png",
+          "description": "麦の茎",
+          "category": "布材",
+          "item_level": 11,
+          "shop_price": 9,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1070,7 +1499,18 @@
         "hist_max": 150,
         "units_for_sale": 1354,
         "last_upload_time": "2026-08-05 01:57:59",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021805_hr1.png",
+          "description": "シルバリオの重厚な粗皮",
+          "category": "皮革材",
+          "item_level": 650,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -1102,7 +1542,18 @@
         "hist_max": 817,
         "units_for_sale": 247,
         "last_upload_time": "2026-08-05 03:20:54",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020298_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1134,7 +1585,18 @@
         "hist_max": 145,
         "units_for_sale": 623,
         "last_upload_time": "2026-08-05 02:22:59",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025044_hr1.png",
+          "description": "トラル大陸原産の、やや苦みがある緑色の野菜。食材の他、薬品や香料としても用いられる",
+          "category": "食材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1157,6 +1619,17 @@
           "high_price": 887,
           "profit_gil": 625,
           "profit_rate": 288.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020295_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -1173,7 +1646,18 @@
         "hist_max": 88,
         "units_for_sale": 1645,
         "last_upload_time": "2026-08-04 19:58:18",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021487_hr1.png",
+          "description": "美しい紋様を持つ岩石",
+          "category": "石材",
+          "item_level": 50,
+          "shop_price": 297,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1189,7 +1673,18 @@
         "hist_max": 176,
         "units_for_sale": 601,
         "last_upload_time": "2026-08-05 02:49:03",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021687_hr1.png",
+          "description": "雷属性を帯びた蚕が作る、紫色のマユ",
+          "category": "布材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -1205,7 +1700,18 @@
         "hist_max": 176,
         "units_for_sale": 601,
         "last_upload_time": "2026-08-05 00:37:24",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021687_hr1.png",
+          "description": "雷属性を帯びた蚕が作る、紫色のマユ",
+          "category": "布材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1269,7 +1775,18 @@
         "hist_max": 120,
         "units_for_sale": 727,
         "last_upload_time": "2026-08-05 02:03:42",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025009_hr1.png",
+          "description": "生薬として使用される、香り高い香草",
+          "category": "錬金術材",
+          "item_level": 685,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1292,6 +1809,17 @@
           "high_price": 245,
           "profit_gil": 39,
           "profit_rate": 20.2
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021689_hr1.png",
+          "description": "タンブルクラブが体に巻き付けている乾燥した植物。稀に植物部分のみが荒野を転がっているらしい",
+          "category": "錬金術材",
+          "item_level": 665,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -1308,7 +1836,18 @@
         "hist_max": 6979,
         "units_for_sale": 238,
         "last_upload_time": "2026-08-05 03:40:23",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020299_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -1347,7 +1886,18 @@
         "hist_max": 5800,
         "units_for_sale": 775,
         "last_upload_time": "2026-08-05 02:30:49",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/027000/027409_hr1.png",
+          "description": "ザナラーン地方で採取できる農業用の土\n\n[畑の収穫物の交雑率アップ。グレード3]",
+          "category": "栽培用品",
+          "item_level": 50,
+          "shop_price": 297,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1363,7 +1913,18 @@
         "hist_max": 1000,
         "units_for_sale": 2240,
         "last_upload_time": "2026-08-04 17:46:07",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025451_hr1.png",
+          "description": "フラントーヨの実から抽出した食用、薬用油",
+          "category": "食材",
+          "item_level": 390,
+          "shop_price": 2799,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1379,7 +1940,18 @@
         "hist_max": 195,
         "units_for_sale": 1039,
         "last_upload_time": "2026-08-04 21:52:14",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022673_hr1.png",
+          "description": "ヨカ・トラルで採集される青色のアルメン。皮なめし材の原料",
+          "category": "錬金術材",
+          "item_level": 710,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1395,7 +1967,18 @@
         "hist_max": 6000,
         "units_for_sale": 2502,
         "last_upload_time": "2026-08-04 20:27:41",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021203_hr1.png",
+          "description": "遥か昔に落下した隕石に含まれる鉱石",
+          "category": "石材",
+          "item_level": 180,
+          "shop_price": 1425,
+          "buyback_price": 24,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1411,7 +1994,18 @@
         "hist_max": 1110,
         "units_for_sale": 683,
         "last_upload_time": "2026-08-05 02:35:24",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/024000/024105_hr1.png",
+          "description": "トライヨラで広く親しまれているクリーミーかつスパイシーなシチュー。食材の出汁が人気の秘訣\n\n敵討伐・製作・採集時の経験値獲得量が上昇する\n\n経験値獲得量 +3%\n\n効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "調理品",
+          "item_level": 710,
+          "shop_price": 99999,
+          "buyback_price": 30,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1450,7 +2044,18 @@
         "hist_max": 75,
         "units_for_sale": 223,
         "last_upload_time": "2026-08-05 03:54:52",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021957_hr1.png",
+          "description": "大きく強靭なアックスビークの翼膜",
+          "category": "錬金術材",
+          "item_level": 675,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1466,7 +2071,18 @@
         "hist_max": 1000,
         "units_for_sale": 2240,
         "last_upload_time": "2026-08-04 17:46:07",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025451_hr1.png",
+          "description": "フラントーヨの実から抽出した食用、薬用油",
+          "category": "食材",
+          "item_level": 390,
+          "shop_price": 2799,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1482,7 +2098,18 @@
         "hist_max": 2709,
         "units_for_sale": 161,
         "last_upload_time": "2026-08-03 12:32:45",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/024000/024412_hr1.png",
+          "description": "製作の効率を高める、生薬を溶かした水\n\n効果時間 15:00",
+          "category": "薬品",
+          "item_level": 412,
+          "shop_price": 12144,
+          "buyback_price": 190,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -1505,6 +2132,17 @@
           "high_price": 1800,
           "profit_gil": 710,
           "profit_rate": 71.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020824_hr1.png",
+          "description": "製錬、鋳造された精霊銀塊",
+          "category": "金属材",
+          "item_level": 130,
+          "shop_price": 2652,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
         }
       },
       {
@@ -1544,6 +2182,17 @@
           "high_price": 247,
           "profit_gil": 47,
           "profit_rate": 25.1
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020297_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -1560,7 +2209,18 @@
         "hist_max": 200,
         "units_for_sale": 558,
         "last_upload_time": "2026-08-05 03:19:56",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020297_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1576,7 +2236,18 @@
         "hist_max": 1699,
         "units_for_sale": 1057,
         "last_upload_time": "2026-08-05 04:06:29",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020808_hr1.png",
+          "description": "製錬、鋳造された闇鉄の小塊",
+          "category": "金属材",
+          "item_level": 55,
+          "shop_price": 1089,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -1631,7 +2302,18 @@
         "hist_max": 300,
         "units_for_sale": 886,
         "last_upload_time": "2026-08-05 03:07:58",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022617_hr1.png",
+          "description": "主にアバラシアで採取される、深みのある味わいの岩塩",
+          "category": "食材",
+          "item_level": 139,
+          "shop_price": 1980,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1647,7 +2329,18 @@
         "hist_max": 420,
         "units_for_sale": 233,
         "last_upload_time": "2026-08-04 22:21:59",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021834_hr1.png",
+          "description": "虎の美しい粗皮",
+          "category": "皮革材",
+          "item_level": 273,
+          "shop_price": 2162,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1663,7 +2356,18 @@
         "hist_max": 615,
         "units_for_sale": 3866,
         "last_upload_time": "2026-08-05 03:36:46",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021801_hr1.png",
+          "description": "スナーブルから採ったタテガミ",
+          "category": "布材",
+          "item_level": 45,
+          "shop_price": 396,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1702,6 +2406,17 @@
           "high_price": 49,
           "profit_gil": 16,
           "profit_rate": 53.3
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025032_hr1.png",
+          "description": "失われた麗しの海域を原産地とする、細く長い繊維を持つ綿花",
+          "category": "布材",
+          "item_level": 710,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -1718,7 +2433,18 @@
         "hist_max": 198,
         "units_for_sale": 1995,
         "last_upload_time": "2026-08-03 16:19:19",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022407_hr1.png",
+          "description": "切り出されたトネリコの丸材",
+          "category": "木材",
+          "item_level": 10,
+          "shop_price": 12,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -1734,7 +2460,18 @@
         "hist_max": 198,
         "units_for_sale": 1995,
         "last_upload_time": "2026-08-03 16:19:19",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022407_hr1.png",
+          "description": "切り出されたトネリコの丸材",
+          "category": "木材",
+          "item_level": 10,
+          "shop_price": 12,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1750,7 +2487,18 @@
         "hist_max": 3000,
         "units_for_sale": 977,
         "last_upload_time": "2026-08-04 21:44:36",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022451_hr1.png",
+          "description": "切り出された竹材",
+          "category": "木材",
+          "item_level": 70,
+          "shop_price": 1330,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1766,7 +2514,18 @@
         "hist_max": 700,
         "units_for_sale": 891,
         "last_upload_time": "2026-08-04 23:18:23",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021655_hr1.png",
+          "description": "アルマスティのふわふわした毛",
+          "category": "布材",
+          "item_level": 525,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1782,7 +2541,18 @@
         "hist_max": 1317,
         "units_for_sale": 690,
         "last_upload_time": "2026-08-05 03:32:56",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020289_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 560,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1805,6 +2575,17 @@
           "high_price": 979,
           "profit_gil": 301,
           "profit_rate": 47.9
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020296_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -1821,7 +2602,18 @@
         "hist_max": 240,
         "units_for_sale": 967,
         "last_upload_time": "2026-08-05 03:29:32",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022675_hr1.png",
+          "description": "ベルカナから採取した、粘度の高い樹液",
+          "category": "錬金術材",
+          "item_level": 545,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1837,7 +2629,18 @@
         "hist_max": 140,
         "units_for_sale": 1119,
         "last_upload_time": "2026-08-04 21:08:37",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022005_hr1.png",
+          "description": "煮込んで硬化させた革",
+          "category": "皮革材",
+          "item_level": 8,
+          "shop_price": 31,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1853,7 +2656,18 @@
         "hist_max": 1000,
         "units_for_sale": 498,
         "last_upload_time": "2026-08-05 03:36:33",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021660_hr1.png",
+          "description": "フリースから紡いだ糸",
+          "category": "布材",
+          "item_level": 39,
+          "shop_price": 258,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1869,7 +2683,18 @@
         "hist_max": 1000,
         "units_for_sale": 1047,
         "last_upload_time": "2026-08-05 00:07:16",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021901_hr1.png",
+          "description": "チョコボの尾羽根",
+          "category": "布材",
+          "item_level": 30,
+          "shop_price": 192,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       }
     ],
     "Gaia": [
@@ -1894,6 +2719,17 @@
           "high_price": 13,
           "profit_gil": 3,
           "profit_rate": 33.3
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020013_hr1.png",
+          "description": "炎の媒質の樹状結晶",
+          "category": "クリスタル",
+          "item_level": 50,
+          "shop_price": 990,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -1917,6 +2753,17 @@
           "high_price": 40,
           "profit_gil": 6,
           "profit_rate": 18.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020008_hr1.png",
+          "description": "水の媒質の結晶",
+          "category": "クリスタル",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -1933,7 +2780,18 @@
         "hist_max": 41,
         "units_for_sale": 1,
         "last_upload_time": "2026-08-05 02:12:22",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020010_hr1.png",
+          "description": "風の媒質の結晶",
+          "category": "クリスタル",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1949,7 +2807,18 @@
         "hist_max": 1650,
         "units_for_sale": 3960,
         "last_upload_time": "2026-08-05 03:43:36",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021003_hr1.png",
+          "description": "ダークマタークラスターを魔導機械の修理に用いるために切り出した補材\n\n[飛空艇・潜水艦パーツ向け修理材料]",
+          "category": "雑貨",
+          "item_level": 70,
+          "shop_price": 2772,
+          "buyback_price": 10,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -1965,7 +2834,18 @@
         "hist_max": 134,
         "units_for_sale": 3960,
         "last_upload_time": "2026-08-05 03:00:00",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021462_hr1.png",
+          "description": "石炭を蒸し焼きした燃料",
+          "category": "錬金術材",
+          "item_level": 70,
+          "shop_price": 443,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -1981,7 +2861,18 @@
         "hist_max": 125,
         "units_for_sale": 99,
         "last_upload_time": "2026-08-05 01:38:43",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021462_hr1.png",
+          "description": "石炭を蒸し焼きした燃料",
+          "category": "錬金術材",
+          "item_level": 70,
+          "shop_price": 443,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -1997,7 +2888,18 @@
         "hist_max": 180,
         "units_for_sale": 3960,
         "last_upload_time": "2026-08-04 23:59:10",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021216_hr1.png",
+          "description": "鏡鉄を含有する鉱石",
+          "category": "石材",
+          "item_level": 43,
+          "shop_price": 228,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2059,7 +2961,18 @@
         "hist_max": 221,
         "units_for_sale": 3901,
         "last_upload_time": "2026-08-04 17:31:42",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021218_hr1.png",
+          "description": "精霊銀を含有する砂",
+          "category": "石材",
+          "item_level": 115,
+          "shop_price": 683,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -2075,7 +2988,18 @@
         "hist_max": 111,
         "units_for_sale": 40,
         "last_upload_time": "2026-08-04 17:31:42",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021218_hr1.png",
+          "description": "精霊銀を含有する砂",
+          "category": "石材",
+          "item_level": 115,
+          "shop_price": 683,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2091,7 +3015,18 @@
         "hist_max": 380,
         "units_for_sale": 2959,
         "last_upload_time": "2026-08-04 18:49:00",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025305_hr1.png",
+          "description": "小粒ながら果汁の詰まったレモン",
+          "category": "食材",
+          "item_level": 420,
+          "shop_price": 630,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -2107,7 +3042,18 @@
         "hist_max": 359,
         "units_for_sale": 99,
         "last_upload_time": "2026-08-04 18:49:00",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025305_hr1.png",
+          "description": "小粒ながら果汁の詰まったレモン",
+          "category": "食材",
+          "item_level": 420,
+          "shop_price": 630,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -2155,7 +3101,18 @@
         "hist_max": 78,
         "units_for_sale": 2974,
         "last_upload_time": "2026-08-04 11:41:23",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023934_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[製作Lv80レシピ用]",
+          "category": "石材",
+          "item_level": 430,
+          "shop_price": 210,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -2210,6 +3167,17 @@
           "high_price": 370,
           "profit_gil": 51,
           "profit_rate": 17.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021205_hr1.png",
+          "description": "闇鉄を含有する鉱石",
+          "category": "石材",
+          "item_level": 55,
+          "shop_price": 326,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -2226,7 +3194,18 @@
         "hist_max": 239,
         "units_for_sale": 2033,
         "last_upload_time": "2026-08-04 16:22:00",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/026000/026228_hr1.png",
+          "description": "魔法の光を吸収し、幻影を解除する小結晶。副作用として染色やクレストも除去される",
+          "category": "触媒",
+          "item_level": 30,
+          "shop_price": 500,
+          "buyback_price": 12,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2265,6 +3244,17 @@
           "high_price": 199,
           "profit_gil": 39,
           "profit_rate": 26.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022210_hr1.png",
+          "description": "ペタルダの翅から得た鱗粉",
+          "category": "錬金術材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -2281,7 +3271,18 @@
         "hist_max": 5800,
         "units_for_sale": 2025,
         "last_upload_time": "2026-08-04 16:41:55",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022414_hr1.png",
+          "description": "切り出されたクリプトメリアの丸材",
+          "category": "木材",
+          "item_level": 300,
+          "shop_price": 2523,
+          "buyback_price": 38,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2375,7 +3376,18 @@
         "hist_max": 753,
         "units_for_sale": 19222,
         "last_upload_time": "2026-08-04 20:03:37",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025052_hr1.png",
+          "description": "ヤクの乳から作った、爽やかな酸味を持つバター",
+          "category": "食材",
+          "item_level": 130,
+          "shop_price": 205,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -2398,6 +3410,17 @@
           "high_price": 550,
           "profit_gil": 422,
           "profit_rate": 422.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020802_hr1.png",
+          "description": "製錬、鋳造された鏡鉄塊",
+          "category": "金属材",
+          "item_level": 43,
+          "shop_price": 763,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
         }
       },
       {
@@ -2602,7 +3625,18 @@
         "hist_max": 140,
         "units_for_sale": 3151,
         "last_upload_time": "2026-08-04 12:39:21",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021212_hr1.png",
+          "description": "銅を含有する鉱石",
+          "category": "石材",
+          "item_level": 70,
+          "shop_price": 415,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -2618,7 +3652,18 @@
         "hist_max": 292,
         "units_for_sale": 8680,
         "last_upload_time": "2026-08-05 02:12:46",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022413_hr1.png",
+          "description": "切り出された分類不明な樹木の丸木",
+          "category": "木材",
+          "item_level": 545,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2657,7 +3702,18 @@
         "hist_max": 1200,
         "units_for_sale": 11687,
         "last_upload_time": "2026-08-04 12:33:07",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023978_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材。\n\n雷霊風時のみ採集可能\n\n[イシュガルド復興事業専用][検品済み]\n\n[高難易度レシピ用]",
+          "category": "石材",
+          "item_level": 511,
+          "shop_price": 210,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 2
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -2673,7 +3729,18 @@
         "hist_max": 600,
         "units_for_sale": 3187,
         "last_upload_time": "2026-08-04 12:33:07",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023978_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材。\n\n雷霊風時のみ採集可能\n\n[イシュガルド復興事業専用][検品済み]\n\n[高難易度レシピ用]",
+          "category": "石材",
+          "item_level": 511,
+          "shop_price": 210,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 2
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -2705,7 +3772,18 @@
         "hist_max": 245,
         "units_for_sale": 3722,
         "last_upload_time": "2026-08-05 00:48:39",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022415_hr1.png",
+          "description": "切り出されたシーダーの丸材",
+          "category": "木材",
+          "item_level": 115,
+          "shop_price": 637,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -2728,6 +3806,17 @@
           "high_price": 92,
           "profit_gil": 37,
           "profit_rate": 74.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022426_hr1.png",
+          "description": "切り出されたダークマホガニーの丸材",
+          "category": "木材",
+          "item_level": 660,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -2744,7 +3833,18 @@
         "hist_max": 60,
         "units_for_sale": 2065,
         "last_upload_time": "2026-08-03 15:08:59",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025221_hr1.png",
+          "description": "不気味なほど大きいポポト。ララフェル族を大きく育てたい場合に最適",
+          "category": "食材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -2760,7 +3860,18 @@
         "hist_max": 1500,
         "units_for_sale": 294,
         "last_upload_time": "2026-08-04 21:11:28",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021003_hr1.png",
+          "description": "建材などを接合するための鏡鉄製金具",
+          "category": "金属材",
+          "item_level": 45,
+          "shop_price": 891,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2776,7 +3887,18 @@
         "hist_max": 110,
         "units_for_sale": 3226,
         "last_upload_time": "2026-08-05 01:24:43",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023976_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[高難易度レシピ用]",
+          "category": "錬金術材",
+          "item_level": 511,
+          "shop_price": 210,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2808,7 +3930,18 @@
         "hist_max": 5799,
         "units_for_sale": 2110,
         "last_upload_time": "2026-08-04 16:41:40",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021222_hr1.png",
+          "description": "高純度のチタンを含有する鉱石",
+          "category": "石材",
+          "item_level": 300,
+          "shop_price": 2523,
+          "buyback_price": 38,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2831,6 +3964,17 @@
           "high_price": 245,
           "profit_gil": 39,
           "profit_rate": 20.2
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021689_hr1.png",
+          "description": "タンブルクラブが体に巻き付けている乾燥した植物。稀に植物部分のみが荒野を転がっているらしい",
+          "category": "錬金術材",
+          "item_level": 665,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -2847,7 +3991,18 @@
         "hist_max": 104,
         "units_for_sale": 17946,
         "last_upload_time": "2026-08-05 04:09:27",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021208_hr1.png",
+          "description": "闇霊銀を含有する鉱石",
+          "category": "石材",
+          "item_level": 420,
+          "shop_price": 630,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -2863,7 +4018,18 @@
         "hist_max": 15,
         "units_for_sale": 10,
         "last_upload_time": "2026-08-04 20:54:00",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025237_hr1.png",
+          "description": "多くの花蕾が木のように枝分かれした形が特徴的な野菜",
+          "category": "食材",
+          "item_level": 685,
+          "shop_price": 99999,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -2879,7 +4045,18 @@
         "hist_max": 5799,
         "units_for_sale": 2110,
         "last_upload_time": "2026-08-04 16:41:40",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021222_hr1.png",
+          "description": "高純度のチタンを含有する鉱石",
+          "category": "石材",
+          "item_level": 300,
+          "shop_price": 2523,
+          "buyback_price": 38,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:17:39",
@@ -2902,6 +4079,17 @@
           "high_price": 500,
           "profit_gil": 466,
           "profit_rate": 5177.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021687_hr1.png",
+          "description": "雷属性を帯びた蚕が作る、紫色のマユ",
+          "category": "布材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -2918,7 +4106,18 @@
         "hist_max": 19,
         "units_for_sale": 1303,
         "last_upload_time": "2026-08-04 21:52:26",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021223_hr1.png",
+          "description": "銀を多量に含有する鉱石",
+          "category": "石材",
+          "item_level": 710,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -2941,6 +4140,17 @@
           "high_price": 90,
           "profit_gil": 35,
           "profit_rate": 70.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020814_hr1.png",
+          "description": "製錬、鋳造された緋金塊",
+          "category": "金属材",
+          "item_level": 70,
+          "shop_price": 1386,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
         }
       },
       {
@@ -2957,7 +4167,18 @@
         "hist_max": 154,
         "units_for_sale": 1529,
         "last_upload_time": "2026-08-05 01:16:39",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021204_hr1.png",
+          "description": "マグネシアと呼ばれる金属の粉",
+          "category": "石材",
+          "item_level": 665,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -2973,7 +4194,18 @@
         "hist_max": 80,
         "units_for_sale": 1371,
         "last_upload_time": "2026-08-04 23:00:25",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025006_hr1.png",
+          "description": "球根からなるスパイス。他品種に比べ小振りだが、濃厚な臭みと豊富な栄養素を持つ",
+          "category": "食材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -2996,6 +4228,17 @@
           "high_price": 6000,
           "profit_gil": 483,
           "profit_rate": 9.3
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020299_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3012,7 +4255,18 @@
         "hist_max": 5,
         "units_for_sale": 1877,
         "last_upload_time": "2026-08-05 02:05:23",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021475_hr1.png",
+          "description": "ピンクベリルを含んでいると思しき原石",
+          "category": "石材",
+          "item_level": 660,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -3028,7 +4282,18 @@
         "hist_max": 150,
         "units_for_sale": 9,
         "last_upload_time": "2026-08-04 21:11:43",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021661_hr1.png",
+          "description": "蚕が糸を吐いて作ったマユ。繊維が採れる",
+          "category": "布材",
+          "item_level": 55,
+          "shop_price": 522,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3051,6 +4316,17 @@
           "high_price": 49,
           "profit_gil": 16,
           "profit_rate": 53.3
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025032_hr1.png",
+          "description": "失われた麗しの海域を原産地とする、細く長い繊維を持つ綿花",
+          "category": "布材",
+          "item_level": 710,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3067,7 +4343,18 @@
         "hist_max": 30,
         "units_for_sale": 1132,
         "last_upload_time": "2026-08-04 21:54:19",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025032_hr1.png",
+          "description": "失われた麗しの海域を原産地とする、細く長い繊維を持つ綿花",
+          "category": "布材",
+          "item_level": 710,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -3090,6 +4377,17 @@
           "high_price": 7,
           "profit_gil": 1,
           "profit_rate": 20.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021816_hr1.png",
+          "description": "ゴンフォテリウムの強靭な粗皮",
+          "category": "皮革材",
+          "item_level": 670,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3106,7 +4404,18 @@
         "hist_max": 999,
         "units_for_sale": 2684,
         "last_upload_time": "2026-08-04 16:34:00",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020296_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3122,7 +4431,18 @@
         "hist_max": 134000,
         "units_for_sale": 541,
         "last_upload_time": "2026-08-05 03:06:38",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/026000/026183_hr1.png",
+          "description": "トラル大陸から始まった旅路において、多量のバイカラージェムを納入したことを示す証書。\n\n一定数集めモードゥナの稀物商に渡すことで貴重な品物を入手できる",
+          "category": "雑貨",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -3138,7 +4458,18 @@
         "hist_max": 200,
         "units_for_sale": 1040,
         "last_upload_time": "2026-08-04 21:13:15",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/026000/026102_hr1.png",
+          "description": "羊脂を固めたロウソク",
+          "category": "雑貨",
+          "item_level": 20,
+          "shop_price": 225,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -3154,7 +4485,18 @@
         "hist_max": 69,
         "units_for_sale": 2387,
         "last_upload_time": "2026-08-04 21:24:46",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021681_hr1.png",
+          "description": "葉まで真っ赤なモコ草の古代種。茎から繊維が採れる",
+          "category": "布材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -3177,6 +4519,17 @@
           "high_price": 394,
           "profit_gil": 74,
           "profit_rate": 24.7
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021957_hr1.png",
+          "description": "強靱なワイバーンの翼",
+          "category": "錬金術材",
+          "item_level": 130,
+          "shop_price": 823,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3193,7 +4546,18 @@
         "hist_max": 5800,
         "units_for_sale": 2025,
         "last_upload_time": "2026-08-04 16:41:55",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022414_hr1.png",
+          "description": "切り出されたクリプトメリアの丸材",
+          "category": "木材",
+          "item_level": 300,
+          "shop_price": 2523,
+          "buyback_price": 38,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3216,6 +4580,17 @@
           "high_price": 247,
           "profit_gil": 47,
           "profit_rate": 25.1
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020297_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3232,7 +4607,18 @@
         "hist_max": 190,
         "units_for_sale": 1,
         "last_upload_time": "2026-08-05 01:37:19",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020297_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3248,7 +4634,18 @@
         "hist_max": 397,
         "units_for_sale": 1835,
         "last_upload_time": "2026-08-04 14:28:23",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025007_hr1.png",
+          "description": "荒野で長い年月をかけて実った、上質なアブラナの種子。小さな粒だが、大量に絞ることで油を抽出できる",
+          "category": "食材",
+          "item_level": 660,
+          "shop_price": 99999,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -3264,7 +4661,18 @@
         "hist_max": 545,
         "units_for_sale": 541,
         "last_upload_time": "2026-08-04 13:41:12",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/059000/059471_hr1.png",
+          "description": "チョコボ厩舎を掃除してくれる自律型ほうき",
+          "category": "雑貨",
+          "item_level": 70,
+          "shop_price": 20000,
+          "buyback_price": 42,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3326,7 +4734,18 @@
         "hist_max": 753,
         "units_for_sale": 2337,
         "last_upload_time": "2026-08-04 20:03:37",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025052_hr1.png",
+          "description": "ヤクの乳から作った、爽やかな酸味を持つバター",
+          "category": "食材",
+          "item_level": 130,
+          "shop_price": 205,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3342,7 +4761,18 @@
         "hist_max": 200,
         "units_for_sale": 1508,
         "last_upload_time": "2026-08-04 03:52:20",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021816_hr1.png",
+          "description": "アルケオーニスの丈夫な粗皮",
+          "category": "皮革材",
+          "item_level": 120,
+          "shop_price": 1045,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -3358,7 +4788,18 @@
         "hist_max": 50,
         "units_for_sale": 2229,
         "last_upload_time": "2026-08-04 09:23:30",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025017_hr1.png",
+          "description": "仁から成るスパイス。香料や精油に用いられる",
+          "category": "食材",
+          "item_level": 40,
+          "shop_price": 162,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3381,6 +4822,17 @@
           "high_price": 20,
           "profit_gil": 11,
           "profit_rate": 137.5
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021814_hr1.png",
+          "description": "ガルガンチュアのふさふさとした粗皮",
+          "category": "皮革材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3397,7 +4849,18 @@
         "hist_max": 1300,
         "units_for_sale": 866,
         "last_upload_time": "2026-08-04 11:41:27",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022454_hr1.png",
+          "description": "削り出されたリグナムバイタの材木",
+          "category": "木材",
+          "item_level": 415,
+          "shop_price": 3075,
+          "buyback_price": 12,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -3420,6 +4883,17 @@
           "high_price": 1800,
           "profit_gil": 710,
           "profit_rate": 71.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020824_hr1.png",
+          "description": "製錬、鋳造された精霊銀塊",
+          "category": "金属材",
+          "item_level": 130,
+          "shop_price": 2652,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
         }
       },
       {
@@ -3436,7 +4910,18 @@
         "hist_max": 100,
         "units_for_sale": 1670,
         "last_upload_time": "2026-08-04 22:04:29",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022627_hr1.png",
+          "description": "強い星極性を持つ花",
+          "category": "錬金術材",
+          "item_level": 160,
+          "shop_price": 760,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -3452,7 +4937,18 @@
         "hist_max": 150,
         "units_for_sale": 1546,
         "last_upload_time": "2026-08-04 17:13:35",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021001_hr1.png",
+          "description": "ガス生物グレネードが産する灰",
+          "category": "錬金術材",
+          "item_level": 40,
+          "shop_price": 216,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -3468,7 +4964,18 @@
         "hist_max": 1449,
         "units_for_sale": 1514,
         "last_upload_time": "2026-08-05 00:29:31",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021262_hr1.png",
+          "description": "道具に込められた職人の想いが結晶化した、半マテリア物質",
+          "category": "デミマテリア",
+          "item_level": 340,
+          "shop_price": 2308,
+          "buyback_price": 40,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       }
     ],
     "Mana": [
@@ -3486,7 +4993,18 @@
         "hist_max": 48,
         "units_for_sale": 107558,
         "last_upload_time": "2026-08-05 04:08:11",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020007_hr1.png",
+          "description": "炎の媒質の結晶",
+          "category": "クリスタル",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -3502,7 +5020,18 @@
         "hist_max": 39,
         "units_for_sale": 157865,
         "last_upload_time": "2026-08-05 00:02:44",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020011_hr1.png",
+          "description": "雷の媒質の結晶",
+          "category": "クリスタル",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3525,6 +5054,17 @@
           "high_price": 13,
           "profit_gil": 3,
           "profit_rate": 33.3
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020013_hr1.png",
+          "description": "炎の媒質の樹状結晶",
+          "category": "クリスタル",
+          "item_level": 50,
+          "shop_price": 990,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3541,7 +5081,18 @@
         "hist_max": 55,
         "units_for_sale": 50000,
         "last_upload_time": "2026-08-05 04:10:22",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020011_hr1.png",
+          "description": "雷の媒質の結晶",
+          "category": "クリスタル",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -3557,7 +5108,18 @@
         "hist_max": 13,
         "units_for_sale": 155497,
         "last_upload_time": "2026-08-04 22:51:50",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020013_hr1.png",
+          "description": "炎の媒質の樹状結晶",
+          "category": "クリスタル",
+          "item_level": 50,
+          "shop_price": 990,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3573,7 +5135,18 @@
         "hist_max": 53,
         "units_for_sale": 70119,
         "last_upload_time": "2026-08-04 17:33:20",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020002_hr1.png",
+          "description": "水の媒質の小結晶",
+          "category": "クリスタル",
+          "item_level": 1,
+          "shop_price": 9,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3589,7 +5162,18 @@
         "hist_max": 49,
         "units_for_sale": 53669,
         "last_upload_time": "2026-08-05 04:03:15",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020001_hr1.png",
+          "description": "炎の媒質の小結晶",
+          "category": "クリスタル",
+          "item_level": 1,
+          "shop_price": 9,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -3612,6 +5196,17 @@
           "high_price": 140,
           "profit_gil": 13,
           "profit_rate": 10.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/026000/026235_hr1.png",
+          "description": "魔法の光で記憶させた武具の幻影を映し出す小結晶\n\n[武具投影に必要]",
+          "category": "触媒",
+          "item_level": 35,
+          "shop_price": 1000,
+          "buyback_price": 24,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -3628,7 +5223,18 @@
         "hist_max": 1600,
         "units_for_sale": 99,
         "last_upload_time": "2026-08-05 02:11:05",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021003_hr1.png",
+          "description": "ダークマタークラスターを魔導機械の修理に用いるために切り出した補材\n\n[飛空艇・潜水艦パーツ向け修理材料]",
+          "category": "雑貨",
+          "item_level": 70,
+          "shop_price": 2772,
+          "buyback_price": 10,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -3644,7 +5250,18 @@
         "hist_max": 161,
         "units_for_sale": 3725,
         "last_upload_time": "2026-08-05 01:22:53",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022638_hr1.png",
+          "description": "半固形化した樹液の塊",
+          "category": "錬金術材",
+          "item_level": 70,
+          "shop_price": 443,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -3660,7 +5277,18 @@
         "hist_max": 160,
         "units_for_sale": 3725,
         "last_upload_time": "2026-08-05 01:22:53",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022638_hr1.png",
+          "description": "半固形化した樹液の塊",
+          "category": "錬金術材",
+          "item_level": 70,
+          "shop_price": 443,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -3676,7 +5304,18 @@
         "hist_max": 405,
         "units_for_sale": 3795,
         "last_upload_time": "2026-08-05 01:59:30",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020407_hr1.png",
+          "description": "他物質への同化特性を持つ精神感応型物質",
+          "category": "触媒",
+          "item_level": 70,
+          "shop_price": 693,
+          "buyback_price": 10,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -3692,7 +5331,18 @@
         "hist_max": 300,
         "units_for_sale": 3881,
         "last_upload_time": "2026-08-04 23:48:18",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/027000/027110_hr1.png",
+          "description": "半透明の柔らかい殻を持つエビ。海釣り用活餌",
+          "category": "釣り餌",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -3862,7 +5512,18 @@
         "hist_max": 130,
         "units_for_sale": 2763,
         "last_upload_time": "2026-08-04 18:23:27",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025352_hr1.png",
+          "description": "トラル大陸原産の粒ぞろいの穀類",
+          "category": "食材",
+          "item_level": 660,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -3910,7 +5571,18 @@
         "hist_max": 110,
         "units_for_sale": 3532,
         "last_upload_time": "2026-08-04 15:25:37",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022678_hr1.png",
+          "description": "地下水脈から湧いた天然水",
+          "category": "錬金術材",
+          "item_level": 415,
+          "shop_price": 630,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -4022,7 +5694,18 @@
         "hist_max": 230,
         "units_for_sale": 2332,
         "last_upload_time": "2026-08-05 03:59:22",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022614_hr1.png",
+          "description": "ヤクテル樹海で採取された独特のコクがある天然水",
+          "category": "錬金術材",
+          "item_level": 670,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4038,7 +5721,18 @@
         "hist_max": 173,
         "units_for_sale": 2915,
         "last_upload_time": "2026-08-05 03:57:45",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025209_hr1.png",
+          "description": "ヤクテル樹海に生育する真紅の果菜。ウトォームの地平線で太陽を受けて育ち、高い糖度で知られる",
+          "category": "食材",
+          "item_level": 650,
+          "shop_price": 99999,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4054,7 +5748,18 @@
         "hist_max": 1460,
         "units_for_sale": 1733,
         "last_upload_time": "2026-08-05 00:07:26",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022402_hr1.png",
+          "description": "化石と化した古代の樹木",
+          "category": "木材",
+          "item_level": 90,
+          "shop_price": 498,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -4070,7 +5775,18 @@
         "hist_max": 1094,
         "units_for_sale": 1733,
         "last_upload_time": "2026-08-05 00:07:26",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022402_hr1.png",
+          "description": "化石と化した古代の樹木",
+          "category": "木材",
+          "item_level": 90,
+          "shop_price": 498,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -4086,7 +5802,18 @@
         "hist_max": 240,
         "units_for_sale": 1792,
         "last_upload_time": "2026-08-04 21:26:09",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/026000/026188_hr1.png",
+          "description": "クラフター向けの製図用紙\n\nマイスター専用アクションの使用で消費される",
+          "category": "雑貨",
+          "item_level": 1,
+          "shop_price": 630,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4118,7 +5845,18 @@
         "hist_max": 180,
         "units_for_sale": 2396,
         "last_upload_time": "2026-08-05 02:10:17",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025010_hr1.png",
+          "description": "油分を含む肉厚な葉の植物。薬効や消毒成分に優れ、葉を揉むと爽やかな芳香がする",
+          "category": "錬金術材",
+          "item_level": 650,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -4134,7 +5872,18 @@
         "hist_max": 100,
         "units_for_sale": 1,
         "last_upload_time": "2026-08-05 01:20:52",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025159_hr1.png",
+          "description": "歯ごたえのある、臭みの少ないロネークの赤身肉",
+          "category": "食材",
+          "item_level": 665,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -4150,7 +5899,18 @@
         "hist_max": 144,
         "units_for_sale": 2531,
         "last_upload_time": "2026-08-04 22:23:25",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025010_hr1.png",
+          "description": "油分を含む肉厚な葉の植物。薬効や消毒成分に優れ、葉を揉むと爽やかな芳香がする",
+          "category": "錬金術材",
+          "item_level": 650,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -4166,7 +5926,18 @@
         "hist_max": 80,
         "units_for_sale": 1744,
         "last_upload_time": "2026-08-04 23:32:29",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021475_hr1.png",
+          "description": "アメトリンを含んでいると思しき原石",
+          "category": "石材",
+          "item_level": 515,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -4182,7 +5953,18 @@
         "hist_max": 40,
         "units_for_sale": 1744,
         "last_upload_time": "2026-08-04 23:32:29",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021475_hr1.png",
+          "description": "アメトリンを含んでいると思しき原石",
+          "category": "石材",
+          "item_level": 515,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4198,7 +5980,18 @@
         "hist_max": 150,
         "units_for_sale": 2592,
         "last_upload_time": "2026-08-03 23:43:31",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023842_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[製作Lv60/70レシピ用]",
+          "category": "食材",
+          "item_level": 150,
+          "shop_price": 150,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4214,7 +6007,18 @@
         "hist_max": 300,
         "units_for_sale": 6661,
         "last_upload_time": "2026-08-05 01:15:03",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021228_hr1.png",
+          "description": "エーテル含有率が極めて高い岩石",
+          "category": "石材",
+          "item_level": 403,
+          "shop_price": 210,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -4246,7 +6050,18 @@
         "hist_max": 990,
         "units_for_sale": 2863,
         "last_upload_time": "2026-08-05 02:45:14",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020296_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -4262,7 +6077,18 @@
         "hist_max": 148,
         "units_for_sale": 99,
         "last_upload_time": "2026-08-05 02:16:22",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020622_hr1.png",
+          "description": "GPを回復する効果のある飲料 (NQ回復量:300 / HQ回復量:350)",
+          "category": "薬品",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -4278,7 +6104,18 @@
         "hist_max": 73,
         "units_for_sale": 2103,
         "last_upload_time": "2026-08-04 22:55:54",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021212_hr1.png",
+          "description": "硬金を含有する鉱石",
+          "category": "石材",
+          "item_level": 395,
+          "shop_price": 210,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4333,7 +6170,18 @@
         "hist_max": 104,
         "units_for_sale": 1264,
         "last_upload_time": "2026-08-04 14:51:33",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025153_hr1.png",
+          "description": "柔らかく癖のないアルパカのフィレ肉。慶事や祭りなどに用いられる貴重な食材",
+          "category": "食材",
+          "item_level": 650,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4349,7 +6197,18 @@
         "hist_max": 52,
         "units_for_sale": 1784,
         "last_upload_time": "2026-08-05 03:45:28",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022404_hr1.png",
+          "description": "切り出されたアカシアの丸材",
+          "category": "木材",
+          "item_level": 670,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4365,7 +6224,18 @@
         "hist_max": 132,
         "units_for_sale": 1457,
         "last_upload_time": "2026-08-05 03:41:40",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022402_hr1.png",
+          "description": "切り出されたリグナムバイタの丸材",
+          "category": "木材",
+          "item_level": 415,
+          "shop_price": 630,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4388,6 +6258,17 @@
           "high_price": 370,
           "profit_gil": 151,
           "profit_rate": 75.5
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022413_hr1.png",
+          "description": "切り出されたトウヒの丸材",
+          "category": "木材",
+          "item_level": 55,
+          "shop_price": 304,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -4404,7 +6285,18 @@
         "hist_max": 400,
         "units_for_sale": 9782,
         "last_upload_time": "2026-08-05 01:03:05",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022614_hr1.png",
+          "description": "オサード小大陸で採水された天然の軟水",
+          "category": "錬金術材",
+          "item_level": 273,
+          "shop_price": 540,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4420,7 +6312,18 @@
         "hist_max": 800,
         "units_for_sale": 3201,
         "last_upload_time": "2026-08-04 00:03:55",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023977_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材。\n\n土霊風時のみ採集可能\n\n[イシュガルド復興事業専用][検品済み]\n\n[高難易度レシピ用]",
+          "category": "錬金術材",
+          "item_level": 511,
+          "shop_price": 210,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 2
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -4436,7 +6339,18 @@
         "hist_max": 5,
         "units_for_sale": 1131,
         "last_upload_time": "2026-08-04 13:12:53",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025251_hr1.png",
+          "description": "バード・オブ・エルピスの重い卵。中に希望が詰まっている",
+          "category": "食材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -4452,7 +6366,18 @@
         "hist_max": 100,
         "units_for_sale": 1452,
         "last_upload_time": "2026-08-04 17:43:48",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022401_hr1.png",
+          "description": "切り出されたトチノキの丸材",
+          "category": "木材",
+          "item_level": 515,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4498,6 +6423,17 @@
           "high_price": 887,
           "profit_gil": 625,
           "profit_rate": 288.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020295_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -4514,7 +6450,18 @@
         "hist_max": 1,
         "units_for_sale": 1613,
         "last_upload_time": "2026-08-04 23:32:44",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021681_hr1.png",
+          "description": "葉まで真っ赤なモコ草の古代種。茎から繊維が採れる",
+          "category": "布材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -4530,7 +6477,18 @@
         "hist_max": 90,
         "units_for_sale": 1055,
         "last_upload_time": "2026-08-04 09:48:31",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021652_hr1.png",
+          "description": "鮮やかな色合が特徴的な綿花",
+          "category": "布材",
+          "item_level": 403,
+          "shop_price": 210,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4562,7 +6520,18 @@
         "hist_max": 180,
         "units_for_sale": 8131,
         "last_upload_time": "2026-08-04 18:23:53",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021209_hr1.png",
+          "description": "魔銅を含有する鉱石",
+          "category": "石材",
+          "item_level": 265,
+          "shop_price": 524,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -4578,7 +6547,18 @@
         "hist_max": 160,
         "units_for_sale": 3248,
         "last_upload_time": "2026-08-04 18:23:53",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021209_hr1.png",
+          "description": "魔銅を含有する鉱石",
+          "category": "石材",
+          "item_level": 265,
+          "shop_price": 524,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4610,7 +6590,18 @@
         "hist_max": 690,
         "units_for_sale": 1931,
         "last_upload_time": "2026-08-05 01:55:34",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022802_hr1.png",
+          "description": "木材の保護とツヤ出しに用いられる塗料",
+          "category": "錬金術材",
+          "item_level": 43,
+          "shop_price": 656,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4626,7 +6617,18 @@
         "hist_max": 34,
         "units_for_sale": 17574,
         "last_upload_time": "2026-08-05 04:06:15",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020809_hr1.png",
+          "description": "製錬、鋳造された黄金塊",
+          "category": "金属材",
+          "item_level": 90,
+          "shop_price": 1782,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -4642,7 +6644,18 @@
         "hist_max": 15,
         "units_for_sale": 886,
         "last_upload_time": "2026-08-05 02:10:41",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021476_hr1.png",
+          "description": "ブラックスターを含んでいると思しき原石",
+          "category": "石材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -4722,7 +6735,18 @@
         "hist_max": 192,
         "units_for_sale": 1894,
         "last_upload_time": "2026-08-05 03:42:29",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021224_hr1.png",
+          "description": "アダマンを含有する鉱石",
+          "category": "石材",
+          "item_level": 148,
+          "shop_price": 879,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4745,6 +6769,17 @@
           "high_price": 210,
           "profit_gil": 99,
           "profit_rate": 99.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020297_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -4761,7 +6796,18 @@
         "hist_max": 179,
         "units_for_sale": 1202,
         "last_upload_time": "2026-08-05 03:58:40",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021231_hr1.png",
+          "description": "黒鉄を含有する鉱石",
+          "category": "石材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4784,6 +6830,17 @@
           "high_price": 6000,
           "profit_gil": 483,
           "profit_rate": 9.3
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020299_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -4800,7 +6857,18 @@
         "hist_max": 200,
         "units_for_sale": 818,
         "last_upload_time": "2026-08-05 03:24:51",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021212_hr1.png",
+          "description": "ゴールドチタンを含有する鉱石",
+          "category": "石材",
+          "item_level": 670,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4816,7 +6884,18 @@
         "hist_max": 300,
         "units_for_sale": 1231,
         "last_upload_time": "2026-08-05 03:36:55",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021814_hr1.png",
+          "description": "大山羊の重厚な粗皮",
+          "category": "皮革材",
+          "item_level": 17,
+          "shop_price": 39,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -4832,7 +6911,18 @@
         "hist_max": 131,
         "units_for_sale": 1231,
         "last_upload_time": "2026-08-05 00:13:54",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021814_hr1.png",
+          "description": "大山羊の重厚な粗皮",
+          "category": "皮革材",
+          "item_level": 17,
+          "shop_price": 39,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4864,7 +6954,18 @@
         "hist_max": 483,
         "units_for_sale": 989,
         "last_upload_time": "2026-08-05 04:06:32",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020814_hr1.png",
+          "description": "製錬、鋳造された緋金塊",
+          "category": "金属材",
+          "item_level": 70,
+          "shop_price": 1386,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4880,7 +6981,18 @@
         "hist_max": 4000,
         "units_for_sale": 1004,
         "last_upload_time": "2026-08-05 01:50:47",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025332_hr1.png",
+          "description": "メガマゲイの球茎部分。アガベ同様、芳醇なメスカルの材料となる",
+          "category": "食材",
+          "item_level": 650,
+          "shop_price": 99999,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4896,7 +7008,18 @@
         "hist_max": 34,
         "units_for_sale": 1960,
         "last_upload_time": "2026-08-05 04:06:15",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020809_hr1.png",
+          "description": "製錬、鋳造された黄金塊",
+          "category": "金属材",
+          "item_level": 90,
+          "shop_price": 1782,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -4912,7 +7035,18 @@
         "hist_max": 200,
         "units_for_sale": 1265,
         "last_upload_time": "2026-08-04 18:05:59",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022614_hr1.png",
+          "description": "ディープアイから採取された大粒の涙",
+          "category": "錬金術材",
+          "item_level": 125,
+          "shop_price": 792,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -4928,7 +7062,18 @@
         "hist_max": 791,
         "units_for_sale": 3028,
         "last_upload_time": "2026-08-04 18:05:59",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022614_hr1.png",
+          "description": "ディープアイから採取された大粒の涙",
+          "category": "錬金術材",
+          "item_level": 125,
+          "shop_price": 792,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4951,6 +7096,17 @@
           "high_price": 20,
           "profit_gil": 11,
           "profit_rate": 137.5
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021814_hr1.png",
+          "description": "ガルガンチュアのふさふさとした粗皮",
+          "category": "皮革材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -4967,7 +7123,18 @@
         "hist_max": 123,
         "units_for_sale": 2025,
         "last_upload_time": "2026-08-04 14:32:11",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021222_hr1.png",
+          "description": "多様な鉱物を含有する天然合金",
+          "category": "石材",
+          "item_level": 650,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -4983,7 +7150,18 @@
         "hist_max": 780,
         "units_for_sale": 3489,
         "last_upload_time": "2026-08-04 14:57:21",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020289_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 560,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -4999,7 +7177,18 @@
         "hist_max": 217,
         "units_for_sale": 601,
         "last_upload_time": "2026-08-04 14:57:21",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020289_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 560,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5015,7 +7204,18 @@
         "hist_max": 700,
         "units_for_sale": 2081,
         "last_upload_time": "2026-08-04 16:51:26",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020605_hr1.png",
+          "description": "体力回復の効能がある水薬",
+          "category": "薬品",
+          "item_level": 560,
+          "shop_price": 99999,
+          "buyback_price": 63,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -5031,7 +7231,18 @@
         "hist_max": 1807,
         "units_for_sale": 58,
         "last_upload_time": "2026-08-04 23:47:03",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020712_hr1.png",
+          "description": "製作の効率を高める、生薬を溶かした薬液\n\n効果時間 15:00",
+          "category": "薬品",
+          "item_level": 675,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -5047,7 +7258,18 @@
         "hist_max": 88,
         "units_for_sale": 879,
         "last_upload_time": "2026-08-04 16:50:25",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020223_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 45,
+          "shop_price": 4500,
+          "buyback_price": 81,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5063,7 +7285,18 @@
         "hist_max": 13000,
         "units_for_sale": 2534,
         "last_upload_time": "2026-08-04 18:27:59",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022454_hr1.png",
+          "description": "削り出された珪化木",
+          "category": "木材",
+          "item_level": 90,
+          "shop_price": 1710,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5086,6 +7319,17 @@
           "high_price": 1800,
           "profit_gil": 710,
           "profit_rate": 71.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020824_hr1.png",
+          "description": "製錬、鋳造された精霊銀塊",
+          "category": "金属材",
+          "item_level": 130,
+          "shop_price": 2652,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
         }
       },
       {
@@ -5102,7 +7346,18 @@
         "hist_max": 300,
         "units_for_sale": 1516,
         "last_upload_time": "2026-08-04 10:38:37",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022414_hr1.png",
+          "description": "長い時をかけて成長したクスノキの古木",
+          "category": "木材",
+          "item_level": 210,
+          "shop_price": 1164,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -5118,7 +7373,18 @@
         "hist_max": 150,
         "units_for_sale": 1032,
         "last_upload_time": "2026-08-04 10:38:37",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022414_hr1.png",
+          "description": "長い時をかけて成長したクスノキの古木",
+          "category": "木材",
+          "item_level": 210,
+          "shop_price": 1164,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5134,7 +7400,18 @@
         "hist_max": 2000,
         "units_for_sale": 1558,
         "last_upload_time": "2026-08-04 17:08:16",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020650_hr1.png",
+          "description": "伝説の神獣フェニックスのものと思しき尾羽 (効果:パーティメンバーを衰弱状態で戦闘不能から蘇生)\n\n[戦闘中は使用不可]",
+          "category": "薬品",
+          "item_level": 50,
+          "shop_price": 871,
+          "buyback_price": 14,
+          "stack_size": 1,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -5150,7 +7427,18 @@
         "hist_max": 600,
         "units_for_sale": 2871,
         "last_upload_time": "2026-08-04 21:20:57",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020802_hr1.png",
+          "description": "製錬、鋳造された鏡鉄塊",
+          "category": "金属材",
+          "item_level": 43,
+          "shop_price": 763,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -5166,7 +7454,18 @@
         "hist_max": 375,
         "units_for_sale": 725,
         "last_upload_time": "2026-08-04 13:10:13",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022606_hr1.png",
+          "description": "錬金術で作られた、木材を保護し劣化を抑えるための塗料",
+          "category": "錬金術材",
+          "item_level": 640,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5189,6 +7488,17 @@
           "high_price": 90,
           "profit_gil": 35,
           "profit_rate": 70.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020814_hr1.png",
+          "description": "製錬、鋳造された緋金塊",
+          "category": "金属材",
+          "item_level": 70,
+          "shop_price": 1386,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
         }
       },
       {
@@ -5212,6 +7522,17 @@
           "high_price": 247,
           "profit_gil": 47,
           "profit_rate": 25.1
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020297_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5235,6 +7556,17 @@
           "high_price": 690,
           "profit_gil": 438,
           "profit_rate": 201.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020298_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5251,7 +7583,18 @@
         "hist_max": 60,
         "units_for_sale": 903,
         "last_upload_time": "2026-08-04 19:07:13",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020223_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 45,
+          "shop_price": 4500,
+          "buyback_price": 81,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -5297,6 +7640,17 @@
           "high_price": 550,
           "profit_gil": 422,
           "profit_rate": 422.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020802_hr1.png",
+          "description": "製錬、鋳造された鏡鉄塊",
+          "category": "金属材",
+          "item_level": 43,
+          "shop_price": 763,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
         }
       },
       {
@@ -5352,6 +7706,17 @@
           "high_price": 500,
           "profit_gil": 466,
           "profit_rate": 5177.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020238_hr1.png",
+          "description": "製品に込められた職人の想いが結晶化した、半マテリア物質\n\n[換金用アイテム]",
+          "category": "デミマテリア",
+          "item_level": 30,
+          "shop_price": 10000,
+          "buyback_price": 1000,
+          "stack_size": 99,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5375,6 +7740,17 @@
           "high_price": 900,
           "profit_gil": 355,
           "profit_rate": 71.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020238_hr1.png",
+          "description": "製品に込められた職人の想いが結晶化した、半マテリア物質\n\n[換金用アイテム]",
+          "category": "デミマテリア",
+          "item_level": 30,
+          "shop_price": 10000,
+          "buyback_price": 1000,
+          "stack_size": 99,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5391,7 +7767,18 @@
         "hist_max": 500,
         "units_for_sale": 201,
         "last_upload_time": "2026-08-05 01:09:24",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020238_hr1.png",
+          "description": "製品に込められた職人の想いが結晶化した、半マテリア物質\n\n[換金用アイテム]",
+          "category": "デミマテリア",
+          "item_level": 30,
+          "shop_price": 10000,
+          "buyback_price": 1000,
+          "stack_size": 99,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:10:43",
@@ -5407,7 +7794,18 @@
         "hist_max": 52,
         "units_for_sale": 89,
         "last_upload_time": "2026-08-04 08:50:01",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/027000/027103_hr1.png",
+          "description": "赤い体色が目立ちやすいゴカイ。海釣り用活餌",
+          "category": "釣り餌",
+          "item_level": 620,
+          "shop_price": 77,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -5423,7 +7821,18 @@
         "hist_max": 388,
         "units_for_sale": 414,
         "last_upload_time": "2026-08-04 12:15:09",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021825_hr1.png",
+          "description": "ゾヌールの強靭な粗皮",
+          "category": "皮革材",
+          "item_level": 412,
+          "shop_price": 2428,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -5439,7 +7848,18 @@
         "hist_max": 100,
         "units_for_sale": 414,
         "last_upload_time": "2026-08-04 12:15:09",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021825_hr1.png",
+          "description": "ゾヌールの強靭な粗皮",
+          "category": "皮革材",
+          "item_level": 412,
+          "shop_price": 2428,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       }
     ],
     "Meteor": [
@@ -5457,7 +7877,18 @@
         "hist_max": 80,
         "units_for_sale": 180472,
         "last_upload_time": "2026-08-05 03:11:09",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020016_hr1.png",
+          "description": "風の媒質の樹状結晶",
+          "category": "クリスタル",
+          "item_level": 50,
+          "shop_price": 990,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5473,7 +7904,18 @@
         "hist_max": 48,
         "units_for_sale": 53351,
         "last_upload_time": "2026-08-05 03:43:01",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020004_hr1.png",
+          "description": "風の媒質の小結晶",
+          "category": "クリスタル",
+          "item_level": 1,
+          "shop_price": 9,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5489,7 +7931,18 @@
         "hist_max": 1620,
         "units_for_sale": 3700,
         "last_upload_time": "2026-08-05 03:06:32",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021003_hr1.png",
+          "description": "ダークマタークラスターを魔導機械の修理に用いるために切り出した補材\n\n[飛空艇・潜水艦パーツ向け修理材料]",
+          "category": "雑貨",
+          "item_level": 70,
+          "shop_price": 2772,
+          "buyback_price": 10,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -5505,7 +7958,18 @@
         "hist_max": 445,
         "units_for_sale": 3721,
         "last_upload_time": "2026-08-05 02:12:33",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020407_hr1.png",
+          "description": "他物質への同化特性を持つ精神感応型物質",
+          "category": "触媒",
+          "item_level": 70,
+          "shop_price": 693,
+          "buyback_price": 10,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -5521,7 +7985,18 @@
         "hist_max": 750,
         "units_for_sale": 1951,
         "last_upload_time": "2026-08-05 02:06:47",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/024000/024165_hr1.png",
+          "description": "細切りにしたハピネスキャロットをビネガーで和えた野菜料理\n\n敵討伐・製作・採集時の経験値獲得量が上昇する\n\n経験値獲得量 +3%\n\n効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "調理品",
+          "item_level": 527,
+          "shop_price": 99999,
+          "buyback_price": 30,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5544,6 +8019,17 @@
           "high_price": 140,
           "profit_gil": 13,
           "profit_rate": 10.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/026000/026235_hr1.png",
+          "description": "魔法の光で記憶させた武具の幻影を映し出す小結晶\n\n[武具投影に必要]",
+          "category": "触媒",
+          "item_level": 35,
+          "shop_price": 1000,
+          "buyback_price": 24,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5567,6 +8053,17 @@
           "high_price": 370,
           "profit_gil": 51,
           "profit_rate": 17.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021205_hr1.png",
+          "description": "闇鉄を含有する鉱石",
+          "category": "石材",
+          "item_level": 55,
+          "shop_price": 326,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5583,7 +8080,18 @@
         "hist_max": 528,
         "units_for_sale": 3417,
         "last_upload_time": "2026-08-04 22:37:00",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/027000/027109_hr1.png",
+          "description": "食紅で赤く染められたハエの幼虫。淡水釣り用活餌",
+          "category": "釣り餌",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:40:49",
@@ -5684,6 +8192,17 @@
           "high_price": 258,
           "profit_gil": 45,
           "profit_rate": 22.5
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020818_hr1.png",
+          "description": "蛮神の祝福を受けたらしい霊銀塊",
+          "category": "金属材",
+          "item_level": 210,
+          "shop_price": 4158,
+          "buyback_price": 8,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -5762,7 +8281,18 @@
         "hist_max": 284,
         "units_for_sale": 3063,
         "last_upload_time": "2026-08-05 04:04:54",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/024000/024453_hr1.png",
+          "description": "独特な風味を持つオウヴィボスの乳",
+          "category": "食材",
+          "item_level": 525,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -5810,7 +8340,18 @@
         "hist_max": 260,
         "units_for_sale": 2563,
         "last_upload_time": "2026-08-04 22:00:53",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025045_hr1.png",
+          "description": "種子からなるスパイス。独特の風味があり、辛さと甘さを併せ持つ",
+          "category": "食材",
+          "item_level": 670,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -5968,7 +8509,18 @@
         "hist_max": 250,
         "units_for_sale": 14996,
         "last_upload_time": "2026-08-04 11:56:47",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021453_hr1.png",
+          "description": "アンバーを含んでいると思しき原石",
+          "category": "石材",
+          "item_level": 40,
+          "shop_price": 742,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -5984,7 +8536,18 @@
         "hist_max": 220,
         "units_for_sale": 3360,
         "last_upload_time": "2026-08-04 14:59:00",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021217_hr1.png",
+          "description": "青金を含有する鉱石",
+          "category": "石材",
+          "item_level": 42,
+          "shop_price": 219,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -6000,7 +8563,18 @@
         "hist_max": 220,
         "units_for_sale": 3360,
         "last_upload_time": "2026-08-04 14:59:00",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021217_hr1.png",
+          "description": "青金を含有する鉱石",
+          "category": "石材",
+          "item_level": 42,
+          "shop_price": 219,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6062,6 +8636,17 @@
           "high_price": 111,
           "profit_gil": 5,
           "profit_rate": 5.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022614_hr1.png",
+          "description": "発泡する天然水",
+          "category": "錬金術材",
+          "item_level": 11,
+          "shop_price": 16,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6085,6 +8670,17 @@
           "high_price": 979,
           "profit_gil": 301,
           "profit_rate": 47.9
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020296_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6108,6 +8704,17 @@
           "high_price": 500,
           "profit_gil": 466,
           "profit_rate": 5177.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021202_hr1.png",
+          "description": "鉄を含有する、角が取れて丸くなった鉱石",
+          "category": "石材",
+          "item_level": 273,
+          "shop_price": 540,
+          "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6124,7 +8731,18 @@
         "hist_max": 300,
         "units_for_sale": 3183,
         "last_upload_time": "2026-08-05 00:13:11",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025013_hr1.png",
+          "description": "果実から成るスパイス。火を吹くほど辛く、薬品や香料に用いられる",
+          "category": "食材",
+          "item_level": 35,
+          "shop_price": 129,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6147,6 +8765,17 @@
           "high_price": 199,
           "profit_gil": 39,
           "profit_rate": 26.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022210_hr1.png",
+          "description": "ペタルダの翅から得た鱗粉",
+          "category": "錬金術材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6163,7 +8792,18 @@
         "hist_max": 6,
         "units_for_sale": 1616,
         "last_upload_time": "2026-08-04 18:56:18",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020810_hr1.png",
+          "description": "製錬、鋳造された白金塊",
+          "category": "金属材",
+          "item_level": 110,
+          "shop_price": 2178,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6186,6 +8826,17 @@
           "high_price": 887,
           "profit_gil": 625,
           "profit_rate": 288.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020295_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6266,7 +8917,18 @@
         "hist_max": 1000,
         "units_for_sale": 18059,
         "last_upload_time": "2026-08-05 03:08:17",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020295_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -6282,7 +8944,18 @@
         "hist_max": 4001,
         "units_for_sale": 10174,
         "last_upload_time": "2026-08-04 21:49:42",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020905_hr1.png",
+          "description": "耐熱性に優れたガラス質の繊維束",
+          "category": "布材",
+          "item_level": 180,
+          "shop_price": 1425,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6298,7 +8971,18 @@
         "hist_max": 1300,
         "units_for_sale": 4008,
         "last_upload_time": "2026-08-04 00:45:56",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021003_hr1.png",
+          "description": "建材などを接合するための鋼鉄製金具",
+          "category": "金属材",
+          "item_level": 30,
+          "shop_price": 432,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6321,6 +9005,17 @@
           "high_price": 92,
           "profit_gil": 37,
           "profit_rate": 74.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022426_hr1.png",
+          "description": "切り出されたダークマホガニーの丸材",
+          "category": "木材",
+          "item_level": 660,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6337,7 +9032,18 @@
         "hist_max": 202,
         "units_for_sale": 14090,
         "last_upload_time": "2026-08-04 12:41:40",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022426_hr1.png",
+          "description": "切り出されたダークマホガニーの丸材",
+          "category": "木材",
+          "item_level": 660,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6353,7 +9059,18 @@
         "hist_max": 230,
         "units_for_sale": 6764,
         "last_upload_time": "2026-08-05 00:43:24",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022615_hr1.png",
+          "description": "マグマが冷え固まってできたと云われる岩石",
+          "category": "石材",
+          "item_level": 30,
+          "shop_price": 120,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -6415,6 +9132,17 @@
           "high_price": 490,
           "profit_gil": 365,
           "profit_rate": 365.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025215_hr1.png",
+          "description": "北洋諸島原産の香り高い根菜。食べるほどクセになるらしいチョコボの飼料\n\n使用すると呼びだしたマイチョコボの取得経験値が一時的に増加する",
+          "category": "雑貨",
+          "item_level": 55,
+          "shop_price": 348,
+          "buyback_price": 6,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6431,7 +9159,18 @@
         "hist_max": 200,
         "units_for_sale": 2567,
         "last_upload_time": "2026-08-04 10:05:42",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025018_hr1.png",
+          "description": "サベネア島原産の色鮮やかなパプリカ",
+          "category": "食材",
+          "item_level": 525,
+          "shop_price": 99999,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -6447,7 +9186,18 @@
         "hist_max": 200,
         "units_for_sale": 2567,
         "last_upload_time": "2026-08-04 10:05:42",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025018_hr1.png",
+          "description": "サベネア島原産の色鮮やかなパプリカ",
+          "category": "食材",
+          "item_level": 525,
+          "shop_price": 99999,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6463,7 +9213,18 @@
         "hist_max": 530,
         "units_for_sale": 3027,
         "last_upload_time": "2026-08-04 16:34:49",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021652_hr1.png",
+          "description": "紅玉海の水中に自生する風変わりな綿花",
+          "category": "布材",
+          "item_level": 265,
+          "shop_price": 2098,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6479,7 +9240,18 @@
         "hist_max": 200,
         "units_for_sale": 934,
         "last_upload_time": "2026-08-05 02:15:00",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025021_hr1.png",
+          "description": "甘やかな香りを放つ古代のスパイス。薬品や香料に用いられる",
+          "category": "食材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6495,7 +9267,18 @@
         "hist_max": 6780,
         "units_for_sale": 968,
         "last_upload_time": "2026-08-04 22:42:28",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020285_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 560,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6511,7 +9294,18 @@
         "hist_max": 70,
         "units_for_sale": 3722,
         "last_upload_time": "2026-08-05 02:23:38",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023926_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[高難易度レシピ用]",
+          "category": "錬金術材",
+          "item_level": 511,
+          "shop_price": 210,
+          "buyback_price": 7,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6534,6 +9328,17 @@
           "high_price": 6000,
           "profit_gil": 483,
           "profit_rate": 9.3
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020299_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6550,7 +9355,18 @@
         "hist_max": 6000,
         "units_for_sale": 861,
         "last_upload_time": "2026-08-04 23:30:19",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020299_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -6573,6 +9389,17 @@
           "high_price": 210,
           "profit_gil": 99,
           "profit_rate": 99.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020297_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6589,7 +9416,18 @@
         "hist_max": 30,
         "units_for_sale": 13842,
         "last_upload_time": "2026-08-05 03:02:32",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021834_hr1.png",
+          "description": "ブラーシャの猛々しい粗皮",
+          "category": "皮革材",
+          "item_level": 660,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6628,7 +9466,18 @@
         "hist_max": 50,
         "units_for_sale": 2037,
         "last_upload_time": "2026-08-03 09:22:58",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021203_hr1.png",
+          "description": "錫を含有する鉱石",
+          "category": "石材",
+          "item_level": 1,
+          "shop_price": 2,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:02:37",
@@ -6644,7 +9493,18 @@
         "hist_max": 100,
         "units_for_sale": 1944,
         "last_upload_time": "2026-08-04 08:18:10",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022604_hr1.png",
+          "description": "黒色のミョウバン。皮なめし剤の原料",
+          "category": "錬金術材",
+          "item_level": 37,
+          "shop_price": 189,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6676,7 +9536,18 @@
         "hist_max": 2200,
         "units_for_sale": 897,
         "last_upload_time": "2026-08-04 12:08:02",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/027000/027409_hr1.png",
+          "description": "ザナラーン地方で採取できる農業用の土\n\n[畑の収穫物の交雑率アップ。グレード3]",
+          "category": "栽培用品",
+          "item_level": 50,
+          "shop_price": 297,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6692,7 +9563,18 @@
         "hist_max": 450,
         "units_for_sale": 805,
         "last_upload_time": "2026-08-04 19:16:24",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022415_hr1.png",
+          "description": "切り出されたイペーの丸材",
+          "category": "木材",
+          "item_level": 710,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6708,7 +9590,18 @@
         "hist_max": 400,
         "units_for_sale": 2861,
         "last_upload_time": "2026-08-04 08:31:45",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022678_hr1.png",
+          "description": "山岳部で採水されたミネラル豊富な天然水",
+          "category": "錬金術材",
+          "item_level": 400,
+          "shop_price": 630,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6724,7 +9617,18 @@
         "hist_max": 950,
         "units_for_sale": 437,
         "last_upload_time": "2026-08-04 12:16:31",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/024000/024105_hr1.png",
+          "description": "トライヨラで広く親しまれているクリーミーかつスパイシーなシチュー。食材の出汁が人気の秘訣\n\n敵討伐・製作・採集時の経験値獲得量が上昇する\n\n経験値獲得量 +3%\n\n効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "調理品",
+          "item_level": 710,
+          "shop_price": 99999,
+          "buyback_price": 30,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6740,7 +9644,18 @@
         "hist_max": 99,
         "units_for_sale": 3127,
         "last_upload_time": "2026-08-04 06:23:56",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023940_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[製作Lv20レシピ用]",
+          "category": "木材",
+          "item_level": 20,
+          "shop_price": 60,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6756,7 +9671,18 @@
         "hist_max": 6500,
         "units_for_sale": 68,
         "last_upload_time": "2026-08-05 01:37:17",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021020_hr1.png",
+          "description": "製錬、鋳造されたイルメナイト系の合金塊",
+          "category": "金属材",
+          "item_level": 610,
+          "shop_price": 99999,
+          "buyback_price": 12,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6772,7 +9698,18 @@
         "hist_max": 6,
         "units_for_sale": 1616,
         "last_upload_time": "2026-08-04 18:56:18",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020810_hr1.png",
+          "description": "製錬、鋳造された白金塊",
+          "category": "金属材",
+          "item_level": 110,
+          "shop_price": 2178,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6788,7 +9725,18 @@
         "hist_max": 305,
         "units_for_sale": 1321,
         "last_upload_time": "2026-08-05 00:40:09",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022636_hr1.png",
+          "description": "他の物質から熱を奪う性質を持つ触媒",
+          "category": "錬金術材",
+          "item_level": 710,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -6811,6 +9759,17 @@
           "high_price": 7,
           "profit_gil": 1,
           "profit_rate": 20.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021816_hr1.png",
+          "description": "ゴンフォテリウムの強靭な粗皮",
+          "category": "皮革材",
+          "item_level": 670,
+          "shop_price": 99999,
+          "buyback_price": 5,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6827,7 +9786,18 @@
         "hist_max": 160000,
         "units_for_sale": 2872,
         "last_upload_time": "2026-08-04 18:11:56",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025906_hr1.png",
+          "description": "多量のバイカラージェムを納入したことを示す証書。\n\n一定数集めモードゥナの稀物商に渡すことで貴重な品物を入手できる",
+          "category": "雑貨",
+          "item_level": 1,
+          "shop_price": 2,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 11:59:32",
@@ -6843,7 +9813,18 @@
         "hist_max": 199,
         "units_for_sale": 2163,
         "last_upload_time": "2026-08-04 00:48:36",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023927_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[製作Lv40レシピ用]",
+          "category": "石材",
+          "item_level": 40,
+          "shop_price": 90,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
       },
       {
         "timestamp": "2026-08-05 13:05:53",
@@ -6866,6 +9847,17 @@
           "high_price": 900,
           "profit_gil": 355,
           "profit_rate": 71.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020238_hr1.png",
+          "description": "製品に込められた職人の想いが結晶化した、半マテリア物質\n\n[換金用アイテム]",
+          "category": "デミマテリア",
+          "item_level": 30,
+          "shop_price": 10000,
+          "buyback_price": 1000,
+          "stack_size": 99,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6889,6 +9881,17 @@
           "high_price": 690,
           "profit_gil": 438,
           "profit_rate": 201.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020298_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
         }
       },
       {
@@ -6905,7 +9908,18 @@
         "hist_max": 500,
         "units_for_sale": 2960,
         "last_upload_time": "2026-08-04 07:41:53",
-        "cross_info": null
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025351_hr1.png",
+          "description": "アップランド小麦を挽いて作られた粉",
+          "category": "食材",
+          "item_level": 403,
+          "shop_price": 2917,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
       }
     ]
   }
