@@ -288,9 +288,16 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
             last_upload_dt = datetime.fromtimestamp(last_upload_ms / 1000, tz=timezone.utc)
             last_upload_str = last_upload_dt.strftime("%Y-%m-%d %H:%M:%S")
 
-        units_for_sale = data.get("unitsForSale", 0)
+        # 最安値を出品しているサーバー単体だけの出品在庫数を取得！
+        listings = data.get("listings", [])
+        if listings:
+            min_listing = min(listings, key=lambda l: l.get("pricePerUnit", 99999999))
+            min_world_name = min_listing.get("worldName") or str(min_listing.get("worldID", ""))
+            same_world_listings = [l for l in listings if (l.get("worldName") == min_world_name or str(l.get("worldID")) == min_world_name)]
+            single_world_units = sum(l.get("quantity", 0) for l in same_world_listings)
+        else:
+            single_world_units = data.get("unitsForSale", 0)
 
-        # 同一の取引履歴データセット(recentHistory)から完全同期待算！
         history = data.get("recentHistory", [])
         prices = [h.get("pricePerUnit", 0) for h in history if h.get("pricePerUnit", 0) > 0]
         
@@ -346,7 +353,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)
                 """, (
                     now_str, scope_name, item_key, item_id, item_display_name, q_type,
-                    vel, price, hm_avg, hm_min, hm_max, units_for_sale, last_upload_str
+                    vel, price, hm_avg, hm_min, hm_max, single_world_units, last_upload_str
                 ))
             else:
                 cursor.execute("""
@@ -363,7 +370,7 @@ def fetch_and_save_all():
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (Synchronized History Min/Max/Avg) ---")
+        print(f"--- Processing DC: {scope} (Single World Stock Mode) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
