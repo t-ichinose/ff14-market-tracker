@@ -613,6 +613,14 @@
     }
 
     @media (max-width: 768px) {
+      .search-box {
+        display: none !important;
+        margin-bottom: 0.85rem;
+      }
+      .search-box.active {
+        display: block !important;
+        animation: fadeIn 0.2s ease;
+      }
       .mobile-dc-tabs {
         display: flex;
       }
