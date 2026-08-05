@@ -580,6 +580,26 @@
       box-shadow: 0 0 12px rgba(0, 210, 255, 0.3);
     }
 
+    .search-toggle-btn {
+      display: none;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 0.85rem;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .search-toggle-btn:hover, .search-toggle-btn.active {
+      background: rgba(0, 210, 255, 0.2);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
     @media (max-width: 1400px) {
       .dc-grid { grid-template-columns: repeat(2, 1fr); }
       .dc-column { height: 550px; }
@@ -590,6 +610,16 @@
     }
 
     @media (max-width: 768px) {
+      .search-toggle-btn {
+        display: inline-flex;
+      }
+      .search-box {
+        display: none;
+        margin-bottom: 1rem;
+      }
+      .search-box.active {
+        display: block;
+      }
       .mobile-dc-tabs {
         display: flex;
       }
@@ -636,10 +666,13 @@
         <div class="status-badge" id="lastUpdatedBadge">
           <span class="status-dot"></span> 読み込み中...
         </div>
+        <button class="search-toggle-btn" id="searchToggleBtn" onclick="toggleSearchBox()" title="検索">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
       </div>
     </header>
 
-    <div class="search-box">
+    <div class="search-box" id="searchBox">
       <i class="fa-solid fa-magnifying-glass"></i>
       <input type="text" id="searchInput" class="search-input" placeholder="全DC横断アイテム検索 (名前またはID)...">
     </div>
@@ -804,6 +837,18 @@
       renderAllColumns(searchTerm);
     }
 
+    function toggleSearchBox() {
+      const box = document.getElementById('searchBox');
+      const btn = document.getElementById('searchToggleBtn');
+      const input = document.getElementById('searchInput');
+      if (!box) return;
+      const isActive = box.classList.toggle('active');
+      if (btn) btn.classList.toggle('active', isActive);
+      if (isActive && input) {
+        input.focus();
+      }
+    }
+
     function formatTimeJST(rawTimeStr) {
       if (!rawTimeStr) return '-';
       let str = String(rawTimeStr).trim();
@@ -818,8 +863,7 @@
       const day = String(d.getDate()).padStart(2, '0');
       const hours = String(d.getHours()).padStart(2, '0');
       const minutes = String(d.getMinutes()).padStart(2, '0');
-      const seconds = String(d.getSeconds()).padStart(2, '0');
-      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} (JST)`;
+      return `${year}-${month}-${day} ${hours}:${minutes}`;
     }
 
     function formatChartLabelJST(rawTimeStr) {
