@@ -1,12 +1,43 @@
 import requests
-import csv
+import sqlite3
 import os
 from datetime import datetime, timezone
+
+def init_db(db_path="data/market_data.db"):
+    os.makedirs("data", exist_ok=True)
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    # テーブル作成
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS market_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp TEXT,
+        scope TEXT,
+        item_id INTEGER,
+        item_name TEXT,
+        daily_sale_velocity REAL,
+        min_price INTEGER,
+        avg_price REAL,
+        min_price_nq INTEGER,
+        min_price_hq INTEGER,
+        units_for_sale INTEGER,
+        listings_count INTEGER,
+        last_upload_time TEXT
+    )
+    """)
+    
+    # 高速検索用インデックス
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON market_logs(timestamp)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_item_id ON market_logs(item_id)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_velocity ON market_logs(daily_sale_velocity)")
+    
+    conn.commit()
+    return conn
 
 def fetch_and_save():
     scope_name = "Mana"
     recent_url = "https://universalis.app/api/v2/extra/stats/recently-updated"
-    
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
     
     # 1. 直近更新アイテムIDを取得（20件）
@@ -41,7 +72,6 @@ def fetch_and_save():
     for item_id, data in items_data.items():
         velocity = data.get("dailySaleVelocity") or 0.0
         
-        # UNIXタイムスタンプ(ミリ秒)を日時に変換
         last_upload_ms = data.get("lastUploadTime")
         last_upload_str = ""
         if last_upload_ms:
@@ -81,35 +111,35 @@ def fetch_and_save():
     except Exception as e:
         print(f"Error fetching XIVAPI names: {e}")
 
-    # 5. CSVファイルに追記保存
-    os.makedirs("data", exist_ok=True)
-    csv_path = "data/market_log.csv"
-    file_exists = os.path.exists(csv_path)
+    # 5. SQLiteデータベースに保存
+    db_path = "data/market_data.db"
+    conn = init_db(db_path)
+    cursor = conn.cursor()
 
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    headers_row = [
-        "日時", "スコープ", "アイテムID", "アイテム名", 
-        "1日平均販売数(個/日)", "最安値(Gil)", "平均価格(Gil)", 
-        "NQ最安値(Gil)", "HQ最安値(Gil)", "総出品数量", "出品件数", "データ更新日時(UTC)"
-    ]
-
-    with open(csv_path, mode="a", newline="", encoding="utf-8-sig") as f:
-        writer = csv.writer(f)
-        if not file_exists:
-            writer.writerow(headers_row)
+    for item in top_items:
+        i_id = item["item_id"]
+        name = name_map.get(i_id, f"Unknown ({i_id})")
         
-        for item in top_items:
-            i_id = item["item_id"]
-            name = name_map.get(i_id, f"Unknown ({i_id})")
-            writer.writerow([
-                now_str, scope_name, i_id, name, 
-                f"{item['velocity']:.1f}", item["min_price"], item["avg_price"],
-                item["min_price_nq"], item["min_price_hq"], item["units_for_sale"],
-                item["listings_count"], item["last_upload_time"]
-            ])
+        cursor.execute("""
+        INSERT INTO market_logs (
+            timestamp, scope, item_id, item_name,
+            daily_sale_velocity, min_price, avg_price,
+            min_price_nq, min_price_hq, units_for_sale,
+            listings_count, last_upload_time
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            now_str, scope_name, i_id, name,
+            item["velocity"], item["min_price"], item["avg_price"],
+            item["min_price_nq"], item["min_price_hq"], item["units_for_sale"],
+            item["listings_count"], item["last_upload_time"]
+        ))
 
-    print("Successfully saved rich data to CSV!")
+    conn.commit()
+    conn.close()
+
+    print("Successfully saved data to SQLite Database (data/market_data.db)!")
 
 if __name__ == "__main__":
     fetch_and_save()
