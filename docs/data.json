@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-05 11:59:48",
+  "last_updated": "2026-08-05 12:10:46",
   "datacenters": [
     "Elemental",
     "Gaia",
@@ -10,7 +10,7 @@
   "data": {
     "Elemental": [
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "18_NONE",
         "item_id": 18,
@@ -20,8 +20,8 @@
         "min_price": 5,
         "avg_price": 21.1,
         "hist_min": 5,
-        "hist_max": 5,
-        "units_for_sale": 5917836,
+        "hist_max": 12,
+        "units_for_sale": 5986156,
         "last_upload_time": "2026-08-05 01:40:56",
         "cross_info": null
       },
@@ -42,7 +42,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "13_NONE",
         "item_id": 13,
@@ -51,14 +51,14 @@
         "velocity": 13653.857,
         "min_price": 32,
         "avg_price": 38.6,
-        "hist_min": 32,
-        "hist_max": 32,
-        "units_for_sale": 7786689,
+        "hist_min": 37,
+        "hist_max": 57,
+        "units_for_sale": 4891688,
         "last_upload_time": "2026-08-05 02:24:47",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:10:43",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "2_NONE",
         "item_id": 2,
@@ -68,9 +68,9 @@
         "min_price": 40,
         "avg_price": 42.3,
         "hist_min": 40,
-        "hist_max": 40,
-        "units_for_sale": 7100,
-        "last_upload_time": "2026-08-05 01:57:58",
+        "hist_max": 43,
+        "units_for_sale": 7815988,
+        "last_upload_time": "2026-08-05 02:51:05",
         "cross_info": null
       },
       {
@@ -122,7 +122,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "10335_NONE",
         "item_id": 10335,
@@ -131,14 +131,14 @@
         "velocity": 467.0,
         "min_price": 377,
         "avg_price": 386.9,
-        "hist_min": 377,
-        "hist_max": 377,
-        "units_for_sale": 52170,
-        "last_upload_time": "2026-08-05 02:40:35",
+        "hist_min": 400,
+        "hist_max": 405,
+        "units_for_sale": 66881,
+        "last_upload_time": "2026-08-05 02:58:17",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "21800_NONE",
         "item_id": 21800,
@@ -147,17 +147,17 @@
         "velocity": 464.85715,
         "min_price": 140,
         "avg_price": 180.3,
-        "hist_min": 140,
-        "hist_max": 140,
-        "units_for_sale": 47208,
-        "last_upload_time": "2026-08-05 01:58:12",
+        "hist_min": 188,
+        "hist_max": 200,
+        "units_for_sale": 45551,
+        "last_upload_time": "2026-08-05 02:55:34",
         "cross_info": {
-          "cheap_scope": "Mana",
-          "cheap_price": 124,
+          "cheap_scope": "Meteor",
+          "cheap_price": 120,
           "high_scope": "Elemental",
           "high_price": 140,
-          "profit_gil": 9,
-          "profit_rate": 7.3
+          "profit_gil": 13,
+          "profit_rate": 10.8
         }
       },
       {
@@ -207,7 +207,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "31982_NONE",
         "item_id": 31982,
@@ -216,8 +216,8 @@
         "velocity": 399.85715,
         "min_price": 74,
         "avg_price": 112.1,
-        "hist_min": 74,
-        "hist_max": 74,
+        "hist_min": 70,
+        "hist_max": 120,
         "units_for_sale": 8738,
         "last_upload_time": "2026-08-05 02:30:06",
         "cross_info": null
@@ -269,7 +269,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "45968_NQ",
         "item_id": 45968,
@@ -278,9 +278,9 @@
         "velocity": 345.7143,
         "min_price": 429,
         "avg_price": 799.6,
-        "hist_min": 429,
-        "hist_max": 429,
-        "units_for_sale": 9844,
+        "hist_min": 428,
+        "hist_max": 838,
+        "units_for_sale": 11036,
         "last_upload_time": "2026-08-04 20:56:08",
         "cross_info": null
       },
@@ -308,7 +308,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "45970_NQ",
         "item_id": 45970,
@@ -317,8 +317,8 @@
         "velocity": 338.85715,
         "min_price": 250,
         "avg_price": 542.6,
-        "hist_min": 250,
-        "hist_max": 250,
+        "hist_min": 998,
+        "hist_max": 1000,
         "units_for_sale": 8825,
         "last_upload_time": "2026-08-05 00:36:35",
         "cross_info": {
@@ -347,7 +347,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "36094_NONE",
         "item_id": 36094,
@@ -356,14 +356,14 @@
         "velocity": 296.7143,
         "min_price": 120,
         "avg_price": 179.6,
-        "hist_min": 120,
-        "hist_max": 120,
-        "units_for_sale": 5,
+        "hist_min": 100,
+        "hist_max": 160,
+        "units_for_sale": 24570,
         "last_upload_time": "2026-08-05 02:14:15",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "5118_NONE",
         "item_id": 5118,
@@ -372,14 +372,14 @@
         "velocity": 294.2857,
         "min_price": 68,
         "avg_price": 181.8,
-        "hist_min": 68,
-        "hist_max": 68,
+        "hist_min": 130,
+        "hist_max": 179,
         "units_for_sale": 19673,
         "last_upload_time": "2026-08-04 22:08:44",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "36080_NQ",
         "item_id": 36080,
@@ -388,8 +388,8 @@
         "velocity": 267.57144,
         "min_price": 430,
         "avg_price": 489.9,
-        "hist_min": 430,
-        "hist_max": 430,
+        "hist_min": 390,
+        "hist_max": 399,
         "units_for_sale": 23984,
         "last_upload_time": "2026-08-05 02:39:15",
         "cross_info": null
@@ -434,7 +434,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "49244_HQ",
         "item_id": 49244,
@@ -444,7 +444,7 @@
         "min_price": 2827,
         "avg_price": 3817.8,
         "hist_min": 2827,
-        "hist_max": 2827,
+        "hist_max": 2988,
         "units_for_sale": 7122,
         "last_upload_time": "2026-08-05 00:35:50",
         "cross_info": null
@@ -466,23 +466,23 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "44018_NONE",
         "item_id": 44018,
         "item_name": "クラロウォルナット原木",
         "quality": "NONE",
-        "velocity": 237.71428,
+        "velocity": 248.28572,
         "min_price": 132,
         "avg_price": 214.0,
-        "hist_min": 132,
-        "hist_max": 132,
-        "units_for_sale": 9971,
-        "last_upload_time": "2026-08-05 02:30:02",
+        "hist_min": 220,
+        "hist_max": 249,
+        "units_for_sale": 9309,
+        "last_upload_time": "2026-08-05 02:57:21",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "45984_NONE",
         "item_id": 45984,
@@ -491,9 +491,9 @@
         "velocity": 229.85715,
         "min_price": 2700,
         "avg_price": 2796.6,
-        "hist_min": 2700,
-        "hist_max": 2700,
-        "units_for_sale": 5137,
+        "hist_min": 2800,
+        "hist_max": 2905,
+        "units_for_sale": 5399,
         "last_upload_time": "2026-08-05 02:25:25",
         "cross_info": null
       },
@@ -553,7 +553,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "5395_NONE",
         "item_id": 5395,
@@ -562,14 +562,21 @@
         "velocity": 200.42857,
         "min_price": 200,
         "avg_price": 412.9,
-        "hist_min": 200,
-        "hist_max": 200,
+        "hist_min": 397,
+        "hist_max": 440,
         "units_for_sale": 23406,
         "last_upload_time": "2026-08-05 00:50:59",
-        "cross_info": null
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 200,
+          "high_scope": "Mana",
+          "high_price": 370,
+          "profit_gil": 151,
+          "profit_rate": 75.5
+        }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "5491_NONE",
         "item_id": 5491,
@@ -578,8 +585,8 @@
         "velocity": 196.57143,
         "min_price": 111,
         "avg_price": 234.8,
-        "hist_min": 111,
-        "hist_max": 111,
+        "hist_min": 1,
+        "hist_max": 268,
         "units_for_sale": 10317,
         "last_upload_time": "2026-08-05 02:33:51",
         "cross_info": {
@@ -608,7 +615,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "45973_NQ",
         "item_id": 45973,
@@ -617,14 +624,14 @@
         "velocity": 196.14285,
         "min_price": 270,
         "avg_price": 863.8,
-        "hist_min": 270,
-        "hist_max": 270,
+        "hist_min": 1784,
+        "hist_max": 1790,
         "units_for_sale": 3506,
         "last_upload_time": "2026-08-04 19:28:26",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "36080_HQ",
         "item_id": 36080,
@@ -633,14 +640,14 @@
         "velocity": 192.85715,
         "min_price": 485,
         "avg_price": 489.9,
-        "hist_min": 485,
-        "hist_max": 485,
+        "hist_min": 390,
+        "hist_max": 399,
         "units_for_sale": 23984,
         "last_upload_time": "2026-08-05 02:39:15",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "36097_NONE",
         "item_id": 36097,
@@ -649,14 +656,14 @@
         "velocity": 185.28572,
         "min_price": 7,
         "avg_price": 29.6,
-        "hist_min": 7,
-        "hist_max": 7,
-        "units_for_sale": 3,
+        "hist_min": 47,
+        "hist_max": 100,
+        "units_for_sale": 13094,
         "last_upload_time": "2026-08-05 01:52:48",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "32003_NONE",
         "item_id": 32003,
@@ -665,9 +672,9 @@
         "velocity": 182.28572,
         "min_price": 400,
         "avg_price": 756.0,
-        "hist_min": 400,
-        "hist_max": 400,
-        "units_for_sale": 15,
+        "hist_min": 500,
+        "hist_max": 880,
+        "units_for_sale": 8504,
         "last_upload_time": "2026-08-04 14:40:34",
         "cross_info": null
       },
@@ -688,7 +695,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "45987_NQ",
         "item_id": 45987,
@@ -697,9 +704,9 @@
         "velocity": 166.57143,
         "min_price": 2398,
         "avg_price": 2535.2,
-        "hist_min": 2398,
-        "hist_max": 2398,
-        "units_for_sale": 5039,
+        "hist_min": 2000,
+        "hist_max": 2999,
+        "units_for_sale": 5031,
         "last_upload_time": "2026-08-05 02:01:54",
         "cross_info": null
       },
@@ -727,7 +734,46 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Elemental",
+        "item_key": "19932_NONE",
+        "item_id": 19932,
+        "item_name": "パーシモン原木",
+        "quality": "NONE",
+        "velocity": 163.0,
+        "min_price": 15,
+        "avg_price": 81.1,
+        "hist_min": 10,
+        "hist_max": 70,
+        "units_for_sale": 7563,
+        "last_upload_time": "2026-08-04 17:32:41",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Elemental",
+        "item_key": "7894_NONE",
+        "item_id": 7894,
+        "item_name": "クリーエの野菜",
+        "quality": "NONE",
+        "velocity": 161.85715,
+        "min_price": 490,
+        "avg_price": 721.0,
+        "hist_min": 200,
+        "hist_max": 1000,
+        "units_for_sale": 2297,
+        "last_upload_time": "2026-08-05 02:59:30",
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 100,
+          "high_scope": "Elemental",
+          "high_price": 490,
+          "profit_gil": 365,
+          "profit_rate": 365.0
+        }
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "31963_NONE",
         "item_id": 31963,
@@ -736,8 +782,8 @@
         "velocity": 156.42857,
         "min_price": 1,
         "avg_price": 39.7,
-        "hist_min": 1,
-        "hist_max": 1,
+        "hist_min": 10,
+        "hist_max": 100,
         "units_for_sale": 10833,
         "last_upload_time": "2026-08-04 18:20:33",
         "cross_info": null
@@ -759,7 +805,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "45988_NQ",
         "item_id": 45988,
@@ -768,26 +814,33 @@
         "velocity": 153.42857,
         "min_price": 2500,
         "avg_price": 3012.1,
-        "hist_min": 2500,
+        "hist_min": 2400,
         "hist_max": 2500,
         "units_for_sale": 5978,
         "last_upload_time": "2026-08-05 02:30:42",
-        "cross_info": null
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 2500,
+          "high_scope": "Mana",
+          "high_price": 3191,
+          "profit_gil": 531,
+          "profit_rate": 21.2
+        }
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "44039_NONE",
         "item_id": 44039,
         "item_name": "ウィンドパセリ",
         "quality": "NONE",
-        "velocity": 150.28572,
+        "velocity": 148.71428,
         "min_price": 45,
-        "avg_price": 84.7,
-        "hist_min": 45,
-        "hist_max": 45,
-        "units_for_sale": 10,
-        "last_upload_time": "2026-08-05 01:22:38",
+        "avg_price": 87.1,
+        "hist_min": 15,
+        "hist_max": 65,
+        "units_for_sale": 19203,
+        "last_upload_time": "2026-08-05 02:35:19",
         "cross_info": null
       },
       {
@@ -807,7 +860,23 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Elemental",
+        "item_key": "36175_NONE",
+        "item_id": 36175,
+        "item_name": "白目鉱",
+        "quality": "NONE",
+        "velocity": 141.42857,
+        "min_price": 80,
+        "avg_price": 175.6,
+        "hist_min": 150,
+        "hist_max": 180,
+        "units_for_sale": 9928,
+        "last_upload_time": "2026-08-04 22:14:16",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "43992_NONE",
         "item_id": 43992,
@@ -816,8 +885,8 @@
         "velocity": 141.14285,
         "min_price": 10,
         "avg_price": 167.4,
-        "hist_min": 10,
-        "hist_max": 10,
+        "hist_min": 110,
+        "hist_max": 154,
         "units_for_sale": 9753,
         "last_upload_time": "2026-08-04 21:02:34",
         "cross_info": null
@@ -839,7 +908,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "12636_NONE",
         "item_id": 12636,
@@ -848,8 +917,8 @@
         "velocity": 128.85715,
         "min_price": 394,
         "avg_price": 440.1,
-        "hist_min": 394,
-        "hist_max": 394,
+        "hist_min": 219,
+        "hist_max": 797,
         "units_for_sale": 5242,
         "last_upload_time": "2026-08-04 22:21:44",
         "cross_info": {
@@ -894,7 +963,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "5342_NONE",
         "item_id": 5342,
@@ -903,14 +972,14 @@
         "velocity": 122.42857,
         "min_price": 91,
         "avg_price": 170.4,
-        "hist_min": 91,
-        "hist_max": 91,
-        "units_for_sale": 1974,
+        "hist_min": 90,
+        "hist_max": 300,
+        "units_for_sale": 1901,
         "last_upload_time": "2026-08-04 19:55:45",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "44053_NONE",
         "item_id": 44053,
@@ -919,9 +988,9 @@
         "velocity": 115.71429,
         "min_price": 5,
         "avg_price": 110.7,
-        "hist_min": 5,
-        "hist_max": 5,
-        "units_for_sale": 9644,
+        "hist_min": 144,
+        "hist_max": 150,
+        "units_for_sale": 11196,
         "last_upload_time": "2026-08-05 01:57:59",
         "cross_info": null
       },
@@ -942,7 +1011,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "41772_NONE",
         "item_id": 41772,
@@ -951,30 +1020,14 @@
         "velocity": 112.42857,
         "min_price": 200,
         "avg_price": 443.1,
-        "hist_min": 200,
-        "hist_max": 200,
+        "hist_min": 480,
+        "hist_max": 817,
         "units_for_sale": 6533,
         "last_upload_time": "2026-08-05 01:48:47",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
-        "scope": "Elemental",
-        "item_key": "50415_NQ",
-        "item_id": 50415,
-        "item_name": "アウクセシア・エネルギーパック",
-        "quality": "NQ",
-        "velocity": 111.42857,
-        "min_price": 9000,
-        "avg_price": 9143.6,
-        "hist_min": 9000,
-        "hist_max": 9000,
-        "units_for_sale": 7278,
-        "last_upload_time": "2026-08-05 02:38:39",
-        "cross_info": null
-      },
-      {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "49243_HQ",
         "item_id": 49243,
@@ -983,14 +1036,14 @@
         "velocity": 110.0,
         "min_price": 3100,
         "avg_price": 4446.2,
-        "hist_min": 3100,
-        "hist_max": 3100,
+        "hist_min": 2000,
+        "hist_max": 6890,
         "units_for_sale": 3175,
         "last_upload_time": "2026-08-04 21:22:19",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "43984_NONE",
         "item_id": 43984,
@@ -999,26 +1052,26 @@
         "velocity": 109.85714,
         "min_price": 68,
         "avg_price": 148.4,
-        "hist_min": 68,
-        "hist_max": 68,
-        "units_for_sale": 12928,
+        "hist_min": 100,
+        "hist_max": 145,
+        "units_for_sale": 13876,
         "last_upload_time": "2026-08-05 02:22:59",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "41764_NONE",
         "item_id": 41764,
         "item_name": "器識のハイオメガマテリジャ",
         "quality": "NONE",
-        "velocity": 108.85714,
+        "velocity": 108.71429,
         "min_price": 217,
-        "avg_price": 1194.4,
-        "hist_min": 217,
-        "hist_max": 217,
-        "units_for_sale": 17298,
-        "last_upload_time": "2026-08-05 00:22:57",
+        "avg_price": 1174.7,
+        "hist_min": 200,
+        "hist_max": 1199,
+        "units_for_sale": 15157,
+        "last_upload_time": "2026-08-05 02:54:46",
         "cross_info": {
           "cheap_scope": "Elemental",
           "cheap_price": 217,
@@ -1029,19 +1082,35 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Elemental",
+        "item_key": "7010_NONE",
+        "item_id": 7010,
+        "item_name": "大理石",
+        "quality": "NONE",
+        "velocity": 108.42857,
+        "min_price": 75,
+        "avg_price": 133.3,
+        "hist_min": 79,
+        "hist_max": 88,
+        "units_for_sale": 7645,
+        "last_upload_time": "2026-08-04 19:58:18",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "44028_NONE",
         "item_id": 44028,
         "item_name": "帯雷繭",
         "quality": "NONE",
-        "velocity": 106.28571,
+        "velocity": 107.57143,
         "min_price": 89,
-        "avg_price": 188.7,
-        "hist_min": 89,
-        "hist_max": 89,
-        "units_for_sale": 7056,
-        "last_upload_time": "2026-08-05 00:37:24",
+        "avg_price": 187.5,
+        "hist_min": 102,
+        "hist_max": 176,
+        "units_for_sale": 6982,
+        "last_upload_time": "2026-08-05 02:49:03",
         "cross_info": null
       },
       {
@@ -1061,7 +1130,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "46188_NONE",
         "item_id": 46188,
@@ -1070,9 +1139,9 @@
         "velocity": 105.28571,
         "min_price": 2000,
         "avg_price": 2985.1,
-        "hist_min": 2000,
+        "hist_min": 1000,
         "hist_max": 2000,
-        "units_for_sale": 4883,
+        "units_for_sale": 5453,
         "last_upload_time": "2026-08-05 02:10:31",
         "cross_info": null
       },
@@ -1093,6 +1162,22 @@
         "cross_info": null
       },
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Elemental",
+        "item_key": "50415_NQ",
+        "item_id": 50415,
+        "item_name": "アウクセシア・エネルギーパック",
+        "quality": "NQ",
+        "velocity": 103.71429,
+        "min_price": 9000,
+        "avg_price": 9162.8,
+        "hist_min": 9298,
+        "hist_max": 9299,
+        "units_for_sale": 7137,
+        "last_upload_time": "2026-08-05 02:59:31",
+        "cross_info": null
+      },
+      {
         "timestamp": "2026-08-05 11:17:50",
         "scope": "Elemental",
         "item_key": "44041_NONE",
@@ -1109,65 +1194,65 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "44071_NONE",
         "item_id": 44071,
         "item_name": "タンブルクラブの枯草",
         "quality": "NONE",
-        "velocity": 97.57143,
-        "min_price": 250,
-        "avg_price": 294.2,
-        "hist_min": 250,
-        "hist_max": 250,
-        "units_for_sale": 18846,
-        "last_upload_time": "2026-08-04 23:23:56",
+        "velocity": 97.14286,
+        "min_price": 245,
+        "avg_price": 295.3,
+        "hist_min": 200,
+        "hist_max": 320,
+        "units_for_sale": 19233,
+        "last_upload_time": "2026-08-05 02:46:47",
         "cross_info": {
           "cheap_scope": "Gaia",
           "cheap_price": 193,
           "high_scope": "Elemental",
-          "high_price": 250,
-          "profit_gil": 44,
-          "profit_rate": 22.8
+          "high_price": 245,
+          "profit_gil": 39,
+          "profit_rate": 20.2
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "44848_NQ",
         "item_id": 44848,
         "item_name": "高濃縮錬金薬",
         "quality": "NQ",
-        "velocity": 93.85714,
+        "velocity": 92.71429,
         "min_price": 1499,
-        "avg_price": 2002.8,
-        "hist_min": 1499,
-        "hist_max": 1499,
-        "units_for_sale": 4812,
-        "last_upload_time": "2026-08-05 02:38:19",
+        "avg_price": 1992.7,
+        "hist_min": 1832,
+        "hist_max": 2300,
+        "units_for_sale": 4810,
+        "last_upload_time": "2026-08-05 02:52:58",
         "cross_info": {
           "cheap_scope": "Gaia",
           "cheap_price": 1200,
-          "high_scope": "Elemental",
-          "high_price": 1499,
-          "profit_gil": 224,
-          "profit_rate": 18.7
+          "high_scope": "Mana",
+          "high_price": 1605,
+          "profit_gil": 324,
+          "profit_rate": 27.0
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "41766_NONE",
         "item_id": 41766,
         "item_name": "魔匠のハイオメガマテリジャ",
         "quality": "NONE",
         "velocity": 91.14286,
-        "min_price": 5188,
+        "min_price": 5186,
         "avg_price": 5247.2,
-        "hist_min": 5188,
-        "hist_max": 5188,
-        "units_for_sale": 2919,
-        "last_upload_time": "2026-08-05 02:02:25",
+        "hist_min": 5189,
+        "hist_max": 6979,
+        "units_for_sale": 3372,
+        "last_upload_time": "2026-08-05 02:54:18",
         "cross_info": null
       },
       {
@@ -1217,7 +1302,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "27838_HQ",
         "item_id": 27838,
@@ -1226,14 +1311,14 @@
         "velocity": 86.57143,
         "min_price": 250,
         "avg_price": 564.9,
-        "hist_min": 250,
-        "hist_max": 250,
-        "units_for_sale": 8351,
+        "hist_min": 300,
+        "hist_max": 1000,
+        "units_for_sale": 11679,
         "last_upload_time": "2026-08-04 17:46:07",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "44139_NONE",
         "item_id": 44139,
@@ -1242,9 +1327,9 @@
         "velocity": 85.42857,
         "min_price": 90,
         "avg_price": 353.5,
-        "hist_min": 90,
-        "hist_max": 90,
-        "units_for_sale": 8241,
+        "hist_min": 135,
+        "hist_max": 195,
+        "units_for_sale": 10041,
         "last_upload_time": "2026-08-04 21:52:14",
         "cross_info": null
       },
@@ -1281,7 +1366,23 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Elemental",
+        "item_key": "44072_NONE",
+        "item_id": 44072,
+        "item_name": "アックスビークの翼膜",
+        "quality": "NONE",
+        "velocity": 72.14286,
+        "min_price": 25,
+        "avg_price": 100.8,
+        "hist_min": 45,
+        "hist_max": 75,
+        "units_for_sale": 5592,
+        "last_upload_time": "2026-08-05 02:46:17",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "27838_NQ",
         "item_id": 27838,
@@ -1290,14 +1391,14 @@
         "velocity": 71.14286,
         "min_price": 100,
         "avg_price": 564.9,
-        "hist_min": 100,
-        "hist_max": 100,
-        "units_for_sale": 8351,
+        "hist_min": 300,
+        "hist_max": 1000,
+        "units_for_sale": 11679,
         "last_upload_time": "2026-08-04 17:46:07",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "12519_NQ",
         "item_id": 12519,
@@ -1306,9 +1407,9 @@
         "velocity": 70.42857,
         "min_price": 1600,
         "avg_price": 2142.2,
-        "hist_min": 1600,
-        "hist_max": 1600,
-        "units_for_sale": 2220,
+        "hist_min": 1800,
+        "hist_max": 2798,
+        "units_for_sale": 2257,
         "last_upload_time": "2026-08-05 02:34:09",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -1336,7 +1437,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "41758_NONE",
         "item_id": 41758,
@@ -1344,15 +1445,22 @@
         "quality": "NONE",
         "velocity": 66.71429,
         "min_price": 187,
-        "avg_price": 258.2,
-        "hist_min": 187,
-        "hist_max": 187,
-        "units_for_sale": 8339,
-        "last_upload_time": "2026-08-05 02:31:28",
-        "cross_info": null
+        "avg_price": 256.0,
+        "hist_min": 199,
+        "hist_max": 230,
+        "units_for_sale": 7476,
+        "last_upload_time": "2026-08-05 02:51:53",
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 187,
+          "high_scope": "Mana",
+          "high_price": 217,
+          "profit_gil": 19,
+          "profit_rate": 10.2
+        }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "46253_HQ",
         "item_id": 46253,
@@ -1361,14 +1469,21 @@
         "velocity": 66.0,
         "min_price": 3480,
         "avg_price": 4821.9,
-        "hist_min": 3480,
-        "hist_max": 3480,
+        "hist_min": 1000,
+        "hist_max": 5700,
         "units_for_sale": 9520,
         "last_upload_time": "2026-08-05 02:10:42",
-        "cross_info": null
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 3480,
+          "high_scope": "Meteor",
+          "high_price": 4130,
+          "profit_gil": 443,
+          "profit_rate": 12.7
+        }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "41759_NONE",
         "item_id": 41759,
@@ -1377,9 +1492,9 @@
         "velocity": 65.85714,
         "min_price": 150,
         "avg_price": 226.6,
-        "hist_min": 150,
-        "hist_max": 150,
-        "units_for_sale": 15945,
+        "hist_min": 195,
+        "hist_max": 200,
+        "units_for_sale": 12086,
         "last_upload_time": "2026-08-05 02:39:16",
         "cross_info": null
       },
@@ -1400,7 +1515,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "52255_NQ",
         "item_id": 52255,
@@ -1409,14 +1524,30 @@
         "velocity": 64.71429,
         "min_price": 3200,
         "avg_price": 4644.6,
-        "hist_min": 3200,
-        "hist_max": 3200,
-        "units_for_sale": 7488,
-        "last_upload_time": "2026-08-05 02:14:25",
+        "hist_min": 2999,
+        "hist_max": 3964,
+        "units_for_sale": 10236,
+        "last_upload_time": "2026-08-05 02:56:16",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Elemental",
+        "item_key": "12901_NONE",
+        "item_id": 12901,
+        "item_name": "アバラシア岩塩",
+        "quality": "NONE",
+        "velocity": 62.57143,
+        "min_price": 102,
+        "avg_price": 342.2,
+        "hist_min": 130,
+        "hist_max": 300,
+        "units_for_sale": 1575,
+        "last_upload_time": "2026-08-04 16:55:17",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "20001_NONE",
         "item_id": 20001,
@@ -1425,14 +1556,30 @@
         "velocity": 60.142857,
         "min_price": 5,
         "avg_price": 204.0,
-        "hist_min": 5,
-        "hist_max": 5,
-        "units_for_sale": 2281,
+        "hist_min": 331,
+        "hist_max": 420,
+        "units_for_sale": 3082,
         "last_upload_time": "2026-08-04 22:21:59",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Elemental",
+        "item_key": "5349_NONE",
+        "item_id": 5349,
+        "item_name": "スナーブルのタテガミ",
+        "quality": "NONE",
+        "velocity": 59.857143,
+        "min_price": 100,
+        "avg_price": 459.4,
+        "hist_min": 200,
+        "hist_max": 615,
+        "units_for_sale": 10801,
+        "last_upload_time": "2026-08-05 02:25:59",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "44138_NONE",
         "item_id": 44138,
@@ -1441,9 +1588,9 @@
         "velocity": 55.857143,
         "min_price": 49,
         "avg_price": 218.2,
-        "hist_min": 49,
-        "hist_max": 49,
-        "units_for_sale": 8169,
+        "hist_min": 149,
+        "hist_max": 480,
+        "units_for_sale": 9431,
         "last_upload_time": "2026-08-05 01:25:48",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -1455,7 +1602,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "5383_NONE",
         "item_id": 5383,
@@ -1464,9 +1611,9 @@
         "velocity": 55.857143,
         "min_price": 5,
         "avg_price": 120.0,
-        "hist_min": 5,
-        "hist_max": 5,
-        "units_for_sale": 1,
+        "hist_min": 79,
+        "hist_max": 198,
+        "units_for_sale": 2885,
         "last_upload_time": "2026-08-03 16:19:19",
         "cross_info": null
       },
@@ -1503,7 +1650,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "5365_NONE",
         "item_id": 5365,
@@ -1512,14 +1659,14 @@
         "velocity": 54.57143,
         "min_price": 300,
         "avg_price": 710.8,
-        "hist_min": 300,
-        "hist_max": 300,
+        "hist_min": 1000,
+        "hist_max": 3000,
         "units_for_sale": 2182,
         "last_upload_time": "2026-08-04 21:44:36",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "36203_NONE",
         "item_id": 36203,
@@ -1528,33 +1675,33 @@
         "velocity": 54.42857,
         "min_price": 150,
         "avg_price": 548.0,
-        "hist_min": 150,
-        "hist_max": 150,
+        "hist_min": 85,
+        "hist_max": 700,
         "units_for_sale": 1471,
         "last_upload_time": "2026-08-04 23:18:23",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "41775_NONE",
         "item_id": 41775,
         "item_name": "達識のハイアルテマテリジャ",
         "quality": "NONE",
         "velocity": 54.285713,
-        "min_price": 630,
+        "min_price": 629,
         "avg_price": 986.2,
-        "hist_min": 630,
-        "hist_max": 630,
-        "units_for_sale": 17372,
-        "last_upload_time": "2026-08-05 02:34:41",
+        "hist_min": 648,
+        "hist_max": 1000,
+        "units_for_sale": 20261,
+        "last_upload_time": "2026-08-05 02:54:48",
         "cross_info": {
           "cheap_scope": "Elemental",
-          "cheap_price": 630,
+          "cheap_price": 629,
           "high_scope": "Meteor",
           "high_price": 979,
-          "profit_gil": 300,
-          "profit_rate": 47.6
+          "profit_gil": 301,
+          "profit_rate": 47.9
         }
       },
       {
@@ -1574,7 +1721,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "5276_NQ",
         "item_id": 5276,
@@ -1583,24 +1730,24 @@
         "velocity": 52.857143,
         "min_price": 5,
         "avg_price": 152.7,
-        "hist_min": 5,
-        "hist_max": 5,
+        "hist_min": 99,
+        "hist_max": 140,
         "units_for_sale": 2530,
         "last_upload_time": "2026-08-04 21:08:37",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Elemental",
         "item_key": "5359_NONE",
         "item_id": 5359,
         "item_name": "チョコボの羽根",
         "quality": "NONE",
-        "velocity": 50.57143,
+        "velocity": 50.285713,
         "min_price": 70,
         "avg_price": 369.9,
-        "hist_min": 70,
-        "hist_max": 70,
+        "hist_min": 160,
+        "hist_max": 1000,
         "units_for_sale": 1402,
         "last_upload_time": "2026-08-05 00:07:16",
         "cross_info": null
@@ -1624,7 +1771,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "5530_NONE",
         "item_id": 5530,
@@ -1633,10 +1780,10 @@
         "velocity": 523.4286,
         "min_price": 125,
         "avg_price": 149.8,
-        "hist_min": 125,
-        "hist_max": 125,
-        "units_for_sale": 75825,
-        "last_upload_time": "2026-08-05 01:38:43",
+        "hist_min": 130,
+        "hist_max": 134,
+        "units_for_sale": 95118,
+        "last_upload_time": "2026-08-05 03:00:00",
         "cross_info": null
       },
       {
@@ -1656,7 +1803,23 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Gaia",
+        "item_key": "5116_NONE",
+        "item_id": 5116,
+        "item_name": "鏡鉄鉱",
+        "quality": "NONE",
+        "velocity": 487.57144,
+        "min_price": 160,
+        "avg_price": 174.2,
+        "hist_min": 158,
+        "hist_max": 180,
+        "units_for_sale": 59183,
+        "last_upload_time": "2026-08-04 23:59:10",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "49234_HQ",
         "item_id": 49234,
@@ -1665,8 +1828,8 @@
         "velocity": 470.0,
         "min_price": 2200,
         "avg_price": 3241.8,
-        "hist_min": 2200,
-        "hist_max": 2200,
+        "hist_min": 2899,
+        "hist_max": 3700,
         "units_for_sale": 25364,
         "last_upload_time": "2026-08-05 01:43:52",
         "cross_info": {
@@ -1679,7 +1842,30 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Gaia",
+        "item_key": "49235_HQ",
+        "item_id": 49235,
+        "item_name": "活力の心酔薬G4",
+        "quality": "HQ",
+        "velocity": 430.85715,
+        "min_price": 3000,
+        "avg_price": 3853.1,
+        "hist_min": 2500,
+        "hist_max": 5000,
+        "units_for_sale": 17913,
+        "last_upload_time": "2026-08-05 01:40:17",
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 2500,
+          "high_scope": "Gaia",
+          "high_price": 3000,
+          "profit_gil": 350,
+          "profit_rate": 14.0
+        }
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "12531_NONE",
         "item_id": 12531,
@@ -1688,9 +1874,9 @@
         "velocity": 422.14285,
         "min_price": 111,
         "avg_price": 200.8,
-        "hist_min": 111,
-        "hist_max": 111,
-        "units_for_sale": 37737,
+        "hist_min": 165,
+        "hist_max": 221,
+        "units_for_sale": 35812,
         "last_upload_time": "2026-08-04 17:31:42",
         "cross_info": null
       },
@@ -1775,6 +1961,22 @@
         "cross_info": null
       },
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Gaia",
+        "item_key": "31989_NONE",
+        "item_id": 31989,
+        "item_name": "第四次復興用の最高級鉱砂【検】",
+        "quality": "NONE",
+        "velocity": 351.57144,
+        "min_price": 67,
+        "avg_price": 87.6,
+        "hist_min": 70,
+        "hist_max": 78,
+        "units_for_sale": 20387,
+        "last_upload_time": "2026-08-04 11:41:23",
+        "cross_info": null
+      },
+      {
         "timestamp": "2026-08-05 11:10:43",
         "scope": "Gaia",
         "item_key": "47701_NONE",
@@ -1791,7 +1993,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "49209_NONE",
         "item_id": 49209,
@@ -1800,8 +2002,8 @@
         "velocity": 338.2857,
         "min_price": 200,
         "avg_price": 341.4,
-        "hist_min": 200,
-        "hist_max": 200,
+        "hist_min": 100,
+        "hist_max": 220,
         "units_for_sale": 25632,
         "last_upload_time": "2026-08-04 17:17:16",
         "cross_info": null
@@ -1830,7 +2032,23 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Gaia",
+        "item_key": "7621_NONE",
+        "item_id": 7621,
+        "item_name": "ミラージュディスペラー",
+        "quality": "NONE",
+        "velocity": 327.14285,
+        "min_price": 139,
+        "avg_price": 211.7,
+        "hist_min": 220,
+        "hist_max": 239,
+        "units_for_sale": 15110,
+        "last_upload_time": "2026-08-04 16:22:00",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "47701_HQ",
         "item_id": 47701,
@@ -1839,8 +2057,8 @@
         "velocity": 315.7143,
         "min_price": 210,
         "avg_price": 404.6,
-        "hist_min": 210,
-        "hist_max": 210,
+        "hist_min": 100,
+        "hist_max": 470,
         "units_for_sale": 13553,
         "last_upload_time": "2026-08-04 22:24:30",
         "cross_info": null
@@ -1862,18 +2080,18 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "52254_NONE",
         "item_id": 52254,
-        "item_name": "カララント:ノーマルカラー",
+        "item_name": "カード:ノーマカー",
         "quality": "NONE",
         "velocity": 282.14285,
         "min_price": 103,
         "avg_price": 233.8,
-        "hist_min": 103,
-        "hist_max": 103,
-        "units_for_sale": 1,
+        "hist_min": 190,
+        "hist_max": 300,
+        "units_for_sale": 16755,
         "last_upload_time": "2026-08-05 01:37:44",
         "cross_info": null
       },
@@ -1894,7 +2112,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "45970_NQ",
         "item_id": 45970,
@@ -1903,9 +2121,9 @@
         "velocity": 277.42856,
         "min_price": 197,
         "avg_price": 493.6,
-        "hist_min": 197,
-        "hist_max": 197,
-        "units_for_sale": 10589,
+        "hist_min": 399,
+        "hist_max": 1005,
+        "units_for_sale": 11688,
         "last_upload_time": "2026-08-05 02:30:33",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -1940,6 +2158,22 @@
         }
       },
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Gaia",
+        "item_key": "12895_HQ",
+        "item_id": 12895,
+        "item_name": "発酵バター",
+        "quality": "HQ",
+        "velocity": 262.2857,
+        "min_price": 600,
+        "avg_price": 637.8,
+        "hist_min": 675,
+        "hist_max": 753,
+        "units_for_sale": 19222,
+        "last_upload_time": "2026-08-04 20:03:37",
+        "cross_info": null
+      },
+      {
         "timestamp": "2026-08-05 11:17:50",
         "scope": "Gaia",
         "item_key": "5059_NQ",
@@ -1963,7 +2197,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "49240_HQ",
         "item_id": 49240,
@@ -1973,8 +2207,8 @@
         "min_price": 2295,
         "avg_price": 3006.9,
         "hist_min": 2295,
-        "hist_max": 2295,
-        "units_for_sale": 32074,
+        "hist_max": 2900,
+        "units_for_sale": 31237,
         "last_upload_time": "2026-08-05 01:02:04",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -2009,7 +2243,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "49207_NONE",
         "item_id": 49207,
@@ -2018,9 +2252,9 @@
         "velocity": 226.85715,
         "min_price": 60,
         "avg_price": 107.5,
-        "hist_min": 60,
-        "hist_max": 60,
-        "units_for_sale": 28392,
+        "hist_min": 82,
+        "hist_max": 89,
+        "units_for_sale": 24992,
         "last_upload_time": "2026-08-04 12:09:02",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -2032,19 +2266,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "49244_HQ",
         "item_id": 49244,
         "item_name": "ポポトポタージュ",
         "quality": "HQ",
         "velocity": 210.42857,
-        "min_price": 2773,
+        "min_price": 2770,
         "avg_price": 3324.9,
-        "hist_min": 2773,
-        "hist_max": 2773,
-        "units_for_sale": 9672,
-        "last_upload_time": "2026-08-05 02:12:54",
+        "hist_min": 2933,
+        "hist_max": 4835,
+        "units_for_sale": 9526,
+        "last_upload_time": "2026-08-05 03:02:06",
         "cross_info": null
       },
       {
@@ -2087,7 +2321,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "45971_NQ",
         "item_id": 45971,
@@ -2096,9 +2330,9 @@
         "velocity": 208.28572,
         "min_price": 2000,
         "avg_price": 1229.6,
-        "hist_min": 2000,
-        "hist_max": 2000,
-        "units_for_sale": 738,
+        "hist_min": 1800,
+        "hist_max": 2005,
+        "units_for_sale": 587,
         "last_upload_time": "2026-08-04 15:53:52",
         "cross_info": null
       },
@@ -2119,7 +2353,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "49211_NQ",
         "item_id": 49211,
@@ -2128,9 +2362,9 @@
         "velocity": 202.0,
         "min_price": 389,
         "avg_price": 652.2,
-        "hist_min": 389,
-        "hist_max": 389,
-        "units_for_sale": 27444,
+        "hist_min": 500,
+        "hist_max": 1950,
+        "units_for_sale": 24906,
         "last_upload_time": "2026-08-05 02:06:07",
         "cross_info": null
       },
@@ -2151,7 +2385,23 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Gaia",
+        "item_key": "36194_NONE",
+        "item_id": 36194,
+        "item_name": "インテグラル原木",
+        "quality": "NONE",
+        "velocity": 176.71428,
+        "min_price": 50,
+        "avg_price": 169.2,
+        "hist_min": 109,
+        "hist_max": 292,
+        "units_for_sale": 8680,
+        "last_upload_time": "2026-08-05 02:12:46",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "45988_NQ",
         "item_id": 45988,
@@ -2160,14 +2410,21 @@
         "velocity": 171.14285,
         "min_price": 2500,
         "avg_price": 3191.9,
-        "hist_min": 2500,
-        "hist_max": 2500,
-        "units_for_sale": 6705,
+        "hist_min": 2400,
+        "hist_max": 7500,
+        "units_for_sale": 7054,
         "last_upload_time": "2026-08-05 02:29:41",
-        "cross_info": null
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 2500,
+          "high_scope": "Mana",
+          "high_price": 3191,
+          "profit_gil": 531,
+          "profit_rate": 21.2
+        }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "32004_NONE",
         "item_id": 32004,
@@ -2176,9 +2433,9 @@
         "velocity": 164.14285,
         "min_price": 600,
         "avg_price": 1050.2,
-        "hist_min": 600,
-        "hist_max": 600,
-        "units_for_sale": 14336,
+        "hist_min": 599,
+        "hist_max": 1200,
+        "units_for_sale": 11687,
         "last_upload_time": "2026-08-04 12:33:07",
         "cross_info": null
       },
@@ -2254,7 +2511,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "7023_NQ",
         "item_id": 7023,
@@ -2263,14 +2520,14 @@
         "velocity": 151.0,
         "min_price": 400,
         "avg_price": 1364.3,
-        "hist_min": 400,
-        "hist_max": 400,
+        "hist_min": 1400,
+        "hist_max": 1500,
         "units_for_sale": 9891,
         "last_upload_time": "2026-08-04 21:11:28",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "45987_NQ",
         "item_id": 45987,
@@ -2279,8 +2536,8 @@
         "velocity": 138.57143,
         "min_price": 2190,
         "avg_price": 2415.7,
-        "hist_min": 2190,
-        "hist_max": 2190,
+        "hist_min": 2250,
+        "hist_max": 3500,
         "units_for_sale": 8273,
         "last_upload_time": "2026-08-04 15:51:09",
         "cross_info": null
@@ -2302,7 +2559,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "44071_NONE",
         "item_id": 44071,
@@ -2311,17 +2568,17 @@
         "velocity": 125.0,
         "min_price": 193,
         "avg_price": 219.7,
-        "hist_min": 193,
-        "hist_max": 193,
-        "units_for_sale": 5,
+        "hist_min": 250,
+        "hist_max": 305,
+        "units_for_sale": 14187,
         "last_upload_time": "2026-08-05 00:19:34",
         "cross_info": {
           "cheap_scope": "Gaia",
           "cheap_price": 193,
           "high_scope": "Elemental",
-          "high_price": 250,
-          "profit_gil": 44,
-          "profit_rate": 22.8
+          "high_price": 245,
+          "profit_gil": 39,
+          "profit_rate": 20.2
         }
       },
       {
@@ -2451,7 +2708,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "41767_NONE",
         "item_id": 41767,
@@ -2460,8 +2717,8 @@
         "velocity": 108.28571,
         "min_price": 6000,
         "avg_price": 8294.0,
-        "hist_min": 6000,
-        "hist_max": 6000,
+        "hist_min": 6299,
+        "hist_max": 6600,
         "units_for_sale": 24589,
         "last_upload_time": "2026-08-05 01:57:29",
         "cross_info": {
@@ -2506,7 +2763,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "44138_NONE",
         "item_id": 44138,
@@ -2515,9 +2772,9 @@
         "velocity": 95.42857,
         "min_price": 30,
         "avg_price": 151.3,
-        "hist_min": 30,
-        "hist_max": 30,
-        "units_for_sale": 16046,
+        "hist_min": 78,
+        "hist_max": 482,
+        "units_for_sale": 8844,
         "last_upload_time": "2026-08-04 21:54:19",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -2600,6 +2857,22 @@
         "cross_info": null
       },
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Gaia",
+        "item_key": "36205_NONE",
+        "item_id": 36205,
+        "item_name": "紅モコ草",
+        "quality": "NONE",
+        "velocity": 78.85714,
+        "min_price": 2,
+        "avg_price": 81.2,
+        "hist_min": 40,
+        "hist_max": 69,
+        "units_for_sale": 10760,
+        "last_upload_time": "2026-08-04 21:24:46",
+        "cross_info": null
+      },
+      {
         "timestamp": "2026-08-05 11:17:50",
         "scope": "Gaia",
         "item_key": "12636_NONE",
@@ -2639,7 +2912,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "41758_NONE",
         "item_id": 41758,
@@ -2648,11 +2921,18 @@
         "velocity": 73.71429,
         "min_price": 190,
         "avg_price": 528.7,
-        "hist_min": 190,
-        "hist_max": 190,
+        "hist_min": 210,
+        "hist_max": 230,
         "units_for_sale": 8844,
         "last_upload_time": "2026-08-05 01:37:19",
-        "cross_info": null
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 187,
+          "high_scope": "Mana",
+          "high_price": 217,
+          "profit_gil": 19,
+          "profit_rate": 10.2
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -2671,7 +2951,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "43980_NONE",
         "item_id": 43980,
@@ -2680,8 +2960,8 @@
         "velocity": 71.57143,
         "min_price": 50,
         "avg_price": 191.3,
-        "hist_min": 50,
-        "hist_max": 50,
+        "hist_min": 200,
+        "hist_max": 397,
         "units_for_sale": 11077,
         "last_upload_time": "2026-08-04 14:28:23",
         "cross_info": null
@@ -2703,7 +2983,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "44848_NQ",
         "item_id": 44848,
@@ -2712,17 +2992,17 @@
         "velocity": 67.85714,
         "min_price": 1200,
         "avg_price": 2162.8,
-        "hist_min": 1200,
-        "hist_max": 1200,
-        "units_for_sale": 6698,
+        "hist_min": 1400,
+        "hist_max": 1980,
+        "units_for_sale": 5800,
         "last_upload_time": "2026-08-05 02:36:46",
         "cross_info": {
           "cheap_scope": "Gaia",
           "cheap_price": 1200,
-          "high_scope": "Elemental",
-          "high_price": 1499,
-          "profit_gil": 224,
-          "profit_rate": 18.7
+          "high_scope": "Mana",
+          "high_price": 1605,
+          "profit_gil": 324,
+          "profit_rate": 27.0
         }
       },
       {
@@ -2749,7 +3029,23 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Gaia",
+        "item_key": "12895_NQ",
+        "item_id": 12895,
+        "item_name": "発酵バター",
+        "quality": "NQ",
+        "velocity": 62.57143,
+        "min_price": 570,
+        "avg_price": 637.8,
+        "hist_min": 675,
+        "hist_max": 753,
+        "units_for_sale": 19222,
+        "last_upload_time": "2026-08-04 20:03:37",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "12568_NONE",
         "item_id": 12568,
@@ -2758,14 +3054,14 @@
         "velocity": 62.142857,
         "min_price": 195,
         "avg_price": 308.4,
-        "hist_min": 195,
-        "hist_max": 195,
+        "hist_min": 148,
+        "hist_max": 200,
         "units_for_sale": 4982,
         "last_upload_time": "2026-08-04 03:52:20",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "4842_NONE",
         "item_id": 4842,
@@ -2774,9 +3070,9 @@
         "velocity": 58.714287,
         "min_price": 8,
         "avg_price": 92.8,
-        "hist_min": 8,
-        "hist_max": 8,
-        "units_for_sale": 5962,
+        "hist_min": 10,
+        "hist_max": 50,
+        "units_for_sale": 5755,
         "last_upload_time": "2026-08-04 09:23:30",
         "cross_info": null
       },
@@ -2804,7 +3100,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:10:43",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Gaia",
         "item_key": "27693_NQ",
         "item_id": 27693,
@@ -2813,9 +3109,9 @@
         "velocity": 55.857143,
         "min_price": 550,
         "avg_price": 948.4,
-        "hist_min": 550,
-        "hist_max": 550,
-        "units_for_sale": 1,
+        "hist_min": 900,
+        "hist_max": 1300,
+        "units_for_sale": 3624,
         "last_upload_time": "2026-08-04 11:41:27",
         "cross_info": null
       },
@@ -2843,6 +3139,38 @@
         }
       },
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Gaia",
+        "item_key": "12634_NONE",
+        "item_id": 12634,
+        "item_name": "アストラルフラワー",
+        "quality": "NONE",
+        "velocity": 51.57143,
+        "min_price": 100,
+        "avg_price": 251.2,
+        "hist_min": 100,
+        "hist_max": 100,
+        "units_for_sale": 2856,
+        "last_upload_time": "2026-08-04 22:04:29",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Gaia",
+        "item_key": "5526_NONE",
+        "item_id": 5526,
+        "item_name": "グレネードの灰",
+        "quality": "NONE",
+        "velocity": 50.714287,
+        "min_price": 41,
+        "avg_price": 159.3,
+        "hist_min": 60,
+        "hist_max": 150,
+        "units_for_sale": 6821,
+        "last_upload_time": "2026-08-04 17:13:35",
+        "cross_info": null
+      },
+      {
         "timestamp": "2026-08-05 11:17:50",
         "scope": "Gaia",
         "item_key": "23181_NONE",
@@ -2861,6 +3189,22 @@
     ],
     "Mana": [
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "8_NONE",
+        "item_id": 8,
+        "item_name": "ファイアクリスタル",
+        "quality": "NONE",
+        "velocity": 15254.286,
+        "min_price": 40,
+        "avg_price": 43.9,
+        "hist_min": 34,
+        "hist_max": 40,
+        "units_for_sale": 6852016,
+        "last_upload_time": "2026-08-05 02:10:24",
+        "cross_info": null
+      },
+      {
         "timestamp": "2026-08-05 10:57:01",
         "scope": "Mana",
         "item_key": "12_NQ",
@@ -2877,7 +3221,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "12_NONE",
         "item_id": 12,
@@ -2886,14 +3230,14 @@
         "velocity": 11405.571,
         "min_price": 39,
         "avg_price": 44.9,
-        "hist_min": 39,
-        "hist_max": 39,
-        "units_for_sale": 9475242,
-        "last_upload_time": "2026-08-05 02:15:46",
+        "hist_min": 43,
+        "hist_max": 55,
+        "units_for_sale": 5429290,
+        "last_upload_time": "2026-08-05 02:53:48",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "14_NONE",
         "item_id": 14,
@@ -2902,9 +3246,9 @@
         "velocity": 10093.0,
         "min_price": 13,
         "avg_price": 22.2,
-        "hist_min": 13,
-        "hist_max": 13,
-        "units_for_sale": 5036800,
+        "hist_min": 20,
+        "hist_max": 45,
+        "units_for_sale": 6278918,
         "last_upload_time": "2026-08-04 22:51:50",
         "cross_info": null
       },
@@ -2925,7 +3269,23 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "7_NONE",
+        "item_id": 7,
+        "item_name": "ウォーターシャード",
+        "quality": "NONE",
+        "velocity": 6514.857,
+        "min_price": 42,
+        "avg_price": 47.4,
+        "hist_min": 47,
+        "hist_max": 53,
+        "units_for_sale": 634671,
+        "last_upload_time": "2026-08-04 17:33:20",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "2_NONE",
         "item_id": 2,
@@ -2934,9 +3294,9 @@
         "velocity": 6058.2856,
         "min_price": 41,
         "avg_price": 48.4,
-        "hist_min": 41,
-        "hist_max": 41,
-        "units_for_sale": 2634324,
+        "hist_min": 49,
+        "hist_max": 49,
+        "units_for_sale": 1467743,
         "last_upload_time": "2026-08-05 01:17:32",
         "cross_info": null
       },
@@ -2955,12 +3315,12 @@
         "units_for_sale": 99,
         "last_upload_time": "2026-08-04 23:47:40",
         "cross_info": {
-          "cheap_scope": "Mana",
-          "cheap_price": 124,
+          "cheap_scope": "Meteor",
+          "cheap_price": 120,
           "high_scope": "Elemental",
           "high_price": 140,
-          "profit_gil": 9,
-          "profit_rate": 7.3
+          "profit_gil": 13,
+          "profit_rate": 10.8
         }
       },
       {
@@ -2980,7 +3340,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "5532_NONE",
         "item_id": 5532,
@@ -2989,9 +3349,9 @@
         "velocity": 499.14285,
         "min_price": 160,
         "avg_price": 179.3,
-        "hist_min": 160,
-        "hist_max": 160,
-        "units_for_sale": 85956,
+        "hist_min": 99,
+        "hist_max": 161,
+        "units_for_sale": 76161,
         "last_upload_time": "2026-08-05 01:22:53",
         "cross_info": null
       },
@@ -3067,7 +3427,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "49235_HQ",
         "item_id": 49235,
@@ -3076,14 +3436,21 @@
         "velocity": 463.2857,
         "min_price": 2600,
         "avg_price": 2991.9,
-        "hist_min": 2600,
-        "hist_max": 2600,
+        "hist_min": 2495,
+        "hist_max": 3000,
         "units_for_sale": 47714,
         "last_upload_time": "2026-08-05 02:37:47",
-        "cross_info": null
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 2500,
+          "high_scope": "Gaia",
+          "high_price": 3000,
+          "profit_gil": 350,
+          "profit_rate": 14.0
+        }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "49238_HQ",
         "item_id": 49238,
@@ -3092,9 +3459,9 @@
         "velocity": 460.2857,
         "min_price": 2725,
         "avg_price": 3418.2,
-        "hist_min": 2725,
-        "hist_max": 2725,
-        "units_for_sale": 59339,
+        "hist_min": 3640,
+        "hist_max": 4700,
+        "units_for_sale": 52269,
         "last_upload_time": "2026-08-05 02:15:46",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -3152,7 +3519,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "49240_HQ",
         "item_id": 49240,
@@ -3162,9 +3529,9 @@
         "min_price": 2384,
         "avg_price": 2861.4,
         "hist_min": 2384,
-        "hist_max": 2384,
-        "units_for_sale": 40560,
-        "last_upload_time": "2026-08-05 02:16:14",
+        "hist_max": 3000,
+        "units_for_sale": 44648,
+        "last_upload_time": "2026-08-05 02:52:44",
         "cross_info": {
           "cheap_scope": "Elemental",
           "cheap_price": 2048,
@@ -3175,7 +3542,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:02:37",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "49207_NONE",
         "item_id": 49207,
@@ -3184,9 +3551,9 @@
         "velocity": 346.42856,
         "min_price": 89,
         "avg_price": 97.3,
-        "hist_min": 89,
-        "hist_max": 89,
-        "units_for_sale": 99,
+        "hist_min": 80,
+        "hist_max": 100,
+        "units_for_sale": 26477,
         "last_upload_time": "2026-08-05 00:28:54",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -3198,7 +3565,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "43981_NONE",
         "item_id": 43981,
@@ -3208,8 +3575,8 @@
         "min_price": 100,
         "avg_price": 195.9,
         "hist_min": 100,
-        "hist_max": 100,
-        "units_for_sale": 30505,
+        "hist_max": 130,
+        "units_for_sale": 30882,
         "last_upload_time": "2026-08-04 18:23:27",
         "cross_info": null
       },
@@ -3230,19 +3597,19 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "49210_NQ",
         "item_id": 49210,
         "item_name": "ロウヤシの葉",
         "quality": "NQ",
-        "velocity": 296.2857,
+        "velocity": 309.42856,
         "min_price": 299,
-        "avg_price": 612.7,
-        "hist_min": 299,
-        "hist_max": 299,
-        "units_for_sale": 30418,
-        "last_upload_time": "2026-08-05 00:30:28",
+        "avg_price": 610.0,
+        "hist_min": 255,
+        "hist_max": 960,
+        "units_for_sale": 33988,
+        "last_upload_time": "2026-08-05 03:04:14",
         "cross_info": null
       },
       {
@@ -3262,7 +3629,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "49212_NQ",
         "item_id": 49212,
@@ -3272,13 +3639,29 @@
         "min_price": 100,
         "avg_price": 157.1,
         "hist_min": 100,
-        "hist_max": 100,
+        "hist_max": 400,
         "units_for_sale": 28219,
         "last_upload_time": "2026-08-05 00:30:22",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "49228_NQ",
+        "item_id": 49228,
+        "item_name": "コンチャ",
+        "quality": "NQ",
+        "velocity": 284.42856,
+        "min_price": 2505,
+        "avg_price": 2685.6,
+        "hist_min": 2794,
+        "hist_max": 2795,
+        "units_for_sale": 28102,
+        "last_upload_time": "2026-08-05 02:47:07",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "45972_NONE",
         "item_id": 45972,
@@ -3287,8 +3670,8 @@
         "velocity": 270.42856,
         "min_price": 1100,
         "avg_price": 2040.2,
-        "hist_min": 1100,
-        "hist_max": 1100,
+        "hist_min": 1400,
+        "hist_max": 2300,
         "units_for_sale": 6010,
         "last_upload_time": "2026-08-04 19:01:03",
         "cross_info": null
@@ -3326,23 +3709,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
-        "scope": "Mana",
-        "item_key": "49228_NQ",
-        "item_id": 49228,
-        "item_name": "コンチャ",
-        "quality": "NQ",
-        "velocity": 269.2857,
-        "min_price": 2505,
-        "avg_price": 2673.9,
-        "hist_min": 2505,
-        "hist_max": 2505,
-        "units_for_sale": 28221,
-        "last_upload_time": "2026-08-05 02:13:59",
-        "cross_info": null
-      },
-      {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "7596_NONE",
         "item_id": 7596,
@@ -3351,9 +3718,9 @@
         "velocity": 249.14285,
         "min_price": 1094,
         "avg_price": 1423.8,
-        "hist_min": 1094,
-        "hist_max": 1094,
-        "units_for_sale": 13188,
+        "hist_min": 1100,
+        "hist_max": 1460,
+        "units_for_sale": 11898,
         "last_upload_time": "2026-08-05 00:07:26",
         "cross_info": null
       },
@@ -3390,7 +3757,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "43978_NONE",
         "item_id": 43978,
@@ -3399,14 +3766,30 @@
         "velocity": 246.0,
         "min_price": 107,
         "avg_price": 184.8,
-        "hist_min": 107,
-        "hist_max": 107,
-        "units_for_sale": 39370,
+        "hist_min": 100,
+        "hist_max": 173,
+        "units_for_sale": 20580,
         "last_upload_time": "2026-08-04 15:57:59",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "49208_NONE",
+        "item_id": 49208,
+        "item_name": "ウカマウピメント",
+        "quality": "NONE",
+        "velocity": 240.14285,
+        "min_price": 342,
+        "avg_price": 526.0,
+        "hist_min": 350,
+        "hist_max": 597,
+        "units_for_sale": 31923,
+        "last_upload_time": "2026-08-05 03:04:03",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "44042_NONE",
         "item_id": 44042,
@@ -3415,26 +3798,10 @@
         "velocity": 227.85715,
         "min_price": 135,
         "avg_price": 231.5,
-        "hist_min": 135,
-        "hist_max": 135,
+        "hist_min": 150,
+        "hist_max": 180,
         "units_for_sale": 20154,
         "last_upload_time": "2026-08-05 02:10:17",
-        "cross_info": null
-      },
-      {
-        "timestamp": "2026-08-05 11:40:49",
-        "scope": "Mana",
-        "item_key": "49208_NONE",
-        "item_id": 49208,
-        "item_name": "ウカマウピメント",
-        "quality": "NONE",
-        "velocity": 215.57143,
-        "min_price": 342,
-        "avg_price": 533.1,
-        "hist_min": 342,
-        "hist_max": 342,
-        "units_for_sale": 32815,
-        "last_upload_time": "2026-08-05 00:11:25",
         "cross_info": null
       },
       {
@@ -3470,7 +3837,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "36174_NONE",
         "item_id": 36174,
@@ -3480,8 +3847,8 @@
         "min_price": 40,
         "avg_price": 91.6,
         "hist_min": 40,
-        "hist_max": 40,
-        "units_for_sale": 13638,
+        "hist_max": 80,
+        "units_for_sale": 7598,
         "last_upload_time": "2026-08-04 23:32:29",
         "cross_info": null
       },
@@ -3502,7 +3869,39 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "31975_NONE",
+        "item_id": 31975,
+        "item_name": "第四次復興用の上級茶葉【検】",
+        "quality": "NONE",
+        "velocity": 197.0,
+        "min_price": 100,
+        "avg_price": 205.0,
+        "hist_min": 90,
+        "hist_max": 150,
+        "units_for_sale": 3576,
+        "last_upload_time": "2026-08-03 23:43:31",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "27698_NONE",
+        "item_id": 27698,
+        "item_name": "霊青岩",
+        "quality": "NONE",
+        "velocity": 187.71428,
+        "min_price": 73,
+        "avg_price": 117.7,
+        "hist_min": 50,
+        "hist_max": 300,
+        "units_for_sale": 6661,
+        "last_upload_time": "2026-08-05 01:15:03",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "45985_NQ",
         "item_id": 45985,
@@ -3511,11 +3910,66 @@
         "velocity": 184.57143,
         "min_price": 2000,
         "avg_price": 2625.9,
-        "hist_min": 2000,
-        "hist_max": 2000,
+        "hist_min": 2690,
+        "hist_max": 3000,
         "units_for_sale": 11928,
         "last_upload_time": "2026-08-05 02:19:34",
         "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "41777_NONE",
+        "item_id": 41777,
+        "item_name": "器識のハイアルテマテリジャ",
+        "quality": "NONE",
+        "velocity": 179.71428,
+        "min_price": 317,
+        "avg_price": 990.9,
+        "hist_min": 985,
+        "hist_max": 990,
+        "units_for_sale": 18022,
+        "last_upload_time": "2026-08-05 02:45:14",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "44017_NONE",
+        "item_id": 44017,
+        "item_name": "アカシア原木",
+        "quality": "NONE",
+        "velocity": 178.85715,
+        "min_price": 40,
+        "avg_price": 125.3,
+        "hist_min": 50,
+        "hist_max": 150,
+        "units_for_sale": 7842,
+        "last_upload_time": "2026-08-04 16:18:27",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "5395_NONE",
+        "item_id": 5395,
+        "item_name": "スプルース原木",
+        "quality": "NONE",
+        "velocity": 178.85715,
+        "min_price": 370,
+        "avg_price": 520.6,
+        "hist_min": 430,
+        "hist_max": 900,
+        "units_for_sale": 22273,
+        "last_upload_time": "2026-08-04 21:22:05",
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 200,
+          "high_scope": "Mana",
+          "high_price": 370,
+          "profit_gil": 151,
+          "profit_rate": 75.5
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -3550,7 +4004,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "50414_NONE",
         "item_id": 50414,
@@ -3559,9 +4013,9 @@
         "velocity": 178.0,
         "min_price": 18000,
         "avg_price": 22009.5,
-        "hist_min": 18000,
-        "hist_max": 18000,
-        "units_for_sale": 12571,
+        "hist_min": 20000,
+        "hist_max": 20000,
+        "units_for_sale": 8338,
         "last_upload_time": "2026-08-05 02:43:37",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -3605,7 +4059,23 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "27687_NONE",
+        "item_id": 27687,
+        "item_name": "リグナムバイタ原木",
+        "quality": "NONE",
+        "velocity": 173.14285,
+        "min_price": 2,
+        "avg_price": 151.5,
+        "hist_min": 122,
+        "hist_max": 132,
+        "units_for_sale": 11590,
+        "last_upload_time": "2026-08-04 23:53:13",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "19872_NONE",
         "item_id": 19872,
@@ -3614,8 +4084,8 @@
         "velocity": 160.57143,
         "min_price": 200,
         "avg_price": 350.5,
-        "hist_min": 200,
-        "hist_max": 200,
+        "hist_min": 180,
+        "hist_max": 400,
         "units_for_sale": 9782,
         "last_upload_time": "2026-08-05 01:03:05",
         "cross_info": null
@@ -3653,7 +4123,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "36190_NONE",
         "item_id": 36190,
@@ -3662,14 +4132,37 @@
         "velocity": 159.57143,
         "min_price": 22,
         "avg_price": 98.5,
-        "hist_min": 22,
-        "hist_max": 22,
+        "hist_min": 60,
+        "hist_max": 100,
         "units_for_sale": 10066,
         "last_upload_time": "2026-08-04 17:43:48",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "45988_NQ",
+        "item_id": 45988,
+        "item_name": "ディアトリマの毛",
+        "quality": "NQ",
+        "velocity": 153.71428,
+        "min_price": 3191,
+        "avg_price": 3327.4,
+        "hist_min": 3780,
+        "hist_max": 4000,
+        "units_for_sale": 4698,
+        "last_upload_time": "2026-08-05 02:20:04",
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 2500,
+          "high_scope": "Mana",
+          "high_price": 3191,
+          "profit_gil": 531,
+          "profit_rate": 21.2
+        }
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "12538_NONE",
         "item_id": 12538,
@@ -3678,14 +4171,14 @@
         "velocity": 152.14285,
         "min_price": 150,
         "avg_price": 328.4,
-        "hist_min": 150,
-        "hist_max": 150,
+        "hist_min": 199,
+        "hist_max": 1000,
         "units_for_sale": 9033,
         "last_upload_time": "2026-08-05 00:13:06",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:10:43",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "41764_NONE",
         "item_id": 41764,
@@ -3694,10 +4187,10 @@
         "velocity": 147.85715,
         "min_price": 887,
         "avg_price": 1763.0,
-        "hist_min": 887,
-        "hist_max": 887,
-        "units_for_sale": 20,
-        "last_upload_time": "2026-08-05 01:26:52",
+        "hist_min": 417,
+        "hist_max": 1016,
+        "units_for_sale": 15301,
+        "last_upload_time": "2026-08-05 02:32:09",
         "cross_info": {
           "cheap_scope": "Elemental",
           "cheap_price": 217,
@@ -3740,7 +4233,23 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "46188_NONE",
+        "item_id": 46188,
+        "item_name": "シデリティス茶葉",
+        "quality": "NONE",
+        "velocity": 142.71428,
+        "min_price": 1908,
+        "avg_price": 2954.3,
+        "hist_min": 2500,
+        "hist_max": 4444,
+        "units_for_sale": 8589,
+        "last_upload_time": "2026-08-04 21:48:51",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "19951_NONE",
         "item_id": 19951,
@@ -3749,9 +4258,9 @@
         "velocity": 142.42857,
         "min_price": 160,
         "avg_price": 507.0,
-        "hist_min": 160,
-        "hist_max": 160,
-        "units_for_sale": 8131,
+        "hist_min": 140,
+        "hist_max": 180,
+        "units_for_sale": 8748,
         "last_upload_time": "2026-08-04 18:23:53",
         "cross_info": null
       },
@@ -3772,6 +4281,38 @@
         "cross_info": null
       },
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "49224_NQ",
+        "item_id": 49224,
+        "item_name": "被膜形成材",
+        "quality": "NQ",
+        "velocity": 137.14285,
+        "min_price": 3300,
+        "avg_price": 4190.6,
+        "hist_min": 3100,
+        "hist_max": 3200,
+        "units_for_sale": 7257,
+        "last_upload_time": "2026-08-05 03:03:46",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "43996_NONE",
+        "item_id": 43996,
+        "item_name": "黒鉄鉱",
+        "quality": "NONE",
+        "velocity": 131.57143,
+        "min_price": 30,
+        "avg_price": 144.2,
+        "hist_min": 65,
+        "hist_max": 250,
+        "units_for_sale": 12463,
+        "last_upload_time": "2026-08-05 01:50:39",
+        "cross_info": null
+      },
+      {
         "timestamp": "2026-08-05 11:10:43",
         "scope": "Mana",
         "item_key": "7017_NQ",
@@ -3788,7 +4329,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "5069_NQ",
         "item_id": 5069,
@@ -3797,10 +4338,10 @@
         "velocity": 131.28572,
         "min_price": 4,
         "avg_price": 10.9,
-        "hist_min": 4,
-        "hist_max": 4,
+        "hist_min": 1,
+        "hist_max": 34,
         "units_for_sale": 16407,
-        "last_upload_time": "2026-08-05 01:21:18",
+        "last_upload_time": "2026-08-05 02:49:33",
         "cross_info": null
       },
       {
@@ -3820,7 +4361,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "41760_NONE",
         "item_id": 41760,
@@ -3829,9 +4370,9 @@
         "velocity": 125.14286,
         "min_price": 210,
         "avg_price": 330.9,
-        "hist_min": 210,
-        "hist_max": 210,
-        "units_for_sale": 6386,
+        "hist_min": 256,
+        "hist_max": 297,
+        "units_for_sale": 5314,
         "last_upload_time": "2026-08-05 02:47:10",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -3859,7 +4400,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "45986_NQ",
         "item_id": 45986,
@@ -3868,8 +4409,8 @@
         "velocity": 121.71429,
         "min_price": 1991,
         "avg_price": 2513.5,
-        "hist_min": 1991,
-        "hist_max": 1991,
+        "hist_min": 2400,
+        "hist_max": 2980,
         "units_for_sale": 4579,
         "last_upload_time": "2026-08-05 02:07:50",
         "cross_info": null
@@ -3891,7 +4432,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "49225_NQ",
         "item_id": 49225,
@@ -3900,14 +4441,30 @@
         "velocity": 120.28571,
         "min_price": 2555,
         "avg_price": 4063.3,
-        "hist_min": 2555,
-        "hist_max": 2555,
-        "units_for_sale": 8636,
-        "last_upload_time": "2026-08-05 02:07:54",
+        "hist_min": 3815,
+        "hist_max": 4000,
+        "units_for_sale": 8753,
+        "last_upload_time": "2026-08-05 03:03:53",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "43995_NONE",
+        "item_id": 43995,
+        "item_name": "ゴールドチタン鉱",
+        "quality": "NONE",
+        "velocity": 98.71429,
+        "min_price": 3,
+        "avg_price": 45.4,
+        "hist_min": 8,
+        "hist_max": 200,
+        "units_for_sale": 14851,
+        "last_upload_time": "2026-08-04 22:34:16",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "5296_NONE",
         "item_id": 5296,
@@ -3916,9 +4473,9 @@
         "velocity": 97.14286,
         "min_price": 131,
         "avg_price": 289.8,
-        "hist_min": 131,
-        "hist_max": 131,
-        "units_for_sale": 7548,
+        "hist_min": 222,
+        "hist_max": 300,
+        "units_for_sale": 7196,
         "last_upload_time": "2026-08-05 00:13:54",
         "cross_info": null
       },
@@ -3962,7 +4519,23 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "49223_NQ",
+        "item_id": 49223,
+        "item_name": "絶縁塗料",
+        "quality": "NQ",
+        "velocity": 88.28571,
+        "min_price": 1800,
+        "avg_price": 2759.0,
+        "hist_min": 2200,
+        "hist_max": 2300,
+        "units_for_sale": 5051,
+        "last_upload_time": "2026-08-04 20:25:48",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "5067_HQ",
         "item_id": 5067,
@@ -3971,14 +4544,14 @@
         "velocity": 85.28571,
         "min_price": 90,
         "avg_price": 274.7,
-        "hist_min": 90,
-        "hist_max": 90,
+        "hist_min": 143,
+        "hist_max": 483,
         "units_for_sale": 21516,
         "last_upload_time": "2026-08-05 00:10:47",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "44067_NONE",
         "item_id": 44067,
@@ -3987,14 +4560,14 @@
         "velocity": 79.28571,
         "min_price": 10,
         "avg_price": 424.8,
-        "hist_min": 10,
-        "hist_max": 10,
+        "hist_min": 900,
+        "hist_max": 4000,
         "units_for_sale": 5653,
         "last_upload_time": "2026-08-05 01:50:47",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "5069_HQ",
         "item_id": 5069,
@@ -4004,9 +4577,9 @@
         "min_price": 1,
         "avg_price": 10.9,
         "hist_min": 1,
-        "hist_max": 1,
+        "hist_max": 34,
         "units_for_sale": 16407,
-        "last_upload_time": "2026-08-05 01:21:18",
+        "last_upload_time": "2026-08-05 02:49:33",
         "cross_info": null
       },
       {
@@ -4026,7 +4599,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "12628_NONE",
         "item_id": 12628,
@@ -4035,14 +4608,14 @@
         "velocity": 77.57143,
         "min_price": 200,
         "avg_price": 717.6,
-        "hist_min": 200,
-        "hist_max": 200,
-        "units_for_sale": 2743,
+        "hist_min": 480,
+        "hist_max": 791,
+        "units_for_sale": 3028,
         "last_upload_time": "2026-08-04 18:05:59",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "44057_NONE",
         "item_id": 44057,
@@ -4051,8 +4624,8 @@
         "velocity": 71.42857,
         "min_price": 8,
         "avg_price": 71.1,
-        "hist_min": 8,
-        "hist_max": 8,
+        "hist_min": 50,
+        "hist_max": 90,
         "units_for_sale": 12180,
         "last_upload_time": "2026-08-04 23:52:29",
         "cross_info": {
@@ -4081,7 +4654,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "33933_NONE",
         "item_id": 33933,
@@ -4090,8 +4663,8 @@
         "velocity": 69.14286,
         "min_price": 217,
         "avg_price": 657.2,
-        "hist_min": 217,
-        "hist_max": 217,
+        "hist_min": 299,
+        "hist_max": 780,
         "units_for_sale": 3489,
         "last_upload_time": "2026-08-04 14:57:21",
         "cross_info": null
@@ -4113,7 +4686,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "38956_HQ",
         "item_id": 38956,
@@ -4122,8 +4695,8 @@
         "velocity": 69.0,
         "min_price": 70,
         "avg_price": 139.6,
-        "hist_min": 70,
-        "hist_max": 70,
+        "hist_min": 149,
+        "hist_max": 700,
         "units_for_sale": 11010,
         "last_upload_time": "2026-08-04 16:51:26",
         "cross_info": null
@@ -4161,7 +4734,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "7606_NQ",
         "item_id": 7606,
@@ -4170,14 +4743,14 @@
         "velocity": 66.28571,
         "min_price": 3333,
         "avg_price": 5454.7,
-        "hist_min": 3333,
-        "hist_max": 3333,
+        "hist_min": 4200,
+        "hist_max": 13000,
         "units_for_sale": 3517,
         "last_upload_time": "2026-08-04 18:27:59",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "5067_NQ",
         "item_id": 5067,
@@ -4186,8 +4759,8 @@
         "velocity": 65.71429,
         "min_price": 90,
         "avg_price": 274.7,
-        "hist_min": 90,
-        "hist_max": 90,
+        "hist_min": 143,
+        "hist_max": 483,
         "units_for_sale": 21516,
         "last_upload_time": "2026-08-05 00:10:47",
         "cross_info": {
@@ -4200,7 +4773,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "12519_NQ",
         "item_id": 12519,
@@ -4209,9 +4782,9 @@
         "velocity": 63.714287,
         "min_price": 1000,
         "avg_price": 2284.7,
-        "hist_min": 1000,
-        "hist_max": 1000,
-        "units_for_sale": 8190,
+        "hist_min": 2400,
+        "hist_max": 3000,
+        "units_for_sale": 6762,
         "last_upload_time": "2026-08-04 17:07:12",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -4223,7 +4796,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "14957_NONE",
         "item_id": 14957,
@@ -4232,9 +4805,9 @@
         "velocity": 63.714287,
         "min_price": 150,
         "avg_price": 234.8,
-        "hist_min": 150,
-        "hist_max": 150,
-        "units_for_sale": 13,
+        "hist_min": 1,
+        "hist_max": 300,
+        "units_for_sale": 1516,
         "last_upload_time": "2026-08-04 10:38:37",
         "cross_info": null
       },
@@ -4255,7 +4828,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "4570_NONE",
         "item_id": 4570,
@@ -4264,8 +4837,8 @@
         "velocity": 61.42857,
         "min_price": 1000,
         "avg_price": 102872.2,
-        "hist_min": 1000,
-        "hist_max": 1000,
+        "hist_min": 1001,
+        "hist_max": 2000,
         "units_for_sale": 3516,
         "last_upload_time": "2026-08-04 17:08:16",
         "cross_info": null
@@ -4319,6 +4892,52 @@
         "cross_info": null
       },
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "44848_NQ",
+        "item_id": 44848,
+        "item_name": "高濃縮錬金薬",
+        "quality": "NQ",
+        "velocity": 55.42857,
+        "min_price": 1605,
+        "avg_price": 2520.2,
+        "hist_min": 1800,
+        "hist_max": 1900,
+        "units_for_sale": 4022,
+        "last_upload_time": "2026-08-05 02:55:45",
+        "cross_info": {
+          "cheap_scope": "Gaia",
+          "cheap_price": 1200,
+          "high_scope": "Mana",
+          "high_price": 1605,
+          "profit_gil": 324,
+          "profit_rate": 27.0
+        }
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Mana",
+        "item_key": "41758_NONE",
+        "item_id": 41758,
+        "item_name": "天眼のハイオメガマテリジャ",
+        "quality": "NONE",
+        "velocity": 55.285713,
+        "min_price": 217,
+        "avg_price": 715.7,
+        "hist_min": 257,
+        "hist_max": 300,
+        "units_for_sale": 6226,
+        "last_upload_time": "2026-08-05 02:53:40",
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 187,
+          "high_scope": "Mana",
+          "high_price": 217,
+          "profit_gil": 19,
+          "profit_rate": 10.2
+        }
+      },
+      {
         "timestamp": "2026-08-05 11:17:50",
         "scope": "Mana",
         "item_key": "5059_NQ",
@@ -4358,7 +4977,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "52712_NQ",
         "item_id": 52712,
@@ -4367,14 +4986,14 @@
         "velocity": 52.57143,
         "min_price": 1,
         "avg_price": 55.9,
-        "hist_min": 1,
-        "hist_max": 1,
+        "hist_min": 40,
+        "hist_max": 99,
         "units_for_sale": 12669,
         "last_upload_time": "2026-08-03 04:19:45",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "41771_NONE",
         "item_id": 41771,
@@ -4383,10 +5002,10 @@
         "velocity": 52.42857,
         "min_price": 690,
         "avg_price": 1082.6,
-        "hist_min": 690,
-        "hist_max": 690,
-        "units_for_sale": 8247,
-        "last_upload_time": "2026-08-05 02:16:55",
+        "hist_min": 600,
+        "hist_max": 1500,
+        "units_for_sale": 10068,
+        "last_upload_time": "2026-08-05 02:53:51",
         "cross_info": {
           "cheap_scope": "Meteor",
           "cheap_price": 217,
@@ -4420,7 +5039,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "8143_NONE",
         "item_id": 8143,
@@ -4429,11 +5048,18 @@
         "velocity": 50.57143,
         "min_price": 500,
         "avg_price": 927.1,
-        "hist_min": 500,
-        "hist_max": 500,
-        "units_for_sale": 3169,
+        "hist_min": 800,
+        "hist_max": 990,
+        "units_for_sale": 3512,
         "last_upload_time": "2026-08-05 01:09:24",
-        "cross_info": null
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 500,
+          "high_scope": "Meteor",
+          "high_price": 900,
+          "profit_gil": 355,
+          "profit_rate": 71.0
+        }
       },
       {
         "timestamp": "2026-08-05 10:57:01",
@@ -4468,7 +5094,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Mana",
         "item_key": "27735_NONE",
         "item_id": 27735,
@@ -4477,8 +5103,8 @@
         "velocity": 50.0,
         "min_price": 100,
         "avg_price": 391.9,
-        "hist_min": 100,
-        "hist_max": 100,
+        "hist_min": 355,
+        "hist_max": 388,
         "units_for_sale": 2988,
         "last_upload_time": "2026-08-04 12:15:09",
         "cross_info": null
@@ -4502,7 +5128,7 @@
     ],
     "Meteor": [
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "16_NONE",
         "item_id": 16,
@@ -4511,14 +5137,14 @@
         "velocity": 18606.285,
         "min_price": 30,
         "avg_price": 58.6,
-        "hist_min": 30,
-        "hist_max": 30,
-        "units_for_sale": 3922183,
+        "hist_min": 50,
+        "hist_max": 80,
+        "units_for_sale": 2991949,
         "last_upload_time": "2026-08-04 18:05:01",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "4_NONE",
         "item_id": 4,
@@ -4527,14 +5153,14 @@
         "velocity": 8660.571,
         "min_price": 40,
         "avg_price": 46.0,
-        "hist_min": 40,
-        "hist_max": 40,
+        "hist_min": 41,
+        "hist_max": 48,
         "units_for_sale": 1468400,
         "last_upload_time": "2026-08-04 12:27:57",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "10373_NONE",
         "item_id": 10373,
@@ -4543,10 +5169,10 @@
         "velocity": 565.7143,
         "min_price": 1597,
         "avg_price": 1638.4,
-        "hist_min": 1597,
-        "hist_max": 1597,
-        "units_for_sale": 88367,
-        "last_upload_time": "2026-08-05 02:47:12",
+        "hist_min": 1620,
+        "hist_max": 1620,
+        "units_for_sale": 71680,
+        "last_upload_time": "2026-08-05 03:06:32",
         "cross_info": null
       },
       {
@@ -4580,6 +5206,29 @@
         "units_for_sale": 2,
         "last_upload_time": "2026-08-05 02:06:47",
         "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Meteor",
+        "item_key": "21800_NONE",
+        "item_id": 21800,
+        "item_name": "ミラージュプリズム",
+        "quality": "NONE",
+        "velocity": 502.2857,
+        "min_price": 120,
+        "avg_price": 159.8,
+        "hist_min": 160,
+        "hist_max": 400,
+        "units_for_sale": 58586,
+        "last_upload_time": "2026-08-05 02:12:27",
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 120,
+          "high_scope": "Elemental",
+          "high_price": 140,
+          "profit_gil": 13,
+          "profit_rate": 10.8
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -4706,7 +5355,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "14147_NONE",
         "item_id": 14147,
@@ -4715,8 +5364,8 @@
         "velocity": 436.57144,
         "min_price": 258,
         "avg_price": 311.3,
-        "hist_min": 258,
-        "hist_max": 258,
+        "hist_min": 300,
+        "hist_max": 308,
         "units_for_sale": 16504,
         "last_upload_time": "2026-08-04 09:24:13",
         "cross_info": null
@@ -4758,7 +5407,14 @@
         "hist_max": 2500,
         "units_for_sale": 20986,
         "last_upload_time": "2026-08-04 23:16:41",
-        "cross_info": null
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 2500,
+          "high_scope": "Gaia",
+          "high_price": 3000,
+          "profit_gil": 350,
+          "profit_rate": 14.0
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",
@@ -4777,7 +5433,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "43986_NONE",
         "item_id": 43986,
@@ -4786,9 +5442,9 @@
         "velocity": 368.42856,
         "min_price": 200,
         "avg_price": 256.9,
-        "hist_min": 200,
-        "hist_max": 200,
-        "units_for_sale": 12630,
+        "hist_min": 215,
+        "hist_max": 260,
+        "units_for_sale": 15747,
         "last_upload_time": "2026-08-04 22:00:53",
         "cross_info": null
       },
@@ -4809,7 +5465,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "47741_NQ",
         "item_id": 47741,
@@ -4818,14 +5474,14 @@
         "velocity": 363.7143,
         "min_price": 1800,
         "avg_price": 2611.9,
-        "hist_min": 1800,
-        "hist_max": 1800,
+        "hist_min": 2199,
+        "hist_max": 5500,
         "units_for_sale": 10250,
         "last_upload_time": "2026-08-04 21:15:32",
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "49240_HQ",
         "item_id": 49240,
@@ -4834,9 +5490,9 @@
         "velocity": 322.14285,
         "min_price": 2146,
         "avg_price": 2742.4,
-        "hist_min": 2146,
-        "hist_max": 2146,
-        "units_for_sale": 24029,
+        "hist_min": 2100,
+        "hist_max": 5000,
+        "units_for_sale": 29111,
         "last_upload_time": "2026-08-05 01:51:22",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -4887,7 +5543,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "49210_NQ",
         "item_id": 49210,
@@ -4896,9 +5552,9 @@
         "velocity": 314.7143,
         "min_price": 299,
         "avg_price": 638.9,
-        "hist_min": 299,
-        "hist_max": 299,
-        "units_for_sale": 25366,
+        "hist_min": 300,
+        "hist_max": 300,
+        "units_for_sale": 30942,
         "last_upload_time": "2026-08-05 01:51:49",
         "cross_info": null
       },
@@ -4935,7 +5591,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "49209_NONE",
         "item_id": 49209,
@@ -4944,9 +5600,9 @@
         "velocity": 284.14285,
         "min_price": 190,
         "avg_price": 316.7,
-        "hist_min": 190,
-        "hist_max": 190,
-        "units_for_sale": 27998,
+        "hist_min": 203,
+        "hist_max": 205,
+        "units_for_sale": 33004,
         "last_upload_time": "2026-08-04 15:52:54",
         "cross_info": null
       },
@@ -4967,7 +5623,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "5115_NONE",
         "item_id": 5115,
@@ -4976,9 +5632,9 @@
         "velocity": 263.0,
         "min_price": 150,
         "avg_price": 189.0,
-        "hist_min": 150,
-        "hist_max": 150,
-        "units_for_sale": 22387,
+        "hist_min": 157,
+        "hist_max": 220,
+        "units_for_sale": 19161,
         "last_upload_time": "2026-08-04 14:59:00",
         "cross_info": null
       },
@@ -5038,7 +5694,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "41775_NONE",
         "item_id": 41775,
@@ -5047,17 +5703,17 @@
         "velocity": 210.57143,
         "min_price": 979,
         "avg_price": 1484.8,
-        "hist_min": 979,
-        "hist_max": 979,
+        "hist_min": 1050,
+        "hist_max": 1050,
         "units_for_sale": 18815,
         "last_upload_time": "2026-08-04 19:40:15",
         "cross_info": {
           "cheap_scope": "Elemental",
-          "cheap_price": 630,
+          "cheap_price": 629,
           "high_scope": "Meteor",
           "high_price": 979,
-          "profit_gil": 300,
-          "profit_rate": 47.6
+          "profit_gil": 301,
+          "profit_rate": 47.9
         }
       },
       {
@@ -5100,6 +5756,22 @@
         "cross_info": null
       },
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Meteor",
+        "item_key": "36260_NONE",
+        "item_id": 36260,
+        "item_name": "ペタルダの鱗粉",
+        "quality": "NONE",
+        "velocity": 182.0,
+        "min_price": 150,
+        "avg_price": 282.8,
+        "hist_min": 205,
+        "hist_max": 400,
+        "units_for_sale": 28170,
+        "last_upload_time": "2026-08-04 17:00:45",
+        "cross_info": null
+      },
+      {
         "timestamp": "2026-08-05 11:17:50",
         "scope": "Meteor",
         "item_key": "9360_HQ",
@@ -5116,7 +5788,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:02:37",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "41764_NONE",
         "item_id": 41764,
@@ -5125,9 +5797,9 @@
         "velocity": 148.14285,
         "min_price": 770,
         "avg_price": 1619.5,
-        "hist_min": 770,
-        "hist_max": 770,
-        "units_for_sale": 1,
+        "hist_min": 750,
+        "hist_max": 900,
+        "units_for_sale": 15851,
         "last_upload_time": "2026-08-04 16:42:39",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -5155,19 +5827,19 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "50415_NQ",
         "item_id": 50415,
         "item_name": "アウクセシア・エネルギーパック",
         "quality": "NQ",
-        "velocity": 144.28572,
+        "velocity": 143.85715,
         "min_price": 8900,
-        "avg_price": 9105.1,
-        "hist_min": 8900,
-        "hist_max": 8900,
-        "units_for_sale": 5512,
-        "last_upload_time": "2026-08-04 19:03:26",
+        "avg_price": 9112.6,
+        "hist_min": 9000,
+        "hist_max": 10000,
+        "units_for_sale": 5408,
+        "last_upload_time": "2026-08-05 02:55:15",
         "cross_info": null
       },
       {
@@ -5203,6 +5875,22 @@
         "cross_info": null
       },
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Meteor",
+        "item_key": "41763_NONE",
+        "item_id": 41763,
+        "item_name": "博識のハイオメガマテリジャ",
+        "quality": "NONE",
+        "velocity": 138.71428,
+        "min_price": 900,
+        "avg_price": 1806.4,
+        "hist_min": 800,
+        "hist_max": 1000,
+        "units_for_sale": 18059,
+        "last_upload_time": "2026-08-05 03:08:17",
+        "cross_info": null
+      },
+      {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Meteor",
         "item_key": "15649_NONE",
@@ -5235,7 +5923,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "44016_NONE",
         "item_id": 44016,
@@ -5244,9 +5932,9 @@
         "velocity": 119.42857,
         "min_price": 92,
         "avg_price": 172.8,
-        "hist_min": 92,
-        "hist_max": 92,
-        "units_for_sale": 7535,
+        "hist_min": 95,
+        "hist_max": 202,
+        "units_for_sale": 8385,
         "last_upload_time": "2026-08-04 12:41:40",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -5290,7 +5978,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "50414_NONE",
         "item_id": 50414,
@@ -5299,8 +5987,8 @@
         "velocity": 114.85714,
         "min_price": 20000,
         "avg_price": 23522.6,
-        "hist_min": 20000,
-        "hist_max": 20000,
+        "hist_min": 18000,
+        "hist_max": 19000,
         "units_for_sale": 7193,
         "last_upload_time": "2026-08-04 23:56:55",
         "cross_info": {
@@ -5329,7 +6017,30 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Meteor",
+        "item_key": "7894_NONE",
+        "item_id": 7894,
+        "item_name": "クリーエの野菜",
+        "quality": "NONE",
+        "velocity": 112.42857,
+        "min_price": 100,
+        "avg_price": 447.8,
+        "hist_min": 300,
+        "hist_max": 980,
+        "units_for_sale": 3861,
+        "last_upload_time": "2026-08-04 23:50:10",
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 100,
+          "high_scope": "Elemental",
+          "high_price": 490,
+          "profit_gil": 365,
+          "profit_rate": 365.0
+        }
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "36098_NONE",
         "item_id": 36098,
@@ -5338,8 +6049,8 @@
         "velocity": 111.14286,
         "min_price": 117,
         "avg_price": 316.1,
-        "hist_min": 117,
-        "hist_max": 117,
+        "hist_min": 188,
+        "hist_max": 200,
         "units_for_sale": 7406,
         "last_upload_time": "2026-08-04 10:05:42",
         "cross_info": null
@@ -5409,7 +6120,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "41767_NONE",
         "item_id": 41767,
@@ -5418,8 +6129,8 @@
         "velocity": 103.14286,
         "min_price": 5799,
         "avg_price": 7611.1,
-        "hist_min": 5799,
-        "hist_max": 5799,
+        "hist_min": 6000,
+        "hist_max": 6000,
         "units_for_sale": 9128,
         "last_upload_time": "2026-08-04 23:30:19",
         "cross_info": {
@@ -5471,6 +6182,45 @@
         }
       },
       {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Meteor",
+        "item_key": "44055_NONE",
+        "item_id": 44055,
+        "item_name": "ブラーシャの粗皮",
+        "quality": "NONE",
+        "velocity": 98.28571,
+        "min_price": 5,
+        "avg_price": 31.9,
+        "hist_min": 5,
+        "hist_max": 30,
+        "units_for_sale": 9884,
+        "last_upload_time": "2026-08-05 03:02:32",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Meteor",
+        "item_key": "46253_HQ",
+        "item_id": 46253,
+        "item_name": "アリペブレ",
+        "quality": "HQ",
+        "velocity": 98.14286,
+        "min_price": 4130,
+        "avg_price": 4778.6,
+        "hist_min": 4440,
+        "hist_max": 5699,
+        "units_for_sale": 7640,
+        "last_upload_time": "2026-08-04 20:13:00",
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 3480,
+          "high_scope": "Meteor",
+          "high_price": 4130,
+          "profit_gil": 443,
+          "profit_rate": 12.7
+        }
+      },
+      {
         "timestamp": "2026-08-05 11:02:37",
         "scope": "Meteor",
         "item_key": "5525_NONE",
@@ -5503,7 +6253,7 @@
         "cross_info": null
       },
       {
-        "timestamp": "2026-08-05 11:40:49",
+        "timestamp": "2026-08-05 11:59:32",
         "scope": "Meteor",
         "item_key": "7766_NONE",
         "item_id": 7766,
@@ -5512,9 +6262,9 @@
         "velocity": 78.85714,
         "min_price": 1500,
         "avg_price": 2108.1,
-        "hist_min": 1500,
-        "hist_max": 1500,
-        "units_for_sale": 4995,
+        "hist_min": 1950,
+        "hist_max": 2200,
+        "units_for_sale": 4416,
         "last_upload_time": "2026-08-04 12:08:02",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -5659,6 +6409,45 @@
         "units_for_sale": 1,
         "last_upload_time": "2026-08-04 18:11:56",
         "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Meteor",
+        "item_key": "31968_NONE",
+        "item_id": 31968,
+        "item_name": "第四次復興用の中級赤銅鉱【検】",
+        "quality": "NONE",
+        "velocity": 59.57143,
+        "min_price": 40,
+        "avg_price": 200.1,
+        "hist_min": 191,
+        "hist_max": 199,
+        "units_for_sale": 3636,
+        "last_upload_time": "2026-08-04 00:48:36",
+        "cross_info": null
+      },
+      {
+        "timestamp": "2026-08-05 11:59:32",
+        "scope": "Meteor",
+        "item_key": "8143_NONE",
+        "item_id": 8143,
+        "item_name": "白光のデミマテリラ",
+        "quality": "NONE",
+        "velocity": 55.42857,
+        "min_price": 900,
+        "avg_price": 886.9,
+        "hist_min": 700,
+        "hist_max": 900,
+        "units_for_sale": 2922,
+        "last_upload_time": "2026-08-05 01:04:27",
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 500,
+          "high_scope": "Meteor",
+          "high_price": 900,
+          "profit_gil": 355,
+          "profit_rate": 71.0
+        }
       },
       {
         "timestamp": "2026-08-05 11:17:50",

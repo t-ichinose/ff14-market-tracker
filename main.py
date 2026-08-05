@@ -67,13 +67,28 @@ def init_db(db_path="data/market_data.db"):
         quality TEXT,
         daily_sale_velocity REAL,
         min_price INTEGER,
-        max_price INTEGER DEFAULT 0,
         avg_price REAL,
+        hist_min INTEGER DEFAULT 0,
+        hist_max INTEGER DEFAULT 0,
         units_for_sale INTEGER,
         listings_count INTEGER,
         last_upload_time TEXT
     )
     """)
+    
+    # hist_min, hist_max カラムの自動追加
+    try:
+        cursor.execute("ALTER TABLE market_logs ADD COLUMN hist_min INTEGER DEFAULT 0")
+    except Exception:
+        pass
+    try:
+        cursor.execute("ALTER TABLE market_logs ADD COLUMN hist_max INTEGER DEFAULT 0")
+    except Exception:
+        pass
+
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON market_logs(timestamp)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_scope_key ON market_logs(scope, item_key)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_pool_active ON items_pool(scope, is_active)")
     
     conn.commit()
     return conn
@@ -130,7 +145,7 @@ def export_web_json(conn, output_path="docs/data.json"):
     for scope in JP_DATACENTERS:
         cursor.execute("""
         SELECT ml.timestamp, ml.scope, ml.item_key, ml.item_id, ml.item_name, ml.quality,
-               ml.daily_sale_velocity, ml.min_price, ml.max_price, ml.avg_price,
+               ml.daily_sale_velocity, ml.min_price, ml.avg_price, ml.hist_min, ml.hist_max,
                ml.units_for_sale, ml.last_upload_time
         FROM market_logs ml
         INNER JOIN (
@@ -146,6 +161,10 @@ def export_web_json(conn, output_path="docs/data.json"):
         rows = cursor.fetchall()
         items = []
         for r in rows:
+            min_p = r[7]
+            h_min = r[9] if (r[9] and r[9] > 0) else min_p
+            h_max = r[10] if (r[10] and r[10] >= h_min) else h_min
+
             item_obj = {
                 "timestamp": r[0],
                 "scope": r[1],
@@ -154,11 +173,12 @@ def export_web_json(conn, output_path="docs/data.json"):
                 "item_name": clean_name(r[4]),
                 "quality": r[5],
                 "velocity": r[6],
-                "min_price": r[7],
-                "max_price": r[8],
-                "avg_price": r[9],
-                "units_for_sale": r[10],
-                "last_upload_time": r[11]
+                "min_price": min_p,            # 出品最安値
+                "avg_price": r[8],             # API公式取引平均単価
+                "hist_min": h_min,             # 直近取引の最低価格
+                "hist_max": h_max,             # 直近取引の最高価格
+                "units_for_sale": r[11],
+                "last_upload_time": r[12]
             }
             items.append(item_obj)
             
@@ -278,40 +298,41 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
             last_upload_dt = datetime.fromtimestamp(last_upload_ms / 1000, tz=timezone.utc)
             last_upload_str = last_upload_dt.strftime("%Y-%m-%d %H:%M:%S")
 
+        avg_price = round(data.get("averagePrice", 0), 1)
         units_for_sale = data.get("unitsForSale", 0)
 
-        # 直近取引履歴 (recentHistory) からの最低取引額、最高取引額、平均取引額を正確に算出
+        # 直近取引履歴 recentHistory から最低売買価格・最高売買価格を精密抽出
         history = data.get("recentHistory", [])
         if history:
             prices = [h.get("pricePerUnit", 0) for h in history if h.get("pricePerUnit", 0) > 0]
             if prices:
-                hist_min = min(prices)
-                hist_max = max(prices)
-                hist_avg = round(sum(prices) / len(prices), 1)
+                h_min = min(prices)
+                h_max = max(prices)
             else:
-                hist_min = data.get("minPrice", 0)
-                hist_max = data.get("maxPrice", hist_min)
-                hist_avg = round(data.get("averagePrice", hist_min), 1)
+                h_min = data.get("minPrice", 0)
+                h_max = data.get("maxPrice", h_min)
         else:
-            hist_min = data.get("minPrice", 0)
-            hist_max = data.get("maxPrice", hist_min)
-            hist_avg = round(data.get("averagePrice", hist_min), 1)
+            h_min = data.get("minPrice", 0)
+            h_max = data.get("maxPrice", h_min)
 
         nq_vel = float(data.get("nqSaleVelocity") or 0.0)
         hq_vel = float(data.get("hqSaleVelocity") or 0.0)
         total_vel = float(data.get("dailySaleVelocity") or data.get("regularSaleVelocity") or 0.0)
+        
+        nq_min = data.get("minPriceNQ") or data.get("minPrice", 0)
+        hq_min = data.get("minPriceHQ") or 0
 
-        has_hq = can_be_hq or (hq_vel > 0)
+        has_hq = can_be_hq or (hq_min > 0 or hq_vel > 0)
 
         if not has_hq:
-            qualities = [("NONE", pure_name, total_vel, hist_min, hist_max, hist_avg)]
+            qualities = [("NONE", pure_name, total_vel, nq_min, h_min, h_max)]
         else:
             qualities = [
-                ("NQ", f"{pure_name} [NQ]", nq_vel, hist_min, hist_max, hist_avg),
-                ("HQ", f"{pure_name} [HQ]", hq_vel, hist_min, hist_max, hist_avg)
+                ("NQ", f"{pure_name} [NQ]", nq_vel, nq_min, h_min, h_max),
+                ("HQ", f"{pure_name} [HQ]", hq_vel, hq_min, h_min, h_max)
             ]
 
-        for q_type, item_display_name, vel, h_min, h_max, h_avg in qualities:
+        for q_type, item_display_name, vel, price, hm_min, hm_max in qualities:
             item_key = f"{item_id}_{q_type}"
 
             if vel >= VELOCITY_THRESHOLD:
@@ -329,12 +350,12 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 cursor.execute("""
                 INSERT INTO market_logs (
                     timestamp, scope, item_key, item_id, item_name, quality,
-                    daily_sale_velocity, min_price, max_price, avg_price,
+                    daily_sale_velocity, min_price, avg_price, hist_min, hist_max,
                     units_for_sale, listings_count, last_upload_time
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)
                 """, (
                     now_str, scope_name, item_key, item_id, item_display_name, q_type,
-                    vel, h_min, h_max, h_avg, units_for_sale, last_upload_str
+                    vel, price, avg_price, hm_min, hm_max, units_for_sale, last_upload_str
                 ))
             else:
                 cursor.execute("""
@@ -351,7 +372,7 @@ def fetch_and_save_all():
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (Recent History Min/Max/Avg) ---")
+        print(f"--- Processing DC: {scope} (Average Price + History Range) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
