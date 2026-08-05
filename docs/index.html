@@ -434,38 +434,7 @@
       font-size: 0.7rem;
     }
 
-    /* Fixed Cross DC Profit Box */
-    .cross-profit-box {
-      background: linear-gradient(135deg, rgba(121, 40, 202, 0.25), rgba(0, 210, 255, 0.25));
-      border: 1px solid rgba(0, 210, 255, 0.35);
-      border-radius: 8px;
-      padding: 0.45rem 0.65rem;
-      font-size: 0.72rem;
-      margin-top: 0.1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
 
-    .cross-profit-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-
-    .profit-route {
-      color: #f1f5f9;
-      font-weight: 600;
-      word-break: break-all;
-    }
-
-    .profit-rate {
-      color: var(--accent-gold);
-      font-weight: 800;
-      font-family: 'Outfit', sans-serif;
-      white-space: nowrap;
-    }
 
 
 
@@ -706,21 +675,7 @@
 
             let cleanTitle = escapeHtml(displayTitle).replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
 
-            // 完全修正したクロスDC転売利益バナー (買 ➔ 売 の両方を確実に美しく表示)
-            let crossProfitBox = "";
-            if (item.cross_info && item.cross_info.profit_rate >= 5.0) {
-              const ci = item.cross_info;
-              crossProfitBox = `
-                <div class="cross-profit-box">
-                  <div class="cross-profit-top">
-                    <span class="profit-route"><i class="fa-solid fa-arrow-right-arrow-left"></i> 買: ${ci.cheap_scope} (${Number(ci.cheap_price).toLocaleString()}G) ➔ 売: ${ci.high_scope} (${Number(ci.high_price).toLocaleString()}G)</span>
-                  </div>
-                  <div style="text-align: right;">
-                    <span class="profit-rate">+${Number(ci.profit_gil).toLocaleString()}G (${ci.profit_rate}%)</span>
-                  </div>
-                </div>
-              `;
-            }
+
 
             const minPriceStr = (item.min_price !== undefined && item.min_price !== null) 
               ? `${Number(item.min_price).toLocaleString()}G` 
@@ -781,8 +736,6 @@
                 <div class="history-range-row">
                   <i class="fa-solid fa-clock-rotate-left"></i> ${historyText}
                 </div>
-
-                ${crossProfitBox}
               </div>
             `;
           }).join('');
