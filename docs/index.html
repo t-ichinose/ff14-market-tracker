@@ -358,12 +358,12 @@
     }
 
     .item-sub-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding-top: 0.4rem;
       border-top: 1px dashed rgba(255, 255, 255, 0.06);
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
     }
 
@@ -621,10 +621,6 @@
               `;
             }
 
-            const unitsStr = (item.units_for_sale !== undefined && item.units_for_sale !== null) 
-              ? `${Number(item.units_for_sale).toLocaleString()}個` 
-              : '-';
-
             const minPriceStr = (item.min_price !== undefined && item.min_price !== null) 
               ? `${Number(item.min_price).toLocaleString()}G` 
               : '-';
@@ -636,7 +632,6 @@
             const hMin = (item.hist_min !== undefined && item.hist_min !== null) ? Number(item.hist_min) : Number(item.min_price || 0);
             const hMax = (item.hist_max !== undefined && item.hist_max !== null) ? Number(item.hist_max) : Number(item.max_price || hMin);
 
-            // 最低と最高が完全に一致する場合は1つの価格でスマート表示 (例: 過去取引: 5G (直近安定))
             let historyText = "";
             if (hMin === hMax) {
               historyText = `過去取引: ${hMin.toLocaleString()}G (固定価格帯)`;
@@ -662,8 +657,7 @@
                 </div>
 
                 <div class="item-sub-grid">
-                  <div>出品最安: ${minPriceStr}</div>
-                  <div>在庫: ${unitsStr}</div>
+                  <div><span style="color:var(--text-muted);">出品最安:</span> <strong style="color:#ffffff;">${minPriceStr}</strong></div>
                 </div>
 
                 <div class="history-range-row">
