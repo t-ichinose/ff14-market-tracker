@@ -475,40 +475,58 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.85rem;
+      gap: 0.5rem;
     }
 
-    .velocity-badge {
-      color: var(--accent-green);
-      font-weight: 700;
-      font-family: 'Outfit', sans-serif;
+    .stat-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.2rem;
-      font-size: 0.85rem;
-    }
-
-    .price-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-weight: 400;
-      margin-right: 0.2rem;
-    }
-
-    .price-main {
+      gap: 0.35rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
       font-weight: 700;
-      color: #ffffff;
       font-family: 'Outfit', sans-serif;
+    }
+    .stat-vel {
+      background: rgba(74, 222, 128, 0.12);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+    .stat-rev {
+      background: rgba(255, 183, 3, 0.12);
+      border: 1px solid rgba(255, 183, 3, 0.35);
+      color: #ffb703;
     }
 
     .item-sub-grid {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 0.4rem;
-      border-top: 1px dashed rgba(255, 255, 255, 0.06);
-      font-size: 0.8rem;
-      color: var(--text-muted);
+      padding-top: 0.45rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      font-size: 0.78rem;
+    }
+
+    .stat-sub-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+    }
+    .stat-sub-item.stat-min {
+      color: #38bdf8;
+    }
+    .stat-sub-item.stat-min strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .stat-sub-item.stat-avg {
+      color: #c084fc;
+    }
+    .stat-sub-item.stat-avg strong {
+      color: #ffffff;
+      font-weight: 700;
     }
 
     .history-range-row {
@@ -850,13 +868,13 @@
                 </div>
                 
                 <div class="item-stats-row">
-                  <span class="velocity-badge"><i class="fa-solid fa-bolt"></i> ${velStr} 個/日</span>
-                  <span class="price-main"><span class="price-label">推定日商:</span>${dailyRevenueStr}</span>
+                  <span class="stat-badge stat-vel"><i class="fa-solid fa-bolt"></i> ${velStr} 個/日</span>
+                  <span class="stat-badge stat-rev"><i class="fa-solid fa-coins"></i> 日商: ${dailyRevenueStr}</span>
                 </div>
 
                 <div class="item-sub-grid">
-                  <div><span style="color:var(--text-muted);">出品最安:</span> <strong style="color:#ffffff;">${minPriceStr}</strong></div>
-                  <div style="text-align:right;"><span style="color:var(--text-muted);">平均:</span> <strong style="color:#ffffff;">${avgPriceStr}</strong></div>
+                  <span class="stat-sub-item stat-min"><i class="fa-solid fa-tag"></i> 最安: <strong>${minPriceStr}</strong></span>
+                  <span class="stat-sub-item stat-avg"><i class="fa-solid fa-scale-balanced"></i> 平均: <strong>${avgPriceStr}</strong></span>
                 </div>
 
                 <div class="history-range-row">
