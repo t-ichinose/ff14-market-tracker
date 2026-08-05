@@ -225,11 +225,11 @@ def fetch_and_cache_metadata(conn, item_ids):
             """, (iid, meta["icon_url"], meta["description"], meta["category"],
                    meta["item_level"], meta["shop_price"], meta["buyback_price"],
                    meta["stack_size"], int(meta["can_be_hq"]), meta["rarity"], now_str))
-            print(f"  [Metadata] {iid} -> {meta['category']} (IL{meta['item_level']})")
+            print(f"  [Metadata] Cached item ID {iid} (iLvl {meta['item_level']})")
         else:
-            print(f"  [Metadata] {iid} -> Failed to fetch")
+            print(f"  [Metadata] Item ID {iid} -> Failed to fetch")
         
-        time.sleep(0.08)
+        time.sleep(0.05)
     
     conn.commit()
     print(f"[Metadata] Fetched and cached {len(missing)} new items.")
@@ -240,7 +240,6 @@ def export_web_json(conn, output_path="docs/data.json"):
     cursor = conn.cursor()
     
     raw_data_by_scope = {}
-    item_cross_dc = {}
     
     for scope in JP_DATACENTERS:
         cursor.execute("""
@@ -284,7 +283,6 @@ def export_web_json(conn, output_path="docs/data.json"):
                 "item_key": r[2],
                 "item_id": item_id,
                 "item_name": raw_name,
-                "quality": r[5],
                 "velocity": r[6],
                 "min_price": min_p,
                 "avg_price": h_avg,
@@ -295,40 +293,7 @@ def export_web_json(conn, output_path="docs/data.json"):
             }
             items.append(item_obj)
             
-            ikey = r[2]
-            if ikey not in item_cross_dc:
-                item_cross_dc[ikey] = []
-            item_cross_dc[ikey].append({
-                "scope": r[1],
-                "min_price": r[7],
-                "velocity": r[6]
-            })
-            
         raw_data_by_scope[scope] = items
-
-    cross_analytics = {}
-    for ikey, dc_list in item_cross_dc.items():
-        valid_prices = [x for x in dc_list if x["min_price"] > 0]
-        if len(valid_prices) >= 2:
-            sorted_by_price = sorted(valid_prices, key=lambda x: x["min_price"])
-            cheapest = sorted_by_price[0]
-            highest = sorted_by_price[-1]
-            
-            cheap_price = cheapest["min_price"]
-            high_price = highest["min_price"]
-            
-            profit_gil = int(high_price * 0.95 - cheap_price)
-            profit_rate = round((profit_gil / cheap_price) * 100, 1) if cheap_price > 0 else 0.0
-            
-            if profit_gil > 0 and profit_rate >= 5.0:
-                cross_analytics[ikey] = {
-                    "cheap_scope": cheapest["scope"],
-                    "cheap_price": cheap_price,
-                    "high_scope": highest["scope"],
-                    "high_price": high_price,
-                    "profit_gil": profit_gil,
-                    "profit_rate": profit_rate
-                }
 
     # Collect all unique item IDs for metadata
     all_item_ids = set()
@@ -343,9 +308,6 @@ def export_web_json(conn, output_path="docs/data.json"):
     for scope, items in raw_data_by_scope.items():
         enriched_items = []
         for item in items:
-            ikey = item["item_key"]
-            cross_info = cross_analytics.get(ikey)
-            item["cross_info"] = cross_info
             # Attach metadata
             if item["item_id"] in meta_cache:
                 item["meta"] = meta_cache[item["item_id"]]
