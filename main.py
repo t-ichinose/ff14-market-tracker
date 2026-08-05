@@ -13,7 +13,7 @@ def init_db(db_path="data/market_data.db"):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
-    # NQ/HQごとに独立キー (scope, item_key)
+    # 1. 注目アイテムプールテーブル (NQ/HQ独立)
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS items_pool (
         scope TEXT,
@@ -28,6 +28,7 @@ def init_db(db_path="data/market_data.db"):
     )
     """)
     
+    # 2. 相場ログテーブル
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS market_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,6 +46,17 @@ def init_db(db_path="data/market_data.db"):
         last_upload_time TEXT
     )
     """)
+    
+    # カラムの安全追加（マイグレーション）
+    try:
+        cursor.execute("ALTER TABLE market_logs ADD COLUMN item_key TEXT")
+    except Exception:
+        pass
+
+    try:
+        cursor.execute("ALTER TABLE market_logs ADD COLUMN quality TEXT")
+    except Exception:
+        pass
     
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_timestamp ON market_logs(timestamp)")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_scope_key ON market_logs(scope, item_key)")
@@ -163,7 +175,6 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
 
     high_velocity_count = 0
 
-    # NQとHQに分割して処理
     for item_id_str, data in items_data.items():
         item_id = int(item_id_str)
         base_name = name_map.get(item_id, f"Unknown ({item_id})")
