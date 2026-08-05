@@ -584,6 +584,7 @@
             <div class="sort-toggle-group">
               <button class="sort-toggle-btn active" data-dc="Mana" data-sort="velocity" onclick="setSort('Mana','velocity')">売買数</button>
               <button class="sort-toggle-btn" data-dc="Mana" data-sort="revenue" onclick="setSort('Mana','revenue')">日商</button>
+              <button class="sort-toggle-btn" data-dc="Mana" data-sort="avg_price" onclick="setSort('Mana','avg_price')">平均額</button>
             </div>
             <span class="dc-count-badge" id="count-Mana">0件</span>
           </div>
@@ -600,6 +601,7 @@
             <div class="sort-toggle-group">
               <button class="sort-toggle-btn active" data-dc="Elemental" data-sort="velocity" onclick="setSort('Elemental','velocity')">売買数</button>
               <button class="sort-toggle-btn" data-dc="Elemental" data-sort="revenue" onclick="setSort('Elemental','revenue')">日商</button>
+              <button class="sort-toggle-btn" data-dc="Elemental" data-sort="avg_price" onclick="setSort('Elemental','avg_price')">平均額</button>
             </div>
             <span class="dc-count-badge" id="count-Elemental">0件</span>
           </div>
@@ -616,6 +618,7 @@
             <div class="sort-toggle-group">
               <button class="sort-toggle-btn active" data-dc="Gaia" data-sort="velocity" onclick="setSort('Gaia','velocity')">売買数</button>
               <button class="sort-toggle-btn" data-dc="Gaia" data-sort="revenue" onclick="setSort('Gaia','revenue')">日商</button>
+              <button class="sort-toggle-btn" data-dc="Gaia" data-sort="avg_price" onclick="setSort('Gaia','avg_price')">平均額</button>
             </div>
             <span class="dc-count-badge" id="count-Gaia">0件</span>
           </div>
@@ -632,6 +635,7 @@
             <div class="sort-toggle-group">
               <button class="sort-toggle-btn active" data-dc="Meteor" data-sort="velocity" onclick="setSort('Meteor','velocity')">売買数</button>
               <button class="sort-toggle-btn" data-dc="Meteor" data-sort="revenue" onclick="setSort('Meteor','revenue')">日商</button>
+              <button class="sort-toggle-btn" data-dc="Meteor" data-sort="avg_price" onclick="setSort('Meteor','avg_price')">平均額</button>
             </div>
             <span class="dc-count-badge" id="count-Meteor">0件</span>
           </div>
@@ -785,6 +789,8 @@
               const revB = (Number(b.avg_price) || 0) * (Number(b.velocity) || 0);
               return revB - revA;
             });
+          } else if (mode === 'avg_price') {
+            uniqueItems.sort((a, b) => (Number(b.avg_price) || 0) - (Number(a.avg_price) || 0));
           } else {
             uniqueItems.sort((a, b) => (Number(b.velocity) || 0) - (Number(a.velocity) || 0));
           }
