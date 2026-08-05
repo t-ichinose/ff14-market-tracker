@@ -404,7 +404,8 @@ def ensure_items_search_json(output_path="docs/items_search.json"):
         import csv, io
         headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
         marketable = set(requests.get('https://universalis.app/api/v2/marketable', headers=headers, timeout=10).json())
-        text = requests.get('https://raw.githubusercontent.com/xivapi/ffxiv-datamining/master/csv/ja/Item.csv', headers=headers, timeout=15).content.decode('utf-8')
+        raw_bytes = requests.get('https://raw.githubusercontent.com/xivapi/ffxiv-datamining/master/csv/ja/Item.csv', headers=headers, timeout=15).content
+        text = raw_bytes.decode('cp932', errors='replace')
         reader = csv.reader(io.StringIO(text))
         next(reader)
         next(reader)
