@@ -2,6 +2,7 @@ import requests
 import sqlite3
 import os
 import json
+import time
 from datetime import datetime, timezone
 
 JP_DATACENTERS = ["Elemental", "Gaia", "Mana", "Meteor"]
@@ -12,7 +13,6 @@ def init_db(db_path="data/market_data.db"):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
-    # 1. 注目アイテムプールテーブル (アイテムマスター)
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS items_pool (
         scope TEXT,
@@ -25,7 +25,6 @@ def init_db(db_path="data/market_data.db"):
     )
     """)
     
-    # 2. 相場ログテーブル
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS market_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -58,7 +57,6 @@ def export_web_json(conn, output_path="docs/data.json"):
     web_data_by_scope = {}
     
     for scope in JP_DATACENTERS:
-        # 現在アクティブかつ販売速度が閾値以上の最新ログを取得
         cursor.execute("""
         SELECT timestamp, scope, item_id, item_name, daily_sale_velocity,
                min_price, avg_price, min_price_nq, min_price_hq,
@@ -108,31 +106,30 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
     cursor = conn.cursor()
     
     # -----------------------------------------------------------------
-    # Step 1: 最近更新されたアイテムIDを取得して新規発見
+    # Step 1: 最近更新されたアイテムIDを最大100件フル取得
     # -----------------------------------------------------------------
     recent_url = "https://universalis.app/api/v2/extra/stats/recently-updated"
     try:
         res = requests.get(recent_url, headers=headers, timeout=10)
         res.raise_for_status()
-        recent_items = res.json().get('items', [])[:30]
+        recent_items = res.json().get('items', [])[:100] # 最大100件フル取得
     except Exception as e:
         print(f"[{scope_name}] Step 1 Error: {e}")
         recent_items = []
 
     # -----------------------------------------------------------------
-    # Step 2: 既存プールのアクティブアイテム + 新規発見アイテムを合体
+    # Step 2: 既存プールのアクティブアイテム + 新規発見100件を統合
     # -----------------------------------------------------------------
     cursor.execute("SELECT item_id FROM items_pool WHERE scope = ? AND is_active = 1", (scope_name,))
     pooled_item_ids = [row[0] for row in cursor.fetchall()]
     
-    # 重複を除いた統合ターゲットIDリスト
     target_ids = list(set(pooled_item_ids + recent_items))
     if not target_ids:
         print(f"[{scope_name}] No target items to fetch.")
         return
 
     # -----------------------------------------------------------------
-    # Step 3: 対象アイテムを一括詳細取得 (10件ずつチャンク取得)
+    # Step 3: 対象アイテムを一括詳細取得 (10件チャンク + レート制限回避ウェイト)
     # -----------------------------------------------------------------
     items_data = {}
     chunk_size = 10
@@ -147,27 +144,34 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 items_data.update(d_res.json().get('items', {}))
         except Exception as e:
             print(f"[{scope_name}] Detail fetch error for chunk: {e}")
+            
+        # APIレート制限(25req/s)に余裕を持たせるためのウェイト(0.1秒)
+        time.sleep(0.1)
 
     if not items_data:
         return
 
     # -----------------------------------------------------------------
-    # Step 4: XIVAPIで日本語アイテム名の一括取得
+    # Step 4: XIVAPIで日本語アイテム名の一括取得 (50件ずつ分割取得)
     # -----------------------------------------------------------------
     all_item_ids = [int(k) for k in items_data.keys()]
-    top_ids_str = ",".join(str(i) for i in all_item_ids)
-    xivapi_url = f"https://xivapi.com/Item?ids={top_ids_str}&columns=ID,Name_ja&language=ja"
-    
     name_map = {}
-    try:
-        x_res = requests.get(xivapi_url, headers=headers, timeout=10)
-        if x_res.status_code == 200:
-            results = x_res.json().get("Results", [])
-            for item in results:
-                if isinstance(item, dict) and "ID" in item:
-                    name_map[item["ID"]] = item.get("Name_ja", "Unknown")
-    except Exception as e:
-        print(f"[{scope_name}] XIVAPI error: {e}")
+    
+    for i in range(0, len(all_item_ids), 50):
+        ids_chunk = all_item_ids[i:i + 50]
+        top_ids_str = ",".join(str(x) for x in ids_chunk)
+        xivapi_url = f"https://xivapi.com/Item?ids={top_ids_str}&columns=ID,Name_ja&language=ja"
+        
+        try:
+            x_res = requests.get(xivapi_url, headers=headers, timeout=10)
+            if x_res.status_code == 200:
+                results = x_res.json().get("Results", [])
+                for item in results:
+                    if isinstance(item, dict) and "ID" in item:
+                        name_map[item["ID"]] = item.get("Name_ja", "Unknown")
+        except Exception as e:
+            print(f"[{scope_name}] XIVAPI error: {e}")
+        time.sleep(0.1)
 
     # -----------------------------------------------------------------
     # Step 5: 選別・登録・除外（クリーンアップ）＆ログ保存
@@ -192,10 +196,8 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         units_for_sale = data.get("unitsForSale", 0)
         listings_count = data.get("listingsCount", 0)
 
-        # 条件判定: 1日平均 50個 以上か？
         if velocity >= VELOCITY_THRESHOLD:
             high_velocity_count += 1
-            # ① プールに登録・更新 (is_active = 1)
             cursor.execute("""
             INSERT INTO items_pool (scope, item_id, item_name, added_at, last_velocity, is_active)
             VALUES (?, ?, ?, ?, ?, 1)
@@ -204,7 +206,6 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 is_active = 1
             """, (scope_name, item_id, item_name, now_str, velocity))
 
-            # ② 相場ログに記録
             cursor.execute("""
             INSERT INTO market_logs (
                 timestamp, scope, item_id, item_name,
@@ -219,7 +220,6 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 listings_count, last_upload_str
             ))
         else:
-            # 除外条件: 50個未満になった場合はプールから除外 (is_active = 0)
             cursor.execute("""
             UPDATE items_pool 
             SET is_active = 0, last_velocity = ?
@@ -234,16 +234,15 @@ def fetch_and_save_all():
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} ---")
+        print(f"--- Processing DC: {scope} (100-item scan) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
     
-    # Web表示用JSON出力
     export_web_json(conn, "docs/data.json")
     
     conn.close()
-    print(f"All 4 JP Datacenters pipeline completed successfully (Threshold >= {VELOCITY_THRESHOLD})!")
+    print(f"All 4 JP Datacenters pipeline completed (100-item full scan, Threshold >= {VELOCITY_THRESHOLD})!")
 
 if __name__ == "__main__":
     fetch_and_save_all()
