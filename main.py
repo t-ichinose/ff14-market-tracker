@@ -7,7 +7,23 @@ import re
 from datetime import datetime, timezone
 
 JP_DATACENTERS = ["Elemental", "Gaia", "Mana", "Meteor"]
-VELOCITY_THRESHOLD = 50.0  # 1日平均50個以上の高回転品のみ
+VELOCITY_THRESHOLD = 50.0
+
+# 49200番台を含む最新黄金のレガシー商材の確実なローカル辞書
+KNOWN_70_ITEMS = {
+    49234: ("剛力の心酔薬G4", True),
+    49235: ("活力の心酔薬G4", True),
+    49236: ("器用の心酔薬G4", True),
+    49237: ("敏捷の心酔薬G4", True),
+    49238: ("知力の心酔薬G4", True),
+    49239: ("精神の心酔薬G4", True),
+    49240: ("心力の心酔薬G4", True),
+    49229: ("フトコーラ", True),
+    49209: ("セドライト", False),
+    47701: ("トラルコーン", False),
+    47740: ("コザマル・カモミール", False),
+    49230: ("キャロットラペ", True),
+}
 
 def init_db(db_path="data/market_data.db"):
     os.makedirs("data", exist_ok=True)
@@ -56,13 +72,55 @@ def init_db(db_path="data/market_data.db"):
 def clean_name(raw_name):
     return re.sub(r'\s*\[(NQ|HQ)\]\s*$', '', raw_name).strip()
 
+def resolve_item_metadata_batch(item_ids):
+    headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
+    meta_map = {}
+    
+    # 0. 既知辞書チェック
+    for iid in item_ids:
+        if iid in KNOWN_70_ITEMS:
+            name, can_hq = KNOWN_70_ITEMS[iid]
+            meta_map[iid] = {"name": name, "can_be_hq": can_hq}
+
+    # 1. XIVAPI Single / Garland API
+    missing_ids = [x for x in item_ids if x not in meta_map]
+    for iid in missing_ids:
+        # XIVAPI Single
+        try:
+            x_single = f"https://xivapi.com/Item/{iid}?language=ja"
+            xr = requests.get(x_single, headers=headers, timeout=3)
+            if xr.status_code == 200:
+                xdata = xr.json()
+                name = xdata.get("Name_ja")
+                can_hq = bool(xdata.get("CanBeHq", 0))
+                if name:
+                    meta_map[iid] = {"name": clean_name(name), "can_be_hq": can_hq}
+                    continue
+        except Exception:
+            pass
+
+        # Garland API Fallback
+        try:
+            g_url = f"https://www.garlandtools.org/db/doc/item/ja/3/{iid}.json"
+            gr = requests.get(g_url, headers=headers, timeout=3)
+            if gr.status_code == 200:
+                g_data = gr.json()
+                name = g_data.get('item', {}).get('name')
+                if name:
+                    meta_map[iid] = {"name": clean_name(name), "can_be_hq": True}
+        except Exception:
+            pass
+            
+        time.sleep(0.05)
+        
+    return meta_map
+
 def export_web_json(conn, output_path="docs/data.json"):
     os.makedirs("docs", exist_ok=True)
     cursor = conn.cursor()
     
-    # 1. 各DCの最新ログを取得
     raw_data_by_scope = {}
-    item_cross_dc = {}  # 全DCでのクロス分析用キー辞書
+    item_cross_dc = {}
     
     for scope in JP_DATACENTERS:
         cursor.execute("""
@@ -95,7 +153,6 @@ def export_web_json(conn, output_path="docs/data.json"):
             }
             items.append(item_obj)
             
-            # クロスDC用に記録
             ikey = r[2]
             if ikey not in item_cross_dc:
                 item_cross_dc[ikey] = []
@@ -107,7 +164,6 @@ def export_web_json(conn, output_path="docs/data.json"):
             
         raw_data_by_scope[scope] = items
 
-    # 2. 全DC間での価格比較（最安仕入れDC ➔ 最高販売DC 利益計算）
     cross_analytics = {}
     for ikey, dc_list in item_cross_dc.items():
         valid_prices = [x for x in dc_list if x["min_price"] > 0]
@@ -119,11 +175,10 @@ def export_web_json(conn, output_path="docs/data.json"):
             cheap_price = cheapest["min_price"]
             high_price = highest["min_price"]
             
-            # 手数料5%考慮の想定純利益
             profit_gil = int(high_price * 0.95 - cheap_price)
             profit_rate = round((profit_gil / cheap_price) * 100, 1) if cheap_price > 0 else 0.0
             
-            if profit_gil > 0 and profit_rate >= 10.0: # 利益10%以上
+            if profit_gil > 0 and profit_rate >= 5.0:
                 cross_analytics[ikey] = {
                     "cheap_scope": cheapest["scope"],
                     "cheap_price": cheap_price,
@@ -133,7 +188,6 @@ def export_web_json(conn, output_path="docs/data.json"):
                     "profit_rate": profit_rate
                 }
 
-    # 3. アイテムデータに計算指標を添付
     final_data_by_scope = {}
     for scope, items in raw_data_by_scope.items():
         enriched_items = []
@@ -144,13 +198,8 @@ def export_web_json(conn, output_path="docs/data.json"):
             avg_p = item["avg_price"]
             units = item["units_for_sale"]
             
-            # 在庫消化日数 = 在庫数 / 1日販売数
             days_to_clear = round(units / vel, 1) if vel > 0 else 999.0
-            
-            # 割安率 = (平均価格 - 最安値) / 平均価格
             discount_rate = round(((avg_p - min_p) / avg_p) * 100, 1) if avg_p > min_p else 0.0
-            
-            # DC間利益データ
             cross_info = cross_analytics.get(ikey)
             
             item["days_to_clear"] = days_to_clear
@@ -215,25 +264,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         return
 
     all_item_ids = [int(k) for k in items_data.keys()]
-    name_map = {}
-    for i in range(0, len(all_item_ids), 50):
-        ids_chunk = all_item_ids[i:i + 50]
-        top_ids_str = ",".join(str(x) for x in ids_chunk)
-        xivapi_url = f"https://xivapi.com/Item?ids={top_ids_str}&columns=ID,Name_ja,CanBeHq&language=ja"
-        
-        try:
-            x_res = requests.get(xivapi_url, headers=headers, timeout=10)
-            if x_res.status_code == 200:
-                results = x_res.json().get("Results", [])
-                for item in results:
-                    if isinstance(item, dict) and "ID" in item:
-                        name_map[item["ID"]] = {
-                            "name": clean_name(item.get("Name_ja", "Unknown")),
-                            "can_be_hq": bool(item.get("CanBeHq", 0))
-                        }
-        except Exception as e:
-            print(f"[{scope_name}] XIVAPI error: {e}")
-        time.sleep(0.1)
+    name_map = resolve_item_metadata_batch(all_item_ids)
 
     high_velocity_count = 0
 
@@ -260,7 +291,9 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         nq_min = data.get("minPriceNQ") or data.get("minPrice", 0)
         hq_min = data.get("minPriceHQ") or 0
 
-        if not can_be_hq:
+        has_hq = can_be_hq or (hq_min > 0 or hq_vel > 0)
+
+        if not has_hq:
             qualities = [("NONE", pure_name, total_vel, nq_min)]
         else:
             qualities = [
@@ -307,14 +340,26 @@ def fetch_and_save_all():
     conn = init_db(db_path)
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+    # DB内の既存 Unknown レコードを本物の名前に一括補正
+    cursor = conn.cursor()
+    cursor.execute("SELECT DISTINCT item_id FROM items_pool WHERE item_name LIKE 'Unknown%'")
+    unknown_ids = [row[0] for row in cursor.fetchall()]
+    if unknown_ids:
+        print(f"Fixing {len(unknown_ids)} Unknown item names in DB...")
+        fixed_meta = resolve_item_metadata_batch(unknown_ids)
+        for iid, meta in fixed_meta.items():
+            cursor.execute("UPDATE items_pool SET item_name = ? WHERE item_id = ? AND item_name LIKE 'Unknown%'", (meta["name"], iid))
+            cursor.execute("UPDATE market_logs SET item_name = ? WHERE item_id = ? AND item_name LIKE 'Unknown%'", (meta["name"], iid))
+        conn.commit()
+
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (Enriched Analytics) ---")
+        print(f"--- Processing DC: {scope} (Dawntrail 7.0 Item Resolution) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()
-    print(f"All 4 JP Datacenters pipeline completed (Enriched Analytics, Threshold >= {VELOCITY_THRESHOLD})!")
+    print(f"All 4 JP Datacenters pipeline completed (Dawntrail 7.0 Item Resolution, Threshold >= {VELOCITY_THRESHOLD})!")
 
 if __name__ == "__main__":
     fetch_and_save_all()
