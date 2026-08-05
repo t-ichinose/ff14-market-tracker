@@ -210,12 +210,13 @@
     }
 
     .dc-column-header {
-      padding: 1rem 1.25rem;
+      padding: 0.75rem 1.25rem;
       background: rgba(15, 23, 42, 0.8);
       border-bottom: 1px solid var(--card-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 0.5rem;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
     }
@@ -237,6 +238,36 @@
       font-weight: 700;
       padding: 0.2rem 0.6rem;
       border-radius: 12px;
+    }
+
+    .sort-toggle-group {
+      display: flex;
+      gap: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+
+    .sort-toggle-btn {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      border: none;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .sort-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .sort-toggle-btn.active {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: #ffffff;
+      font-weight: 700;
     }
 
     .dc-item-list {
@@ -461,7 +492,13 @@
       <div class="dc-column">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> Mana</div>
-          <span class="dc-count-badge" id="count-Mana">0件</span>
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <div class="sort-toggle-group">
+              <button class="sort-toggle-btn active" data-dc="Mana" data-sort="velocity" onclick="setSort('Mana','velocity')">売買数</button>
+              <button class="sort-toggle-btn" data-dc="Mana" data-sort="revenue" onclick="setSort('Mana','revenue')">日商</button>
+            </div>
+            <span class="dc-count-badge" id="count-Mana">0件</span>
+          </div>
         </div>
         <div class="dc-item-list" id="list-Mana">
           <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...</div>
@@ -471,7 +508,13 @@
       <div class="dc-column">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental</div>
-          <span class="dc-count-badge" id="count-Elemental">0件</span>
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <div class="sort-toggle-group">
+              <button class="sort-toggle-btn active" data-dc="Elemental" data-sort="velocity" onclick="setSort('Elemental','velocity')">売買数</button>
+              <button class="sort-toggle-btn" data-dc="Elemental" data-sort="revenue" onclick="setSort('Elemental','revenue')">日商</button>
+            </div>
+            <span class="dc-count-badge" id="count-Elemental">0件</span>
+          </div>
         </div>
         <div class="dc-item-list" id="list-Elemental">
           <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...</div>
@@ -481,7 +524,13 @@
       <div class="dc-column">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia</div>
-          <span class="dc-count-badge" id="count-Gaia">0件</span>
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <div class="sort-toggle-group">
+              <button class="sort-toggle-btn active" data-dc="Gaia" data-sort="velocity" onclick="setSort('Gaia','velocity')">売買数</button>
+              <button class="sort-toggle-btn" data-dc="Gaia" data-sort="revenue" onclick="setSort('Gaia','revenue')">日商</button>
+            </div>
+            <span class="dc-count-badge" id="count-Gaia">0件</span>
+          </div>
         </div>
         <div class="dc-item-list" id="list-Gaia">
           <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...</div>
@@ -491,7 +540,13 @@
       <div class="dc-column">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor</div>
-          <span class="dc-count-badge" id="count-Meteor">0件</span>
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <div class="sort-toggle-group">
+              <button class="sort-toggle-btn active" data-dc="Meteor" data-sort="velocity" onclick="setSort('Meteor','velocity')">売買数</button>
+              <button class="sort-toggle-btn" data-dc="Meteor" data-sort="revenue" onclick="setSort('Meteor','revenue')">日商</button>
+            </div>
+            <span class="dc-count-badge" id="count-Meteor">0件</span>
+          </div>
         </div>
         <div class="dc-item-list" id="list-Meteor">
           <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...</div>
@@ -504,6 +559,17 @@
   <script>
     const DATACENTERS = ["Mana", "Elemental", "Gaia", "Meteor"];
     let allDcData = {};
+    const sortMode = { Mana: 'velocity', Elemental: 'velocity', Gaia: 'velocity', Meteor: 'velocity' };
+
+    function setSort(dc, mode) {
+      sortMode[dc] = mode;
+      // Update toggle button styles
+      document.querySelectorAll(`.sort-toggle-btn[data-dc="${dc}"]`).forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.sort === mode);
+      });
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+      renderAllColumns(searchTerm);
+    }
 
     const FRONTEND_NAME_MAP = {
       49234: "剛力の心酔薬G4",
@@ -597,6 +663,18 @@
               </div>
             `;
             return;
+          }
+
+          // Sort by current mode
+          const mode = sortMode[dc] || 'velocity';
+          if (mode === 'revenue') {
+            uniqueItems.sort((a, b) => {
+              const revA = (Number(a.avg_price) || 0) * (Number(a.velocity) || 0);
+              const revB = (Number(b.avg_price) || 0) * (Number(b.velocity) || 0);
+              return revB - revA;
+            });
+          } else {
+            uniqueItems.sort((a, b) => (Number(b.velocity) || 0) - (Number(a.velocity) || 0));
           }
 
           listEl.innerHTML = uniqueItems.map((item, idx) => {
