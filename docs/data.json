@@ -21,7 +21,7 @@
         "avg_price": 7.8,
         "hist_min": 5,
         "hist_max": 12,
-        "units_for_sale": 5320120,
+        "units_for_sale": 280632,
         "last_upload_time": "2026-08-05 01:40:56",
         "cross_info": null
       },
@@ -37,7 +37,7 @@
         "avg_price": 45.4,
         "hist_min": 41,
         "hist_max": 50,
-        "units_for_sale": 2823733,
+        "units_for_sale": 233000,
         "last_upload_time": "2026-08-05 02:04:49",
         "cross_info": null
       },
@@ -53,7 +53,7 @@
         "avg_price": 40.6,
         "hist_min": 40,
         "hist_max": 43,
-        "units_for_sale": 3378546,
+        "units_for_sale": 67799,
         "last_upload_time": "2026-08-05 02:51:05",
         "cross_info": null
       },
@@ -69,7 +69,7 @@
         "avg_price": 40.6,
         "hist_min": 40,
         "hist_max": 43,
-        "units_for_sale": 5202013,
+        "units_for_sale": 67799,
         "last_upload_time": "2026-08-05 01:57:58",
         "cross_info": null
       },
@@ -85,7 +85,7 @@
         "avg_price": 39.4,
         "hist_min": 38,
         "hist_max": 42,
-        "units_for_sale": 2447888,
+        "units_for_sale": 44594,
         "last_upload_time": "2026-08-05 00:25:18",
         "cross_info": null
       },
@@ -101,7 +101,7 @@
         "avg_price": 41.8,
         "hist_min": 40,
         "hist_max": 43,
-        "units_for_sale": 4578680,
+        "units_for_sale": 257485,
         "last_upload_time": "2026-08-05 04:05:30",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -124,7 +124,7 @@
         "avg_price": 1669.2,
         "hist_min": 1659,
         "hist_max": 1709,
-        "units_for_sale": 83000,
+        "units_for_sale": 3960,
         "last_upload_time": "2026-08-05 04:05:46",
         "cross_info": null
       },
@@ -140,7 +140,7 @@
         "avg_price": 465.4,
         "hist_min": 450,
         "hist_max": 497,
-        "units_for_sale": 62106,
+        "units_for_sale": 3891,
         "last_upload_time": "2026-08-05 04:01:52",
         "cross_info": null
       },
@@ -179,7 +179,7 @@
         "avg_price": 3785.0,
         "hist_min": 3470,
         "hist_max": 4588,
-        "units_for_sale": 14526,
+        "units_for_sale": 709,
         "last_upload_time": "2026-08-05 03:46:22",
         "cross_info": null
       },
@@ -195,7 +195,7 @@
         "avg_price": 3785.0,
         "hist_min": 3470,
         "hist_max": 4588,
-        "units_for_sale": 14526,
+        "units_for_sale": 709,
         "last_upload_time": "2026-08-04 22:07:51",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -218,7 +218,7 @@
         "avg_price": 2476.8,
         "hist_min": 2296,
         "hist_max": 3200,
-        "units_for_sale": 25086,
+        "units_for_sale": 363,
         "last_upload_time": "2026-08-05 03:47:03",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -241,7 +241,7 @@
         "avg_price": 89.0,
         "hist_min": 70,
         "hist_max": 120,
-        "units_for_sale": 8738,
+        "units_for_sale": 11339,
         "last_upload_time": "2026-08-05 02:30:06",
         "cross_info": null
       },
@@ -257,7 +257,7 @@
         "avg_price": 2050.0,
         "hist_min": 2050,
         "hist_max": 2050,
-        "units_for_sale": 23263,
+        "units_for_sale": 3163,
         "last_upload_time": "2026-08-05 01:27:43",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -303,7 +303,7 @@
         "avg_price": 738.0,
         "hist_min": 428,
         "hist_max": 838,
-        "units_for_sale": 11056,
+        "units_for_sale": 3214,
         "last_upload_time": "2026-08-04 20:56:08",
         "cross_info": null
       },
@@ -319,7 +319,7 @@
         "avg_price": 998.8,
         "hist_min": 998,
         "hist_max": 1000,
-        "units_for_sale": 9221,
+        "units_for_sale": 3136,
         "last_upload_time": "2026-08-05 00:36:35",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -342,7 +342,7 @@
         "avg_price": 998.8,
         "hist_min": 998,
         "hist_max": 1000,
-        "units_for_sale": 9221,
+        "units_for_sale": 3846,
         "last_upload_time": "2026-08-05 03:20:23",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -365,7 +365,7 @@
         "avg_price": 739.0,
         "hist_min": 715,
         "hist_max": 789,
-        "units_for_sale": 5711,
+        "units_for_sale": 3539,
         "last_upload_time": "2026-08-04 22:41:31",
         "cross_info": null
       },
@@ -381,7 +381,7 @@
         "avg_price": 126.8,
         "hist_min": 100,
         "hist_max": 160,
-        "units_for_sale": 24570,
+        "units_for_sale": 26660,
         "last_upload_time": "2026-08-05 02:14:15",
         "cross_info": null
       },
@@ -397,7 +397,7 @@
         "avg_price": 150.6,
         "hist_min": 130,
         "hist_max": 179,
-        "units_for_sale": 19762,
+        "units_for_sale": 2188,
         "last_upload_time": "2026-08-05 03:25:35",
         "cross_info": null
       },
@@ -413,7 +413,7 @@
         "avg_price": 480.0,
         "hist_min": 480,
         "hist_max": 480,
-        "units_for_sale": 20788,
+        "units_for_sale": 2783,
         "last_upload_time": "2026-08-05 04:06:26",
         "cross_info": null
       },
@@ -429,7 +429,7 @@
         "avg_price": 226.8,
         "hist_min": 195,
         "hist_max": 300,
-        "units_for_sale": 10631,
+        "units_for_sale": 2540,
         "last_upload_time": "2026-08-04 23:38:05",
         "cross_info": null
       },
@@ -445,7 +445,7 @@
         "avg_price": 2891.6,
         "hist_min": 2827,
         "hist_max": 2988,
-        "units_for_sale": 7091,
+        "units_for_sale": 2469,
         "last_upload_time": "2026-08-05 00:35:50",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -484,7 +484,7 @@
         "avg_price": 205.8,
         "hist_min": 180,
         "hist_max": 249,
-        "units_for_sale": 9589,
+        "units_for_sale": 1483,
         "last_upload_time": "2026-08-05 01:33:53",
         "cross_info": null
       },
@@ -500,7 +500,7 @@
         "avg_price": 287.2,
         "hist_min": 280,
         "hist_max": 298,
-        "units_for_sale": 18010,
+        "units_for_sale": 1502,
         "last_upload_time": "2026-08-05 01:09:23",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -523,7 +523,7 @@
         "avg_price": 205.8,
         "hist_min": 180,
         "hist_max": 249,
-        "units_for_sale": 8874,
+        "units_for_sale": 1483,
         "last_upload_time": "2026-08-05 04:03:32",
         "cross_info": null
       },
@@ -539,7 +539,7 @@
         "avg_price": 2880.8,
         "hist_min": 2800,
         "hist_max": 2905,
-        "units_for_sale": 5137,
+        "units_for_sale": 1448,
         "last_upload_time": "2026-08-05 02:25:25",
         "cross_info": null
       },
@@ -555,7 +555,7 @@
         "avg_price": 122.0,
         "hist_min": 47,
         "hist_max": 195,
-        "units_for_sale": 16694,
+        "units_for_sale": 3260,
         "last_upload_time": "2026-08-05 01:18:32",
         "cross_info": null
       },
@@ -571,7 +571,7 @@
         "avg_price": 1248.0,
         "hist_min": 1000,
         "hist_max": 1498,
-        "units_for_sale": 12265,
+        "units_for_sale": 1281,
         "last_upload_time": "2026-08-05 02:38:29",
         "cross_info": null
       },
@@ -587,7 +587,7 @@
         "avg_price": 439.4,
         "hist_min": 218,
         "hist_max": 999,
-        "units_for_sale": 18400,
+        "units_for_sale": 3513,
         "last_upload_time": "2026-08-05 04:04:58",
         "cross_info": null
       },
@@ -603,7 +603,7 @@
         "avg_price": 46.6,
         "hist_min": 9,
         "hist_max": 120,
-        "units_for_sale": 17313,
+        "units_for_sale": 1675,
         "last_upload_time": "2026-08-05 00:16:05",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -626,7 +626,7 @@
         "avg_price": 406.2,
         "hist_min": 397,
         "hist_max": 440,
-        "units_for_sale": 23406,
+        "units_for_sale": 3071,
         "last_upload_time": "2026-08-05 00:50:59",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -649,7 +649,7 @@
         "avg_price": 1099.6,
         "hist_min": 998,
         "hist_max": 1500,
-        "units_for_sale": 4643,
+        "units_for_sale": 1610,
         "last_upload_time": "2026-08-05 01:20:26",
         "cross_info": null
       },
@@ -665,7 +665,7 @@
         "avg_price": 134.8,
         "hist_min": 1,
         "hist_max": 268,
-        "units_for_sale": 10317,
+        "units_for_sale": 3475,
         "last_upload_time": "2026-08-05 02:33:51",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -688,7 +688,7 @@
         "avg_price": 1785.8,
         "hist_min": 1784,
         "hist_max": 1790,
-        "units_for_sale": 3506,
+        "units_for_sale": 2024,
         "last_upload_time": "2026-08-04 19:28:26",
         "cross_info": null
       },
@@ -704,7 +704,7 @@
         "avg_price": 1785.8,
         "hist_min": 1784,
         "hist_max": 1790,
-        "units_for_sale": 3506,
+        "units_for_sale": 2024,
         "last_upload_time": "2026-08-04 19:28:26",
         "cross_info": null
       },
@@ -720,7 +720,7 @@
         "avg_price": 82.2,
         "hist_min": 47,
         "hist_max": 100,
-        "units_for_sale": 13094,
+        "units_for_sale": 1159,
         "last_upload_time": "2026-08-05 01:52:48",
         "cross_info": null
       },
@@ -736,7 +736,7 @@
         "avg_price": 725.6,
         "hist_min": 500,
         "hist_max": 880,
-        "units_for_sale": 8504,
+        "units_for_sale": 3310,
         "last_upload_time": "2026-08-04 14:40:34",
         "cross_info": null
       },
@@ -752,7 +752,7 @@
         "avg_price": 480.0,
         "hist_min": 480,
         "hist_max": 480,
-        "units_for_sale": 30846,
+        "units_for_sale": 2783,
         "last_upload_time": "2026-08-05 04:06:26",
         "cross_info": null
       },
@@ -768,7 +768,7 @@
         "avg_price": 327.6,
         "hist_min": 200,
         "hist_max": 488,
-        "units_for_sale": 2526,
+        "units_for_sale": 1641,
         "last_upload_time": "2026-08-05 03:00:47",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -791,7 +791,7 @@
         "avg_price": 2299.8,
         "hist_min": 2000,
         "hist_max": 2999,
-        "units_for_sale": 4900,
+        "units_for_sale": 892,
         "last_upload_time": "2026-08-05 02:01:54",
         "cross_info": null
       },
@@ -807,7 +807,7 @@
         "avg_price": 2299.8,
         "hist_min": 2000,
         "hist_max": 2999,
-        "units_for_sale": 4900,
+        "units_for_sale": 892,
         "last_upload_time": "2026-08-05 02:01:54",
         "cross_info": null
       },
@@ -823,7 +823,7 @@
         "avg_price": 798.4,
         "hist_min": 702,
         "hist_max": 1000,
-        "units_for_sale": 30130,
+        "units_for_sale": 1597,
         "last_upload_time": "2026-08-05 04:06:40",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -846,7 +846,7 @@
         "avg_price": 30.2,
         "hist_min": 10,
         "hist_max": 70,
-        "units_for_sale": 14192,
+        "units_for_sale": 1873,
         "last_upload_time": "2026-08-04 17:32:41",
         "cross_info": null
       },
@@ -862,7 +862,7 @@
         "avg_price": 45.6,
         "hist_min": 10,
         "hist_max": 100,
-        "units_for_sale": 10833,
+        "units_for_sale": 2671,
         "last_upload_time": "2026-08-04 18:20:33",
         "cross_info": null
       },
@@ -878,7 +878,7 @@
         "avg_price": 2460.0,
         "hist_min": 2400,
         "hist_max": 2500,
-        "units_for_sale": 5978,
+        "units_for_sale": 1597,
         "last_upload_time": "2026-08-05 00:39:50",
         "cross_info": null
       },
@@ -894,7 +894,7 @@
         "avg_price": 2460.0,
         "hist_min": 2400,
         "hist_max": 2500,
-        "units_for_sale": 11675,
+        "units_for_sale": 1597,
         "last_upload_time": "2026-08-05 02:30:42",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -917,7 +917,7 @@
         "avg_price": 30.8,
         "hist_min": 15,
         "hist_max": 65,
-        "units_for_sale": 16753,
+        "units_for_sale": 1051,
         "last_upload_time": "2026-08-05 02:35:19",
         "cross_info": null
       },
@@ -933,7 +933,7 @@
         "avg_price": 3638.8,
         "hist_min": 3600,
         "hist_max": 3794,
-        "units_for_sale": 4857,
+        "units_for_sale": 1867,
         "last_upload_time": "2026-08-04 15:18:16",
         "cross_info": null
       },
@@ -949,7 +949,7 @@
         "avg_price": 170.8,
         "hist_min": 150,
         "hist_max": 180,
-        "units_for_sale": 9928,
+        "units_for_sale": 1598,
         "last_upload_time": "2026-08-04 22:14:16",
         "cross_info": null
       },
@@ -965,7 +965,7 @@
         "avg_price": 137.8,
         "hist_min": 110,
         "hist_max": 154,
-        "units_for_sale": 9753,
+        "units_for_sale": 1215,
         "last_upload_time": "2026-08-04 21:02:34",
         "cross_info": null
       },
@@ -981,7 +981,7 @@
         "avg_price": 137.8,
         "hist_min": 110,
         "hist_max": 154,
-        "units_for_sale": 9753,
+        "units_for_sale": 1215,
         "last_upload_time": "2026-08-04 21:02:34",
         "cross_info": null
       },
@@ -997,7 +997,7 @@
         "avg_price": 427.0,
         "hist_min": 219,
         "hist_max": 797,
-        "units_for_sale": 5242,
+        "units_for_sale": 10411,
         "last_upload_time": "2026-08-04 22:21:44",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -1020,7 +1020,7 @@
         "avg_price": 9298.4,
         "hist_min": 9298,
         "hist_max": 9299,
-        "units_for_sale": 6882,
+        "units_for_sale": 1346,
         "last_upload_time": "2026-08-04 23:12:58",
         "cross_info": null
       },
@@ -1036,7 +1036,7 @@
         "avg_price": 97.2,
         "hist_min": 91,
         "hist_max": 105,
-        "units_for_sale": 6273,
+        "units_for_sale": 503,
         "last_upload_time": "2026-08-04 17:38:20",
         "cross_info": null
       },
@@ -1052,7 +1052,7 @@
         "avg_price": 177.2,
         "hist_min": 90,
         "hist_max": 300,
-        "units_for_sale": 1901,
+        "units_for_sale": 1839,
         "last_upload_time": "2026-08-04 19:55:45",
         "cross_info": null
       },
@@ -1068,7 +1068,7 @@
         "avg_price": 145.4,
         "hist_min": 144,
         "hist_max": 150,
-        "units_for_sale": 9644,
+        "units_for_sale": 1354,
         "last_upload_time": "2026-08-05 01:57:59",
         "cross_info": null
       },
@@ -1084,7 +1084,7 @@
         "avg_price": 5153.2,
         "hist_min": 2000,
         "hist_max": 6890,
-        "units_for_sale": 2668,
+        "units_for_sale": 1612,
         "last_upload_time": "2026-08-04 21:22:19",
         "cross_info": null
       },
@@ -1100,7 +1100,7 @@
         "avg_price": 694.4,
         "hist_min": 480,
         "hist_max": 817,
-        "units_for_sale": 6547,
+        "units_for_sale": 247,
         "last_upload_time": "2026-08-05 03:20:54",
         "cross_info": null
       },
@@ -1116,7 +1116,7 @@
         "avg_price": 5153.2,
         "hist_min": 2000,
         "hist_max": 6890,
-        "units_for_sale": 2240,
+        "units_for_sale": 1612,
         "last_upload_time": "2026-08-05 03:07:13",
         "cross_info": null
       },
@@ -1132,7 +1132,7 @@
         "avg_price": 122.0,
         "hist_min": 100,
         "hist_max": 145,
-        "units_for_sale": 14454,
+        "units_for_sale": 623,
         "last_upload_time": "2026-08-05 02:22:59",
         "cross_info": null
       },
@@ -1148,7 +1148,7 @@
         "avg_price": 917.6,
         "hist_min": 200,
         "hist_max": 1199,
-        "units_for_sale": 15159,
+        "units_for_sale": 291,
         "last_upload_time": "2026-08-05 03:47:26",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -1171,7 +1171,7 @@
         "avg_price": 81.6,
         "hist_min": 79,
         "hist_max": 88,
-        "units_for_sale": 7645,
+        "units_for_sale": 1645,
         "last_upload_time": "2026-08-04 19:58:18",
         "cross_info": null
       },
@@ -1187,7 +1187,7 @@
         "avg_price": 150.0,
         "hist_min": 102,
         "hist_max": 176,
-        "units_for_sale": 6982,
+        "units_for_sale": 601,
         "last_upload_time": "2026-08-05 02:49:03",
         "cross_info": null
       },
@@ -1203,7 +1203,7 @@
         "avg_price": 150.0,
         "hist_min": 102,
         "hist_max": 176,
-        "units_for_sale": 6982,
+        "units_for_sale": 601,
         "last_upload_time": "2026-08-05 00:37:24",
         "cross_info": null
       },
@@ -1235,7 +1235,7 @@
         "avg_price": 1800.0,
         "hist_min": 1000,
         "hist_max": 2000,
-        "units_for_sale": 4883,
+        "units_for_sale": 669,
         "last_upload_time": "2026-08-05 01:54:34",
         "cross_info": null
       },
@@ -1251,7 +1251,7 @@
         "avg_price": 9298.4,
         "hist_min": 9298,
         "hist_max": 9299,
-        "units_for_sale": 7397,
+        "units_for_sale": 1346,
         "last_upload_time": "2026-08-05 03:27:50",
         "cross_info": null
       },
@@ -1267,7 +1267,7 @@
         "avg_price": 101.6,
         "hist_min": 85,
         "hist_max": 120,
-        "units_for_sale": 9375,
+        "units_for_sale": 727,
         "last_upload_time": "2026-08-05 02:03:42",
         "cross_info": null
       },
@@ -1283,7 +1283,7 @@
         "avg_price": 257.0,
         "hist_min": 200,
         "hist_max": 320,
-        "units_for_sale": 18853,
+        "units_for_sale": 267,
         "last_upload_time": "2026-08-05 02:46:47",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -1306,7 +1306,7 @@
         "avg_price": 6261.0,
         "hist_min": 5189,
         "hist_max": 6979,
-        "units_for_sale": 3701,
+        "units_for_sale": 238,
         "last_upload_time": "2026-08-05 03:40:23",
         "cross_info": null
       },
@@ -1322,7 +1322,7 @@
         "avg_price": 1982.0,
         "hist_min": 1950,
         "hist_max": 1999,
-        "units_for_sale": 4378,
+        "units_for_sale": 312,
         "last_upload_time": "2026-08-05 01:54:41",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -1345,7 +1345,7 @@
         "avg_price": 4260.0,
         "hist_min": 1900,
         "hist_max": 5800,
-        "units_for_sale": 3325,
+        "units_for_sale": 775,
         "last_upload_time": "2026-08-05 02:30:49",
         "cross_info": null
       },
@@ -1361,7 +1361,7 @@
         "avg_price": 554.0,
         "hist_min": 300,
         "hist_max": 1000,
-        "units_for_sale": 8351,
+        "units_for_sale": 2240,
         "last_upload_time": "2026-08-04 17:46:07",
         "cross_info": null
       },
@@ -1377,7 +1377,7 @@
         "avg_price": 175.0,
         "hist_min": 135,
         "hist_max": 195,
-        "units_for_sale": 8241,
+        "units_for_sale": 1039,
         "last_upload_time": "2026-08-04 21:52:14",
         "cross_info": null
       },
@@ -1393,7 +1393,7 @@
         "avg_price": 5900.0,
         "hist_min": 5500,
         "hist_max": 6000,
-        "units_for_sale": 5717,
+        "units_for_sale": 2502,
         "last_upload_time": "2026-08-04 20:27:41",
         "cross_info": null
       },
@@ -1409,7 +1409,7 @@
         "avg_price": 733.6,
         "hist_min": 300,
         "hist_max": 1110,
-        "units_for_sale": 906,
+        "units_for_sale": 683,
         "last_upload_time": "2026-08-05 02:35:24",
         "cross_info": null
       },
@@ -1425,7 +1425,7 @@
         "avg_price": 1982.0,
         "hist_min": 1950,
         "hist_max": 1999,
-        "units_for_sale": 4390,
+        "units_for_sale": 312,
         "last_upload_time": "2026-08-05 04:06:09",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -1448,7 +1448,7 @@
         "avg_price": 57.8,
         "hist_min": 45,
         "hist_max": 75,
-        "units_for_sale": 5604,
+        "units_for_sale": 223,
         "last_upload_time": "2026-08-05 03:54:52",
         "cross_info": null
       },
@@ -1464,7 +1464,7 @@
         "avg_price": 554.0,
         "hist_min": 300,
         "hist_max": 1000,
-        "units_for_sale": 8351,
+        "units_for_sale": 2240,
         "last_upload_time": "2026-08-04 17:46:07",
         "cross_info": null
       },
@@ -1480,7 +1480,7 @@
         "avg_price": 1381.6,
         "hist_min": 500,
         "hist_max": 2709,
-        "units_for_sale": 3004,
+        "units_for_sale": 161,
         "last_upload_time": "2026-08-03 12:32:45",
         "cross_info": null
       },
@@ -1496,7 +1496,7 @@
         "avg_price": 2359.4,
         "hist_min": 2000,
         "hist_max": 2798,
-        "units_for_sale": 2702,
+        "units_for_sale": 642,
         "last_upload_time": "2026-08-05 02:34:09",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -1519,7 +1519,7 @@
         "avg_price": 3573.0,
         "hist_min": 1195,
         "hist_max": 4910,
-        "units_for_sale": 9282,
+        "units_for_sale": 1591,
         "last_upload_time": "2026-08-05 02:10:42",
         "cross_info": null
       },
@@ -1535,7 +1535,7 @@
         "avg_price": 211.8,
         "hist_min": 199,
         "hist_max": 230,
-        "units_for_sale": 7476,
+        "units_for_sale": 8209,
         "last_upload_time": "2026-08-05 02:51:53",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -1558,7 +1558,7 @@
         "avg_price": 198.4,
         "hist_min": 195,
         "hist_max": 200,
-        "units_for_sale": 12104,
+        "units_for_sale": 558,
         "last_upload_time": "2026-08-05 03:19:56",
         "cross_info": null
       },
@@ -1574,7 +1574,7 @@
         "avg_price": 1669.2,
         "hist_min": 1600,
         "hist_max": 1699,
-        "units_for_sale": 14401,
+        "units_for_sale": 1057,
         "last_upload_time": "2026-08-05 04:06:29",
         "cross_info": null
       },
@@ -1590,7 +1590,7 @@
         "avg_price": 3962.4,
         "hist_min": 3962,
         "hist_max": 3964,
-        "units_for_sale": 7299,
+        "units_for_sale": 509,
         "last_upload_time": "2026-08-05 02:14:25",
         "cross_info": null
       },
@@ -1606,7 +1606,7 @@
         "avg_price": 3573.0,
         "hist_min": 1195,
         "hist_max": 4910,
-        "units_for_sale": 9282,
+        "units_for_sale": 1421,
         "last_upload_time": "2026-08-05 04:04:53",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -1629,7 +1629,7 @@
         "avg_price": 229.4,
         "hist_min": 130,
         "hist_max": 300,
-        "units_for_sale": 1567,
+        "units_for_sale": 886,
         "last_upload_time": "2026-08-05 03:07:58",
         "cross_info": null
       },
@@ -1645,7 +1645,7 @@
         "avg_price": 384.4,
         "hist_min": 331,
         "hist_max": 420,
-        "units_for_sale": 2281,
+        "units_for_sale": 233,
         "last_upload_time": "2026-08-04 22:21:59",
         "cross_info": null
       },
@@ -1661,7 +1661,7 @@
         "avg_price": 409.6,
         "hist_min": 200,
         "hist_max": 615,
-        "units_for_sale": 10408,
+        "units_for_sale": 3866,
         "last_upload_time": "2026-08-05 03:36:46",
         "cross_info": null
       },
@@ -1677,7 +1677,7 @@
         "avg_price": 3962.4,
         "hist_min": 3962,
         "hist_max": 3964,
-        "units_for_sale": 7299,
+        "units_for_sale": 509,
         "last_upload_time": "2026-08-05 04:02:10",
         "cross_info": null
       },
@@ -1693,7 +1693,7 @@
         "avg_price": 362.4,
         "hist_min": 149,
         "hist_max": 480,
-        "units_for_sale": 9338,
+        "units_for_sale": 875,
         "last_upload_time": "2026-08-05 01:25:48",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -1716,7 +1716,7 @@
         "avg_price": 111.4,
         "hist_min": 79,
         "hist_max": 198,
-        "units_for_sale": 2248,
+        "units_for_sale": 1995,
         "last_upload_time": "2026-08-03 16:19:19",
         "cross_info": null
       },
@@ -1732,7 +1732,7 @@
         "avg_price": 111.4,
         "hist_min": 79,
         "hist_max": 198,
-        "units_for_sale": 2248,
+        "units_for_sale": 1995,
         "last_upload_time": "2026-08-03 16:19:19",
         "cross_info": null
       },
@@ -1748,7 +1748,7 @@
         "avg_price": 1400.0,
         "hist_min": 1000,
         "hist_max": 3000,
-        "units_for_sale": 2182,
+        "units_for_sale": 977,
         "last_upload_time": "2026-08-04 21:44:36",
         "cross_info": null
       },
@@ -1764,7 +1764,7 @@
         "avg_price": 411.0,
         "hist_min": 85,
         "hist_max": 700,
-        "units_for_sale": 1471,
+        "units_for_sale": 891,
         "last_upload_time": "2026-08-04 23:18:23",
         "cross_info": null
       },
@@ -1780,7 +1780,7 @@
         "avg_price": 695.4,
         "hist_min": 333,
         "hist_max": 1317,
-        "units_for_sale": 1996,
+        "units_for_sale": 690,
         "last_upload_time": "2026-08-05 03:32:56",
         "cross_info": null
       },
@@ -1796,7 +1796,7 @@
         "avg_price": 643.4,
         "hist_min": 629,
         "hist_max": 650,
-        "units_for_sale": 17072,
+        "units_for_sale": 1636,
         "last_upload_time": "2026-08-05 03:28:42",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -1819,7 +1819,7 @@
         "avg_price": 97.8,
         "hist_min": 24,
         "hist_max": 240,
-        "units_for_sale": 11015,
+        "units_for_sale": 967,
         "last_upload_time": "2026-08-05 03:29:32",
         "cross_info": null
       },
@@ -1835,7 +1835,7 @@
         "avg_price": 107.8,
         "hist_min": 99,
         "hist_max": 140,
-        "units_for_sale": 2498,
+        "units_for_sale": 1119,
         "last_upload_time": "2026-08-04 21:08:37",
         "cross_info": null
       },
@@ -1851,7 +1851,7 @@
         "avg_price": 459.8,
         "hist_min": 199,
         "hist_max": 1000,
-        "units_for_sale": 3233,
+        "units_for_sale": 498,
         "last_upload_time": "2026-08-05 03:36:33",
         "cross_info": null
       },
@@ -1867,7 +1867,7 @@
         "avg_price": 525.8,
         "hist_min": 160,
         "hist_max": 1000,
-        "units_for_sale": 1988,
+        "units_for_sale": 1047,
         "last_upload_time": "2026-08-05 00:07:16",
         "cross_info": null
       }
@@ -1885,7 +1885,7 @@
         "avg_price": 8.6,
         "hist_min": 8,
         "hist_max": 9,
-        "units_for_sale": 3575697,
+        "units_for_sale": 141721,
         "last_upload_time": "2026-08-05 04:03:01",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -1908,7 +1908,7 @@
         "avg_price": 50.0,
         "hist_min": 44,
         "hist_max": 66,
-        "units_for_sale": 4583760,
+        "units_for_sale": 88500,
         "last_upload_time": "2026-08-05 04:00:52",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -1931,7 +1931,7 @@
         "avg_price": 48.6,
         "hist_min": 41,
         "hist_max": 41,
-        "units_for_sale": 4723421,
+        "units_for_sale": 1,
         "last_upload_time": "2026-08-05 02:12:22",
         "cross_info": null
       },
@@ -1947,7 +1947,7 @@
         "avg_price": 1650.0,
         "hist_min": 1650,
         "hist_max": 1650,
-        "units_for_sale": 68065,
+        "units_for_sale": 3960,
         "last_upload_time": "2026-08-05 03:43:36",
         "cross_info": null
       },
@@ -1963,7 +1963,7 @@
         "avg_price": 149.8,
         "hist_min": 130,
         "hist_max": 134,
-        "units_for_sale": 75787,
+        "units_for_sale": 3960,
         "last_upload_time": "2026-08-05 03:00:00",
         "cross_info": null
       },
@@ -1979,7 +1979,7 @@
         "avg_price": 149.8,
         "hist_min": 125,
         "hist_max": 125,
-        "units_for_sale": 75787,
+        "units_for_sale": 99,
         "last_upload_time": "2026-08-05 01:38:43",
         "cross_info": null
       },
@@ -1995,7 +1995,7 @@
         "avg_price": 162.4,
         "hist_min": 158,
         "hist_max": 180,
-        "units_for_sale": 48150,
+        "units_for_sale": 3960,
         "last_upload_time": "2026-08-04 23:59:10",
         "cross_info": null
       },
@@ -2011,7 +2011,7 @@
         "avg_price": 3219.6,
         "hist_min": 2899,
         "hist_max": 3700,
-        "units_for_sale": 25465,
+        "units_for_sale": 830,
         "last_upload_time": "2026-08-05 03:21:31",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -2034,7 +2034,7 @@
         "avg_price": 3020.0,
         "hist_min": 2500,
         "hist_max": 5000,
-        "units_for_sale": 32168,
+        "units_for_sale": 295,
         "last_upload_time": "2026-08-05 01:40:17",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -2057,7 +2057,7 @@
         "avg_price": 182.0,
         "hist_min": 165,
         "hist_max": 221,
-        "units_for_sale": 34257,
+        "units_for_sale": 3901,
         "last_upload_time": "2026-08-04 17:31:42",
         "cross_info": null
       },
@@ -2073,7 +2073,7 @@
         "avg_price": 200.8,
         "hist_min": 111,
         "hist_max": 111,
-        "units_for_sale": 34257,
+        "units_for_sale": 40,
         "last_upload_time": "2026-08-04 17:31:42",
         "cross_info": null
       },
@@ -2089,7 +2089,7 @@
         "avg_price": 370.4,
         "hist_min": 350,
         "hist_max": 380,
-        "units_for_sale": 20674,
+        "units_for_sale": 2959,
         "last_upload_time": "2026-08-04 18:49:00",
         "cross_info": null
       },
@@ -2105,7 +2105,7 @@
         "avg_price": 358.6,
         "hist_min": 359,
         "hist_max": 359,
-        "units_for_sale": 20674,
+        "units_for_sale": 99,
         "last_upload_time": "2026-08-04 18:49:00",
         "cross_info": null
       },
@@ -2121,7 +2121,7 @@
         "avg_price": 431.9,
         "hist_min": 350,
         "hist_max": 350,
-        "units_for_sale": 22106,
+        "units_for_sale": 2689,
         "last_upload_time": "2026-08-04 22:58:53",
         "cross_info": null
       },
@@ -2137,7 +2137,7 @@
         "avg_price": 478.4,
         "hist_min": 300,
         "hist_max": 698,
-        "units_for_sale": 22106,
+        "units_for_sale": 2689,
         "last_upload_time": "2026-08-04 22:58:53",
         "cross_info": null
       },
@@ -2153,7 +2153,7 @@
         "avg_price": 73.4,
         "hist_min": 70,
         "hist_max": 78,
-        "units_for_sale": 20387,
+        "units_for_sale": 2974,
         "last_upload_time": "2026-08-04 11:41:23",
         "cross_info": null
       },
@@ -2169,7 +2169,7 @@
         "avg_price": 404.6,
         "hist_min": 110,
         "hist_max": 110,
-        "units_for_sale": 13553,
+        "units_for_sale": 3480,
         "last_upload_time": "2026-08-04 22:24:30",
         "cross_info": null
       },
@@ -2185,7 +2185,7 @@
         "avg_price": 188.0,
         "hist_min": 100,
         "hist_max": 220,
-        "units_for_sale": 24894,
+        "units_for_sale": 3572,
         "last_upload_time": "2026-08-04 17:17:16",
         "cross_info": null
       },
@@ -2201,7 +2201,7 @@
         "avg_price": 417.5,
         "hist_min": 370,
         "hist_max": 370,
-        "units_for_sale": 66059,
+        "units_for_sale": 2910,
         "last_upload_time": "2026-08-04 21:12:15",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -2224,7 +2224,7 @@
         "avg_price": 227.0,
         "hist_min": 220,
         "hist_max": 239,
-        "units_for_sale": 12650,
+        "units_for_sale": 2033,
         "last_upload_time": "2026-08-04 16:22:00",
         "cross_info": null
       },
@@ -2240,7 +2240,7 @@
         "avg_price": 324.0,
         "hist_min": 100,
         "hist_max": 470,
-        "units_for_sale": 13553,
+        "units_for_sale": 3480,
         "last_upload_time": "2026-08-04 22:24:30",
         "cross_info": null
       },
@@ -2256,7 +2256,7 @@
         "avg_price": 158.0,
         "hist_min": 100,
         "hist_max": 200,
-        "units_for_sale": 13722,
+        "units_for_sale": 2332,
         "last_upload_time": "2026-08-04 18:42:00",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -2279,7 +2279,7 @@
         "avg_price": 6391.8,
         "hist_min": 5800,
         "hist_max": 5800,
-        "units_for_sale": 25507,
+        "units_for_sale": 2025,
         "last_upload_time": "2026-08-04 16:41:55",
         "cross_info": null
       },
@@ -2295,7 +2295,7 @@
         "avg_price": 280.0,
         "hist_min": 200,
         "hist_max": 300,
-        "units_for_sale": 16658,
+        "units_for_sale": 1238,
         "last_upload_time": "2026-08-05 03:11:45",
         "cross_info": null
       },
@@ -2311,7 +2311,7 @@
         "avg_price": 233.8,
         "hist_min": 103,
         "hist_max": 103,
-        "units_for_sale": 16658,
+        "units_for_sale": 1238,
         "last_upload_time": "2026-08-05 01:37:44",
         "cross_info": null
       },
@@ -2327,7 +2327,7 @@
         "avg_price": 493.6,
         "hist_min": 399,
         "hist_max": 1005,
-        "units_for_sale": 9256,
+        "units_for_sale": 2951,
         "last_upload_time": "2026-08-05 02:30:33",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -2350,7 +2350,7 @@
         "avg_price": 431.9,
         "hist_min": 150,
         "hist_max": 150,
-        "units_for_sale": 9256,
+        "units_for_sale": 2951,
         "last_upload_time": "2026-08-04 15:56:28",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -2389,7 +2389,7 @@
         "avg_price": 694.2,
         "hist_min": 500,
         "hist_max": 500,
-        "units_for_sale": 99,
+        "units_for_sale": 3064,
         "last_upload_time": "2026-08-05 00:56:46",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -2412,7 +2412,7 @@
         "avg_price": 2779.8,
         "hist_min": 2700,
         "hist_max": 2900,
-        "units_for_sale": 18911,
+        "units_for_sale": 1843,
         "last_upload_time": "2026-08-05 04:07:33",
         "cross_info": null
       },
@@ -2428,7 +2428,7 @@
         "avg_price": 2355.4,
         "hist_min": 2295,
         "hist_max": 2597,
-        "units_for_sale": 29838,
+        "units_for_sale": 3186,
         "last_upload_time": "2026-08-05 03:22:25",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -2474,7 +2474,7 @@
         "avg_price": 87.6,
         "hist_min": 82,
         "hist_max": 89,
-        "units_for_sale": 24992,
+        "units_for_sale": 2040,
         "last_upload_time": "2026-08-04 12:09:02",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -2513,7 +2513,7 @@
         "avg_price": 3324.9,
         "hist_min": 1000,
         "hist_max": 1000,
-        "units_for_sale": 21,
+        "units_for_sale": 1976,
         "last_upload_time": "2026-08-05 02:12:54",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -2568,7 +2568,7 @@
         "avg_price": 652.2,
         "hist_min": 389,
         "hist_max": 389,
-        "units_for_sale": 23530,
+        "units_for_sale": 3650,
         "last_upload_time": "2026-08-05 02:06:07",
         "cross_info": null
       },
@@ -2600,7 +2600,7 @@
         "avg_price": 214.5,
         "hist_min": 140,
         "hist_max": 140,
-        "units_for_sale": 36513,
+        "units_for_sale": 3151,
         "last_upload_time": "2026-08-04 12:39:21",
         "cross_info": null
       },
@@ -2632,7 +2632,7 @@
         "avg_price": 3520.4,
         "hist_min": 2400,
         "hist_max": 7500,
-        "units_for_sale": 6705,
+        "units_for_sale": 1515,
         "last_upload_time": "2026-08-05 02:29:41",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -2671,7 +2671,7 @@
         "avg_price": 1050.2,
         "hist_min": 600,
         "hist_max": 600,
-        "units_for_sale": 72,
+        "units_for_sale": 3187,
         "last_upload_time": "2026-08-04 12:33:07",
         "cross_info": null
       },
@@ -2687,7 +2687,7 @@
         "avg_price": 1665.2,
         "hist_min": 1500,
         "hist_max": 1500,
-        "units_for_sale": 5457,
+        "units_for_sale": 1858,
         "last_upload_time": "2026-08-04 18:30:09",
         "cross_info": null
       },
@@ -2703,7 +2703,7 @@
         "avg_price": 226.0,
         "hist_min": 198,
         "hist_max": 245,
-        "units_for_sale": 16042,
+        "units_for_sale": 3722,
         "last_upload_time": "2026-08-05 00:48:39",
         "cross_info": null
       },
@@ -2719,7 +2719,7 @@
         "avg_price": 194.2,
         "hist_min": 50,
         "hist_max": 50,
-        "units_for_sale": 9141,
+        "units_for_sale": 1515,
         "last_upload_time": "2026-08-05 00:51:36",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -2742,7 +2742,7 @@
         "avg_price": 134.8,
         "hist_min": 60,
         "hist_max": 60,
-        "units_for_sale": 16452,
+        "units_for_sale": 2065,
         "last_upload_time": "2026-08-03 15:08:59",
         "cross_info": null
       },
@@ -2758,7 +2758,7 @@
         "avg_price": 1364.3,
         "hist_min": 1400,
         "hist_max": 1500,
-        "units_for_sale": 9891,
+        "units_for_sale": 294,
         "last_upload_time": "2026-08-04 21:11:28",
         "cross_info": null
       },
@@ -2774,7 +2774,7 @@
         "avg_price": 85.8,
         "hist_min": 64,
         "hist_max": 110,
-        "units_for_sale": 17241,
+        "units_for_sale": 3226,
         "last_upload_time": "2026-08-05 01:24:43",
         "cross_info": null
       },
@@ -2790,7 +2790,7 @@
         "avg_price": 2687.0,
         "hist_min": 2250,
         "hist_max": 3500,
-        "units_for_sale": 8273,
+        "units_for_sale": 1083,
         "last_upload_time": "2026-08-04 15:51:09",
         "cross_info": null
       },
@@ -2806,7 +2806,7 @@
         "avg_price": 5888.2,
         "hist_min": 5799,
         "hist_max": 5799,
-        "units_for_sale": 24945,
+        "units_for_sale": 2110,
         "last_upload_time": "2026-08-04 16:41:40",
         "cross_info": null
       },
@@ -2822,7 +2822,7 @@
         "avg_price": 277.0,
         "hist_min": 250,
         "hist_max": 305,
-        "units_for_sale": 14187,
+        "units_for_sale": 790,
         "last_upload_time": "2026-08-05 00:19:34",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -2845,7 +2845,7 @@
         "avg_price": 98.4,
         "hist_min": 94,
         "hist_max": 104,
-        "units_for_sale": 14905,
+        "units_for_sale": 17946,
         "last_upload_time": "2026-08-05 04:09:27",
         "cross_info": null
       },
@@ -2861,7 +2861,7 @@
         "avg_price": 62.3,
         "hist_min": 15,
         "hist_max": 15,
-        "units_for_sale": 8320,
+        "units_for_sale": 10,
         "last_upload_time": "2026-08-04 20:54:00",
         "cross_info": null
       },
@@ -2877,7 +2877,7 @@
         "avg_price": 5888.2,
         "hist_min": 5799,
         "hist_max": 5799,
-        "units_for_sale": 99,
+        "units_for_sale": 2110,
         "last_upload_time": "2026-08-04 16:41:40",
         "cross_info": null
       },
@@ -2893,7 +2893,7 @@
         "avg_price": 116.9,
         "hist_min": 80,
         "hist_max": 80,
-        "units_for_sale": 11155,
+        "units_for_sale": 673,
         "last_upload_time": "2026-08-05 00:11:06",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -2916,7 +2916,7 @@
         "avg_price": 82.3,
         "hist_min": 19,
         "hist_max": 19,
-        "units_for_sale": 13666,
+        "units_for_sale": 1303,
         "last_upload_time": "2026-08-04 21:52:26",
         "cross_info": null
       },
@@ -2932,7 +2932,7 @@
         "avg_price": 136.8,
         "hist_min": 50,
         "hist_max": 50,
-        "units_for_sale": 32664,
+        "units_for_sale": 17,
         "last_upload_time": "2026-08-04 19:14:32",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -2955,7 +2955,7 @@
         "avg_price": 198.0,
         "hist_min": 154,
         "hist_max": 154,
-        "units_for_sale": 14756,
+        "units_for_sale": 1529,
         "last_upload_time": "2026-08-05 01:16:39",
         "cross_info": null
       },
@@ -2971,7 +2971,7 @@
         "avg_price": 205.9,
         "hist_min": 80,
         "hist_max": 80,
-        "units_for_sale": 13829,
+        "units_for_sale": 1371,
         "last_upload_time": "2026-08-04 23:00:25",
         "cross_info": null
       },
@@ -2987,7 +2987,7 @@
         "avg_price": 6439.6,
         "hist_min": 6299,
         "hist_max": 6600,
-        "units_for_sale": 24079,
+        "units_for_sale": 769,
         "last_upload_time": "2026-08-05 01:57:29",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -3010,7 +3010,7 @@
         "avg_price": 10.1,
         "hist_min": 5,
         "hist_max": 5,
-        "units_for_sale": 23590,
+        "units_for_sale": 1877,
         "last_upload_time": "2026-08-05 02:05:23",
         "cross_info": null
       },
@@ -3026,7 +3026,7 @@
         "avg_price": 306.8,
         "hist_min": 150,
         "hist_max": 150,
-        "units_for_sale": 5693,
+        "units_for_sale": 9,
         "last_upload_time": "2026-08-04 21:11:43",
         "cross_info": null
       },
@@ -3042,7 +3042,7 @@
         "avg_price": 161.6,
         "hist_min": 78,
         "hist_max": 482,
-        "units_for_sale": 8844,
+        "units_for_sale": 1132,
         "last_upload_time": "2026-08-04 21:54:19",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -3065,7 +3065,7 @@
         "avg_price": 151.3,
         "hist_min": 30,
         "hist_max": 30,
-        "units_for_sale": 8844,
+        "units_for_sale": 1132,
         "last_upload_time": "2026-08-04 21:54:19",
         "cross_info": null
       },
@@ -3081,7 +3081,7 @@
         "avg_price": 28.8,
         "hist_min": 5,
         "hist_max": 5,
-        "units_for_sale": 8775,
+        "units_for_sale": 5,
         "last_upload_time": "2026-08-04 16:44:23",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -3104,7 +3104,7 @@
         "avg_price": 1365.6,
         "hist_min": 999,
         "hist_max": 999,
-        "units_for_sale": 99,
+        "units_for_sale": 2684,
         "last_upload_time": "2026-08-04 16:34:00",
         "cross_info": null
       },
@@ -3120,7 +3120,7 @@
         "avg_price": 128200.4,
         "hist_min": 120001,
         "hist_max": 134000,
-        "units_for_sale": 4746,
+        "units_for_sale": 541,
         "last_upload_time": "2026-08-05 03:06:38",
         "cross_info": null
       },
@@ -3136,7 +3136,7 @@
         "avg_price": 427.7,
         "hist_min": 200,
         "hist_max": 200,
-        "units_for_sale": 2953,
+        "units_for_sale": 1040,
         "last_upload_time": "2026-08-04 21:13:15",
         "cross_info": null
       },
@@ -3152,7 +3152,7 @@
         "avg_price": 81.2,
         "hist_min": 40,
         "hist_max": 69,
-        "units_for_sale": 10760,
+        "units_for_sale": 2387,
         "last_upload_time": "2026-08-04 21:24:46",
         "cross_info": null
       },
@@ -3191,7 +3191,7 @@
         "avg_price": 6391.8,
         "hist_min": 5800,
         "hist_max": 5800,
-        "units_for_sale": 25507,
+        "units_for_sale": 2025,
         "last_upload_time": "2026-08-04 16:41:55",
         "cross_info": null
       },
@@ -3207,7 +3207,7 @@
         "avg_price": 219.4,
         "hist_min": 210,
         "hist_max": 230,
-        "units_for_sale": 8844,
+        "units_for_sale": 571,
         "last_upload_time": "2026-08-05 01:37:19",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -3230,7 +3230,7 @@
         "avg_price": 528.7,
         "hist_min": 190,
         "hist_max": 190,
-        "units_for_sale": 8844,
+        "units_for_sale": 1,
         "last_upload_time": "2026-08-05 01:37:19",
         "cross_info": null
       },
@@ -3246,7 +3246,7 @@
         "avg_price": 272.4,
         "hist_min": 200,
         "hist_max": 397,
-        "units_for_sale": 11077,
+        "units_for_sale": 1835,
         "last_upload_time": "2026-08-04 14:28:23",
         "cross_info": null
       },
@@ -3262,7 +3262,7 @@
         "avg_price": 1205.3,
         "hist_min": 545,
         "hist_max": 545,
-        "units_for_sale": 6938,
+        "units_for_sale": 541,
         "last_upload_time": "2026-08-04 13:41:12",
         "cross_info": null
       },
@@ -3278,7 +3278,7 @@
         "avg_price": 1625.0,
         "hist_min": 1400,
         "hist_max": 1980,
-        "units_for_sale": 5800,
+        "units_for_sale": 312,
         "last_upload_time": "2026-08-05 02:36:46",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -3301,7 +3301,7 @@
         "avg_price": 2225.4,
         "hist_min": 1200,
         "hist_max": 1200,
-        "units_for_sale": 5800,
+        "units_for_sale": 312,
         "last_upload_time": "2026-08-04 22:52:29",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -3324,7 +3324,7 @@
         "avg_price": 701.6,
         "hist_min": 675,
         "hist_max": 753,
-        "units_for_sale": 19222,
+        "units_for_sale": 2337,
         "last_upload_time": "2026-08-04 20:03:37",
         "cross_info": null
       },
@@ -3340,7 +3340,7 @@
         "avg_price": 179.6,
         "hist_min": 148,
         "hist_max": 200,
-        "units_for_sale": 4982,
+        "units_for_sale": 1508,
         "last_upload_time": "2026-08-04 03:52:20",
         "cross_info": null
       },
@@ -3356,7 +3356,7 @@
         "avg_price": 92.8,
         "hist_min": 10,
         "hist_max": 50,
-        "units_for_sale": 5755,
+        "units_for_sale": 2229,
         "last_upload_time": "2026-08-04 09:23:30",
         "cross_info": null
       },
@@ -3372,7 +3372,7 @@
         "avg_price": 35.4,
         "hist_min": 30,
         "hist_max": 45,
-        "units_for_sale": 8912,
+        "units_for_sale": 200,
         "last_upload_time": "2026-08-05 04:09:34",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -3395,7 +3395,7 @@
         "avg_price": 1049.6,
         "hist_min": 900,
         "hist_max": 1300,
-        "units_for_sale": 3624,
+        "units_for_sale": 866,
         "last_upload_time": "2026-08-04 11:41:27",
         "cross_info": null
       },
@@ -3411,7 +3411,7 @@
         "avg_price": 2205.3,
         "hist_min": 1800,
         "hist_max": 1800,
-        "units_for_sale": 6489,
+        "units_for_sale": 1284,
         "last_upload_time": "2026-08-04 21:56:47",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -3434,7 +3434,7 @@
         "avg_price": 100.0,
         "hist_min": 100,
         "hist_max": 100,
-        "units_for_sale": 2856,
+        "units_for_sale": 1670,
         "last_upload_time": "2026-08-04 22:04:29",
         "cross_info": null
       },
@@ -3450,7 +3450,7 @@
         "avg_price": 159.3,
         "hist_min": 60,
         "hist_max": 150,
-        "units_for_sale": 6821,
+        "units_for_sale": 1546,
         "last_upload_time": "2026-08-04 17:13:35",
         "cross_info": null
       },
@@ -3466,7 +3466,7 @@
         "avg_price": 1808.8,
         "hist_min": 1449,
         "hist_max": 1449,
-        "units_for_sale": 3226,
+        "units_for_sale": 1514,
         "last_upload_time": "2026-08-05 00:29:31",
         "cross_info": null
       }
@@ -3484,7 +3484,7 @@
         "avg_price": 46.6,
         "hist_min": 42,
         "hist_max": 48,
-        "units_for_sale": 4923754,
+        "units_for_sale": 107558,
         "last_upload_time": "2026-08-05 04:08:11",
         "cross_info": null
       },
@@ -3500,7 +3500,7 @@
         "avg_price": 44.5,
         "hist_min": 39,
         "hist_max": 39,
-        "units_for_sale": 5411600,
+        "units_for_sale": 157865,
         "last_upload_time": "2026-08-05 00:02:44",
         "cross_info": null
       },
@@ -3516,7 +3516,7 @@
         "avg_price": 24.0,
         "hist_min": 14,
         "hist_max": 45,
-        "units_for_sale": 8828325,
+        "units_for_sale": 163497,
         "last_upload_time": "2026-08-05 04:04:54",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -3539,7 +3539,7 @@
         "avg_price": 49.2,
         "hist_min": 38,
         "hist_max": 55,
-        "units_for_sale": 5424291,
+        "units_for_sale": 50000,
         "last_upload_time": "2026-08-05 04:10:22",
         "cross_info": null
       },
@@ -3555,7 +3555,7 @@
         "avg_price": 22.2,
         "hist_min": 13,
         "hist_max": 13,
-        "units_for_sale": 2000,
+        "units_for_sale": 155497,
         "last_upload_time": "2026-08-04 22:51:50",
         "cross_info": null
       },
@@ -3571,7 +3571,7 @@
         "avg_price": 51.6,
         "hist_min": 47,
         "hist_max": 53,
-        "units_for_sale": 634671,
+        "units_for_sale": 70119,
         "last_upload_time": "2026-08-04 17:33:20",
         "cross_info": null
       },
@@ -3587,7 +3587,7 @@
         "avg_price": 49.0,
         "hist_min": 49,
         "hist_max": 49,
-        "units_for_sale": 1451903,
+        "units_for_sale": 53669,
         "last_upload_time": "2026-08-05 04:03:15",
         "cross_info": null
       },
@@ -3603,7 +3603,7 @@
         "avg_price": 176.8,
         "hist_min": 124,
         "hist_max": 124,
-        "units_for_sale": 62202,
+        "units_for_sale": 2412,
         "last_upload_time": "2026-08-04 23:47:40",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -3626,7 +3626,7 @@
         "avg_price": 1668.6,
         "hist_min": 1600,
         "hist_max": 1600,
-        "units_for_sale": 134067,
+        "units_for_sale": 99,
         "last_upload_time": "2026-08-05 02:11:05",
         "cross_info": null
       },
@@ -3642,7 +3642,7 @@
         "avg_price": 179.3,
         "hist_min": 99,
         "hist_max": 161,
-        "units_for_sale": 72365,
+        "units_for_sale": 3725,
         "last_upload_time": "2026-08-05 01:22:53",
         "cross_info": null
       },
@@ -3658,7 +3658,7 @@
         "avg_price": 179.3,
         "hist_min": 160,
         "hist_max": 160,
-        "units_for_sale": 76161,
+        "units_for_sale": 3725,
         "last_upload_time": "2026-08-05 01:22:53",
         "cross_info": null
       },
@@ -3674,7 +3674,7 @@
         "avg_price": 447.1,
         "hist_min": 405,
         "hist_max": 405,
-        "units_for_sale": 30,
+        "units_for_sale": 3795,
         "last_upload_time": "2026-08-05 01:59:30",
         "cross_info": null
       },
@@ -3690,7 +3690,7 @@
         "avg_price": 753.4,
         "hist_min": 300,
         "hist_max": 300,
-        "units_for_sale": 14442,
+        "units_for_sale": 3881,
         "last_upload_time": "2026-08-04 23:48:18",
         "cross_info": null
       },
@@ -3706,7 +3706,7 @@
         "avg_price": 2991.9,
         "hist_min": 495,
         "hist_max": 495,
-        "units_for_sale": 47960,
+        "units_for_sale": 2469,
         "last_upload_time": "2026-08-05 02:13:55",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -3729,7 +3729,7 @@
         "avg_price": 2991.9,
         "hist_min": 2495,
         "hist_max": 3000,
-        "units_for_sale": 47960,
+        "units_for_sale": 2469,
         "last_upload_time": "2026-08-05 02:37:47",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -3752,7 +3752,7 @@
         "avg_price": 3418.2,
         "hist_min": 3640,
         "hist_max": 4700,
-        "units_for_sale": 56503,
+        "units_for_sale": 780,
         "last_upload_time": "2026-08-05 02:15:46",
         "cross_info": null
       },
@@ -3768,7 +3768,7 @@
         "avg_price": 3418.2,
         "hist_min": 410,
         "hist_max": 410,
-        "units_for_sale": 56503,
+        "units_for_sale": 3,
         "last_upload_time": "2026-08-05 02:14:00",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -3837,7 +3837,7 @@
         "avg_price": 2861.4,
         "hist_min": 2384,
         "hist_max": 3000,
-        "units_for_sale": 43317,
+        "units_for_sale": 3342,
         "last_upload_time": "2026-08-05 02:52:44",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -3860,7 +3860,7 @@
         "avg_price": 112.4,
         "hist_min": 100,
         "hist_max": 130,
-        "units_for_sale": 30505,
+        "units_for_sale": 2763,
         "last_upload_time": "2026-08-04 18:23:27",
         "cross_info": null
       },
@@ -3876,7 +3876,7 @@
         "avg_price": 2094.2,
         "hist_min": 2090,
         "hist_max": 2096,
-        "units_for_sale": 32557,
+        "units_for_sale": 3661,
         "last_upload_time": "2026-08-05 04:00:05",
         "cross_info": null
       },
@@ -3892,7 +3892,7 @@
         "avg_price": 3198.8,
         "hist_min": 3198,
         "hist_max": 3199,
-        "units_for_sale": 27667,
+        "units_for_sale": 2005,
         "last_upload_time": "2026-08-05 04:02:09",
         "cross_info": null
       },
@@ -3908,7 +3908,7 @@
         "avg_price": 227.8,
         "hist_min": 110,
         "hist_max": 110,
-        "units_for_sale": 20836,
+        "units_for_sale": 3532,
         "last_upload_time": "2026-08-04 15:25:37",
         "cross_info": null
       },
@@ -3924,7 +3924,7 @@
         "avg_price": 157.1,
         "hist_min": 100,
         "hist_max": 100,
-        "units_for_sale": 27537,
+        "units_for_sale": 3500,
         "last_upload_time": "2026-08-05 00:30:22",
         "cross_info": null
       },
@@ -3940,7 +3940,7 @@
         "avg_price": 233.0,
         "hist_min": 100,
         "hist_max": 400,
-        "units_for_sale": 27537,
+        "units_for_sale": 3500,
         "last_upload_time": "2026-08-05 04:08:54",
         "cross_info": null
       },
@@ -3988,7 +3988,7 @@
         "avg_price": 2040.2,
         "hist_min": 1100,
         "hist_max": 1100,
-        "units_for_sale": 6010,
+        "units_for_sale": 2754,
         "last_upload_time": "2026-08-04 19:01:03",
         "cross_info": null
       },
@@ -4004,7 +4004,7 @@
         "avg_price": 2673.9,
         "hist_min": 2505,
         "hist_max": 2505,
-        "units_for_sale": 1,
+        "units_for_sale": 2005,
         "last_upload_time": "2026-08-05 01:50:39",
         "cross_info": null
       },
@@ -4020,7 +4020,7 @@
         "avg_price": 185.0,
         "hist_min": 145,
         "hist_max": 230,
-        "units_for_sale": 22913,
+        "units_for_sale": 2332,
         "last_upload_time": "2026-08-05 03:59:22",
         "cross_info": null
       },
@@ -4036,7 +4036,7 @@
         "avg_price": 139.0,
         "hist_min": 107,
         "hist_max": 173,
-        "units_for_sale": 20827,
+        "units_for_sale": 2915,
         "last_upload_time": "2026-08-05 03:57:45",
         "cross_info": null
       },
@@ -4052,7 +4052,7 @@
         "avg_price": 1321.0,
         "hist_min": 1100,
         "hist_max": 1460,
-        "units_for_sale": 11898,
+        "units_for_sale": 1733,
         "last_upload_time": "2026-08-05 00:07:26",
         "cross_info": null
       },
@@ -4068,7 +4068,7 @@
         "avg_price": 1423.8,
         "hist_min": 1094,
         "hist_max": 1094,
-        "units_for_sale": 30,
+        "units_for_sale": 1733,
         "last_upload_time": "2026-08-05 00:07:26",
         "cross_info": null
       },
@@ -4084,7 +4084,7 @@
         "avg_price": 420.3,
         "hist_min": 240,
         "hist_max": 240,
-        "units_for_sale": 13754,
+        "units_for_sale": 1792,
         "last_upload_time": "2026-08-04 21:26:09",
         "cross_info": null
       },
@@ -4100,7 +4100,7 @@
         "avg_price": 594.8,
         "hist_min": 498,
         "hist_max": 778,
-        "units_for_sale": 27308,
+        "units_for_sale": 3515,
         "last_upload_time": "2026-08-05 04:01:15",
         "cross_info": null
       },
@@ -4116,7 +4116,7 @@
         "avg_price": 163.0,
         "hist_min": 150,
         "hist_max": 180,
-        "units_for_sale": 20154,
+        "units_for_sale": 2396,
         "last_upload_time": "2026-08-05 02:10:17",
         "cross_info": null
       },
@@ -4132,7 +4132,7 @@
         "avg_price": 126.3,
         "hist_min": 100,
         "hist_max": 100,
-        "units_for_sale": 37819,
+        "units_for_sale": 1,
         "last_upload_time": "2026-08-05 01:20:52",
         "cross_info": null
       },
@@ -4148,7 +4148,7 @@
         "avg_price": 247.4,
         "hist_min": 144,
         "hist_max": 144,
-        "units_for_sale": 33261,
+        "units_for_sale": 2531,
         "last_upload_time": "2026-08-04 22:23:25",
         "cross_info": null
       },
@@ -4164,7 +4164,7 @@
         "avg_price": 91.6,
         "hist_min": 40,
         "hist_max": 80,
-        "units_for_sale": 7598,
+        "units_for_sale": 1744,
         "last_upload_time": "2026-08-04 23:32:29",
         "cross_info": null
       },
@@ -4180,7 +4180,7 @@
         "avg_price": 91.6,
         "hist_min": 40,
         "hist_max": 40,
-        "units_for_sale": 7598,
+        "units_for_sale": 1744,
         "last_upload_time": "2026-08-04 23:32:29",
         "cross_info": null
       },
@@ -4196,7 +4196,7 @@
         "avg_price": 104.0,
         "hist_min": 90,
         "hist_max": 150,
-        "units_for_sale": 3576,
+        "units_for_sale": 2592,
         "last_upload_time": "2026-08-03 23:43:31",
         "cross_info": null
       },
@@ -4244,7 +4244,7 @@
         "avg_price": 990.9,
         "hist_min": 985,
         "hist_max": 990,
-        "units_for_sale": 18037,
+        "units_for_sale": 2863,
         "last_upload_time": "2026-08-05 02:45:14",
         "cross_info": null
       },
@@ -4260,7 +4260,7 @@
         "avg_price": 285.7,
         "hist_min": 148,
         "hist_max": 148,
-        "units_for_sale": 19326,
+        "units_for_sale": 99,
         "last_upload_time": "2026-08-05 02:16:22",
         "cross_info": null
       },
@@ -4276,7 +4276,7 @@
         "avg_price": 179.4,
         "hist_min": 73,
         "hist_max": 73,
-        "units_for_sale": 9034,
+        "units_for_sale": 2103,
         "last_upload_time": "2026-08-04 22:55:54",
         "cross_info": null
       },
@@ -4315,7 +4315,7 @@
         "avg_price": 22009.5,
         "hist_min": 20000,
         "hist_max": 20000,
-        "units_for_sale": 8338,
+        "units_for_sale": 3126,
         "last_upload_time": "2026-08-04 23:14:45",
         "cross_info": null
       },
@@ -4331,7 +4331,7 @@
         "avg_price": 218.1,
         "hist_min": 104,
         "hist_max": 104,
-        "units_for_sale": 13189,
+        "units_for_sale": 1264,
         "last_upload_time": "2026-08-04 14:51:33",
         "cross_info": null
       },
@@ -4347,7 +4347,7 @@
         "avg_price": 51.2,
         "hist_min": 50,
         "hist_max": 52,
-        "units_for_sale": 8087,
+        "units_for_sale": 1784,
         "last_upload_time": "2026-08-05 03:45:28",
         "cross_info": null
       },
@@ -4363,7 +4363,7 @@
         "avg_price": 126.2,
         "hist_min": 122,
         "hist_max": 132,
-        "units_for_sale": 11888,
+        "units_for_sale": 1457,
         "last_upload_time": "2026-08-05 03:41:40",
         "cross_info": null
       },
@@ -4379,7 +4379,7 @@
         "avg_price": 556.6,
         "hist_min": 430,
         "hist_max": 900,
-        "units_for_sale": 22791,
+        "units_for_sale": 2301,
         "last_upload_time": "2026-08-05 03:43:44",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -4418,7 +4418,7 @@
         "avg_price": 782.2,
         "hist_min": 751,
         "hist_max": 800,
-        "units_for_sale": 8635,
+        "units_for_sale": 3201,
         "last_upload_time": "2026-08-04 00:03:55",
         "cross_info": null
       },
@@ -4434,7 +4434,7 @@
         "avg_price": 280.8,
         "hist_min": 5,
         "hist_max": 5,
-        "units_for_sale": 14219,
+        "units_for_sale": 1131,
         "last_upload_time": "2026-08-04 13:12:53",
         "cross_info": null
       },
@@ -4450,7 +4450,7 @@
         "avg_price": 98.5,
         "hist_min": 60,
         "hist_max": 100,
-        "units_for_sale": 10066,
+        "units_for_sale": 1452,
         "last_upload_time": "2026-08-04 17:43:48",
         "cross_info": null
       },
@@ -4466,7 +4466,7 @@
         "avg_price": 3916.0,
         "hist_min": 3780,
         "hist_max": 4000,
-        "units_for_sale": 4698,
+        "units_for_sale": 1364,
         "last_upload_time": "2026-08-05 04:03:27",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -4489,7 +4489,7 @@
         "avg_price": 1034.0,
         "hist_min": 1016,
         "hist_max": 1100,
-        "units_for_sale": 15405,
+        "units_for_sale": 371,
         "last_upload_time": "2026-08-05 03:39:32",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -4512,7 +4512,7 @@
         "avg_price": 98.7,
         "hist_min": 1,
         "hist_max": 1,
-        "units_for_sale": 11,
+        "units_for_sale": 1613,
         "last_upload_time": "2026-08-04 23:32:44",
         "cross_info": null
       },
@@ -4528,7 +4528,7 @@
         "avg_price": 198.8,
         "hist_min": 90,
         "hist_max": 90,
-        "units_for_sale": 5783,
+        "units_for_sale": 1055,
         "last_upload_time": "2026-08-04 09:48:31",
         "cross_info": null
       },
@@ -4544,7 +4544,7 @@
         "avg_price": 3488.8,
         "hist_min": 2500,
         "hist_max": 4444,
-        "units_for_sale": 9147,
+        "units_for_sale": 427,
         "last_upload_time": "2026-08-04 21:48:51",
         "cross_info": null
       },
@@ -4576,7 +4576,7 @@
         "avg_price": 507.0,
         "hist_min": 160,
         "hist_max": 160,
-        "units_for_sale": 8131,
+        "units_for_sale": 3248,
         "last_upload_time": "2026-08-04 18:23:53",
         "cross_info": null
       },
@@ -4592,7 +4592,7 @@
         "avg_price": 3161.8,
         "hist_min": 3100,
         "hist_max": 3200,
-        "units_for_sale": 7139,
+        "units_for_sale": 658,
         "last_upload_time": "2026-08-05 04:10:15",
         "cross_info": null
       },
@@ -4608,7 +4608,7 @@
         "avg_price": 989.2,
         "hist_min": 690,
         "hist_max": 690,
-        "units_for_sale": 15480,
+        "units_for_sale": 1931,
         "last_upload_time": "2026-08-05 01:55:34",
         "cross_info": null
       },
@@ -4640,7 +4640,7 @@
         "avg_price": 144.1,
         "hist_min": 15,
         "hist_max": 15,
-        "units_for_sale": 10,
+        "units_for_sale": 886,
         "last_upload_time": "2026-08-05 02:10:41",
         "cross_info": null
       },
@@ -4656,7 +4656,7 @@
         "avg_price": 2513.5,
         "hist_min": 1991,
         "hist_max": 1991,
-        "units_for_sale": 4579,
+        "units_for_sale": 1,
         "last_upload_time": "2026-08-05 02:07:50",
         "cross_info": null
       },
@@ -4672,7 +4672,7 @@
         "avg_price": 2556.0,
         "hist_min": 2400,
         "hist_max": 2980,
-        "units_for_sale": 4579,
+        "units_for_sale": 1076,
         "last_upload_time": "2026-08-05 02:07:50",
         "cross_info": null
       },
@@ -4688,7 +4688,7 @@
         "avg_price": 4063.3,
         "hist_min": 2555,
         "hist_max": 2555,
-        "units_for_sale": 8538,
+        "units_for_sale": 1085,
         "last_upload_time": "2026-08-04 23:24:01",
         "cross_info": null
       },
@@ -4704,7 +4704,7 @@
         "avg_price": 3954.0,
         "hist_min": 3815,
         "hist_max": 4000,
-        "units_for_sale": 8538,
+        "units_for_sale": 1085,
         "last_upload_time": "2026-08-05 04:10:32",
         "cross_info": null
       },
@@ -4720,7 +4720,7 @@
         "avg_price": 186.6,
         "hist_min": 185,
         "hist_max": 192,
-        "units_for_sale": 8629,
+        "units_for_sale": 1894,
         "last_upload_time": "2026-08-05 03:42:29",
         "cross_info": null
       },
@@ -4736,7 +4736,7 @@
         "avg_price": 245.0,
         "hist_min": 217,
         "hist_max": 297,
-        "units_for_sale": 5327,
+        "units_for_sale": 261,
         "last_upload_time": "2026-08-05 03:48:30",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -4759,7 +4759,7 @@
         "avg_price": 150.8,
         "hist_min": 100,
         "hist_max": 179,
-        "units_for_sale": 11484,
+        "units_for_sale": 1202,
         "last_upload_time": "2026-08-05 03:58:40",
         "cross_info": null
       },
@@ -4775,7 +4775,7 @@
         "avg_price": 5214.4,
         "hist_min": 5207,
         "hist_max": 5217,
-        "units_for_sale": 11359,
+        "units_for_sale": 2253,
         "last_upload_time": "2026-08-05 04:00:57",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -4798,7 +4798,7 @@
         "avg_price": 75.2,
         "hist_min": 8,
         "hist_max": 200,
-        "units_for_sale": 15936,
+        "units_for_sale": 818,
         "last_upload_time": "2026-08-05 03:24:51",
         "cross_info": null
       },
@@ -4814,7 +4814,7 @@
         "avg_price": 264.2,
         "hist_min": 222,
         "hist_max": 300,
-        "units_for_sale": 7196,
+        "units_for_sale": 1231,
         "last_upload_time": "2026-08-05 03:36:55",
         "cross_info": null
       },
@@ -4830,7 +4830,7 @@
         "avg_price": 289.8,
         "hist_min": 131,
         "hist_max": 131,
-        "units_for_sale": 7196,
+        "units_for_sale": 1231,
         "last_upload_time": "2026-08-05 00:13:54",
         "cross_info": null
       },
@@ -4846,7 +4846,7 @@
         "avg_price": 2280.0,
         "hist_min": 2200,
         "hist_max": 2300,
-        "units_for_sale": 5180,
+        "units_for_sale": 816,
         "last_upload_time": "2026-08-05 03:50:20",
         "cross_info": null
       },
@@ -4862,7 +4862,7 @@
         "avg_price": 218.6,
         "hist_min": 143,
         "hist_max": 483,
-        "units_for_sale": 20932,
+        "units_for_sale": 989,
         "last_upload_time": "2026-08-05 04:06:32",
         "cross_info": null
       },
@@ -4878,7 +4878,7 @@
         "avg_price": 2781.4,
         "hist_min": 900,
         "hist_max": 4000,
-        "units_for_sale": 6650,
+        "units_for_sale": 1004,
         "last_upload_time": "2026-08-05 01:50:47",
         "cross_info": null
       },
@@ -4894,7 +4894,7 @@
         "avg_price": 10.8,
         "hist_min": 1,
         "hist_max": 34,
-        "units_for_sale": 16407,
+        "units_for_sale": 1960,
         "last_upload_time": "2026-08-05 04:06:15",
         "cross_info": null
       },
@@ -4910,7 +4910,7 @@
         "avg_price": 717.6,
         "hist_min": 200,
         "hist_max": 200,
-        "units_for_sale": 2753,
+        "units_for_sale": 1265,
         "last_upload_time": "2026-08-04 18:05:59",
         "cross_info": null
       },
@@ -4926,7 +4926,7 @@
         "avg_price": 717.6,
         "hist_min": 480,
         "hist_max": 791,
-        "units_for_sale": 2753,
+        "units_for_sale": 3028,
         "last_upload_time": "2026-08-04 18:05:59",
         "cross_info": null
       },
@@ -4942,7 +4942,7 @@
         "avg_price": 67.4,
         "hist_min": 50,
         "hist_max": 90,
-        "units_for_sale": 12453,
+        "units_for_sale": 477,
         "last_upload_time": "2026-08-05 03:56:40",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -4965,7 +4965,7 @@
         "avg_price": 314.4,
         "hist_min": 123,
         "hist_max": 123,
-        "units_for_sale": 4758,
+        "units_for_sale": 2025,
         "last_upload_time": "2026-08-04 14:32:11",
         "cross_info": null
       },
@@ -4997,7 +4997,7 @@
         "avg_price": 657.2,
         "hist_min": 217,
         "hist_max": 217,
-        "units_for_sale": 3489,
+        "units_for_sale": 601,
         "last_upload_time": "2026-08-04 14:57:21",
         "cross_info": null
       },
@@ -5013,7 +5013,7 @@
         "avg_price": 259.6,
         "hist_min": 149,
         "hist_max": 700,
-        "units_for_sale": 9640,
+        "units_for_sale": 2081,
         "last_upload_time": "2026-08-04 16:51:26",
         "cross_info": null
       },
@@ -5029,7 +5029,7 @@
         "avg_price": 2032.8,
         "hist_min": 1807,
         "hist_max": 1807,
-        "units_for_sale": 1,
+        "units_for_sale": 58,
         "last_upload_time": "2026-08-04 23:47:03",
         "cross_info": null
       },
@@ -5045,7 +5045,7 @@
         "avg_price": 130.7,
         "hist_min": 88,
         "hist_max": 88,
-        "units_for_sale": 4693,
+        "units_for_sale": 879,
         "last_upload_time": "2026-08-04 16:50:25",
         "cross_info": null
       },
@@ -5061,7 +5061,7 @@
         "avg_price": 8998.0,
         "hist_min": 4200,
         "hist_max": 13000,
-        "units_for_sale": 3517,
+        "units_for_sale": 2534,
         "last_upload_time": "2026-08-04 18:27:59",
         "cross_info": null
       },
@@ -5077,7 +5077,7 @@
         "avg_price": 2701.0,
         "hist_min": 2400,
         "hist_max": 3000,
-        "units_for_sale": 6762,
+        "units_for_sale": 1362,
         "last_upload_time": "2026-08-04 17:07:12",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -5116,7 +5116,7 @@
         "avg_price": 234.8,
         "hist_min": 150,
         "hist_max": 150,
-        "units_for_sale": 1516,
+        "units_for_sale": 1032,
         "last_upload_time": "2026-08-04 10:38:37",
         "cross_info": null
       },
@@ -5132,7 +5132,7 @@
         "avg_price": 1500.2,
         "hist_min": 1001,
         "hist_max": 2000,
-        "units_for_sale": 3516,
+        "units_for_sale": 1558,
         "last_upload_time": "2026-08-04 17:08:16",
         "cross_info": null
       },
@@ -5148,7 +5148,7 @@
         "avg_price": 659.0,
         "hist_min": 600,
         "hist_max": 600,
-        "units_for_sale": 2,
+        "units_for_sale": 2871,
         "last_upload_time": "2026-08-04 21:20:57",
         "cross_info": null
       },
@@ -5164,7 +5164,7 @@
         "avg_price": 398.6,
         "hist_min": 375,
         "hist_max": 375,
-        "units_for_sale": 1882,
+        "units_for_sale": 725,
         "last_upload_time": "2026-08-04 13:10:13",
         "cross_info": null
       },
@@ -5203,7 +5203,7 @@
         "avg_price": 520.8,
         "hist_min": 217,
         "hist_max": 900,
-        "units_for_sale": 6333,
+        "units_for_sale": 316,
         "last_upload_time": "2026-08-05 04:10:18",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -5226,7 +5226,7 @@
         "avg_price": 1152.0,
         "hist_min": 600,
         "hist_max": 1500,
-        "units_for_sale": 8237,
+        "units_for_sale": 1131,
         "last_upload_time": "2026-08-05 03:44:45",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -5249,7 +5249,7 @@
         "avg_price": 139.3,
         "hist_min": 60,
         "hist_max": 60,
-        "units_for_sale": 4618,
+        "units_for_sale": 903,
         "last_upload_time": "2026-08-04 19:07:13",
         "cross_info": null
       },
@@ -5265,7 +5265,7 @@
         "avg_price": 2520.2,
         "hist_min": 1800,
         "hist_max": 1900,
-        "units_for_sale": 4037,
+        "units_for_sale": 159,
         "last_upload_time": "2026-08-05 02:55:45",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -5288,7 +5288,7 @@
         "avg_price": 654.7,
         "hist_min": 550,
         "hist_max": 550,
-        "units_for_sale": 54191,
+        "units_for_sale": 2,
         "last_upload_time": "2026-08-05 02:23:42",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -5311,7 +5311,7 @@
         "avg_price": 55.9,
         "hist_min": 1,
         "hist_max": 1,
-        "units_for_sale": 12669,
+        "units_for_sale": 1793,
         "last_upload_time": "2026-08-03 04:19:45",
         "cross_info": null
       },
@@ -5327,7 +5327,7 @@
         "avg_price": 73.8,
         "hist_min": 40,
         "hist_max": 99,
-        "units_for_sale": 12669,
+        "units_for_sale": 1793,
         "last_upload_time": "2026-08-03 04:19:45",
         "cross_info": null
       },
@@ -5343,7 +5343,7 @@
         "avg_price": 927.1,
         "hist_min": 500,
         "hist_max": 500,
-        "units_for_sale": 3169,
+        "units_for_sale": 201,
         "last_upload_time": "2026-08-05 01:09:24",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -5389,7 +5389,7 @@
         "avg_price": 927.1,
         "hist_min": 500,
         "hist_max": 500,
-        "units_for_sale": 9,
+        "units_for_sale": 201,
         "last_upload_time": "2026-08-05 01:09:24",
         "cross_info": null
       },
@@ -5405,7 +5405,7 @@
         "avg_price": 145.6,
         "hist_min": 52,
         "hist_max": 52,
-        "units_for_sale": 1864,
+        "units_for_sale": 89,
         "last_upload_time": "2026-08-04 08:50:01",
         "cross_info": null
       },
@@ -5421,7 +5421,7 @@
         "avg_price": 391.9,
         "hist_min": 355,
         "hist_max": 388,
-        "units_for_sale": 2988,
+        "units_for_sale": 414,
         "last_upload_time": "2026-08-04 12:15:09",
         "cross_info": null
       },
@@ -5437,7 +5437,7 @@
         "avg_price": 391.9,
         "hist_min": 100,
         "hist_max": 100,
-        "units_for_sale": 2988,
+        "units_for_sale": 414,
         "last_upload_time": "2026-08-04 12:15:09",
         "cross_info": null
       }
@@ -5455,7 +5455,7 @@
         "avg_price": 51.0,
         "hist_min": 30,
         "hist_max": 80,
-        "units_for_sale": 2782681,
+        "units_for_sale": 180472,
         "last_upload_time": "2026-08-05 03:11:09",
         "cross_info": null
       },
@@ -5471,7 +5471,7 @@
         "avg_price": 45.8,
         "hist_min": 41,
         "hist_max": 48,
-        "units_for_sale": 1463633,
+        "units_for_sale": 53351,
         "last_upload_time": "2026-08-05 03:43:01",
         "cross_info": null
       },
@@ -5487,7 +5487,7 @@
         "avg_price": 1620.0,
         "hist_min": 1620,
         "hist_max": 1620,
-        "units_for_sale": 70787,
+        "units_for_sale": 3700,
         "last_upload_time": "2026-08-05 03:06:32",
         "cross_info": null
       },
@@ -5503,7 +5503,7 @@
         "avg_price": 445.0,
         "hist_min": 445,
         "hist_max": 445,
-        "units_for_sale": 47880,
+        "units_for_sale": 3721,
         "last_upload_time": "2026-08-05 02:12:33",
         "cross_info": null
       },
@@ -5519,7 +5519,7 @@
         "avg_price": 715.8,
         "hist_min": 697,
         "hist_max": 750,
-        "units_for_sale": 73576,
+        "units_for_sale": 1951,
         "last_upload_time": "2026-08-05 02:06:47",
         "cross_info": null
       },
@@ -5535,7 +5535,7 @@
         "avg_price": 276.4,
         "hist_min": 160,
         "hist_max": 400,
-        "units_for_sale": 58586,
+        "units_for_sale": 3639,
         "last_upload_time": "2026-08-05 02:12:27",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -5558,7 +5558,7 @@
         "avg_price": 395.8,
         "hist_min": 370,
         "hist_max": 439,
-        "units_for_sale": 56745,
+        "units_for_sale": 1914,
         "last_upload_time": "2026-08-04 20:51:33",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -5581,7 +5581,7 @@
         "avg_price": 502.8,
         "hist_min": 482,
         "hist_max": 528,
-        "units_for_sale": 18686,
+        "units_for_sale": 3417,
         "last_upload_time": "2026-08-04 22:37:00",
         "cross_info": null
       },
@@ -5597,7 +5597,7 @@
         "avg_price": 1938.0,
         "hist_min": 1300,
         "hist_max": 2500,
-        "units_for_sale": 25058,
+        "units_for_sale": 1753,
         "last_upload_time": "2026-08-04 18:02:08",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -5659,7 +5659,7 @@
         "avg_price": 2980.0,
         "hist_min": 2500,
         "hist_max": 3300,
-        "units_for_sale": 16106,
+        "units_for_sale": 1531,
         "last_upload_time": "2026-08-05 04:15:40",
         "cross_info": null
       },
@@ -5675,7 +5675,7 @@
         "avg_price": 301.6,
         "hist_min": 300,
         "hist_max": 308,
-        "units_for_sale": 16504,
+        "units_for_sale": 2973,
         "last_upload_time": "2026-08-04 09:24:13",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -5698,7 +5698,7 @@
         "avg_price": 2500.0,
         "hist_min": 2500,
         "hist_max": 2500,
-        "units_for_sale": 20986,
+        "units_for_sale": 245,
         "last_upload_time": "2026-08-04 23:16:41",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -5760,7 +5760,7 @@
         "avg_price": 253.8,
         "hist_min": 225,
         "hist_max": 284,
-        "units_for_sale": 113201,
+        "units_for_sale": 3063,
         "last_upload_time": "2026-08-05 04:04:54",
         "cross_info": null
       },
@@ -5776,7 +5776,7 @@
         "avg_price": 4117.6,
         "hist_min": 3900,
         "hist_max": 4690,
-        "units_for_sale": 9188,
+        "units_for_sale": 2713,
         "last_upload_time": "2026-08-04 18:53:17",
         "cross_info": null
       },
@@ -5792,7 +5792,7 @@
         "avg_price": 2099.8,
         "hist_min": 1900,
         "hist_max": 2300,
-        "units_for_sale": 10300,
+        "units_for_sale": 2835,
         "last_upload_time": "2026-08-05 03:30:27",
         "cross_info": null
       },
@@ -5808,7 +5808,7 @@
         "avg_price": 234.6,
         "hist_min": 215,
         "hist_max": 260,
-        "units_for_sale": 12630,
+        "units_for_sale": 2563,
         "last_upload_time": "2026-08-04 22:00:53",
         "cross_info": null
       },
@@ -5824,7 +5824,7 @@
         "avg_price": 2099.8,
         "hist_min": 1900,
         "hist_max": 2300,
-        "units_for_sale": 10300,
+        "units_for_sale": 2835,
         "last_upload_time": "2026-08-04 21:15:32",
         "cross_info": null
       },
@@ -5840,7 +5840,7 @@
         "avg_price": 1888.8,
         "hist_min": 500,
         "hist_max": 2242,
-        "units_for_sale": 22869,
+        "units_for_sale": 2742,
         "last_upload_time": "2026-08-05 03:48:37",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -5863,7 +5863,7 @@
         "avg_price": 1888.8,
         "hist_min": 500,
         "hist_max": 2242,
-        "units_for_sale": 22869,
+        "units_for_sale": 3351,
         "last_upload_time": "2026-08-05 01:51:22",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -5886,7 +5886,7 @@
         "avg_price": 300.0,
         "hist_min": 300,
         "hist_max": 300,
-        "units_for_sale": 24266,
+        "units_for_sale": 3762,
         "last_upload_time": "2026-08-05 01:51:49",
         "cross_info": null
       },
@@ -5902,7 +5902,7 @@
         "avg_price": 300.0,
         "hist_min": 300,
         "hist_max": 300,
-        "units_for_sale": 24266,
+        "units_for_sale": 25366,
         "last_upload_time": "2026-08-05 01:51:49",
         "cross_info": null
       },
@@ -5918,7 +5918,7 @@
         "avg_price": 2700.8,
         "hist_min": 2500,
         "hist_max": 2800,
-        "units_for_sale": 18381,
+        "units_for_sale": 1448,
         "last_upload_time": "2026-08-05 01:14:47",
         "cross_info": null
       },
@@ -5950,7 +5950,7 @@
         "avg_price": 204.0,
         "hist_min": 203,
         "hist_max": 205,
-        "units_for_sale": 26145,
+        "units_for_sale": 2888,
         "last_upload_time": "2026-08-04 15:52:54",
         "cross_info": null
       },
@@ -5966,7 +5966,7 @@
         "avg_price": 215.8,
         "hist_min": 180,
         "hist_max": 250,
-        "units_for_sale": 14264,
+        "units_for_sale": 14996,
         "last_upload_time": "2026-08-04 11:56:47",
         "cross_info": null
       },
@@ -5982,7 +5982,7 @@
         "avg_price": 190.0,
         "hist_min": 157,
         "hist_max": 220,
-        "units_for_sale": 19161,
+        "units_for_sale": 3360,
         "last_upload_time": "2026-08-04 14:59:00",
         "cross_info": null
       },
@@ -5998,7 +5998,7 @@
         "avg_price": 190.0,
         "hist_min": 157,
         "hist_max": 220,
-        "units_for_sale": 19161,
+        "units_for_sale": 3360,
         "last_upload_time": "2026-08-04 14:59:00",
         "cross_info": null
       },
@@ -6014,7 +6014,7 @@
         "avg_price": 2437.0,
         "hist_min": 2005,
         "hist_max": 2980,
-        "units_for_sale": 3909,
+        "units_for_sale": 1809,
         "last_upload_time": "2026-08-05 00:41:04",
         "cross_info": null
       },
@@ -6030,7 +6030,7 @@
         "avg_price": 3500.0,
         "hist_min": 3500,
         "hist_max": 3500,
-        "units_for_sale": 7789,
+        "units_for_sale": 1183,
         "last_upload_time": "2026-08-04 15:27:15",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -6076,7 +6076,7 @@
         "avg_price": 1050.0,
         "hist_min": 1050,
         "hist_max": 1050,
-        "units_for_sale": 18815,
+        "units_for_sale": 2139,
         "last_upload_time": "2026-08-04 19:40:15",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -6099,7 +6099,7 @@
         "avg_price": 188.0,
         "hist_min": 160,
         "hist_max": 220,
-        "units_for_sale": 7453,
+        "units_for_sale": 2446,
         "last_upload_time": "2026-08-04 07:44:05",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -6122,7 +6122,7 @@
         "avg_price": 223.6,
         "hist_min": 168,
         "hist_max": 300,
-        "units_for_sale": 10256,
+        "units_for_sale": 3183,
         "last_upload_time": "2026-08-05 00:13:11",
         "cross_info": null
       },
@@ -6138,7 +6138,7 @@
         "avg_price": 289.6,
         "hist_min": 205,
         "hist_max": 400,
-        "units_for_sale": 20640,
+        "units_for_sale": 3678,
         "last_upload_time": "2026-08-04 17:00:45",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -6161,7 +6161,7 @@
         "avg_price": 5.4,
         "hist_min": 5,
         "hist_max": 6,
-        "units_for_sale": 12643,
+        "units_for_sale": 1616,
         "last_upload_time": "2026-08-04 18:56:18",
         "cross_info": null
       },
@@ -6200,7 +6200,7 @@
         "avg_price": 9320.0,
         "hist_min": 9000,
         "hist_max": 10000,
-        "units_for_sale": 5483,
+        "units_for_sale": 666,
         "last_upload_time": "2026-08-04 19:03:26",
         "cross_info": null
       },
@@ -6216,7 +6216,7 @@
         "avg_price": 9320.0,
         "hist_min": 9000,
         "hist_max": 10000,
-        "units_for_sale": 5483,
+        "units_for_sale": 666,
         "last_upload_time": "2026-08-05 02:55:15",
         "cross_info": null
       },
@@ -6232,7 +6232,7 @@
         "avg_price": 2741.0,
         "hist_min": 2207,
         "hist_max": 2999,
-        "units_for_sale": 12527,
+        "units_for_sale": 16639,
         "last_upload_time": "2026-08-04 18:11:18",
         "cross_info": null
       },
@@ -6248,7 +6248,7 @@
         "avg_price": 2741.0,
         "hist_min": 2207,
         "hist_max": 2999,
-        "units_for_sale": 12527,
+        "units_for_sale": 1020,
         "last_upload_time": "2026-08-04 18:11:18",
         "cross_info": null
       },
@@ -6312,7 +6312,7 @@
         "avg_price": 165.4,
         "hist_min": 95,
         "hist_max": 202,
-        "units_for_sale": 7535,
+        "units_for_sale": 1194,
         "last_upload_time": "2026-08-04 12:41:40",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -6335,7 +6335,7 @@
         "avg_price": 165.4,
         "hist_min": 95,
         "hist_max": 202,
-        "units_for_sale": 7535,
+        "units_for_sale": 14090,
         "last_upload_time": "2026-08-04 12:41:40",
         "cross_info": null
       },
@@ -6367,7 +6367,7 @@
         "avg_price": 18532.0,
         "hist_min": 18000,
         "hist_max": 19000,
-        "units_for_sale": 7193,
+        "units_for_sale": 2071,
         "last_upload_time": "2026-08-04 23:56:55",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -6406,7 +6406,7 @@
         "avg_price": 476.0,
         "hist_min": 300,
         "hist_max": 980,
-        "units_for_sale": 2218,
+        "units_for_sale": 1385,
         "last_upload_time": "2026-08-04 23:50:10",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -6429,7 +6429,7 @@
         "avg_price": 194.0,
         "hist_min": 188,
         "hist_max": 200,
-        "units_for_sale": 7406,
+        "units_for_sale": 2567,
         "last_upload_time": "2026-08-04 10:05:42",
         "cross_info": null
       },
@@ -6445,7 +6445,7 @@
         "avg_price": 194.0,
         "hist_min": 188,
         "hist_max": 200,
-        "units_for_sale": 7406,
+        "units_for_sale": 2567,
         "last_upload_time": "2026-08-04 10:05:42",
         "cross_info": null
       },
@@ -6461,7 +6461,7 @@
         "avg_price": 384.4,
         "hist_min": 240,
         "hist_max": 530,
-        "units_for_sale": 7197,
+        "units_for_sale": 3027,
         "last_upload_time": "2026-08-04 16:34:49",
         "cross_info": null
       },
@@ -6477,7 +6477,7 @@
         "avg_price": 161.6,
         "hist_min": 104,
         "hist_max": 200,
-        "units_for_sale": 4823,
+        "units_for_sale": 934,
         "last_upload_time": "2026-08-05 02:15:00",
         "cross_info": null
       },
@@ -6493,7 +6493,7 @@
         "avg_price": 5376.0,
         "hist_min": 5000,
         "hist_max": 6780,
-        "units_for_sale": 12369,
+        "units_for_sale": 968,
         "last_upload_time": "2026-08-04 22:42:28",
         "cross_info": null
       },
@@ -6509,7 +6509,7 @@
         "avg_price": 50.8,
         "hist_min": 45,
         "hist_max": 70,
-        "units_for_sale": 27242,
+        "units_for_sale": 3722,
         "last_upload_time": "2026-08-05 02:23:38",
         "cross_info": null
       },
@@ -6525,7 +6525,7 @@
         "avg_price": 6000.0,
         "hist_min": 6000,
         "hist_max": 6000,
-        "units_for_sale": 9407,
+        "units_for_sale": 861,
         "last_upload_time": "2026-08-05 03:46:56",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -6548,7 +6548,7 @@
         "avg_price": 6000.0,
         "hist_min": 6000,
         "hist_max": 6000,
-        "units_for_sale": 9407,
+        "units_for_sale": 861,
         "last_upload_time": "2026-08-04 23:30:19",
         "cross_info": null
       },
@@ -6564,7 +6564,7 @@
         "avg_price": 353.8,
         "hist_min": 196,
         "hist_max": 417,
-        "units_for_sale": 4571,
+        "units_for_sale": 237,
         "last_upload_time": "2026-08-04 22:40:47",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -6587,7 +6587,7 @@
         "avg_price": 16.4,
         "hist_min": 5,
         "hist_max": 30,
-        "units_for_sale": 9884,
+        "units_for_sale": 13842,
         "last_upload_time": "2026-08-05 03:02:32",
         "cross_info": null
       },
@@ -6603,7 +6603,7 @@
         "avg_price": 4691.8,
         "hist_min": 4440,
         "hist_max": 5699,
-        "units_for_sale": 6287,
+        "units_for_sale": 582,
         "last_upload_time": "2026-08-04 20:13:00",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -6626,7 +6626,7 @@
         "avg_price": 24.0,
         "hist_min": 5,
         "hist_max": 50,
-        "units_for_sale": 5905,
+        "units_for_sale": 2037,
         "last_upload_time": "2026-08-03 09:22:58",
         "cross_info": null
       },
@@ -6642,7 +6642,7 @@
         "avg_price": 84.0,
         "hist_min": 40,
         "hist_max": 100,
-        "units_for_sale": 6394,
+        "units_for_sale": 1944,
         "last_upload_time": "2026-08-04 08:18:10",
         "cross_info": null
       },
@@ -6658,7 +6658,7 @@
         "avg_price": 1200.0,
         "hist_min": 500,
         "hist_max": 2500,
-        "units_for_sale": 2168,
+        "units_for_sale": 969,
         "last_upload_time": "2026-08-04 14:55:03",
         "cross_info": null
       },
@@ -6674,7 +6674,7 @@
         "avg_price": 2028.8,
         "hist_min": 1950,
         "hist_max": 2200,
-        "units_for_sale": 4416,
+        "units_for_sale": 897,
         "last_upload_time": "2026-08-04 12:08:02",
         "cross_info": null
       },
@@ -6690,7 +6690,7 @@
         "avg_price": 290.0,
         "hist_min": 222,
         "hist_max": 450,
-        "units_for_sale": 9394,
+        "units_for_sale": 805,
         "last_upload_time": "2026-08-04 19:16:24",
         "cross_info": null
       },
@@ -6706,7 +6706,7 @@
         "avg_price": 329.0,
         "hist_min": 200,
         "hist_max": 400,
-        "units_for_sale": 4985,
+        "units_for_sale": 2861,
         "last_upload_time": "2026-08-04 08:31:45",
         "cross_info": null
       },
@@ -6722,7 +6722,7 @@
         "avg_price": 762.6,
         "hist_min": 630,
         "hist_max": 950,
-        "units_for_sale": 5695,
+        "units_for_sale": 437,
         "last_upload_time": "2026-08-04 12:16:31",
         "cross_info": null
       },
@@ -6738,7 +6738,7 @@
         "avg_price": 53.6,
         "hist_min": 20,
         "hist_max": 99,
-        "units_for_sale": 12130,
+        "units_for_sale": 3127,
         "last_upload_time": "2026-08-04 06:23:56",
         "cross_info": null
       },
@@ -6754,7 +6754,7 @@
         "avg_price": 4962.2,
         "hist_min": 4499,
         "hist_max": 6500,
-        "units_for_sale": 427,
+        "units_for_sale": 68,
         "last_upload_time": "2026-08-05 01:37:17",
         "cross_info": null
       },
@@ -6770,7 +6770,7 @@
         "avg_price": 5.4,
         "hist_min": 5,
         "hist_max": 6,
-        "units_for_sale": 12643,
+        "units_for_sale": 1616,
         "last_upload_time": "2026-08-04 18:56:18",
         "cross_info": null
       },
@@ -6786,7 +6786,7 @@
         "avg_price": 231.0,
         "hist_min": 200,
         "hist_max": 305,
-        "units_for_sale": 4097,
+        "units_for_sale": 1321,
         "last_upload_time": "2026-08-05 00:40:09",
         "cross_info": null
       },
@@ -6802,7 +6802,7 @@
         "avg_price": 33.0,
         "hist_min": 25,
         "hist_max": 35,
-        "units_for_sale": 6382,
+        "units_for_sale": 244,
         "last_upload_time": "2026-08-04 17:12:02",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -6841,7 +6841,7 @@
         "avg_price": 197.0,
         "hist_min": 191,
         "hist_max": 199,
-        "units_for_sale": 3521,
+        "units_for_sale": 2163,
         "last_upload_time": "2026-08-04 00:48:36",
         "cross_info": null
       },
@@ -6880,7 +6880,7 @@
         "avg_price": 731.6,
         "hist_min": 517,
         "hist_max": 890,
-        "units_for_sale": 11383,
+        "units_for_sale": 451,
         "last_upload_time": "2026-08-04 22:40:22",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -6903,7 +6903,7 @@
         "avg_price": 334.0,
         "hist_min": 250,
         "hist_max": 500,
-        "units_for_sale": 7999,
+        "units_for_sale": 2960,
         "last_upload_time": "2026-08-04 07:41:53",
         "cross_info": null
       }
