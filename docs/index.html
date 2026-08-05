@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FF14 Market Board Analytics - Mana DC</title>
+  <title>FF14 Market Board Analytics - JP DC Comparison</title>
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,6 +111,44 @@
       0% { opacity: 0.4; }
       50% { opacity: 1; }
       100% { opacity: 0.4; }
+    }
+
+    /* DC Selector Tabs */
+    .dc-tabs {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .dc-tab {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.65rem 1.25rem;
+      border-radius: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .dc-tab:hover {
+      border-color: rgba(0, 210, 255, 0.4);
+      color: #ffffff;
+    }
+
+    .dc-tab.active {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(121, 40, 202, 0.2));
+      border-color: var(--accent-blue);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
     }
 
     /* Stats Overview Cards */
@@ -299,7 +337,7 @@
   <div class="container">
     <header>
       <div class="brand">
-        <div class="brand-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="brand-icon"><i class="fa-solid fa-earth-asia"></i></div>
         <div>
           <h1>FF14 Market Board Analytics</h1>
           <div class="status-badge" id="lastUpdatedBadge">
@@ -309,17 +347,23 @@
       </div>
     </header>
 
+    <!-- DC Selection Tabs -->
+    <div class="dc-tabs" id="dcTabs">
+      <button class="dc-tab active" data-dc="Mana"><i class="fa-solid fa-server"></i> Mana</button>
+      <button class="dc-tab" data-dc="Elemental"><i class="fa-solid fa-server"></i> Elemental</button>
+      <button class="dc-tab" data-dc="Gaia"><i class="fa-solid fa-server"></i> Gaia</button>
+      <button class="dc-tab" data-dc="Meteor"><i class="fa-solid fa-server"></i> Meteor</button>
+    </div>
+
     <!-- Overview Cards -->
     <div class="overview-grid">
       <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-server"></i> 対象スコープ</div>
+        <div class="stat-label"><i class="fa-solid fa-server"></i> 選択中データセンター</div>
         <div class="stat-value" id="statScope">Mana DC</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card-body">
-          <div class="stat-label"><i class="fa-solid fa-fire"></i> 監視アクティブ数</div>
-          <div class="stat-value" id="statTotalItems">-</div>
-        </div>
+        <div class="stat-label"><i class="fa-solid fa-fire"></i> 監視アクティブ数</div>
+        <div class="stat-value" id="statTotalItems">-</div>
       </div>
       <div class="stat-card">
         <div class="stat-label"><i class="fa-solid fa-crown"></i> 最高取引速度アイテム</div>
@@ -354,7 +398,7 @@
             <tr>
               <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-muted);">
                 <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                <p>最新の市場データを取得中...</p>
+                <p>日本DCデータを読み込み中...</p>
               </td>
             </tr>
           </tbody>
@@ -363,12 +407,13 @@
     </div>
 
     <footer>
-      <p>FF14 Market Board Analytics &copy; 2026 | Powered by Universalis API & XIVAPI</p>
+      <p>FF14 Market Board Analytics &copy; 2026 | Japan DC Comparison (Elemental / Gaia / Mana / Meteor)</p>
     </footer>
   </div>
 
   <script>
-    let globalItems = [];
+    let allDcData = {};
+    let currentDc = "Mana";
 
     async function loadData() {
       try {
@@ -376,19 +421,12 @@
         if (!res.ok) throw new Error('Data fetch failed');
         const data = await res.json();
 
-        // Stats Update
         document.getElementById('lastUpdatedBadge').innerHTML = `
           <span class="status-dot"></span> 最終更新: ${data.last_updated} (UTC)
         `;
-        document.getElementById('statScope').innerText = `${data.scope} DC`;
-        document.getElementById('statTotalItems').innerText = `${data.total_items} 件`;
 
-        globalItems = data.items || [];
-        if (globalItems.length > 0) {
-          document.getElementById('statTopItem').innerText = globalItems[0].item_name;
-        }
-
-        renderTable(globalItems);
+        allDcData = data.data || {};
+        switchDc(currentDc);
 
       } catch (err) {
         console.error(err);
@@ -403,13 +441,31 @@
       }
     }
 
+    function switchDc(dcName) {
+      currentDc = dcName;
+      document.getElementById('statScope').innerText = `${dcName} DC`;
+
+      const items = allDcData[dcName] || [];
+      document.getElementById('statTotalItems').innerText = `${items.length} 件`;
+
+      if (items.length > 0) {
+        document.getElementById('statTopItem').innerText = items[0].item_name;
+      } else {
+        document.getElementById('statTopItem').innerText = '-';
+      }
+
+      // Filter input reset
+      document.getElementById('searchInput').value = '';
+      renderTable(items);
+    }
+
     function renderTable(items) {
       const tbody = document.getElementById('marketTableBody');
-      if (items.length === 0) {
+      if (!items || items.length === 0) {
         tbody.innerHTML = `
           <tr>
             <td colspan="7" style="text-align: center; padding: 2rem; color: var(--text-muted);">
-              該当するアイテムが見つかりませんでした。
+              ${currentDc} DC のデータがまだありません。次の自動巡回までお待ちください。
             </td>
           </tr>
         `;
@@ -465,15 +521,28 @@
       });
     }
 
+    // DC Tab Click Events
+    document.querySelectorAll('.dc-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        document.querySelectorAll('.dc-tab').forEach(t => t.classList.remove('active'));
+        const targetTab = e.currentTarget;
+        targetTab.classList.add('active');
+        const dc = targetTab.getAttribute('data-dc');
+        switchDc(dc);
+      });
+    });
+
     // Search Filter
     document.getElementById('searchInput').addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase().trim();
+      const items = allDcData[currentDc] || [];
+
       if (!term) {
-        renderTable(globalItems);
+        renderTable(items);
         return;
       }
 
-      const filtered = globalItems.filter(item => 
+      const filtered = items.filter(item => 
         item.item_name.toLowerCase().includes(term) ||
         item.item_id.toString().includes(term)
       );
