@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-05 13:56:49",
+  "last_updated": "2026-08-05 14:09:15",
   "datacenters": [
     "Elemental",
     "Gaia",
@@ -332,7 +332,7 @@
         "scope": "Elemental",
         "item_key": "49238_HQ",
         "item_id": 49238,
-        "item_name": "知力の心酔薬G4",
+        "item_name": "心力の宝薬G4",
         "quality": "HQ",
         "velocity": 422.7143,
         "min_price": 2750,
@@ -359,7 +359,7 @@
         "scope": "Elemental",
         "item_key": "49238_NONE",
         "item_id": 49238,
-        "item_name": "知力の心酔薬G4",
+        "item_name": "心力の宝薬G4",
         "quality": "NONE",
         "velocity": 422.7143,
         "min_price": 400,
@@ -393,7 +393,7 @@
         "scope": "Elemental",
         "item_key": "49234_HQ",
         "item_id": 49234,
-        "item_name": "剛力の心酔薬G4",
+        "item_name": "剛力の宝薬G4",
         "quality": "HQ",
         "velocity": 401.14285,
         "min_price": 2296,
@@ -454,7 +454,7 @@
         "scope": "Elemental",
         "item_key": "49240_NONE",
         "item_id": 49240,
-        "item_name": "心力の心酔薬G4",
+        "item_name": "キャラメルポップコーン",
         "quality": "NONE",
         "velocity": 375.57144,
         "min_price": 799,
@@ -488,7 +488,7 @@
         "scope": "Elemental",
         "item_key": "49240_HQ",
         "item_id": 49240,
-        "item_name": "心力の心酔薬G4",
+        "item_name": "キャラメルポップコーン",
         "quality": "HQ",
         "velocity": 348.14285,
         "min_price": 2050,
@@ -560,11 +560,11 @@
         "last_upload_time": "2026-08-05 00:36:35",
         "cross_info": {
           "cheap_scope": "Gaia",
-          "cheap_price": 150,
+          "cheap_price": 197,
           "high_scope": "Elemental",
           "high_price": 250,
-          "profit_gil": 87,
-          "profit_rate": 58.0
+          "profit_gil": 40,
+          "profit_rate": 20.3
         },
         "meta": {
           "icon_url": "https://www.garlandtools.org/files/icons/item/21471.png",
@@ -694,7 +694,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:05:53",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "5118_NONE",
         "item_id": 5118,
@@ -705,8 +705,8 @@
         "avg_price": 150.6,
         "hist_min": 130,
         "hist_max": 179,
-        "units_for_sale": 20802,
-        "last_upload_time": "2026-08-05 03:25:35",
+        "units_for_sale": 19762,
+        "last_upload_time": "2026-08-05 04:07:13",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/021000/021212_hr1.png",
@@ -931,7 +931,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "44018_NONE",
         "item_id": 44018,
@@ -942,7 +942,7 @@
         "avg_price": 205.8,
         "hist_min": 180,
         "hist_max": 249,
-        "units_for_sale": 2005,
+        "units_for_sale": 8874,
         "last_upload_time": "2026-08-05 04:03:32",
         "cross_info": null,
         "meta": {
@@ -962,7 +962,7 @@
         "scope": "Elemental",
         "item_key": "45984_NONE",
         "item_id": 45984,
-        "item_name": "クラロウォルナット原木",
+        "item_name": "浸透性防腐塗料",
         "quality": "NONE",
         "velocity": 229.85715,
         "min_price": 2700,
@@ -1012,7 +1012,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "7596_NONE",
         "item_id": 7596,
@@ -1023,7 +1023,7 @@
         "avg_price": 1248.0,
         "hist_min": 1000,
         "hist_max": 1498,
-        "units_for_sale": 3479,
+        "units_for_sale": 12265,
         "last_upload_time": "2026-08-05 02:38:29",
         "cross_info": null,
         "meta": {
@@ -1165,7 +1165,7 @@
         "scope": "Elemental",
         "item_key": "45972_NONE",
         "item_id": 45972,
-        "item_name": "オルコクロマイト",
+        "item_name": "コチニール染料",
         "quality": "NONE",
         "velocity": 197.71428,
         "min_price": 1000,
@@ -1235,7 +1235,14 @@
         "hist_max": 270,
         "units_for_sale": 99,
         "last_upload_time": "2026-08-04 19:28:26",
-        "cross_info": null,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 130,
+          "high_scope": "Elemental",
+          "high_price": 270,
+          "profit_gil": 126,
+          "profit_rate": 96.9
+        },
         "meta": {
           "icon_url": "https://www.garlandtools.org/files/icons/item/21492.png",
           "description": "落雷によってガラス化した珪岩",
@@ -1418,7 +1425,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "5059_NQ",
         "item_id": 5059,
@@ -1429,7 +1436,7 @@
         "avg_price": 798.4,
         "hist_min": 702,
         "hist_max": 1000,
-        "units_for_sale": 4074,
+        "units_for_sale": 30130,
         "last_upload_time": "2026-08-05 04:08:07",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -1452,7 +1459,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "19932_NONE",
         "item_id": 19932,
@@ -1463,7 +1470,7 @@
         "avg_price": 30.2,
         "hist_min": 10,
         "hist_max": 70,
-        "units_for_sale": 4872,
+        "units_for_sale": 7563,
         "last_upload_time": "2026-08-04 17:32:41",
         "cross_info": null,
         "meta": {
@@ -1492,7 +1499,14 @@
         "hist_max": 100,
         "units_for_sale": 3480,
         "last_upload_time": "2026-08-04 18:20:33",
-        "cross_info": null,
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 1,
+          "high_scope": "Mana",
+          "high_price": 20,
+          "profit_gil": 18,
+          "profit_rate": 1800.0
+        },
         "meta": {
           "icon_url": "https://xivapi.com/i/023000/023897_hr1.png",
           "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[製作Lv20レシピ用]",
@@ -1519,7 +1533,14 @@
         "hist_max": 2500,
         "units_for_sale": 99,
         "last_upload_time": "2026-08-05 00:39:50",
-        "cross_info": null,
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 1800,
+          "high_scope": "Mana",
+          "high_price": 3191,
+          "profit_gil": 1231,
+          "profit_rate": 68.4
+        },
         "meta": {
           "icon_url": "https://www.garlandtools.org/files/icons/item/21616.png",
           "description": "古代からトラル大陸に棲息する鳥類の毛",
@@ -1594,7 +1615,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "24007_NONE",
         "item_id": 24007,
@@ -1605,7 +1626,7 @@
         "avg_price": 3638.8,
         "hist_min": 3600,
         "hist_max": 3794,
-        "units_for_sale": 604,
+        "units_for_sale": 4857,
         "last_upload_time": "2026-08-04 15:18:16",
         "cross_info": null,
         "meta": {
@@ -1648,7 +1669,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "43992_NONE",
         "item_id": 43992,
@@ -1659,7 +1680,7 @@
         "avg_price": 137.8,
         "hist_min": 110,
         "hist_max": 154,
-        "units_for_sale": 2461,
+        "units_for_sale": 9753,
         "last_upload_time": "2026-08-04 21:02:34",
         "cross_info": null,
         "meta": {
@@ -1694,6 +1715,40 @@
           "description": "高硬度のクロムを含有する高山鉱石",
           "category": "石材",
           "item_level": 650,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Elemental",
+        "item_key": "43985_NONE",
+        "item_id": 43985,
+        "item_name": "ヤースラニガーリック",
+        "quality": "NONE",
+        "velocity": 135.0,
+        "min_price": 51,
+        "avg_price": 158.4,
+        "hist_min": 113,
+        "hist_max": 184,
+        "units_for_sale": 28740,
+        "last_upload_time": "2026-08-05 04:48:35",
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 51,
+          "high_scope": "Gaia",
+          "high_price": 80,
+          "profit_gil": 25,
+          "profit_rate": 49.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025006_hr1.png",
+          "description": "球根からなるスパイス。他品種に比べ小振りだが、濃厚な臭みと豊富な栄養素を持つ",
+          "category": "食材",
+          "item_level": 680,
           "shop_price": 99999,
           "buyback_price": 4,
           "stack_size": 999,
@@ -1927,33 +1982,6 @@
       {
         "timestamp": "2026-08-05 13:17:01",
         "scope": "Elemental",
-        "item_key": "43984_NONE",
-        "item_id": 43984,
-        "item_name": "ピーマン",
-        "quality": "NONE",
-        "velocity": 109.85714,
-        "min_price": 68,
-        "avg_price": 122.0,
-        "hist_min": 100,
-        "hist_max": 145,
-        "units_for_sale": 948,
-        "last_upload_time": "2026-08-05 02:22:59",
-        "cross_info": null,
-        "meta": {
-          "icon_url": "https://xivapi.com/i/025000/025044_hr1.png",
-          "description": "トラル大陸原産の、やや苦みがある緑色の野菜。食材の他、薬品や香料としても用いられる",
-          "category": "食材",
-          "item_level": 680,
-          "shop_price": 99999,
-          "buyback_price": 7,
-          "stack_size": 999,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
-        "timestamp": "2026-08-05 13:17:01",
-        "scope": "Elemental",
         "item_key": "41764_NONE",
         "item_id": 41764,
         "item_name": "器識のハイオメガマテリジャ",
@@ -1980,6 +2008,33 @@
           "item_level": 690,
           "shop_price": 99999,
           "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Elemental",
+        "item_key": "43984_NONE",
+        "item_id": 43984,
+        "item_name": "ピーマン",
+        "quality": "NONE",
+        "velocity": 108.57143,
+        "min_price": 68,
+        "avg_price": 166.0,
+        "hist_min": 100,
+        "hist_max": 200,
+        "units_for_sale": 12926,
+        "last_upload_time": "2026-08-05 04:48:18",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025044_hr1.png",
+          "description": "トラル大陸原産の、やや苦みがある緑色の野菜。食材の他、薬品や香料としても用いられる",
+          "category": "食材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 7,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -2013,7 +2068,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:05:53",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "44028_NONE",
         "item_id": 44028,
@@ -2024,7 +2079,7 @@
         "avg_price": 150.0,
         "hist_min": 102,
         "hist_max": 176,
-        "units_for_sale": 7580,
+        "units_for_sale": 6982,
         "last_upload_time": "2026-08-05 02:49:03",
         "cross_info": null,
         "meta": {
@@ -2071,7 +2126,7 @@
         "scope": "Elemental",
         "item_key": "46188_NONE",
         "item_id": 46188,
-        "item_name": "シデリティス茶葉",
+        "item_name": "ゴールデンイール",
         "quality": "NONE",
         "velocity": 105.28571,
         "min_price": 2000,
@@ -2098,7 +2153,7 @@
         "scope": "Elemental",
         "item_key": "46188_NQ",
         "item_id": 46188,
-        "item_name": "シデリティス茶葉",
+        "item_name": "ゴールデンイール",
         "quality": "NQ",
         "velocity": 105.28571,
         "min_price": 2000,
@@ -2252,10 +2307,10 @@
         "cross_info": {
           "cheap_scope": "Gaia",
           "cheap_price": 1200,
-          "high_scope": "Elemental",
-          "high_price": 1499,
-          "profit_gil": 224,
-          "profit_rate": 18.7
+          "high_scope": "Mana",
+          "high_price": 1605,
+          "profit_gil": 324,
+          "profit_rate": 27.0
         },
         "meta": {
           "icon_url": "https://www.garlandtools.org/files/icons/item/22701.png",
@@ -2351,7 +2406,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "25008_HQ",
         "item_id": 25008,
@@ -2362,7 +2417,7 @@
         "avg_price": 5900.0,
         "hist_min": 5500,
         "hist_max": 6000,
-        "units_for_sale": 2093,
+        "units_for_sale": 5717,
         "last_upload_time": "2026-08-04 20:27:41",
         "cross_info": null,
         "meta": {
@@ -2669,7 +2724,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:05:53",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "5061_NQ",
         "item_id": 5061,
@@ -2681,7 +2736,7 @@
         "hist_min": 1600,
         "hist_max": 1699,
         "units_for_sale": 14401,
-        "last_upload_time": "2026-08-05 04:06:29",
+        "last_upload_time": "2026-08-05 04:08:29",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/020000/020808_hr1.png",
@@ -3095,34 +3150,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
-        "scope": "Elemental",
-        "item_key": "5094_NQ",
-        "item_id": 5094,
-        "item_name": "コバルトリベット",
-        "quality": "NQ",
-        "velocity": 53.857143,
-        "min_price": 1000,
-        "avg_price": 1120.6,
-        "hist_min": 1000,
-        "hist_max": 1399,
-        "units_for_sale": 835,
-        "last_upload_time": "2026-08-05 02:15:20",
-        "cross_info": null,
-        "meta": {
-          "icon_url": "https://xivapi.com/i/021000/021003_hr1.png",
-          "description": "頭を大きく成形した鏡鉄の鋲",
-          "category": "金属材",
-          "item_level": 45,
-          "shop_price": 891,
-          "buyback_price": 2,
-          "stack_size": 999,
-          "can_be_hq": true,
-          "rarity": 1
-        }
-      },
-      {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Elemental",
         "item_key": "36261_NONE",
         "item_id": 36261,
@@ -3133,7 +3161,7 @@
         "avg_price": 97.8,
         "hist_min": 24,
         "hist_max": 240,
-        "units_for_sale": 1257,
+        "units_for_sale": 11015,
         "last_upload_time": "2026-08-05 03:29:32",
         "cross_info": null,
         "meta": {
@@ -3145,6 +3173,33 @@
           "buyback_price": 5,
           "stack_size": 999,
           "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Elemental",
+        "item_key": "5094_NQ",
+        "item_id": 5094,
+        "item_name": "コバルトリベット",
+        "quality": "NQ",
+        "velocity": 53.714287,
+        "min_price": 1000,
+        "avg_price": 1120.6,
+        "hist_min": 1000,
+        "hist_max": 1399,
+        "units_for_sale": 14045,
+        "last_upload_time": "2026-08-05 02:15:20",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021003_hr1.png",
+          "description": "頭を大きく成形した鏡鉄の鋲",
+          "category": "金属材",
+          "item_level": 45,
+          "shop_price": 891,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": true,
           "rarity": 1
         }
       },
@@ -3327,7 +3382,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "5530_NONE",
         "item_id": 5530,
@@ -3338,8 +3393,8 @@
         "avg_price": 139.4,
         "hist_min": 139,
         "hist_max": 140,
-        "units_for_sale": 9439,
-        "last_upload_time": "2026-08-05 03:18:56",
+        "units_for_sale": 75765,
+        "last_upload_time": "2026-08-05 04:41:36",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/021000/021462_hr1.png",
@@ -3381,19 +3436,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "5116_NONE",
         "item_id": 5116,
         "item_name": "鏡鉄鉱",
         "quality": "NONE",
-        "velocity": 487.57144,
+        "velocity": 495.2857,
         "min_price": 160,
-        "avg_price": 162.4,
-        "hist_min": 158,
-        "hist_max": 180,
-        "units_for_sale": 9829,
-        "last_upload_time": "2026-08-04 23:59:10",
+        "avg_price": 160.0,
+        "hist_min": 160,
+        "hist_max": 160,
+        "units_for_sale": 47181,
+        "last_upload_time": "2026-08-05 04:28:53",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/021000/021216_hr1.png",
@@ -3412,7 +3467,7 @@
         "scope": "Gaia",
         "item_key": "49234_HQ",
         "item_id": 49234,
-        "item_name": "剛力の心酔薬G4",
+        "item_name": "剛力の宝薬G4",
         "quality": "HQ",
         "velocity": 470.0,
         "min_price": 2200,
@@ -3473,7 +3528,7 @@
         "scope": "Gaia",
         "item_key": "49235_HQ",
         "item_id": 49235,
-        "item_name": "活力の心酔薬G4",
+        "item_name": "眼力の宝薬G4",
         "quality": "HQ",
         "velocity": 430.85715,
         "min_price": 3000,
@@ -3551,6 +3606,33 @@
           "item_level": 115,
           "shop_price": 683,
           "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Gaia",
+        "item_key": "52092_NONE",
+        "item_id": 52092,
+        "item_name": "惑星アウクセシア探索計画の手形",
+        "quality": "NONE",
+        "velocity": 410.85715,
+        "min_price": 20,
+        "avg_price": 60.0,
+        "hist_min": 60,
+        "hist_max": 60,
+        "units_for_sale": 32908,
+        "last_upload_time": "2026-08-05 04:32:32",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/26177.png",
+          "description": "コスモエクスプローラー計画機構が発行した手形。惑星アウクセシアにて高難易度のミッションを完了した計画貢献者へ贈られ、特別な品と交換できる",
+          "category": "61",
+          "item_level": 1,
+          "shop_price": 99999,
+          "buyback_price": 0,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -3669,7 +3751,7 @@
         "scope": "Gaia",
         "item_key": "49229_NQ",
         "item_id": 49229,
-        "item_name": "フトコーラ",
+        "item_name": "フリントコーン",
         "quality": "NQ",
         "velocity": 363.7143,
         "min_price": 350,
@@ -3723,7 +3805,7 @@
         "scope": "Gaia",
         "item_key": "47701_NONE",
         "item_id": 47701,
-        "item_name": "トラルコーン",
+        "item_name": "ウルトラポーション",
         "quality": "NONE",
         "velocity": 342.7143,
         "min_price": 110,
@@ -3750,7 +3832,7 @@
         "scope": "Gaia",
         "item_key": "49209_NONE",
         "item_id": 49209,
-        "item_name": "セドライト",
+        "item_name": "ローズガーネット原石",
         "quality": "NONE",
         "velocity": 338.2857,
         "min_price": 200,
@@ -3807,7 +3889,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "7621_NONE",
         "item_id": 7621,
@@ -3818,7 +3900,7 @@
         "avg_price": 227.0,
         "hist_min": 220,
         "hist_max": 239,
-        "units_for_sale": 1287,
+        "units_for_sale": 12650,
         "last_upload_time": "2026-08-04 16:22:00",
         "cross_info": null,
         "meta": {
@@ -3838,7 +3920,7 @@
         "scope": "Gaia",
         "item_key": "47701_HQ",
         "item_id": 47701,
-        "item_name": "トラルコーン",
+        "item_name": "ウルトラポーション",
         "quality": "HQ",
         "velocity": 315.7143,
         "min_price": 210,
@@ -3861,7 +3943,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "36260_NONE",
         "item_id": 36260,
@@ -3872,7 +3954,7 @@
         "avg_price": 158.0,
         "hist_min": 100,
         "hist_max": 200,
-        "units_for_sale": 506,
+        "units_for_sale": 13722,
         "last_upload_time": "2026-08-04 18:42:00",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -3926,7 +4008,7 @@
         "scope": "Gaia",
         "item_key": "52254_NONE",
         "item_id": 52254,
-        "item_name": "カード:ノーマカー",
+        "item_name": "カララント:ノーマルカラー",
         "quality": "NONE",
         "velocity": 296.14285,
         "min_price": 103,
@@ -3953,7 +4035,7 @@
         "scope": "Gaia",
         "item_key": "52254_NQ",
         "item_id": 52254,
-        "item_name": "カード:ノーマカー",
+        "item_name": "カララント:ノーマルカラー",
         "quality": "NQ",
         "velocity": 282.14285,
         "min_price": 103,
@@ -3969,6 +4051,40 @@
           "category": "55",
           "item_level": 1,
           "shop_price": 216,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Gaia",
+        "item_key": "45970_NONE",
+        "item_id": 45970,
+        "item_name": "ロードクロサイト原石",
+        "quality": "NONE",
+        "velocity": 277.42856,
+        "min_price": 197,
+        "avg_price": 640.8,
+        "hist_min": 399,
+        "hist_max": 1005,
+        "units_for_sale": 9256,
+        "last_upload_time": "2026-08-05 02:30:33",
+        "cross_info": {
+          "cheap_scope": "Gaia",
+          "cheap_price": 197,
+          "high_scope": "Elemental",
+          "high_price": 250,
+          "profit_gil": 40,
+          "profit_rate": 20.3
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21471.png",
+          "description": "ロードクロサイトを含んでいると思しき原石",
+          "category": "48",
+          "item_level": 740,
+          "shop_price": 99999,
           "buyback_price": 0,
           "stack_size": 999,
           "can_be_hq": false,
@@ -3996,40 +4112,6 @@
           "high_price": 250,
           "profit_gil": 40,
           "profit_rate": 20.3
-        },
-        "meta": {
-          "icon_url": "https://www.garlandtools.org/files/icons/item/21471.png",
-          "description": "ロードクロサイトを含んでいると思しき原石",
-          "category": "48",
-          "item_level": 740,
-          "shop_price": 99999,
-          "buyback_price": 0,
-          "stack_size": 999,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
-        "timestamp": "2026-08-05 11:17:50",
-        "scope": "Gaia",
-        "item_key": "45970_NONE",
-        "item_id": 45970,
-        "item_name": "ロードクロサイト原石",
-        "quality": "NONE",
-        "velocity": 270.7143,
-        "min_price": 150,
-        "avg_price": 150.0,
-        "hist_min": 150,
-        "hist_max": 150,
-        "units_for_sale": 88,
-        "last_upload_time": "2026-08-04 15:56:28",
-        "cross_info": {
-          "cheap_scope": "Gaia",
-          "cheap_price": 150,
-          "high_scope": "Elemental",
-          "high_price": 250,
-          "profit_gil": 87,
-          "profit_rate": 58.0
         },
         "meta": {
           "icon_url": "https://www.garlandtools.org/files/icons/item/21471.png",
@@ -4109,7 +4191,7 @@
         "scope": "Gaia",
         "item_key": "49228_NQ",
         "item_id": 49228,
-        "item_name": "コンチャ",
+        "item_name": "イヨラエキス",
         "quality": "NQ",
         "velocity": 249.0,
         "min_price": 2600,
@@ -4136,7 +4218,7 @@
         "scope": "Gaia",
         "item_key": "49240_HQ",
         "item_id": 49240,
-        "item_name": "心力の心酔薬G4",
+        "item_name": "キャラメルポップコーン",
         "quality": "HQ",
         "velocity": 246.0,
         "min_price": 2295,
@@ -4170,7 +4252,7 @@
         "scope": "Gaia",
         "item_key": "49240_NONE",
         "item_id": 49240,
-        "item_name": "心力の心酔薬G4",
+        "item_name": "キャラメルポップコーン",
         "quality": "NONE",
         "velocity": 246.0,
         "min_price": 1000,
@@ -4204,7 +4286,7 @@
         "scope": "Gaia",
         "item_key": "49207_NONE",
         "item_id": 49207,
-        "item_name": "サンチアゴトマト",
+        "item_name": "エレクトロパイン原木",
         "quality": "NONE",
         "velocity": 226.85715,
         "min_price": 60,
@@ -4226,6 +4308,60 @@
           "description": "切り出されたエレクトロパインの丸材。強い雷属性のエーテルを帯びており、取り扱いには注意が必要",
           "category": "50",
           "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Gaia",
+        "item_key": "6141_NQ",
+        "item_id": 6141,
+        "item_name": "コーディアル",
+        "quality": "NQ",
+        "velocity": 223.71428,
+        "min_price": 50,
+        "avg_price": 270.8,
+        "hist_min": 250,
+        "hist_max": 354,
+        "units_for_sale": 9021,
+        "last_upload_time": "2026-08-04 13:36:02",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020622_hr1.png",
+          "description": "GPを回復する効果のある飲料 (NQ回復量:300 / HQ回復量:350)",
+          "category": "薬品",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": true,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Gaia",
+        "item_key": "45971_NONE",
+        "item_id": 45971,
+        "item_name": "シャーローニ・コーヒー",
+        "quality": "NONE",
+        "velocity": 213.42857,
+        "min_price": 2000,
+        "avg_price": 1580.0,
+        "hist_min": 1200,
+        "hist_max": 1900,
+        "units_for_sale": 641,
+        "last_upload_time": "2026-08-05 04:15:50",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/27501.png",
+          "description": "焙煎すると優れたなめし材になることで知られるコーヒー豆",
+          "category": "54",
+          "item_level": 740,
           "shop_price": 99999,
           "buyback_price": 0,
           "stack_size": 999,
@@ -4322,33 +4458,6 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
-        "scope": "Gaia",
-        "item_key": "45971_NONE",
-        "item_id": 45971,
-        "item_name": "シャーローニ・コーヒー",
-        "quality": "NONE",
-        "velocity": 208.28572,
-        "min_price": 2000,
-        "avg_price": 2000.0,
-        "hist_min": 2000,
-        "hist_max": 2000,
-        "units_for_sale": 73,
-        "last_upload_time": "2026-08-04 15:53:52",
-        "cross_info": null,
-        "meta": {
-          "icon_url": "https://www.garlandtools.org/files/icons/item/27501.png",
-          "description": "焙煎すると優れたなめし材になることで知られるコーヒー豆",
-          "category": "54",
-          "item_level": 740,
-          "shop_price": 99999,
-          "buyback_price": 0,
-          "stack_size": 999,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
         "timestamp": "2026-08-05 11:10:43",
         "scope": "Gaia",
         "item_key": "49211_NONE",
@@ -4410,7 +4519,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "44017_NONE",
         "item_id": 44017,
@@ -4421,7 +4530,7 @@
         "avg_price": 38.8,
         "hist_min": 22,
         "hist_max": 50,
-        "units_for_sale": 959,
+        "units_for_sale": 11437,
         "last_upload_time": "2026-08-05 00:51:55",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -4471,7 +4580,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:59:32",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "36194_NONE",
         "item_id": 36194,
@@ -4479,10 +4588,10 @@
         "quality": "NONE",
         "velocity": 176.71428,
         "min_price": 50,
-        "avg_price": 169.2,
+        "avg_price": 195.4,
         "hist_min": 109,
         "hist_max": 292,
-        "units_for_sale": 8680,
+        "units_for_sale": 9621,
         "last_upload_time": "2026-08-05 02:12:46",
         "cross_info": null,
         "meta": {
@@ -4492,6 +4601,40 @@
           "item_level": 545,
           "shop_price": 99999,
           "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Gaia",
+        "item_key": "45988_NONE",
+        "item_id": 45988,
+        "item_name": "ディアトリマの毛",
+        "quality": "NONE",
+        "velocity": 171.14285,
+        "min_price": 2500,
+        "avg_price": 3520.4,
+        "hist_min": 2400,
+        "hist_max": 7500,
+        "units_for_sale": 6705,
+        "last_upload_time": "2026-08-05 02:29:41",
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 1800,
+          "high_scope": "Mana",
+          "high_price": 3191,
+          "profit_gil": 1231,
+          "profit_rate": 68.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21616.png",
+          "description": "古代からトラル大陸に棲息する鳥類の毛",
+          "category": "51",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -4701,15 +4844,15 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:59:32",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "7023_NQ",
         "item_id": 7023,
         "item_name": "コバルトフィッティング",
         "quality": "NQ",
-        "velocity": 151.0,
+        "velocity": 150.57143,
         "min_price": 400,
-        "avg_price": 1400.0,
+        "avg_price": 1440.0,
         "hist_min": 1400,
         "hist_max": 1500,
         "units_for_sale": 9891,
@@ -4782,6 +4925,33 @@
         }
       },
       {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Gaia",
+        "item_key": "45987_NONE",
+        "item_id": 45987,
+        "item_name": "クロノピオの粗皮",
+        "quality": "NONE",
+        "velocity": 138.57143,
+        "min_price": 2190,
+        "avg_price": 2687.0,
+        "hist_min": 2250,
+        "hist_max": 3500,
+        "units_for_sale": 8273,
+        "last_upload_time": "2026-08-04 15:51:09",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21820.png",
+          "description": "古代からトラル大陸に棲息する哺乳類の粗皮",
+          "category": "52",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
         "timestamp": "2026-08-05 13:17:01",
         "scope": "Gaia",
         "item_key": "45987_NQ",
@@ -4809,7 +4979,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "41776_NONE",
         "item_id": 41776,
@@ -4820,7 +4990,7 @@
         "avg_price": 1184.0,
         "hist_min": 1000,
         "hist_max": 1500,
-        "units_for_sale": 2608,
+        "units_for_sale": 17949,
         "last_upload_time": "2026-08-05 04:05:08",
         "cross_info": null,
         "meta": {
@@ -5147,7 +5317,14 @@
         "hist_max": 80,
         "units_for_sale": 99,
         "last_upload_time": "2026-08-04 23:00:25",
-        "cross_info": null,
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 51,
+          "high_scope": "Gaia",
+          "high_price": 80,
+          "profit_gil": 25,
+          "profit_rate": 49.0
+        },
         "meta": {
           "icon_url": "https://xivapi.com/i/025000/025006_hr1.png",
           "description": "球根からなるスパイス。他品種に比べ小振りだが、濃厚な臭みと豊富な栄養素を持つ",
@@ -5161,7 +5338,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "7008_NONE",
         "item_id": 7008,
@@ -5172,12 +5349,12 @@
         "avg_price": 130.4,
         "hist_min": 100,
         "hist_max": 190,
-        "units_for_sale": 344,
+        "units_for_sale": 9277,
         "last_upload_time": "2026-08-04 12:25:06",
         "cross_info": {
           "cheap_scope": "Meteor",
           "cheap_price": 80,
-          "high_scope": "Gaia",
+          "high_scope": "Mana",
           "high_price": 100,
           "profit_gil": 15,
           "profit_rate": 18.8
@@ -5272,6 +5449,33 @@
           "buyback_price": 1,
           "stack_size": 999,
           "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Gaia",
+        "item_key": "27960_HQ",
+        "item_id": 27960,
+        "item_name": "極錬精薬",
+        "quality": "HQ",
+        "velocity": 100.71429,
+        "min_price": 880,
+        "avg_price": 1827.6,
+        "hist_min": 1198,
+        "hist_max": 2000,
+        "units_for_sale": 5357,
+        "last_upload_time": "2026-08-04 14:00:55",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020643_hr1.png",
+          "description": "一時的に錬精効率が大きく上昇する薬品\n\n効果時間 180:00",
+          "category": "薬品",
+          "item_level": 395,
+          "shop_price": 11355,
+          "buyback_price": 100,
+          "stack_size": 999,
+          "can_be_hq": true,
           "rarity": 1
         }
       },
@@ -5371,7 +5575,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "43961_NONE",
         "item_id": 43961,
@@ -5382,7 +5586,7 @@
         "avg_price": 128200.4,
         "hist_min": 120001,
         "hist_max": 134000,
-        "units_for_sale": 311,
+        "units_for_sale": 4746,
         "last_upload_time": "2026-08-05 03:06:38",
         "cross_info": null,
         "meta": {
@@ -5419,33 +5623,6 @@
           "item_level": 20,
           "shop_price": 225,
           "buyback_price": 1,
-          "stack_size": 999,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
-        "timestamp": "2026-08-05 11:59:32",
-        "scope": "Gaia",
-        "item_key": "36205_NONE",
-        "item_id": 36205,
-        "item_name": "紅モコ草",
-        "quality": "NONE",
-        "velocity": 78.85714,
-        "min_price": 2,
-        "avg_price": 69.0,
-        "hist_min": 40,
-        "hist_max": 69,
-        "units_for_sale": 10760,
-        "last_upload_time": "2026-08-04 21:24:46",
-        "cross_info": null,
-        "meta": {
-          "icon_url": "https://xivapi.com/i/021000/021681_hr1.png",
-          "description": "葉まで真っ赤なモコ草の古代種。茎から繊維が採れる",
-          "category": "布材",
-          "item_level": 539,
-          "shop_price": 99999,
-          "buyback_price": 2,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -5513,6 +5690,33 @@
         }
       },
       {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Gaia",
+        "item_key": "36205_NONE",
+        "item_id": 36205,
+        "item_name": "紅モコ草",
+        "quality": "NONE",
+        "velocity": 75.71429,
+        "min_price": 2,
+        "avg_price": 52.6,
+        "hist_min": 40,
+        "hist_max": 69,
+        "units_for_sale": 10760,
+        "last_upload_time": "2026-08-04 21:24:46",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021681_hr1.png",
+          "description": "葉まで真っ赤なモコ草の古代種。茎から繊維が採れる",
+          "category": "布材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
         "timestamp": "2026-08-05 13:17:01",
         "scope": "Gaia",
         "item_key": "41758_NONE",
@@ -5574,7 +5778,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "43980_NONE",
         "item_id": 43980,
@@ -5585,7 +5789,7 @@
         "avg_price": 272.4,
         "hist_min": 200,
         "hist_max": 397,
-        "units_for_sale": 92,
+        "units_for_sale": 11077,
         "last_upload_time": "2026-08-04 14:28:23",
         "cross_info": null,
         "meta": {
@@ -5662,18 +5866,18 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
-        "item_key": "44848_NQ",
+        "item_key": "44848_NONE",
         "item_id": 44848,
         "item_name": "高濃縮錬金薬",
-        "quality": "NQ",
+        "quality": "NONE",
         "velocity": 67.85714,
         "min_price": 1200,
         "avg_price": 1625.0,
         "hist_min": 1400,
         "hist_max": 1980,
-        "units_for_sale": 611,
+        "units_for_sale": 5800,
         "last_upload_time": "2026-08-05 02:36:46",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -5696,26 +5900,26 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 13:17:01",
         "scope": "Gaia",
-        "item_key": "44848_NONE",
+        "item_key": "44848_NQ",
         "item_id": 44848,
         "item_name": "高濃縮錬金薬",
-        "quality": "NONE",
-        "velocity": 66.71429,
+        "quality": "NQ",
+        "velocity": 67.85714,
         "min_price": 1200,
-        "avg_price": 1200.0,
-        "hist_min": 1200,
-        "hist_max": 1200,
-        "units_for_sale": 20,
-        "last_upload_time": "2026-08-04 22:52:29",
+        "avg_price": 1625.0,
+        "hist_min": 1400,
+        "hist_max": 1980,
+        "units_for_sale": 611,
+        "last_upload_time": "2026-08-05 02:36:46",
         "cross_info": {
           "cheap_scope": "Gaia",
           "cheap_price": 1200,
-          "high_scope": "Elemental",
-          "high_price": 1499,
-          "profit_gil": 224,
-          "profit_rate": 18.7
+          "high_scope": "Mana",
+          "high_price": 1605,
+          "profit_gil": 324,
+          "profit_rate": 27.0
         },
         "meta": {
           "icon_url": "https://www.garlandtools.org/files/icons/item/22701.png",
@@ -5845,7 +6049,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "44014_NONE",
         "item_id": 44014,
@@ -5856,7 +6060,7 @@
         "avg_price": 241.8,
         "hist_min": 220,
         "hist_max": 280,
-        "units_for_sale": 196,
+        "units_for_sale": 3484,
         "last_upload_time": "2026-08-05 02:10:43",
         "cross_info": null,
         "meta": {
@@ -5933,7 +6137,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "12634_NONE",
         "item_id": 12634,
@@ -5944,7 +6148,7 @@
         "avg_price": 100.0,
         "hist_min": 100,
         "hist_max": 100,
-        "units_for_sale": 938,
+        "units_for_sale": 2970,
         "last_upload_time": "2026-08-04 22:04:29",
         "cross_info": null,
         "meta": {
@@ -5960,7 +6164,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Gaia",
         "item_key": "5526_NONE",
         "item_id": 5526,
@@ -5971,7 +6175,7 @@
         "avg_price": 114.0,
         "hist_min": 60,
         "hist_max": 150,
-        "units_for_sale": 1359,
+        "units_for_sale": 6821,
         "last_upload_time": "2026-08-04 17:13:35",
         "cross_info": null,
         "meta": {
@@ -6016,7 +6220,41 @@
     ],
     "Mana": [
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "13_NONE",
+        "item_id": 13,
+        "item_name": "ウォータークリスタル",
+        "quality": "NONE",
+        "velocity": 19633.572,
+        "min_price": 38,
+        "avg_price": 40.6,
+        "hist_min": 36,
+        "hist_max": 49,
+        "units_for_sale": 4328419,
+        "last_upload_time": "2026-08-05 04:36:04",
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 36,
+          "high_scope": "Gaia",
+          "high_price": 40,
+          "profit_gil": 2,
+          "profit_rate": 5.6
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020008_hr1.png",
+          "description": "水の媒質の結晶",
+          "category": "クリスタル",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "8_NONE",
         "item_id": 8,
@@ -6027,7 +6265,7 @@
         "avg_price": 46.6,
         "hist_min": 42,
         "hist_max": 48,
-        "units_for_sale": 854922,
+        "units_for_sale": 8269116,
         "last_upload_time": "2026-08-05 04:08:11",
         "cross_info": null,
         "meta": {
@@ -6043,23 +6281,50 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "10_NONE",
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
         "quality": "NONE",
-        "velocity": 13433.143,
+        "velocity": 13433.0,
         "min_price": 42,
-        "avg_price": 51.2,
+        "avg_price": 52.4,
         "hist_min": 44,
         "hist_max": 59,
-        "units_for_sale": 541155,
-        "last_upload_time": "2026-08-05 04:10:46",
+        "units_for_sale": 3147385,
+        "last_upload_time": "2026-08-05 04:36:00",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/020000/020010_hr1.png",
           "description": "風の媒質の結晶",
+          "category": "クリスタル",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 0,
+          "stack_size": 9999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "12_NONE",
+        "item_id": 12,
+        "item_name": "ライトニングクリスタル",
+        "quality": "NONE",
+        "velocity": 12888.857,
+        "min_price": 39,
+        "avg_price": 48.2,
+        "hist_min": 38,
+        "hist_max": 55,
+        "units_for_sale": 6106097,
+        "last_upload_time": "2026-08-05 05:03:28",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020011_hr1.png",
+          "description": "雷の媒質の結晶",
           "category": "クリスタル",
           "item_level": 25,
           "shop_price": 229,
@@ -6097,7 +6362,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "14_NONE",
         "item_id": 14,
@@ -6105,11 +6370,11 @@
         "quality": "NONE",
         "velocity": 11603.0,
         "min_price": 13,
-        "avg_price": 24.0,
+        "avg_price": 23.0,
         "hist_min": 14,
         "hist_max": 45,
-        "units_for_sale": 707686,
-        "last_upload_time": "2026-08-05 04:04:54",
+        "units_for_sale": 11209689,
+        "last_upload_time": "2026-08-05 04:37:27",
         "cross_info": {
           "cheap_scope": "Gaia",
           "cheap_price": 9,
@@ -6124,33 +6389,6 @@
           "category": "クリスタル",
           "item_level": 50,
           "shop_price": 990,
-          "buyback_price": 0,
-          "stack_size": 9999,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
-        "timestamp": "2026-08-05 13:17:01",
-        "scope": "Mana",
-        "item_key": "12_NONE",
-        "item_id": 12,
-        "item_name": "ライトニングクリスタル",
-        "quality": "NONE",
-        "velocity": 11405.571,
-        "min_price": 39,
-        "avg_price": 49.2,
-        "hist_min": 38,
-        "hist_max": 55,
-        "units_for_sale": 684988,
-        "last_upload_time": "2026-08-05 04:10:22",
-        "cross_info": null,
-        "meta": {
-          "icon_url": "https://xivapi.com/i/020000/020011_hr1.png",
-          "description": "雷の媒質の結晶",
-          "category": "クリスタル",
-          "item_level": 25,
-          "shop_price": 229,
           "buyback_price": 0,
           "stack_size": 9999,
           "can_be_hq": false,
@@ -6185,7 +6423,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "7_NONE",
         "item_id": 7,
@@ -6196,8 +6434,8 @@
         "avg_price": 51.6,
         "hist_min": 47,
         "hist_max": 53,
-        "units_for_sale": 66267,
-        "last_upload_time": "2026-08-04 17:33:20",
+        "units_for_sale": 636620,
+        "last_upload_time": "2026-08-05 04:54:39",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/020000/020002_hr1.png",
@@ -6212,7 +6450,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "2_NONE",
         "item_id": 2,
@@ -6223,8 +6461,8 @@
         "avg_price": 49.0,
         "hist_min": 49,
         "hist_max": 49,
-        "units_for_sale": 342433,
-        "last_upload_time": "2026-08-05 04:03:15",
+        "units_for_sale": 2984120,
+        "last_upload_time": "2026-08-05 04:54:16",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/020000/020001_hr1.png",
@@ -6239,7 +6477,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "10373_NONE",
         "item_id": 10373,
@@ -6250,8 +6488,8 @@
         "avg_price": 1598.6,
         "hist_min": 1597,
         "hist_max": 1600,
-        "units_for_sale": 16830,
-        "last_upload_time": "2026-08-05 04:23:31",
+        "units_for_sale": 87533,
+        "last_upload_time": "2026-08-05 04:56:45",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/021000/021003_hr1.png",
@@ -6300,19 +6538,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "10335_NONE",
         "item_id": 10335,
         "item_name": "ダークマタークラスター",
         "quality": "NONE",
         "velocity": 508.85715,
-        "min_price": 405,
-        "avg_price": 468.0,
+        "min_price": 404,
+        "avg_price": 481.2,
         "hist_min": 468,
-        "hist_max": 468,
-        "units_for_sale": 19470,
-        "last_upload_time": "2026-08-05 03:52:30",
+        "hist_max": 490,
+        "units_for_sale": 60625,
+        "last_upload_time": "2026-08-05 04:38:54",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/020000/020407_hr1.png",
@@ -6327,19 +6565,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "5532_NONE",
         "item_id": 5532,
         "item_name": "樹液塊",
         "quality": "NONE",
-        "velocity": 499.14285,
-        "min_price": 160,
-        "avg_price": 132.0,
-        "hist_min": 99,
-        "hist_max": 161,
-        "units_for_sale": 9795,
-        "last_upload_time": "2026-08-05 01:22:53",
+        "velocity": 506.7143,
+        "min_price": 168,
+        "avg_price": 198.0,
+        "hist_min": 198,
+        "hist_max": 198,
+        "units_for_sale": 82545,
+        "last_upload_time": "2026-08-05 05:03:20",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/022000/022638_hr1.png",
@@ -6412,7 +6650,7 @@
         "scope": "Mana",
         "item_key": "49235_NONE",
         "item_id": 49235,
-        "item_name": "活力の心酔薬G4",
+        "item_name": "眼力の宝薬G4",
         "quality": "NONE",
         "velocity": 468.0,
         "min_price": 495,
@@ -6442,18 +6680,18 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "49235_HQ",
         "item_id": 49235,
-        "item_name": "活力の心酔薬G4",
+        "item_name": "眼力の宝薬G4",
         "quality": "HQ",
         "velocity": 463.2857,
         "min_price": 2600,
         "avg_price": 2713.0,
         "hist_min": 2495,
         "hist_max": 3000,
-        "units_for_sale": 3039,
+        "units_for_sale": 47960,
         "last_upload_time": "2026-08-05 03:48:50",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -6476,19 +6714,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "49238_HQ",
         "item_id": 49238,
-        "item_name": "知力の心酔薬G4",
+        "item_name": "心力の宝薬G4",
         "quality": "HQ",
         "velocity": 460.2857,
         "min_price": 2725,
         "avg_price": 3813.0,
         "hist_min": 2725,
         "hist_max": 4700,
-        "units_for_sale": 7454,
-        "last_upload_time": "2026-08-05 03:55:42",
+        "units_for_sale": 56500,
+        "last_upload_time": "2026-08-05 04:42:36",
         "cross_info": null,
         "meta": {
           "icon_url": "https://www.garlandtools.org/files/icons/item/20708.png",
@@ -6507,7 +6745,7 @@
         "scope": "Mana",
         "item_key": "49238_NONE",
         "item_id": 49238,
-        "item_name": "知力の心酔薬G4",
+        "item_name": "心力の宝薬G4",
         "quality": "NONE",
         "velocity": 460.2857,
         "min_price": 410,
@@ -6537,19 +6775,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "36086_NONE",
         "item_id": 36086,
         "item_name": "パームシロップ",
         "quality": "NONE",
-        "velocity": 455.7143,
+        "velocity": 429.85715,
         "min_price": 100,
-        "avg_price": 107.6,
+        "avg_price": 107.0,
         "hist_min": 84,
         "hist_max": 120,
-        "units_for_sale": 9900,
-        "last_upload_time": "2026-08-05 04:00:55",
+        "units_for_sale": 77572,
+        "last_upload_time": "2026-08-05 04:34:01",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/022000/022642_hr1.png",
@@ -6564,19 +6802,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "49240_HQ",
         "item_id": 49240,
-        "item_name": "心力の心酔薬G4",
+        "item_name": "キャラメルポップコーン",
         "quality": "HQ",
         "velocity": 403.57144,
         "min_price": 2384,
         "avg_price": 2640.6,
         "hist_min": 2384,
         "hist_max": 2970,
-        "units_for_sale": 5048,
-        "last_upload_time": "2026-08-05 03:49:53",
+        "units_for_sale": 44070,
+        "last_upload_time": "2026-08-05 04:42:34",
         "cross_info": {
           "cheap_scope": "Elemental",
           "cheap_price": 2050,
@@ -6602,7 +6840,7 @@
         "scope": "Mana",
         "item_key": "49240_NONE",
         "item_id": 49240,
-        "item_name": "心力の心酔薬G4",
+        "item_name": "キャラメルポップコーン",
         "quality": "NONE",
         "velocity": 383.14285,
         "min_price": 1000,
@@ -6632,18 +6870,18 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "49207_NONE",
         "item_id": 49207,
-        "item_name": "サンチアゴトマト",
+        "item_name": "エレクトロパイン原木",
         "quality": "NONE",
         "velocity": 368.42856,
         "min_price": 89,
         "avg_price": 102.0,
         "hist_min": 100,
         "hist_max": 110,
-        "units_for_sale": 4481,
+        "units_for_sale": 25980,
         "last_upload_time": "2026-08-05 04:00:26",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -6666,19 +6904,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "43981_NONE",
         "item_id": 43981,
         "item_name": "トラルコーン",
         "quality": "NONE",
-        "velocity": 341.2857,
+        "velocity": 340.57144,
         "min_price": 100,
-        "avg_price": 112.4,
+        "avg_price": 126.6,
         "hist_min": 100,
-        "hist_max": 130,
-        "units_for_sale": 2251,
-        "last_upload_time": "2026-08-04 18:23:27",
+        "hist_max": 153,
+        "units_for_sale": 30755,
+        "last_upload_time": "2026-08-05 04:42:11",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/025000/025352_hr1.png",
@@ -6720,19 +6958,46 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "46246_NONE",
+        "item_id": 46246,
+        "item_name": "紫電の霊砂",
+        "quality": "NONE",
+        "velocity": 332.2857,
+        "min_price": 1999,
+        "avg_price": 2095.6,
+        "hist_min": 2095,
+        "hist_max": 2097,
+        "units_for_sale": 32933,
+        "last_upload_time": "2026-08-05 04:39:24",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21248.png",
+          "description": "精選によって得られた、大粒のクリスタルの粉末",
+          "category": "54",
+          "item_level": 730,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "49228_NQ",
         "item_id": 49228,
-        "item_name": "コンチャ",
+        "item_name": "イヨラエキス",
         "quality": "NQ",
-        "velocity": 330.2857,
-        "min_price": 2505,
+        "velocity": 322.0,
+        "min_price": 2699,
         "avg_price": 3198.8,
         "hist_min": 3198,
         "hist_max": 3199,
-        "units_for_sale": 1711,
-        "last_upload_time": "2026-08-05 04:02:09",
+        "units_for_sale": 27596,
+        "last_upload_time": "2026-08-05 04:54:15",
         "cross_info": null,
         "meta": {
           "icon_url": "https://www.garlandtools.org/files/icons/item/20674.png",
@@ -6774,23 +7039,50 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:02:37",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
-        "item_key": "49212_NONE",
-        "item_id": 49212,
-        "item_name": "ガーデン・ソフトウォーター",
+        "item_key": "15858_NONE",
+        "item_id": 15858,
+        "item_name": "ヴォイドマンドレイク",
         "quality": "NONE",
-        "velocity": 291.0,
-        "min_price": 100,
-        "avg_price": 100.0,
-        "hist_min": 100,
-        "hist_max": 100,
-        "units_for_sale": 99,
-        "last_upload_time": "2026-08-05 00:30:22",
+        "velocity": 299.2857,
+        "min_price": 1133,
+        "avg_price": 1076.0,
+        "hist_min": 1002,
+        "hist_max": 1102,
+        "units_for_sale": 25314,
+        "last_upload_time": "2026-08-05 03:27:12",
         "cross_info": null,
         "meta": {
-          "icon_url": "https://www.garlandtools.org/files/icons/item/22678.png",
-          "description": "ミネラルの含有量が少なく、口当たりが滑らかな水",
+          "icon_url": "https://xivapi.com/i/025000/025004_hr1.png",
+          "description": "奇妙な姿をした野草。その強い毒性から、異界ヴォイドの植物とも呼ばれる",
+          "category": "錬金術材",
+          "item_level": 155,
+          "shop_price": 261,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "49210_NONE",
+        "item_id": 49210,
+        "item_name": "ロウヤシの葉",
+        "quality": "NONE",
+        "velocity": 298.2857,
+        "min_price": 299,
+        "avg_price": 964.6,
+        "hist_min": 930,
+        "hist_max": 1000,
+        "units_for_sale": 31230,
+        "last_upload_time": "2026-08-05 04:57:06",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22709.png",
+          "description": "良質な蝋が採れるロウヤシの葉。蝋は幅広い用途に用いられる",
           "category": "54",
           "item_level": 770,
           "shop_price": 99999,
@@ -6855,18 +7147,45 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "49212_NONE",
+        "item_id": 49212,
+        "item_name": "ガーデン・ソフトウォーター",
+        "quality": "NONE",
+        "velocity": 271.57144,
+        "min_price": 100,
+        "avg_price": 240.4,
+        "hist_min": 127,
+        "hist_max": 400,
+        "units_for_sale": 27347,
+        "last_upload_time": "2026-08-05 05:01:45",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22678.png",
+          "description": "ミネラルの含有量が少なく、口当たりが滑らかな水",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "45972_NONE",
         "item_id": 45972,
-        "item_name": "オルコクロマイト",
+        "item_name": "コチニール染料",
         "quality": "NONE",
         "velocity": 270.42856,
         "min_price": 1100,
         "avg_price": 1820.0,
         "hist_min": 1400,
         "hist_max": 2300,
-        "units_for_sale": 775,
+        "units_for_sale": 6010,
         "last_upload_time": "2026-08-04 19:01:03",
         "cross_info": null,
         "meta": {
@@ -6886,7 +7205,7 @@
         "scope": "Mana",
         "item_key": "45972_NQ",
         "item_id": 45972,
-        "item_name": "オルコクロマイト",
+        "item_name": "コチニール染料",
         "quality": "NQ",
         "velocity": 270.42856,
         "min_price": 1100,
@@ -6913,7 +7232,7 @@
         "scope": "Mana",
         "item_key": "49228_NONE",
         "item_id": 49228,
-        "item_name": "コンチャ",
+        "item_name": "イヨラエキス",
         "quality": "NONE",
         "velocity": 269.2857,
         "min_price": 2505,
@@ -6936,7 +7255,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "44034_NONE",
         "item_id": 44034,
@@ -6947,7 +7266,7 @@
         "avg_price": 185.0,
         "hist_min": 145,
         "hist_max": 230,
-        "units_for_sale": 4994,
+        "units_for_sale": 22913,
         "last_upload_time": "2026-08-05 03:59:22",
         "cross_info": null,
         "meta": {
@@ -6963,7 +7282,41 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "7008_NONE",
+        "item_id": 7008,
+        "item_name": "御影石",
+        "quality": "NONE",
+        "velocity": 264.85715,
+        "min_price": 100,
+        "avg_price": 429.8,
+        "hist_min": 400,
+        "hist_max": 500,
+        "units_for_sale": 7695,
+        "last_upload_time": "2026-08-05 04:20:36",
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 80,
+          "high_scope": "Mana",
+          "high_price": 100,
+          "profit_gil": 15,
+          "profit_rate": 18.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/022000/022615_hr1.png",
+          "description": "マグマが冷え固まってできたと云われる岩石",
+          "category": "石材",
+          "item_level": 30,
+          "shop_price": 120,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "43978_NONE",
         "item_id": 43978,
@@ -6974,7 +7327,7 @@
         "avg_price": 139.0,
         "hist_min": 107,
         "hist_max": 173,
-        "units_for_sale": 1984,
+        "units_for_sale": 20827,
         "last_upload_time": "2026-08-05 03:57:45",
         "cross_info": null,
         "meta": {
@@ -6990,7 +7343,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "7596_NONE",
         "item_id": 7596,
@@ -7001,7 +7354,7 @@
         "avg_price": 1321.0,
         "hist_min": 1100,
         "hist_max": 1460,
-        "units_for_sale": 960,
+        "units_for_sale": 11898,
         "last_upload_time": "2026-08-05 00:07:26",
         "cross_info": null,
         "meta": {
@@ -7071,7 +7424,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "36260_NONE",
         "item_id": 36260,
@@ -7082,7 +7435,7 @@
         "avg_price": 250.0,
         "hist_min": 250,
         "hist_max": 250,
-        "units_for_sale": 1138,
+        "units_for_sale": 19010,
         "last_upload_time": "2026-08-04 15:03:05",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -7105,18 +7458,18 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "49208_NONE",
         "item_id": 49208,
-        "item_name": "ウカマウピメント",
+        "item_name": "高密度軽銀鉱",
         "quality": "NONE",
         "velocity": 239.85715,
         "min_price": 342,
         "avg_price": 594.8,
         "hist_min": 498,
         "hist_max": 778,
-        "units_for_sale": 3545,
+        "units_for_sale": 29042,
         "last_upload_time": "2026-08-05 04:01:15",
         "cross_info": null,
         "meta": {
@@ -7132,7 +7485,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "44042_NONE",
         "item_id": 44042,
@@ -7143,7 +7496,7 @@
         "avg_price": 163.0,
         "hist_min": 150,
         "hist_max": 180,
-        "units_for_sale": 3465,
+        "units_for_sale": 21236,
         "last_upload_time": "2026-08-05 02:10:17",
         "cross_info": null,
         "meta": {
@@ -7186,7 +7539,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "5111_NONE",
         "item_id": 5111,
@@ -7197,7 +7550,7 @@
         "avg_price": 37.0,
         "hist_min": 20,
         "hist_max": 50,
-        "units_for_sale": 5173,
+        "units_for_sale": 65129,
         "last_upload_time": "2026-08-04 00:42:13",
         "cross_info": null,
         "meta": {
@@ -7240,7 +7593,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "36174_NONE",
         "item_id": 36174,
@@ -7251,7 +7604,7 @@
         "avg_price": 62.8,
         "hist_min": 40,
         "hist_max": 80,
-        "units_for_sale": 2338,
+        "units_for_sale": 7598,
         "last_upload_time": "2026-08-04 23:32:29",
         "cross_info": null,
         "meta": {
@@ -7294,7 +7647,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "31975_NONE",
         "item_id": 31975,
@@ -7305,7 +7658,7 @@
         "avg_price": 104.0,
         "hist_min": 90,
         "hist_max": 150,
-        "units_for_sale": 362,
+        "units_for_sale": 3576,
         "last_upload_time": "2026-08-03 23:43:31",
         "cross_info": null,
         "meta": {
@@ -7321,7 +7674,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "27698_NONE",
         "item_id": 27698,
@@ -7332,7 +7685,7 @@
         "avg_price": 149.6,
         "hist_min": 50,
         "hist_max": 300,
-        "units_for_sale": 795,
+        "units_for_sale": 6661,
         "last_upload_time": "2026-08-05 01:15:03",
         "cross_info": null,
         "meta": {
@@ -7342,6 +7695,33 @@
           "item_level": 403,
           "shop_price": 210,
           "buyback_price": 3,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "45985_NONE",
+        "item_id": 45985,
+        "item_name": "シャーローニ・コークス",
+        "quality": "NONE",
+        "velocity": 184.57143,
+        "min_price": 2000,
+        "avg_price": 2814.0,
+        "hist_min": 2690,
+        "hist_max": 3000,
+        "units_for_sale": 11928,
+        "last_upload_time": "2026-08-05 04:02:33",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21462.png",
+          "description": "シャーローニ荒野で採集された石炭を高温で乾留した燃料",
+          "category": "54",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -7375,19 +7755,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "6141_HQ",
         "item_id": 6141,
         "item_name": "コーディアル",
         "quality": "HQ",
         "velocity": 181.42857,
-        "min_price": 148,
+        "min_price": 99,
         "avg_price": 309.2,
         "hist_min": 264,
         "hist_max": 469,
-        "units_for_sale": 1256,
-        "last_upload_time": "2026-08-05 02:55:49",
+        "units_for_sale": 19651,
+        "last_upload_time": "2026-08-05 04:51:02",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/020000/020622_hr1.png",
@@ -7402,7 +7782,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "41777_NONE",
         "item_id": 41777,
@@ -7413,7 +7793,7 @@
         "avg_price": 988.6,
         "hist_min": 985,
         "hist_max": 990,
-        "units_for_sale": 2076,
+        "units_for_sale": 18037,
         "last_upload_time": "2026-08-05 03:20:23",
         "cross_info": null,
         "meta": {
@@ -7456,18 +7836,18 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "50414_NONE",
         "item_id": 50414,
-        "item_name": "アイギス・エネルギーパック",
+        "item_name": "オイジュス・エネルギーパック",
         "quality": "NONE",
         "velocity": 178.0,
         "min_price": 18000,
         "avg_price": 20000.0,
         "hist_min": 20000,
         "hist_max": 20000,
-        "units_for_sale": 4233,
+        "units_for_sale": 8338,
         "last_upload_time": "2026-08-05 03:46:00",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -7494,7 +7874,7 @@
         "scope": "Mana",
         "item_key": "50414_NQ",
         "item_id": 50414,
-        "item_name": "アイギス・エネルギーパック",
+        "item_name": "オイジュス・エネルギーパック",
         "quality": "NQ",
         "velocity": 178.0,
         "min_price": 20000,
@@ -7544,19 +7924,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "44017_NONE",
         "item_id": 44017,
         "item_name": "アカシア原木",
         "quality": "NONE",
-        "velocity": 174.14285,
+        "velocity": 174.57143,
         "min_price": 40,
-        "avg_price": 51.2,
+        "avg_price": 53.6,
         "hist_min": 50,
-        "hist_max": 52,
-        "units_for_sale": 964,
-        "last_upload_time": "2026-08-05 03:45:28",
+        "hist_max": 62,
+        "units_for_sale": 8405,
+        "last_upload_time": "2026-08-05 04:49:14",
         "cross_info": {
           "cheap_scope": "Gaia",
           "cheap_price": 20,
@@ -7578,7 +7958,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "27687_NONE",
         "item_id": 27687,
@@ -7589,7 +7969,7 @@
         "avg_price": 126.2,
         "hist_min": 122,
         "hist_max": 132,
-        "units_for_sale": 1401,
+        "units_for_sale": 11888,
         "last_upload_time": "2026-08-05 03:41:40",
         "cross_info": null,
         "meta": {
@@ -7605,7 +7985,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "5395_NONE",
         "item_id": 5395,
@@ -7616,7 +7996,7 @@
         "avg_price": 556.6,
         "hist_min": 430,
         "hist_max": 900,
-        "units_for_sale": 2166,
+        "units_for_sale": 21547,
         "last_upload_time": "2026-08-05 03:43:44",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -7639,7 +8019,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "27774_NONE",
         "item_id": 27774,
@@ -7650,7 +8030,7 @@
         "avg_price": 564.4,
         "hist_min": 490,
         "hist_max": 622,
-        "units_for_sale": 1207,
+        "units_for_sale": 5537,
         "last_upload_time": "2026-08-04 15:25:12",
         "cross_info": null,
         "meta": {
@@ -7666,7 +8046,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "32002_NONE",
         "item_id": 32002,
@@ -7677,7 +8057,7 @@
         "avg_price": 782.2,
         "hist_min": 751,
         "hist_max": 800,
-        "units_for_sale": 3596,
+        "units_for_sale": 8635,
         "last_upload_time": "2026-08-04 00:03:55",
         "cross_info": null,
         "meta": {
@@ -7720,7 +8100,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "36190_NONE",
         "item_id": 36190,
@@ -7731,7 +8111,7 @@
         "avg_price": 72.8,
         "hist_min": 60,
         "hist_max": 100,
-        "units_for_sale": 1031,
+        "units_for_sale": 10066,
         "last_upload_time": "2026-08-04 17:43:48",
         "cross_info": null,
         "meta": {
@@ -7747,7 +8127,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "19872_NONE",
         "item_id": 19872,
@@ -7758,7 +8138,7 @@
         "avg_price": 262.8,
         "hist_min": 180,
         "hist_max": 400,
-        "units_for_sale": 2491,
+        "units_for_sale": 9782,
         "last_upload_time": "2026-08-05 01:03:05",
         "cross_info": null,
         "meta": {
@@ -7768,6 +8148,40 @@
           "item_level": 273,
           "shop_price": 540,
           "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "45988_NONE",
+        "item_id": 45988,
+        "item_name": "ディアトリマの毛",
+        "quality": "NONE",
+        "velocity": 153.71428,
+        "min_price": 3191,
+        "avg_price": 3916.0,
+        "hist_min": 3780,
+        "hist_max": 4000,
+        "units_for_sale": 5363,
+        "last_upload_time": "2026-08-05 04:03:27",
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 1800,
+          "high_scope": "Mana",
+          "high_price": 3191,
+          "profit_gil": 1231,
+          "profit_rate": 68.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21616.png",
+          "description": "古代からトラル大陸に棲息する鳥類の毛",
+          "category": "51",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -7808,7 +8222,34 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "36181_NONE",
+        "item_id": 36181,
+        "item_name": "鉄雲母",
+        "quality": "NONE",
+        "velocity": 153.14285,
+        "min_price": 111,
+        "avg_price": 221.4,
+        "hist_min": 194,
+        "hist_max": 295,
+        "units_for_sale": 9688,
+        "last_upload_time": "2026-08-04 22:35:25",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021226_hr1.png",
+          "description": "鈍色の破片を含む結晶",
+          "category": "石材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "41764_NONE",
         "item_id": 41764,
@@ -7819,7 +8260,7 @@
         "avg_price": 1034.0,
         "hist_min": 1016,
         "hist_max": 1100,
-        "units_for_sale": 1965,
+        "units_for_sale": 18893,
         "last_upload_time": "2026-08-05 03:39:32",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -7896,18 +8337,18 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "46188_NONE",
         "item_id": 46188,
-        "item_name": "シデリティス茶葉",
+        "item_name": "ゴールデンイール",
         "quality": "NONE",
         "velocity": 142.71428,
         "min_price": 1908,
         "avg_price": 3488.8,
         "hist_min": 2500,
         "hist_max": 4444,
-        "units_for_sale": 558,
+        "units_for_sale": 9377,
         "last_upload_time": "2026-08-04 21:48:51",
         "cross_info": null,
         "meta": {
@@ -7923,7 +8364,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "19951_NONE",
         "item_id": 19951,
@@ -7934,7 +8375,7 @@
         "avg_price": 166.0,
         "hist_min": 140,
         "hist_max": 180,
-        "units_for_sale": 3733,
+        "units_for_sale": 8131,
         "last_upload_time": "2026-08-04 18:23:53",
         "cross_info": null,
         "meta": {
@@ -7977,6 +8418,40 @@
         }
       },
       {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "31963_NONE",
+        "item_id": 31963,
+        "item_name": "第四次復興用の鉄鉱【検】",
+        "quality": "NONE",
+        "velocity": 132.0,
+        "min_price": 20,
+        "avg_price": 84.0,
+        "hist_min": 80,
+        "hist_max": 100,
+        "units_for_sale": 10870,
+        "last_upload_time": "2026-08-04 22:31:48",
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 1,
+          "high_scope": "Mana",
+          "high_price": 20,
+          "profit_gil": 18,
+          "profit_rate": 1800.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023897_hr1.png",
+          "description": "ディアデム諸島で採れるイシュガルド復興用資材\n\n[イシュガルド復興事業専用][検品済み]\n\n[製作Lv20レシピ用]",
+          "category": "石材",
+          "item_level": 20,
+          "shop_price": 60,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
         "timestamp": "2026-08-05 11:10:43",
         "scope": "Mana",
         "item_key": "7017_NQ",
@@ -8004,7 +8479,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "5069_NQ",
         "item_id": 5069,
@@ -8015,7 +8490,7 @@
         "avg_price": 10.8,
         "hist_min": 1,
         "hist_max": 34,
-        "units_for_sale": 2940,
+        "units_for_sale": 16407,
         "last_upload_time": "2026-08-05 04:06:15",
         "cross_info": null,
         "meta": {
@@ -8058,7 +8533,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "45986_NONE",
         "item_id": 45986,
@@ -8066,10 +8541,10 @@
         "quality": "NONE",
         "velocity": 121.71429,
         "min_price": 1991,
-        "avg_price": 1991.0,
-        "hist_min": 1991,
-        "hist_max": 1991,
-        "units_for_sale": 1,
+        "avg_price": 2556.0,
+        "hist_min": 2400,
+        "hist_max": 2980,
+        "units_for_sale": 4776,
         "last_upload_time": "2026-08-05 02:07:50",
         "cross_info": null,
         "meta": {
@@ -8116,7 +8591,7 @@
         "scope": "Mana",
         "item_key": "49225_NONE",
         "item_id": 49225,
-        "item_name": "ローストチキン",
+        "item_name": "エバーキープの人工樹脂",
         "quality": "NONE",
         "velocity": 120.28571,
         "min_price": 2555,
@@ -8139,23 +8614,50 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "49225_NQ",
         "item_id": 49225,
-        "item_name": "ローストチキン",
+        "item_name": "エバーキープの人工樹脂",
         "quality": "NQ",
         "velocity": 120.28571,
         "min_price": 2555,
         "avg_price": 3954.0,
         "hist_min": 3815,
         "hist_max": 4000,
-        "units_for_sale": 1284,
+        "units_for_sale": 8538,
         "last_upload_time": "2026-08-05 04:10:32",
         "cross_info": null,
         "meta": {
           "icon_url": "https://www.garlandtools.org/files/icons/item/22652.png",
           "description": "エバーキープで作られた人工の樹脂",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "49224_NONE",
+        "item_id": 49224,
+        "item_name": "被膜形成材",
+        "quality": "NONE",
+        "velocity": 117.57143,
+        "min_price": 3300,
+        "avg_price": 3161.8,
+        "hist_min": 3100,
+        "hist_max": 3200,
+        "units_for_sale": 7139,
+        "last_upload_time": "2026-08-05 04:14:27",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22663.png",
+          "description": "金属の表面に被膜を形成し、着色を可能にするための錬金薬",
           "category": "54",
           "item_level": 770,
           "shop_price": 99999,
@@ -8193,7 +8695,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "12538_NONE",
         "item_id": 12538,
@@ -8204,7 +8706,7 @@
         "avg_price": 186.6,
         "hist_min": 185,
         "hist_max": 192,
-        "units_for_sale": 2120,
+        "units_for_sale": 8629,
         "last_upload_time": "2026-08-05 03:42:29",
         "cross_info": null,
         "meta": {
@@ -8220,7 +8722,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "41760_NONE",
         "item_id": 41760,
@@ -8231,7 +8733,7 @@
         "avg_price": 245.0,
         "hist_min": 217,
         "hist_max": 297,
-        "units_for_sale": 1072,
+        "units_for_sale": 5327,
         "last_upload_time": "2026-08-05 03:48:30",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -8254,7 +8756,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:05:53",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "43996_NONE",
         "item_id": 43996,
@@ -8267,7 +8769,14 @@
         "hist_max": 179,
         "units_for_sale": 11484,
         "last_upload_time": "2026-08-05 03:58:40",
-        "cross_info": null,
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 30,
+          "high_scope": "Meteor",
+          "high_price": 43,
+          "profit_gil": 10,
+          "profit_rate": 33.3
+        },
         "meta": {
           "icon_url": "https://xivapi.com/i/021000/021231_hr1.png",
           "description": "黒鉄を含有する鉱石",
@@ -8281,7 +8790,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "41767_NONE",
         "item_id": 41767,
@@ -8292,7 +8801,7 @@
         "avg_price": 5214.4,
         "hist_min": 5207,
         "hist_max": 5217,
-        "units_for_sale": 2023,
+        "units_for_sale": 11359,
         "last_upload_time": "2026-08-05 04:00:57",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -8315,7 +8824,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:05:53",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "43995_NONE",
         "item_id": 43995,
@@ -8326,7 +8835,7 @@
         "avg_price": 75.2,
         "hist_min": 8,
         "hist_max": 200,
-        "units_for_sale": 15936,
+        "units_for_sale": 14849,
         "last_upload_time": "2026-08-05 03:24:51",
         "cross_info": null,
         "meta": {
@@ -8342,7 +8851,34 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "41763_NONE",
+        "item_id": 41763,
+        "item_name": "博識のハイオメガマテリジャ",
+        "quality": "NONE",
+        "velocity": 97.71429,
+        "min_price": 817,
+        "avg_price": 1449.0,
+        "hist_min": 517,
+        "hist_max": 1817,
+        "units_for_sale": 20741,
+        "last_upload_time": "2026-08-05 05:03:39",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020295_hr1.png",
+          "description": "",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "5296_NONE",
         "item_id": 5296,
@@ -8353,7 +8889,7 @@
         "avg_price": 264.2,
         "hist_min": 222,
         "hist_max": 300,
-        "units_for_sale": 1148,
+        "units_for_sale": 7981,
         "last_upload_time": "2026-08-05 03:36:55",
         "cross_info": null,
         "meta": {
@@ -8396,7 +8932,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "41765_NONE",
         "item_id": 41765,
@@ -8407,8 +8943,8 @@
         "avg_price": 3095.0,
         "hist_min": 217,
         "hist_max": 4216,
-        "units_for_sale": 1009,
-        "last_upload_time": "2026-08-05 04:00:40",
+        "units_for_sale": 9467,
+        "last_upload_time": "2026-08-05 05:02:05",
         "cross_info": {
           "cheap_scope": "Gaia",
           "cheap_price": 1990,
@@ -8424,6 +8960,33 @@
           "item_level": 690,
           "shop_price": 99999,
           "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "49223_NONE",
+        "item_id": 49223,
+        "item_name": "絶縁塗料",
+        "quality": "NONE",
+        "velocity": 88.28571,
+        "min_price": 1800,
+        "avg_price": 2280.0,
+        "hist_min": 2200,
+        "hist_max": 2300,
+        "units_for_sale": 5180,
+        "last_upload_time": "2026-08-05 03:50:20",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22654.png",
+          "description": "雷属性エーテル遮断加工のための特殊な塗料",
+          "category": "54",
+          "item_level": 770,
+          "shop_price": 99999,
+          "buyback_price": 0,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -8457,7 +9020,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "5067_HQ",
         "item_id": 5067,
@@ -8468,7 +9031,7 @@
         "avg_price": 218.6,
         "hist_min": 143,
         "hist_max": 483,
-        "units_for_sale": 6536,
+        "units_for_sale": 20932,
         "last_upload_time": "2026-08-05 04:06:32",
         "cross_info": null,
         "meta": {
@@ -8484,7 +9047,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "12628_NONE",
         "item_id": 12628,
@@ -8495,7 +9058,7 @@
         "avg_price": 575.4,
         "hist_min": 480,
         "hist_max": 697,
-        "units_for_sale": 285,
+        "units_for_sale": 2753,
         "last_upload_time": "2026-08-05 03:31:33",
         "cross_info": null,
         "meta": {
@@ -8511,7 +9074,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "44067_NONE",
         "item_id": 44067,
@@ -8522,7 +9085,7 @@
         "avg_price": 2781.4,
         "hist_min": 900,
         "hist_max": 4000,
-        "units_for_sale": 1128,
+        "units_for_sale": 5653,
         "last_upload_time": "2026-08-05 01:50:47",
         "cross_info": null,
         "meta": {
@@ -8538,7 +9101,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "5069_HQ",
         "item_id": 5069,
@@ -8549,7 +9112,7 @@
         "avg_price": 10.8,
         "hist_min": 1,
         "hist_max": 34,
-        "units_for_sale": 2940,
+        "units_for_sale": 16407,
         "last_upload_time": "2026-08-05 04:06:15",
         "cross_info": null,
         "meta": {
@@ -8592,7 +9155,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "8149_NONE",
         "item_id": 8149,
@@ -8603,7 +9166,7 @@
         "avg_price": 568.0,
         "hist_min": 200,
         "hist_max": 950,
-        "units_for_sale": 835,
+        "units_for_sale": 2707,
         "last_upload_time": "2026-08-04 13:43:43",
         "cross_info": null,
         "meta": {
@@ -8619,7 +9182,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "44057_NONE",
         "item_id": 44057,
@@ -8630,8 +9193,8 @@
         "avg_price": 67.4,
         "hist_min": 50,
         "hist_max": 90,
-        "units_for_sale": 894,
-        "last_upload_time": "2026-08-05 03:56:40",
+        "units_for_sale": 15409,
+        "last_upload_time": "2026-08-05 04:49:21",
         "cross_info": {
           "cheap_scope": "Mana",
           "cheap_price": 8,
@@ -8649,6 +9212,67 @@
           "buyback_price": 5,
           "stack_size": 999,
           "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "46253_HQ",
+        "item_id": 46253,
+        "item_name": "アリペブレ",
+        "quality": "HQ",
+        "velocity": 70.14286,
+        "min_price": 3800,
+        "avg_price": 5122.6,
+        "hist_min": 4300,
+        "hist_max": 5700,
+        "units_for_sale": 8568,
+        "last_upload_time": "2026-08-05 03:56:45",
+        "cross_info": {
+          "cheap_scope": "Elemental",
+          "cheap_price": 3651,
+          "high_scope": "Meteor",
+          "high_price": 4130,
+          "profit_gil": 272,
+          "profit_rate": 7.5
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/24107.png",
+          "description": "ウナギとポポトをひと口大に切り、パウダー状にしたサベネアンパプリカで煮込んだ料理<br>敵討伐・製作・採集時の経験値獲得量が上昇する<br>経験値獲得量 +3%<br>効果時間 30:00 [最大2倍まで効果時間の継ぎ足し可能]",
+          "category": "46",
+          "item_level": 750,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "5262_NQ",
+        "item_id": 5262,
+        "item_name": "卵砥石",
+        "quality": "NQ",
+        "velocity": 69.85714,
+        "min_price": 400,
+        "avg_price": 800.0,
+        "hist_min": 699,
+        "hist_max": 1201,
+        "units_for_sale": 914,
+        "last_upload_time": "2026-08-05 04:14:59",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021470_hr1.png",
+          "description": "金属や石材などの研磨用卵殻",
+          "category": "石材",
+          "item_level": 40,
+          "shop_price": 202,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": true,
           "rarity": 1
         }
       },
@@ -8680,7 +9304,34 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:05:53",
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "44027_NONE",
+        "item_id": 44027,
+        "item_name": "ロネークの獣毛",
+        "quality": "NONE",
+        "velocity": 69.42857,
+        "min_price": 1,
+        "avg_price": 6.8,
+        "hist_min": 2,
+        "hist_max": 12,
+        "units_for_sale": 9770,
+        "last_upload_time": "2026-08-05 04:49:51",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021827_hr1.png",
+          "description": "ロネークのずっしりとした獣毛",
+          "category": "布材",
+          "item_level": 670,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "33933_NONE",
         "item_id": 33933,
@@ -8734,7 +9385,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "38956_HQ",
         "item_id": 38956,
@@ -8745,7 +9396,7 @@
         "avg_price": 259.6,
         "hist_min": 149,
         "hist_max": 700,
-        "units_for_sale": 1990,
+        "units_for_sale": 10425,
         "last_upload_time": "2026-08-04 16:51:26",
         "cross_info": null,
         "meta": {
@@ -8815,7 +9466,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "7606_NQ",
         "item_id": 7606,
@@ -8826,7 +9477,7 @@
         "avg_price": 8998.0,
         "hist_min": 4200,
         "hist_max": 13000,
-        "units_for_sale": 99,
+        "units_for_sale": 3517,
         "last_upload_time": "2026-08-04 18:27:59",
         "cross_info": null,
         "meta": {
@@ -8842,7 +9493,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "12519_NQ",
         "item_id": 12519,
@@ -8853,7 +9504,7 @@
         "avg_price": 2701.0,
         "hist_min": 2400,
         "hist_max": 3000,
-        "units_for_sale": 1213,
+        "units_for_sale": 6762,
         "last_upload_time": "2026-08-04 17:07:12",
         "cross_info": {
           "cheap_scope": "Mana",
@@ -8876,7 +9527,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "14957_NONE",
         "item_id": 14957,
@@ -8887,7 +9538,7 @@
         "avg_price": 204.2,
         "hist_min": 1,
         "hist_max": 300,
-        "units_for_sale": 140,
+        "units_for_sale": 1516,
         "last_upload_time": "2026-08-04 10:38:37",
         "cross_info": null,
         "meta": {
@@ -8930,7 +9581,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:05:53",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "4570_NONE",
         "item_id": 4570,
@@ -8984,6 +9635,33 @@
         }
       },
       {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "39714_NONE",
+        "item_id": 39714,
+        "item_name": "ラザハンコットン",
+        "quality": "NONE",
+        "velocity": 60.142857,
+        "min_price": 99,
+        "avg_price": 1108.0,
+        "hist_min": 240,
+        "hist_max": 4100,
+        "units_for_sale": 4850,
+        "last_upload_time": "2026-08-04 09:49:55",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/023000/023153_hr1.png",
+          "description": "ラザハンで古くから親しまれる素朴な織物",
+          "category": "布材",
+          "item_level": 640,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
         "timestamp": "2026-08-05 11:10:43",
         "scope": "Mana",
         "item_key": "39711_NONE",
@@ -9011,7 +9689,102 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "8143_NONE",
+        "item_id": 8143,
+        "item_name": "白光のデミマテリラ",
+        "quality": "NONE",
+        "velocity": 59.714287,
+        "min_price": 500,
+        "avg_price": 923.8,
+        "hist_min": 800,
+        "hist_max": 999,
+        "units_for_sale": 3106,
+        "last_upload_time": "2026-08-05 04:53:58",
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 500,
+          "high_scope": "Meteor",
+          "high_price": 900,
+          "profit_gil": 355,
+          "profit_rate": 71.0
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020238_hr1.png",
+          "description": "製品に込められた職人の想いが結晶化した、半マテリア物質\n\n[換金用アイテム]",
+          "category": "デミマテリア",
+          "item_level": 30,
+          "shop_price": 10000,
+          "buyback_price": 1000,
+          "stack_size": 99,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "36095_NONE",
+        "item_id": 36095,
+        "item_name": "エルダーナツメグ",
+        "quality": "NONE",
+        "velocity": 59.57143,
+        "min_price": 24,
+        "avg_price": 125.2,
+        "hist_min": 78,
+        "hist_max": 184,
+        "units_for_sale": 12965,
+        "last_upload_time": "2026-08-04 20:33:15",
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 24,
+          "high_scope": "Meteor",
+          "high_price": 80,
+          "profit_gil": 52,
+          "profit_rate": 216.7
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025021_hr1.png",
+          "description": "甘やかな香りを放つ古代のスパイス。薬品や香料に用いられる",
+          "category": "食材",
+          "item_level": 539,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "41779_NONE",
+        "item_id": 41779,
+        "item_name": "魔匠のハイアルテマテリジャ",
+        "quality": "NONE",
+        "velocity": 59.142857,
+        "min_price": 500,
+        "avg_price": 1160.0,
+        "hist_min": 1000,
+        "hist_max": 1200,
+        "units_for_sale": 6124,
+        "last_upload_time": "2026-08-05 04:01:03",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020300_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "5067_NQ",
         "item_id": 5067,
@@ -9022,7 +9795,7 @@
         "avg_price": 218.6,
         "hist_min": 143,
         "hist_max": 483,
-        "units_for_sale": 6536,
+        "units_for_sale": 20932,
         "last_upload_time": "2026-08-05 04:06:32",
         "cross_info": {
           "cheap_scope": "Gaia",
@@ -9045,7 +9818,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "41758_NONE",
         "item_id": 41758,
@@ -9056,8 +9829,8 @@
         "avg_price": 520.8,
         "hist_min": 217,
         "hist_max": 900,
-        "units_for_sale": 1598,
-        "last_upload_time": "2026-08-05 04:15:03",
+        "units_for_sale": 6531,
+        "last_upload_time": "2026-08-05 05:03:23",
         "cross_info": {
           "cheap_scope": "Elemental",
           "cheap_price": 187,
@@ -9069,40 +9842,6 @@
         "meta": {
           "icon_url": "https://xivapi.com/i/020000/020297_hr1.png",
           "description": "",
-          "category": "マテリア",
-          "item_level": 690,
-          "shop_price": 99999,
-          "buyback_price": 197,
-          "stack_size": 999,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
-        "timestamp": "2026-08-05 13:17:01",
-        "scope": "Mana",
-        "item_key": "41771_NONE",
-        "item_id": 41771,
-        "item_name": "天眼のハイアルテマテリジャ",
-        "quality": "NONE",
-        "velocity": 55.714287,
-        "min_price": 690,
-        "avg_price": 1152.0,
-        "hist_min": 600,
-        "hist_max": 1500,
-        "units_for_sale": 1123,
-        "last_upload_time": "2026-08-05 04:15:05",
-        "cross_info": {
-          "cheap_scope": "Meteor",
-          "cheap_price": 217,
-          "high_scope": "Mana",
-          "high_price": 690,
-          "profit_gil": 438,
-          "profit_rate": 201.8
-        },
-        "meta": {
-          "icon_url": "https://xivapi.com/i/020000/020298_hr1.png",
-          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
           "category": "マテリア",
           "item_level": 690,
           "shop_price": 99999,
@@ -9134,6 +9873,74 @@
           "item_level": 45,
           "shop_price": 4500,
           "buyback_price": 81,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "41771_NONE",
+        "item_id": 41771,
+        "item_name": "天眼のハイアルテマテリジャ",
+        "quality": "NONE",
+        "velocity": 55.42857,
+        "min_price": 690,
+        "avg_price": 1152.0,
+        "hist_min": 600,
+        "hist_max": 1500,
+        "units_for_sale": 8275,
+        "last_upload_time": "2026-08-05 05:02:02",
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 217,
+          "high_scope": "Mana",
+          "high_price": 690,
+          "profit_gil": 438,
+          "profit_rate": 201.8
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020298_hr1.png",
+          "description": "[マテリア穴の個数を超えた1回目の装着まで使用可能]",
+          "category": "マテリア",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 197,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Mana",
+        "item_key": "44848_NONE",
+        "item_id": 44848,
+        "item_name": "高濃縮錬金薬",
+        "quality": "NONE",
+        "velocity": 55.42857,
+        "min_price": 1605,
+        "avg_price": 1860.0,
+        "hist_min": 1800,
+        "hist_max": 1900,
+        "units_for_sale": 4799,
+        "last_upload_time": "2026-08-05 04:54:10",
+        "cross_info": {
+          "cheap_scope": "Gaia",
+          "cheap_price": 1200,
+          "high_scope": "Mana",
+          "high_price": 1605,
+          "profit_gil": 324,
+          "profit_rate": 27.0
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/22701.png",
+          "description": "従来の錬金薬を濃縮し、性能を向上させた錬金薬",
+          "category": "54",
+          "item_level": 720,
+          "shop_price": 99999,
+          "buyback_price": 0,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -9208,7 +10015,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 11:17:50",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "52712_NONE",
         "item_id": 52712,
@@ -9216,10 +10023,10 @@
         "quality": "NONE",
         "velocity": 52.57143,
         "min_price": 1,
-        "avg_price": 1.0,
-        "hist_min": 1,
-        "hist_max": 1,
-        "units_for_sale": 2,
+        "avg_price": 73.8,
+        "hist_min": 40,
+        "hist_max": 99,
+        "units_for_sale": 12669,
         "last_upload_time": "2026-08-03 04:19:45",
         "cross_info": null,
         "meta": {
@@ -9296,40 +10103,6 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
-        "scope": "Mana",
-        "item_key": "8143_NONE",
-        "item_id": 8143,
-        "item_name": "白光のデミマテリラ",
-        "quality": "NONE",
-        "velocity": 50.57143,
-        "min_price": 500,
-        "avg_price": 924.0,
-        "hist_min": 800,
-        "hist_max": 990,
-        "units_for_sale": 392,
-        "last_upload_time": "2026-08-05 01:09:24",
-        "cross_info": {
-          "cheap_scope": "Mana",
-          "cheap_price": 500,
-          "high_scope": "Meteor",
-          "high_price": 900,
-          "profit_gil": 355,
-          "profit_rate": 71.0
-        },
-        "meta": {
-          "icon_url": "https://xivapi.com/i/020000/020238_hr1.png",
-          "description": "製品に込められた職人の想いが結晶化した、半マテリア物質\n\n[換金用アイテム]",
-          "category": "デミマテリア",
-          "item_level": 30,
-          "shop_price": 10000,
-          "buyback_price": 1000,
-          "stack_size": 99,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
         "timestamp": "2026-08-05 10:57:01",
         "scope": "Mana",
         "item_key": "8143_NQ",
@@ -9384,7 +10157,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Mana",
         "item_key": "27735_NONE",
         "item_id": 27735,
@@ -9395,7 +10168,7 @@
         "avg_price": 366.6,
         "hist_min": 355,
         "hist_max": 388,
-        "units_for_sale": 418,
+        "units_for_sale": 3406,
         "last_upload_time": "2026-08-04 12:15:09",
         "cross_info": null,
         "meta": {
@@ -9731,6 +10504,33 @@
         }
       },
       {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Meteor",
+        "item_key": "5114_NONE",
+        "item_id": 5114,
+        "item_name": "霊銀鉱",
+        "quality": "NONE",
+        "velocity": 474.7143,
+        "min_price": 141,
+        "avg_price": 211.8,
+        "hist_min": 180,
+        "hist_max": 300,
+        "units_for_sale": 22485,
+        "last_upload_time": "2026-08-05 05:06:35",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021208_hr1.png",
+          "description": "霊銀を含有する鉱石",
+          "category": "石材",
+          "item_level": 34,
+          "shop_price": 154,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
         "timestamp": "2026-08-05 11:17:50",
         "scope": "Meteor",
         "item_key": "43858_NONE",
@@ -9762,7 +10562,7 @@
         "scope": "Meteor",
         "item_key": "49234_NONE",
         "item_id": 49234,
-        "item_name": "剛力の心酔薬G4",
+        "item_name": "剛力の宝薬G4",
         "quality": "NONE",
         "velocity": 466.7143,
         "min_price": 100,
@@ -9789,7 +10589,7 @@
         "scope": "Meteor",
         "item_key": "49238_NONE",
         "item_id": 49238,
-        "item_name": "知力の心酔薬G4",
+        "item_name": "心力の宝薬G4",
         "quality": "NONE",
         "velocity": 458.0,
         "min_price": 495,
@@ -9823,7 +10623,7 @@
         "scope": "Meteor",
         "item_key": "49238_HQ",
         "item_id": 49238,
-        "item_name": "知力の心酔薬G4",
+        "item_name": "心力の宝薬G4",
         "quality": "HQ",
         "velocity": 457.57144,
         "min_price": 2500,
@@ -9850,7 +10650,7 @@
         "scope": "Meteor",
         "item_key": "49234_HQ",
         "item_id": 49234,
-        "item_name": "剛力の心酔薬G4",
+        "item_name": "剛力の宝薬G4",
         "quality": "HQ",
         "velocity": 440.14285,
         "min_price": 2500,
@@ -9880,7 +10680,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Meteor",
         "item_key": "14147_NONE",
         "item_id": 14147,
@@ -9891,7 +10691,7 @@
         "avg_price": 301.6,
         "hist_min": 300,
         "hist_max": 308,
-        "units_for_sale": 4286,
+        "units_for_sale": 16504,
         "last_upload_time": "2026-08-04 09:24:13",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -9918,7 +10718,7 @@
         "scope": "Meteor",
         "item_key": "49235_NONE",
         "item_id": 49235,
-        "item_name": "活力の心酔薬G4",
+        "item_name": "眼力の宝薬G4",
         "quality": "NONE",
         "velocity": 401.42856,
         "min_price": 399,
@@ -9952,7 +10752,7 @@
         "scope": "Meteor",
         "item_key": "49235_HQ",
         "item_id": 49235,
-        "item_name": "活力の心酔薬G4",
+        "item_name": "眼力の宝薬G4",
         "quality": "HQ",
         "velocity": 401.0,
         "min_price": 2500,
@@ -10016,7 +10816,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Meteor",
         "item_key": "36255_NONE",
         "item_id": 36255,
@@ -10027,7 +10827,7 @@
         "avg_price": 253.8,
         "hist_min": 225,
         "hist_max": 284,
-        "units_for_sale": 8797,
+        "units_for_sale": 59508,
         "last_upload_time": "2026-08-05 04:04:54",
         "cross_info": null,
         "meta": {
@@ -10097,7 +10897,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:05:53",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Meteor",
         "item_key": "43986_NONE",
         "item_id": 43986,
@@ -10108,7 +10908,7 @@
         "avg_price": 234.6,
         "hist_min": 215,
         "hist_max": 260,
-        "units_for_sale": 20673,
+        "units_for_sale": 12630,
         "last_upload_time": "2026-08-04 22:00:53",
         "cross_info": null,
         "meta": {
@@ -10155,7 +10955,7 @@
         "scope": "Meteor",
         "item_key": "49240_HQ",
         "item_id": 49240,
-        "item_name": "心力の心酔薬G4",
+        "item_name": "キャラメルポップコーン",
         "quality": "HQ",
         "velocity": 322.85715,
         "min_price": 2146,
@@ -10189,7 +10989,7 @@
         "scope": "Meteor",
         "item_key": "49240_NONE",
         "item_id": 49240,
-        "item_name": "心力の心酔薬G4",
+        "item_name": "キャラメルポップコーン",
         "quality": "NONE",
         "velocity": 322.14285,
         "min_price": 500,
@@ -10277,7 +11077,7 @@
         "scope": "Meteor",
         "item_key": "49228_NONE",
         "item_id": 49228,
-        "item_name": "コンチャ",
+        "item_name": "イヨラエキス",
         "quality": "NONE",
         "velocity": 304.7143,
         "min_price": 2500,
@@ -10331,7 +11131,7 @@
         "scope": "Meteor",
         "item_key": "49228_NQ",
         "item_id": 49228,
-        "item_name": "コンチャ",
+        "item_name": "イヨラエキス",
         "quality": "NQ",
         "velocity": 277.42856,
         "min_price": 2500,
@@ -10348,33 +11148,6 @@
           "item_level": 770,
           "shop_price": 99999,
           "buyback_price": 0,
-          "stack_size": 999,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
-        "timestamp": "2026-08-05 13:05:53",
-        "scope": "Meteor",
-        "item_key": "5115_NONE",
-        "item_id": 5115,
-        "item_name": "青金鉱",
-        "quality": "NONE",
-        "velocity": 263.0,
-        "min_price": 150,
-        "avg_price": 190.0,
-        "hist_min": 157,
-        "hist_max": 220,
-        "units_for_sale": 19161,
-        "last_upload_time": "2026-08-04 14:59:00",
-        "cross_info": null,
-        "meta": {
-          "icon_url": "https://xivapi.com/i/021000/021217_hr1.png",
-          "description": "青金を含有する鉱石",
-          "category": "石材",
-          "item_level": 42,
-          "shop_price": 219,
-          "buyback_price": 1,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -10408,7 +11181,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Meteor",
         "item_key": "5059_NQ",
         "item_id": 5059,
@@ -10419,7 +11192,7 @@
         "avg_price": 1555.8,
         "hist_min": 679,
         "hist_max": 5000,
-        "units_for_sale": 9508,
+        "units_for_sale": 39857,
         "last_upload_time": "2026-08-05 03:28:13",
         "cross_info": {
           "cheap_scope": "Elemental",
@@ -10442,6 +11215,33 @@
         }
       },
       {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Meteor",
+        "item_key": "5115_NONE",
+        "item_id": 5115,
+        "item_name": "青金鉱",
+        "quality": "NONE",
+        "velocity": 253.28572,
+        "min_price": 150,
+        "avg_price": 195.6,
+        "hist_min": 157,
+        "hist_max": 240,
+        "units_for_sale": 19697,
+        "last_upload_time": "2026-08-05 05:06:42",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021217_hr1.png",
+          "description": "青金を含有する鉱石",
+          "category": "石材",
+          "item_level": 42,
+          "shop_price": 219,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
         "timestamp": "2026-08-05 11:17:50",
         "scope": "Meteor",
         "item_key": "45984_NONE",
@@ -10460,6 +11260,67 @@
           "icon_url": "https://www.garlandtools.org/files/icons/item/20661.png",
           "description": "木材の内部まで浸透して保護する、防腐加工塗料",
           "category": "54",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Meteor",
+        "item_key": "43859_NONE",
+        "item_id": 43859,
+        "item_name": "ゴーストニッパー",
+        "quality": "NONE",
+        "velocity": 241.57143,
+        "min_price": 300,
+        "avg_price": 464.0,
+        "hist_min": 50,
+        "hist_max": 900,
+        "units_for_sale": 9087,
+        "last_upload_time": "2026-08-03 21:10:07",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/027000/027110_hr1.png",
+          "description": "半透明の柔らかい殻を持つエビ。海釣り用活餌",
+          "category": "釣り餌",
+          "item_level": 690,
+          "shop_price": 99999,
+          "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Meteor",
+        "item_key": "45988_NONE",
+        "item_id": 45988,
+        "item_name": "ディアトリマの毛",
+        "quality": "NONE",
+        "velocity": 233.57143,
+        "min_price": 1800,
+        "avg_price": 3500.0,
+        "hist_min": 3500,
+        "hist_max": 3500,
+        "units_for_sale": 7789,
+        "last_upload_time": "2026-08-05 04:40:38",
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 1800,
+          "high_scope": "Mana",
+          "high_price": 3191,
+          "profit_gil": 1231,
+          "profit_rate": 68.4
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21616.png",
+          "description": "古代からトラル大陸に棲息する鳥類の毛",
+          "category": "51",
           "item_level": 740,
           "shop_price": 99999,
           "buyback_price": 0,
@@ -10537,11 +11398,45 @@
         }
       },
       {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Meteor",
+        "item_key": "45973_NONE",
+        "item_id": 45973,
+        "item_name": "フルグライト",
+        "quality": "NONE",
+        "velocity": 222.28572,
+        "min_price": 130,
+        "avg_price": 638.8,
+        "hist_min": 398,
+        "hist_max": 1498,
+        "units_for_sale": 2680,
+        "last_upload_time": "2026-08-05 05:06:59",
+        "cross_info": {
+          "cheap_scope": "Meteor",
+          "cheap_price": 130,
+          "high_scope": "Elemental",
+          "high_price": 270,
+          "profit_gil": 126,
+          "profit_rate": 96.9
+        },
+        "meta": {
+          "icon_url": "https://www.garlandtools.org/files/icons/item/21492.png",
+          "description": "落雷によってガラス化した珪岩",
+          "category": "48",
+          "item_level": 740,
+          "shop_price": 99999,
+          "buyback_price": 0,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
         "timestamp": "2026-08-05 13:17:01",
         "scope": "Meteor",
         "item_key": "49209_NONE",
         "item_id": 49209,
-        "item_name": "セドライト",
+        "item_name": "ローズガーネット原石",
         "quality": "NONE",
         "velocity": 216.71428,
         "min_price": 190,
@@ -10659,7 +11554,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Meteor",
         "item_key": "36260_NONE",
         "item_id": 36260,
@@ -10670,7 +11565,7 @@
         "avg_price": 289.6,
         "hist_min": 205,
         "hist_max": 400,
-        "units_for_sale": 7530,
+        "units_for_sale": 20640,
         "last_upload_time": "2026-08-04 17:00:45",
         "cross_info": {
           "cheap_scope": "Meteor",
@@ -10835,11 +11730,45 @@
         }
       },
       {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Meteor",
+        "item_key": "43996_NONE",
+        "item_id": 43996,
+        "item_name": "黒鉄鉱",
+        "quality": "NONE",
+        "velocity": 141.42857,
+        "min_price": 43,
+        "avg_price": 85.0,
+        "hist_min": 38,
+        "hist_max": 120,
+        "units_for_sale": 9603,
+        "last_upload_time": "2026-08-05 04:29:45",
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 30,
+          "high_scope": "Meteor",
+          "high_price": 43,
+          "profit_gil": 10,
+          "profit_rate": 33.3
+        },
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021231_hr1.png",
+          "description": "黒鉄を含有する鉱石",
+          "category": "石材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
         "timestamp": "2026-08-05 11:10:43",
         "scope": "Meteor",
         "item_key": "49227_NONE",
         "item_id": 49227,
-        "item_name": "ベラフディアン・ペペロンチーノ",
+        "item_name": "トライヨラの染料",
         "quality": "NONE",
         "velocity": 141.28572,
         "min_price": 2425,
@@ -10866,7 +11795,7 @@
         "scope": "Meteor",
         "item_key": "49227_NQ",
         "item_id": 49227,
-        "item_name": "ベラフディアン・ペペロンチーノ",
+        "item_name": "トライヨラの染料",
         "quality": "NQ",
         "velocity": 141.28572,
         "min_price": 2425,
@@ -11031,7 +11960,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:05:53",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Meteor",
         "item_key": "44016_NONE",
         "item_id": 44016,
@@ -11108,7 +12037,7 @@
         "cross_info": {
           "cheap_scope": "Meteor",
           "cheap_price": 80,
-          "high_scope": "Gaia",
+          "high_scope": "Mana",
           "high_price": 100,
           "profit_gil": 15,
           "profit_rate": 18.8
@@ -11126,19 +12055,19 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Meteor",
         "item_key": "36262_NONE",
         "item_id": 36262,
         "item_name": "デュナミスシャード",
         "quality": "NONE",
         "velocity": 116.71429,
-        "min_price": 40,
+        "min_price": 30,
         "avg_price": 394.8,
         "hist_min": 70,
         "hist_max": 1200,
-        "units_for_sale": 1315,
-        "last_upload_time": "2026-08-05 02:45:04",
+        "units_for_sale": 6849,
+        "last_upload_time": "2026-08-05 04:39:53",
         "cross_info": null,
         "meta": {
           "icon_url": "https://xivapi.com/i/020000/020047_hr1.png",
@@ -11157,7 +12086,7 @@
         "scope": "Meteor",
         "item_key": "50414_NONE",
         "item_id": 50414,
-        "item_name": "アイギス・エネルギーパック",
+        "item_name": "オイジュス・エネルギーパック",
         "quality": "NONE",
         "velocity": 114.85714,
         "min_price": 20000,
@@ -11191,7 +12120,7 @@
         "scope": "Meteor",
         "item_key": "50414_NQ",
         "item_id": 50414,
-        "item_name": "アイギス・エネルギーパック",
+        "item_name": "オイジュス・エネルギーパック",
         "quality": "NQ",
         "velocity": 114.85714,
         "min_price": 20000,
@@ -11342,7 +12271,14 @@
         "hist_max": 80,
         "units_for_sale": 10,
         "last_upload_time": "2026-08-05 02:15:00",
-        "cross_info": null,
+        "cross_info": {
+          "cheap_scope": "Mana",
+          "cheap_price": 24,
+          "high_scope": "Meteor",
+          "high_price": 80,
+          "profit_gil": 52,
+          "profit_rate": 216.7
+        },
         "meta": {
           "icon_url": "https://xivapi.com/i/025000/025021_hr1.png",
           "description": "甘やかな香りを放つ古代のスパイス。薬品や香料に用いられる",
@@ -11566,7 +12502,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:05:53",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Meteor",
         "item_key": "5107_NONE",
         "item_id": 5107,
@@ -11951,7 +12887,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05 13:17:01",
+        "timestamp": "2026-08-05 14:01:05",
         "scope": "Meteor",
         "item_key": "5059_HQ",
         "item_id": 5059,
@@ -11962,7 +12898,7 @@
         "avg_price": 1555.8,
         "hist_min": 679,
         "hist_max": 5000,
-        "units_for_sale": 9508,
+        "units_for_sale": 39857,
         "last_upload_time": "2026-08-05 03:28:13",
         "cross_info": null,
         "meta": {
@@ -12069,6 +13005,33 @@
           "buyback_price": 2,
           "stack_size": 999,
           "can_be_hq": true,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05 14:01:05",
+        "scope": "Meteor",
+        "item_key": "8161_NONE",
+        "item_id": 8161,
+        "item_name": "オ・ゴモロの果実",
+        "quality": "NONE",
+        "velocity": 50.142857,
+        "min_price": 500,
+        "avg_price": 1160.0,
+        "hist_min": 900,
+        "hist_max": 1800,
+        "units_for_sale": 4135,
+        "last_upload_time": "2026-08-03 23:55:49",
+        "cross_info": null,
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025309_hr1.png",
+          "description": "チョコボのおやつに適した果実。\n\nマイチョコボの羽根の青味が濃くなる",
+          "category": "雑貨",
+          "item_level": 45,
+          "shop_price": 264,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
           "rarity": 1
         }
       }

@@ -938,7 +938,9 @@
             }
 
             let displayTitle = item.item_name || `Item ${item.item_id}`;
-            if (displayTitle.includes("Unknown") && FRONTEND_NAME_MAP[item.item_id]) {
+            if ((displayTitle.includes("Unknown") || displayTitle.startsWith("Item ")) && allItemSearchDict[item.item_id]) {
+              displayTitle = allItemSearchDict[item.item_id];
+            } else if (displayTitle.includes("Unknown") && FRONTEND_NAME_MAP[item.item_id]) {
               displayTitle = FRONTEND_NAME_MAP[item.item_id];
             }
 

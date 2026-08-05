@@ -102,20 +102,33 @@ def resolve_item_metadata_batch(conn, item_ids):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
     meta_map = {}
     
-    # 1. Known items map
+    # Load full 16,843 items search dictionary if available
+    items_search = {}
+    if os.path.exists("docs/items_search.json"):
+        try:
+            with open("docs/items_search.json", "r", encoding="utf-8") as f:
+                items_search = json.load(f)
+        except Exception:
+            pass
+
+    # 1. Known items map & items_search dictionary
     for iid in item_ids:
         if iid in KNOWN_70_ITEMS:
             name, can_hq = KNOWN_70_ITEMS[iid]
             meta_map[iid] = {"name": name, "can_be_hq": can_hq}
+        elif str(iid) in items_search:
+            meta_map[iid] = {"name": items_search[str(iid)], "can_be_hq": True}
+        elif iid in items_search:
+            meta_map[iid] = {"name": items_search[iid], "can_be_hq": True}
 
-    # 2. Check item_metadata DB cache
+    # 2. Check item_metadata DB cache for any remaining
     missing_ids = [x for x in item_ids if x not in meta_map]
     if missing_ids and conn:
         cursor = conn.cursor()
         placeholders = ','.join(['?'] * len(missing_ids))
         cursor.execute(f"SELECT item_id, category, can_be_hq FROM item_metadata WHERE item_id IN ({placeholders})", list(missing_ids))
         for row in cursor.fetchall():
-            meta_map[row[0]] = {"name": f"Item {row[0]}", "can_be_hq": bool(row[2])}
+            meta_map[row[0]] = {"name": f"Unknown ({row[0]})", "can_be_hq": bool(row[2])}
 
     # 3. Fallback to XIVAPI / Garland for truly unknown items
     still_missing = [x for x in item_ids if x not in meta_map]
