@@ -544,6 +544,42 @@
 
 
 
+    /* Mobile DC Switcher Tabs (hidden on desktop) */
+    .mobile-dc-tabs {
+      display: none;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.2rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .mobile-dc-tab-btn {
+      flex: 1;
+      min-width: 75px;
+      padding: 0.5rem 0.6rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.8rem;
+      font-family: 'Outfit', sans-serif;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+    .mobile-dc-tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.25), rgba(121, 40, 202, 0.25));
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.3);
+    }
+
     @media (max-width: 1400px) {
       .dc-grid { grid-template-columns: repeat(2, 1fr); }
       .dc-column { height: 550px; }
@@ -554,8 +590,29 @@
     }
 
     @media (max-width: 768px) {
-      .dc-grid { grid-template-columns: 1fr; }
-      .dc-column { height: 500px; }
+      .mobile-dc-tabs {
+        display: flex;
+      }
+      .dc-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.75rem;
+        padding-bottom: 0.5rem;
+        scrollbar-width: none;
+      }
+      .dc-grid::-webkit-scrollbar {
+        display: none;
+      }
+      .dc-column {
+        flex: 0 0 100%;
+        width: 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        height: calc(100vh - 230px);
+        min-height: 520px;
+      }
       h1 { font-size: 1.3rem; }
     }
 
@@ -587,9 +644,24 @@
       <input type="text" id="searchInput" class="search-input" placeholder="全DC横断アイテム検索 (名前またはID)...">
     </div>
 
-    <div class="dc-grid">
+    <div class="mobile-dc-tabs" id="mobileDcTabs">
+      <button class="mobile-dc-tab-btn active" data-target="column-Mana" onclick="scrollToDc('Mana')">
+        <i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> Mana
+      </button>
+      <button class="mobile-dc-tab-btn" data-target="column-Elemental" onclick="scrollToDc('Elemental')">
+        <i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental
+      </button>
+      <button class="mobile-dc-tab-btn" data-target="column-Gaia" onclick="scrollToDc('Gaia')">
+        <i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia
+      </button>
+      <button class="mobile-dc-tab-btn" data-target="column-Meteor" onclick="scrollToDc('Meteor')">
+        <i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor
+      </button>
+    </div>
 
-      <div class="dc-column">
+    <div class="dc-grid" id="dcGrid">
+
+      <div class="dc-column" id="column-Mana">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> Mana</div>
           <div style="display:flex;align-items:center;gap:0.4rem;">
@@ -606,7 +678,7 @@
         </div>
       </div>
 
-      <div class="dc-column">
+      <div class="dc-column" id="column-Elemental">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental</div>
           <div style="display:flex;align-items:center;gap:0.4rem;">
@@ -623,7 +695,7 @@
         </div>
       </div>
 
-      <div class="dc-column">
+      <div class="dc-column" id="column-Gaia">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia</div>
           <div style="display:flex;align-items:center;gap:0.4rem;">
@@ -640,7 +712,7 @@
         </div>
       </div>
 
-      <div class="dc-column">
+      <div class="dc-column" id="column-Meteor">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor</div>
           <div style="display:flex;align-items:center;gap:0.4rem;">
@@ -684,6 +756,43 @@
     let allDcData = {};
     const sortMode = { Mana: 'velocity', Elemental: 'velocity', Gaia: 'velocity', Meteor: 'velocity' };
     let priceChart = null;
+
+    function scrollToDc(dc) {
+      const col = document.getElementById(`column-${dc}`);
+      const grid = document.getElementById('dcGrid');
+      if (col && grid) {
+        document.querySelectorAll('.mobile-dc-tab-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.target === `column-${dc}`);
+        });
+        col.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      }
+    }
+
+    function initMobileSwipeObserver() {
+      const grid = document.getElementById('dcGrid');
+      if (!grid || typeof IntersectionObserver === 'undefined') return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            const id = entry.target.id;
+            document.querySelectorAll('.mobile-dc-tab-btn').forEach(btn => {
+              btn.classList.toggle('active', btn.dataset.target === id);
+            });
+          }
+        });
+      }, {
+        root: grid,
+        threshold: 0.5
+      });
+
+      DATACENTERS.forEach(dc => {
+        const col = document.getElementById(`column-${dc}`);
+        if (col) observer.observe(col);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initMobileSwipeObserver);
 
     function setSort(dc, mode) {
       sortMode[dc] = mode;
@@ -744,6 +853,7 @@
 
         allDcData = data.data || {};
         renderAllColumns();
+        setTimeout(initMobileSwipeObserver, 200);
 
       } catch (err) {
         console.error("loadData error:", err);
