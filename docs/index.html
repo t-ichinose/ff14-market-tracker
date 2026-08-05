@@ -969,19 +969,13 @@
             );
           }
 
-          // 重複除外
-          const seenKeys = new Set();
+          // 重複除外 (1アイテム1カードに統一)
+          const seenIds = new Set();
           const uniqueItems = [];
           
           for (const item of items) {
-            const q = item.quality || "NONE";
-            const dupKey = `${item.item_id}_${q}`;
-            
-            if (q === "NONE" && seenKeys.has(`${item.item_id}_NQ`)) continue;
-            if (q === "NQ" && seenKeys.has(`${item.item_id}_NONE`)) continue;
-
-            if (!seenKeys.has(dupKey)) {
-              seenKeys.add(dupKey);
+            if (!seenIds.has(item.item_id)) {
+              seenIds.add(item.item_id);
               uniqueItems.push(item);
             }
           }
@@ -1011,15 +1005,6 @@
           }
 
           listEl.innerHTML = uniqueItems.map((item, idx) => {
-            const q = item.quality || "NONE";
-            let qualityBadge = "";
-            
-            if (q === "HQ" || (item.item_name && item.item_name.includes("[HQ]"))) {
-              qualityBadge = `<span class="quality-badge quality-hq"><i class="fa-solid fa-crown"></i> HQ</span>`;
-            } else if (q === "NQ" || (item.item_name && item.item_name.includes("[NQ]"))) {
-              qualityBadge = `<span class="quality-badge quality-nq"><i class="fa-solid fa-box"></i> NQ</span>`;
-            }
-
             let displayTitle = item.item_name || `Item ${item.item_id}`;
             if ((displayTitle.includes("Unknown") || displayTitle.startsWith("Item ")) && allItemSearchDict[item.item_id]) {
               displayTitle = allItemSearchDict[item.item_id];
@@ -1088,7 +1073,6 @@
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                       </a>
                     </span>
-                    ${qualityBadge}
                   </div>
                 </div>
                 

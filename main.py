@@ -506,55 +506,39 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         if h_avg < h_min: h_avg = float(h_min)
         if h_avg > h_max: h_avg = float(h_max)
 
-        nq_vel = float(data.get("nqSaleVelocity") or 0.0)
-        hq_vel = float(data.get("hqSaleVelocity") or 0.0)
         total_vel = float(data.get("dailySaleVelocity") or data.get("regularSaleVelocity") or 0.0)
-        
-        nq_min = data.get("minPriceNQ") or data.get("minPrice", 0)
-        hq_min = data.get("minPriceHQ") or 0
+        min_price = data.get("minPrice", 0)
 
-        # NQ/HQ distinction ONLY for items that actually can be HQ
-        has_hq = can_be_hq and ((hq_vel > 0) or (hq_min > 0))
+        item_key = str(item_id)
 
-        if not has_hq:
-            qualities = [("NONE", pure_name, total_vel, nq_min, h_min, h_max, h_avg)]
+        if total_vel >= VELOCITY_THRESHOLD:
+            high_velocity_count += 1
+            cursor.execute("""
+            INSERT INTO items_pool (scope, item_key, item_id, item_name, quality, added_at, last_velocity, is_active)
+            VALUES (?, ?, ?, ?, 'NONE', ?, ?, 1)
+            ON CONFLICT(scope, item_key) DO UPDATE SET
+                item_name = excluded.item_name,
+                quality = 'NONE',
+                last_velocity = excluded.last_velocity,
+                is_active = 1
+            """, (scope_name, item_key, item_id, pure_name, now_str, total_vel))
+
+            cursor.execute("""
+            INSERT INTO market_logs (
+                timestamp, scope, item_key, item_id, item_name, quality,
+                daily_sale_velocity, min_price, avg_price, hist_min, hist_max,
+                units_for_sale, listings_count, last_upload_time
+            ) VALUES (?, ?, ?, ?, ?, 'NONE', ?, ?, ?, ?, ?, ?, 0, ?)
+            """, (
+                now_str, scope_name, item_key, item_id, pure_name,
+                total_vel, min_price, h_avg, h_min, h_max, exact_dc_stock, last_upload_str
+            ))
         else:
-            qualities = [
-                ("NQ", f"{pure_name} [NQ]", nq_vel, nq_min, h_min, h_max, h_avg),
-                ("HQ", f"{pure_name} [HQ]", hq_vel, hq_min, h_min, h_max, h_avg)
-            ]
-
-        for q_type, item_display_name, vel, price, hm_min, hm_max, hm_avg in qualities:
-            item_key = f"{item_id}_{q_type}"
-
-            if vel >= VELOCITY_THRESHOLD:
-                high_velocity_count += 1
-                cursor.execute("""
-                INSERT INTO items_pool (scope, item_key, item_id, item_name, quality, added_at, last_velocity, is_active)
-                VALUES (?, ?, ?, ?, ?, ?, ?, 1)
-                ON CONFLICT(scope, item_key) DO UPDATE SET
-                    item_name = excluded.item_name,
-                    quality = excluded.quality,
-                    last_velocity = excluded.last_velocity,
-                    is_active = 1
-                """, (scope_name, item_key, item_id, item_display_name, q_type, now_str, vel))
-
-                cursor.execute("""
-                INSERT INTO market_logs (
-                    timestamp, scope, item_key, item_id, item_name, quality,
-                    daily_sale_velocity, min_price, avg_price, hist_min, hist_max,
-                    units_for_sale, listings_count, last_upload_time
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)
-                """, (
-                    now_str, scope_name, item_key, item_id, item_display_name, q_type,
-                    vel, price, hm_avg, hm_min, hm_max, exact_dc_stock, last_upload_str
-                ))
-            else:
-                cursor.execute("""
-                UPDATE items_pool 
-                SET is_active = 0, last_velocity = ?
-                WHERE scope = ? AND item_key = ?
-                """, (vel, scope_name, item_key))
+            cursor.execute("""
+            UPDATE items_pool 
+            SET is_active = 0, last_velocity = ?
+            WHERE scope = ? AND item_key = ?
+            """, (total_vel, scope_name, item_key))
 
     print(f"[{scope_name}] Processed -> High Velocity Cards (>= {VELOCITY_THRESHOLD}/day): {high_velocity_count} cards.")
 
