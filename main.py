@@ -9,34 +9,6 @@ from datetime import datetime, timezone
 JP_DATACENTERS = ["Elemental", "Gaia", "Mana", "Meteor"]
 VELOCITY_THRESHOLD = 50.0
 
-KNOWN_70_ITEMS = {
-    49234: ("剛力の心酔薬G4", True),
-    49235: ("活力の心酔薬G4", True),
-    49236: ("器用の心酔薬G4", True),
-    49237: ("敏捷の心酔薬G4", True),
-    49238: ("知力の心酔薬G4", True),
-    49239: ("精神の心酔薬G4", True),
-    49240: ("心力の心酔薬G4", True),
-    49229: ("フトコーラ", True),
-    49209: ("セドライト", False),
-    47701: ("トラルコーン", False),
-    47740: ("コザマル・カモミール", False),
-    49230: ("キャロットラペ", True),
-    49225: ("ローストチキン", True),
-    49226: ("メスカル", True),
-    49227: ("ベラフディアン・ペペロンチーノ", True),
-    49228: ("コンチャ", True),
-    49205: ("ロイヤルウパー", False),
-    49206: ("スイートバナナ", False),
-    49207: ("サンチアゴトマト", False),
-    49208: ("ウカマウピメント", False),
-    45972: ("オルコクロマイト", False),
-    45984: ("クラロウォルナット原木", False),
-    46188: ("シデリティス茶葉", False),
-    50414: ("アイギス・エネルギーパック", False),
-    52254: ("カード:ノーマカー", False),
-}
-
 def init_db(db_path="data/market_data.db"):
     os.makedirs("data", exist_ok=True)
     conn = sqlite3.connect(db_path, timeout=30)
@@ -111,13 +83,7 @@ def resolve_item_metadata_batch(conn, item_ids):
         except Exception:
             pass
 
-    # 1. Known items map
-    for iid in item_ids:
-        if iid in KNOWN_70_ITEMS:
-            name, can_hq = KNOWN_70_ITEMS[iid]
-            meta_map[iid] = {"name": name, "can_be_hq": can_hq}
-
-    # 2. Check item_metadata DB cache for real can_be_hq & name
+    # 1. Check item_metadata DB cache for real can_be_hq & name
     if item_ids and conn:
         cursor = conn.cursor()
         placeholders = ','.join(['?'] * len(item_ids))

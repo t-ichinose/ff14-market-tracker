@@ -565,29 +565,7 @@
       renderAllColumns(searchTerm);
     }
 
-    const FRONTEND_NAME_MAP = {
-      49234: "剛力の心酔薬G4",
-      49235: "活力の心酔薬G4",
-      49236: "器用の心酔薬G4",
-      49237: "敏捷の心酔薬G4",
-      49238: "知力の心酔薬G4",
-      49239: "精神の心酔薬G4",
-      49240: "心力の心酔薬G4",
-      49229: "フトコーラ",
-      49209: "セドライト",
-      47701: "トラルコーン",
-      47740: "コザマル・カモミール",
-      49230: "キャロットラペ",
-      49225: "ローストチキン",
-      49226: "メスカル",
-      49227: "ベラフディアン・ペペロンチーノ",
-      49228: "コンチャ",
-      45972: "オルコクロマイト",
-      45984: "クラロウォルナット原木",
-      46188: "シデリティス茶葉",
-      50414: "アイギス・エネルギーパック",
-      52254: "カード:ノーマカー"
-    };
+
 
     async function loadData() {
       try {
@@ -669,8 +647,6 @@
             let displayTitle = item.item_name || `Item ${item.item_id}`;
             if ((displayTitle.includes("Unknown") || displayTitle.startsWith("Item ")) && allItemSearchDict[item.item_id]) {
               displayTitle = allItemSearchDict[item.item_id];
-            } else if (displayTitle.includes("Unknown") && FRONTEND_NAME_MAP[item.item_id]) {
-              displayTitle = FRONTEND_NAME_MAP[item.item_id];
             }
 
             let cleanTitle = escapeHtml(displayTitle).replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
