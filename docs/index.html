@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FF14 Market Board Analytics - JP DC Comparison</title>
+  <title>FF14 Market Board Analytics - JP DC High-Velocity Items</title>
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,6 +96,19 @@
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
+    }
+
+    .filter-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 183, 3, 0.15);
+      border: 1px solid rgba(255, 183, 3, 0.3);
+      color: var(--accent-gold);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
     }
 
     .status-dot {
@@ -337,11 +350,16 @@
   <div class="container">
     <header>
       <div class="brand">
-        <div class="brand-icon"><i class="fa-solid fa-earth-asia"></i></div>
+        <div class="brand-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
         <div>
           <h1>FF14 Market Board Analytics</h1>
-          <div class="status-badge" id="lastUpdatedBadge">
-            <span class="status-dot"></span> データを読み込み中...
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.4rem; flex-wrap: wrap;">
+            <div class="filter-badge">
+              <i class="fa-solid fa-filter"></i> 1日50個以上売れる超高流動品
+            </div>
+            <div class="status-badge" id="lastUpdatedBadge">
+              <span class="status-dot"></span> データを読み込み中...
+            </div>
           </div>
         </div>
       </div>
@@ -362,7 +380,7 @@
         <div class="stat-value" id="statScope">Mana DC</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-fire"></i> 監視アクティブ数</div>
+        <div class="stat-label"><i class="fa-solid fa-bolt"></i> 爆速回転アイテム数 (>=50/日)</div>
         <div class="stat-value" id="statTotalItems">-</div>
       </div>
       <div class="stat-card">
@@ -375,7 +393,7 @@
     <div class="controls-bar">
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" class="search-input" placeholder="アイテム名またはIDでリアルタイム検索...">
+        <input type="text" id="searchInput" class="search-input" placeholder="高回転アイテム名またはIDでリアルタイム検索...">
       </div>
     </div>
 
@@ -398,7 +416,7 @@
             <tr>
               <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-muted);">
                 <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                <p>日本DCデータを読み込み中...</p>
+                <p>超高回転市場データを読み込み中...</p>
               </td>
             </tr>
           </tbody>
@@ -407,7 +425,7 @@
     </div>
 
     <footer>
-      <p>FF14 Market Board Analytics &copy; 2026 | Japan DC Comparison (Elemental / Gaia / Mana / Meteor)</p>
+      <p>FF14 High-Velocity Market Analytics &copy; 2026 | Pool Threshold: &ge; 50.0 sales/day</p>
     </footer>
   </div>
 
@@ -454,7 +472,6 @@
         document.getElementById('statTopItem').innerText = '-';
       }
 
-      // Filter input reset
       document.getElementById('searchInput').value = '';
       renderTable(items);
     }
@@ -465,7 +482,7 @@
         tbody.innerHTML = `
           <tr>
             <td colspan="7" style="text-align: center; padding: 2rem; color: var(--text-muted);">
-              ${currentDc} DC のデータがまだありません。次の自動巡回までお待ちください。
+              現在 ${currentDc} DC で「1日平均50個以上」売れている高回転アイテムはプール未検知か蓄積待ちです。
             </td>
           </tr>
         `;
@@ -521,7 +538,6 @@
       });
     }
 
-    // DC Tab Click Events
     document.querySelectorAll('.dc-tab').forEach(tab => {
       tab.addEventListener('click', (e) => {
         document.querySelectorAll('.dc-tab').forEach(t => t.classList.remove('active'));
@@ -532,7 +548,6 @@
       });
     });
 
-    // Search Filter
     document.getElementById('searchInput').addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase().trim();
       const items = allDcData[currentDc] || [];
@@ -550,7 +565,6 @@
       renderTable(filtered);
     });
 
-    // Initial Load
     loadData();
   </script>
 </body>
