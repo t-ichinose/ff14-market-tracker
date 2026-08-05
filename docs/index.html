@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 強力なキャッシュ無効化ヘッダー -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -113,6 +112,26 @@
       border-radius: 20px;
       font-size: 0.8rem;
       font-weight: 600;
+    }
+
+    .refresh-btn {
+      background: rgba(0, 210, 255, 0.15);
+      border: 1px solid var(--accent-blue);
+      color: #ffffff;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .refresh-btn:hover {
+      background: var(--accent-blue);
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
     }
 
     .filter-badge {
@@ -424,6 +443,7 @@
       </div>
 
       <div class="header-badges">
+        <button class="refresh-btn" onclick="loadData()"><i class="fa-solid fa-rotate"></i> データ更新</button>
         <div class="filter-badge">
           <i class="fa-solid fa-fire"></i> 1日50個以上売れる超高流動品
         </div>
@@ -487,7 +507,6 @@
     const DATACENTERS = ["Mana", "Elemental", "Gaia", "Meteor"];
     let allDcData = {};
 
-    // フロントエンド用二重保険補正マップ（ブラウザキャッシュ対策）
     const FRONTEND_NAME_MAP = {
       49234: "剛力の心酔薬G4",
       49235: "活力の心酔薬G4",
@@ -514,9 +533,14 @@
 
     async function loadData() {
       try {
-        // キャッシュを強力に破壊するランダムクエリ
         const cacheBuster = `t=${Date.now()}_${Math.random()}`;
-        const res = await fetch(`data.json?${cacheBuster}`, { cache: "no-store" });
+        const res = await fetch(`data.json?${cacheBuster}`, { 
+          cache: "no-store",
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          }
+        });
         if (!res.ok) throw new Error('Data fetch failed');
         const data = await res.json();
 
@@ -573,7 +597,6 @@
             qualityBadge = `<span class="quality-badge quality-nq"><i class="fa-solid fa-box"></i> NQ</span>`;
           }
 
-          // 万が一キャッシュ等で Unknown が届いても画面レベルで確実に補正！
           let displayTitle = item.item_name;
           if (displayTitle.includes("Unknown") && FRONTEND_NAME_MAP[item.item_id]) {
             displayTitle = FRONTEND_NAME_MAP[item.item_id];
@@ -608,6 +631,10 @@
             `;
           }
 
+          // 出品枠数表示のスマートクリーン化（1出品固定の誤解表記を完全に防止）
+          const lc = item.listings_count;
+          const listingsStr = (lc && lc > 1) ? ` (${lc.toLocaleString()}出品)` : '';
+
           return `
             <div class="item-card">
               <div class="item-card-header">
@@ -628,7 +655,7 @@
 
               <div class="item-sub-grid">
                 <div>平均: ${item.avg_price.toLocaleString()}G</div>
-                <div>在庫: ${item.units_for_sale.toLocaleString()}個 (${item.listings_count}出品)</div>
+                <div>在庫: ${item.units_for_sale.toLocaleString()}個${listingsStr}</div>
               </div>
 
               ${crossProfitBox}
@@ -655,6 +682,7 @@
       renderAllColumns(term);
     });
 
+    setInterval(loadData, 60000);
     loadData();
   </script>
 </body>
