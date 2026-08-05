@@ -47,7 +47,6 @@
       margin: 0 auto;
     }
 
-    /* Header & Filter Bar */
     header {
       display: flex;
       flex-wrap: wrap;
@@ -133,7 +132,6 @@
       100% { opacity: 0.4; }
     }
 
-    /* Global Search Box */
     .search-box {
       position: relative;
       width: 100%;
@@ -164,7 +162,6 @@
       border-color: var(--accent-blue);
     }
 
-    /* 4-Column DC Grid Layout */
     .dc-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -212,7 +209,6 @@
       border-radius: 12px;
     }
 
-    /* Scrollable Item List */
     .dc-item-list {
       flex: 1;
       overflow-y: auto;
@@ -222,7 +218,6 @@
       gap: 0.75rem;
     }
 
-    /* Custom Scrollbar */
     .dc-item-list::-webkit-scrollbar {
       width: 6px;
     }
@@ -240,7 +235,6 @@
       background: var(--accent-blue);
     }
 
-    /* Compact Item Card */
     .item-card {
       background: rgba(15, 23, 42, 0.6);
       border: 1px solid var(--card-border);
@@ -305,9 +299,17 @@
       font-size: 0.85rem;
     }
 
+    .price-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-right: 0.2rem;
+    }
+
     .price-main {
       font-weight: 700;
       color: #ffffff;
+      font-family: 'Outfit', sans-serif;
     }
 
     .item-sub-grid {
@@ -323,7 +325,6 @@
     .nq-badge { color: var(--badge-nq); font-weight: 600; }
     .hq-badge { color: var(--badge-hq); font-weight: 600; }
 
-    /* Responsive Grid */
     @media (max-width: 1400px) {
       .dc-grid { grid-template-columns: repeat(2, 1fr); }
       .dc-column { height: 550px; }
@@ -357,16 +358,13 @@
       </div>
     </header>
 
-    <!-- Global Search Input -->
     <div class="search-box">
       <i class="fa-solid fa-magnifying-glass"></i>
       <input type="text" id="searchInput" class="search-input" placeholder="全DC横断アイテム検索 (名前またはID)...">
     </div>
 
-    <!-- 4 DC Multi-Column Layout -->
     <div class="dc-grid">
 
-      <!-- Mana DC Column -->
       <div class="dc-column">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> Mana</div>
@@ -377,7 +375,6 @@
         </div>
       </div>
 
-      <!-- Elemental DC Column -->
       <div class="dc-column">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental</div>
@@ -388,7 +385,6 @@
         </div>
       </div>
 
-      <!-- Gaia DC Column -->
       <div class="dc-column">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia</div>
@@ -399,7 +395,6 @@
         </div>
       </div>
 
-      <!-- Meteor DC Column -->
       <div class="dc-column">
         <div class="dc-column-header">
           <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor</div>
@@ -446,7 +441,6 @@
       DATACENTERS.forEach(dc => {
         const rawItems = allDcData[dc] || [];
         
-        // Search Filter
         let items = rawItems;
         if (searchTerm) {
           items = rawItems.filter(item => 
@@ -481,7 +475,7 @@
               
               <div class="item-stats-row">
                 <span class="velocity-badge"><i class="fa-solid fa-bolt"></i> ${item.velocity.toFixed(1)} 個/日</span>
-                <span class="price-main">${item.min_price.toLocaleString()} Gil</span>
+                <span class="price-main"><span class="price-label">最安:</span>${item.min_price.toLocaleString()}G</span>
               </div>
 
               <div class="item-sub-grid">
@@ -508,7 +502,6 @@
       });
     }
 
-    // Global Search Event
     document.getElementById('searchInput').addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase().trim();
       renderAllColumns(term);
