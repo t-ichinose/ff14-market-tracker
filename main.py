@@ -75,6 +75,22 @@ def init_db(db_path="data/market_data.db"):
         last_upload_time TEXT
     )
     """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS item_metadata (
+        item_id INTEGER PRIMARY KEY,
+        icon_url TEXT,
+        description TEXT,
+        category TEXT,
+        item_level INTEGER DEFAULT 0,
+        shop_price INTEGER DEFAULT 0,
+        buyback_price INTEGER DEFAULT 0,
+        stack_size INTEGER DEFAULT 1,
+        can_be_hq INTEGER DEFAULT 0,
+        rarity INTEGER DEFAULT 1,
+        fetched_at TEXT
+    )
+    """)
     
     conn.commit()
     return conn
@@ -120,6 +136,107 @@ def resolve_item_metadata_batch(item_ids):
         time.sleep(0.05)
         
     return meta_map
+
+def fetch_and_cache_metadata(conn, item_ids):
+    """Fetch item metadata from XIVAPI/Garland, cache in DB, return dict."""
+    headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
+    cursor = conn.cursor()
+    
+    # Load existing cache
+    cached = {}
+    placeholders = ','.join(['?'] * len(item_ids))
+    cursor.execute(f"SELECT * FROM item_metadata WHERE item_id IN ({placeholders})", list(item_ids))
+    for row in cursor.fetchall():
+        cached[row[0]] = {
+            "icon_url": row[1] or "",
+            "description": row[2] or "",
+            "category": row[3] or "",
+            "item_level": row[4] or 0,
+            "shop_price": row[5] or 0,
+            "buyback_price": row[6] or 0,
+            "stack_size": row[7] or 1,
+            "can_be_hq": bool(row[8]),
+            "rarity": row[9] or 1
+        }
+    
+    missing = [iid for iid in item_ids if iid not in cached]
+    if not missing:
+        print(f"[Metadata] All {len(item_ids)} items cached, no API calls needed.")
+        return cached
+    
+    print(f"[Metadata] {len(cached)} cached, {len(missing)} new items to fetch...")
+    
+    for iid in missing:
+        meta = None
+        
+        # Try XIVAPI first
+        try:
+            url = f"https://xivapi.com/Item/{iid}?language=ja"
+            resp = requests.get(url, headers=headers, timeout=5)
+            if resp.status_code == 200:
+                xdata = resp.json()
+                icon_path = xdata.get("IconHD") or xdata.get("Icon", "")
+                icon_url = f"https://xivapi.com{icon_path}" if icon_path else ""
+                cat_obj = xdata.get("ItemUICategory")
+                category = ""
+                if cat_obj and isinstance(cat_obj, dict):
+                    category = cat_obj.get("Name_ja", "") or cat_obj.get("Name", "") or ""
+                meta = {
+                    "icon_url": icon_url,
+                    "description": (xdata.get("Description_ja") or xdata.get("Description") or "").strip(),
+                    "category": category,
+                    "item_level": xdata.get("LevelItem", 0) or 0,
+                    "shop_price": xdata.get("PriceMid", 0) or 0,
+                    "buyback_price": xdata.get("PriceLow", 0) or 0,
+                    "stack_size": xdata.get("StackSize", 1) or 1,
+                    "can_be_hq": bool(xdata.get("CanBeHq", 0)),
+                    "rarity": xdata.get("Rarity", 1) or 1
+                }
+        except Exception:
+            pass
+        
+        # Fallback to Garland Tools
+        if not meta:
+            try:
+                url = f"https://www.garlandtools.org/db/doc/item/ja/3/{iid}.json"
+                resp = requests.get(url, headers=headers, timeout=5)
+                if resp.status_code == 200:
+                    item_data = resp.json().get("item", {})
+                    icon_id = item_data.get("icon", "")
+                    icon_url = f"https://www.garlandtools.org/files/icons/item/{icon_id}.png" if icon_id else ""
+                    meta = {
+                        "icon_url": icon_url,
+                        "description": (item_data.get("description", "") or "").strip(),
+                        "category": str(item_data.get("category", "") or ""),
+                        "item_level": item_data.get("ilvl", 0) or 0,
+                        "shop_price": item_data.get("price", 0) or 0,
+                        "buyback_price": 0,
+                        "stack_size": item_data.get("stackSize", 1) or 1,
+                        "can_be_hq": bool(item_data.get("hq", 0)),
+                        "rarity": item_data.get("rarity", 1) or 1
+                    }
+            except Exception:
+                pass
+        
+        if meta:
+            cached[iid] = meta
+            now_str = datetime.now(timezone.utc).isoformat()
+            cursor.execute("""
+                INSERT OR REPLACE INTO item_metadata 
+                (item_id, icon_url, description, category, item_level, shop_price, buyback_price, stack_size, can_be_hq, rarity, fetched_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (iid, meta["icon_url"], meta["description"], meta["category"],
+                   meta["item_level"], meta["shop_price"], meta["buyback_price"],
+                   meta["stack_size"], int(meta["can_be_hq"]), meta["rarity"], now_str))
+            print(f"  [Metadata] {iid} -> {meta['category']} (IL{meta['item_level']})")
+        else:
+            print(f"  [Metadata] {iid} -> Failed to fetch")
+        
+        time.sleep(0.08)
+    
+    conn.commit()
+    print(f"[Metadata] Fetched and cached {len(missing)} new items.")
+    return cached
 
 def export_web_json(conn, output_path="docs/data.json"):
     os.makedirs("docs", exist_ok=True)
@@ -207,6 +324,15 @@ def export_web_json(conn, output_path="docs/data.json"):
                     "profit_rate": profit_rate
                 }
 
+    # Collect all unique item IDs for metadata
+    all_item_ids = set()
+    for scope, items in raw_data_by_scope.items():
+        for item in items:
+            all_item_ids.add(item["item_id"])
+    
+    # Fetch/cache metadata for all items
+    meta_cache = fetch_and_cache_metadata(conn, all_item_ids)
+
     final_data_by_scope = {}
     for scope, items in raw_data_by_scope.items():
         enriched_items = []
@@ -214,6 +340,9 @@ def export_web_json(conn, output_path="docs/data.json"):
             ikey = item["item_key"]
             cross_info = cross_analytics.get(ikey)
             item["cross_info"] = cross_info
+            # Attach metadata
+            if item["item_id"] in meta_cache:
+                item["meta"] = meta_cache[item["item_id"]]
             enriched_items.append(item)
             
         final_data_by_scope[scope] = enriched_items
