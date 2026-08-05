@@ -6,18 +6,15 @@ import time
 from datetime import datetime, timezone
 
 JP_DATACENTERS = ["Elemental", "Gaia", "Mana", "Meteor"]
-VELOCITY_THRESHOLD = 50.0  # 1日平均50個以上の高回転品のみ（NQ/HQ個別に判定）
+VELOCITY_THRESHOLD = 50.0  # 1日平均50個以上の高回転品のみ
 
 def init_db(db_path="data/market_data.db"):
     os.makedirs("data", exist_ok=True)
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
-    # 既存のテーブル構造が古い場合はドロップして新構造で作成（安全性向上）
-    cursor.execute("PRAGMA table_info(items_pool)")
-    columns = [row[1] for row in cursor.fetchall()]
-    if columns and "item_key" not in columns:
-        cursor.execute("DROP TABLE IF EXISTS items_pool")
+    # 完全に新しいロジックに更新するためプールテーブルをクリーン初期化
+    cursor.execute("DROP TABLE IF EXISTS items_pool")
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS items_pool (
@@ -33,13 +30,6 @@ def init_db(db_path="data/market_data.db"):
     )
     """)
     
-    cursor.execute("PRAGMA table_info(market_logs)")
-    log_columns = [row[1] for row in cursor.fetchall()]
-    if log_columns and "item_key" not in log_columns:
-        cursor.execute("ALTER TABLE market_logs ADD COLUMN item_key TEXT")
-    if log_columns and "quality" not in log_columns:
-        cursor.execute("ALTER TABLE market_logs ADD COLUMN quality TEXT")
-
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS market_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -114,7 +104,7 @@ def export_web_json(conn, output_path="docs/data.json"):
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(web_data, f, ensure_ascii=False, indent=2)
         
-    print(f"Exported NQ/HQ-separated web JSON to {output_path}")
+    print(f"Exported web JSON (HQ-aware) to {output_path}")
 
 def process_dc_pipeline(scope_name: str, conn, now_str: str):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
@@ -191,14 +181,23 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
 
         nq_vel = float(data.get("nqSaleVelocity") or 0.0)
         hq_vel = float(data.get("hqSaleVelocity") or 0.0)
+        total_vel = float(data.get("dailySaleVelocity") or data.get("regularSaleVelocity") or 0.0)
         
         nq_min = data.get("minPriceNQ") or data.get("minPrice", 0)
-        hq_min = data.get("minPriceHQ") or data.get("minPrice", 0)
+        hq_min = data.get("minPriceHQ") or 0
 
-        qualities = [
-            ("NQ", f"{base_name} [NQ]", nq_vel, nq_min),
-            ("HQ", f"{base_name} [HQ]", hq_vel, hq_min)
-        ]
+        # HQが存在するか厳密判定 (hq_min > 0 または hq_vel > 0)
+        has_hq = (hq_min > 0 or hq_vel > 0)
+
+        if not has_hq:
+            # HQが存在しないアイテム（マテリア・シャード・家具・一部素材など）
+            qualities = [("NONE", base_name, total_vel, nq_min)]
+        else:
+            # HQが存在するアイテム（装備・薬品・料理など）
+            qualities = [
+                ("NQ", f"{base_name} [NQ]", nq_vel, nq_min),
+                ("HQ", f"{base_name} [HQ]", hq_vel, hq_min)
+            ]
 
         for q_type, full_name, vel, price in qualities:
             item_key = f"{item_id}_{q_type}"
@@ -230,7 +229,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                 WHERE scope = ? AND item_key = ?
                 """, (vel, scope_name, item_key))
 
-    print(f"[{scope_name}] Processed items -> High Velocity NQ/HQ Cards (>= {VELOCITY_THRESHOLD}/day): {high_velocity_count} cards.")
+    print(f"[{scope_name}] Processed items -> High Velocity Cards (>= {VELOCITY_THRESHOLD}/day): {high_velocity_count} cards.")
 
 def fetch_and_save_all():
     db_path = "data/market_data.db"
@@ -238,13 +237,13 @@ def fetch_and_save_all():
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (NQ/HQ Separated) ---")
+        print(f"--- Processing DC: {scope} (HQ-aware) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()
-    print(f"All 4 JP Datacenters pipeline completed (NQ/HQ Separated, Threshold >= {VELOCITY_THRESHOLD})!")
+    print(f"All 4 JP Datacenters pipeline completed (HQ-aware, Threshold >= {VELOCITY_THRESHOLD})!")
 
 if __name__ == "__main__":
     fetch_and_save_all()
