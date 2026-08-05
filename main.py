@@ -261,7 +261,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
     for i in range(0, len(target_ids), chunk_size):
         chunk = target_ids[i:i + chunk_size]
         ids_str = ",".join(map(str, chunk))
-        # Universalis APIから出品リストを取得
+        # 制限パラメータを撤去し、全出品リスト(最大100件)を取得！
         detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}"
         
         try:
@@ -296,7 +296,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
         avg_price = round(data.get("averagePrice", 0), 1)
         units_for_sale = data.get("unitsForSale", 0)
         
-        # Universalis API の正しい出品数計算 (len(listings))
+        # 本物の出品枠数 len(listings) を正確にカウント！
         listings_list = data.get("listings", [])
         listings_count = len(listings_list)
 
@@ -357,13 +357,13 @@ def fetch_and_save_all():
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (Real Listings Count) ---")
+        print(f"--- Processing DC: {scope} (Full Real Listings) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()
-    print(f"All 4 JP Datacenters pipeline completed (Real Listings Count, Threshold >= {VELOCITY_THRESHOLD})!")
+    print(f"All 4 JP Datacenters pipeline completed (Full Real Listings, Threshold >= {VELOCITY_THRESHOLD})!")
 
 if __name__ == "__main__":
     fetch_and_save_all()
