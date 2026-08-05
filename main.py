@@ -132,15 +132,19 @@ def export_web_json(conn, output_path="docs/data.json"):
     
     for scope in JP_DATACENTERS:
         cursor.execute("""
-        SELECT timestamp, scope, item_key, item_id, item_name, quality,
-               daily_sale_velocity, min_price, avg_price,
-               units_for_sale, listings_count, last_upload_time
-        FROM market_logs
-        WHERE scope = ? 
-          AND timestamp = (SELECT MAX(timestamp) FROM market_logs WHERE scope = ?)
-          AND daily_sale_velocity >= ?
-        ORDER BY daily_sale_velocity DESC
-        """, (scope, scope, VELOCITY_THRESHOLD))
+        SELECT ml.timestamp, ml.scope, ml.item_key, ml.item_id, ml.item_name, ml.quality,
+               ml.daily_sale_velocity, ml.min_price, ml.avg_price,
+               ml.units_for_sale, ml.listings_count, ml.last_upload_time
+        FROM market_logs ml
+        INNER JOIN (
+            SELECT scope, item_key, MAX(id) as max_id
+            FROM market_logs
+            WHERE scope = ?
+            GROUP BY item_key
+        ) latest ON ml.id = latest.max_id
+        WHERE ml.daily_sale_velocity >= ?
+        ORDER BY ml.daily_sale_velocity DESC
+        """, (scope, VELOCITY_THRESHOLD))
         
         rows = cursor.fetchall()
         items = []
@@ -257,8 +261,8 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
     for i in range(0, len(target_ids), chunk_size):
         chunk = target_ids[i:i + chunk_size]
         ids_str = ",".join(map(str, chunk))
-        # entries=0 を指定して正確な listingsCount と unitsForSale を最速取得！
-        detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}?entries=0"
+        # Universalis APIから出品リストを取得
+        detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}"
         
         try:
             d_res = requests.get(detail_url, headers=headers, timeout=15)
@@ -291,7 +295,10 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
 
         avg_price = round(data.get("averagePrice", 0), 1)
         units_for_sale = data.get("unitsForSale", 0)
-        listings_count = data.get("listingsCount", 0)
+        
+        # Universalis API の正しい出品数計算 (len(listings))
+        listings_list = data.get("listings", [])
+        listings_count = len(listings_list)
 
         nq_vel = float(data.get("nqSaleVelocity") or 0.0)
         hq_vel = float(data.get("hqSaleVelocity") or 0.0)
@@ -349,25 +356,14 @@ def fetch_and_save_all():
     conn = init_db(db_path)
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    cursor = conn.cursor()
-    cursor.execute("SELECT DISTINCT item_id FROM items_pool WHERE item_name LIKE 'Unknown%'")
-    unknown_ids = [row[0] for row in cursor.fetchall()]
-    if unknown_ids:
-        print(f"Fixing {len(unknown_ids)} Unknown item names in DB...")
-        fixed_meta = resolve_item_metadata_batch(unknown_ids)
-        for iid, meta in fixed_meta.items():
-            cursor.execute("UPDATE items_pool SET item_name = ? WHERE item_id = ? AND item_name LIKE 'Unknown%'", (meta["name"], iid))
-            cursor.execute("UPDATE market_logs SET item_name = ? WHERE item_id = ? AND item_name LIKE 'Unknown%'", (meta["name"], iid))
-        conn.commit()
-
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (Accurate Listings Count) ---")
+        print(f"--- Processing DC: {scope} (Real Listings Count) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()
-    print(f"All 4 JP Datacenters pipeline completed (Accurate Listings Count, Threshold >= {VELOCITY_THRESHOLD})!")
+    print(f"All 4 JP Datacenters pipeline completed (Real Listings Count, Threshold >= {VELOCITY_THRESHOLD})!")
 
 if __name__ == "__main__":
     fetch_and_save_all()
