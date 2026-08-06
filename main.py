@@ -7,6 +7,12 @@ import re
 from datetime import datetime, timezone
 
 JP_DATACENTERS = ["Elemental", "Gaia", "Mana", "Meteor"]
+DC_WORLDS = {
+    "Elemental": ["Carbuncle", "Gungnir", "Kujata", "Typhon", "Atomos", "Tonberry", "Aegis", "Garuda"],
+    "Gaia": ["Alexander", "Bahamut", "Durandal", "Fenrir", "Ifrit", "Ridill", "Tiamat", "Ultima"],
+    "Mana": ["Anima", "Asura", "Chocobo", "Hades", "Ixion", "Masamune", "Pandaemonium", "Titan"],
+    "Meteor": ["Belias", "Mandragora", "Ramuh", "Shinryu", "Unicorn", "Valefor", "Yojimbo", "Zeromus"]
+}
 VELOCITY_THRESHOLD = 50.0
 
 def init_db(db_path="data/market_data.db"):
@@ -33,6 +39,7 @@ def init_db(db_path="data/market_data.db"):
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         timestamp TEXT,
         scope TEXT,
+        world_name TEXT DEFAULT '',
         item_key TEXT,
         item_id INTEGER,
         item_name TEXT,
@@ -247,39 +254,65 @@ def export_web_json(conn, output_path="docs/data.json"):
     
     for scope in JP_DATACENTERS:
         cursor.execute("""
-        SELECT ml.timestamp, ml.scope, ml.item_key, ml.item_id, ml.item_name, ml.quality,
-               ml.daily_sale_velocity, ml.min_price, ml.avg_price, ml.hist_min, ml.hist_max,
-               ml.units_for_sale, ml.last_upload_time
-        FROM market_logs ml
-        INNER JOIN (
-            SELECT scope, item_key, MAX(id) as max_id
-            FROM market_logs
-            WHERE scope = ?
-            GROUP BY item_key
-        ) latest ON ml.id = latest.max_id
-        WHERE ml.daily_sale_velocity >= ?
-        ORDER BY ml.daily_sale_velocity DESC
-        """, (scope, VELOCITY_THRESHOLD))
+        SELECT item_key, item_id, item_name, MAX(daily_sale_velocity) as max_vel
+        FROM market_logs
+        WHERE scope = ? AND world_name != ''
+        GROUP BY item_key
+        HAVING max_vel >= 5.0
+        ORDER BY max_vel DESC
+        """, (scope,))
         
         rows = cursor.fetchall()
         items = []
         for r in rows:
-            min_p = r[7]
-            h_min = r[9] if (r[9] and r[9] > 0) else min_p
-            h_max = r[10] if (r[10] and r[10] >= h_min) else h_min
-            h_avg = r[8] if r[8] else h_min
-
-            if h_avg < h_min: h_avg = float(h_min)
-            if h_avg > h_max: h_avg = float(h_max)
-
-            item_id = r[3]
-            raw_name = clean_name(r[4])
+            item_key = r[0]
+            item_id = r[1]
+            raw_name = clean_name(r[2])
             if (raw_name.startswith("Item ") or "Unknown" in raw_name) and str(item_id) in items_search:
                 raw_name = items_search[str(item_id)]
             elif (raw_name.startswith("Item ") or "Unknown" in raw_name) and item_id in items_search:
                 raw_name = items_search[item_id]
-
             raw_name = clean_name(raw_name)
+
+            # Retrieve raw per-world stats for this item & scope
+            w_cursor = conn.cursor()
+            w_cursor.execute("""
+            SELECT ml.world_name, ml.min_price, ml.avg_price, ml.units_for_sale, ml.last_upload_time, ml.daily_sale_velocity
+            FROM market_logs ml
+            INNER JOIN (
+                SELECT world_name, MAX(id) as max_id
+                FROM market_logs
+                WHERE scope = ? AND item_key = ? AND world_name != ''
+                GROUP BY world_name
+            ) w_latest ON ml.id = w_latest.max_id
+            """, (scope, item_key))
+            w_rows = w_cursor.fetchall()
+            worlds_stats = {}
+            max_world_vel = 0.0
+            dc_min_price = 0
+            dc_total_stock = 0
+
+            for wr in w_rows:
+                w_name = wr[0]
+                w_min = wr[1] or 0
+                w_avg = wr[2] or 0
+                w_stock = wr[3] or 0
+                w_time = wr[4] or ""
+                w_vel = wr[5] or 0.0
+
+                if w_vel > max_world_vel:
+                    max_world_vel = w_vel
+                if w_min > 0 and (dc_min_price == 0 or w_min < dc_min_price):
+                    dc_min_price = w_min
+                dc_total_stock += w_stock
+
+                worlds_stats[w_name] = {
+                    "min_price": w_min,
+                    "avg_price": w_avg,
+                    "units_for_sale": w_stock,
+                    "last_upload_time": w_time,
+                    "velocity": w_vel
+                }
 
             # Query history points for the past 30 days
             h_cursor = conn.cursor()
@@ -288,7 +321,7 @@ def export_web_json(conn, output_path="docs/data.json"):
             FROM market_logs
             WHERE scope = ? AND item_key = ? AND timestamp >= datetime('now', '-30 days')
             ORDER BY id ASC
-            """, (r[1], r[2]))
+            """, (scope, item_key))
             h_rows = h_cursor.fetchall()
             history_points = []
             for hr in h_rows:
@@ -301,18 +334,19 @@ def export_web_json(conn, output_path="docs/data.json"):
                 })
 
             item_obj = {
-                "timestamp": r[0],
-                "scope": r[1],
-                "item_key": r[2],
+                "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "scope": scope,
+                "item_key": item_key,
                 "item_id": item_id,
                 "item_name": raw_name,
-                "velocity": r[6],
-                "min_price": min_p,
-                "avg_price": h_avg,
-                "hist_min": h_min,
-                "hist_max": h_max,
-                "units_for_sale": r[11],
-                "last_upload_time": r[12],
+                "velocity": max_world_vel,
+                "min_price": dc_min_price,
+                "avg_price": 0,
+                "hist_min": dc_min_price,
+                "hist_max": dc_min_price,
+                "units_for_sale": dc_total_stock,
+                "last_upload_time": "",
+                "worlds": worlds_stats,
                 "history_points": history_points
             }
             items.append(item_obj)
@@ -344,6 +378,7 @@ def export_web_json(conn, output_path="docs/data.json"):
     web_data = {
         "last_updated": last_updated,
         "datacenters": JP_DATACENTERS,
+        "dc_worlds": DC_WORLDS,
         "velocity_threshold": VELOCITY_THRESHOLD,
         "data": final_data_by_scope
     }
@@ -394,8 +429,10 @@ def ensure_items_search_json(output_path="docs/items_search.json"):
 def process_dc_pipeline(scope_name: str, conn, now_str: str):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
     cursor = conn.cursor()
-    
-    recent_url = "https://universalis.app/api/v2/extra/stats/recently-updated"
+    target_worlds = DC_WORLDS.get(scope_name, [])
+
+    # Step 1: Find high velocity or recently updated items for this DC
+    recent_url = f"https://universalis.app/api/v2/extra/stats/recently-updated?dcName={scope_name}"
     try:
         res = requests.get(recent_url, headers=headers, timeout=10)
         res.raise_for_status()
@@ -411,100 +448,96 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
     if not target_ids:
         return
 
-    items_data = {}
-    chunk_size = 50
-    for i in range(0, len(target_ids), chunk_size):
-        chunk = target_ids[i:i + chunk_size]
-        ids_str = ",".join(map(str, chunk))
-        detail_url = f"https://universalis.app/api/v2/{scope_name}/{ids_str}?entriesToReturn=100"
-        
-        for attempt in range(2):
-            try:
-                d_res = requests.get(detail_url, headers=headers, timeout=15)
-                if d_res.status_code == 200:
-                    items_data.update(d_res.json().get('items', {}))
-                    break
-            except Exception as e:
-                if attempt == 1:
-                    print(f"[{scope_name}] Detail fetch error (attempt {attempt+1}): {e}")
-                time.sleep(1)
+    # Process each world in this DC directly
+    for world_name in target_worlds:
+        print(f"  -> Fetching raw world data: {world_name} ({len(target_ids)} items)...")
+        world_items_data = {}
+        chunk_size = 50
+        for i in range(0, len(target_ids), chunk_size):
+            chunk = target_ids[i:i + chunk_size]
+            ids_str = ",".join(map(str, chunk))
+            detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entriesToReturn=50"
             
-        time.sleep(0.1)
+            for attempt in range(2):
+                try:
+                    d_res = requests.get(detail_url, headers=headers, timeout=15)
+                    if d_res.status_code == 200:
+                        world_items_data.update(d_res.json().get('items', {}))
+                        break
+                except Exception as e:
+                    if attempt == 1:
+                        print(f"    [{world_name}] Fetch error: {e}")
+                    time.sleep(0.5)
+            time.sleep(0.05)
 
-    if not items_data:
-        return
+        if not world_items_data:
+            continue
 
-    all_item_ids = [int(k) for k in items_data.keys()]
-    name_map = resolve_item_metadata_batch(conn, all_item_ids)
+        all_item_ids = [int(k) for k in world_items_data.keys()]
+        name_map = resolve_item_metadata_batch(conn, all_item_ids)
 
-    high_velocity_count = 0
+        high_velocity_count = 0
 
-    for item_id_str, data in items_data.items():
-        item_id = int(item_id_str)
-        item_meta = name_map.get(item_id, {"name": f"Unknown ({item_id})", "can_be_hq": False})
-        pure_name = item_meta["name"]
-        can_be_hq = item_meta["can_be_hq"]
-        
-        last_upload_ms = data.get("lastUploadTime")
-        last_upload_str = ""
-        if last_upload_ms:
-            last_upload_dt = datetime.fromtimestamp(last_upload_ms / 1000, tz=timezone.utc)
-            last_upload_str = last_upload_dt.strftime("%Y-%m-%d %H:%M:%S")
+        for item_id_str, data in world_items_data.items():
+            item_id = int(item_id_str)
+            item_meta = name_map.get(item_id, {"name": f"Unknown ({item_id})", "can_be_hq": False})
+            pure_name = item_meta["name"]
+            
+            last_upload_ms = data.get("lastUploadTime")
+            last_upload_str = ""
+            if last_upload_ms:
+                last_upload_dt = datetime.fromtimestamp(last_upload_ms / 1000, tz=timezone.utc)
+                last_upload_str = last_upload_dt.strftime("%Y-%m-%d %H:%M:%S")
 
-        # その列(データセンター)で今マーケットに出品されているリアルな総個数！
-        listings = data.get("listings", [])
-        exact_dc_stock = sum(l.get("quantity", 0) for l in listings) if listings else data.get("unitsForSale", 0)
+            listings = data.get("listings", [])
+            w_stock = sum(l.get("quantity", 0) for l in listings) if listings else data.get("unitsForSale", 0)
 
-        history = data.get("recentHistory", [])
-        prices = [h.get("pricePerUnit", 0) for h in history if h.get("pricePerUnit", 0) > 0]
-        
-        if prices:
-            h_min = min(prices)
-            h_max = max(prices)
-            h_avg = round(sum(prices) / len(prices), 1)
-        else:
-            h_min = data.get("minPrice", 0)
-            h_max = data.get("maxPrice", h_min)
-            h_avg = round(data.get("averagePrice", h_min), 1)
+            history = data.get("recentHistory", [])
+            prices = [h.get("pricePerUnit", 0) for h in history if h.get("pricePerUnit", 0) > 0]
+            
+            if prices:
+                h_min = min(prices)
+                h_max = max(prices)
+                h_avg = round(sum(prices) / len(prices), 1)
+            else:
+                h_min = data.get("minPrice", 0)
+                h_max = data.get("maxPrice", h_min)
+                h_avg = round(data.get("averagePrice", h_min), 1)
 
-        if h_avg < h_min: h_avg = float(h_min)
-        if h_avg > h_max: h_avg = float(h_max)
+            if h_avg < h_min: h_avg = float(h_min)
+            if h_avg > h_max: h_avg = float(h_max)
 
-        total_vel = float(data.get("dailySaleVelocity") or data.get("regularSaleVelocity") or 0.0)
-        min_price = data.get("minPrice", 0)
+            # Raw uncalculated world sale velocity direct from Universalis for this exact world
+            w_vel = float(data.get("dailySaleVelocity") or data.get("regularSaleVelocity") or 0.0)
+            min_price = data.get("minPrice", 0)
 
-        item_key = str(item_id)
+            item_key = str(item_id)
 
-        if total_vel >= VELOCITY_THRESHOLD:
-            high_velocity_count += 1
-            cursor.execute("""
-            INSERT INTO items_pool (scope, item_key, item_id, item_name, quality, added_at, last_velocity, is_active)
-            VALUES (?, ?, ?, ?, 'NONE', ?, ?, 1)
-            ON CONFLICT(scope, item_key) DO UPDATE SET
-                item_name = excluded.item_name,
-                quality = 'NONE',
-                last_velocity = excluded.last_velocity,
-                is_active = 1
-            """, (scope_name, item_key, item_id, pure_name, now_str, total_vel))
+            if w_vel >= 10.0:  # Per-world threshold
+                high_velocity_count += 1
+                cursor.execute("""
+                INSERT INTO items_pool (scope, item_key, item_id, item_name, quality, added_at, last_velocity, is_active)
+                VALUES (?, ?, ?, ?, 'NONE', ?, ?, 1)
+                ON CONFLICT(scope, item_key) DO UPDATE SET
+                    item_name = excluded.item_name,
+                    quality = 'NONE',
+                    last_velocity = excluded.last_velocity,
+                    is_active = 1
+                """, (scope_name, item_key, item_id, pure_name, now_str, w_vel))
 
+            # Insert raw per-world log into market_logs
             cursor.execute("""
             INSERT INTO market_logs (
-                timestamp, scope, item_key, item_id, item_name, quality,
+                timestamp, scope, world_name, item_key, item_id, item_name, quality,
                 daily_sale_velocity, min_price, avg_price, hist_min, hist_max,
                 units_for_sale, listings_count, last_upload_time
-            ) VALUES (?, ?, ?, ?, ?, 'NONE', ?, ?, ?, ?, ?, ?, 0, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, 'NONE', ?, ?, ?, ?, ?, ?, 0, ?)
             """, (
-                now_str, scope_name, item_key, item_id, pure_name,
-                total_vel, min_price, h_avg, h_min, h_max, exact_dc_stock, last_upload_str
+                now_str, scope_name, world_name, item_key, item_id, pure_name,
+                w_vel, min_price, h_avg, h_min, h_max, w_stock, last_upload_str
             ))
-        else:
-            cursor.execute("""
-            UPDATE items_pool 
-            SET is_active = 0, last_velocity = ?
-            WHERE scope = ? AND item_key = ?
-            """, (total_vel, scope_name, item_key))
 
-    print(f"[{scope_name}] Processed -> High Velocity Cards (>= {VELOCITY_THRESHOLD}/day): {high_velocity_count} cards.")
+        print(f"  [{world_name}] Raw World Processed -> Items: {len(world_items_data)} (Active >=10/day: {high_velocity_count})")
 
 def fetch_and_save_all():
     db_path = "data/market_data.db"
@@ -512,14 +545,14 @@ def fetch_and_save_all():
     now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     for scope in JP_DATACENTERS:
-        print(f"--- Processing DC: {scope} (Exact DC Listings Stock) ---")
+        print(f"--- Processing DC & All Worlds Direct: {scope} ---")
         process_dc_pipeline(scope, conn, now_str)
 
     cleanup_old_logs(conn, 30)
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()
-    print(f"All 4 JP Datacenters pipeline completed (Threshold >= {VELOCITY_THRESHOLD})!")
+    print(f"All 4 JP Datacenters & 32 Worlds raw pipeline completed!")
 
 if __name__ == "__main__":
     fetch_and_save_all()
