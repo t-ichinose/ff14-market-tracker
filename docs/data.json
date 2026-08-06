@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-05T22:58:12Z",
+  "last_updated": "2026-08-06T00:01:09Z",
   "datacenters": [
     "Elemental",
     "Gaia",
@@ -2056,7 +2056,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Elemental",
         "item_key": "5115",
         "item_id": 5115,
@@ -2066,7 +2066,7 @@
         "avg_price": 199.4,
         "hist_min": 100,
         "hist_max": 400,
-        "units_for_sale": 19591,
+        "units_for_sale": 28098,
         "last_upload_time": "2026-08-05 12:40:33",
         "history_points": [
           {
@@ -2158,6 +2158,13 @@
             "min_price": 138,
             "avg_price": 199.4,
             "units_for_sale": 19591,
+            "velocity": 355.0
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 138,
+            "avg_price": 199.4,
+            "units_for_sale": 28098,
             "velocity": 355.0
           }
         ],
@@ -2471,7 +2478,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Elemental",
         "item_key": "5111",
         "item_id": 5111,
@@ -2528,6 +2535,13 @@
           },
           {
             "timestamp": "2026-08-05T22:52:37Z",
+            "min_price": 19,
+            "avg_price": 59.4,
+            "units_for_sale": 19141,
+            "velocity": 319.2857
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
             "min_price": 19,
             "avg_price": 59.4,
             "units_for_sale": 19141,
@@ -2747,7 +2761,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Elemental",
         "item_key": "15858",
         "item_id": 15858,
@@ -2757,7 +2771,7 @@
         "avg_price": 1081.2,
         "hist_min": 1000,
         "hist_max": 1102,
-        "units_for_sale": 37094,
+        "units_for_sale": 37915,
         "last_upload_time": "2026-08-05 06:56:23",
         "history_points": [
           {
@@ -2793,6 +2807,13 @@
             "min_price": 1100,
             "avg_price": 1081.2,
             "units_for_sale": 37094,
+            "velocity": 294.7143
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 1100,
+            "avg_price": 1081.2,
+            "units_for_sale": 37915,
             "velocity": 294.7143
           }
         ],
@@ -3237,7 +3258,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Elemental",
         "item_key": "5118",
         "item_id": 5118,
@@ -3247,8 +3268,8 @@
         "avg_price": 147.6,
         "hist_min": 99,
         "hist_max": 220,
-        "units_for_sale": 16581,
-        "last_upload_time": "2026-08-05 21:40:42",
+        "units_for_sale": 19735,
+        "last_upload_time": "2026-08-05 23:20:26",
         "history_points": [
           {
             "timestamp": "2026-08-05T21:43:09Z",
@@ -3262,6 +3283,13 @@
             "min_price": 104,
             "avg_price": 147.6,
             "units_for_sale": 16581,
+            "velocity": 265.57144
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 104,
+            "avg_price": 147.6,
+            "units_for_sale": 19735,
             "velocity": 265.57144
           }
         ],
@@ -4714,7 +4742,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Elemental",
         "item_key": "44016",
         "item_id": 44016,
@@ -4724,7 +4752,7 @@
         "avg_price": 308.4,
         "hist_min": 170,
         "hist_max": 400,
-        "units_for_sale": 7268,
+        "units_for_sale": 7376,
         "last_upload_time": "2026-08-05 21:40:18",
         "history_points": [
           {
@@ -4788,6 +4816,13 @@
             "min_price": 101,
             "avg_price": 308.4,
             "units_for_sale": 7268,
+            "velocity": 160.57143
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 101,
+            "avg_price": 308.4,
+            "units_for_sale": 7376,
             "velocity": 160.57143
           }
         ],
@@ -5218,7 +5253,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Elemental",
         "item_key": "6141",
         "item_id": 6141,
@@ -5228,7 +5263,7 @@
         "avg_price": 104.0,
         "hist_min": 80,
         "hist_max": 110,
-        "units_for_sale": 28449,
+        "units_for_sale": 35325,
         "last_upload_time": "2026-08-05 18:46:15",
         "history_points": [
           {
@@ -5306,6 +5341,13 @@
             "min_price": 109,
             "avg_price": 104.0,
             "units_for_sale": 28449,
+            "velocity": 150.28572
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 109,
+            "avg_price": 104.0,
+            "units_for_sale": 35325,
             "velocity": 150.28572
           }
         ],
@@ -5924,54 +5966,6 @@
       {
         "timestamp": "2026-08-05T22:52:37Z",
         "scope": "Elemental",
-        "item_key": "44005",
-        "item_id": 44005,
-        "item_name": "ホワイトゴールド鉱",
-        "velocity": 130.14285,
-        "min_price": 30,
-        "avg_price": 19.4,
-        "hist_min": 14,
-        "hist_max": 30,
-        "units_for_sale": 8263,
-        "last_upload_time": "2026-08-05 21:55:15",
-        "history_points": [
-          {
-            "timestamp": "2026-08-05T20:05:44Z",
-            "min_price": 30,
-            "avg_price": 19.4,
-            "units_for_sale": 10228,
-            "velocity": 119.85714
-          },
-          {
-            "timestamp": "2026-08-05T21:43:09Z",
-            "min_price": 30,
-            "avg_price": 19.4,
-            "units_for_sale": 8580,
-            "velocity": 119.85714
-          },
-          {
-            "timestamp": "2026-08-05T22:52:37Z",
-            "min_price": 30,
-            "avg_price": 19.4,
-            "units_for_sale": 8263,
-            "velocity": 130.14285
-          }
-        ],
-        "meta": {
-          "icon_url": "https://xivapi.com/i/021000/021217_hr1.png",
-          "description": "ホワイトゴールドを含有する鉱石",
-          "category": "石材",
-          "item_level": 670,
-          "shop_price": 99999,
-          "buyback_price": 4,
-          "stack_size": 999,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
-        "timestamp": "2026-08-05T22:52:37Z",
-        "scope": "Elemental",
         "item_key": "41776",
         "item_id": 41776,
         "item_name": "博識のハイアルテマテリジャ",
@@ -6232,7 +6226,62 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
+        "scope": "Elemental",
+        "item_key": "44005",
+        "item_id": 44005,
+        "item_name": "ホワイトゴールド鉱",
+        "velocity": 113.71429,
+        "min_price": 24,
+        "avg_price": 42.8,
+        "hist_min": 30,
+        "hist_max": 60,
+        "units_for_sale": 8958,
+        "last_upload_time": "2026-08-05 23:15:04",
+        "history_points": [
+          {
+            "timestamp": "2026-08-05T20:05:44Z",
+            "min_price": 30,
+            "avg_price": 19.4,
+            "units_for_sale": 10228,
+            "velocity": 119.85714
+          },
+          {
+            "timestamp": "2026-08-05T21:43:09Z",
+            "min_price": 30,
+            "avg_price": 19.4,
+            "units_for_sale": 8580,
+            "velocity": 119.85714
+          },
+          {
+            "timestamp": "2026-08-05T22:52:37Z",
+            "min_price": 30,
+            "avg_price": 19.4,
+            "units_for_sale": 8263,
+            "velocity": 130.14285
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 24,
+            "avg_price": 42.8,
+            "units_for_sale": 8958,
+            "velocity": 113.71429
+          }
+        ],
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021217_hr1.png",
+          "description": "ホワイトゴールドを含有する鉱石",
+          "category": "石材",
+          "item_level": 670,
+          "shop_price": 99999,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Elemental",
         "item_key": "19957",
         "item_id": 19957,
@@ -6242,8 +6291,8 @@
         "avg_price": 139.0,
         "hist_min": 3,
         "hist_max": 250,
-        "units_for_sale": 19907,
-        "last_upload_time": "2026-08-05 22:46:21",
+        "units_for_sale": 21243,
+        "last_upload_time": "2026-08-05 23:48:38",
         "history_points": [
           {
             "timestamp": "2026-08-05T10:04:45Z",
@@ -6292,6 +6341,13 @@
             "min_price": 99,
             "avg_price": 139.0,
             "units_for_sale": 19907,
+            "velocity": 113.14286
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 99,
+            "avg_price": 139.0,
+            "units_for_sale": 21243,
             "velocity": 113.14286
           }
         ],
@@ -6605,7 +6661,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Elemental",
         "item_key": "44004",
         "item_id": 44004,
@@ -6615,7 +6671,7 @@
         "avg_price": 17.8,
         "hist_min": 15,
         "hist_max": 20,
-        "units_for_sale": 15237,
+        "units_for_sale": 14958,
         "last_upload_time": "2026-08-05 22:47:31",
         "history_points": [
           {
@@ -6630,6 +6686,13 @@
             "min_price": 4,
             "avg_price": 17.8,
             "units_for_sale": 15237,
+            "velocity": 98.28571
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 4,
+            "avg_price": 17.8,
+            "units_for_sale": 14958,
             "velocity": 98.28571
           }
         ],
@@ -6994,40 +7057,6 @@
       {
         "timestamp": "2026-08-05T22:52:37Z",
         "scope": "Elemental",
-        "item_key": "44006",
-        "item_id": 44006,
-        "item_name": "ブラックスター原石",
-        "velocity": 90.28571,
-        "min_price": 39,
-        "avg_price": 152.6,
-        "hist_min": 100,
-        "hist_max": 198,
-        "units_for_sale": 13509,
-        "last_upload_time": "2026-08-05 22:22:38",
-        "history_points": [
-          {
-            "timestamp": "2026-08-05T22:52:37Z",
-            "min_price": 39,
-            "avg_price": 152.6,
-            "units_for_sale": 13509,
-            "velocity": 90.28571
-          }
-        ],
-        "meta": {
-          "icon_url": "https://xivapi.com/i/021000/021476_hr1.png",
-          "description": "ブラックスターを含んでいると思しき原石",
-          "category": "石材",
-          "item_level": 680,
-          "shop_price": 99999,
-          "buyback_price": 5,
-          "stack_size": 999,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
-        "timestamp": "2026-08-05T22:52:37Z",
-        "scope": "Elemental",
         "item_key": "46253",
         "item_id": 46253,
         "item_name": "アリペブレ",
@@ -7151,6 +7180,47 @@
           "item_level": 525,
           "shop_price": 99999,
           "buyback_price": 2,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05T23:54:41Z",
+        "scope": "Elemental",
+        "item_key": "44006",
+        "item_id": 44006,
+        "item_name": "ブラックスター原石",
+        "velocity": 87.28571,
+        "min_price": 60,
+        "avg_price": 159.6,
+        "hist_min": 100,
+        "hist_max": 200,
+        "units_for_sale": 19199,
+        "last_upload_time": "2026-08-05 23:53:11",
+        "history_points": [
+          {
+            "timestamp": "2026-08-05T22:52:37Z",
+            "min_price": 39,
+            "avg_price": 152.6,
+            "units_for_sale": 13509,
+            "velocity": 90.28571
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 60,
+            "avg_price": 159.6,
+            "units_for_sale": 19199,
+            "velocity": 87.28571
+          }
+        ],
+        "meta": {
+          "icon_url": "https://xivapi.com/i/021000/021476_hr1.png",
+          "description": "ブラックスターを含んでいると思しき原石",
+          "category": "石材",
+          "item_level": 680,
+          "shop_price": 99999,
+          "buyback_price": 5,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -8972,6 +9042,82 @@
         }
       },
       {
+        "timestamp": "2026-08-05T23:54:41Z",
+        "scope": "Elemental",
+        "item_key": "35833",
+        "item_id": 35833,
+        "item_name": "バイカラージェム納品証",
+        "velocity": 61.0,
+        "min_price": 150999,
+        "avg_price": 150940.0,
+        "hist_min": 145000,
+        "hist_max": 158000,
+        "units_for_sale": 2891,
+        "last_upload_time": "2026-08-05 23:04:12",
+        "history_points": [
+          {
+            "timestamp": "2026-08-05T12:22:29Z",
+            "min_price": 152000,
+            "avg_price": 146991.8,
+            "units_for_sale": 2762,
+            "velocity": 57.57143
+          },
+          {
+            "timestamp": "2026-08-05T14:44:33Z",
+            "min_price": 151000,
+            "avg_price": 146991.8,
+            "units_for_sale": 2751,
+            "velocity": 57.42857
+          },
+          {
+            "timestamp": "2026-08-05T16:28:17Z",
+            "min_price": 151000,
+            "avg_price": 149596.0,
+            "units_for_sale": 3593,
+            "velocity": 58.42857
+          },
+          {
+            "timestamp": "2026-08-05T20:05:44Z",
+            "min_price": 151000,
+            "avg_price": 149596.0,
+            "units_for_sale": 4787,
+            "velocity": 57.714287
+          },
+          {
+            "timestamp": "2026-08-05T21:43:09Z",
+            "min_price": 150999,
+            "avg_price": 149596.0,
+            "units_for_sale": 5026,
+            "velocity": 54.714287
+          },
+          {
+            "timestamp": "2026-08-05T22:52:37Z",
+            "min_price": 150999,
+            "avg_price": 149600.0,
+            "units_for_sale": 2890,
+            "velocity": 54.142857
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 150999,
+            "avg_price": 150940.0,
+            "units_for_sale": 2891,
+            "velocity": 61.0
+          }
+        ],
+        "meta": {
+          "icon_url": "https://xivapi.com/i/025000/025906_hr1.png",
+          "description": "多量のバイカラージェムを納入したことを示す証書。\n\n一定数集めモードゥナの稀物商に渡すことで貴重な品物を入手できる",
+          "category": "雑貨",
+          "item_level": 1,
+          "shop_price": 2,
+          "buyback_price": 1,
+          "stack_size": 999,
+          "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
         "timestamp": "2026-08-05T14:44:33Z",
         "scope": "Elemental",
         "item_key": "5336",
@@ -9263,75 +9409,6 @@
           "item_level": 665,
           "shop_price": 99999,
           "buyback_price": 2,
-          "stack_size": 999,
-          "can_be_hq": false,
-          "rarity": 1
-        }
-      },
-      {
-        "timestamp": "2026-08-05T22:52:37Z",
-        "scope": "Elemental",
-        "item_key": "35833",
-        "item_id": 35833,
-        "item_name": "バイカラージェム納品証",
-        "velocity": 54.142857,
-        "min_price": 150999,
-        "avg_price": 149600.0,
-        "hist_min": 145000,
-        "hist_max": 158000,
-        "units_for_sale": 2890,
-        "last_upload_time": "2026-08-05 22:53:22",
-        "history_points": [
-          {
-            "timestamp": "2026-08-05T12:22:29Z",
-            "min_price": 152000,
-            "avg_price": 146991.8,
-            "units_for_sale": 2762,
-            "velocity": 57.57143
-          },
-          {
-            "timestamp": "2026-08-05T14:44:33Z",
-            "min_price": 151000,
-            "avg_price": 146991.8,
-            "units_for_sale": 2751,
-            "velocity": 57.42857
-          },
-          {
-            "timestamp": "2026-08-05T16:28:17Z",
-            "min_price": 151000,
-            "avg_price": 149596.0,
-            "units_for_sale": 3593,
-            "velocity": 58.42857
-          },
-          {
-            "timestamp": "2026-08-05T20:05:44Z",
-            "min_price": 151000,
-            "avg_price": 149596.0,
-            "units_for_sale": 4787,
-            "velocity": 57.714287
-          },
-          {
-            "timestamp": "2026-08-05T21:43:09Z",
-            "min_price": 150999,
-            "avg_price": 149596.0,
-            "units_for_sale": 5026,
-            "velocity": 54.714287
-          },
-          {
-            "timestamp": "2026-08-05T22:52:37Z",
-            "min_price": 150999,
-            "avg_price": 149600.0,
-            "units_for_sale": 2890,
-            "velocity": 54.142857
-          }
-        ],
-        "meta": {
-          "icon_url": "https://xivapi.com/i/025000/025906_hr1.png",
-          "description": "多量のバイカラージェムを納入したことを示す証書。\n\n一定数集めモードゥナの稀物商に渡すことで貴重な品物を入手できる",
-          "category": "雑貨",
-          "item_level": 1,
-          "shop_price": 2,
-          "buyback_price": 1,
           "stack_size": 999,
           "can_be_hq": false,
           "rarity": 1
@@ -11198,7 +11275,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Gaia",
         "item_key": "5116",
         "item_id": 5116,
@@ -11208,7 +11285,7 @@
         "avg_price": 154.0,
         "hist_min": 111,
         "hist_max": 197,
-        "units_for_sale": 77136,
+        "units_for_sale": 57401,
         "last_upload_time": "2026-08-05 21:00:52",
         "history_points": [
           {
@@ -11307,6 +11384,13 @@
             "min_price": 149,
             "avg_price": 154.0,
             "units_for_sale": 77136,
+            "velocity": 418.0
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 149,
+            "avg_price": 154.0,
+            "units_for_sale": 57401,
             "velocity": 418.0
           }
         ],
@@ -11876,7 +11960,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T21:43:09Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Gaia",
         "item_key": "5114",
         "item_id": 5114,
@@ -11919,6 +12003,13 @@
           },
           {
             "timestamp": "2026-08-05T21:43:09Z",
+            "min_price": 120,
+            "avg_price": 132.0,
+            "units_for_sale": 29226,
+            "velocity": 335.57144
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
             "min_price": 120,
             "avg_price": 132.0,
             "units_for_sale": 29226,
@@ -12028,7 +12119,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Gaia",
         "item_key": "5118",
         "item_id": 5118,
@@ -12038,7 +12129,7 @@
         "avg_price": 86.2,
         "hist_min": 81,
         "hist_max": 90,
-        "units_for_sale": 28639,
+        "units_for_sale": 26300,
         "last_upload_time": "2026-08-05 17:47:55",
         "history_points": [
           {
@@ -12130,6 +12221,13 @@
             "min_price": 51,
             "avg_price": 86.2,
             "units_for_sale": 28639,
+            "velocity": 316.0
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 51,
+            "avg_price": 86.2,
+            "units_for_sale": 26300,
             "velocity": 316.0
           }
         ],
@@ -13032,7 +13130,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T21:43:09Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Gaia",
         "item_key": "15858",
         "item_id": 15858,
@@ -13042,7 +13140,7 @@
         "avg_price": 1163.2,
         "hist_min": 1150,
         "hist_max": 1172,
-        "units_for_sale": 37305,
+        "units_for_sale": 47068,
         "last_upload_time": "2026-08-05 17:24:14",
         "history_points": [
           {
@@ -13127,6 +13225,13 @@
             "min_price": 1097,
             "avg_price": 1163.2,
             "units_for_sale": 37305,
+            "velocity": 220.71428
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 1097,
+            "avg_price": 1163.2,
+            "units_for_sale": 47068,
             "velocity": 220.71428
           }
         ],
@@ -13717,103 +13822,6 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
-        "scope": "Gaia",
-        "item_key": "6141",
-        "item_id": 6141,
-        "item_name": "コーディアル",
-        "velocity": 188.85715,
-        "min_price": 50,
-        "avg_price": 189.2,
-        "hist_min": 174,
-        "hist_max": 200,
-        "units_for_sale": 10229,
-        "last_upload_time": "2026-08-05 22:14:46",
-        "history_points": [
-          {
-            "timestamp": "2026-08-05 15:40:59",
-            "min_price": 50,
-            "avg_price": 145.6,
-            "units_for_sale": 8866,
-            "velocity": 255.42857
-          },
-          {
-            "timestamp": "2026-08-05 07:10:28",
-            "min_price": 50,
-            "avg_price": 145.6,
-            "units_for_sale": 8866,
-            "velocity": 255.42857
-          },
-          {
-            "timestamp": "2026-08-05T10:04:45Z",
-            "min_price": 50,
-            "avg_price": 145.6,
-            "units_for_sale": 8866,
-            "velocity": 255.42857
-          },
-          {
-            "timestamp": "2026-08-05T12:22:29Z",
-            "min_price": 50,
-            "avg_price": 170.4,
-            "units_for_sale": 8742,
-            "velocity": 227.42857
-          },
-          {
-            "timestamp": "2026-08-05T14:44:33Z",
-            "min_price": 50,
-            "avg_price": 170.4,
-            "units_for_sale": 8536,
-            "velocity": 175.71428
-          },
-          {
-            "timestamp": "2026-08-05T16:28:17Z",
-            "min_price": 50,
-            "avg_price": 170.4,
-            "units_for_sale": 8536,
-            "velocity": 175.71428
-          },
-          {
-            "timestamp": "2026-08-05T18:05:50Z",
-            "min_price": 50,
-            "avg_price": 170.4,
-            "units_for_sale": 9280,
-            "velocity": 175.71428
-          },
-          {
-            "timestamp": "2026-08-05T20:05:44Z",
-            "min_price": 50,
-            "avg_price": 170.4,
-            "units_for_sale": 8536,
-            "velocity": 175.71428
-          },
-          {
-            "timestamp": "2026-08-05T21:43:09Z",
-            "min_price": 50,
-            "avg_price": 170.4,
-            "units_for_sale": 8536,
-            "velocity": 175.71428
-          },
-          {
-            "timestamp": "2026-08-05T22:52:37Z",
-            "min_price": 50,
-            "avg_price": 189.2,
-            "units_for_sale": 10229,
-            "velocity": 188.85715
-          }
-        ],
-        "meta": {
-          "icon_url": "https://xivapi.com/i/020000/020622_hr1.png",
-          "description": "GPを回復する効果のある飲料 (NQ回復量:300 / HQ回復量:350)",
-          "category": "薬品",
-          "item_level": 25,
-          "shop_price": 229,
-          "buyback_price": 4,
-          "stack_size": 999,
-          "can_be_hq": true,
-          "rarity": 1
-        }
-      },
-      {
         "timestamp": "2026-08-05T21:43:09Z",
         "scope": "Gaia",
         "item_key": "45995",
@@ -13869,7 +13877,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T22:52:37Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Gaia",
         "item_key": "5119",
         "item_id": 5119,
@@ -13879,7 +13887,7 @@
         "avg_price": 179.8,
         "hist_min": 100,
         "hist_max": 200,
-        "units_for_sale": 39912,
+        "units_for_sale": 36513,
         "last_upload_time": "2026-08-04 12:39:21",
         "history_points": [
           {
@@ -13922,6 +13930,13 @@
             "min_price": 140,
             "avg_price": 179.8,
             "units_for_sale": 39912,
+            "velocity": 180.57143
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 140,
+            "avg_price": 179.8,
+            "units_for_sale": 36513,
             "velocity": 180.57143
           }
         ],
@@ -14310,18 +14325,18 @@
         }
       },
       {
-        "timestamp": "2026-08-05T21:43:09Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Gaia",
         "item_key": "44017",
         "item_id": 44017,
         "item_name": "アカシア原木",
-        "velocity": 163.0,
+        "velocity": 167.71428,
         "min_price": 20,
-        "avg_price": 36.8,
+        "avg_price": 39.4,
         "hist_min": 22,
-        "hist_max": 50,
-        "units_for_sale": 11518,
-        "last_upload_time": "2026-08-05 05:59:11",
+        "hist_max": 70,
+        "units_for_sale": 14182,
+        "last_upload_time": "2026-08-05 23:38:55",
         "history_points": [
           {
             "timestamp": "2026-08-05 15:21:03",
@@ -14399,6 +14414,13 @@
             "avg_price": 36.8,
             "units_for_sale": 11518,
             "velocity": 163.0
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 20,
+            "avg_price": 39.4,
+            "units_for_sale": 14182,
+            "velocity": 167.71428
           }
         ],
         "meta": {
@@ -14410,6 +14432,110 @@
           "buyback_price": 2,
           "stack_size": 999,
           "can_be_hq": false,
+          "rarity": 1
+        }
+      },
+      {
+        "timestamp": "2026-08-05T23:54:41Z",
+        "scope": "Gaia",
+        "item_key": "6141",
+        "item_id": 6141,
+        "item_name": "コーディアル",
+        "velocity": 160.85715,
+        "min_price": 50,
+        "avg_price": 221.2,
+        "hist_min": 199,
+        "hist_max": 250,
+        "units_for_sale": 8273,
+        "last_upload_time": "2026-08-05 23:14:18",
+        "history_points": [
+          {
+            "timestamp": "2026-08-05 15:40:59",
+            "min_price": 50,
+            "avg_price": 145.6,
+            "units_for_sale": 8866,
+            "velocity": 255.42857
+          },
+          {
+            "timestamp": "2026-08-05 07:10:28",
+            "min_price": 50,
+            "avg_price": 145.6,
+            "units_for_sale": 8866,
+            "velocity": 255.42857
+          },
+          {
+            "timestamp": "2026-08-05T10:04:45Z",
+            "min_price": 50,
+            "avg_price": 145.6,
+            "units_for_sale": 8866,
+            "velocity": 255.42857
+          },
+          {
+            "timestamp": "2026-08-05T12:22:29Z",
+            "min_price": 50,
+            "avg_price": 170.4,
+            "units_for_sale": 8742,
+            "velocity": 227.42857
+          },
+          {
+            "timestamp": "2026-08-05T14:44:33Z",
+            "min_price": 50,
+            "avg_price": 170.4,
+            "units_for_sale": 8536,
+            "velocity": 175.71428
+          },
+          {
+            "timestamp": "2026-08-05T16:28:17Z",
+            "min_price": 50,
+            "avg_price": 170.4,
+            "units_for_sale": 8536,
+            "velocity": 175.71428
+          },
+          {
+            "timestamp": "2026-08-05T18:05:50Z",
+            "min_price": 50,
+            "avg_price": 170.4,
+            "units_for_sale": 9280,
+            "velocity": 175.71428
+          },
+          {
+            "timestamp": "2026-08-05T20:05:44Z",
+            "min_price": 50,
+            "avg_price": 170.4,
+            "units_for_sale": 8536,
+            "velocity": 175.71428
+          },
+          {
+            "timestamp": "2026-08-05T21:43:09Z",
+            "min_price": 50,
+            "avg_price": 170.4,
+            "units_for_sale": 8536,
+            "velocity": 175.71428
+          },
+          {
+            "timestamp": "2026-08-05T22:52:37Z",
+            "min_price": 50,
+            "avg_price": 189.2,
+            "units_for_sale": 10229,
+            "velocity": 188.85715
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 50,
+            "avg_price": 221.2,
+            "units_for_sale": 8273,
+            "velocity": 160.85715
+          }
+        ],
+        "meta": {
+          "icon_url": "https://xivapi.com/i/020000/020622_hr1.png",
+          "description": "GPを回復する効果のある飲料 (NQ回復量:300 / HQ回復量:350)",
+          "category": "薬品",
+          "item_level": 25,
+          "shop_price": 229,
+          "buyback_price": 4,
+          "stack_size": 999,
+          "can_be_hq": true,
           "rarity": 1
         }
       },
@@ -15580,7 +15706,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T21:43:09Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Gaia",
         "item_key": "44025",
         "item_id": 44025,
@@ -15590,7 +15716,7 @@
         "avg_price": 14.2,
         "hist_min": 7,
         "hist_max": 22,
-        "units_for_sale": 14637,
+        "units_for_sale": 12068,
         "last_upload_time": "2026-08-05 17:17:50",
         "history_points": [
           {
@@ -15619,6 +15745,13 @@
             "min_price": 4,
             "avg_price": 14.2,
             "units_for_sale": 14637,
+            "velocity": 119.14286
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
+            "min_price": 4,
+            "avg_price": 14.2,
+            "units_for_sale": 12068,
             "velocity": 119.14286
           }
         ],
@@ -17851,7 +17984,7 @@
         }
       },
       {
-        "timestamp": "2026-08-05T21:43:09Z",
+        "timestamp": "2026-08-05T23:54:41Z",
         "scope": "Gaia",
         "item_key": "19952",
         "item_id": 19952,
@@ -17866,6 +17999,13 @@
         "history_points": [
           {
             "timestamp": "2026-08-05T21:43:09Z",
+            "min_price": 199,
+            "avg_price": 267.6,
+            "units_for_sale": 7004,
+            "velocity": 60.714287
+          },
+          {
+            "timestamp": "2026-08-05T23:54:41Z",
             "min_price": 199,
             "avg_price": 267.6,
             "units_for_sale": 7004,
