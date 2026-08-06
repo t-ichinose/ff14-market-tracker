@@ -5,6 +5,7 @@ import json
 import time
 import re
 from datetime import datetime, timezone
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 JP_DATACENTERS = ["Elemental", "Gaia", "Mana", "Meteor"]
 DC_WORLDS = {
@@ -432,6 +433,33 @@ def ensure_items_search_json(output_path="docs/items_search.json"):
     except Exception as e:
         print(f"Error building items_search.json: {e}")
 
+def fetch_single_world_data(world_name, target_ids):
+    headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
+    world_items_data = {}
+    chunk_size = 50
+    chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
+    
+    def fetch_chunk(chunk):
+        ids_str = ",".join(map(str, chunk))
+        detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entriesToReturn=50"
+        for attempt in range(2):
+            try:
+                d_res = requests.get(detail_url, headers=headers, timeout=10)
+                if d_res.status_code == 200:
+                    return d_res.json().get('items', {})
+            except Exception:
+                time.sleep(0.3)
+        return {}
+
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        futures = [executor.submit(fetch_chunk, c) for c in chunks]
+        for future in as_completed(futures):
+            res = future.result()
+            if res:
+                world_items_data.update(res)
+                
+    return world_name, world_items_data
+
 def process_dc_pipeline(scope_name: str, conn, now_str: str):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
     cursor = conn.cursor()
@@ -454,33 +482,27 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
     if not target_ids:
         return
 
-    # Process each world in this DC directly
-    for world_name in target_worlds:
-        print(f"  -> Fetching raw world data: {world_name} ({len(target_ids)} items)...")
-        world_items_data = {}
-        chunk_size = 50
-        for i in range(0, len(target_ids), chunk_size):
-            chunk = target_ids[i:i + chunk_size]
-            ids_str = ",".join(map(str, chunk))
-            detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entriesToReturn=50"
-            
-            for attempt in range(2):
-                try:
-                    d_res = requests.get(detail_url, headers=headers, timeout=15)
-                    if d_res.status_code == 200:
-                        world_items_data.update(d_res.json().get('items', {}))
-                        break
-                except Exception as e:
-                    if attempt == 1:
-                        print(f"    [{world_name}] Fetch error: {e}")
-                    time.sleep(0.5)
-            time.sleep(0.05)
+    # Process all worlds in this DC in parallel (8 threads)
+    print(f"  [Parallel] Fetching {len(target_worlds)} worlds concurrently ({len(target_ids)} items per world)...")
+    world_results = {}
+    with ThreadPoolExecutor(max_workers=len(target_worlds)) as executor:
+        futures = [executor.submit(fetch_single_world_data, w, target_ids) for w in target_worlds]
+        for future in as_completed(futures):
+            w_name, w_items = future.result()
+            world_results[w_name] = w_items
 
+    # Bulk resolve metadata for all item IDs found in this DC
+    all_dc_item_ids = set()
+    for w_name, w_items in world_results.items():
+        all_dc_item_ids.update([int(k) for k in w_items.keys()])
+    
+    name_map = resolve_item_metadata_batch(conn, list(all_dc_item_ids))
+
+    # Process and insert DB records per world
+    for world_name in target_worlds:
+        world_items_data = world_results.get(world_name, {})
         if not world_items_data:
             continue
-
-        all_item_ids = [int(k) for k in world_items_data.keys()]
-        name_map = resolve_item_metadata_batch(conn, all_item_ids)
 
         high_velocity_count = 0
 
@@ -545,20 +567,27 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
 
         print(f"  [{world_name}] Raw World Processed -> Items: {len(world_items_data)} (Active >=10/day: {high_velocity_count})")
 
-def fetch_and_save_all():
+import sys
+
+def fetch_and_save_all(target_dc=None):
     db_path = "data/market_data.db"
     conn = init_db(db_path)
     now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    for scope in JP_DATACENTERS:
-        print(f"--- Processing DC & All Worlds Direct: {scope} ---")
+    dcs = [target_dc] if target_dc and target_dc in JP_DATACENTERS else JP_DATACENTERS
+
+    for scope in dcs:
+        print(f"--- Processing DC & All Worlds Direct: {scope} (Parallel) ---")
         process_dc_pipeline(scope, conn, now_str)
 
     cleanup_old_logs(conn, 30)
     conn.commit()
     export_web_json(conn, "docs/data.json")
     conn.close()
-    print(f"All 4 JP Datacenters & 32 Worlds raw pipeline completed!")
+    print(f"Pipeline completed for DCs: {dcs}!")
 
 if __name__ == "__main__":
-    fetch_and_save_all()
+    target_dc = None
+    if len(sys.argv) > 2 and sys.argv[1] in ["--dc", "-dc"]:
+        target_dc = sys.argv[2]
+    fetch_and_save_all(target_dc)
