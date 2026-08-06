@@ -284,7 +284,7 @@ def export_web_json(conn, output_path="docs/data.json"):
             # Retrieve raw per-world stats for this item & scope
             w_cursor = conn.cursor()
             w_cursor.execute("""
-            SELECT ml.world_name, ml.min_price, ml.avg_price, ml.units_for_sale, ml.last_upload_time, ml.daily_sale_velocity
+            SELECT ml.world_name, ml.min_price, ml.avg_price, ml.units_for_sale, ml.last_upload_time, ml.daily_sale_velocity, ml.hist_min, ml.hist_max
             FROM market_logs ml
             INNER JOIN (
                 SELECT world_name, MAX(id) as max_id
@@ -306,6 +306,8 @@ def export_web_json(conn, output_path="docs/data.json"):
                 w_stock = wr[3] or 0
                 w_time = wr[4] or ""
                 w_vel = wr[5] or 0.0
+                w_hist_min = wr[6] or w_min
+                w_hist_max = wr[7] or w_min
 
                 if w_vel > max_world_vel:
                     max_world_vel = w_vel
@@ -318,7 +320,9 @@ def export_web_json(conn, output_path="docs/data.json"):
                     "avg_price": w_avg,
                     "units_for_sale": w_stock,
                     "last_upload_time": w_time,
-                    "velocity": w_vel
+                    "velocity": w_vel,
+                    "hist_min": w_hist_min,
+                    "hist_max": w_hist_max
                 }
 
             # Query history points for the past 30 days
@@ -535,10 +539,21 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
             if h_avg < h_min: h_avg = float(h_min)
             if h_avg > h_max: h_avg = float(h_max)
 
-            # Raw uncalculated world sale velocity direct from Universalis for this exact world
+            # 自前で正確な売買速度(velocity)を計算: 直近取引履歴の全合計個数 ÷ 経過日数
+            total_qty_sold = sum(h.get("quantity", 1) for h in history)
             w_vel = float(data.get("dailySaleVelocity") or data.get("regularSaleVelocity") or 0.0)
-            min_price = data.get("minPrice", 0)
+            
+            if len(history) >= 2:
+                timestamps = [h.get("timestamp", 0) for h in history if h.get("timestamp", 0) > 0]
+                if len(timestamps) >= 2:
+                    newest_ts = max(timestamps)
+                    oldest_ts = min(timestamps)
+                    diff_seconds = newest_ts - oldest_ts
+                    if diff_seconds > 60: # 1分以上の経過時間がある場合
+                        days = diff_seconds / 86400.0
+                        w_vel = round(total_qty_sold / days, 1)
 
+            min_price = data.get("minPrice", 0)
             item_key = str(item_id)
 
             if w_vel >= 10.0:  # Per-world threshold
@@ -553,7 +568,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
                     is_active = 1
                 """, (scope_name, item_key, item_id, pure_name, now_str, w_vel))
 
-            # Insert raw per-world log into market_logs
+            # Insert raw per-world log into market_logs (including hist_min, hist_max)
             cursor.execute("""
             INSERT INTO market_logs (
                 timestamp, scope, world_name, item_key, item_id, item_name, quality,

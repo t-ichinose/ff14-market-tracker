@@ -1044,7 +1044,9 @@
           const wMin = wInfo.min_price || 0;
           const wAvg = wInfo.avg_price || item.avg_price || 0;
           const wStock = wInfo.units_for_sale || 0;
-          const wVel = (wInfo.velocity !== undefined && wInfo.velocity !== null && wInfo.velocity > 0) ? wInfo.velocity : (item.velocity || 0);
+          const wVel = (wInfo.velocity !== undefined && wInfo.velocity !== null) ? wInfo.velocity : (item.velocity || 0);
+          const wHMin = (wInfo.hist_min !== undefined && wInfo.hist_min !== null) ? wInfo.hist_min : (item.hist_min || wMin);
+          const wHMax = (wInfo.hist_max !== undefined && wInfo.hist_max !== null) ? wInfo.hist_max : (item.hist_max || wMin);
           const dailyRevenue = (wAvg || item.avg_price || 0) * wVel;
 
           return {
@@ -1053,6 +1055,8 @@
             w_avg_price: wAvg,
             w_stock: wStock,
             w_velocity: wVel,
+            w_hist_min: wHMin,
+            w_hist_max: wHMax,
             daily_revenue: dailyRevenue
           };
         });
@@ -1097,12 +1101,12 @@
 
           const stockStr = (item.w_stock || 0).toLocaleString();
 
-          const hMin = (item.hist_min !== undefined && item.hist_min !== null) ? Math.round(Number(item.hist_min)) : (minPriceVal || 0);
-          const hMax = (item.hist_max !== undefined && item.hist_max !== null) ? Math.round(Number(item.hist_max)) : hMin;
+          const hMin = Math.round(Number(item.w_hist_min || minPriceVal || 0));
+          const hMax = Math.round(Number(item.w_hist_max || hMin));
 
           let historyText = "";
-          if (hMin === hMax) {
-            historyText = `過去取引: ${hMin.toLocaleString()}G/個 (固定帯)`;
+          if (hMin === hMax || hMax === 0) {
+            historyText = `過去取引: ${hMin.toLocaleString()}G/個 (単一帯)`;
           } else {
             historyText = `過去取引: 最安 ${hMin.toLocaleString()}G 〜 最高 ${hMax.toLocaleString()}G`;
           }
