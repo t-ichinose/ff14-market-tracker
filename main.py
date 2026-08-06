@@ -55,6 +55,12 @@ def init_db(db_path="data/market_data.db"):
     )
     """)
 
+    # マイグレーション: 既存のDBに world_name カラムがない場合は自動追加
+    try:
+        cursor.execute("ALTER TABLE market_logs ADD COLUMN world_name TEXT DEFAULT ''")
+    except Exception:
+        pass
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS item_metadata (
         item_id INTEGER PRIMARY KEY,
