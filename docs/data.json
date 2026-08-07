@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-07T00:36:34Z",
+  "last_updated": "2026-08-07T01:15:22Z",
   "datacenters": [
     "Elemental",
     "Gaia",
@@ -1852,10 +1852,10 @@
         "world_name": "Carbuncle",
         "dc_name": "Elemental",
         "min_price": 25,
-        "avg_price": 29.8,
-        "max_price": 34,
+        "avg_price": 28.8,
+        "max_price": 30,
         "units_for_sale": 143520,
-        "sale_velocity": 1026.4
+        "sale_velocity": 455.0
       },
       {
         "item_id": 30893,
@@ -22224,11 +22224,11 @@
         "category_name": "一般",
         "world_name": "Gungnir",
         "dc_name": "Elemental",
-        "min_price": 1800,
-        "avg_price": 2075.0,
+        "min_price": 2000,
+        "avg_price": 2250.0,
         "max_price": 2500,
         "units_for_sale": 35,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.3
       },
       {
         "item_id": 4311,
@@ -26958,11 +26958,11 @@
         "category_name": "一般",
         "world_name": "Kujata",
         "dc_name": "Elemental",
-        "min_price": 1200000,
-        "avg_price": 1287450.0,
+        "min_price": 1350000,
+        "avg_price": 1374900.0,
         "max_price": 1399800,
         "units_for_sale": 81,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.3
       },
       {
         "item_id": 19032,
@@ -32032,7 +32032,7 @@
         "avg_price": 399999.8,
         "max_price": 400000,
         "units_for_sale": 7,
-        "sale_velocity": 0.7
+        "sale_velocity": 0.6
       },
       {
         "item_id": 15925,
@@ -43809,10 +43809,10 @@
         "world_name": "Typhon",
         "dc_name": "Elemental",
         "min_price": 400780,
-        "avg_price": 407460.0,
-        "max_price": 434180,
+        "avg_price": 400780.0,
+        "max_price": 400780,
         "units_for_sale": 1,
-        "sale_velocity": 0.7
+        "sale_velocity": 0.6
       },
       {
         "item_id": 49257,
@@ -49100,10 +49100,10 @@
         "world_name": "Typhon",
         "dc_name": "Elemental",
         "min_price": 90,
-        "avg_price": 140.0,
-        "max_price": 190,
+        "avg_price": 90.0,
+        "max_price": 90,
         "units_for_sale": 614,
-        "sale_velocity": 1.9
+        "sale_velocity": 0.1
       },
       {
         "item_id": 13711,
@@ -58696,10 +58696,10 @@
         "world_name": "Atomos",
         "dc_name": "Elemental",
         "min_price": 8002,
-        "avg_price": 8402.0,
-        "max_price": 8802,
+        "avg_price": 8002.0,
+        "max_price": 8002,
         "units_for_sale": 2,
-        "sale_velocity": 0.3
+        "sale_velocity": 0.1
       },
       {
         "item_id": 47899,
@@ -77705,9 +77705,9 @@
         "category_name": "一般",
         "world_name": "Aegis",
         "dc_name": "Elemental",
-        "min_price": 35000,
-        "avg_price": 35000.0,
-        "max_price": 35000,
+        "min_price": 36000,
+        "avg_price": 32000.0,
+        "max_price": 36000,
         "units_for_sale": 1,
         "sale_velocity": 0.1
       },
@@ -83074,9 +83074,9 @@
         "category_name": "一般",
         "world_name": "Aegis",
         "dc_name": "Elemental",
-        "min_price": 190,
+        "min_price": 70,
         "avg_price": 191.8,
-        "max_price": 199,
+        "max_price": 650,
         "units_for_sale": 3039,
         "sale_velocity": 70.7
       },
@@ -113463,7 +113463,7 @@
         "avg_price": 60.0,
         "max_price": 60,
         "units_for_sale": 24,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.4
       },
       {
         "item_id": 37763,
@@ -118493,10 +118493,10 @@
         "world_name": "Bahamut",
         "dc_name": "Gaia",
         "min_price": 10,
-        "avg_price": 2482.0,
-        "max_price": 10000,
+        "avg_price": 602.5,
+        "max_price": 2000,
         "units_for_sale": 279,
-        "sale_velocity": 4.6
+        "sale_velocity": 3.1
       },
       {
         "item_id": 36228,
@@ -123458,9 +123458,9 @@
         "category_name": "一般",
         "world_name": "Bahamut",
         "dc_name": "Gaia",
-        "min_price": 60,
-        "avg_price": 60.0,
-        "max_price": 60,
+        "min_price": 9000,
+        "avg_price": 8211.8,
+        "max_price": 50060,
         "units_for_sale": 26,
         "sale_velocity": 0.1
       },
@@ -129712,10 +129712,10 @@
         "world_name": "Bahamut",
         "dc_name": "Gaia",
         "min_price": 10,
-        "avg_price": 65.0,
-        "max_price": 140,
+        "avg_price": 27.5,
+        "max_price": 45,
         "units_for_sale": 197,
-        "sale_velocity": 2.3
+        "sale_velocity": 1.9
       },
       {
         "item_id": 31819,
@@ -132262,10 +132262,10 @@
         "world_name": "Durandal",
         "dc_name": "Gaia",
         "min_price": 198,
-        "avg_price": 380.0,
-        "max_price": 502,
+        "avg_price": 299.3,
+        "max_price": 400,
         "units_for_sale": 235,
-        "sale_velocity": 1.6
+        "sale_velocity": 1.1
       },
       {
         "item_id": 33916,
@@ -134030,10 +134030,10 @@
         "world_name": "Durandal",
         "dc_name": "Gaia",
         "min_price": 280,
-        "avg_price": 504.0,
-        "max_price": 936,
+        "avg_price": 280.0,
+        "max_price": 280,
         "units_for_sale": 79,
-        "sale_velocity": 1.3
+        "sale_velocity": 0.1
       },
       {
         "item_id": 37814,
@@ -135746,10 +135746,10 @@
         "world_name": "Durandal",
         "dc_name": "Gaia",
         "min_price": 700,
-        "avg_price": 756.4,
+        "avg_price": 755.2,
         "max_price": 799,
         "units_for_sale": 43,
-        "sale_velocity": 0.7
+        "sale_velocity": 0.6
       },
       {
         "item_id": 2547,
@@ -148800,10 +148800,10 @@
         "world_name": "Fenrir",
         "dc_name": "Gaia",
         "min_price": 598,
-        "avg_price": 899.6,
+        "avg_price": 899.5,
         "max_price": 1000,
         "units_for_sale": 64,
-        "sale_velocity": 0.7
+        "sale_velocity": 0.6
       },
       {
         "item_id": 50455,
@@ -152647,9 +152647,9 @@
         "category_name": "一般",
         "world_name": "Fenrir",
         "dc_name": "Gaia",
-        "min_price": 850,
-        "avg_price": 850.0,
-        "max_price": 850,
+        "min_price": 898,
+        "avg_price": 910.0,
+        "max_price": 3150,
         "units_for_sale": 23,
         "sale_velocity": 0.1
       },
@@ -165809,7 +165809,7 @@
         "avg_price": 59000.0,
         "max_price": 59000,
         "units_for_sale": 38,
-        "sale_velocity": 0.4
+        "sale_velocity": 0.3
       },
       {
         "item_id": 45070,
@@ -169913,11 +169913,11 @@
         "category_name": "一般",
         "world_name": "Ifrit",
         "dc_name": "Gaia",
-        "min_price": 18000,
-        "avg_price": 18500.0,
+        "min_price": 19000,
+        "avg_price": 19000.0,
         "max_price": 19000,
         "units_for_sale": 72,
-        "sale_velocity": 0.3
+        "sale_velocity": 0.1
       },
       {
         "item_id": 3043,
@@ -179353,11 +179353,11 @@
         "category_name": "一般",
         "world_name": "Ridill",
         "dc_name": "Gaia",
-        "min_price": 39,
-        "avg_price": 44.8,
+        "min_price": 50,
+        "avg_price": 50.0,
         "max_price": 50,
         "units_for_sale": 404,
-        "sale_velocity": 1.1
+        "sale_velocity": 0.4
       },
       {
         "item_id": 36091,
@@ -182369,11 +182369,11 @@
         "category_name": "一般",
         "world_name": "Ridill",
         "dc_name": "Gaia",
-        "min_price": 700,
-        "avg_price": 700.0,
-        "max_price": 700,
+        "min_price": 800,
+        "avg_price": 799.8,
+        "max_price": 10111,
         "units_for_sale": 83,
-        "sale_velocity": 0.1
+        "sale_velocity": 0.7
       },
       {
         "item_id": 50824,
@@ -189288,10 +189288,10 @@
         "world_name": "Tiamat",
         "dc_name": "Gaia",
         "min_price": 489,
-        "avg_price": 1493062.0,
+        "avg_price": 1779327.5,
         "max_price": 6000000,
         "units_for_sale": 15,
-        "sale_velocity": 0.7
+        "sale_velocity": 0.6
       },
       {
         "item_id": 52295,
@@ -189782,10 +189782,10 @@
         "world_name": "Tiamat",
         "dc_name": "Gaia",
         "min_price": 50,
-        "avg_price": 83.3,
-        "max_price": 100,
+        "avg_price": 50.0,
+        "max_price": 50,
         "units_for_sale": 262,
-        "sale_velocity": 1.7
+        "sale_velocity": 0.3
       },
       {
         "item_id": 33916,
@@ -191147,10 +191147,10 @@
         "world_name": "Tiamat",
         "dc_name": "Gaia",
         "min_price": 2900000,
-        "avg_price": 3148171.8,
+        "avg_price": 3137595.7,
         "max_price": 3332807,
         "units_for_sale": 18,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.4
       },
       {
         "item_id": 49292,
@@ -194878,10 +194878,10 @@
         "world_name": "Tiamat",
         "dc_name": "Gaia",
         "min_price": 618000,
-        "avg_price": 618000.0,
-        "max_price": 618000,
+        "avg_price": 588400.0,
+        "max_price": 720000,
         "units_for_sale": 72,
-        "sale_velocity": 0.1
+        "sale_velocity": 0.3
       },
       {
         "item_id": 32829,
@@ -195943,11 +195943,11 @@
         "category_name": "一般",
         "world_name": "Tiamat",
         "dc_name": "Gaia",
-        "min_price": 15,
-        "avg_price": 15.0,
-        "max_price": 15,
+        "min_price": 10,
+        "avg_price": 16.0,
+        "max_price": 200,
         "units_for_sale": 381,
-        "sale_velocity": 0.3
+        "sale_velocity": 0.9
       },
       {
         "item_id": 29411,
@@ -196957,9 +196957,9 @@
         "category_name": "一般",
         "world_name": "Tiamat",
         "dc_name": "Gaia",
-        "min_price": 450500,
-        "avg_price": 450500.0,
-        "max_price": 450500,
+        "min_price": 1100000,
+        "avg_price": 549303.2,
+        "max_price": 1197021,
         "units_for_sale": 2,
         "sale_velocity": 0.1
       },
@@ -197594,11 +197594,11 @@
         "category_name": "一般",
         "world_name": "Tiamat",
         "dc_name": "Gaia",
-        "min_price": 389500,
-        "avg_price": 389750.0,
+        "min_price": 390000,
+        "avg_price": 390000.0,
         "max_price": 390000,
         "units_for_sale": 8,
-        "sale_velocity": 0.3
+        "sale_velocity": 0.1
       },
       {
         "item_id": 33258,
@@ -198999,10 +198999,10 @@
         "world_name": "Tiamat",
         "dc_name": "Gaia",
         "min_price": 800,
-        "avg_price": 2000.0,
+        "avg_price": 2333.3,
         "max_price": 3200,
         "units_for_sale": 16,
-        "sale_velocity": 1.3
+        "sale_velocity": 1.0
       },
       {
         "item_id": 10611,
@@ -199857,10 +199857,10 @@
         "world_name": "Tiamat",
         "dc_name": "Gaia",
         "min_price": 149,
-        "avg_price": 247.8,
+        "avg_price": 259.8,
         "max_price": 300,
         "units_for_sale": 29,
-        "sale_velocity": 0.7
+        "sale_velocity": 0.6
       },
       {
         "item_id": 5629,
@@ -206241,11 +206241,11 @@
         "category_name": "一般",
         "world_name": "Ultima",
         "dc_name": "Gaia",
-        "min_price": 100,
-        "avg_price": 300.0,
+        "min_price": 500,
+        "avg_price": 500.0,
         "max_price": 500,
         "units_for_sale": 125,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.3
       },
       {
         "item_id": 37814,
@@ -217590,9 +217590,9 @@
         "category_name": "一般",
         "world_name": "Ultima",
         "dc_name": "Gaia",
-        "min_price": 22222,
-        "avg_price": 22222.0,
-        "max_price": 22222,
+        "min_price": 0,
+        "avg_price": 11644.4,
+        "max_price": 0,
         "units_for_sale": 0,
         "sale_velocity": 0.1
       },
@@ -217852,9 +217852,9 @@
         "category_name": "一般",
         "world_name": "Anima",
         "dc_name": "Mana",
-        "min_price": 150,
-        "avg_price": 150.0,
-        "max_price": 150,
+        "min_price": 100,
+        "avg_price": 360.0,
+        "max_price": 6000,
         "units_for_sale": 13,
         "sale_velocity": 0.3
       },
@@ -225977,11 +225977,11 @@
         "category_name": "一般",
         "world_name": "Anima",
         "dc_name": "Mana",
-        "min_price": 12,
-        "avg_price": 12.0,
-        "max_price": 12,
+        "min_price": 15,
+        "avg_price": 45.0,
+        "max_price": 800,
         "units_for_sale": 1594,
-        "sale_velocity": 1.4
+        "sale_velocity": 15.7
       },
       {
         "item_id": 50292,
@@ -233157,7 +233157,7 @@
         "avg_price": 401.0,
         "max_price": 401,
         "units_for_sale": 477,
-        "sale_velocity": 2.9
+        "sale_velocity": 1.4
       },
       {
         "item_id": 44897,
@@ -235092,11 +235092,11 @@
         "category_name": "一般",
         "world_name": "Asura",
         "dc_name": "Mana",
-        "min_price": 900000,
-        "avg_price": 914999.5,
+        "min_price": 929999,
+        "avg_price": 929999.0,
         "max_price": 929999,
         "units_for_sale": 16,
-        "sale_velocity": 0.3
+        "sale_velocity": 0.1
       },
       {
         "item_id": 44169,
@@ -268884,10 +268884,10 @@
         "world_name": "Hades",
         "dc_name": "Mana",
         "min_price": 96986,
-        "avg_price": 96987.6,
-        "max_price": 96992,
+        "avg_price": 96986.5,
+        "max_price": 96987,
         "units_for_sale": 6,
-        "sale_velocity": 0.7
+        "sale_velocity": 0.6
       },
       {
         "item_id": 36086,
@@ -269741,11 +269741,11 @@
         "category_name": "一般",
         "world_name": "Hades",
         "dc_name": "Mana",
-        "min_price": 1000,
-        "avg_price": 1203.3,
+        "min_price": 1500,
+        "avg_price": 1500.0,
         "max_price": 1500,
         "units_for_sale": 46,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.3
       },
       {
         "item_id": 24233,
@@ -275371,10 +275371,10 @@
         "world_name": "Hades",
         "dc_name": "Mana",
         "min_price": 99999,
-        "avg_price": 99999.8,
+        "avg_price": 99999.7,
         "max_price": 100000,
         "units_for_sale": 2,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.4
       },
       {
         "item_id": 47937,
@@ -286920,7 +286920,7 @@
         "avg_price": 350.0,
         "max_price": 350,
         "units_for_sale": 47,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.4
       },
       {
         "item_id": 49294,
@@ -305105,9 +305105,9 @@
         "category_name": "一般",
         "world_name": "Masamune",
         "dc_name": "Mana",
-        "min_price": 710,
-        "avg_price": 710.0,
-        "max_price": 710,
+        "min_price": 690,
+        "avg_price": 669.8,
+        "max_price": 100000000,
         "units_for_sale": 22,
         "sale_velocity": 0.1
       },
@@ -309123,8 +309123,8 @@
         "world_name": "Masamune",
         "dc_name": "Mana",
         "min_price": 90,
-        "avg_price": 90.0,
-        "max_price": 90,
+        "avg_price": 66.0,
+        "max_price": 12345,
         "units_for_sale": 18,
         "sale_velocity": 0.1
       },
@@ -312529,10 +312529,10 @@
         "world_name": "Masamune",
         "dc_name": "Mana",
         "min_price": 60,
-        "avg_price": 117.8,
+        "avg_price": 132.2,
         "max_price": 160,
         "units_for_sale": 21,
-        "sale_velocity": 0.7
+        "sale_velocity": 0.6
       },
       {
         "item_id": 27728,
@@ -313672,9 +313672,9 @@
         "category_name": "一般",
         "world_name": "Masamune",
         "dc_name": "Mana",
-        "min_price": 840,
-        "avg_price": 840.0,
-        "max_price": 840,
+        "min_price": 760,
+        "avg_price": 880.0,
+        "max_price": 30040,
         "units_for_sale": 30,
         "sale_velocity": 0.1
       },
@@ -324426,10 +324426,10 @@
         "world_name": "Pandaemonium",
         "dc_name": "Mana",
         "min_price": 10000000,
-        "avg_price": 15000000.0,
+        "avg_price": 16666666.7,
         "max_price": 20000000,
         "units_for_sale": 46,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.4
       },
       {
         "item_id": 27127,
@@ -335906,9 +335906,9 @@
         "category_name": "一般",
         "world_name": "Titan",
         "dc_name": "Mana",
-        "min_price": 20429,
-        "avg_price": 20429.0,
-        "max_price": 20429,
+        "min_price": 20390,
+        "avg_price": 16519.8,
+        "max_price": 20390,
         "units_for_sale": 1,
         "sale_velocity": 0.1
       },
@@ -339209,10 +339209,10 @@
         "world_name": "Titan",
         "dc_name": "Mana",
         "min_price": 1700000,
-        "avg_price": 1744987.5,
+        "avg_price": 1759983.3,
         "max_price": 1799950,
         "units_for_sale": 77,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.4
       },
       {
         "item_id": 37357,
@@ -363715,11 +363715,11 @@
         "category_name": "一般",
         "world_name": "Belias",
         "dc_name": "Meteor",
-        "min_price": 13000,
-        "avg_price": 13000.0,
-        "max_price": 13000,
+        "min_price": 5000,
+        "avg_price": 11798.0,
+        "max_price": 90090,
         "units_for_sale": 39,
-        "sale_velocity": 0.1
+        "sale_velocity": 0.4
       },
       {
         "item_id": 8156,
@@ -367851,9 +367851,9 @@
         "category_name": "一般",
         "world_name": "Mandragora",
         "dc_name": "Meteor",
-        "min_price": 500,
+        "min_price": 92,
         "avg_price": 690.0,
-        "max_price": 950,
+        "max_price": 6000,
         "units_for_sale": 118,
         "sale_velocity": 1.7
       },
@@ -370972,10 +370972,10 @@
         "world_name": "Mandragora",
         "dc_name": "Meteor",
         "min_price": 894,
-        "avg_price": 932.8,
-        "max_price": 980,
+        "avg_price": 921.0,
+        "max_price": 950,
         "units_for_sale": 69,
-        "sale_velocity": 1.4
+        "sale_velocity": 1.1
       },
       {
         "item_id": 44031,
@@ -375912,10 +375912,10 @@
         "world_name": "Mandragora",
         "dc_name": "Meteor",
         "min_price": 4899,
-        "avg_price": 10231.0,
-        "max_price": 16794,
+        "avg_price": 6949.5,
+        "max_price": 9000,
         "units_for_sale": 106,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.4
       },
       {
         "item_id": 28139,
@@ -389290,11 +389290,11 @@
         "category_name": "一般",
         "world_name": "Ramuh",
         "dc_name": "Meteor",
-        "min_price": 50000,
+        "min_price": 24000,
         "avg_price": 50000.0,
-        "max_price": 50000,
+        "max_price": 130000,
         "units_for_sale": 17,
-        "sale_velocity": 0.1
+        "sale_velocity": 0.3
       },
       {
         "item_id": 48111,
@@ -390720,9 +390720,9 @@
         "category_name": "一般",
         "world_name": "Ramuh",
         "dc_name": "Meteor",
-        "min_price": 800,
-        "avg_price": 800.0,
-        "max_price": 800,
+        "min_price": 1000,
+        "avg_price": 1236.2,
+        "max_price": 60000,
         "units_for_sale": 11,
         "sale_velocity": 0.1
       },
@@ -395206,10 +395206,10 @@
         "world_name": "Ramuh",
         "dc_name": "Meteor",
         "min_price": 1,
-        "avg_price": 68.5,
+        "avg_price": 61.0,
         "max_price": 91,
         "units_for_sale": 21,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.4
       },
       {
         "item_id": 5676,
@@ -398403,9 +398403,9 @@
         "category_name": "一般",
         "world_name": "Ramuh",
         "dc_name": "Meteor",
-        "min_price": 1499,
-        "avg_price": 1499.0,
-        "max_price": 1499,
+        "min_price": 1400,
+        "avg_price": 19259.8,
+        "max_price": 10000,
         "units_for_sale": 7,
         "sale_velocity": 0.1
       },
@@ -421378,9 +421378,9 @@
         "category_name": "一般",
         "world_name": "Unicorn",
         "dc_name": "Meteor",
-        "min_price": 10296,
-        "avg_price": 10296.0,
-        "max_price": 10296,
+        "min_price": 0,
+        "avg_price": 15736.4,
+        "max_price": 0,
         "units_for_sale": 0,
         "sale_velocity": 0.1
       },
@@ -421418,10 +421418,10 @@
         "world_name": "Unicorn",
         "dc_name": "Meteor",
         "min_price": 326,
-        "avg_price": 154561.0,
+        "avg_price": 153205.0,
         "max_price": 204165,
         "units_for_sale": 12,
-        "sale_velocity": 0.7
+        "sale_velocity": 0.6
       },
       {
         "item_id": 52295,
@@ -427618,11 +427618,11 @@
         "category_name": "一般",
         "world_name": "Unicorn",
         "dc_name": "Meteor",
-        "min_price": 1800,
-        "avg_price": 2477.8,
+        "min_price": 2800,
+        "avg_price": 2900.0,
         "max_price": 3000,
         "units_for_sale": 219,
-        "sale_velocity": 11.3
+        "sale_velocity": 1.4
       },
       {
         "item_id": 13717,
@@ -443078,10 +443078,10 @@
         "world_name": "Valefor",
         "dc_name": "Meteor",
         "min_price": 1000,
-        "avg_price": 1150.0,
+        "avg_price": 1133.3,
         "max_price": 1200,
         "units_for_sale": 38,
-        "sale_velocity": 0.6
+        "sale_velocity": 0.4
       },
       {
         "item_id": 49295,
@@ -452723,11 +452723,11 @@
         "category_name": "一般",
         "world_name": "Valefor",
         "dc_name": "Meteor",
-        "min_price": 15000,
-        "avg_price": 17000.0,
+        "min_price": 19000,
+        "avg_price": 19000.0,
         "max_price": 19000,
         "units_for_sale": 8,
-        "sale_velocity": 0.3
+        "sale_velocity": 0.1
       },
       {
         "item_id": 5126,
@@ -452918,9 +452918,9 @@
         "category_name": "一般",
         "world_name": "Valefor",
         "dc_name": "Meteor",
-        "min_price": 88000,
-        "avg_price": 88000.0,
-        "max_price": 88000,
+        "min_price": 89000,
+        "avg_price": 88400.0,
+        "max_price": 77777777,
         "units_for_sale": 28,
         "sale_velocity": 0.1
       },
@@ -456610,9 +456610,9 @@
         "category_name": "一般",
         "world_name": "Valefor",
         "dc_name": "Meteor",
-        "min_price": 65000,
-        "avg_price": 65000.0,
-        "max_price": 65000,
+        "min_price": 65048,
+        "avg_price": 67208.8,
+        "max_price": 100000000,
         "units_for_sale": 12,
         "sale_velocity": 0.3
       },
@@ -467935,9 +467935,9 @@
         "category_name": "一般",
         "world_name": "Yojimbo",
         "dc_name": "Meteor",
-        "min_price": 9999,
-        "avg_price": 9999.0,
-        "max_price": 9999,
+        "min_price": 9977,
+        "avg_price": 8226.0,
+        "max_price": 20377,
         "units_for_sale": 5,
         "sale_velocity": 0.1
       },
@@ -477492,11 +477492,11 @@
         "category_name": "一般",
         "world_name": "Zeromus",
         "dc_name": "Meteor",
-        "min_price": 22000,
-        "avg_price": 22799.2,
+        "min_price": 22999,
+        "avg_price": 22999.0,
         "max_price": 22999,
         "units_for_sale": 27,
-        "sale_velocity": 0.7
+        "sale_velocity": 0.6
       },
       {
         "item_id": 4650,
@@ -485267,10 +485267,10 @@
         "world_name": "Zeromus",
         "dc_name": "Meteor",
         "min_price": 15000,
-        "avg_price": 16693.3,
-        "max_price": 20060,
+        "avg_price": 15010.0,
+        "max_price": 15020,
         "units_for_sale": 26,
-        "sale_velocity": 0.4
+        "sale_velocity": 0.3
       },
       {
         "item_id": 5288,

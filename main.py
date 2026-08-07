@@ -26,6 +26,7 @@ def init_db(db_path="data/market_data.db"):
     conn = sqlite3.connect(db_path, timeout=60)
     cursor = conn.cursor()
     cursor.execute("PRAGMA journal_mode=WAL;")
+    cursor.execute("PRAGMA busy_timeout=60000;")
     
     # 1. アイテムプールシート (items_pool)
     cursor.execute("""
@@ -206,7 +207,7 @@ def fetch_single_world_data(world_name, target_ids):
     
     def fetch_chunk(chunk):
         ids_str = ",".join(map(str, chunk))
-        detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entriesToReturn=500"
+        detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=500"
         for attempt in range(2):
             try:
                 d_res = requests.get(detail_url, headers=headers, timeout=10)
