@@ -205,13 +205,15 @@ def fetch_single_world_data(world_name, target_ids):
     headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
     detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=50"
-    for attempt in range(2):
+    for attempt in range(3):
         try:
-            d_res = requests.get(detail_url, headers=headers, timeout=10)
+            d_res = requests.get(detail_url, headers=headers, timeout=12)
             if d_res.status_code == 200:
                 return world_name, d_res.json().get('items', {})
+            elif d_res.status_code in (429, 502, 503, 504):
+                time.sleep(1.0 * (attempt + 1))
         except Exception:
-            time.sleep(0.3)
+            time.sleep(0.5 * (attempt + 1))
     return world_name, {}
 
 def process_dc_pipeline(scope_name: str, now_str: str = None):
