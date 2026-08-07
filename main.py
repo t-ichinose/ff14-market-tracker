@@ -174,7 +174,7 @@ def resolve_item_metadata_batch(conn, item_ids):
 
         # Garland API fallback for icon and category
         try:
-            res = requests.get(f"https://www.garlandtools.org/db/doc/item/ja/2/{iid}.json", headers=headers, timeout=5)
+            res = requests.get(f"https://www.garlandtools.org/db/doc/item/ja/3/{iid}.json", headers=headers, timeout=5)
             if res.status_code == 200:
                 res.encoding = 'utf-8'
                 g_data = res.json().get("item", {})
@@ -182,9 +182,11 @@ def resolve_item_metadata_batch(conn, item_ids):
                     name = g_data.get("name")
                 icon_code = g_data.get("icon")
                 if icon_code:
-                    code_int = int(icon_code)
-                    folder = f"{code_int:06d}"[:3] + "000"
-                    icon_url = f"https://xivapi.com/i/{folder}/{code_int:06d}.png"
+                    code_str = str(icon_code).replace("t/", "")
+                    code_int = int(code_str)
+                    code_padded = f"{code_int:06d}"
+                    folder = code_padded[:3] + "000"
+                    icon_url = f"https://beta.xivapi.com/api/1/asset/ui/icon/{folder}/{code_padded}_hr1.tex?format=png"
                 category_name = g_data.get("category_name", category_name)
         except Exception:
             pass
@@ -382,7 +384,7 @@ def export_web_json(conn=None, output_path="docs/data.json"):
         
         icon_url = meta.get("icon", "")
         if not icon_url or "000000.png" in icon_url:
-            icon_url = icons_map.get(str(iid)) or icons_map.get(iid) or "https://xivapi.com/i/020000/021001.png"
+            icon_url = icons_map.get(str(iid)) or icons_map.get(iid) or "https://beta.xivapi.com/api/1/asset/ui/icon/020000/021001_hr1.tex?format=png"
         category_name = meta.get("category", "一般")
 
         real_vel = velocity_calc.get((iid, wname), round(vel or 0, 1))

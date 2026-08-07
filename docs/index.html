@@ -1063,12 +1063,14 @@
           // 日商（流通ギル = 平均単価 × 日当売買数）
           const dailyRevenue = Math.round((item.avg_price || 0) * (item.sale_velocity || 0)).toLocaleString();
 
-          const iidNum = parseInt(item.item_id, 10) || 0;
-          const iidStr = iidNum.toString().padStart(6, '0');
-          const iidFolder = iidStr.substring(0, 3) + '000';
-          const directIconUrl = `https://xivapi.com/i/${iidFolder}/${iidStr}.png`;
-          const iconUrl = item.icon_url && !item.icon_url.endsWith('000000.png') ? item.icon_url : directIconUrl;
-          const iconImg = `<img class="item-icon" src="${iconUrl}" alt="" onerror="this.onerror=null; this.src='${directIconUrl}';">`;
+          // アイコンURL: data.json の icon_url をそのまま使用（beta.xivapi.com 統一済み）
+          // フォールバック: icon_url からコードを抽出し beta.xivapi.com で再試行
+          const iconUrl = item.icon_url && !item.icon_url.endsWith('000000.png') ? item.icon_url : 'https://beta.xivapi.com/api/1/asset/ui/icon/020000/021001_hr1.tex?format=png';
+          const codeMatch = iconUrl.match(/(\d{6})/);
+          const fbCode = codeMatch ? codeMatch[1] : '021001';
+          const fbFolder = fbCode.substring(0, 3) + '000';
+          const fallbackUrl = `https://beta.xivapi.com/api/1/asset/ui/icon/${fbFolder}/${fbCode}_hr1.tex?format=png`;
+          const iconImg = `<img class="item-icon" src="${iconUrl}" alt="" onerror="this.onerror=null; this.src='${fallbackUrl}';">`;
 
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
 
