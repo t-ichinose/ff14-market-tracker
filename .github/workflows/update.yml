@@ -2,8 +2,8 @@ name: Scheduled Market Research Update
 
 on:
   schedule:
-    # 3時間ごとに定期実行
-    - cron: '0 */3 * * *'
+    # 30分ごとに定期実行
+    - cron: '*/30 * * * *'
   workflow_dispatch: # 手動実行ボタン
   push:
     branches:
