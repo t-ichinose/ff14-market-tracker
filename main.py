@@ -4,6 +4,7 @@ import os
 import json
 import time
 import re
+import sys
 from datetime import datetime, timezone
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -14,66 +15,77 @@ DC_WORLDS = {
     "Mana": ["Anima", "Asura", "Chocobo", "Hades", "Ixion", "Masamune", "Pandaemonium", "Titan"],
     "Meteor": ["Belias", "Mandragora", "Ramuh", "Shinryu", "Unicorn", "Valefor", "Yojimbo", "Zeromus"]
 }
-VELOCITY_THRESHOLD = 50.0
+
+WORLD_TO_DC = {}
+for dc, worlds in DC_WORLDS.items():
+    for w in worlds:
+        WORLD_TO_DC[w] = dc
 
 def init_db(db_path="data/market_data.db"):
     os.makedirs("data", exist_ok=True)
-    conn = sqlite3.connect(db_path, timeout=30)
+    conn = sqlite3.connect(db_path, timeout=60)
     cursor = conn.cursor()
+    cursor.execute("PRAGMA journal_mode=WAL;")
     
+    # 1. アイテムプールシート (items_pool)
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS items_pool (
-        scope TEXT,
-        item_key TEXT,
-        item_id INTEGER,
-        item_name TEXT,
-        quality TEXT,
-        added_at TEXT,
-        last_velocity REAL,
-        is_active INTEGER DEFAULT 1,
-        PRIMARY KEY (scope, item_key)
+        item_id INTEGER PRIMARY KEY,
+        added_at TEXT
     )
     """)
     
+    # 2. 取引履歴シート (sales_history)
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS market_logs (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        timestamp TEXT,
-        scope TEXT,
-        world_name TEXT DEFAULT '',
-        item_key TEXT,
+    CREATE TABLE IF NOT EXISTS sales_history (
         item_id INTEGER,
-        item_name TEXT,
-        quality TEXT,
-        daily_sale_velocity REAL,
-        min_price INTEGER,
-        avg_price REAL,
-        hist_min INTEGER DEFAULT 0,
-        hist_max INTEGER DEFAULT 0,
-        units_for_sale INTEGER,
-        listings_count INTEGER,
-        last_upload_time TEXT
+        world_name TEXT,
+        timestamp INTEGER,
+        price_per_unit INTEGER,
+        quantity INTEGER,
+        hq INTEGER,
+        buyer_name TEXT,
+        PRIMARY KEY (item_id, world_name, timestamp, buyer_name, price_per_unit, quantity)
     )
     """)
-
-    # マイグレーション: 既存のDBに world_name カラムがない場合は自動追加
-    try:
-        cursor.execute("ALTER TABLE market_logs ADD COLUMN world_name TEXT DEFAULT ''")
-    except Exception:
-        pass
-
+    
+    # 3. 最新統計情報シート (item_market_stats)
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS item_metadata (
+    CREATE TABLE IF NOT EXISTS item_market_stats (
+        item_id INTEGER,
+        world_name TEXT,
+        dc_name TEXT,
+        updated_at TEXT,
+        min_price INTEGER,
+        min_price_nq INTEGER,
+        min_price_hq INTEGER,
+        avg_price REAL,
+        avg_price_nq REAL,
+        avg_price_hq REAL,
+        current_avg_price REAL,
+        current_avg_price_nq REAL,
+        current_avg_price_hq REAL,
+        max_price INTEGER,
+        max_price_nq INTEGER,
+        max_price_hq INTEGER,
+        units_for_sale INTEGER,
+        listings_count INTEGER,
+        units_sold INTEGER,
+        recent_history_count INTEGER,
+        sale_velocity REAL,
+        sale_velocity_nq REAL,
+        sale_velocity_hq REAL,
+        PRIMARY KEY (item_id, world_name)
+    )
+    """)
+    
+    # 4. アイテムマスターシート (items_metadata)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS items_metadata (
         item_id INTEGER PRIMARY KEY,
+        item_name TEXT,
         icon_url TEXT,
-        description TEXT,
-        category TEXT,
-        item_level INTEGER DEFAULT 0,
-        shop_price INTEGER DEFAULT 0,
-        buyback_price INTEGER DEFAULT 0,
-        stack_size INTEGER DEFAULT 1,
-        can_be_hq INTEGER DEFAULT 0,
-        rarity INTEGER DEFAULT 1,
+        category_name TEXT,
         fetched_at TEXT
     )
     """)
@@ -81,334 +93,16 @@ def init_db(db_path="data/market_data.db"):
     conn.commit()
     return conn
 
-def clean_name(raw_name):
-    return re.sub(r'\s*\[(NQ|HQ)\]\s*$', '', raw_name).strip()
-
-def load_items_search():
-    if os.path.exists("docs/items_search.json"):
-        try:
-            with open("docs/items_search.json", "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            pass
-    return {}
-
-def resolve_item_metadata_batch(conn, item_ids):
-    headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
-    meta_map = {}
-    
-    # Load full 16,843 items search dictionary if available
-    items_search = load_items_search()
-
-    # 1. Check item_metadata DB cache for real can_be_hq & name
-    if item_ids and conn:
-        cursor = conn.cursor()
-        placeholders = ','.join(['?'] * len(item_ids))
-        cursor.execute(f"SELECT item_id, can_be_hq FROM item_metadata WHERE item_id IN ({placeholders})", list(item_ids))
-        for row in cursor.fetchall():
-            iid = row[0]
-            can_hq_db = bool(row[1])
-            name = items_search.get(str(iid)) or items_search.get(iid) or f"Item {iid}"
-            meta_map[iid] = {"name": name, "can_be_hq": can_hq_db}
-
-    # 3. Fill remaining from items_search dictionary (default can_be_hq=False for safety)
-    for iid in item_ids:
-        if iid not in meta_map:
-            name = items_search.get(str(iid)) or items_search.get(iid) or f"Item {iid}"
-            meta_map[iid] = {"name": name, "can_be_hq": False}
-
-    # 3. Fallback to XIVAPI / Garland for truly unknown items
-    still_missing = [x for x in item_ids if x not in meta_map]
-    for iid in still_missing:
-        try:
-            x_single = f"https://xivapi.com/Item/{iid}?language=ja"
-            xr = requests.get(x_single, headers=headers, timeout=5)
-            if xr.status_code == 200:
-                xdata = xr.json()
-                name = xdata.get("Name_ja")
-                can_hq = bool(xdata.get("CanBeHq", 0))
-                if name:
-                    meta_map[iid] = {"name": clean_name(name), "can_be_hq": can_hq}
-                    continue
-        except Exception:
-            pass
-
-        try:
-            g_url = f"https://www.garlandtools.org/db/doc/item/ja/3/{iid}.json"
-            gr = requests.get(g_url, headers=headers, timeout=5)
-            if gr.status_code == 200:
-                g_data = gr.json()
-                name = g_data.get('item', {}).get('name')
-                if name:
-                    meta_map[iid] = {"name": clean_name(name), "can_be_hq": True}
-        except Exception:
-            pass
-            
-        time.sleep(0.05)
-        
-    return meta_map
-
-def fetch_and_cache_metadata(conn, item_ids):
-    """Fetch item metadata from XIVAPI/Garland, cache in DB, return dict."""
-    if not item_ids:
-        return {}
-        
-    headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
-    cursor = conn.cursor()
-    
-    # Load existing cache
-    cached = {}
-    placeholders = ','.join(['?'] * len(item_ids))
-    cursor.execute(f"SELECT * FROM item_metadata WHERE item_id IN ({placeholders})", list(item_ids))
-    for row in cursor.fetchall():
-        cached[row[0]] = {
-            "icon_url": row[1] or "",
-            "description": row[2] or "",
-            "category": row[3] or "",
-            "item_level": row[4] or 0,
-            "shop_price": row[5] or 0,
-            "buyback_price": row[6] or 0,
-            "stack_size": row[7] or 1,
-            "can_be_hq": bool(row[8]),
-            "rarity": row[9] or 1
-        }
-    
-    missing = [iid for iid in item_ids if iid not in cached]
-    if not missing:
-        print(f"[Metadata] All {len(item_ids)} items cached, no API calls needed.")
-        return cached
-    
-    print(f"[Metadata] {len(cached)} cached, {len(missing)} new items to fetch...")
-    
-    for iid in missing:
-        meta = None
-        
-        # Try XIVAPI first
-        try:
-            url = f"https://xivapi.com/Item/{iid}?language=ja"
-            resp = requests.get(url, headers=headers, timeout=5)
-            if resp.status_code == 200:
-                xdata = resp.json()
-                icon_path = xdata.get("IconHD") or xdata.get("Icon", "")
-                icon_url = f"https://xivapi.com{icon_path}" if icon_path else ""
-                cat_obj = xdata.get("ItemUICategory")
-                category = ""
-                if cat_obj and isinstance(cat_obj, dict):
-                    category = cat_obj.get("Name_ja", "") or cat_obj.get("Name", "") or ""
-                meta = {
-                    "icon_url": icon_url,
-                    "description": (xdata.get("Description_ja") or xdata.get("Description") or "").strip(),
-                    "category": category,
-                    "item_level": xdata.get("LevelItem", 0) or 0,
-                    "shop_price": xdata.get("PriceMid", 0) or 0,
-                    "buyback_price": xdata.get("PriceLow", 0) or 0,
-                    "stack_size": xdata.get("StackSize", 1) or 1,
-                    "can_be_hq": bool(xdata.get("CanBeHq", 0)),
-                    "rarity": xdata.get("Rarity", 1) or 1
-                }
-        except Exception:
-            pass
-        
-        # Fallback to Garland Tools
-        if not meta:
-            try:
-                url = f"https://www.garlandtools.org/db/doc/item/ja/3/{iid}.json"
-                resp = requests.get(url, headers=headers, timeout=5)
-                if resp.status_code == 200:
-                    item_data = resp.json().get("item", {})
-                    icon_id = item_data.get("icon", "")
-                    icon_url = f"https://www.garlandtools.org/files/icons/item/{icon_id}.png" if icon_id else ""
-                    meta = {
-                        "icon_url": icon_url,
-                        "description": (item_data.get("description", "") or "").strip(),
-                        "category": str(item_data.get("category", "") or ""),
-                        "item_level": item_data.get("ilvl", 0) or 0,
-                        "shop_price": item_data.get("price", 0) or 0,
-                        "buyback_price": 0,
-                        "stack_size": item_data.get("stackSize", 1) or 1,
-                        "can_be_hq": bool(item_data.get("hq", 0)),
-                        "rarity": item_data.get("rarity", 1) or 1
-                    }
-            except Exception:
-                pass
-        
-        if meta:
-            cached[iid] = meta
-            now_str = datetime.now(timezone.utc).isoformat()
-            cursor.execute("""
-                INSERT OR REPLACE INTO item_metadata 
-                (item_id, icon_url, description, category, item_level, shop_price, buyback_price, stack_size, can_be_hq, rarity, fetched_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (iid, meta["icon_url"], meta["description"], meta["category"],
-                   meta["item_level"], meta["shop_price"], meta["buyback_price"],
-                   meta["stack_size"], int(meta["can_be_hq"]), meta["rarity"], now_str))
-            print(f"  [Metadata] Cached item ID {iid} (iLvl {meta['item_level']})")
-        else:
-            print(f"  [Metadata] Item ID {iid} -> Failed to fetch")
-        
-        time.sleep(0.05)
-    
-    conn.commit()
-    print(f"[Metadata] Fetched and cached {len(missing)} new items.")
-    return cached
-
-def export_web_json(conn, output_path="docs/data.json"):
-    os.makedirs("docs", exist_ok=True)
-    cursor = conn.cursor()
-    items_search = load_items_search()
-    
-    raw_data_by_scope = {}
-    
-    for scope in JP_DATACENTERS:
-        cursor.execute("""
-        SELECT item_key, item_id, item_name, MAX(daily_sale_velocity) as max_vel
-        FROM market_logs
-        WHERE scope = ? AND world_name != ''
-        GROUP BY item_key
-        HAVING max_vel >= 5.0
-        ORDER BY max_vel DESC
-        """, (scope,))
-        
-        rows = cursor.fetchall()
-        items = []
-        for r in rows:
-            item_key = r[0]
-            item_id = r[1]
-            raw_name = clean_name(r[2])
-            if (raw_name.startswith("Item ") or "Unknown" in raw_name) and str(item_id) in items_search:
-                raw_name = items_search[str(item_id)]
-            elif (raw_name.startswith("Item ") or "Unknown" in raw_name) and item_id in items_search:
-                raw_name = items_search[item_id]
-            raw_name = clean_name(raw_name)
-
-            # Retrieve raw per-world stats for this item & scope
-            w_cursor = conn.cursor()
-            w_cursor.execute("""
-            SELECT ml.world_name, ml.min_price, ml.avg_price, ml.units_for_sale, ml.last_upload_time, ml.daily_sale_velocity, ml.hist_min, ml.hist_max
-            FROM market_logs ml
-            INNER JOIN (
-                SELECT world_name, MAX(id) as max_id
-                FROM market_logs
-                WHERE scope = ? AND item_key = ? AND world_name != ''
-                GROUP BY world_name
-            ) w_latest ON ml.id = w_latest.max_id
-            """, (scope, item_key))
-            w_rows = w_cursor.fetchall()
-            worlds_stats = {}
-            max_world_vel = 0.0
-            dc_min_price = 0
-            dc_total_stock = 0
-
-            for wr in w_rows:
-                w_name = wr[0]
-                w_min = wr[1] or 0
-                w_avg = wr[2] or 0
-                w_stock = wr[3] or 0
-                w_time = wr[4] or ""
-                w_vel = wr[5] or 0.0
-                w_hist_min = wr[6] or w_min
-                w_hist_max = wr[7] or w_min
-
-                if w_vel > max_world_vel:
-                    max_world_vel = w_vel
-                if w_min > 0 and (dc_min_price == 0 or w_min < dc_min_price):
-                    dc_min_price = w_min
-                dc_total_stock += w_stock
-
-                worlds_stats[w_name] = {
-                    "min_price": w_min,
-                    "avg_price": w_avg,
-                    "units_for_sale": w_stock,
-                    "last_upload_time": w_time,
-                    "velocity": w_vel,
-                    "hist_min": w_hist_min,
-                    "hist_max": w_hist_max
-                }
-
-            # Query history points for the past 30 days
-            h_cursor = conn.cursor()
-            h_cursor.execute("""
-            SELECT timestamp, min_price, avg_price, units_for_sale, daily_sale_velocity
-            FROM market_logs
-            WHERE scope = ? AND item_key = ? AND timestamp >= datetime('now', '-30 days')
-            ORDER BY id ASC
-            """, (scope, item_key))
-            h_rows = h_cursor.fetchall()
-            history_points = []
-            for hr in h_rows:
-                history_points.append({
-                    "timestamp": hr[0],
-                    "min_price": hr[1],
-                    "avg_price": hr[2],
-                    "units_for_sale": hr[3],
-                    "velocity": hr[4]
-                })
-
-            item_obj = {
-                "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                "scope": scope,
-                "item_key": item_key,
-                "item_id": item_id,
-                "item_name": raw_name,
-                "velocity": max_world_vel,
-                "min_price": dc_min_price,
-                "avg_price": 0,
-                "hist_min": dc_min_price,
-                "hist_max": dc_min_price,
-                "units_for_sale": dc_total_stock,
-                "last_upload_time": "",
-                "worlds": worlds_stats,
-                "history_points": history_points
-            }
-            items.append(item_obj)
-            
-        raw_data_by_scope[scope] = items
-
-    # Collect all unique item IDs for metadata
-    all_item_ids = set()
-    for scope, items in raw_data_by_scope.items():
-        for item in items:
-            all_item_ids.add(item["item_id"])
-    
-    # Fetch/cache metadata for all items
-    meta_cache = fetch_and_cache_metadata(conn, all_item_ids)
-
-    final_data_by_scope = {}
-    for scope, items in raw_data_by_scope.items():
-        enriched_items = []
-        for item in items:
-            # Attach metadata
-            if item["item_id"] in meta_cache:
-                item["meta"] = meta_cache[item["item_id"]]
-            enriched_items.append(item)
-            
-        final_data_by_scope[scope] = enriched_items
-
-    last_updated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    
-    web_data = {
-        "last_updated": last_updated,
-        "datacenters": JP_DATACENTERS,
-        "dc_worlds": DC_WORLDS,
-        "velocity_threshold": VELOCITY_THRESHOLD,
-        "data": final_data_by_scope
-    }
-    
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(web_data, f, ensure_ascii=False, indent=2)
-        
-    print(f"Exported enriched web JSON to {output_path}")
-    ensure_items_search_json("docs/items_search.json")
-
-def cleanup_old_logs(conn, days=30):
-    """Delete market logs older than `days` days."""
+def cleanup_old_logs(conn, days=7):
+    """Delete sales history older than `days` days."""
     try:
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM market_logs WHERE timestamp < datetime('now', '-' || ? || ' days')", (str(days),))
+        cutoff_ts = int(time.time()) - (days * 86400)
+        cursor.execute("DELETE FROM sales_history WHERE timestamp < ?", (cutoff_ts,))
         deleted_count = cursor.rowcount
         conn.commit()
         if deleted_count > 0:
-            print(f"[Cleanup] Deleted {deleted_count} logs older than {days} days.")
+            print(f"[Cleanup] Deleted {deleted_count} trade logs older than {days} days.")
     except Exception as e:
         print(f"[Cleanup] Error cleaning up old logs: {e}")
 
@@ -430,12 +124,79 @@ def ensure_items_search_json(output_path="docs/items_search.json"):
                 iid = int(r[0])
                 name = r[1].strip()
                 if iid in marketable and name:
-                    items[iid] = name
+                    items[str(iid)] = name
         with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(items, f, ensure_ascii=False)
+            json.dump(items, f, ensure_ascii=False, indent=2)
         print(f"Exported full items search index ({len(items)} items) to {output_path}")
     except Exception as e:
         print(f"Error building items_search.json: {e}")
+
+def load_items_search():
+    ensure_items_search_json("docs/items_search.json")
+    if os.path.exists("docs/items_search.json"):
+        try:
+            with open("docs/items_search.json", "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+def resolve_item_metadata_batch(conn, item_ids):
+    headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
+    meta_map = {}
+    
+    items_search = load_items_search()
+    cursor = conn.cursor()
+
+    missing_ids = []
+    for iid in item_ids:
+        cursor.execute("SELECT item_name, icon_url, category_name FROM items_metadata WHERE item_id = ?", (iid,))
+        row = cursor.fetchone()
+        if row and row[0] and not row[0].startswith("アイテム #") and not "" in row[0] and len(row[0]) < 60 and not row[0].endswith("。") and not row[0].endswith("効"):
+            meta_map[iid] = {"name": row[0], "icon": row[1], "category": row[2]}
+        else:
+            missing_ids.append(iid)
+
+    if not missing_ids:
+        return meta_map
+
+    print(f"Resolving exact item names for {len(missing_ids)} items...")
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    for iid in missing_ids:
+        name = items_search.get(str(iid)) or items_search.get(iid)
+        icon_url = ""
+        category_name = "一般"
+
+        # Garland API fallback for icon and category
+        try:
+            res = requests.get(f"https://www.garlandtools.org/db/doc/item/ja/2/{iid}.json", headers=headers, timeout=5)
+            if res.status_code == 200:
+                res.encoding = 'utf-8'
+                g_data = res.json().get("item", {})
+                if not name:
+                    name = g_data.get("name")
+                icon_code = g_data.get("icon")
+                if icon_code:
+                    code_int = int(icon_code)
+                    folder = f"{code_int:06d}"[:3] + "000"
+                    icon_url = f"https://xivapi.com/i/{folder}/{code_int:06d}.png"
+                category_name = g_data.get("category_name", category_name)
+        except Exception:
+            pass
+
+        if not name:
+            name = f"アイテム #{iid}"
+
+        cursor.execute("""
+        INSERT OR REPLACE INTO items_metadata (item_id, item_name, icon_url, category_name, fetched_at)
+        VALUES (?, ?, ?, ?, ?)
+        """, (iid, name, icon_url, category_name, now_str))
+
+        meta_map[iid] = {"name": name, "icon": icon_url, "category": category_name}
+
+    conn.commit()
+    return meta_map
 
 def fetch_single_world_data(world_name, target_ids):
     headers = {"User-Agent": "FFXIV-Market-Tracker/1.0"}
@@ -445,7 +206,7 @@ def fetch_single_world_data(world_name, target_ids):
     
     def fetch_chunk(chunk):
         ids_str = ",".join(map(str, chunk))
-        detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entriesToReturn=50"
+        detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entriesToReturn=500"
         for attempt in range(2):
             try:
                 d_res = requests.get(detail_url, headers=headers, timeout=10)
@@ -469,25 +230,28 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
     cursor = conn.cursor()
     target_worlds = DC_WORLDS.get(scope_name, [])
 
-    # Step 1: Find high velocity or recently updated items for this DC
+    # Step 1: 200件の直近取引アイテムIDを取得
     recent_url = f"https://universalis.app/api/v2/extra/stats/recently-updated?dcName={scope_name}"
     try:
         res = requests.get(recent_url, headers=headers, timeout=10)
         res.raise_for_status()
-        recent_items = res.json().get('items', [])[:100]
+        recent_items = res.json().get('items', [])[:200]
     except Exception as e:
         print(f"[{scope_name}] Step 1 Error: {e}")
         recent_items = []
 
-    cursor.execute("SELECT item_id FROM items_pool WHERE scope = ? AND is_active = 1", (scope_name,))
-    pooled_item_ids = [row[0] for row in cursor.fetchall()]
-    
-    target_ids = list(set(pooled_item_ids + recent_items))
+    # ① プールシート (items_pool) に追加登録
+    for iid in recent_items:
+        cursor.execute("INSERT OR IGNORE INTO items_pool (item_id, added_at) VALUES (?, ?)", (iid, now_str))
+    conn.commit()
+
+    # ② プールに入っている全アイテムIDを取得
+    cursor.execute("SELECT item_id FROM items_pool")
+    target_ids = [row[0] for row in cursor.fetchall()]
     if not target_ids:
         return
 
-    # Process all worlds in this DC in parallel (8 threads)
-    print(f"  [Parallel] Fetching {len(target_worlds)} worlds concurrently ({len(target_ids)} items per world)...")
+    print(f"  [Parallel] Fetching {len(target_worlds)} worlds concurrently ({len(target_ids)} pooled items)...")
     world_results = {}
     with ThreadPoolExecutor(max_workers=len(target_worlds)) as executor:
         futures = [executor.submit(fetch_single_world_data, w, target_ids) for w in target_worlds]
@@ -495,94 +259,155 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str):
             w_name, w_items = future.result()
             world_results[w_name] = w_items
 
-    # Bulk resolve metadata for all item IDs found in this DC
-    all_dc_item_ids = set()
-    for w_name, w_items in world_results.items():
-        all_dc_item_ids.update([int(k) for k in w_items.keys()])
-    
-    name_map = resolve_item_metadata_batch(conn, list(all_dc_item_ids))
+    # メタデータ一括解決
+    resolve_item_metadata_batch(conn, target_ids)
 
-    # Process and insert DB records per world
+    # 各ワールド・各アイテムのデータ書き込み
     for world_name in target_worlds:
         world_items_data = world_results.get(world_name, {})
         if not world_items_data:
             continue
 
-        high_velocity_count = 0
+        dc_name = WORLD_TO_DC.get(world_name, scope_name)
 
         for item_id_str, data in world_items_data.items():
             item_id = int(item_id_str)
-            item_meta = name_map.get(item_id, {"name": f"Unknown ({item_id})", "can_be_hq": False})
-            pure_name = item_meta["name"]
-            
-            last_upload_ms = data.get("lastUploadTime")
-            last_upload_str = ""
-            if last_upload_ms:
-                last_upload_dt = datetime.fromtimestamp(last_upload_ms / 1000, tz=timezone.utc)
-                last_upload_str = last_upload_dt.strftime("%Y-%m-%d %H:%M:%S")
 
-            listings = data.get("listings", [])
-            w_stock = sum(l.get("quantity", 0) for l in listings) if listings else data.get("unitsForSale", 0)
+            # 1) 取引履歴シート (sales_history) への追記 (INSERT OR IGNORE)
+            recent_history = data.get("recentHistory", [])
+            for h in recent_history:
+                ts = h.get("timestamp", 0)
+                price = h.get("pricePerUnit", 0)
+                qty = h.get("quantity", 0)
+                hq = 1 if h.get("hq") else 0
+                buyer = h.get("buyerName", "")
+                if ts > 0 and price > 0:
+                    cursor.execute("""
+                    INSERT OR IGNORE INTO sales_history (item_id, world_name, timestamp, price_per_unit, quantity, hq, buyer_name)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                    """, (item_id, world_name, ts, price, qty, hq, buyer))
 
-            history = data.get("recentHistory", [])
-            prices = [h.get("pricePerUnit", 0) for h in history if h.get("pricePerUnit", 0) > 0]
-            
-            if prices:
-                h_min = min(prices)
-                h_max = max(prices)
-                h_avg = round(sum(prices) / len(prices), 1)
-            else:
-                h_min = data.get("minPrice", 0)
-                h_max = data.get("maxPrice", h_min)
-                h_avg = round(data.get("averagePrice", h_min), 1)
-
-            if h_avg < h_min: h_avg = float(h_min)
-            if h_avg > h_max: h_avg = float(h_max)
-
-            # 自前で正確な売買速度(velocity)を計算: 直近取引履歴の全合計個数 ÷ 経過日数
-            total_qty_sold = sum(h.get("quantity", 1) for h in history)
-            w_vel = float(data.get("dailySaleVelocity") or data.get("regularSaleVelocity") or 0.0)
-            
-            if len(history) >= 2:
-                timestamps = [h.get("timestamp", 0) for h in history if h.get("timestamp", 0) > 0]
-                if len(timestamps) >= 2:
-                    newest_ts = max(timestamps)
-                    oldest_ts = min(timestamps)
-                    diff_seconds = newest_ts - oldest_ts
-                    if diff_seconds > 60: # 1分以上の経過時間がある場合
-                        days = diff_seconds / 86400.0
-                        w_vel = round(total_qty_sold / days, 1)
-
-            min_price = data.get("minPrice", 0)
-            item_key = str(item_id)
-
-            if w_vel >= 10.0:  # Per-world threshold
-                high_velocity_count += 1
-                cursor.execute("""
-                INSERT INTO items_pool (scope, item_key, item_id, item_name, quality, added_at, last_velocity, is_active)
-                VALUES (?, ?, ?, ?, 'NONE', ?, ?, 1)
-                ON CONFLICT(scope, item_key) DO UPDATE SET
-                    item_name = excluded.item_name,
-                    quality = 'NONE',
-                    last_velocity = excluded.last_velocity,
-                    is_active = 1
-                """, (scope_name, item_key, item_id, pure_name, now_str, w_vel))
-
-            # Insert raw per-world log into market_logs (including hist_min, hist_max)
+            # 2) 最新統計情報シート (item_market_stats) への保存 (INSERT OR REPLACE)
             cursor.execute("""
-            INSERT INTO market_logs (
-                timestamp, scope, world_name, item_key, item_id, item_name, quality,
-                daily_sale_velocity, min_price, avg_price, hist_min, hist_max,
-                units_for_sale, listings_count, last_upload_time
-            ) VALUES (?, ?, ?, ?, ?, ?, 'NONE', ?, ?, ?, ?, ?, ?, 0, ?)
+            INSERT OR REPLACE INTO item_market_stats (
+                item_id, world_name, dc_name, updated_at,
+                min_price, min_price_nq, min_price_hq,
+                avg_price, avg_price_nq, avg_price_hq,
+                current_avg_price, current_avg_price_nq, current_avg_price_hq,
+                max_price, max_price_nq, max_price_hq,
+                units_for_sale, listings_count, units_sold, recent_history_count,
+                sale_velocity, sale_velocity_nq, sale_velocity_hq
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
-                now_str, scope_name, world_name, item_key, item_id, pure_name,
-                w_vel, min_price, h_avg, h_min, h_max, w_stock, last_upload_str
+                item_id, world_name, dc_name, now_str,
+                data.get("minPrice", 0), data.get("minPriceNQ", 0), data.get("minPriceHQ", 0),
+                data.get("averagePrice", 0.0), data.get("averagePriceNQ", 0.0), data.get("averagePriceHQ", 0.0),
+                data.get("currentAveragePrice", 0.0), data.get("currentAveragePriceNQ", 0.0), data.get("currentAveragePriceHQ", 0.0),
+                data.get("maxPrice", 0), data.get("maxPriceNQ", 0), data.get("maxPriceHQ", 0),
+                data.get("unitsForSale", 0), data.get("listingsCount", 0),
+                data.get("unitsSold", 0), data.get("recentHistoryCount", 0),
+                data.get("regularSaleVelocity", 0.0), data.get("nqSaleVelocity", 0.0), data.get("hqSaleVelocity", 0.0)
             ))
 
-        print(f"  [{world_name}] Raw World Processed -> Items: {len(world_items_data)} (Active >=10/day: {high_velocity_count})")
+        print(f"  [{world_name}] Processed -> Items: {len(world_items_data)}")
 
-import sys
+    conn.commit()
+
+def export_web_json(conn, output_path="docs/data.json"):
+    cursor = conn.cursor()
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    # メタデータマップの作成
+    cursor.execute("SELECT item_id, item_name, icon_url, category_name FROM items_metadata")
+    meta_map = {row[0]: {"name": row[1], "icon": row[2], "category": row[3]} for row in cursor.fetchall()}
+
+    # 過去7日間の取引履歴集計マップ (取引データから MIN, MAX, AVG, 7日合計/7.0)
+    cutoff_ts = int(time.time()) - (7 * 86400)
+    cursor.execute("""
+    SELECT item_id, world_name,
+           MIN(price_per_unit) as h_min,
+           MAX(price_per_unit) as h_max,
+           AVG(price_per_unit) as h_avg,
+           SUM(quantity) as total_qty
+    FROM sales_history
+    WHERE timestamp >= ?
+    GROUP BY item_id, world_name
+    """, (cutoff_ts,))
+
+    history_stats_map = {}
+    for row in cursor.fetchall():
+        iid, wname, h_min, h_max, h_avg, total_qty = row
+        history_stats_map[(iid, wname)] = {
+            "min_price": h_min or 0,
+            "max_price": h_max or 0,
+            "avg_price": round(h_avg or 0, 1),
+            "sale_velocity": round((total_qty or 0) / 7.0, 1)  # 合算 / 7.0日
+        }
+
+    # 最新統計データ（在庫数等）の読み込み
+    cursor.execute("SELECT item_id, world_name, dc_name, min_price, avg_price, max_price, units_for_sale, sale_velocity FROM item_market_stats")
+    
+    final_data_by_world = {}
+
+    for row in cursor.fetchall():
+        iid, wname, dc_name, stats_min, stats_avg, stats_max, units_for_sale, stats_vel = row
+
+        item_meta = meta_map.get(iid, {"name": f"アイテム #{iid}", "icon": "", "category": "一般"})
+        hist_stats = history_stats_map.get((iid, wname), None)
+
+        # 取引データ(sales_history)からの計算値を最優先、なければ統計データ値を採用
+        if hist_stats:
+            c_min = hist_stats["min_price"]
+            c_avg = hist_stats["avg_price"]
+            c_max = hist_stats["max_price"]
+            c_vel = hist_stats["sale_velocity"]
+        else:
+            c_min = stats_min
+            c_avg = round(stats_avg, 1)
+            c_max = stats_max
+            c_vel = round(stats_vel, 1)
+
+        card_item = {
+            "item_id": iid,
+            "item_name": item_meta["name"],
+            "icon_url": item_meta["icon"],
+            "category_name": item_meta["category"],
+            "world_name": wname,
+            "dc_name": dc_name,
+            "min_price": c_min,
+            "avg_price": c_avg,
+            "max_price": c_max,
+            "units_for_sale": units_for_sale or 0,
+            "sale_velocity": c_vel
+        }
+
+        if wname not in final_data_by_world:
+            final_data_by_world[wname] = []
+        final_data_by_world[wname].append(card_item)
+
+    web_data = {
+        "last_updated": now_str,
+        "datacenters": JP_DATACENTERS,
+        "dc_worlds": DC_WORLDS,
+        "data": final_data_by_world
+    }
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(web_data, f, ensure_ascii=False, indent=2)
+
+    print(f"Exported streamlined web JSON to {output_path}")
+
+    web_data = {
+        "last_updated": now_str,
+        "datacenters": JP_DATACENTERS,
+        "dc_worlds": DC_WORLDS,
+        "data": final_data_by_world
+    }
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(web_data, f, ensure_ascii=False, indent=2)
+
+    print(f"Exported enriched web JSON to {output_path}")
 
 def fetch_and_save_all(target_dc=None):
     db_path = "data/market_data.db"
@@ -593,16 +418,18 @@ def fetch_and_save_all(target_dc=None):
 
     for scope in dcs:
         print(f"--- Processing DC & All Worlds Direct: {scope} (Parallel) ---")
-        process_dc_pipeline(scope, conn, now_str)
+        try:
+            process_dc_pipeline(scope, conn, now_str)
+            export_web_json(conn, "docs/data.json")
+        except Exception as e:
+            print(f"[{scope}] Error in pipeline: {e}")
 
-    cleanup_old_logs(conn, 30)
+    cleanup_old_logs(conn, 7)
     conn.commit()
     export_web_json(conn, "docs/data.json")
-    conn.close()
-    print(f"Pipeline completed for DCs: {dcs}!")
 
 if __name__ == "__main__":
     target_dc = None
-    if len(sys.argv) > 2 and sys.argv[1] in ["--dc", "-dc"]:
-        target_dc = sys.argv[2]
+    if len(sys.argv) > 1 and sys.argv[1] == "--dc":
+        target_dc = sys.argv[2] if len(sys.argv) > 2 else "Mana"
     fetch_and_save_all(target_dc)

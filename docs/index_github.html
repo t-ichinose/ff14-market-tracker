@@ -1,0 +1,1196 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <title>FF14 Market Analytics - Enriched Pro Dashboard</title>
+  <!-- Google Fonts & Icons & Chart.js -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --card-bg: rgba(22, 30, 49, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-blue: #00d2ff;
+      --accent-purple: #7928ca;
+      --accent-gold: #ffb703;
+      --accent-green: #4ade80;
+      --accent-red: #f87171;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --badge-hq-bg: rgba(239, 68, 68, 0.15);
+      --badge-hq-border: rgba(239, 68, 68, 0.4);
+      --badge-hq-text: #f87171;
+      --badge-nq-bg: rgba(59, 130, 246, 0.15);
+      --badge-nq-border: rgba(59, 130, 246, 0.4);
+      --badge-nq-text: #60a5fa;
+    }
+
+    /* Modal & Chart Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-card {
+      background: rgba(22, 30, 49, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      width: 92%;
+      max-width: 850px;
+      padding: 1.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      transform: translateY(20px);
+      transition: transform 0.25s ease;
+    }
+    .modal-overlay.active .modal-card {
+      transform: translateY(0);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+    .modal-title-box {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+    }
+    .chart-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(121, 40, 202, 0.2);
+      border: 1px solid rgba(121, 40, 202, 0.4);
+      color: #c084fc;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 0.6rem;
+      width: 100%;
+      justify-content: center;
+    }
+    .chart-btn:hover {
+      background: rgba(121, 40, 202, 0.45);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(121, 40, 202, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(121, 40, 202, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 210, 255, 0.12) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 1.5rem 1rem;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: white;
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-badges {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0, 210, 255, 0.1);
+      border: 1px solid rgba(0, 210, 255, 0.2);
+      color: var(--accent-blue);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .search-modal-btn {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(121, 40, 202, 0.25));
+      border: 1px solid var(--accent-blue);
+      color: #ffffff;
+      padding: 0.4rem 0.95rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+    }
+
+    .search-modal-btn:hover {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-blue);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-blue);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    .search-box {
+      position: relative;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.7rem 1rem 0.7rem 2.8rem;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-blue);
+    }
+
+    .dc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .dc-column {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 180px);
+      min-height: 600px;
+    }
+
+    .dc-column-header {
+      padding: 0.75rem 1.25rem;
+      background: rgba(15, 23, 42, 0.8);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+
+    .dc-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dc-count-badge {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--accent-blue);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+    }
+
+    .sort-toggle-group {
+      display: flex;
+      gap: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+
+    .sort-toggle-btn {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      border: none;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .sort-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .sort-toggle-btn.active {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .dc-item-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .dc-item-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .dc-item-list::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .dc-item-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+    }
+
+    .dc-item-list::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-blue);
+    }
+
+    /* Enhanced Item Card */
+    .item-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.85rem;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .item-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 210, 255, 0.3);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.3);
+      flex-shrink: 0;
+      image-rendering: pixelated;
+    }
+
+    .lodestone-link-icon {
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      margin-left: 0.35rem;
+      transition: color 0.15s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .lodestone-link-icon:hover {
+      color: var(--accent-blue);
+    }
+
+    .item-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .item-header-text {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .rank-tag {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--accent-gold);
+    }
+
+    .item-card-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #ffffff;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .quality-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .quality-hq {
+      background: var(--badge-hq-bg);
+      border: 1px solid var(--badge-hq-border);
+      color: var(--badge-hq-text);
+    }
+
+    .quality-nq {
+      background: var(--badge-nq-bg);
+      border: 1px solid var(--badge-nq-border);
+      color: var(--badge-nq-text);
+    }
+
+    .item-stats-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+    }
+    .stat-vel {
+      color: #4ade80;
+    }
+    .stat-rev {
+      color: #ffb703;
+    }
+
+    .item-sub-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.45rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      font-size: 0.78rem;
+    }
+
+    .stat-sub-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+    }
+    .stat-sub-item.stat-min {
+      color: #38bdf8;
+    }
+    .stat-sub-item.stat-min strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .stat-sub-item.stat-avg {
+      color: #c084fc;
+    }
+    .stat-sub-item.stat-avg strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .history-range-row {
+      font-size: 0.73rem;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      padding: 0.3rem 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .history-range-row i {
+      color: var(--accent-blue);
+      font-size: 0.7rem;
+    }
+
+
+
+
+
+    /* Mobile DC Switcher Tabs (hidden on desktop) */
+    .mobile-dc-tabs {
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.85rem;
+      overflow-x: auto;
+      padding-bottom: 0.2rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .mobile-dc-tab-btn {
+      flex: 1;
+      min-width: 60px;
+      padding: 0.35rem 0.45rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.72rem;
+      font-family: 'Outfit', sans-serif;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+    }
+    .mobile-dc-tab-btn i {
+      font-size: 0.68rem;
+    }
+    .mobile-dc-tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.25), rgba(121, 40, 202, 0.25));
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+    }
+    .mobile-search-btn {
+      padding: 0.35rem 0.65rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .mobile-search-btn:hover, .mobile-search-btn.active {
+      background: rgba(0, 210, 255, 0.25);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
+    @media (max-width: 1400px) {
+      .dc-grid { grid-template-columns: repeat(2, 1fr); }
+      .dc-column { height: 550px; }
+    }
+
+    @media (max-width: 900px) {
+      .modal-result-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .search-box {
+        display: none !important;
+        margin-bottom: 0.85rem;
+      }
+      .search-box.active {
+        display: block !important;
+        animation: fadeIn 0.2s ease;
+      }
+      .mobile-dc-tabs {
+        display: flex;
+      }
+      .dc-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.75rem;
+        padding-bottom: 0.5rem;
+        scrollbar-width: none;
+      }
+      .dc-grid::-webkit-scrollbar {
+        display: none;
+      }
+      .dc-column {
+        flex: 0 0 100%;
+        width: 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        height: calc(100vh - 230px);
+        min-height: 520px;
+      }
+      h1 { font-size: 1.3rem; }
+    }
+
+    @media (max-width: 550px) {
+      .modal-result-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="brand-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+        <div>
+          <h1>FF14 Market Board Analytics</h1>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-box" id="searchBox">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="searchInput" class="search-input" placeholder="蜈ｨDC讓ｪ譁ｭ繧｢繧､繝・Β讀懃ｴ｢ (蜷榊燕縺ｾ縺溘・ID)...">
+    </div>
+
+    <div class="mobile-dc-tabs" id="mobileDcTabs">
+      <button class="mobile-dc-tab-btn active" data-target="column-Mana" onclick="scrollToDc('Mana')">
+        <i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> Mana
+      </button>
+      <button class="mobile-dc-tab-btn" data-target="column-Elemental" onclick="scrollToDc('Elemental')">
+        <i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental
+      </button>
+      <button class="mobile-dc-tab-btn" data-target="column-Gaia" onclick="scrollToDc('Gaia')">
+        <i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia
+      </button>
+      <button class="mobile-dc-tab-btn" data-target="column-Meteor" onclick="scrollToDc('Meteor')">
+        <i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor
+      </button>
+      <button class="mobile-search-btn" id="searchToggleBtn" onclick="toggleSearchBox()" title="讀懃ｴ｢">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+
+    <div class="dc-grid" id="dcGrid">
+
+      <div class="dc-column" id="column-Mana">
+        <div class="dc-column-header">
+          <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> Mana</div>
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <div class="sort-toggle-group">
+              <button class="sort-toggle-btn active" data-dc="Mana" data-sort="velocity" onclick="setSort('Mana','velocity')">螢ｲ雋ｷ</button>
+              <button class="sort-toggle-btn" data-dc="Mana" data-sort="revenue" onclick="setSort('Mana','revenue')">豬・・/button>
+              <button class="sort-toggle-btn" data-dc="Mana" data-sort="avg_price" onclick="setSort('Mana','avg_price')">蟷ｳ蝮・/button>
+            </div>
+            <span class="dc-count-badge" id="count-Mana">0莉ｶ</span>
+          </div>
+        </div>
+        <div class="dc-item-list" id="list-Mana">
+          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...</div>
+        </div>
+      </div>
+
+      <div class="dc-column" id="column-Elemental">
+        <div class="dc-column-header">
+          <div class="dc-name"><i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental</div>
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <div class="sort-toggle-group">
+              <button class="sort-toggle-btn active" data-dc="Elemental" data-sort="velocity" onclick="setSort('Elemental','velocity')">螢ｲ雋ｷ</button>
+              <button class="sort-toggle-btn" data-dc="Elemental" data-sort="revenue" onclick="setSort('Elemental','revenue')">豬・・/button>
+              <button class="sort-toggle-btn" data-dc="Elemental" data-sort="avg_price" onclick="setSort('Elemental','avg_price')">蟷ｳ蝮・/button>
+            </div>
+            <span class="dc-count-badge" id="count-Elemental">0莉ｶ</span>
+          </div>
+        </div>
+        <div class="dc-item-list" id="list-Elemental">
+          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...</div>
+        </div>
+      </div>
+
+      <div class="dc-column" id="column-Gaia">
+        <div class="dc-column-header">
+          <div class="dc-name"><i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia</div>
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <div class="sort-toggle-group">
+              <button class="sort-toggle-btn active" data-dc="Gaia" data-sort="velocity" onclick="setSort('Gaia','velocity')">螢ｲ雋ｷ</button>
+              <button class="sort-toggle-btn" data-dc="Gaia" data-sort="revenue" onclick="setSort('Gaia','revenue')">豬・・/button>
+              <button class="sort-toggle-btn" data-dc="Gaia" data-sort="avg_price" onclick="setSort('Gaia','avg_price')">蟷ｳ蝮・/button>
+            </div>
+            <span class="dc-count-badge" id="count-Gaia">0莉ｶ</span>
+          </div>
+        </div>
+        <div class="dc-item-list" id="list-Gaia">
+          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...</div>
+        </div>
+      </div>
+
+      <div class="dc-column" id="column-Meteor">
+        <div class="dc-column-header">
+          <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor</div>
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <div class="sort-toggle-group">
+              <button class="sort-toggle-btn active" data-dc="Meteor" data-sort="velocity" onclick="setSort('Meteor','velocity')">螢ｲ雋ｷ</button>
+              <button class="sort-toggle-btn" data-dc="Meteor" data-sort="revenue" onclick="setSort('Meteor','revenue')">豬・・/button>
+              <button class="sort-toggle-btn" data-dc="Meteor" data-sort="avg_price" onclick="setSort('Meteor','avg_price')">蟷ｳ蝮・/button>
+            </div>
+            <span class="dc-count-badge" id="count-Meteor">0莉ｶ</span>
+          </div>
+        </div>
+        <div class="dc-item-list" id="list-Meteor">
+          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Chart Modal -->
+  <div class="modal-overlay" id="chartModal" onclick="closeChartModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <img id="modalItemIcon" src="" style="width:36px;height:36px;border-radius:6px;display:none;" />
+          <div>
+            <h2 id="modalItemTitle" style="font-size:1.2rem;font-weight:700;color:#fff;">萓｡譬ｼ繝ｻ蝨ｨ蠎ｫ謗ｨ遘ｻ</h2>
+            <div id="modalItemSub" style="font-size:0.8rem;color:var(--text-muted);">繝・・繧ｿ繧ｻ繝ｳ繧ｿ繝ｼ: Mana</div>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeChartModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="chart-container">
+        <canvas id="priceChartCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DATACENTERS = ["Mana", "Elemental", "Gaia", "Meteor"];
+    let allDcData = {};
+    const sortMode = { Mana: 'velocity', Elemental: 'velocity', Gaia: 'velocity', Meteor: 'velocity' };
+    let priceChart = null;
+
+    function scrollToDc(dc) {
+      const col = document.getElementById(`column-${dc}`);
+      const grid = document.getElementById('dcGrid');
+      if (col && grid) {
+        document.querySelectorAll('.mobile-dc-tab-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.target === `column-${dc}`);
+        });
+        col.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      }
+    }
+
+    function initMobileSwipeObserver() {
+      const grid = document.getElementById('dcGrid');
+      if (!grid || typeof IntersectionObserver === 'undefined') return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            const id = entry.target.id;
+            document.querySelectorAll('.mobile-dc-tab-btn').forEach(btn => {
+              btn.classList.toggle('active', btn.dataset.target === id);
+            });
+          }
+        });
+      }, {
+        root: grid,
+        threshold: 0.5
+      });
+
+      DATACENTERS.forEach(dc => {
+        const col = document.getElementById(`column-${dc}`);
+        if (col) observer.observe(col);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initMobileSwipeObserver);
+
+    function setSort(dc, mode) {
+      sortMode[dc] = mode;
+      // Update toggle button styles
+      document.querySelectorAll(`.sort-toggle-btn[data-dc="${dc}"]`).forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.sort === mode);
+      });
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+      renderAllColumns(searchTerm);
+    }
+
+    function toggleSearchBox() {
+      const box = document.getElementById('searchBox');
+      const btn = document.getElementById('searchToggleBtn');
+      const input = document.getElementById('searchInput');
+      if (!box) return;
+      const isActive = box.classList.toggle('active');
+      if (btn) btn.classList.toggle('active', isActive);
+      if (isActive && input) {
+        input.focus();
+      }
+    }
+
+    function formatTimeJST(rawTimeStr) {
+      if (!rawTimeStr) return '-';
+      let str = String(rawTimeStr).trim();
+      if (!str.endsWith('Z') && !str.includes('+')) {
+        str = str.replace(' ', 'T') + 'Z';
+      }
+      const d = new Date(str);
+      if (isNaN(d.getTime())) return rawTimeStr;
+      
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const hours = String(d.getHours()).padStart(2, '0');
+      const minutes = String(d.getMinutes()).padStart(2, '0');
+      return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }
+
+    function formatChartLabelJST(rawTimeStr) {
+      if (!rawTimeStr) return '';
+      let str = String(rawTimeStr).trim();
+      if (!str.endsWith('Z') && !str.includes('+')) {
+        str = str.replace(' ', 'T') + 'Z';
+      }
+      const d = new Date(str);
+      if (isNaN(d.getTime())) return rawTimeStr.replace(/^\d{4}-/, '');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const hours = String(d.getHours()).padStart(2, '0');
+      const minutes = String(d.getMinutes()).padStart(2, '0');
+      return `${month}-${day} ${hours}:${minutes}`;
+    }
+
+    async function loadData() {
+      try {
+        const cacheBuster = `t=${Date.now()}_${Math.random()}`;
+        const res = await fetch(`data.json?${cacheBuster}`, { 
+          cache: "no-store"
+        });
+        if (!res.ok) throw new Error('Data fetch failed');
+        const data = await res.json();
+
+        const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
+        if (lastUpdatedEl) {
+          const formattedLastUpdated = formatTimeJST(data.last_updated);
+          lastUpdatedEl.innerHTML = `<span class="status-dot"></span> 譛邨よ峩譁ｰ: ${formattedLastUpdated}`;
+        }
+
+        allDcData = data.data || {};
+        renderAllColumns();
+        setTimeout(initMobileSwipeObserver, 200);
+
+      } catch (err) {
+        console.error("loadData error:", err);
+        DATACENTERS.forEach(dc => {
+          document.getElementById(`list-${dc}`).innerHTML = `
+            <div style="text-align:center; padding:2rem; color:#ef4444;">
+              <i class="fa-solid fa-triangle-exclamation"></i> 繝・・繧ｿ蜿門ｾ励お繝ｩ繝ｼ
+            </div>
+          `;
+        });
+      }
+    }
+
+    function renderAllColumns(searchTerm = "") {
+      DATACENTERS.forEach(dc => {
+        try {
+          const rawItems = allDcData[dc] || [];
+          
+          let items = rawItems;
+          if (searchTerm) {
+            items = rawItems.filter(item => 
+              item.item_name.toLowerCase().includes(searchTerm) ||
+              item.item_id.toString().includes(searchTerm)
+            );
+          }
+
+          // 驥崎､・勁螟・(1繧｢繧､繝・Β1繧ｫ繝ｼ繝峨↓邨ｱ荳)
+          const seenIds = new Set();
+          const uniqueItems = [];
+          
+          for (const item of items) {
+            if (!seenIds.has(item.item_id)) {
+              seenIds.add(item.item_id);
+              uniqueItems.push(item);
+            }
+          }
+
+          document.getElementById(`count-${dc}`).innerText = `${uniqueItems.length}莉ｶ`;
+          const listEl = document.getElementById(`list-${dc}`);
+
+          if (uniqueItems.length === 0) {
+            listEl.innerHTML = `
+              <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.85rem;">
+                鬮伜屓霆｢繧｢繧､繝・Β譛ｪ讀懃衍
+              </div>
+            `;
+            return;
+          }
+
+          // Sort by current mode
+          const mode = sortMode[dc] || 'velocity';
+          if (mode === 'revenue') {
+            uniqueItems.sort((a, b) => {
+              const revA = (Number(a.avg_price) || 0) * (Number(a.velocity) || 0);
+              const revB = (Number(b.avg_price) || 0) * (Number(b.velocity) || 0);
+              return revB - revA;
+            });
+          } else if (mode === 'avg_price') {
+            uniqueItems.sort((a, b) => (Number(b.avg_price) || 0) - (Number(a.avg_price) || 0));
+          } else {
+            uniqueItems.sort((a, b) => (Number(b.velocity) || 0) - (Number(a.velocity) || 0));
+          }
+
+          listEl.innerHTML = uniqueItems.map((item, idx) => {
+            let displayTitle = item.item_name || `Item ${item.item_id}`;
+            if ((displayTitle.includes("Unknown") || displayTitle.startsWith("Item ")) && allItemSearchDict[item.item_id]) {
+              displayTitle = allItemSearchDict[item.item_id];
+            }
+
+            let cleanTitle = escapeHtml(displayTitle).replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
+
+            const minPriceVal = (item.min_price !== undefined && item.min_price !== null) ? Math.round(Number(item.min_price)) : null;
+            const minPriceStr = (minPriceVal !== null) ? `${minPriceVal.toLocaleString()}G` : '-';
+
+            const avgPriceVal = (item.avg_price !== undefined && item.avg_price !== null) ? Math.round(Number(item.avg_price)) : null;
+            const avgPriceStr = (avgPriceVal !== null) ? `${avgPriceVal.toLocaleString()}G` : '-';
+
+            const hMin = (item.hist_min !== undefined && item.hist_min !== null) ? Math.round(Number(item.hist_min)) : (minPriceVal || 0);
+            const hMax = (item.hist_max !== undefined && item.hist_max !== null) ? Math.round(Number(item.hist_max)) : hMin;
+
+            let historyText = "";
+            if (hMin === hMax) {
+              historyText = `驕主悉蜿門ｼ・ ${hMin.toLocaleString()}G/蛟・(蝗ｺ螳壻ｾ｡譬ｼ蟶ｯ)`;
+            } else {
+              historyText = `驕主悉蜿門ｼ・ 譛螳・${hMin.toLocaleString()}G 縲・譛鬮・${hMax.toLocaleString()}G`;
+            }
+
+            const vel = (item.velocity !== undefined && item.velocity !== null) ? Number(item.velocity) : 0;
+            const velStr = Math.round(vel).toLocaleString();
+            const dailyRevenue = Math.round((avgPriceVal || 0) * vel);
+            const dailyRevenueStr = dailyRevenue.toLocaleString() + 'G';
+
+            // Item icon
+            const meta = item.meta || {};
+            const iconUrl = meta.icon_url || '';
+            const iconImg = iconUrl ? `<img class="item-icon" src="${iconUrl}" alt="" loading="lazy" onerror="this.style.display='none'">` : '';
+
+            const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
+
+            return `
+              <div class="item-card">
+                <div class="item-card-header">
+                  ${iconImg}
+                  <div class="item-header-text">
+                    <span class="rank-tag">#${idx + 1}</span>
+                    <span class="item-card-title">
+                      ${cleanTitle}
+                      <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" title="Lodestone縺ｧ讀懃ｴ｢">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+                
+                <div class="item-stats-row">
+                  <span class="stat-badge stat-vel"><i class="fa-solid fa-bolt"></i> 螢ｲ雋ｷ謨ｰ: ${velStr}蛟・譌･</span>
+                  <span class="stat-badge stat-rev"><i class="fa-solid fa-coins"></i> 豬・壹ぐ繝ｫ: ${dailyRevenueStr}/譌･</span>
+                </div>
+
+                <div class="item-sub-grid">
+                  <span class="stat-sub-item stat-min"><i class="fa-solid fa-tag"></i> 譛螳牙腰萓｡: <strong>${minPriceStr}/蛟・/strong></span>
+                  <span class="stat-sub-item stat-avg"><i class="fa-solid fa-scale-balanced"></i> 蟷ｳ蝮・腰萓｡: <strong>${avgPriceStr}/蛟・/strong></span>
+                </div>
+
+                <div class="history-range-row">
+                  <i class="fa-solid fa-clock-rotate-left"></i> ${historyText}
+                </div>
+
+                <button class="chart-btn" onclick="openChartModal('${dc}', ${item.item_id})">
+                  <i class="fa-solid fa-chart-line"></i> 嶋 謗ｨ遘ｻ繧ｰ繝ｩ繝・                </button>
+              </div>
+            `;
+          }).join('');
+        } catch (colErr) {
+          console.error(`Error rendering column ${dc}:`, colErr);
+        }
+      });
+    }
+
+    function openChartModal(dc, itemId) {
+      const items = allDcData[dc] || [];
+      const item = items.find(i => i.item_id === itemId || i.item_id === Number(itemId));
+      if (!item) return;
+
+      const history = item.history_points || [];
+      const modal = document.getElementById('chartModal');
+      const modalTitle = document.getElementById('modalItemTitle');
+      const modalSub = document.getElementById('modalItemSub');
+      const modalIcon = document.getElementById('modalItemIcon');
+
+      let displayTitle = item.item_name || `Item ${item.item_id}`;
+      if (allItemSearchDict[item.item_id]) {
+        displayTitle = allItemSearchDict[item.item_id];
+      }
+      modalTitle.innerText = displayTitle.replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
+      modalSub.innerText = `${dc} 繝・・繧ｿ繧ｻ繝ｳ繧ｿ繝ｼ | 逶ｴ霑代・謗ｨ遘ｻ (繝・・繧ｿ螻･豁ｴ: ${history.length}莉ｶ)`;
+
+      const meta = item.meta || {};
+      if (meta.icon_url) {
+        modalIcon.src = meta.icon_url;
+        modalIcon.style.display = 'block';
+      } else {
+        modalIcon.style.display = 'none';
+      }
+
+      modal.classList.add('active');
+
+      const labels = history.map(h => formatChartLabelJST(h.timestamp));
+      const avgPrices = history.map(h => h.avg_price);
+      const minPrices = history.map(h => h.min_price);
+      const stockUnits = history.map(h => h.units_for_sale);
+
+      const ctx = document.getElementById('priceChartCanvas').getContext('2d');
+      if (priceChart) {
+        priceChart.destroy();
+      }
+
+      priceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels.length > 0 ? labels : [formatChartLabelJST(item.timestamp) || '迴ｾ蝨ｨ'],
+          datasets: [
+            {
+              label: '蟷ｳ蝮・ｾ｡譬ｼ (G)',
+              data: avgPrices.length > 0 ? avgPrices : [item.avg_price],
+              borderColor: '#a855f7',
+              backgroundColor: 'rgba(168, 85, 247, 0.15)',
+              fill: true,
+              tension: 0.3,
+              yAxisID: 'yPrice'
+            },
+            {
+              label: '蜃ｺ蜩∵怙螳牙､ (G)',
+              data: minPrices.length > 0 ? minPrices : [item.min_price],
+              borderColor: '#4ade80',
+              backgroundColor: 'transparent',
+              borderDash: [4, 4],
+              tension: 0.3,
+              yAxisID: 'yPrice'
+            },
+            {
+              label: '蜃ｺ蜩∝惠蠎ｫ謨ｰ (蛟・',
+              data: stockUnits.length > 0 ? stockUnits : [item.units_for_sale],
+              borderColor: '#ffb703',
+              backgroundColor: 'transparent',
+              tension: 0.3,
+              yAxisID: 'yStock'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          plugins: {
+            legend: {
+              labels: { color: '#94a3b8', font: { family: 'Inter' } }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(15, 23, 42, 0.95)',
+              titleColor: '#f8fafc',
+              bodyColor: '#cbd5e1',
+              borderColor: 'rgba(255, 255, 255, 0.15)',
+              borderWidth: 1,
+              padding: 10
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8' }
+            },
+            yPrice: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              title: { display: true, text: '萓｡譬ｼ (Gil)', color: '#a855f7' },
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8' }
+            },
+            yStock: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: { display: true, text: '蝨ｨ蠎ｫ謨ｰ (蛟・', color: '#ffb703' },
+              grid: { drawOnChartArea: false },
+              ticks: { color: '#ffb703' }
+            }
+          }
+        }
+      });
+    }
+
+    function closeChartModal(e) {
+      if (!e || e.target.id === 'chartModal' || e.target.closest('.modal-close-btn')) {
+        document.getElementById('chartModal').classList.remove('active');
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function(m) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[m];
+      });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      renderAllColumns(term);
+    });
+
+    setInterval(loadData, 60000);
+    loadData();
+
+    // Load full 16,843 marketable items index for instant Japanese search
+    let allItemSearchDict = {};
+    async function loadItemSearchDict() {
+      try {
+        const res = await fetch('items_search.json');
+        if (res.ok) {
+          allItemSearchDict = await res.json();
+        }
+      } catch (e) {
+        console.warn("Could not load items_search.json:", e);
+      }
+    }
+    loadItemSearchDict();
+
+    </script>
+</body>
+</html>
