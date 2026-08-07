@@ -150,13 +150,20 @@ def resolve_item_metadata_batch(conn, item_ids):
     meta_map = {}
     
     items_search = load_items_search()
+    icons_map = {}
+    if os.path.exists("docs/icons_map.json"):
+        try:
+            with open("docs/icons_map.json", "r", encoding="utf-8") as f:
+                icons_map = json.load(f)
+        except Exception:
+            pass
     cursor = conn.cursor()
 
     missing_ids = []
     for iid in item_ids:
         cursor.execute("SELECT item_name, icon_url, category_name FROM items_metadata WHERE item_id = ?", (iid,))
         row = cursor.fetchone()
-        if row and row[0] and not row[0].startswith("アイテム #") and len(row[0]) < 60:
+        if row and row[0] and not row[0].startswith("アイテム #") and len(row[0]) < 60 and row[1] and "021001_hr1" not in row[1]:
             meta_map[iid] = {"name": row[0], "icon": row[1], "category": row[2]}
         else:
             missing_ids.append(iid)
@@ -169,7 +176,7 @@ def resolve_item_metadata_batch(conn, item_ids):
 
     for iid in missing_ids:
         name = items_search.get(str(iid)) or items_search.get(iid) or f"アイテム #{iid}"
-        icon_url = ""
+        icon_url = icons_map.get(str(iid)) or icons_map.get(iid) or ""
         category_name = "一般"
 
         # Garland API fallback for icon and category
@@ -384,9 +391,12 @@ def export_web_json(conn=None, output_path="docs/data.json"):
         if not item_name or item_name.startswith("アイテム #"):
             item_name = items_search.get(str(iid)) or items_search.get(iid) or f"アイテム #{iid}"
         
+        mapped_icon = icons_map.get(str(iid)) or icons_map.get(iid)
         icon_url = meta.get("icon", "")
-        if not icon_url or "000000.png" in icon_url:
-            icon_url = icons_map.get(str(iid)) or icons_map.get(iid) or "https://beta.xivapi.com/api/1/asset/ui/icon/020000/021001_hr1.tex?format=png"
+        if mapped_icon:
+            icon_url = mapped_icon
+        elif not icon_url or "000000.png" in icon_url or "021001_hr1" in icon_url:
+            icon_url = "https://beta.xivapi.com/api/1/asset/ui/icon/020000/021001_hr1.tex?format=png"
         category_name = meta.get("category", "一般")
 
         real_vel = velocity_calc.get((iid, wname), round(vel or 0, 1))
