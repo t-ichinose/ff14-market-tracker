@@ -1,21 +1,5 @@
-# Database files
-data/
-*.db
-*.db-shm
-*.db-wal
-
-# Python
 __pycache__/
 *.pyc
-
-# Temp / Local check files
-check.txt
-check_data/
-check_names.txt
-compare*.py
-export_full_raw.py
-fetch_live_history.py
-rebuild_metadata.py
-vel_debug.py
-vel_debug.txt
-velocity_*.txt
+*.log
+.tempmediaStorage/
+scratch/

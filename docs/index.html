@@ -1028,8 +1028,6 @@
         const worldItems = (allData[worldName] || []).filter(item => {
           if (excludeCrystals && isCrystalItem(item)) return false;
           if (searchTerm && !item.item_name.toLowerCase().includes(searchTerm) && !String(item.item_id).includes(searchTerm)) return false;
-          // 日当たり売買数(sale_velocity)が 50 以上のアイテムのみを対象とする
-          if ((item.sale_velocity || 0) < 50) return false;
           return true;
         });
 
@@ -1065,8 +1063,12 @@
           // 日商（流通ギル = 平均単価 × 日当売買数）
           const dailyRevenue = Math.round((item.avg_price || 0) * (item.sale_velocity || 0)).toLocaleString();
 
-          const iconUrl = item.icon_url || `https://xivapi.com/i/000000/000000.png`;
-          const iconImg = `<img class="item-icon" src="${iconUrl}" alt="" onerror="this.src='https://xivapi.com/i/000000/000000.png'">`;
+          const iidNum = parseInt(item.item_id, 10) || 0;
+          const iidStr = iidNum.toString().padStart(6, '0');
+          const iidFolder = iidStr.substring(0, 3) + '000';
+          const directIconUrl = `https://xivapi.com/i/${iidFolder}/${iidStr}.png`;
+          const iconUrl = item.icon_url && !item.icon_url.endsWith('000000.png') ? item.icon_url : directIconUrl;
+          const iconImg = `<img class="item-icon" src="${iconUrl}" alt="" onerror="this.onerror=null; this.src='${directIconUrl}';">`;
 
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
 
