@@ -414,7 +414,9 @@ def export_web_json(conn=None, output_path="docs/data.json"):
 
     final_data_by_world = {}
     for wname, items in data_by_world.items():
-        sorted_items = sorted(items, key=lambda x: x["daily_revenue"], reverse=True)[:30]
+        # 売買数が10個未満のアイテムを除外（RMT・資金移動等のノイズ排除）
+        filtered_items = [x for x in items if x["sale_velocity"] >= 10]
+        sorted_items = sorted(filtered_items, key=lambda x: x["daily_revenue"], reverse=True)[:30]
         final_data_by_world[wname] = sorted_items
 
     web_data = {
