@@ -434,7 +434,7 @@ def export_web_json(conn=None, output_path="docs/data.json"):
         final_max = hist_max if hist_max else max_p
 
         daily_revenue = round(final_avg * real_vel)
-        sale_trades = round(hist_count / 7.0, 1) if hist_count > 0 else 0.0
+        sale_trades = int(hist_count)
 
         item_obj = {
             "item_id": iid,
