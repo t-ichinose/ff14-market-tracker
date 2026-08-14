@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-14T23:44:13Z",
+  "last_updated": "2026-08-14T23:46:21Z",
   "datacenters": [
     "Elemental",
     "Gaia",
@@ -98,7 +98,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 44,
@@ -113,7 +113,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 42,
@@ -128,7 +128,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 37,
@@ -158,7 +158,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 42,
         "avg_price": 48,
@@ -188,7 +188,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 26,
         "avg_price": 39,
@@ -203,7 +203,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 34,
         "avg_price": 41,
@@ -218,7 +218,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 34,
         "avg_price": 39,
@@ -248,7 +248,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 34,
         "avg_price": 41,
@@ -278,7 +278,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 18,
         "avg_price": 24,
@@ -293,7 +293,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 53,
@@ -308,7 +308,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 14,
         "avg_price": 28,
@@ -338,7 +338,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 31,
         "avg_price": 37,
@@ -2350,7 +2350,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 47,
@@ -2365,7 +2365,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 43,
@@ -2380,7 +2380,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 47,
@@ -2410,7 +2410,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 46,
         "avg_price": 48,
@@ -2440,7 +2440,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 44,
@@ -2455,7 +2455,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 45,
@@ -2470,7 +2470,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 31,
@@ -2500,7 +2500,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 48,
@@ -2530,7 +2530,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 24,
         "avg_price": 26,
@@ -2545,7 +2545,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 59,
         "avg_price": 63,
@@ -2560,7 +2560,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 44,
         "avg_price": 47,
@@ -2590,7 +2590,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 31,
         "avg_price": 44,
@@ -4632,7 +4632,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 42,
@@ -4647,7 +4647,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 44,
@@ -4662,7 +4662,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 32,
         "avg_price": 44,
@@ -4692,7 +4692,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 44,
@@ -4722,7 +4722,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 42,
@@ -4737,7 +4737,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 41,
@@ -4752,7 +4752,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 38,
@@ -4782,7 +4782,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 45,
@@ -4812,7 +4812,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 33,
         "avg_price": 38,
@@ -4827,7 +4827,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 45,
         "avg_price": 56,
@@ -4842,7 +4842,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 46,
@@ -4872,7 +4872,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 33,
         "avg_price": 38,
@@ -6944,7 +6944,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 43,
@@ -6959,7 +6959,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 49,
@@ -6974,7 +6974,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 18,
         "avg_price": 25,
@@ -7004,7 +7004,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 43,
@@ -7034,7 +7034,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 43,
@@ -7049,7 +7049,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 42,
@@ -7064,7 +7064,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 25,
         "avg_price": 36,
@@ -7094,7 +7094,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 41,
@@ -7124,7 +7124,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 14,
         "avg_price": 20,
@@ -7139,7 +7139,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 52,
@@ -7154,7 +7154,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 17,
         "avg_price": 22,
@@ -7184,7 +7184,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 34,
@@ -9196,7 +9196,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 42,
@@ -9211,7 +9211,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 52,
         "avg_price": 53,
@@ -9226,7 +9226,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 40,
@@ -9256,7 +9256,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 50,
@@ -9286,7 +9286,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 40,
@@ -9301,7 +9301,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 41,
@@ -9316,7 +9316,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 43,
@@ -9346,7 +9346,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 42,
@@ -9376,7 +9376,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 77,
         "avg_price": 77,
@@ -9391,7 +9391,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 46,
@@ -9406,7 +9406,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 55,
         "avg_price": 70,
@@ -9436,7 +9436,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 54,
         "avg_price": 64,
@@ -11403,7 +11403,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 42,
@@ -11418,7 +11418,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 46,
@@ -11433,7 +11433,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 24,
         "avg_price": 30,
@@ -11463,7 +11463,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 46,
@@ -11493,7 +11493,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 45,
@@ -11508,7 +11508,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 45,
@@ -11523,7 +11523,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 32,
         "avg_price": 41,
@@ -11553,7 +11553,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 42,
@@ -11583,7 +11583,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 28,
         "avg_price": 28,
@@ -11598,7 +11598,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 49,
@@ -11613,7 +11613,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 38,
@@ -11643,7 +11643,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 31,
@@ -13700,7 +13700,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 41,
@@ -13715,7 +13715,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 33,
         "avg_price": 44,
@@ -13730,7 +13730,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 44,
         "avg_price": 44,
@@ -13745,7 +13745,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 46,
@@ -13775,7 +13775,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 39,
@@ -13790,7 +13790,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 43,
@@ -13805,7 +13805,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 37,
@@ -13835,7 +13835,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 45,
@@ -13865,7 +13865,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 39,
@@ -13880,7 +13880,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 58,
         "avg_price": 66,
@@ -13895,7 +13895,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 68,
         "avg_price": 72,
@@ -13925,7 +13925,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 18,
         "avg_price": 26,
@@ -15907,7 +15907,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 41,
@@ -15922,7 +15922,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 44,
@@ -15937,7 +15937,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 40,
@@ -15967,7 +15967,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 46,
@@ -15997,7 +15997,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 41,
@@ -16012,7 +16012,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 48,
@@ -16027,7 +16027,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 48,
@@ -16057,7 +16057,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 47,
@@ -16087,7 +16087,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 24,
@@ -16102,7 +16102,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 62,
@@ -16117,7 +16117,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 58,
         "avg_price": 63,
@@ -16147,7 +16147,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 26,
         "avg_price": 49,
@@ -17542,7 +17542,7 @@
       {
         "item_id": 49256,
         "item_name": "コートリーラヴァー・インデックス",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/037000/037000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/037000/037856_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 638921,
         "avg_price": 642000,
@@ -17872,7 +17872,7 @@
       {
         "item_id": 51964,
         "item_name": "カーウェン・タイツ",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/057000/057000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/057000/057475_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 249969,
         "avg_price": 349999,
@@ -18144,7 +18144,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 48,
         "avg_price": 51,
@@ -18159,7 +18159,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 45,
         "avg_price": 52,
@@ -18174,7 +18174,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 34,
         "avg_price": 37,
@@ -18204,7 +18204,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 46,
@@ -18234,7 +18234,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 55,
@@ -18249,7 +18249,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 22,
         "avg_price": 55,
@@ -18264,7 +18264,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 50,
@@ -18294,7 +18294,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 34,
         "avg_price": 45,
@@ -18324,7 +18324,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 42,
@@ -18339,7 +18339,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 15,
         "avg_price": 64,
@@ -18354,7 +18354,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 15,
         "avg_price": 54,
@@ -18384,7 +18384,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 22,
         "avg_price": 63,
@@ -20366,7 +20366,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 44,
@@ -20381,7 +20381,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 50,
@@ -20396,7 +20396,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 38,
@@ -20426,7 +20426,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 44,
         "avg_price": 49,
@@ -20456,7 +20456,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 34,
         "avg_price": 48,
@@ -20471,7 +20471,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 45,
         "avg_price": 49,
@@ -20486,7 +20486,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 45,
@@ -20516,7 +20516,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 45,
@@ -20546,7 +20546,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 45,
@@ -20561,7 +20561,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 50,
         "avg_price": 61,
@@ -20576,7 +20576,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 58,
         "avg_price": 82,
@@ -20606,7 +20606,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 50,
         "avg_price": 60,
@@ -22618,7 +22618,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 43,
@@ -22633,7 +22633,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 50,
@@ -22648,7 +22648,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 46,
@@ -22678,7 +22678,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 44,
@@ -22708,7 +22708,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 42,
         "avg_price": 47,
@@ -22723,7 +22723,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 47,
         "avg_price": 51,
@@ -22738,7 +22738,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 37,
@@ -22768,7 +22768,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 42,
@@ -22798,7 +22798,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 25,
         "avg_price": 35,
@@ -22813,7 +22813,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 31,
@@ -22828,7 +22828,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 12,
         "avg_price": 20,
@@ -22858,7 +22858,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 34,
         "avg_price": 46,
@@ -24885,7 +24885,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 54,
@@ -24900,7 +24900,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 48,
@@ -24915,7 +24915,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 42,
@@ -24945,7 +24945,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 60,
         "avg_price": 79,
@@ -24975,7 +24975,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 59,
@@ -24990,7 +24990,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 59,
         "avg_price": 70,
@@ -25005,7 +25005,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 41,
@@ -25035,7 +25035,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 45,
@@ -25065,7 +25065,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 28,
@@ -25080,7 +25080,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 48,
         "avg_price": 49,
@@ -25095,7 +25095,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 22,
         "avg_price": 41,
@@ -25125,7 +25125,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 46,
         "avg_price": 60,
@@ -26880,7 +26880,7 @@
       {
         "item_id": 51964,
         "item_name": "カーウェン・タイツ",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/057000/057000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/057000/057475_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 340000,
         "avg_price": 367450,
@@ -27137,7 +27137,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 45,
         "avg_price": 49,
@@ -27152,7 +27152,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 44,
@@ -27167,7 +27167,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 40,
@@ -27197,7 +27197,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 43,
         "avg_price": 47,
@@ -27227,7 +27227,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 15,
         "avg_price": 43,
@@ -27242,7 +27242,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 15,
         "avg_price": 48,
@@ -27257,7 +27257,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 19,
         "avg_price": 34,
@@ -27287,7 +27287,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 53,
@@ -27317,7 +27317,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 38,
@@ -27332,7 +27332,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 16,
         "avg_price": 24,
@@ -27347,7 +27347,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 69,
         "avg_price": 71,
@@ -27377,7 +27377,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 40,
@@ -29374,7 +29374,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 45,
         "avg_price": 46,
@@ -29389,7 +29389,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 48,
         "avg_price": 51,
@@ -29404,7 +29404,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 45,
         "avg_price": 48,
@@ -29434,7 +29434,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 48,
@@ -29449,7 +29449,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 52,
@@ -29464,7 +29464,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 36,
@@ -29494,7 +29494,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 34,
         "avg_price": 42,
@@ -29524,7 +29524,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 15,
         "avg_price": 24,
@@ -29539,7 +29539,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 15,
         "avg_price": 31,
@@ -29554,7 +29554,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 23,
         "avg_price": 35,
@@ -29584,7 +29584,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 50,
         "avg_price": 54,
@@ -31611,7 +31611,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 48,
@@ -31641,7 +31641,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 47,
         "avg_price": 49,
@@ -31671,7 +31671,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 3,
         "avg_price": 47,
@@ -31686,7 +31686,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 3,
         "avg_price": 46,
@@ -31701,7 +31701,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 40,
@@ -31731,7 +31731,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 41,
@@ -31761,7 +31761,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 31,
         "avg_price": 36,
@@ -31776,7 +31776,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 19,
         "avg_price": 30,
@@ -31791,7 +31791,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 60,
         "avg_price": 66,
@@ -31821,7 +31821,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 28,
         "avg_price": 36,
@@ -33711,7 +33711,7 @@
       {
         "item_id": 52268,
         "item_name": "コスモ・プレデター認証鍵",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/026000/026000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/026000/026014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 350000,
         "avg_price": 406167,
@@ -33908,7 +33908,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 47,
         "avg_price": 48,
@@ -33923,7 +33923,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 44,
         "avg_price": 45,
@@ -33953,7 +33953,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 46,
         "avg_price": 58,
@@ -33968,7 +33968,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 49,
@@ -33983,7 +33983,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 25,
         "avg_price": 39,
@@ -34013,7 +34013,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 46,
@@ -34043,7 +34043,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 35,
@@ -34058,7 +34058,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 23,
         "avg_price": 41,
@@ -34073,7 +34073,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 24,
@@ -34103,7 +34103,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 50,
         "avg_price": 76,
@@ -36115,7 +36115,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 47,
@@ -36130,7 +36130,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 48,
@@ -36145,7 +36145,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 32,
@@ -36175,7 +36175,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 44,
         "avg_price": 50,
@@ -36205,7 +36205,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 49,
@@ -36220,7 +36220,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 43,
         "avg_price": 51,
@@ -36235,7 +36235,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 26,
         "avg_price": 32,
@@ -36265,7 +36265,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 28,
         "avg_price": 39,
@@ -36295,7 +36295,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 11,
         "avg_price": 17,
@@ -36310,7 +36310,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 24,
         "avg_price": 34,
@@ -36325,7 +36325,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 18,
         "avg_price": 34,
@@ -36355,7 +36355,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 50,
         "avg_price": 62,
@@ -38367,7 +38367,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 45,
         "avg_price": 48,
@@ -38382,7 +38382,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 45,
@@ -38397,7 +38397,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 44,
@@ -38427,7 +38427,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 49,
@@ -38457,7 +38457,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 53,
@@ -38472,7 +38472,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 47,
@@ -38487,7 +38487,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 37,
@@ -38517,7 +38517,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 40,
@@ -38547,7 +38547,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 5,
         "avg_price": 10,
@@ -38562,7 +38562,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 50,
@@ -38577,7 +38577,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 47,
@@ -38607,7 +38607,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 49,
         "avg_price": 95,
@@ -40107,7 +40107,7 @@
       {
         "item_id": 49266,
         "item_name": "コートリーラヴァー・ウォーサイズ",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/037000/037000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/037000/037293_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 284995,
         "avg_price": 323561,
@@ -40649,7 +40649,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 44,
@@ -40664,7 +40664,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 42,
@@ -40679,7 +40679,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 33,
         "avg_price": 37,
@@ -40709,7 +40709,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 43,
         "avg_price": 47,
@@ -40739,7 +40739,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 44,
         "avg_price": 51,
@@ -40754,7 +40754,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 48,
         "avg_price": 56,
@@ -40769,7 +40769,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 45,
         "avg_price": 53,
@@ -40799,7 +40799,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 42,
@@ -40829,7 +40829,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 18,
         "avg_price": 22,
@@ -40844,7 +40844,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 56,
         "avg_price": 59,
@@ -40859,7 +40859,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 43,
         "avg_price": 52,
@@ -40889,7 +40889,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 70,
         "avg_price": 79,
@@ -42976,7 +42976,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 43,
         "avg_price": 46,
@@ -42991,7 +42991,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 45,
@@ -43006,7 +43006,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 44,
@@ -43036,7 +43036,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 42,
         "avg_price": 46,
@@ -43066,7 +43066,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 48,
@@ -43081,7 +43081,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 44,
         "avg_price": 49,
@@ -43096,7 +43096,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 46,
@@ -43126,7 +43126,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 31,
         "avg_price": 41,
@@ -43156,7 +43156,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 5,
         "avg_price": 13,
@@ -43171,7 +43171,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 45,
@@ -43186,7 +43186,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 48,
@@ -43216,7 +43216,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 61,
         "avg_price": 76,
@@ -44791,7 +44791,7 @@
       {
         "item_id": 49256,
         "item_name": "コートリーラヴァー・インデックス",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/037000/037000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/037000/037856_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 120780,
         "avg_price": 323294,
@@ -45273,7 +45273,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 46,
@@ -45288,7 +45288,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 28,
         "avg_price": 39,
@@ -45303,7 +45303,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 32,
         "avg_price": 34,
@@ -45333,7 +45333,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 43,
         "avg_price": 45,
@@ -45363,7 +45363,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 50,
@@ -45378,7 +45378,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 47,
@@ -45393,7 +45393,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 51,
@@ -45423,7 +45423,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 37,
@@ -45453,7 +45453,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 11,
         "avg_price": 16,
@@ -45468,7 +45468,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 55,
         "avg_price": 60,
@@ -45483,7 +45483,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 49,
         "avg_price": 54,
@@ -45513,7 +45513,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 82,
         "avg_price": 90,
@@ -47540,7 +47540,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 44,
@@ -47555,7 +47555,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 33,
         "avg_price": 42,
@@ -47570,7 +47570,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 19,
         "avg_price": 26,
@@ -47600,7 +47600,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 44,
@@ -47630,7 +47630,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 47,
         "avg_price": 48,
@@ -47645,7 +47645,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 42,
         "avg_price": 47,
@@ -47660,7 +47660,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 48,
@@ -47690,7 +47690,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 38,
@@ -47720,7 +47720,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 35,
@@ -47735,7 +47735,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 40,
@@ -47750,7 +47750,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 54,
@@ -47780,7 +47780,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 57,
         "avg_price": 60,
@@ -49762,7 +49762,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 43,
@@ -49777,7 +49777,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 45,
@@ -49792,7 +49792,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 32,
         "avg_price": 43,
@@ -49822,7 +49822,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 44,
@@ -49852,7 +49852,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 48,
@@ -49867,7 +49867,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 42,
@@ -49882,7 +49882,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 49,
@@ -49912,7 +49912,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 34,
         "avg_price": 40,
@@ -49942,7 +49942,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 11,
         "avg_price": 26,
@@ -49957,7 +49957,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 9,
         "avg_price": 62,
@@ -49972,7 +49972,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 10,
         "avg_price": 47,
@@ -50002,7 +50002,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 89,
         "avg_price": 115,
@@ -51984,7 +51984,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 47,
@@ -51999,7 +51999,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 49,
@@ -52014,7 +52014,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 39,
@@ -52044,7 +52044,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 48,
@@ -52074,7 +52074,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 47,
@@ -52089,7 +52089,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 73,
@@ -52104,7 +52104,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 51,
@@ -52134,7 +52134,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 40,
@@ -52164,7 +52164,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 49,
         "avg_price": 51,
@@ -52179,7 +52179,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 67,
         "avg_price": 72,
@@ -52194,7 +52194,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 46,
         "avg_price": 51,
@@ -52224,7 +52224,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 50,
         "avg_price": 55,
@@ -53679,7 +53679,7 @@
       {
         "item_id": 49256,
         "item_name": "コートリーラヴァー・インデックス",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/037000/037000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/037000/037856_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 365000,
         "avg_price": 389875,
@@ -54084,7 +54084,7 @@
       {
         "item_id": 52268,
         "item_name": "コスモ・プレデター認証鍵",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/026000/026000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/026000/026014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 900000,
         "avg_price": 973160,
@@ -54266,7 +54266,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 41,
@@ -54281,7 +54281,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 45,
         "avg_price": 45,
@@ -54311,7 +54311,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 48,
@@ -54341,7 +54341,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 42,
@@ -54356,7 +54356,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 33,
         "avg_price": 48,
@@ -54371,7 +54371,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 42,
         "avg_price": 50,
@@ -54401,7 +54401,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 39,
@@ -54431,7 +54431,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 28,
         "avg_price": 32,
@@ -54446,7 +54446,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 50,
         "avg_price": 82,
@@ -54461,7 +54461,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 55,
         "avg_price": 62,
@@ -54491,7 +54491,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 56,
@@ -56396,7 +56396,7 @@
       {
         "item_id": 52268,
         "item_name": "コスモ・プレデター認証鍵",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/026000/026000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/026000/026014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 89990,
         "avg_price": 374663,
@@ -56563,7 +56563,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 48,
@@ -56578,7 +56578,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 47,
@@ -56593,7 +56593,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 25,
         "avg_price": 35,
@@ -56623,7 +56623,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 45,
@@ -56653,7 +56653,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 45,
@@ -56668,7 +56668,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 52,
@@ -56683,7 +56683,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 46,
@@ -56713,7 +56713,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 46,
@@ -56743,7 +56743,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 45,
@@ -56758,7 +56758,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 61,
@@ -56773,7 +56773,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 50,
@@ -56803,7 +56803,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 52,
@@ -58815,7 +58815,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 41,
@@ -58830,7 +58830,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 31,
         "avg_price": 39,
@@ -58845,7 +58845,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 19,
         "avg_price": 29,
@@ -58875,7 +58875,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 33,
         "avg_price": 42,
@@ -58905,7 +58905,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 53,
@@ -58920,7 +58920,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 42,
@@ -58935,7 +58935,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 21,
         "avg_price": 36,
@@ -58965,7 +58965,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 32,
         "avg_price": 43,
@@ -58995,7 +58995,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 41,
@@ -59010,7 +59010,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 46,
@@ -59025,7 +59025,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 9,
         "avg_price": 23,
@@ -59055,7 +59055,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 10,
         "avg_price": 22,
@@ -61127,7 +61127,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 52,
@@ -61142,7 +61142,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 53,
@@ -61157,7 +61157,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 39,
@@ -61187,7 +61187,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 50,
@@ -61217,7 +61217,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 44,
         "avg_price": 50,
@@ -61232,7 +61232,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 43,
         "avg_price": 53,
@@ -61247,7 +61247,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 50,
@@ -61277,7 +61277,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 37,
@@ -61307,7 +61307,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 11,
         "avg_price": 34,
@@ -61322,7 +61322,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 46,
@@ -61337,7 +61337,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 15,
         "avg_price": 30,
@@ -61367,7 +61367,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 31,
         "avg_price": 62,
@@ -61517,7 +61517,7 @@
       {
         "item_id": 8552,
         "item_name": "ウェーブサマーパレオ",
-        "icon_url": "https://xivapi.com/i/020000/021001_hr1.png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/048000/048987_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 10000,
         "avg_price": 200875,
@@ -63379,7 +63379,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 42,
@@ -63394,7 +63394,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 41,
@@ -63409,7 +63409,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 45,
@@ -63439,7 +63439,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 38,
         "avg_price": 42,
@@ -63454,7 +63454,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 37,
         "avg_price": 55,
@@ -63469,7 +63469,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 43,
@@ -63499,7 +63499,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 31,
         "avg_price": 40,
@@ -63529,7 +63529,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 26,
         "avg_price": 36,
@@ -63544,7 +63544,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 48,
@@ -63559,7 +63559,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 15,
         "avg_price": 40,
@@ -63589,7 +63589,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 69,
@@ -65329,7 +65329,7 @@
       {
         "item_id": 51964,
         "item_name": "カーウェン・タイツ",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/057000/057000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/057000/057475_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 390000,
         "avg_price": 566667,
@@ -65646,7 +65646,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 1,
         "avg_price": 46,
@@ -65661,7 +65661,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 10,
         "avg_price": 43,
@@ -65676,7 +65676,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 10,
         "avg_price": 31,
@@ -65706,7 +65706,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 10,
         "avg_price": 43,
@@ -65736,7 +65736,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 73,
@@ -65751,7 +65751,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 58,
@@ -65766,7 +65766,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 50,
@@ -65796,7 +65796,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 42,
@@ -65826,7 +65826,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 28,
@@ -65841,7 +65841,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 50,
         "avg_price": 73,
@@ -65856,7 +65856,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 43,
@@ -65886,7 +65886,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 44,
@@ -67913,7 +67913,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 44,
         "avg_price": 46,
@@ -67928,7 +67928,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 31,
         "avg_price": 40,
@@ -67943,7 +67943,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 35,
@@ -67973,7 +67973,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41,
         "avg_price": 47,
@@ -68003,7 +68003,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 44,
@@ -68018,7 +68018,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 29,
         "avg_price": 39,
@@ -68033,7 +68033,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 28,
         "avg_price": 44,
@@ -68063,7 +68063,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 28,
         "avg_price": 44,
@@ -68093,7 +68093,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 27,
         "avg_price": 33,
@@ -68108,7 +68108,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 27,
         "avg_price": 50,
@@ -68123,7 +68123,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 10,
         "avg_price": 29,
@@ -68153,7 +68153,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 45,
@@ -69338,7 +69338,7 @@
       {
         "item_id": 47928,
         "item_name": "バウンサーズ・ホルスタースラックス",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/057000/057000_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/057000/057766_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 41000,
         "avg_price": 450008,
@@ -70210,7 +70210,7 @@
       {
         "item_id": 3,
         "item_name": "アイスシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 43,
@@ -70225,7 +70225,7 @@
       {
         "item_id": 4,
         "item_name": "ウィンドシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020003_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 36,
         "avg_price": 41,
@@ -70240,7 +70240,7 @@
       {
         "item_id": 5,
         "item_name": "アースシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020004_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 28,
         "avg_price": 36,
@@ -70270,7 +70270,7 @@
       {
         "item_id": 7,
         "item_name": "ウォーターシャード",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020006_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020002_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 39,
         "avg_price": 50,
@@ -70300,7 +70300,7 @@
       {
         "item_id": 9,
         "item_name": "アイスクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 35,
         "avg_price": 45,
@@ -70315,7 +70315,7 @@
       {
         "item_id": 10,
         "item_name": "ウィンドクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020009_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 40,
         "avg_price": 49,
@@ -70330,7 +70330,7 @@
       {
         "item_id": 11,
         "item_name": "アースクリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020010_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 25,
         "avg_price": 43,
@@ -70360,7 +70360,7 @@
       {
         "item_id": 13,
         "item_name": "ウォータークリスタル",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020012_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020008_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 39,
@@ -70390,7 +70390,7 @@
       {
         "item_id": 15,
         "item_name": "アイスクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 20,
         "avg_price": 26,
@@ -70405,7 +70405,7 @@
       {
         "item_id": 16,
         "item_name": "ウィンドクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020015_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 30,
         "avg_price": 45,
@@ -70420,7 +70420,7 @@
       {
         "item_id": 17,
         "item_name": "アースクラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020016_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 31,
         "avg_price": 48,
@@ -70450,7 +70450,7 @@
       {
         "item_id": 19,
         "item_name": "ウォータークラスター",
-        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020018_hr1.tex&format=png",
+        "icon_url": "https://v2.xivapi.com/api/asset?path=ui/icon/020000/020014_hr1.tex&format=png",
         "category_name": "一般",
         "min_price": 47,
         "avg_price": 74,
