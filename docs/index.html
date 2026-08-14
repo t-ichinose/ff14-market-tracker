@@ -1078,14 +1078,16 @@
           // 日商（流通ギル = 平均単価 × 日当売買数）
           const dailyRevenue = Math.round((item.avg_price || 0) * (item.sale_velocity || 0)).toLocaleString();
 
-          // アイコンURL変換・フォールバック
+          // 2段階フォールバック処理: _hr1高画質(404) -> 通常画質 -> 安全共通アイコン
           let rawIcon = item.icon_url || '';
           if (rawIcon.includes('beta.xivapi.com/api/1/asset/ui/icon/')) {
             rawIcon = rawIcon.replace('https://beta.xivapi.com/api/1/asset/ui/icon/', 'https://xivapi.com/i/').replace('.tex?format=png', '.png');
           }
-          const iconUrl = rawIcon || 'https://xivapi.com/i/020000/021001_hr1.png';
-          const fallbackUrl = 'https://xivapi.com/i/020000/021001_hr1.png';
-          const iconImg = `<img class="item-icon" src="${iconUrl}" alt="" onerror="this.onerror=null; this.src='${fallbackUrl}';">`;
+          const primaryIcon = rawIcon || 'https://xivapi.com/i/020000/021001.png';
+          const secondaryIcon = primaryIcon.replace('_hr1.png', '.png');
+          const finalFallback = 'https://xivapi.com/i/020000/021001.png';
+          
+          const iconImg = `<img class="item-icon" src="${primaryIcon}" alt="" onerror="if (this.src.includes('_hr1.png')) { this.src='${secondaryIcon}'; } else { this.onerror=null; this.src='${finalFallback}'; }">`;
 
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
 
