@@ -376,12 +376,28 @@ def export_web_json(conn=None, output_path="docs/data.json"):
     """)
     velocity_calc = {(row[0], row[1]): round(row[2] / 7.0, 1) for row in cursor.fetchall()}
 
-    cursor.execute("""
-    SELECT item_id, world_name, MIN(price_per_unit), AVG(price_per_unit), MAX(price_per_unit)
-    FROM sales_history
-    GROUP BY item_id, world_name
-    """)
-    sales_stats = {(row[0], row[1]): (row[2], round(row[3] or 0), row[4]) for row in cursor.fetchall()}
+    # トリム平均 (Trimmed Mean): 上下10%の異常値・外れ値をカットして真の平均単価を算出
+    cursor.execute("SELECT item_id, world_name, price_per_unit FROM sales_history")
+    sales_raw = {}
+    for row in cursor.fetchall():
+        sales_raw.setdefault((row[0], row[1]), []).append(row[2])
+
+    sales_stats = {}
+    for key, prices in sales_raw.items():
+        min_p = min(prices)
+        max_p = max(prices)
+        
+        # 5件以上あれば上下10%をカットしたトリム平均、少なければ中央値(メディアン)
+        if len(prices) >= 5:
+            sp = sorted(prices)
+            cut = max(1, int(len(sp) * 0.10))
+            trimmed = sp[cut: len(sp) - cut] if (len(sp) - 2 * cut) > 0 else sp
+            avg_p = round(sum(trimmed) / float(len(trimmed)))
+        else:
+            sp = sorted(prices)
+            avg_p = sp[len(sp) // 2]
+            
+        sales_stats[key] = (min_p, avg_p, max_p)
 
     cursor.execute("""
     SELECT item_id, world_name, dc_name, min_price, avg_price, max_price, units_for_sale, listings_count, sale_velocity, updated_at
