@@ -243,6 +243,12 @@ def process_dc_pipeline(scope_name: str, now_str: str = None):
         recent_items = []
 
     # ① プールシート (items_pool) に追加登録 (全DC共通・重複排除ルール)
+    # 取引履歴 (sales_history) およびクリスタル類 (ID: 2-19) も全自動でプールへ確実に同期
+    cursor.execute("INSERT OR IGNORE INTO items_pool (item_id, added_at) SELECT DISTINCT item_id, ? FROM sales_history", (now_str,))
+    crystal_batch = [(cid, now_str) for cid in range(2, 20)]
+    cursor.executemany("INSERT OR IGNORE INTO items_pool (item_id, added_at) VALUES (?, ?)", crystal_batch)
+    conn.commit()
+
     if recent_items:
         cursor.execute("SELECT item_id FROM items_pool")
         existing_ids = set(row[0] for row in cursor.fetchall())
@@ -430,10 +436,18 @@ def export_web_json(conn=None, output_path="docs/data.json"):
 
     final_data_by_world = {}
     for wname, items in data_by_world.items():
-        # 売買数が10個未満のアイテムを除外（RMT・資金移動等のノイズ排除）
-        filtered_items = [x for x in items if x["sale_velocity"] >= 10]
-        sorted_items = sorted(filtered_items, key=lambda x: x["daily_revenue"], reverse=True)[:30]
-        final_data_by_world[wname] = sorted_items
+        # 売買数が10個未満のアイテムを除外（ノイズ排除）、ただしクリスタル類(ID 2-19)は無条件に保持
+        filtered_items = [x for x in items if x["sale_velocity"] >= 10 or (2 <= x["item_id"] <= 19)]
+        
+        # 売買数順および流通ギル順の両方の観点から上位100件をJSONに保持（フロントエンドでの自由な切替・ソートに対応）
+        top_by_revenue = set(x["item_id"] for x in sorted(filtered_items, key=lambda x: x["daily_revenue"], reverse=True)[:60])
+        top_by_velocity = set(x["item_id"] for x in sorted(filtered_items, key=lambda x: x["sale_velocity"], reverse=True)[:60])
+        crystal_ids = set(x["item_id"] for x in filtered_items if 2 <= x["item_id"] <= 19)
+        
+        keep_ids = top_by_revenue.union(top_by_velocity).union(crystal_ids)
+        combined_items = [x for x in filtered_items if x["item_id"] in keep_ids]
+        
+        final_data_by_world[wname] = combined_items
 
     web_data = {
         "last_updated": now_str,
