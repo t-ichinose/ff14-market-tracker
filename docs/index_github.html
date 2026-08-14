@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -7,13 +7,12 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
-  <title>FF14 Market Analytics - Enriched Pro Dashboard</title>
+  <title>FF14 Market Analytics - Japan Datacenters & World Tracker</title>
   <!-- Google Fonts & Icons & Chart.js -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <style>
     :root {
@@ -27,104 +26,6 @@
       --accent-red: #f87171;
       --text-main: #f1f5f9;
       --text-muted: #94a3b8;
-      --badge-hq-bg: rgba(239, 68, 68, 0.15);
-      --badge-hq-border: rgba(239, 68, 68, 0.4);
-      --badge-hq-text: #f87171;
-      --badge-nq-bg: rgba(59, 130, 246, 0.15);
-      --badge-nq-border: rgba(59, 130, 246, 0.4);
-      --badge-nq-text: #60a5fa;
-    }
-
-    /* Modal & Chart Styles */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(11, 15, 25, 0.8);
-      backdrop-filter: blur(12px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.25s ease;
-    }
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    .modal-card {
-      background: rgba(22, 30, 49, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      width: 92%;
-      max-width: 850px;
-      padding: 1.5rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      transform: translateY(20px);
-      transition: transform 0.25s ease;
-    }
-    .modal-overlay.active .modal-card {
-      transform: translateY(0);
-    }
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.2rem;
-    }
-    .modal-title-box {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-    .modal-close-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: none;
-      color: var(--text-muted);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.1rem;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-close-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-    }
-    .chart-container {
-      position: relative;
-      width: 100%;
-      height: 380px;
-    }
-    .chart-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(121, 40, 202, 0.2);
-      border: 1px solid rgba(121, 40, 202, 0.4);
-      color: #c084fc;
-      padding: 0.4rem 0.75rem;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      margin-top: 0.6rem;
-      width: 100%;
-      justify-content: center;
-    }
-    .chart-btn:hover {
-      background: rgba(121, 40, 202, 0.45);
-      color: #ffffff;
-      box-shadow: 0 0 12px rgba(121, 40, 202, 0.4);
     }
 
     * {
@@ -142,11 +43,11 @@
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
-      padding: 1.5rem 1rem;
+      padding: 1.25rem 1rem;
     }
 
     .container {
-      max-width: 1600px;
+      max-width: 1850px;
       margin: 0 auto;
     }
 
@@ -155,7 +56,7 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       gap: 1rem;
     }
 
@@ -208,27 +109,6 @@
       font-weight: 600;
     }
 
-    .search-modal-btn {
-      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(121, 40, 202, 0.25));
-      border: 1px solid var(--accent-blue);
-      color: #ffffff;
-      padding: 0.4rem 0.95rem;
-      border-radius: 20px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      transition: all 0.2s ease;
-    }
-
-    .search-modal-btn:hover {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
-      transform: translateY(-1px);
-    }
-
     .status-dot {
       width: 8px;
       height: 8px;
@@ -244,56 +124,335 @@
       100% { opacity: 0.4; }
     }
 
+    /* DC Top Navigation Tabs */
+    .dc-tabs-container {
+      display: flex;
+      gap: 0.6rem;
+      background: rgba(15, 23, 42, 0.7);
+      padding: 0.45rem;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 1.2rem;
+      overflow-x: auto;
+    }
+
+    .dc-tab-btn {
+      flex: 1;
+      min-width: 140px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .dc-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+    }
+
+    .dc-tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.25), rgba(121, 40, 202, 0.3));
+      border-color: rgba(0, 210, 255, 0.4);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
+    }
+
+    /* Single-Row Unified Controls Bar: World Nav Tabs + Search Box + Sort Controls */
+    .controls-bar {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      padding: 0.45rem 0.8rem;
+      border-radius: 14px;
+      min-height: 46px;
+      box-sizing: border-box;
+    }
+
+    .world-nav-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex: 1 1 auto;
+      min-width: 320px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .world-nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .world-nav-bar::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    .world-nav-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.35rem 0.85rem;
+      border-radius: 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    .world-nav-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .world-nav-btn.active {
+      background: var(--accent-purple);
+      color: white;
+      border-color: var(--accent-purple);
+    }
+
     .search-box {
       position: relative;
-      width: 100%;
-      margin-bottom: 1.5rem;
+      flex: 0 0 200px;
+      max-width: 220px;
+      display: flex;
+      align-items: center;
+      margin: 0;
     }
 
     .search-box i {
       position: absolute;
-      left: 1rem;
+      left: 0.85rem;
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-muted);
+      font-size: 0.85rem;
+      pointer-events: none;
     }
 
     .search-input {
       width: 100%;
-      background: var(--card-bg);
+      background: rgba(0, 0, 0, 0.3);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 0.7rem 1rem 0.7rem 2.8rem;
+      border-radius: 10px;
+      padding: 0.38rem 0.8rem 0.38rem 2.4rem;
       color: var(--text-main);
-      font-size: 0.95rem;
+      font-size: 0.82rem;
       outline: none;
       transition: border-color 0.2s ease;
+      box-sizing: border-box;
+      margin: 0;
     }
 
     .search-input:focus {
       border-color: var(--accent-blue);
     }
 
-    .dc-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
+    /* Sort Toggle Group */
+    .sort-control-container {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      padding: 0;
+      border: none;
+      flex-shrink: 0;
+      margin: 0;
     }
 
-    .dc-column {
+    .sort-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .sort-toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 2px;
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    .sort-toggle-btn {
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      padding: 0 0.7rem;
+      height: 26px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sort-toggle-btn:hover {
+      color: #ffffff;
+    }
+
+    .sort-toggle-btn.active {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0, 210, 255, 0.25);
+    }
+
+    .filter-toggle-btn {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      padding: 0.35rem 0.85rem;
+      border-radius: 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .filter-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .filter-toggle-btn.active {
+      background: linear-gradient(135deg, rgba(121, 40, 202, 0.3), rgba(0, 210, 255, 0.25));
+      border-color: rgba(0, 210, 255, 0.5);
+      color: #00d2ff;
+      box-shadow: 0 2px 8px rgba(0, 210, 255, 0.2);
+    }
+
+    /* World Grid (4 Columns Visible, Lightweight Carousel) */
+    .grid-scroll-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .grid-slide-btn {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+      z-index: 90;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(0, 210, 255, 0.4);
+      color: var(--accent-blue);
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+
+    .grid-slide-btn:hover {
+      background: var(--accent-blue);
+      color: #000000;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+      transform: translateY(-50%) scale(1.12);
+    }
+
+    .grid-slide-left {
+      left: -18px;
+    }
+
+    .grid-slide-right {
+      right: -18px;
+    }
+
+    .world-grid {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      min-height: 650px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+    }
+
+    .world-grid::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    .world-column {
+      flex: 0 0 calc((100% - 3rem) / 4);
+      min-width: calc((100% - 3rem) / 4);
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 180px);
-      min-height: 600px;
+      height: calc(100vh - 250px);
+      min-height: 620px;
+      box-sizing: border-box;
     }
 
-    .dc-column-header {
-      padding: 0.75rem 1.25rem;
-      background: rgba(15, 23, 42, 0.8);
+    @media (max-width: 768px) {
+      .world-column {
+        flex: 0 0 100%;
+        min-width: 100%;
+      }
+    }
+
+    .world-column-header {
+      padding: 0.85rem 1.1rem;
+      background: rgba(15, 23, 42, 0.9);
       border-bottom: 1px solid var(--card-border);
       display: flex;
       justify-content: space-between;
@@ -303,544 +462,459 @@
       border-top-right-radius: 16px;
     }
 
-    .dc-name {
+    .world-name {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 800;
       color: #ffffff;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
-    .dc-count-badge {
+    .world-count-badge {
       background: rgba(255, 255, 255, 0.08);
       color: var(--accent-blue);
       font-size: 0.75rem;
       font-weight: 700;
-      padding: 0.2rem 0.6rem;
+      padding: 0.2rem 0.55rem;
       border-radius: 12px;
     }
 
-    .sort-toggle-group {
-      display: flex;
-      gap: 0;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--card-border);
-    }
-
-    .sort-toggle-btn {
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-muted);
-      border: none;
-      padding: 0.2rem 0.55rem;
-      font-size: 0.65rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .sort-toggle-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .sort-toggle-btn.active {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      color: #ffffff;
-      font-weight: 700;
-    }
-
-    .dc-item-list {
+    .world-item-list {
       flex: 1;
       overflow-y: auto;
-      padding: 0.8rem;
+      padding: 0.85rem;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.85rem;
     }
 
-    .dc-item-list::-webkit-scrollbar {
-      width: 6px;
+    .world-item-list::-webkit-scrollbar {
+      width: 5px;
     }
 
-    .dc-item-list::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.1);
-    }
-
-    .dc-item-list::-webkit-scrollbar-thumb {
+    .world-item-list::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.15);
       border-radius: 3px;
     }
 
-    .dc-item-list::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-blue);
-    }
-
-    /* Enhanced Item Card */
+    /* Enhanced Original Item Card Style */
     .item-card {
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(15, 23, 42, 0.7);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 0.85rem;
-      transition: transform 0.15s ease, border-color 0.15s ease;
+      border-radius: 14px;
+      padding: 0.9rem;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.55rem;
     }
 
     .item-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(0, 210, 255, 0.3);
-      background: rgba(15, 23, 42, 0.85);
-    }
-
-    .item-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(0, 0, 0, 0.3);
-      flex-shrink: 0;
-      image-rendering: pixelated;
-    }
-
-    .lodestone-link-icon {
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      margin-left: 0.35rem;
-      transition: color 0.15s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .lodestone-link-icon:hover {
-      color: var(--accent-blue);
+      border-color: rgba(0, 210, 255, 0.35);
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
 
     .item-card-header {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      align-items: flex-start;
+      gap: 0.7rem;
+    }
+
+    .item-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      flex-shrink: 0;
     }
 
     .item-header-text {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
       flex: 1;
       min-width: 0;
     }
 
     .rank-tag {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: var(--accent-gold);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .item-card-title {
       font-weight: 700;
       font-size: 0.95rem;
       color: #ffffff;
-      line-height: 1.3;
-      flex: 1;
-    }
-
-    .quality-badge {
-      font-size: 0.7rem;
-      font-weight: 800;
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.2rem;
-    }
-
-    .quality-hq {
-      background: var(--badge-hq-bg);
-      border: 1px solid var(--badge-hq-border);
-      color: var(--badge-hq-text);
-    }
-
-    .quality-nq {
-      background: var(--badge-nq-bg);
-      border: 1px solid var(--badge-nq-border);
-      color: var(--badge-nq-text);
-    }
-
-    .item-stats-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .stat-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.78rem;
-      font-weight: 700;
-      font-family: 'Outfit', sans-serif;
-    }
-    .stat-vel {
-      color: #4ade80;
-    }
-    .stat-rev {
-      color: #ffb703;
-    }
-
-    .item-sub-grid {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 0.45rem;
-      border-top: 1px dashed rgba(255, 255, 255, 0.08);
-      font-size: 0.78rem;
-    }
-
-    .stat-sub-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.78rem;
-    }
-    .stat-sub-item.stat-min {
-      color: #38bdf8;
-    }
-    .stat-sub-item.stat-min strong {
-      color: #ffffff;
-      font-weight: 700;
-    }
-    .stat-sub-item.stat-avg {
-      color: #c084fc;
-    }
-    .stat-sub-item.stat-avg strong {
-      color: #ffffff;
-      font-weight: 700;
-    }
-
-    .history-range-row {
-      font-size: 0.73rem;
-      color: #94a3b8;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 6px;
-      padding: 0.3rem 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       display: flex;
       align-items: center;
       gap: 0.4rem;
     }
 
-    .history-range-row i {
+    .lodestone-link-icon {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      transition: color 0.2s ease;
+    }
+
+    .lodestone-link-icon:hover {
       color: var(--accent-blue);
+    }
+
+    .rank-tag {
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-right: 0.35rem;
+    }
+
+    .item-stats-row {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    .item-section-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 0.45rem 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .latest-box {
+      border-left: 3px solid var(--accent-green);
+    }
+
+    .history-box {
+      border-left: 3px solid var(--accent-blue);
+    }
+
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      letter-spacing: 0.3px;
+    }
+
+    .sub-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.25rem 0.5rem;
+      font-size: 0.74rem;
+    }
+
+    .stat-cell {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .stat-cell .lbl {
+      color: var(--text-muted);
       font-size: 0.7rem;
     }
 
-
-
-
-
-    /* Mobile DC Switcher Tabs (hidden on desktop) */
-    .mobile-dc-tabs {
-      display: none;
-      align-items: center;
-      gap: 0.35rem;
-      margin-bottom: 0.85rem;
-      overflow-x: auto;
-      padding-bottom: 0.2rem;
-      -webkit-overflow-scrolling: touch;
+    .stat-cell strong {
+      color: var(--text-main);
+      font-weight: 600;
     }
-    .mobile-dc-tab-btn {
-      flex: 1;
-      min-width: 60px;
-      padding: 0.35rem 0.45rem;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--card-border);
+
+    .chart-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(121, 40, 202, 0.2);
+      border: 1px solid rgba(121, 40, 202, 0.4);
+      color: #c084fc;
+      padding: 0.38rem 0.6rem;
       border-radius: 8px;
-      color: var(--text-muted);
-      font-weight: 700;
-      font-size: 0.72rem;
-      font-family: 'Outfit', sans-serif;
-      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
-      white-space: nowrap;
-      display: inline-flex;
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.2rem;
+    }
+
+    .chart-btn:hover {
+      background: rgba(121, 40, 202, 0.45);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(121, 40, 202, 0.4);
+    }
+
+    /* Grid Slide Container & Navigation Buttons */
+    .grid-scroll-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .grid-slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      width: 38px;
+      height: 64px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--accent-blue);
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.25rem;
+      font-size: 1.1rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
     }
-    .mobile-dc-tab-btn i {
-      font-size: 0.68rem;
-    }
-    .mobile-dc-tab-btn.active {
-      background: linear-gradient(135deg, rgba(0, 210, 255, 0.25), rgba(121, 40, 202, 0.25));
+
+    .grid-slide-btn:hover {
+      background: rgba(0, 210, 255, 0.25);
       color: #ffffff;
       border-color: var(--accent-blue);
-      box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+      box-shadow: 0 0 14px rgba(0, 210, 255, 0.4);
     }
-    .mobile-search-btn {
-      padding: 0.35rem 0.65rem;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      color: var(--text-main);
-      cursor: pointer;
-      font-size: 0.78rem;
-      display: inline-flex;
+
+    .grid-slide-left {
+      left: -12px;
+    }
+
+    .grid-slide-right {
+      right: -12px;
+    }
+
+
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(12px);
+      display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.2s ease;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
     }
-    .mobile-search-btn:hover, .mobile-search-btn.active {
-      background: rgba(0, 210, 255, 0.25);
-      border-color: var(--accent-blue);
-      color: var(--accent-blue);
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
-
-    @media (max-width: 1400px) {
-      .dc-grid { grid-template-columns: repeat(2, 1fr); }
-      .dc-column { height: 550px; }
+    .modal-card {
+      background: rgba(22, 30, 49, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      width: 92%;
+      max-width: 850px;
+      padding: 1.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     }
-
-    @media (max-width: 900px) {
-      .modal-result-grid { grid-template-columns: repeat(2, 1fr); }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
     }
-
-    @media (max-width: 768px) {
-      .search-box {
-        display: none !important;
-        margin-bottom: 0.85rem;
-      }
-      .search-box.active {
-        display: block !important;
-        animation: fadeIn 0.2s ease;
-      }
-      .mobile-dc-tabs {
-        display: flex;
-      }
-      .dc-grid {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        gap: 0.75rem;
-        padding-bottom: 0.5rem;
-        scrollbar-width: none;
-      }
-      .dc-grid::-webkit-scrollbar {
-        display: none;
-      }
-      .dc-column {
-        flex: 0 0 100%;
-        width: 100%;
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-        height: calc(100vh - 230px);
-        min-height: 520px;
-      }
-      h1 { font-size: 1.3rem; }
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: var(--text-muted);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    @media (max-width: 550px) {
-      .modal-result-grid { grid-template-columns: 1fr; }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
     <header>
       <div class="brand">
-        <div class="brand-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+        <div class="brand-icon"><i class="fa-solid fa-chart-simple"></i></div>
         <div>
-          <h1>FF14 Market Board Analytics</h1>
+          <h1>FF14 Market Tracker</h1>
+          <div style="font-size:0.75rem; color:var(--text-muted);">Japan Datacenters & All 32 Worlds Comparison</div>
+        </div>
+      </div>
+      <div class="header-badges">
+        <div class="status-badge" id="lastUpdatedBadge">
+          <span class="status-dot"></span> 最終更新: 読み込み中...
         </div>
       </div>
     </header>
 
-    <div class="search-box" id="searchBox">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" id="searchInput" class="search-input" placeholder="蜈ｨDC讓ｪ譁ｭ繧｢繧､繝・Β讀懃ｴ｢ (蜷榊燕縺ｾ縺溘・ID)...">
+    <!-- DC Selection Tabs -->
+    <div class="dc-tabs-container">
+      <button class="dc-tab-btn active" data-dc="Mana" onclick="switchDc('Mana')">
+        <i class="fa-solid fa-server" style="color: #60a5fa;"></i> Mana (8 Worlds)
+      </button>
+      <button class="dc-tab-btn" data-dc="Elemental" onclick="switchDc('Elemental')">
+        <i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental (8 Worlds)
+      </button>
+      <button class="dc-tab-btn" data-dc="Gaia" onclick="switchDc('Gaia')">
+        <i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia (8 Worlds)
+      </button>
+      <button class="dc-tab-btn" data-dc="Meteor" onclick="switchDc('Meteor')">
+        <i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor (8 Worlds)
+      </button>
     </div>
 
-    <div class="mobile-dc-tabs" id="mobileDcTabs">
-      <button class="mobile-dc-tab-btn active" data-target="column-Mana" onclick="scrollToDc('Mana')">
-        <i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> Mana
+    <!-- Unified Single-Row Controls Bar: World Nav Tabs -> Sort Controls -> Search Box -->
+    <div class="controls-bar">
+      <!-- 1. World Nav Tabs -->
+      <div class="world-nav-wrapper">
+        <div class="world-nav-bar" id="worldNavBar">
+          <!-- JavaScript Populated -->
+        </div>
+      </div>
+
+      <!-- 2. Sort Control (売買数 / 流通ギル / 平均単価) -->
+      <div class="sort-control-container">
+        <span class="sort-label"><i class="fa-solid fa-arrow-down-wide-short"></i> 並び替え:</span>
+        <div class="sort-toggle-group">
+          <button class="sort-toggle-btn active" data-sort="velocity" onclick="setGlobalSort('velocity')">売買数</button>
+          <button class="sort-toggle-btn" data-sort="revenue" onclick="setGlobalSort('revenue')">流通ギル</button>
+          <button class="sort-toggle-btn" data-sort="avg_price" onclick="setGlobalSort('avg_price')">平均単価</button>
+        </div>
+      </div>
+
+      <!-- 3. Crystal Exclusion Toggle Filter -->
+      <button class="filter-toggle-btn active" id="crystalFilterBtn" onclick="toggleCrystalFilter()" title="シャード・クリスタル・クラスター類の表示/除外を切り替え">
+        <i class="fa-solid fa-gem"></i> クリスタル除外: ON
       </button>
-      <button class="mobile-dc-tab-btn" data-target="column-Elemental" onclick="scrollToDc('Elemental')">
-        <i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental
-      </button>
-      <button class="mobile-dc-tab-btn" data-target="column-Gaia" onclick="scrollToDc('Gaia')">
-        <i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia
-      </button>
-      <button class="mobile-dc-tab-btn" data-target="column-Meteor" onclick="scrollToDc('Meteor')">
-        <i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor
-      </button>
-      <button class="mobile-search-btn" id="searchToggleBtn" onclick="toggleSearchBox()" title="讀懃ｴ｢">
+
+      <!-- 4. Search Box (Compact Width) -->
+      <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="検索 (名前/ID)...">
+      </div>
+    </div>
+
+    <!-- World 8 Columns Grid Container with Arrow Buttons -->
+    <div class="grid-scroll-wrapper">
+      <button class="grid-slide-btn grid-slide-left" onclick="slideWorldGrid(-1)" title="左へ移動">
+        <i class="fa-solid fa-chevron-left"></i>
       </button>
-    </div>
-
-    <div class="dc-grid" id="dcGrid">
-
-      <div class="dc-column" id="column-Mana">
-        <div class="dc-column-header">
-          <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> Mana</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;">
-            <div class="sort-toggle-group">
-              <button class="sort-toggle-btn active" data-dc="Mana" data-sort="velocity" onclick="setSort('Mana','velocity')">螢ｲ雋ｷ</button>
-              <button class="sort-toggle-btn" data-dc="Mana" data-sort="revenue" onclick="setSort('Mana','revenue')">豬・・/button>
-              <button class="sort-toggle-btn" data-dc="Mana" data-sort="avg_price" onclick="setSort('Mana','avg_price')">蟷ｳ蝮・/button>
-            </div>
-            <span class="dc-count-badge" id="count-Mana">0莉ｶ</span>
-          </div>
-        </div>
-        <div class="dc-item-list" id="list-Mana">
-          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...</div>
+      <div class="world-grid" id="worldGrid">
+        <div style="text-align:center; padding:3rem; width:100%; color:var(--text-muted);">
+          <i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>マーケットデータを読み込み中...
         </div>
       </div>
-
-      <div class="dc-column" id="column-Elemental">
-        <div class="dc-column-header">
-          <div class="dc-name"><i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;">
-            <div class="sort-toggle-group">
-              <button class="sort-toggle-btn active" data-dc="Elemental" data-sort="velocity" onclick="setSort('Elemental','velocity')">螢ｲ雋ｷ</button>
-              <button class="sort-toggle-btn" data-dc="Elemental" data-sort="revenue" onclick="setSort('Elemental','revenue')">豬・・/button>
-              <button class="sort-toggle-btn" data-dc="Elemental" data-sort="avg_price" onclick="setSort('Elemental','avg_price')">蟷ｳ蝮・/button>
-            </div>
-            <span class="dc-count-badge" id="count-Elemental">0莉ｶ</span>
-          </div>
-        </div>
-        <div class="dc-item-list" id="list-Elemental">
-          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...</div>
-        </div>
-      </div>
-
-      <div class="dc-column" id="column-Gaia">
-        <div class="dc-column-header">
-          <div class="dc-name"><i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;">
-            <div class="sort-toggle-group">
-              <button class="sort-toggle-btn active" data-dc="Gaia" data-sort="velocity" onclick="setSort('Gaia','velocity')">螢ｲ雋ｷ</button>
-              <button class="sort-toggle-btn" data-dc="Gaia" data-sort="revenue" onclick="setSort('Gaia','revenue')">豬・・/button>
-              <button class="sort-toggle-btn" data-dc="Gaia" data-sort="avg_price" onclick="setSort('Gaia','avg_price')">蟷ｳ蝮・/button>
-            </div>
-            <span class="dc-count-badge" id="count-Gaia">0莉ｶ</span>
-          </div>
-        </div>
-        <div class="dc-item-list" id="list-Gaia">
-          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...</div>
-        </div>
-      </div>
-
-      <div class="dc-column" id="column-Meteor">
-        <div class="dc-column-header">
-          <div class="dc-name"><i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;">
-            <div class="sort-toggle-group">
-              <button class="sort-toggle-btn active" data-dc="Meteor" data-sort="velocity" onclick="setSort('Meteor','velocity')">螢ｲ雋ｷ</button>
-              <button class="sort-toggle-btn" data-dc="Meteor" data-sort="revenue" onclick="setSort('Meteor','revenue')">豬・・/button>
-              <button class="sort-toggle-btn" data-dc="Meteor" data-sort="avg_price" onclick="setSort('Meteor','avg_price')">蟷ｳ蝮・/button>
-            </div>
-            <span class="dc-count-badge" id="count-Meteor">0莉ｶ</span>
-          </div>
-        </div>
-        <div class="dc-item-list" id="list-Meteor">
-          <div style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Chart Modal -->
-  <div class="modal-overlay" id="chartModal" onclick="closeChartModal(event)">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <div class="modal-title-box">
-          <img id="modalItemIcon" src="" style="width:36px;height:36px;border-radius:6px;display:none;" />
-          <div>
-            <h2 id="modalItemTitle" style="font-size:1.2rem;font-weight:700;color:#fff;">萓｡譬ｼ繝ｻ蝨ｨ蠎ｫ謗ｨ遘ｻ</h2>
-            <div id="modalItemSub" style="font-size:0.8rem;color:var(--text-muted);">繝・・繧ｿ繧ｻ繝ｳ繧ｿ繝ｼ: Mana</div>
-          </div>
-        </div>
-        <button class="modal-close-btn" onclick="closeChartModal()"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="chart-container">
-        <canvas id="priceChartCanvas"></canvas>
-      </div>
+      <button class="grid-slide-btn grid-slide-right" onclick="slideWorldGrid(1)" title="右へ移動">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
   </div>
 
   <script>
-    const DATACENTERS = ["Mana", "Elemental", "Gaia", "Meteor"];
-    let allDcData = {};
-    const sortMode = { Mana: 'velocity', Elemental: 'velocity', Gaia: 'velocity', Meteor: 'velocity' };
-    let priceChart = null;
+    let allData = {};
+    let activeDc = "Mana";
+    let activeSortMode = "velocity";
+    let excludeCrystals = true; // デフォルトでクリスタル類を除外
+    let dcWorldsMap = {
+      "Elemental": ["Carbuncle", "Gungnir", "Kujata", "Typhon", "Atomos", "Tonberry", "Aegis", "Garuda"],
+      "Gaia": ["Alexander", "Bahamut", "Durandal", "Fenrir", "Ifrit", "Ridill", "Tiamat", "Ultima"],
+      "Mana": ["Anima", "Asura", "Chocobo", "Hades", "Ixion", "Masamune", "Pandaemonium", "Titan"],
+      "Meteor": ["Belias", "Mandragora", "Ramuh", "Shinryu", "Unicorn", "Valefor", "Yojimbo", "Zeromus"]
+    };
+    let allItemSearchDict = {};
 
-    function scrollToDc(dc) {
-      const col = document.getElementById(`column-${dc}`);
-      const grid = document.getElementById('dcGrid');
-      if (col && grid) {
-        document.querySelectorAll('.mobile-dc-tab-btn').forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.target === `column-${dc}`);
-        });
-        col.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    // クリスタル・シャード・クラスター・触媒の判定関数 (ID: 2~19 判定含む)
+    function isCrystalItem(item) {
+      if (!item) return false;
+      const id = Number(item.item_id || 0);
+      // FF14公式データ: シャード(2~7), クリスタル(8~13), クラスター(14~19)
+      if (id >= 2 && id <= 19) return true;
+      
+      const cat = (item.meta && item.meta.category) ? item.meta.category : '';
+      if (cat === "クリスタル" || cat === "触媒") return true;
+      
+      const name = item.item_name || '';
+      if (name.includes("シャード") || name.includes("クリスタル") || name.includes("クラスター")) return true;
+      
+      return false;
+    }
+
+    function toggleCrystalFilter() {
+      excludeCrystals = !excludeCrystals;
+      const btn = document.getElementById('crystalFilterBtn');
+      if (btn) {
+        btn.classList.toggle('active', excludeCrystals);
+        btn.innerHTML = `<i class="fa-solid fa-gem"></i> クリスタル除外: ${excludeCrystals ? 'ON' : 'OFF'}`;
       }
+      renderWorldGrid();
     }
 
-    function initMobileSwipeObserver() {
-      const grid = document.getElementById('dcGrid');
-      if (!grid || typeof IntersectionObserver === 'undefined') return;
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            const id = entry.target.id;
-            document.querySelectorAll('.mobile-dc-tab-btn').forEach(btn => {
-              btn.classList.toggle('active', btn.dataset.target === id);
-            });
-          }
-        });
-      }, {
-        root: grid,
-        threshold: 0.5
+    function switchDc(dcName) {
+      activeDc = dcName;
+      document.querySelectorAll('.dc-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.dc === dcName);
       });
-
-      DATACENTERS.forEach(dc => {
-        const col = document.getElementById(`column-${dc}`);
-        if (col) observer.observe(col);
+      requestAnimationFrame(() => {
+        renderWorldGrid(true);
+        const grid = document.getElementById('worldGrid');
+        if (grid) grid.scrollTo({ left: 0, behavior: 'auto' });
       });
     }
 
-    document.addEventListener('DOMContentLoaded', initMobileSwipeObserver);
-
-    function setSort(dc, mode) {
-      sortMode[dc] = mode;
-      // Update toggle button styles
-      document.querySelectorAll(`.sort-toggle-btn[data-dc="${dc}"]`).forEach(btn => {
+    function setGlobalSort(mode) {
+      activeSortMode = mode;
+      document.querySelectorAll('.sort-toggle-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.sort === mode);
       });
-      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-      renderAllColumns(searchTerm);
+      renderWorldGrid();
     }
 
-    function toggleSearchBox() {
-      const box = document.getElementById('searchBox');
-      const btn = document.getElementById('searchToggleBtn');
-      const input = document.getElementById('searchInput');
-      if (!box) return;
-      const isActive = box.classList.toggle('active');
-      if (btn) btn.classList.toggle('active', isActive);
-      if (isActive && input) {
-        input.focus();
+    // 超軽量: 1列分（1ワールド分）ずつ滑らかに横スライド移動
+    function slideWorldGrid(direction) {
+      const grid = document.getElementById('worldGrid');
+      if (!grid) return;
+
+      const firstCol = grid.querySelector('.world-column');
+      if (!firstCol) return;
+
+      const stepWidth = firstCol.offsetWidth + 16;
+      grid.scrollBy({ left: stepWidth * direction, behavior: 'smooth' });
+    }
+
+    function scrollToWorld(worldName) {
+      const col = document.getElementById(`world-col-${worldName}`);
+      if (col) {
+        document.querySelectorAll('.world-nav-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.world === worldName);
+        });
+        col.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
       }
     }
 
@@ -876,286 +950,6 @@
       return `${month}-${day} ${hours}:${minutes}`;
     }
 
-    async function loadData() {
-      try {
-        const cacheBuster = `t=${Date.now()}_${Math.random()}`;
-        const res = await fetch(`data.json?${cacheBuster}`, { 
-          cache: "no-store"
-        });
-        if (!res.ok) throw new Error('Data fetch failed');
-        const data = await res.json();
-
-        const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
-        if (lastUpdatedEl) {
-          const formattedLastUpdated = formatTimeJST(data.last_updated);
-          lastUpdatedEl.innerHTML = `<span class="status-dot"></span> 譛邨よ峩譁ｰ: ${formattedLastUpdated}`;
-        }
-
-        allDcData = data.data || {};
-        renderAllColumns();
-        setTimeout(initMobileSwipeObserver, 200);
-
-      } catch (err) {
-        console.error("loadData error:", err);
-        DATACENTERS.forEach(dc => {
-          document.getElementById(`list-${dc}`).innerHTML = `
-            <div style="text-align:center; padding:2rem; color:#ef4444;">
-              <i class="fa-solid fa-triangle-exclamation"></i> 繝・・繧ｿ蜿門ｾ励お繝ｩ繝ｼ
-            </div>
-          `;
-        });
-      }
-    }
-
-    function renderAllColumns(searchTerm = "") {
-      DATACENTERS.forEach(dc => {
-        try {
-          const rawItems = allDcData[dc] || [];
-          
-          let items = rawItems;
-          if (searchTerm) {
-            items = rawItems.filter(item => 
-              item.item_name.toLowerCase().includes(searchTerm) ||
-              item.item_id.toString().includes(searchTerm)
-            );
-          }
-
-          // 驥崎､・勁螟・(1繧｢繧､繝・Β1繧ｫ繝ｼ繝峨↓邨ｱ荳)
-          const seenIds = new Set();
-          const uniqueItems = [];
-          
-          for (const item of items) {
-            if (!seenIds.has(item.item_id)) {
-              seenIds.add(item.item_id);
-              uniqueItems.push(item);
-            }
-          }
-
-          document.getElementById(`count-${dc}`).innerText = `${uniqueItems.length}莉ｶ`;
-          const listEl = document.getElementById(`list-${dc}`);
-
-          if (uniqueItems.length === 0) {
-            listEl.innerHTML = `
-              <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.85rem;">
-                鬮伜屓霆｢繧｢繧､繝・Β譛ｪ讀懃衍
-              </div>
-            `;
-            return;
-          }
-
-          // Sort by current mode
-          const mode = sortMode[dc] || 'velocity';
-          if (mode === 'revenue') {
-            uniqueItems.sort((a, b) => {
-              const revA = (Number(a.avg_price) || 0) * (Number(a.velocity) || 0);
-              const revB = (Number(b.avg_price) || 0) * (Number(b.velocity) || 0);
-              return revB - revA;
-            });
-          } else if (mode === 'avg_price') {
-            uniqueItems.sort((a, b) => (Number(b.avg_price) || 0) - (Number(a.avg_price) || 0));
-          } else {
-            uniqueItems.sort((a, b) => (Number(b.velocity) || 0) - (Number(a.velocity) || 0));
-          }
-
-          listEl.innerHTML = uniqueItems.map((item, idx) => {
-            let displayTitle = item.item_name || `Item ${item.item_id}`;
-            if ((displayTitle.includes("Unknown") || displayTitle.startsWith("Item ")) && allItemSearchDict[item.item_id]) {
-              displayTitle = allItemSearchDict[item.item_id];
-            }
-
-            let cleanTitle = escapeHtml(displayTitle).replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
-
-            const minPriceVal = (item.min_price !== undefined && item.min_price !== null) ? Math.round(Number(item.min_price)) : null;
-            const minPriceStr = (minPriceVal !== null) ? `${minPriceVal.toLocaleString()}G` : '-';
-
-            const avgPriceVal = (item.avg_price !== undefined && item.avg_price !== null) ? Math.round(Number(item.avg_price)) : null;
-            const avgPriceStr = (avgPriceVal !== null) ? `${avgPriceVal.toLocaleString()}G` : '-';
-
-            const hMin = (item.hist_min !== undefined && item.hist_min !== null) ? Math.round(Number(item.hist_min)) : (minPriceVal || 0);
-            const hMax = (item.hist_max !== undefined && item.hist_max !== null) ? Math.round(Number(item.hist_max)) : hMin;
-
-            let historyText = "";
-            if (hMin === hMax) {
-              historyText = `驕主悉蜿門ｼ・ ${hMin.toLocaleString()}G/蛟・(蝗ｺ螳壻ｾ｡譬ｼ蟶ｯ)`;
-            } else {
-              historyText = `驕主悉蜿門ｼ・ 譛螳・${hMin.toLocaleString()}G 縲・譛鬮・${hMax.toLocaleString()}G`;
-            }
-
-            const vel = (item.velocity !== undefined && item.velocity !== null) ? Number(item.velocity) : 0;
-            const velStr = Math.round(vel).toLocaleString();
-            const dailyRevenue = Math.round((avgPriceVal || 0) * vel);
-            const dailyRevenueStr = dailyRevenue.toLocaleString() + 'G';
-
-            // Item icon
-            const meta = item.meta || {};
-            const iconUrl = meta.icon_url || '';
-            const iconImg = iconUrl ? `<img class="item-icon" src="${iconUrl}" alt="" loading="lazy" onerror="this.style.display='none'">` : '';
-
-            const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
-
-            return `
-              <div class="item-card">
-                <div class="item-card-header">
-                  ${iconImg}
-                  <div class="item-header-text">
-                    <span class="rank-tag">#${idx + 1}</span>
-                    <span class="item-card-title">
-                      ${cleanTitle}
-                      <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" title="Lodestone縺ｧ讀懃ｴ｢">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                      </a>
-                    </span>
-                  </div>
-                </div>
-                
-                <div class="item-stats-row">
-                  <span class="stat-badge stat-vel"><i class="fa-solid fa-bolt"></i> 螢ｲ雋ｷ謨ｰ: ${velStr}蛟・譌･</span>
-                  <span class="stat-badge stat-rev"><i class="fa-solid fa-coins"></i> 豬・壹ぐ繝ｫ: ${dailyRevenueStr}/譌･</span>
-                </div>
-
-                <div class="item-sub-grid">
-                  <span class="stat-sub-item stat-min"><i class="fa-solid fa-tag"></i> 譛螳牙腰萓｡: <strong>${minPriceStr}/蛟・/strong></span>
-                  <span class="stat-sub-item stat-avg"><i class="fa-solid fa-scale-balanced"></i> 蟷ｳ蝮・腰萓｡: <strong>${avgPriceStr}/蛟・/strong></span>
-                </div>
-
-                <div class="history-range-row">
-                  <i class="fa-solid fa-clock-rotate-left"></i> ${historyText}
-                </div>
-
-                <button class="chart-btn" onclick="openChartModal('${dc}', ${item.item_id})">
-                  <i class="fa-solid fa-chart-line"></i> 嶋 謗ｨ遘ｻ繧ｰ繝ｩ繝・                </button>
-              </div>
-            `;
-          }).join('');
-        } catch (colErr) {
-          console.error(`Error rendering column ${dc}:`, colErr);
-        }
-      });
-    }
-
-    function openChartModal(dc, itemId) {
-      const items = allDcData[dc] || [];
-      const item = items.find(i => i.item_id === itemId || i.item_id === Number(itemId));
-      if (!item) return;
-
-      const history = item.history_points || [];
-      const modal = document.getElementById('chartModal');
-      const modalTitle = document.getElementById('modalItemTitle');
-      const modalSub = document.getElementById('modalItemSub');
-      const modalIcon = document.getElementById('modalItemIcon');
-
-      let displayTitle = item.item_name || `Item ${item.item_id}`;
-      if (allItemSearchDict[item.item_id]) {
-        displayTitle = allItemSearchDict[item.item_id];
-      }
-      modalTitle.innerText = displayTitle.replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
-      modalSub.innerText = `${dc} 繝・・繧ｿ繧ｻ繝ｳ繧ｿ繝ｼ | 逶ｴ霑代・謗ｨ遘ｻ (繝・・繧ｿ螻･豁ｴ: ${history.length}莉ｶ)`;
-
-      const meta = item.meta || {};
-      if (meta.icon_url) {
-        modalIcon.src = meta.icon_url;
-        modalIcon.style.display = 'block';
-      } else {
-        modalIcon.style.display = 'none';
-      }
-
-      modal.classList.add('active');
-
-      const labels = history.map(h => formatChartLabelJST(h.timestamp));
-      const avgPrices = history.map(h => h.avg_price);
-      const minPrices = history.map(h => h.min_price);
-      const stockUnits = history.map(h => h.units_for_sale);
-
-      const ctx = document.getElementById('priceChartCanvas').getContext('2d');
-      if (priceChart) {
-        priceChart.destroy();
-      }
-
-      priceChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels.length > 0 ? labels : [formatChartLabelJST(item.timestamp) || '迴ｾ蝨ｨ'],
-          datasets: [
-            {
-              label: '蟷ｳ蝮・ｾ｡譬ｼ (G)',
-              data: avgPrices.length > 0 ? avgPrices : [item.avg_price],
-              borderColor: '#a855f7',
-              backgroundColor: 'rgba(168, 85, 247, 0.15)',
-              fill: true,
-              tension: 0.3,
-              yAxisID: 'yPrice'
-            },
-            {
-              label: '蜃ｺ蜩∵怙螳牙､ (G)',
-              data: minPrices.length > 0 ? minPrices : [item.min_price],
-              borderColor: '#4ade80',
-              backgroundColor: 'transparent',
-              borderDash: [4, 4],
-              tension: 0.3,
-              yAxisID: 'yPrice'
-            },
-            {
-              label: '蜃ｺ蜩∝惠蠎ｫ謨ｰ (蛟・',
-              data: stockUnits.length > 0 ? stockUnits : [item.units_for_sale],
-              borderColor: '#ffb703',
-              backgroundColor: 'transparent',
-              tension: 0.3,
-              yAxisID: 'yStock'
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          interaction: {
-            mode: 'index',
-            intersect: false,
-          },
-          plugins: {
-            legend: {
-              labels: { color: '#94a3b8', font: { family: 'Inter' } }
-            },
-            tooltip: {
-              backgroundColor: 'rgba(15, 23, 42, 0.95)',
-              titleColor: '#f8fafc',
-              bodyColor: '#cbd5e1',
-              borderColor: 'rgba(255, 255, 255, 0.15)',
-              borderWidth: 1,
-              padding: 10
-            }
-          },
-          scales: {
-            x: {
-              grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: { color: '#94a3b8' }
-            },
-            yPrice: {
-              type: 'linear',
-              display: true,
-              position: 'left',
-              title: { display: true, text: '萓｡譬ｼ (Gil)', color: '#a855f7' },
-              grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: { color: '#94a3b8' }
-            },
-            yStock: {
-              type: 'linear',
-              display: true,
-              position: 'right',
-              title: { display: true, text: '蝨ｨ蠎ｫ謨ｰ (蛟・', color: '#ffb703' },
-              grid: { drawOnChartArea: false },
-              ticks: { color: '#ffb703' }
-            }
-          }
-        }
-      });
-    }
-
-    function closeChartModal(e) {
-      if (!e || e.target.id === 'chartModal' || e.target.closest('.modal-close-btn')) {
-        document.getElementById('chartModal').classList.remove('active');
-      }
-    }
-
     function escapeHtml(str) {
       if (!str) return '';
       return String(str).replace(/[&<>"']/g, function(m) {
@@ -1169,16 +963,211 @@
       });
     }
 
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      const term = e.target.value.toLowerCase().trim();
-      renderAllColumns(term);
+    let lastLoadedTime = null;
+
+    async function loadData() {
+      try {
+        const cacheBuster = `t=${Date.now()}_${Math.random()}`;
+        const res = await fetch(`data.json?${cacheBuster}`, { cache: "no-store" });
+        if (!res.ok) throw new Error('Data fetch failed');
+        const data = await res.json();
+
+        const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
+        if (lastUpdatedEl) {
+          const formattedLastUpdated = formatTimeJST(data.last_updated);
+          lastUpdatedEl.innerHTML = `<span class="status-dot"></span> 最終更新: ${formattedLastUpdated}`;
+        }
+
+        // データに更新がない場合は再描画を行わない（チカチカ防止）
+        if (lastLoadedTime && lastLoadedTime === data.last_updated) {
+          return;
+        }
+        lastLoadedTime = data.last_updated;
+
+        allData = data.data || {};
+        if (data.dc_worlds) {
+          dcWorldsMap = data.dc_worlds;
+        }
+
+        renderWorldGrid();
+
+      } catch (err) {
+        console.error("loadData error:", err);
+        document.getElementById('worldGrid').innerHTML = `
+          <div style="text-align:center; padding:3rem; width:100%; color:#ef4444;">
+            <i class="fa-solid fa-triangle-exclamation fa-2x"></i><br><br>データ取得エラー
+          </div>
+        `;
+      }
+    }
+
+    function renderWorldGrid(forceFull = false) {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+      const worlds = dcWorldsMap[activeDc] || [];
+      const dcItems = allData[activeDc] || [];
+
+      // Render World Quick Nav Bar
+      const navBar = document.getElementById('worldNavBar');
+      navBar.innerHTML = worlds.map((w, idx) => `
+        <button class="world-nav-btn ${idx === 0 ? 'active' : ''}" data-world="${w}" onclick="scrollToWorld('${w}')">
+          <i class="fa-solid fa-globe"></i> ${w}
+        </button>
+      `).join('');
+
+      // Filter items by crystal exclusion toggle & search term
+      let filteredItems = dcItems;
+
+      if (excludeCrystals) {
+        filteredItems = filteredItems.filter(item => !isCrystalItem(item));
+      }
+
+      if (searchTerm) {
+        filteredItems = filteredItems.filter(item => 
+          (item.item_name && item.item_name.toLowerCase().includes(searchTerm)) ||
+          item.item_id.toString().includes(searchTerm)
+        );
+      }
+
+      // Build World Grid Columns (8 Worlds, Top 30 Items Each)
+      const grid = document.getElementById('worldGrid');
+      
+      grid.innerHTML = worlds.map(worldName => {
+        // Prepare items for this world with world-specific metrics (日当たり売買数 50以上限定)
+        const worldItems = (allData[worldName] || []).filter(item => {
+          if (excludeCrystals && isCrystalItem(item)) return false;
+          if (searchTerm && !item.item_name.toLowerCase().includes(searchTerm) && !String(item.item_id).includes(searchTerm)) return false;
+          return true;
+        });
+
+        // Sort worldItems by activeSortMode
+        if (activeSortMode === 'revenue') {
+          worldItems.sort((a, b) => ((b.avg_price || 0) * (b.sale_velocity || 0)) - ((a.avg_price || 0) * (a.sale_velocity || 0)));
+        } else if (activeSortMode === 'avg_price') {
+          worldItems.sort((a, b) => (b.avg_price || 0) - (a.avg_price || 0));
+        } else if (activeSortMode === 'min_price') {
+          worldItems.sort((a, b) => (b.min_price || 0) - (a.min_price || 0));
+        } else {
+          // Default: velocity (sale_velocity)
+          worldItems.sort((a, b) => (b.sale_velocity || 0) - (a.sale_velocity || 0));
+        }
+
+        // 上位30件に絞って超高速表示！
+        const displayItems = worldItems.slice(0, 30);
+
+        const cardListHtml = displayItems.length === 0 ? `
+          <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.82rem;">
+            プールデータ未登録（データ収集待ち）
+          </div>
+        ` : displayItems.map((item, idx) => {
+          let displayTitle = item.item_name || `Item #${item.item_id}`;
+          let cleanTitle = escapeHtml(displayTitle).replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
+
+          const cMin = (item.min_price || 0).toLocaleString();
+          const cAvg = Math.round(item.avg_price || 0).toLocaleString();
+          const cMax = (item.max_price || 0).toLocaleString();
+          const cStock = (item.units_for_sale || 0).toLocaleString();
+          const cVel = (item.sale_velocity || 0).toLocaleString();
+
+          // 日商（流通ギル = 平均単価 × 日当売買数）
+          const dailyRevenue = Math.round((item.avg_price || 0) * (item.sale_velocity || 0)).toLocaleString();
+
+          // アイコンURL変換・フォールバック
+          let rawIcon = item.icon_url || '';
+          if (rawIcon.includes('beta.xivapi.com/api/1/asset/ui/icon/')) {
+            rawIcon = rawIcon.replace('https://beta.xivapi.com/api/1/asset/ui/icon/', 'https://xivapi.com/i/').replace('.tex?format=png', '.png');
+          }
+          const iconUrl = rawIcon || 'https://xivapi.com/i/020000/021001_hr1.png';
+          const fallbackUrl = 'https://xivapi.com/i/020000/021001_hr1.png';
+          const iconImg = `<img class="item-icon" src="${iconUrl}" alt="" onerror="this.onerror=null; this.src='${fallbackUrl}';">`;
+
+          const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
+
+          return `
+            <div class="item-card" data-velocity="${item.sale_velocity || 0}" data-avg_price="${item.avg_price || 0}" data-min_price="${item.min_price || 0}">
+              <div class="item-card-header">
+                ${iconImg}
+                <div class="item-header-text">
+                  <span class="item-card-title">
+                    <span class="rank-tag">#${idx + 1}</span>${cleanTitle}
+                    <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" title="Lodestoneで検索">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                  </span>
+                </div>
+              </div>
+
+              <!-- 市場ステータス -->
+              <div class="item-section-box latest-box">
+                <!-- 上段: 売買数 & 流通ギル (日商) -->
+                <div class="sub-grid-2" style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="lbl" style="font-size:0.7rem;"><i class="fa-solid fa-bolt" style="color:var(--accent-blue);"></i> 売買数:</span> <strong style="color:var(--accent-blue); font-size:0.8rem;">${cVel}個/日</strong></div>
+                  <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="lbl" style="font-size:0.7rem;"><i class="fa-solid fa-coins" style="color:#ffb703;"></i> 流通ギル:</span> <strong style="color:#ffb703; font-size:0.8rem;">${dailyRevenue}G/日</strong></div>
+                </div>
+
+                <!-- 下段: 4カラム テーブル形式 (ラベル横並び・数値直下) -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: 4px 2px; background: rgba(0, 0, 0, 0.25); border-radius: 6px; padding: 6px 2px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                  <!-- ラベルヘッダー行 -->
+                  <div style="font-size: 0.68rem; color: #94a3b8;"><i class="fa-solid fa-tag" style="color:#38bdf8;"></i> 最安値</div>
+                  <div style="font-size: 0.68rem; color: #94a3b8;"><i class="fa-solid fa-scale-balanced" style="color:#c084fc;"></i> 平均値</div>
+                  <div style="font-size: 0.68rem; color: #94a3b8;"><i class="fa-solid fa-arrow-trend-up" style="color:#f472b6;"></i> 最高値</div>
+                  <div style="font-size: 0.68rem; color: #94a3b8;"><i class="fa-solid fa-boxes-stacked" style="color:#4ade80;"></i> 在庫数</div>
+                  
+                  <!-- 数値データ行 (真下) -->
+                  <div style="font-weight: 700; font-size: 0.78rem; color: #38bdf8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${cMin}G</div>
+                  <div style="font-weight: 700; font-size: 0.78rem; color: #c084fc; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${cAvg}G</div>
+                  <div style="font-weight: 700; font-size: 0.78rem; color: #f472b6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${cMax}G</div>
+                  <div style="font-weight: 700; font-size: 0.78rem; color: #4ade80; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${cStock}個</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="world-column" id="world-col-${worldName}">
+            <div class="world-column-header">
+              <div class="world-name"><i class="fa-solid fa-globe" style="color: var(--accent-blue);"></i> ${worldName}</div>
+              <span class="world-count-badge">${displayItems.length}件</span>
+            </div>
+            <div class="world-item-list">
+              ${cardListHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 遅延画像読み込み: 画面内に入ったアイコンだけ読み込む
+      requestAnimationFrame(() => {
+        const lazyImages = grid.querySelectorAll('img[data-src]');
+        if ('IntersectionObserver' in window) {
+          const imgObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                delete img.dataset.src;
+                imgObserver.unobserve(img);
+              }
+            });
+          }, { root: grid, rootMargin: '200px' });
+          lazyImages.forEach(img => imgObserver.observe(img));
+        } else {
+          lazyImages.forEach(img => { img.src = img.dataset.src; });
+        }
+      });
+    }
+
+    let searchDebounceTimer = null;
+    document.getElementById('searchInput').addEventListener('input', () => {
+      clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(() => {
+        renderWorldGrid();
+      }, 250);
     });
 
     setInterval(loadData, 60000);
     loadData();
 
-    // Load full 16,843 marketable items index for instant Japanese search
-    let allItemSearchDict = {};
     async function loadItemSearchDict() {
       try {
         const res = await fetch('items_search.json');
@@ -1190,7 +1179,6 @@
       }
     }
     loadItemSearchDict();
-
-    </script>
+  </script>
 </body>
 </html>
