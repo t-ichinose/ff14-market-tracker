@@ -1054,8 +1054,8 @@
           worldItems.length = 0;
           worldItems.push(...validItems);
         } else if (activeSortMode === 'max_price') {
-          // 高額取引モード: 平均価格が最高値の35%以上ある本物の高額品のみに厳選ソート (資金移動・異常値を100%遮断)
-          let cleanItems = worldItems.filter(item => (item.max_price || 0) > 0 && (((item.avg_price || 0) / item.max_price) >= 0.35));
+          // 高額取引モード: 売買実績があり(件数>0)、平均価格が最高値の35%以上ある本物の高額取引品に厳選ソート
+          let cleanItems = worldItems.filter(item => (item.max_price || 0) > 0 && (item.sale_trades || 0) > 0 && (((item.avg_price || 0) / item.max_price) >= 0.35));
           cleanItems.sort((a, b) => (b.max_price || 0) - (a.max_price || 0));
           worldItems.length = 0;
           worldItems.push(...cleanItems);

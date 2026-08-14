@@ -427,13 +427,12 @@ def export_web_json(conn=None, output_path="docs/data.json"):
         category_name = meta.get("category", "一般")
 
         real_vel = velocity_calc.get((iid, wname), round(vel or 0, 1))
-        hist_min, hist_avg, hist_max, hist_count = sales_stats.get((iid, wname), (min_p, avg_p, max_p, 0))
+        if (iid, wname) in sales_stats:
+            final_min, final_avg, final_max, hist_count = sales_stats[(iid, wname)]
+        else:
+            final_min, final_avg, final_max, hist_count = (min_p, avg_p, max_p, 0)
 
-        final_min = hist_min if hist_min else min_p
-        final_avg = hist_avg if hist_avg else (avg_p or 0)
-        final_max = hist_max if hist_max else max_p
-
-        daily_revenue = round(final_avg * real_vel)
+        daily_revenue = round(final_avg * real_vel) if hist_count > 0 else 0
         sale_trades = int(hist_count)
 
         item_obj = {
