@@ -193,7 +193,7 @@ def resolve_item_metadata_batch(conn, item_ids):
                     code_int = int(code_str)
                     code_padded = f"{code_int:06d}"
                     folder = code_padded[:3] + "000"
-                    icon_url = f"https://xivapi.com/i/{folder}/{code_padded}_hr1.png"
+                    icon_url = f"https://v2.xivapi.com/api/asset?path=ui/icon/{folder}/{code_padded}_hr1.tex&format=png"
                 category_name = g_data.get("category_name", category_name)
         except Exception:
             pass

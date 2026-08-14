@@ -1078,16 +1078,18 @@
           // 日商（流通ギル = 平均単価 × 日当売買数）
           const dailyRevenue = Math.round((item.avg_price || 0) * (item.sale_velocity || 0)).toLocaleString();
 
-          // 2段階フォールバック処理: _hr1高画質(404) -> 通常画質 -> 安全共通アイコン
+          // 新API (v2.xivapi.com) 対応＆安全フォールバック処理
           let rawIcon = item.icon_url || '';
-          if (rawIcon.includes('beta.xivapi.com/api/1/asset/ui/icon/')) {
-            rawIcon = rawIcon.replace('https://beta.xivapi.com/api/1/asset/ui/icon/', 'https://xivapi.com/i/').replace('.tex?format=png', '.png');
+          if (rawIcon.includes('xivapi.com/i/')) {
+            let m = rawIcon.match(/\/i\/(\d{6})\/(\d{6})(?:_hr1)?\.png/);
+            if (m) {
+              rawIcon = `https://v2.xivapi.com/api/asset?path=ui/icon/${m[1]}/${m[2]}_hr1.tex&format=png`;
+            }
           }
-          const primaryIcon = rawIcon || 'https://xivapi.com/i/020000/021001.png';
-          const secondaryIcon = primaryIcon.replace('_hr1.png', '.png');
-          const finalFallback = 'https://xivapi.com/i/020000/021001.png';
+          const primaryIcon = rawIcon || 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
+          const finalFallback = 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
           
-          const iconImg = `<img class="item-icon" src="${primaryIcon}" alt="" onerror="if (this.src.includes('_hr1.png')) { this.src='${secondaryIcon}'; } else { this.onerror=null; this.src='${finalFallback}'; }">`;
+          const iconImg = `<img class="item-icon" src="${primaryIcon}" alt="" onerror="this.onerror=null; this.src='${finalFallback}';">`;
 
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
 
