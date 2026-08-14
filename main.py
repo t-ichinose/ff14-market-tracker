@@ -179,24 +179,34 @@ def resolve_item_metadata_batch(conn, item_ids):
         icon_url = icons_map.get(str(iid)) or icons_map.get(iid) or ""
         category_name = "一般"
 
-        # Garland API fallback for icon and category
+        # Direct v2.xivapi.com Sheet API fallback for 100% accurate icons (Patch 1.0 to 7.x)
+        if not icon_url:
+            try:
+                res = requests.get(f"https://v2.xivapi.com/api/sheet/Item/{iid}?fields=Icon", headers=headers, timeout=4)
+                if res.status_code == 200:
+                    icon_data = res.json().get("fields", {}).get("Icon", {})
+                    path_hr1 = icon_data.get("path_hr1")
+                    if path_hr1:
+                        icon_url = f"https://v2.xivapi.com/api/asset?path={path_hr1}&format=png"
+            except Exception:
+                pass
+
+        # Garland API fallback for category and fallback name
         try:
-            res = requests.get(f"https://www.garlandtools.org/db/doc/item/ja/3/{iid}.json", headers=headers, timeout=5)
+            res = requests.get(f"https://www.garlandtools.org/db/doc/item/ja/3/{iid}.json", headers=headers, timeout=3)
             if res.status_code == 200:
                 res.encoding = 'utf-8'
                 g_data = res.json().get("item", {})
-                if not name:
-                    name = g_data.get("name")
-                icon_code = g_data.get("icon")
-                if icon_code:
-                    code_str = str(icon_code).replace("t/", "")
-                    code_int = int(code_str)
-                    code_padded = f"{code_int:06d}"
-                    folder = code_padded[:3] + "000"
-                    icon_url = f"https://v2.xivapi.com/api/asset?path=ui/icon/{folder}/{code_padded}_hr1.tex&format=png"
+                if not name or name.startswith("アイテム #"):
+                    g_name = g_data.get("name")
+                    if g_name:
+                        name = g_name
                 category_name = g_data.get("category_name", category_name)
         except Exception:
             pass
+
+        if not icon_url:
+            icon_url = "https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png"
 
         cursor.execute("""
         INSERT OR REPLACE INTO items_metadata (item_id, item_name, icon_url, category_name, fetched_at)
