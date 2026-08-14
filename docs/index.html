@@ -1078,29 +1078,11 @@
           // 日商（流通ギル = 平均単価 × 日当売買数）
           const dailyRevenue = Math.round((item.avg_price || 0) * (item.sale_velocity || 0)).toLocaleString();
 
-          // ハイブリッド自動フォールバック構成 (旧API -> 404なら新API -> 404なら共通デフォルト)
-          let rawIcon = item.icon_url || '';
-          let primaryIcon = rawIcon;
-          let v2FallbackIcon = '';
+          // 直通100%正解 v2.xivapi URL優先＆安全フォールバック構成
+          let primaryIcon = item.icon_url || 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
+          const safeFallback = 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
 
-          let m = rawIcon.match(/\/i\/(\d{6})\/(\d{6})(?:_hr1)?\.png/) || rawIcon.match(/ui\/icon\/(\d{6})\/(\d{6})/);
-          if (m) {
-            folder = m[1];
-            code = m[2];
-            primaryIcon = `https://xivapi.com/i/${folder}/${code}_hr1.png`;
-            v2FallbackIcon = `https://v2.xivapi.com/api/asset?path=ui/icon/${folder}/${code}_hr1.tex&format=png`;
-          } else if (rawIcon.includes('v2.xivapi.com')) {
-            v2FallbackIcon = rawIcon;
-            let m2 = rawIcon.match(/ui\/icon\/(\d{6})\/(\d{6})/);
-            if (m2) {
-              primaryIcon = `https://xivapi.com/i/${m2[1]}/${m2[2]}_hr1.png`;
-            }
-          }
-          if (!primaryIcon) primaryIcon = 'https://xivapi.com/i/020000/021001_hr1.png';
-          if (!v2FallbackIcon) v2FallbackIcon = 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
-          const safeFallback = 'https://xivapi.com/i/020000/021001_hr1.png';
-
-          const iconImg = `<img class="item-icon" src="${primaryIcon}" alt="" onerror="if (this.src !== '${v2FallbackIcon}') { this.src='${v2FallbackIcon}'; } else { this.onerror=null; this.src='${safeFallback}'; }">`;
+          const iconImg = `<img class="item-icon" src="${primaryIcon}" alt="" onerror="this.onerror=null; this.src='${safeFallback}';">`;
 
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
 
