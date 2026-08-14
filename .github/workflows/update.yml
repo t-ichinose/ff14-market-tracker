@@ -2,8 +2,8 @@ name: Scheduled Market Research Update
 
 on:
   schedule:
-    # 30分ごとに定期実行
-    - cron: '*/30 * * * *'
+    # 1時間ごとに定期実行 (渋滞・タイムアウト防止)
+    - cron: '0 * * * *'
   workflow_dispatch: # 手動実行ボタン
   push:
     branches:
@@ -15,6 +15,7 @@ permissions:
 jobs:
   update-market-data:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
