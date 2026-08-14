@@ -806,6 +806,7 @@
           <button class="sort-toggle-btn active" data-sort="velocity" onclick="setGlobalSort('velocity')">売買数</button>
           <button class="sort-toggle-btn" data-sort="revenue" onclick="setGlobalSort('revenue')">流通ギル</button>
           <button class="sort-toggle-btn" data-sort="avg_price" onclick="setGlobalSort('avg_price')">平均単価</button>
+          <button class="sort-toggle-btn" data-sort="max_price" onclick="setGlobalSort('max_price')">💎 高額取引</button>
         </div>
       </div>
 
@@ -1044,6 +1045,8 @@
           worldItems.sort((a, b) => ((b.avg_price || 0) * (b.sale_velocity || 0)) - ((a.avg_price || 0) * (a.sale_velocity || 0)));
         } else if (activeSortMode === 'avg_price') {
           worldItems.sort((a, b) => (b.avg_price || 0) - (a.avg_price || 0));
+        } else if (activeSortMode === 'max_price') {
+          worldItems.sort((a, b) => (b.max_price || 0) - (a.max_price || 0));
         } else if (activeSortMode === 'min_price') {
           worldItems.sort((a, b) => (b.min_price || 0) - (a.min_price || 0));
         } else {

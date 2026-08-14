@@ -439,12 +439,13 @@ def export_web_json(conn=None, output_path="docs/data.json"):
         # 売買数が10個未満のアイテムを除外（ノイズ排除）、ただしクリスタル類(ID 2-19)は無条件に保持
         filtered_items = [x for x in items if x["sale_velocity"] >= 10 or (2 <= x["item_id"] <= 19)]
         
-        # 売買数順および流通ギル順の両方の観点から上位100件をJSONに保持（フロントエンドでの自由な切替・ソートに対応）
+        # 売買数順、流通ギル順、および高額単価(max_price)順の全観点から上位品目をJSONに保持（フロントエンドでの切替・ソートに完全対応）
         top_by_revenue = set(x["item_id"] for x in sorted(filtered_items, key=lambda x: x["daily_revenue"], reverse=True)[:60])
         top_by_velocity = set(x["item_id"] for x in sorted(filtered_items, key=lambda x: x["sale_velocity"], reverse=True)[:60])
+        top_by_max_price = set(x["item_id"] for x in sorted(filtered_items, key=lambda x: x.get("max_price", 0), reverse=True)[:60])
         crystal_ids = set(x["item_id"] for x in filtered_items if 2 <= x["item_id"] <= 19)
         
-        keep_ids = top_by_revenue.union(top_by_velocity).union(crystal_ids)
+        keep_ids = top_by_revenue.union(top_by_velocity).union(top_by_max_price).union(crystal_ids)
         combined_items = [x for x in filtered_items if x["item_id"] in keep_ids]
         
         final_data_by_world[wname] = combined_items
