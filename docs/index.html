@@ -963,6 +963,8 @@
       });
     }
 
+    let lastLoadedTime = null;
+
     async function loadData() {
       try {
         const cacheBuster = `t=${Date.now()}_${Math.random()}`;
@@ -975,6 +977,12 @@
           const formattedLastUpdated = formatTimeJST(data.last_updated);
           lastUpdatedEl.innerHTML = `<span class="status-dot"></span> 最終更新: ${formattedLastUpdated}`;
         }
+
+        // データに更新がない場合は再描画を行わない（チカチカ防止）
+        if (lastLoadedTime && lastLoadedTime === data.last_updated) {
+          return;
+        }
+        lastLoadedTime = data.last_updated;
 
         allData = data.data || {};
         if (data.dc_worlds) {
@@ -1063,13 +1071,13 @@
           // 日商（流通ギル = 平均単価 × 日当売買数）
           const dailyRevenue = Math.round((item.avg_price || 0) * (item.sale_velocity || 0)).toLocaleString();
 
-          // アイコンURL: data.json の icon_url をそのまま使用（beta.xivapi.com 統一済み）
-          // フォールバック: icon_url からコードを抽出し beta.xivapi.com で再試行
-          const iconUrl = item.icon_url && !item.icon_url.endsWith('000000.png') ? item.icon_url : 'https://beta.xivapi.com/api/1/asset/ui/icon/020000/021001_hr1.tex?format=png';
-          const codeMatch = iconUrl.match(/(\d{6})/);
-          const fbCode = codeMatch ? codeMatch[1] : '021001';
-          const fbFolder = fbCode.substring(0, 3) + '000';
-          const fallbackUrl = `https://beta.xivapi.com/api/1/asset/ui/icon/${fbFolder}/${fbCode}_hr1.tex?format=png`;
+          // アイコンURL変換・フォールバック
+          let rawIcon = item.icon_url || '';
+          if (rawIcon.includes('beta.xivapi.com/api/1/asset/ui/icon/')) {
+            rawIcon = rawIcon.replace('https://beta.xivapi.com/api/1/asset/ui/icon/', 'https://xivapi.com/i/').replace('.tex?format=png', '.png');
+          }
+          const iconUrl = rawIcon || 'https://xivapi.com/i/020000/021001_hr1.png';
+          const fallbackUrl = 'https://xivapi.com/i/020000/021001_hr1.png';
           const iconImg = `<img class="item-icon" src="${iconUrl}" alt="" onerror="this.onerror=null; this.src='${fallbackUrl}';">`;
 
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
@@ -1149,8 +1157,12 @@
       });
     }
 
+    let searchDebounceTimer = null;
     document.getElementById('searchInput').addEventListener('input', () => {
-      renderWorldGrid();
+      clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(() => {
+        renderWorldGrid();
+      }, 250);
     });
 
     setInterval(loadData, 60000);

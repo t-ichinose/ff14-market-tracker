@@ -193,7 +193,7 @@ def resolve_item_metadata_batch(conn, item_ids):
                     code_int = int(code_str)
                     code_padded = f"{code_int:06d}"
                     folder = code_padded[:3] + "000"
-                    icon_url = f"https://beta.xivapi.com/api/1/asset/ui/icon/{folder}/{code_padded}_hr1.tex?format=png"
+                    icon_url = f"https://xivapi.com/i/{folder}/{code_padded}_hr1.png"
                 category_name = g_data.get("category_name", category_name)
         except Exception:
             pass
@@ -395,8 +395,12 @@ def export_web_json(conn=None, output_path="docs/data.json"):
         icon_url = meta.get("icon", "")
         if mapped_icon:
             icon_url = mapped_icon
-        elif not icon_url or "000000.png" in icon_url or "021001_hr1" in icon_url:
-            icon_url = "https://beta.xivapi.com/api/1/asset/ui/icon/020000/021001_hr1.tex?format=png"
+        
+        if "beta.xivapi.com/api/1/asset/ui/icon/" in icon_url:
+            icon_url = icon_url.replace("https://beta.xivapi.com/api/1/asset/ui/icon/", "https://xivapi.com/i/").replace(".tex?format=png", ".png")
+
+        if not icon_url or "000000.png" in icon_url or "021001_hr1" in icon_url:
+            icon_url = "https://xivapi.com/i/020000/021001_hr1.png"
         category_name = meta.get("category", "一般")
 
         real_vel = velocity_calc.get((iid, wname), round(vel or 0, 1))

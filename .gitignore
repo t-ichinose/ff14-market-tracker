@@ -5,4 +5,5 @@ __pycache__/
 scratch/
 data/
 check_data/
+exports/
 *.txt
