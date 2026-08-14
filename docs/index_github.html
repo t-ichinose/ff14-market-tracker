@@ -1040,13 +1040,21 @@
           return true;
         });
 
-        // Sort worldItems by activeSortMode
+        // Sort worldItems by activeSortMode with appropriate noise reduction filters
         if (activeSortMode === 'revenue') {
-          worldItems.sort((a, b) => ((b.avg_price || 0) * (b.sale_velocity || 0)) - ((a.avg_price || 0) * (a.sale_velocity || 0)));
+          // 流通ギルモード: 売買数が10個以上の動いているアイテムのみに絞り込んでソート(ノイズ除去)
+          let validItems = worldItems.filter(item => (item.sale_velocity || 0) >= 10 || isCrystalItem(item));
+          validItems.sort((a, b) => ((b.avg_price || 0) * (b.sale_velocity || 0)) - ((a.avg_price || 0) * (a.sale_velocity || 0)));
+          worldItems.length = 0;
+          worldItems.push(...validItems);
         } else if (activeSortMode === 'avg_price') {
-          worldItems.sort((a, b) => (b.avg_price || 0) - (a.avg_price || 0));
+          // 平均単価モード: 売買数が10個以上の品目に限定してソート(単発ノイズ除去)
+          let validItems = worldItems.filter(item => (item.sale_velocity || 0) >= 10);
+          validItems.sort((a, b) => (b.avg_price || 0) - (a.avg_price || 0));
+          worldItems.length = 0;
+          worldItems.push(...validItems);
         } else if (activeSortMode === 'max_price') {
-          // 常時クリーンフィルター: 平均価格が最高値の35%以上ある本物の高額品のみに厳選ソート (資金移動・異常値を100%遮断)
+          // 高額取引モード: 平均価格が最高値の35%以上ある本物の高額品のみに厳選ソート (資金移動・異常値を100%遮断)
           let cleanItems = worldItems.filter(item => (item.max_price || 0) > 0 && (((item.avg_price || 0) / item.max_price) >= 0.35));
           cleanItems.sort((a, b) => (b.max_price || 0) - (a.max_price || 0));
           worldItems.length = 0;
