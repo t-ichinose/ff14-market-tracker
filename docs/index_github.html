@@ -1042,14 +1042,14 @@
 
         // Sort worldItems by activeSortMode with appropriate noise reduction filters
         if (activeSortMode === 'revenue') {
-          // 流通ギルモード: 売買数が10個以上の動いているアイテムのみに絞り込んでソート(ノイズ除去)
-          let validItems = worldItems.filter(item => (item.sale_velocity || 0) >= 10 || isCrystalItem(item));
+          // 流通ギルモード: 1日1個以上売れている実績ある品目(フォーチュンカロット等)に絞り込んでソート
+          let validItems = worldItems.filter(item => (item.sale_velocity || 0) >= 1.0 || isCrystalItem(item));
           validItems.sort((a, b) => ((b.avg_price || 0) * (b.sale_velocity || 0)) - ((a.avg_price || 0) * (a.sale_velocity || 0)));
           worldItems.length = 0;
           worldItems.push(...validItems);
         } else if (activeSortMode === 'avg_price') {
-          // 平均単価モード: 売買数が10個以上の品目に限定してソート(単発ノイズ除去)
-          let validItems = worldItems.filter(item => (item.sale_velocity || 0) >= 10);
+          // 平均単価モード: 1日1個以上売れている品目に限定してソート
+          let validItems = worldItems.filter(item => (item.sale_velocity || 0) >= 1.0);
           validItems.sort((a, b) => (b.avg_price || 0) - (a.avg_price || 0));
           worldItems.length = 0;
           worldItems.push(...validItems);
