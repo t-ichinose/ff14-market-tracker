@@ -7,3 +7,4 @@ data/
 check_data/
 exports/
 *.txt
+!requirements.txt
