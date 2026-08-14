@@ -450,7 +450,8 @@ def export_web_json(conn=None, output_path="docs/data.json"):
             "daily_revenue": daily_revenue,
             "updated_at": updated
         }
-        data_by_world.setdefault(wname, []).append(item_obj)
+        if sale_trades > 0:
+            data_by_world.setdefault(wname, []).append(item_obj)
 
     final_data_by_world = {}
     for wname, items in data_by_world.items():

@@ -1035,6 +1035,7 @@
       grid.innerHTML = worlds.map(worldName => {
         // Prepare items for this world with world-specific metrics (日当たり売買数 50以上限定)
         const worldItems = (allData[worldName] || []).filter(item => {
+          if ((item.sale_trades || 0) <= 0) return false; // 共通ルール: 販売実績がない品目(売買件数 0件)は全タブで完全非表示
           if (excludeCrystals && isCrystalItem(item)) return false;
           if (searchTerm && !item.item_name.toLowerCase().includes(searchTerm) && !String(item.item_id).includes(searchTerm)) return false;
           return true;
