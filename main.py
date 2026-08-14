@@ -397,7 +397,8 @@ def export_web_json(conn=None, output_path="docs/data.json"):
             sp = sorted(prices)
             avg_p = sp[len(sp) // 2]
             
-        sales_stats[key] = (min_p, avg_p, max_p)
+        count_p = len(prices)
+        sales_stats[key] = (min_p, avg_p, max_p, count_p)
 
     cursor.execute("""
     SELECT item_id, world_name, dc_name, min_price, avg_price, max_price, units_for_sale, listings_count, sale_velocity, updated_at
@@ -426,13 +427,14 @@ def export_web_json(conn=None, output_path="docs/data.json"):
         category_name = meta.get("category", "一般")
 
         real_vel = velocity_calc.get((iid, wname), round(vel or 0, 1))
-        hist_min, hist_avg, hist_max = sales_stats.get((iid, wname), (min_p, avg_p, max_p))
+        hist_min, hist_avg, hist_max, hist_count = sales_stats.get((iid, wname), (min_p, avg_p, max_p, 0))
 
         final_min = hist_min if hist_min else min_p
         final_avg = hist_avg if hist_avg else (avg_p or 0)
         final_max = hist_max if hist_max else max_p
 
         daily_revenue = round(final_avg * real_vel)
+        sale_trades = round(hist_count / 7.0, 1) if hist_count > 0 else 0.0
 
         item_obj = {
             "item_id": iid,
@@ -445,6 +447,7 @@ def export_web_json(conn=None, output_path="docs/data.json"):
             "units_for_sale": u_sale,
             "listings_count": l_count,
             "sale_velocity": real_vel,
+            "sale_trades": sale_trades,
             "daily_revenue": daily_revenue,
             "updated_at": updated
         }
