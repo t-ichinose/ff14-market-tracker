@@ -467,6 +467,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.55rem;
+      cursor: pointer;
     }
 
     .item-card:hover {
@@ -1276,19 +1277,19 @@
           let primaryIcon = item.icon_url || 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
           const safeFallback = 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
 
-          const iconImg = `<img class="item-icon item-icon-clickable" src="${primaryIcon}" alt="" onclick="openItemModal(${item.item_id}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${worldName}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}')" title="クリックで取引履歴と詳細を表示" onerror="this.onerror=null; this.src='${safeFallback}';">`;
+          const iconImg = `<img class="item-icon" src="${primaryIcon}" alt="" onerror="this.onerror=null; this.src='${safeFallback}';">`;
 
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
 
           return `
-            <div class="item-card" data-velocity="${item.sale_velocity || 0}" data-avg_price="${item.avg_price || 0}" data-min_price="${item.min_price || 0}">
+            <div class="item-card" data-velocity="${item.sale_velocity || 0}" data-avg_price="${item.avg_price || 0}" data-min_price="${item.min_price || 0}" onclick="openItemModal(${item.item_id}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${worldName}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}')" title="クリックで取引履歴と詳細を表示">
               <div class="item-card-header">
                 ${iconImg}
                 <div class="item-header-text">
                   <span class="item-card-title">
                     <span class="rank-tag">#${idx + 1}</span>
-                    <span class="item-card-title-clickable" onclick="openItemModal(${item.item_id}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${worldName}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}')" title="クリックで取引履歴と詳細を表示">${cleanTitle}</span>
-                    <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" title="Lodestoneで検索">
+                    <span>${cleanTitle}</span>
+                    <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" title="Lodestoneで検索" onclick="event.stopPropagation()">
                       <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
                   </span>
