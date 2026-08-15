@@ -784,8 +784,22 @@
       background: rgba(11, 17, 30, 0.7);
       border: 1px solid var(--card-border);
       border-radius: 12px;
-      overflow: hidden;
-      min-height: 250px;
+      overflow-y: auto;
+      max-height: 380px;
+      min-height: 200px;
+    }
+
+    .history-table-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .history-table-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+
+    .history-table-container::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-blue);
     }
 
     .history-table {
@@ -796,7 +810,11 @@
     }
 
     .history-table th {
-      background: rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(8px);
       padding: 0.65rem 1rem;
       color: var(--text-muted);
       font-weight: 600;
