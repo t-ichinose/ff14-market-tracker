@@ -177,6 +177,17 @@ def load_items_search():
             pass
     return {}
 
+def compute_xivapi_icon_url(icon_id: int) -> str:
+    """アイテムIDまたはアイコンIDからXIVAPI v2の完全な高解像度PNGアイコンURLを動的に計算"""
+    try:
+        iid = int(icon_id)
+        folder_num = (iid // 1000) * 1000
+        folder_str = f"{folder_num:06d}"
+        icon_str = f"{iid:06d}"
+        return f"https://v2.xivapi.com/api/asset?path=ui/icon/{folder_str}/{icon_str}_hr1.tex&format=png"
+    except Exception:
+        return "https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png"
+
 def resolve_item_metadata_batch(conn, item_ids):
     headers = DEFAULT_HEADERS
     meta_map = {}
@@ -231,8 +242,12 @@ def resolve_item_metadata_batch(conn, item_ids):
         except Exception:
             pass
 
+        str_id = str(iid)
+        if str_id in icons_map:
+            icon_url = icons_map[str_id]
+
         if not icon_url:
-            icon_url = "https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png"
+            icon_url = compute_xivapi_icon_url(iid)
 
         cursor.execute("""
         INSERT OR REPLACE INTO items_metadata (item_id, item_name, icon_url, category_name, fetched_at)
@@ -248,7 +263,7 @@ def fetch_single_world_data(world_name, target_ids):
     """1ワールド分のアイテムデータを取得。指数バックオフでリトライ (#17)"""
     headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=50"
+    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=500"
     for attempt in range(3):
         try:
             d_res = requests.get(detail_url, headers=headers, timeout=8)
@@ -318,7 +333,7 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str = None):
 
     for chunk_idx, chunk_ids in enumerate(item_chunks, 1):
         world_results = {}
-        with ThreadPoolExecutor(max_workers=len(target_worlds)) as executor:
+        with ThreadPoolExecutor(max_workers=min(3, len(target_worlds))) as executor:
             futures = [executor.submit(fetch_single_world_data, w, chunk_ids) for w in target_worlds]
             for future in as_completed(futures):
                 w_name, w_items = future.result()
@@ -337,8 +352,8 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str = None):
             for item_id_str, data in world_items_data.items():
                 item_id = int(item_id_str)
 
-                # 取引履歴のメモリ蓄積 (最大50件)
-                recent_history = data.get("recentHistory", [])[:50]
+                # 取引履歴のメモリ蓄積 (最大500件)
+                recent_history = data.get("recentHistory", [])[:500]
                 for h in recent_history:
                     ts = h.get("timestamp", 0)
                     price = h.get("pricePerUnit", 0)
@@ -388,9 +403,12 @@ def process_dc_pipeline(scope_name: str, conn, now_str: str = None):
     print(f"  [{scope_name}] Complete Iterative Cycle Finished: {total_sales_inserted:,} sales & {total_stats_inserted:,} stats saved.")
 
 def export_web_json(conn, output_path="docs/data.json"):
-    """DB データを集約して docs/data.json を出力 (#6: connは必須引数に)"""
+    """DB データを集約して docs/data.json を出力 (全集計を直近7日間に厳密限定)"""
     cursor = conn.cursor()
-    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    now_dt = datetime.now(timezone.utc)
+    now_str = now_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+    now_ts = int(now_dt.timestamp())
+    seven_days_ago_ts = now_ts - (7 * 86400)  # 直近1週間 (7日間) のタイムスタンプ基準
 
     items_search = get_items_search()
     icons_map = get_icons_map()
@@ -398,23 +416,30 @@ def export_web_json(conn, output_path="docs/data.json"):
     cursor.execute("SELECT item_id, item_name, icon_url, category_name FROM items_metadata")
     meta_dict = {row[0]: {"name": row[1], "icon": row[2], "category": row[3]} for row in cursor.fetchall()}
 
-    # 実際のデータ蓄積日数を算出して正確な日販数を計算 (#8)
-    cursor.execute("SELECT MIN(timestamp), MAX(timestamp) FROM sales_history")
+    # 実際のデータ蓄積日数を算出して正確な日販数を計算 (直近7日間に厳密限定)
+    cursor.execute("SELECT MIN(timestamp), MAX(timestamp) FROM sales_history WHERE timestamp >= ?", (seven_days_ago_ts,))
     ts_range = cursor.fetchone()
     if ts_range and ts_range[0] and ts_range[1]:
-        actual_days = max(1.0, (ts_range[1] - ts_range[0]) / 86400.0)
+        calc_days = (ts_range[1] - ts_range[0]) / 86400.0
+        actual_days = min(7.0, max(1.0, calc_days))
     else:
         actual_days = 7.0
 
+    # 直近1週間以内の売買数・売買件数を厳密集計
     cursor.execute("""
     SELECT item_id, world_name, SUM(quantity) as total_qty, COUNT(*) as trade_count
     FROM sales_history
+    WHERE timestamp >= ?
     GROUP BY item_id, world_name
-    """)
+    """, (seven_days_ago_ts,))
     velocity_calc = {(row[0], row[1]): round(row[2] / actual_days, 1) for row in cursor.fetchall()}
 
-    # トリム平均 (Trimmed Mean): 上下10%の異常値・外れ値をカットして真の平均単価を算出
-    cursor.execute("SELECT item_id, world_name, price_per_unit FROM sales_history")
+    # トリム平均 (Trimmed Mean): 直近1週間以内の価格データから上下10%の外れ値をカットして真の平均単価を算出
+    cursor.execute("""
+    SELECT item_id, world_name, price_per_unit 
+    FROM sales_history 
+    WHERE timestamp >= ?
+    """, (seven_days_ago_ts,))
     sales_raw = {}
     for row in cursor.fetchall():
         sales_raw.setdefault((row[0], row[1]), []).append(row[2])

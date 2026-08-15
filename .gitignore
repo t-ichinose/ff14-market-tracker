@@ -3,8 +3,9 @@ __pycache__/
 *.log
 .tempmediaStorage/
 scratch/
-data/
 check_data/
 exports/
-*.txt
-!requirements.txt
+data/
+*.db
+*.db-shm
+*.db-wal

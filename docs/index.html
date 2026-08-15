@@ -1143,6 +1143,16 @@
       "Meteor": ["Belias", "Mandragora", "Ramuh", "Shinryu", "Unicorn", "Valefor", "Yojimbo", "Zeromus"]
     };
 
+    // アイコンURLの動的計算アルゴリズム (アイテムIDからXIVAPI v2高画質PNGアイコンURLを100%自動算出)
+    function getComputedIconUrl(itemId) {
+      if (!itemId) return 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
+      const id = Number(itemId);
+      const folderNum = Math.floor(id / 1000) * 1000;
+      const folderStr = String(folderNum).padStart(6, '0');
+      const iconStr = String(id).padStart(6, '0');
+      return `https://v2.xivapi.com/api/asset?path=ui/icon/${folderStr}/${iconStr}_hr1.tex&format=png`;
+    }
+
     // クリスタル・シャード・クラスター・触媒の判定関数 (ID: 2~19 判定含む)
     function isCrystalItem(item) {
       if (!item) return false;
@@ -1380,11 +1390,12 @@
           // 日商（流通ギル = 平均単価 × 日当売買数）
           const dailyRevenue = Math.round((item.avg_price || 0) * (item.sale_velocity || 0)).toLocaleString();
 
-          // 直通100%正解 v2.xivapi URL優先＆安全フォールバック構成
-          let primaryIcon = item.icon_url || 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
+          // アイコンURL動的計算 ＆ 多重フォールバック構成
+          const computedIcon = getComputedIconUrl(item.item_id);
+          let primaryIcon = (item.icon_url && !item.icon_url.includes("021001_hr1")) ? item.icon_url : computedIcon;
           const safeFallback = 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
 
-          const iconImg = `<img class="item-icon" src="${primaryIcon}" alt="" onerror="this.onerror=null; this.src='${safeFallback}';">`;
+          const iconImg = `<img class="item-icon" src="${primaryIcon}" alt="" onerror="if(this.src !== '${computedIcon}') { this.src='${computedIcon}'; } else { this.onerror=null; this.src='${safeFallback}'; }">`;
 
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
 
