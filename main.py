@@ -51,6 +51,14 @@ def init_db(db_path="data/market_data.db"):
     )
     """)
     
+    # 2b. sales_history 高速検索用インデックス (#5)
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_sales_item_world ON sales_history (item_id, world_name)
+    """)
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_sales_timestamp ON sales_history (timestamp)
+    """)
+    
     # 3. 最新統計情報シート (item_market_stats)
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS item_market_stats (
@@ -110,6 +118,30 @@ def cleanup_old_logs(conn, days=7):
 
 DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
+# キャッシュ用グローバル変数 (#7: ファイルの重複ロード防止)
+_items_search_cache = None
+_icons_map_cache = None
+
+def get_items_search():
+    """items_search.json を一度だけ読み込んでキャッシュ返却"""
+    global _items_search_cache
+    if _items_search_cache is None:
+        _items_search_cache = load_items_search()
+    return _items_search_cache
+
+def get_icons_map():
+    """icons_map.json を一度だけ読み込んでキャッシュ返却"""
+    global _icons_map_cache
+    if _icons_map_cache is None:
+        _icons_map_cache = {}
+        if os.path.exists("docs/icons_map.json"):
+            try:
+                with open("docs/icons_map.json", "r", encoding="utf-8") as f:
+                    _icons_map_cache = json.load(f)
+            except Exception:
+                pass
+    return _icons_map_cache
+
 def ensure_items_search_json(output_path="docs/items_search.json"):
     if os.path.exists(output_path) and os.path.getsize(output_path) > 100000:
         return
@@ -149,14 +181,8 @@ def resolve_item_metadata_batch(conn, item_ids):
     headers = DEFAULT_HEADERS
     meta_map = {}
     
-    items_search = load_items_search()
-    icons_map = {}
-    if os.path.exists("docs/icons_map.json"):
-        try:
-            with open("docs/icons_map.json", "r", encoding="utf-8") as f:
-                icons_map = json.load(f)
-        except Exception:
-            pass
+    items_search = get_items_search()
+    icons_map = get_icons_map()
     cursor = conn.cursor()
 
     missing_ids = []
@@ -219,25 +245,29 @@ def resolve_item_metadata_batch(conn, item_ids):
     return meta_map
 
 def fetch_single_world_data(world_name, target_ids):
+    """1ワールド分のアイテムデータを取得。指数バックオフでリトライ (#17)"""
     headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
     detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=50"
-    for attempt in range(2):
+    for attempt in range(3):
         try:
-            d_res = requests.get(detail_url, headers=headers, timeout=5)
+            d_res = requests.get(detail_url, headers=headers, timeout=8)
             if d_res.status_code == 200:
                 return world_name, d_res.json().get('items', {})
-            elif d_res.status_code in (429, 502, 503, 504):
-                time.sleep(0.5 * (attempt + 1))
+            elif d_res.status_code == 429:
+                # レート制限: Retry-After ヘッダーを尊重、なければ指数バックオフ
+                retry_after = int(d_res.headers.get('Retry-After', 2 ** (attempt + 1)))
+                time.sleep(min(retry_after, 30))
+            elif d_res.status_code in (502, 503, 504):
+                time.sleep(2 ** attempt)  # 1s → 2s → 4s
         except Exception:
-            time.sleep(0.3 * (attempt + 1))
+            time.sleep(2 ** attempt)
     return world_name, {}
 
-def process_dc_pipeline(scope_name: str, now_str: str = None):
+def process_dc_pipeline(scope_name: str, conn, now_str: str = None):
+    """1つのDCに属する全ワールドのデータを取得・保存 (#6: connを外部から受け取る)"""
     if not now_str:
         now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-    conn = init_db("data/market_data.db")
     headers = DEFAULT_HEADERS
     cursor = conn.cursor()
     target_worlds = DC_WORLDS.get(scope_name, [])
@@ -356,35 +386,32 @@ def process_dc_pipeline(scope_name: str, now_str: str = None):
         total_stats_inserted += len(market_stats_batch)
 
     print(f"  [{scope_name}] Complete Iterative Cycle Finished: {total_sales_inserted:,} sales & {total_stats_inserted:,} stats saved.")
-    conn.close()
 
-def export_web_json(conn=None, output_path="docs/data.json"):
-    should_close = False
-    if conn is None:
-        conn = init_db("data/market_data.db")
-        should_close = True
-
+def export_web_json(conn, output_path="docs/data.json"):
+    """DB データを集約して docs/data.json を出力 (#6: connは必須引数に)"""
     cursor = conn.cursor()
     now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    items_search = load_items_search()
-    icons_map = {}
-    if os.path.exists("docs/icons_map.json"):
-        try:
-            with open("docs/icons_map.json", "r", encoding="utf-8") as f:
-                icons_map = json.load(f)
-        except Exception:
-            pass
+    items_search = get_items_search()
+    icons_map = get_icons_map()
 
     cursor.execute("SELECT item_id, item_name, icon_url, category_name FROM items_metadata")
     meta_dict = {row[0]: {"name": row[1], "icon": row[2], "category": row[3]} for row in cursor.fetchall()}
+
+    # 実際のデータ蓄積日数を算出して正確な日販数を計算 (#8)
+    cursor.execute("SELECT MIN(timestamp), MAX(timestamp) FROM sales_history")
+    ts_range = cursor.fetchone()
+    if ts_range and ts_range[0] and ts_range[1]:
+        actual_days = max(1.0, (ts_range[1] - ts_range[0]) / 86400.0)
+    else:
+        actual_days = 7.0
 
     cursor.execute("""
     SELECT item_id, world_name, SUM(quantity) as total_qty, COUNT(*) as trade_count
     FROM sales_history
     GROUP BY item_id, world_name
     """)
-    velocity_calc = {(row[0], row[1]): round(row[2] / 7.0, 1) for row in cursor.fetchall()}
+    velocity_calc = {(row[0], row[1]): round(row[2] / actual_days, 1) for row in cursor.fetchall()}
 
     # トリム平均 (Trimmed Mean): 上下10%の異常値・外れ値をカットして真の平均単価を算出
     cursor.execute("SELECT item_id, world_name, price_per_unit FROM sales_history")
@@ -491,28 +518,37 @@ def export_web_json(conn=None, output_path="docs/data.json"):
     }
 
     with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(web_data, f, ensure_ascii=False, indent=2)
+        json.dump(web_data, f, ensure_ascii=False, separators=(",", ":"))
 
-    print(f"Exported streamlined web JSON to {output_path}")
-
-    if should_close:
-        conn.close()
+    file_size_kb = os.path.getsize(output_path) / 1024
+    print(f"Exported streamlined web JSON to {output_path} ({file_size_kb:.0f} KB)")
 
 def fetch_and_save_all(target_dc=None):
+    """メインエントリポイント: データ取得 → クリーンアップ → メタデータ解決 → JSON出力 (#6: DB接続を一元化)"""
     now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     dcs = [target_dc] if target_dc and target_dc in JP_DATACENTERS else JP_DATACENTERS
+
+    conn = init_db("data/market_data.db")
 
     for scope in dcs:
         print(f"--- Processing DC & All Worlds Direct: {scope} ---")
         try:
-            process_dc_pipeline(scope, now_str)
+            process_dc_pipeline(scope, conn, now_str)
         except Exception as e:
             print(f"[{scope}] Error in pipeline: {e}")
 
-    c_conn = init_db("data/market_data.db")
-    cleanup_old_logs(c_conn, 7)
-    c_conn.close()
-    export_web_json(None, "docs/data.json")
+    cleanup_old_logs(conn, 7)
+
+    # メタデータ解決: プール内全アイテムの名前・アイコン・カテゴリをDBに書き込む (#1)
+    cursor = conn.cursor()
+    cursor.execute("SELECT item_id FROM items_pool")
+    all_pool_ids = [row[0] for row in cursor.fetchall()]
+    if all_pool_ids:
+        print(f"Resolving metadata for {len(all_pool_ids)} pooled items...")
+        resolve_item_metadata_batch(conn, all_pool_ids)
+
+    export_web_json(conn, "docs/data.json")
+    conn.close()
 
 if __name__ == "__main__":
     target_dc = None

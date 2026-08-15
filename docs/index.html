@@ -371,48 +371,6 @@
     }
 
     /* World Grid (4 Columns Visible, Lightweight Carousel) */
-    .grid-scroll-wrapper {
-      position: relative;
-      width: 100%;
-    }
-
-    .grid-slide-btn {
-      position: absolute;
-      top: 40%;
-      transform: translateY(-50%);
-      z-index: 90;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(0, 210, 255, 0.4);
-      color: var(--accent-blue);
-      font-size: 1.15rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(8px);
-      transition: all 0.25s ease;
-    }
-
-    .grid-slide-btn:hover {
-      background: var(--accent-blue);
-      color: #000000;
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
-      transform: translateY(-50%) scale(1.12);
-    }
-
-    .grid-slide-left {
-      left: -18px;
-    }
-
-    .grid-slide-right {
-      right: -18px;
-    }
-
     .world-grid {
       display: flex;
       gap: 1rem;
@@ -538,14 +496,6 @@
       min-width: 0;
     }
 
-    .rank-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--accent-blue);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
     .item-card-title {
       font-weight: 700;
       font-size: 0.95rem;
@@ -579,6 +529,8 @@
       align-items: center;
       gap: 0.4rem;
       flex-wrap: wrap;
+    }
+
     .item-section-box {
       background: rgba(0, 0, 0, 0.25);
       border: 1px solid rgba(255, 255, 255, 0.05);
@@ -631,130 +583,6 @@
       font-weight: 600;
     }
 
-    .chart-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(121, 40, 202, 0.2);
-      border: 1px solid rgba(121, 40, 202, 0.4);
-      color: #c084fc;
-      padding: 0.38rem 0.6rem;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      width: 100%;
-      justify-content: center;
-      margin-top: 0.2rem;
-    }
-
-    .chart-btn:hover {
-      background: rgba(121, 40, 202, 0.45);
-      color: #ffffff;
-      box-shadow: 0 0 12px rgba(121, 40, 202, 0.4);
-    }
-
-    /* Grid Slide Container & Navigation Buttons */
-    .grid-scroll-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-      width: 100%;
-    }
-
-    .grid-slide-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 100;
-      width: 38px;
-      height: 64px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: var(--accent-blue);
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-      transition: all 0.2s ease;
-    }
-
-    .grid-slide-btn:hover {
-      background: rgba(0, 210, 255, 0.25);
-      color: #ffffff;
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 14px rgba(0, 210, 255, 0.4);
-    }
-
-    .grid-slide-left {
-      left: -12px;
-    }
-
-    .grid-slide-right {
-      right: -12px;
-    }
-
-
-
-    /* Modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(11, 15, 25, 0.85);
-      backdrop-filter: blur(12px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.25s ease;
-    }
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    .modal-card {
-      background: rgba(22, 30, 49, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      width: 92%;
-      max-width: 850px;
-      padding: 1.5rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    }
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-    .modal-close-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: none;
-      color: var(--text-muted);
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .chart-container {
-      position: relative;
-      width: 100%;
-      height: 380px;
-    }
   </style>
 </head>
 <body>
@@ -849,7 +677,6 @@
       "Mana": ["Anima", "Asura", "Chocobo", "Hades", "Ixion", "Masamune", "Pandaemonium", "Titan"],
       "Meteor": ["Belias", "Mandragora", "Ramuh", "Shinryu", "Unicorn", "Valefor", "Yojimbo", "Zeromus"]
     };
-    let allItemSearchDict = {};
 
     // クリスタル・シャード・クラスター・触媒の判定関数 (ID: 2~19 判定含む)
     function isCrystalItem(item) {
@@ -919,7 +746,7 @@
       }
     }
 
-    function formatTimeJST(rawTimeStr) {
+    function formatTimeLocal(rawTimeStr) {
       if (!rawTimeStr) return '-';
       let str = String(rawTimeStr).trim();
       if (!str.endsWith('Z') && !str.includes('+')) {
@@ -936,7 +763,7 @@
       return `${year}-${month}-${day} ${hours}:${minutes}`;
     }
 
-    function formatChartLabelJST(rawTimeStr) {
+    function formatChartLabelLocal(rawTimeStr) {
       if (!rawTimeStr) return '';
       let str = String(rawTimeStr).trim();
       if (!str.endsWith('Z') && !str.includes('+')) {
@@ -975,7 +802,7 @@
 
         const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
         if (lastUpdatedEl) {
-          const formattedLastUpdated = formatTimeJST(data.last_updated);
+          const formattedLastUpdated = formatTimeLocal(data.last_updated);
           lastUpdatedEl.innerHTML = `<span class="status-dot"></span> 最終更新: ${formattedLastUpdated}`;
         }
 
@@ -1150,26 +977,6 @@
           </div>
         `;
       }).join('');
-
-      // 遅延画像読み込み: 画面内に入ったアイコンだけ読み込む
-      requestAnimationFrame(() => {
-        const lazyImages = grid.querySelectorAll('img[data-src]');
-        if ('IntersectionObserver' in window) {
-          const imgObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                delete img.dataset.src;
-                imgObserver.unobserve(img);
-              }
-            });
-          }, { root: grid, rootMargin: '200px' });
-          lazyImages.forEach(img => imgObserver.observe(img));
-        } else {
-          lazyImages.forEach(img => { img.src = img.dataset.src; });
-        }
-      });
     }
 
     let searchDebounceTimer = null;
@@ -1182,18 +989,6 @@
 
     setInterval(loadData, 60000);
     loadData();
-
-    async function loadItemSearchDict() {
-      try {
-        const res = await fetch('items_search.json');
-        if (res.ok) {
-          allItemSearchDict = await res.json();
-        }
-      } catch (e) {
-        console.warn("Could not load items_search.json:", e);
-      }
-    }
-    loadItemSearchDict();
   </script>
 </body>
 </html>
