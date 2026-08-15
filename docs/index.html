@@ -1056,7 +1056,7 @@
 
       <!-- Modal Body -->
       <div class="modal-body">
-        <!-- 1. DC内ハイライト比較 (最安値・最安平均・最高平均・最高値) -->
+        <!-- 1. DC内ハイライト比較 (最安値 ➔ 最高値 ➔ 最安平均 ➔ 最高平均) -->
         <div class="dc-summary-grid">
           <div class="dc-summary-card min-card">
             <div>
@@ -1064,6 +1064,14 @@
               <div class="dc-summary-world" id="modalMinWorld">-</div>
             </div>
             <div class="dc-summary-price" id="modalMinPrice">-G</div>
+          </div>
+
+          <div class="dc-summary-card max-card">
+            <div>
+              <div class="dc-summary-label"><i class="fa-solid fa-arrow-trend-up" style="color:#ef4444;"></i> 最高値ワールド</div>
+              <div class="dc-summary-world" id="modalMaxWorld">-</div>
+            </div>
+            <div class="dc-summary-price" id="modalMaxPrice">-G</div>
           </div>
 
           <div class="dc-summary-card min-avg-card">
@@ -1080,14 +1088,6 @@
               <div class="dc-summary-world" id="modalMaxAvgWorld">-</div>
             </div>
             <div class="dc-summary-price" id="modalMaxAvgPrice">-G</div>
-          </div>
-
-          <div class="dc-summary-card max-card">
-            <div>
-              <div class="dc-summary-label"><i class="fa-solid fa-arrow-trend-up" style="color:#ef4444;"></i> 最高値ワールド</div>
-              <div class="dc-summary-world" id="modalMaxWorld">-</div>
-            </div>
-            <div class="dc-summary-price" id="modalMaxPrice">-G</div>
           </div>
         </div>
 
