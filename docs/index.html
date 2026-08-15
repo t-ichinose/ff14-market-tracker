@@ -799,9 +799,32 @@
       padding-bottom: 0.4rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       scrollbar-width: none;
+      scroll-behavior: smooth;
     }
 
     .modal-world-tabs::-webkit-scrollbar { display: none; }
+
+    .modal-tab-slide-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: var(--accent-blue);
+      width: 28px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .modal-tab-slide-btn:hover {
+      background: var(--accent-blue);
+      color: #000000;
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+    }
 
     .modal-world-tab-btn {
       background: rgba(255, 255, 255, 0.05);
@@ -1040,9 +1063,17 @@
           <div style="font-size:0.85rem; font-weight:700; color:#ffffff; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem;">
             <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-blue);"></i> 直近の売買取引履歴 (リアルタイムデータ)
           </div>
-          <!-- ワールド選択ボタン一覧 -->
-          <div class="modal-world-tabs" id="modalWorldTabs">
-            <!-- JSで各ワールドボタン生成 -->
+          <!-- ワールド選択ボタン一覧 (左右アローボタン付き) -->
+          <div style="position:relative; display:flex; align-items:center; width:100%; gap:6px;">
+            <button class="modal-tab-slide-btn" onclick="slideModalWorldTabs(-1)" title="左へスライド">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="modal-world-tabs" id="modalWorldTabs" style="flex:1;">
+              <!-- JSで各ワールドボタン生成 -->
+            </div>
+            <button class="modal-tab-slide-btn" onclick="slideModalWorldTabs(1)" title="右へスライド">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
           </div>
         </div>
 
@@ -1505,6 +1536,13 @@
             </td>
           </tr>
         `;
+      }
+    }
+
+    function slideModalWorldTabs(direction) {
+      const container = document.getElementById('modalWorldTabs');
+      if (container) {
+        container.scrollBy({ left: direction * 180, behavior: 'smooth' });
       }
     }
 
