@@ -583,6 +583,266 @@
       font-weight: 600;
     }
 
+    /* Item Detail Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(8, 12, 22, 0.85);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: rgba(18, 26, 43, 0.95);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 820px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 210, 255, 0.15);
+      overflow: hidden;
+      animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalSlideUp {
+      from { transform: translateY(20px) scale(0.97); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 1.2rem 1.5rem;
+      background: rgba(11, 17, 30, 0.9);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .modal-title-box {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .modal-item-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .modal-item-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(239, 68, 68, 0.25);
+      color: #f87171;
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    .modal-body {
+      padding: 1.2rem 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    /* DC内ハイライト比較カード (最安ワールド・最高ワールド) */
+    .dc-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      .dc-summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dc-summary-card {
+      background: rgba(11, 17, 30, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .dc-summary-card.min-card {
+      border-left: 4px solid var(--accent-green);
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.08), rgba(11, 17, 30, 0.6));
+    }
+
+    .dc-summary-card.max-card {
+      border-left: 4px solid #f472b6;
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.08), rgba(11, 17, 30, 0.6));
+    }
+
+    .dc-summary-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .dc-summary-world {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #ffffff;
+    }
+
+    .dc-summary-price {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .min-card .dc-summary-price { color: var(--accent-green); }
+    .max-card .dc-summary-price { color: #f472b6; }
+
+    /* Modal World Switch Tabs */
+    .modal-world-tabs {
+      display: flex;
+      gap: 0.4rem;
+      overflow-x: auto;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      scrollbar-width: none;
+    }
+
+    .modal-world-tabs::-webkit-scrollbar { display: none; }
+
+    .modal-world-tab-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .modal-world-tab-btn.active {
+      background: var(--accent-purple);
+      color: #ffffff;
+      border-color: var(--accent-purple);
+      box-shadow: 0 2px 8px rgba(121, 40, 202, 0.4);
+    }
+
+    /* History Table */
+    .history-table-container {
+      background: rgba(11, 17, 30, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 250px;
+    }
+
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+
+    .history-table th {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0.65rem 1rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .history-table td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+    }
+
+    .history-table tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .hq-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #00d2ff, #3b82f6);
+      color: #000000;
+      font-weight: 800;
+      font-size: 0.68rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      margin-left: 0.3rem;
+    }
+
+    .item-icon-clickable {
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .item-icon-clickable:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+    }
+
+    .item-card-title-clickable {
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .item-card-title-clickable:hover {
+      color: var(--accent-blue);
+    }
   </style>
 </head>
 <body>
@@ -663,6 +923,85 @@
       <button class="grid-slide-btn grid-slide-right" onclick="slideWorldGrid(1)" title="右へ移動">
         <i class="fa-solid fa-chevron-right"></i>
       </button>
+    </div>
+  </div>
+
+  <!-- Item Detail & Sales History Modal -->
+  <div class="modal-backdrop" id="itemDetailModal" onclick="closeItemModalOnBackdrop(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <img class="modal-item-icon" id="modalItemIcon" src="" alt="">
+          <div>
+            <div class="modal-item-name" id="modalItemName">
+              アイテム名
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted);" id="modalItemMeta">
+              ID: - | カテゴリ: -
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <a id="modalLodestoneLink" href="#" target="_blank" rel="noopener" class="lodestone-link-icon" style="font-size:1.1rem; padding:6px;" title="Lodestoneで開く">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+          <button class="modal-close-btn" onclick="closeItemModal()" title="閉じる">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- 1. DC内ハイライト比較 (最安ワールド・最高ワールド) -->
+        <div class="dc-summary-grid">
+          <div class="dc-summary-card min-card">
+            <div>
+              <div class="dc-summary-label"><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> DC内 最安値ワールド</div>
+              <div class="dc-summary-world" id="modalMinWorld">-</div>
+            </div>
+            <div class="dc-summary-price" id="modalMinPrice">-G</div>
+          </div>
+
+          <div class="dc-summary-card max-card">
+            <div>
+              <div class="dc-summary-label"><i class="fa-solid fa-arrow-trend-up" style="color:#f472b6;"></i> DC内 最高値ワールド</div>
+              <div class="dc-summary-world" id="modalMaxWorld">-</div>
+            </div>
+            <div class="dc-summary-price" id="modalMaxPrice">-G</div>
+          </div>
+        </div>
+
+        <!-- 2. ワールド切替タブ & 直近取引履歴 -->
+        <div>
+          <div style="font-size:0.85rem; font-weight:700; color:#ffffff; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem;">
+            <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-blue);"></i> 直近の売買取引履歴 (リアルタイムデータ)
+          </div>
+          <!-- ワールド選択ボタン一覧 -->
+          <div class="modal-world-tabs" id="modalWorldTabs">
+            <!-- JSで各ワールドボタン生成 -->
+          </div>
+        </div>
+
+        <!-- 取引履歴テーブル -->
+        <div class="history-table-container">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>取引日時 (JST)</th>
+                <th>品質</th>
+                <th>単価 (G)</th>
+                <th>数量</th>
+                <th>合計金額 (G)</th>
+              </tr>
+            </thead>
+            <tbody id="modalHistoryTbody">
+              <!-- JSで取引履歴を読み込み表示 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -919,7 +1258,7 @@
           let primaryIcon = item.icon_url || 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
           const safeFallback = 'https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png';
 
-          const iconImg = `<img class="item-icon" src="${primaryIcon}" alt="" onerror="this.onerror=null; this.src='${safeFallback}';">`;
+          const iconImg = `<img class="item-icon item-icon-clickable" src="${primaryIcon}" alt="" onclick="openItemModal(${item.item_id}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${worldName}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}')" title="クリックで取引履歴と詳細を表示" onerror="this.onerror=null; this.src='${safeFallback}';">`;
 
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
 
@@ -929,7 +1268,8 @@
                 ${iconImg}
                 <div class="item-header-text">
                   <span class="item-card-title">
-                    <span class="rank-tag">#${idx + 1}</span>${cleanTitle}
+                    <span class="rank-tag">#${idx + 1}</span>
+                    <span class="item-card-title-clickable" onclick="openItemModal(${item.item_id}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${worldName}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}')" title="クリックで取引履歴と詳細を表示">${cleanTitle}</span>
                     <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" title="Lodestoneで検索">
                       <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
@@ -939,10 +1279,12 @@
 
               <!-- 市場ステータス -->
               <div class="item-section-box latest-box">
-                <!-- 上段: 売買数 & 売買件数 & 流通ギル (日商) -->
-                <div class="sub-grid-3" style="display:grid; grid-template-columns: 1fr 1fr 1.2fr; gap:4px; margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="lbl" style="font-size:0.68rem;"><i class="fa-solid fa-bolt" style="color:var(--accent-blue);"></i> 売買数:</span> <strong style="color:var(--accent-blue); font-size:0.76rem;">${cVel}個/日</strong></div>
-                  <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="lbl" style="font-size:0.68rem;"><i class="fa-solid fa-receipt" style="color:#a855f7;"></i> 売買件数:</span> <strong style="color:#a855f7; font-size:0.76rem;">${cTrades}件</strong></div>
+                <!-- 上段 (2段構造): 1段目=売買数&売買件数(2列), 2段目=流通ギル(全幅) -->
+                <div style="display:flex; flex-direction:column; gap:3px; margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4px;">
+                    <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="lbl" style="font-size:0.68rem;"><i class="fa-solid fa-bolt" style="color:var(--accent-blue);"></i> 売買数:</span> <strong style="color:var(--accent-blue); font-size:0.76rem;">${cVel}個/日</strong></div>
+                    <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="lbl" style="font-size:0.68rem;"><i class="fa-solid fa-receipt" style="color:#a855f7;"></i> 売買件数:</span> <strong style="color:#a855f7; font-size:0.76rem;">${cTrades}件</strong></div>
+                  </div>
                   <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="lbl" style="font-size:0.68rem;"><i class="fa-solid fa-coins" style="color:#ffb703;"></i> 流通ギル:</span> <strong style="color:#ffb703; font-size:0.76rem;">${dailyRevenue}G/日</strong></div>
                 </div>
 
@@ -985,6 +1327,148 @@
       searchDebounceTimer = setTimeout(() => {
         renderWorldGrid();
       }, 250);
+    });
+
+    let currentModalItemId = null;
+    let currentModalWorld = null;
+
+    function openItemModal(itemId, itemName, iconUrl, worldName, categoryName) {
+      currentModalItemId = itemId;
+      currentModalWorld = worldName;
+
+      document.getElementById('modalItemIcon').src = iconUrl;
+      document.getElementById('modalItemName').innerHTML = `${escapeHtml(itemName)}`;
+      document.getElementById('modalItemMeta').innerText = `ID: ${itemId} | カテゴリ: ${categoryName || '一般'}`;
+      document.getElementById('modalLodestoneLink').href = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(itemName)}`;
+
+      // 1. DC内全ワールドの最安値・最高値ワールドの集計
+      computeDcMinMaxSummary(itemId);
+
+      // 2. ワールド切り替えタブのレンダリング
+      const worlds = dcWorldsMap[activeDc] || [];
+      const tabsEl = document.getElementById('modalWorldTabs');
+      tabsEl.innerHTML = worlds.map(w => `
+        <button class="modal-world-tab-btn ${w === worldName ? 'active' : ''}" onclick="switchModalWorld('${w}')">
+          <i class="fa-solid fa-globe"></i> ${w}
+        </button>
+      `).join('');
+
+      // 3. モーダル表示
+      document.getElementById('itemDetailModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // 4. リアルタイム履歴データの非同期取得
+      fetchModalHistory(worldName, itemId);
+    }
+
+    function computeDcMinMaxSummary(itemId) {
+      let minVal = Infinity, minWorld = '-';
+      let maxVal = -1, maxWorld = '-';
+
+      const worlds = dcWorldsMap[activeDc] || [];
+      for (const w of worlds) {
+        const wItems = allData[w] || [];
+        const found = wItems.find(x => x.item_id === itemId);
+        if (found) {
+          if (found.min_price > 0 && found.min_price < minVal) {
+            minVal = found.min_price;
+            minWorld = w;
+          }
+          if (found.max_price > maxVal) {
+            maxVal = found.max_price;
+            maxWorld = w;
+          }
+        }
+      }
+
+      document.getElementById('modalMinWorld').innerText = minWorld !== '-' ? minWorld : 'データなし';
+      document.getElementById('modalMinPrice').innerText = minVal !== Infinity ? `${minVal.toLocaleString()}G` : '-G';
+
+      document.getElementById('modalMaxWorld').innerText = maxWorld !== '-' ? maxWorld : 'データなし';
+      document.getElementById('modalMaxPrice').innerText = maxVal > 0 ? `${maxVal.toLocaleString()}G` : '-G';
+    }
+
+    async function fetchModalHistory(worldName, itemId) {
+      const tbody = document.getElementById('modalHistoryTbody');
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5" style="text-align:center; padding:2rem; color:var(--text-muted);">
+            <i class="fa-solid fa-spinner fa-spin fa-lg"></i> Universalis から ${worldName} の直近取引履歴を取得中...
+          </td>
+        </tr>
+      `;
+
+      try {
+        const url = `https://universalis.app/api/v2/${worldName}/${itemId}?entries=30`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('API fetch failed');
+        const data = await res.json();
+        const history = data.recentHistory || [];
+
+        if (history.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="5" style="text-align:center; padding:2rem; color:var(--text-muted);">
+                直近の取引履歴データがありません
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = history.map(h => {
+          const formattedTime = formatTimeLocal(new Date(h.timestamp * 1000).toISOString());
+          const hqBadge = h.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
+          const price = (h.pricePerUnit || 0).toLocaleString();
+          const qty = (h.quantity || 0).toLocaleString();
+          const totalPrice = ((h.pricePerUnit || 0) * (h.quantity || 0)).toLocaleString();
+
+          return `
+            <tr>
+              <td style="font-size:0.78rem; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> ${formattedTime}</td>
+              <td>${hqBadge}</td>
+              <td style="font-weight:700; color:var(--text-main);">${price}G</td>
+              <td>${qty}個</td>
+              <td style="font-weight:700; color:#ffb703;">${totalPrice}G</td>
+            </tr>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error("Modal history fetch error:", err);
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center; padding:2rem; color:#ef4444;">
+              <i class="fa-solid fa-circle-exclamation"></i> 履歴データの取得に失敗しました
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    function switchModalWorld(worldName) {
+      currentModalWorld = worldName;
+      document.querySelectorAll('.modal-world-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.includes(worldName));
+      });
+      if (currentModalItemId) {
+        fetchModalHistory(worldName, currentModalItemId);
+      }
+    }
+
+    function closeItemModal() {
+      document.getElementById('itemDetailModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeItemModalOnBackdrop(e) {
+      if (e.target.id === 'itemDetailModal') {
+        closeItemModal();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeItemModal();
     });
 
     setInterval(loadData, 60000);
