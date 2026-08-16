@@ -945,10 +945,269 @@
     .item-card-title-clickable:hover {
       color: var(--accent-blue);
     }
+
+    /* Mobile Responsive & Slide-in Drawer Menu Styles */
+    .mobile-header-bar {
+      display: none;
+    }
+
+    .mobile-drawer-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-drawer-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 85%;
+      max-width: 360px;
+      height: 100vh;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-color);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
+      z-index: 2001;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .mobile-drawer.active {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .drawer-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .drawer-close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .drawer-body {
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .drawer-section-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .drawer-dc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .drawer-dc-btn {
+      padding: 0.75rem 0.5rem;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .drawer-dc-btn.active {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
+    }
+
+    .drawer-world-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .drawer-world-chip {
+      padding: 0.4rem 0.75rem;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .drawer-world-chip.active {
+      background: rgba(0, 210, 255, 0.2);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    .drawer-sort-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .drawer-sort-btn {
+      padding: 0.6rem;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .drawer-sort-btn.active {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 0.4rem;
+      }
+      .container {
+        padding: 0.1rem;
+      }
+      header, .dc-tabs-container, .controls-bar {
+        display: none !important;
+      }
+      .mobile-header-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.6rem 0.8rem;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        margin-bottom: 0.75rem;
+        position: sticky;
+        top: 0.4rem;
+        z-index: 100;
+      }
+      .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .mobile-brand-icon {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        color: #fff;
+      }
+      .mobile-brand-title {
+        font-size: 0.9rem;
+        font-weight: 800;
+        color: var(--text-main);
+      }
+      .mobile-active-info {
+        font-size: 0.75rem;
+        color: var(--accent-blue);
+        font-weight: 600;
+      }
+      .mobile-drawer-trigger {
+        padding: 0.45rem 0.8rem;
+        background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(168, 85, 247, 0.2));
+        border: 1px solid var(--accent-blue);
+        border-radius: 8px;
+        color: #fff;
+        font-size: 0.8rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        cursor: pointer;
+      }
+      .world-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .world-column {
+        width: 100% !important;
+        min-width: 100% !important;
+      }
+      .grid-slide-btn {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Mobile Top Header Bar (Visible on <= 768px) -->
+    <div class="mobile-header-bar">
+      <div class="mobile-brand">
+        <div class="mobile-brand-icon"><i class="fa-solid fa-chart-simple"></i></div>
+        <div>
+          <div class="mobile-brand-title">FF14 Market Tracker</div>
+          <div class="mobile-active-info" id="mobileActiveBadge">Mana (全ワールド)</div>
+        </div>
+      </div>
+      <button class="mobile-drawer-trigger" onclick="openMobileDrawer()" title="メニューを開く">
+        <i class="fa-solid fa-sliders"></i> フィルター・設定
+      </button>
+    </div>
+
     <header>
       <div class="brand">
         <div class="brand-icon"><i class="fa-solid fa-chart-simple"></i></div>
@@ -1630,9 +1889,166 @@
         closeItemModal();
       }
     }
+  </script>
+
+  <!-- Slide-in Drawer Menu & Overlay (Mobile Optimization) -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" onclick="closeMobileDrawer()"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <i class="fa-solid fa-sliders" style="color:var(--accent-blue);"></i> フィルター・表示設定
+      </div>
+      <button class="drawer-close-btn" onclick="closeMobileDrawer()" title="閉じる">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <!-- 1. DC Selection -->
+      <div>
+        <div class="drawer-section-title"><i class="fa-solid fa-server"></i> データセンター (DC)</div>
+        <div class="drawer-dc-grid">
+          <button class="drawer-dc-btn active" data-drawer-dc="Mana" onclick="selectDrawerDc('Mana')">Mana</button>
+          <button class="drawer-dc-btn" data-drawer-dc="Elemental" onclick="selectDrawerDc('Elemental')">Elemental</button>
+          <button class="drawer-dc-btn" data-drawer-dc="Gaia" onclick="selectDrawerDc('Gaia')">Gaia</button>
+          <button class="drawer-dc-btn" data-drawer-dc="Meteor" onclick="selectDrawerDc('Meteor')">Meteor</button>
+        </div>
+      </div>
+
+      <!-- 2. World Selection -->
+      <div>
+        <div class="drawer-section-title"><i class="fa-solid fa-earth-asia"></i> ワールド絞り込み</div>
+        <div class="drawer-world-chips" id="drawerWorldChips">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- 3. Sort Order -->
+      <div>
+        <div class="drawer-section-title"><i class="fa-solid fa-arrow-down-wide-short"></i> 並び替え順</div>
+        <div class="drawer-sort-grid">
+          <button class="drawer-sort-btn active" data-drawer-sort="velocity" onclick="selectDrawerSort('velocity')">売買数順</button>
+          <button class="drawer-sort-btn" data-drawer-sort="revenue" onclick="selectDrawerSort('revenue')">流通ギル順</button>
+          <button class="drawer-sort-btn" data-drawer-sort="avg_price" onclick="selectDrawerSort('avg_price')">平均単価順</button>
+          <button class="drawer-sort-btn" data-drawer-sort="max_price" onclick="selectDrawerSort('max_price')">💎 高額取引</button>
+        </div>
+      </div>
+
+      <!-- 4. Crystal Filter Toggle -->
+      <div>
+        <div class="drawer-section-title"><i class="fa-solid fa-gem"></i> 表示フィルター</div>
+        <button class="filter-toggle-btn active" id="drawerCrystalFilterBtn" onclick="toggleCrystalFilter()" style="width:100%; justify-content:center; padding:0.75rem;">
+          <i class="fa-solid fa-gem"></i> クリスタル除外: ON
+        </button>
+      </div>
+
+      <!-- 5. Search Box -->
+      <div>
+        <div class="drawer-section-title"><i class="fa-solid fa-magnifying-glass"></i> アイテム検索</div>
+        <div class="search-box" style="width:100%;">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="drawerSearchInput" class="search-input" placeholder="検索 (名前/ID)..." oninput="syncDrawerSearch(this.value)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Mobile Drawer Controls & Sync */
+    function openMobileDrawer() {
+      document.getElementById('mobileDrawerBackdrop').classList.add('active');
+      document.getElementById('mobileDrawer').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      updateDrawerUI();
+    }
+
+    function closeMobileDrawer() {
+      document.getElementById('mobileDrawerBackdrop').classList.remove('active');
+      document.getElementById('mobileDrawer').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function updateDrawerUI() {
+      const curDc = activeDc || 'Mana';
+      const curSort = activeSortMode || 'velocity';
+
+      // Sync DC Buttons
+      document.querySelectorAll('.drawer-dc-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-drawer-dc') === curDc);
+      });
+
+      // Sync World Chips
+      const chipContainer = document.getElementById('drawerWorldChips');
+      const worldsList = dcWorldsMap[curDc] || [];
+      if (chipContainer) {
+        let html = `<button class="drawer-world-chip ${!currentSelectedWorld ? 'active' : ''}" onclick="selectDrawerWorld('ALL')">全ワールド (${curDc})</button>`;
+        worldsList.forEach(w => {
+          const isAct = currentSelectedWorld === w;
+          html += `<button class="drawer-world-chip ${isAct ? 'active' : ''}" onclick="selectDrawerWorld('${w}')">${w}</button>`;
+        });
+        chipContainer.innerHTML = html;
+      }
+
+      // Sync Sort Buttons
+      document.querySelectorAll('.drawer-sort-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-drawer-sort') === curSort);
+      });
+
+      // Sync Crystal Filter Button
+      const drawerCrystalBtn = document.getElementById('drawerCrystalFilterBtn');
+      if (drawerCrystalBtn) {
+        drawerCrystalBtn.classList.toggle('active', excludeCrystals);
+        drawerCrystalBtn.innerHTML = excludeCrystals 
+          ? '<i class="fa-solid fa-gem"></i> クリスタル除外: ON' 
+          : '<i class="fa-solid fa-gem"></i> クリスタル除外: OFF';
+      }
+
+      // Sync Active Badge in Mobile Header
+      const activeBadge = document.getElementById('mobileActiveBadge');
+      if (activeBadge) {
+        const wText = currentSelectedWorld || '全ワールド';
+        activeBadge.textContent = `${curDc} (${wText})`;
+      }
+    }
+
+    let currentSelectedWorld = null;
+
+    function selectDrawerDc(dcName) {
+      currentSelectedWorld = null;
+      switchDc(dcName);
+      updateDrawerUI();
+    }
+
+    function selectDrawerWorld(wName) {
+      if (wName === 'ALL') {
+        currentSelectedWorld = null;
+        renderWorldGrid();
+        const grid = document.getElementById('worldGrid');
+        if (grid) grid.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        currentSelectedWorld = wName;
+        scrollToWorld(wName);
+      }
+      updateDrawerUI();
+    }
+
+    function selectDrawerSort(sortKey) {
+      setGlobalSort(sortKey);
+      updateDrawerUI();
+    }
+
+    function syncDrawerSearch(val) {
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.value = val;
+        renderWorldGrid();
+      }
+    }
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeItemModal();
+      if (e.key === 'Escape') {
+        closeItemModal();
+        closeMobileDrawer();
+      }
     });
 
     setInterval(loadData, 60000);
