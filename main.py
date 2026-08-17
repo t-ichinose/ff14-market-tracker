@@ -15,7 +15,7 @@ DC_WORLDS = {
     "Meteor": ["Belias", "Mandragora", "Ramuh", "Shinryu", "Unicorn", "Valefor", "Yojimbo", "Zeromus"]
 }
 WORLD_TO_DC = {w: dc for dc, worlds in DC_WORLDS.items() for w in worlds}
-DEFAULT_HEADERS = {'User-Agent': 'FF14MarketTracker/2.0'}
+DEFAULT_HEADERS = {'User-Agent': 'FF14MarketTracker/3.0'}
 
 def init_db(db_path="data/market_data.db"):
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
@@ -51,33 +51,8 @@ def init_db(db_path="data/market_data.db"):
         PRIMARY KEY (item_id, world_name, timestamp, price_per_unit, quantity, hq, buyer_name)
     )""")
 
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS item_market_stats (
-        item_id INTEGER,
-        world_name TEXT,
-        dc_name TEXT,
-        updated_at TEXT,
-        min_price INTEGER,
-        min_price_nq INTEGER,
-        min_price_hq INTEGER,
-        avg_price REAL,
-        avg_price_nq REAL,
-        avg_price_hq REAL,
-        current_avg_price REAL,
-        current_avg_price_nq REAL,
-        current_avg_price_hq REAL,
-        max_price INTEGER,
-        max_price_nq INTEGER,
-        max_price_hq INTEGER,
-        units_for_sale INTEGER,
-        listings_count INTEGER,
-        units_sold INTEGER,
-        recent_history_count INTEGER,
-        sale_velocity REAL,
-        sale_velocity_nq REAL,
-        sale_velocity_hq REAL,
-        PRIMARY KEY (item_id, world_name)
-    )""")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_sales_lookup ON sales_history (item_id, world_name, timestamp);")
+
     conn.commit()
     return conn
 
@@ -118,9 +93,7 @@ def resolve_item_metadata_batch(conn, item_ids):
     icons_map = get_icons_map()
     cursor = conn.cursor()
 
-    default_icon = "https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png"
     meta_rows = []
-
     for iid in item_ids:
         name = items_search.get(iid, f"Item #{iid}")
         icon_url = icons_map.get(iid)
@@ -150,6 +123,10 @@ def fetch_single_world_data(world_name, target_ids):
     return world_name, {}
 
 def export_web_json(conn, output_path="docs/data.json"):
+    """
+    Exports full web JSON directly from sales_history database.
+    Calculates card stats and recent 15 transaction history for all worlds/DCs.
+    """
     cursor = conn.cursor()
     now_dt = datetime.now(timezone.utc)
     now_str = now_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -162,6 +139,7 @@ def export_web_json(conn, output_path="docs/data.json"):
     cursor.execute("SELECT item_id, item_name, icon_url, category_name FROM items_metadata")
     meta_dict = {row[0]: {"name": row[1], "icon": row[2], "category": row[3]} for row in cursor.fetchall()}
 
+    # Calculate actual span of days in DB (up to 7.0 days)
     cursor.execute("SELECT MIN(timestamp), MAX(timestamp) FROM sales_history WHERE timestamp >= ?", (seven_days_ago_ts,))
     ts_range = cursor.fetchone()
     if ts_range and ts_range[0] and ts_range[1]:
@@ -170,20 +148,22 @@ def export_web_json(conn, output_path="docs/data.json"):
     else:
         actual_days = 7.0
 
+    # Retrieve all transaction logs from sales_history within past 7 days
     cursor.execute("""
     SELECT item_id, world_name, price_per_unit, quantity, hq, timestamp
     FROM sales_history 
     WHERE timestamp >= ?
     ORDER BY timestamp DESC
     """, (seven_days_ago_ts,))
-    
-    sales_by_item = {}
-    history_by_item = {}
+
+    sales_by_item_world = {}
+    history_by_item_world = {}
+
     for row in cursor.fetchall():
         iid, wname, price, qty, hq, ts = row
-        sales_by_item.setdefault((iid, wname), []).append({"price": price, "qty": qty, "ts": ts})
+        sales_by_item_world.setdefault((iid, wname), []).append({"price": price, "qty": qty, "ts": ts})
         
-        hist_list = history_by_item.setdefault((iid, wname), [])
+        hist_list = history_by_item_world.setdefault((iid, wname), [])
         if len(hist_list) < 15:
             hist_list.append({
                 "price": price,
@@ -192,17 +172,17 @@ def export_web_json(conn, output_path="docs/data.json"):
                 "ts": ts
             })
 
-    velocity_calc = {}
-    sales_stats = {}
+    # Group calculated metrics by world
+    data_by_world = {}
 
-    for key, items_list in sales_by_item.items():
+    for (iid, wname), items_list in sales_by_item_world.items():
         if not items_list:
             continue
-        
+
         prices = [x["price"] for x in items_list]
         med = sorted(prices)[len(prices) // 2]
         
-        # Eliminate extreme RMT / money transfer outliers (e.g. 150M G trade on 200G item)
+        # Outlier filtering for extreme money transfers / RMT
         if med < 1_000_000 and len(items_list) >= 2:
             clean_items = [x for x in items_list if not (x["price"] > 20 * med and x["price"] > 1_000_000)]
             if clean_items:
@@ -212,10 +192,10 @@ def export_web_json(conn, output_path="docs/data.json"):
         total_qty = sum(x["qty"] for x in items_list)
         trade_cnt = len(items_list)
 
-        velocity_calc[key] = round(total_qty / actual_days, 1)
-
+        real_vel = round(total_qty / actual_days, 1)
         min_p = min(clean_prices)
         max_p = max(clean_prices)
+
         if len(clean_prices) >= 5:
             sp = sorted(clean_prices)
             cut = max(1, int(len(sp) * 0.10))
@@ -224,101 +204,47 @@ def export_web_json(conn, output_path="docs/data.json"):
         else:
             sp = sorted(clean_prices)
             avg_p = sp[len(sp) // 2]
-        
-        sales_stats[key] = (min_p, avg_p, max_p, trade_cnt)
 
+        daily_revenue = round(avg_p * real_vel)
 
-    cursor.execute("""
-    SELECT item_id, world_name, dc_name, min_price, avg_price, max_price, units_for_sale, listings_count, sale_velocity, recent_history_count, updated_at
-    FROM item_market_stats
-    """)
-    rows = cursor.fetchall()
-
-    data_by_world = {}
-    for r in rows:
-        iid, wname, dcname, min_p, avg_p, max_p, u_sale, l_count, vel, rh_count, updated = r
         meta = meta_dict.get(iid, {})
         item_name = meta.get("name") or items_search.get(iid) or f"Item #{iid}"
         icon_url = icons_map.get(iid) or meta.get("icon") or compute_xivapi_icon_url(iid)
         category_name = meta.get("category", "一般")
-
-        real_vel = velocity_calc.get((iid, wname), round(vel or 0, 1))
-        if (iid, wname) in sales_stats:
-            final_min, final_avg, final_max, hist_count = sales_stats[(iid, wname)]
-            sale_trades = int(hist_count)
-        else:
-            final_min, final_avg, final_max = (min_p, avg_p, max_p)
-            sale_trades = 0
-
-        daily_revenue = round((final_avg or 0) * real_vel)
-        item_history = history_by_item.get((iid, wname), [])
 
         item_obj = {
             "item_id": iid,
             "item_name": item_name,
             "icon_url": icon_url,
             "category_name": category_name,
-            "min_price": final_min or 0,
-            "avg_price": final_avg or 0,
-            "max_price": final_max or 0,
-            "units_for_sale": u_sale or 0,
-            "listings_count": l_count or 0,
+            "min_price": min_p,
+            "avg_price": avg_p,
+            "max_price": max_p,
             "sale_velocity": real_vel,
-            "sale_trades": sale_trades,
+            "sale_trades": trade_cnt,
             "daily_revenue": daily_revenue,
-            "history": item_history,
-            "updated_at": updated
+            "history": history_by_item_world.get((iid, wname), []),
+            "updated_at": now_str
         }
-        if sale_trades > 0 or real_vel > 0 or u_sale > 0:
-            data_by_world.setdefault(wname, []).append(item_obj)
 
-    final_data_by_world = {}
-    for wname, items in data_by_world.items():
-        filtered_items = items
-        clean_high_value_items = [
-            x for x in items 
-            if x.get("max_price", 0) > 0 and ((x.get("avg_price", 0) / float(x["max_price"])) >= 0.35)
-        ]
-        top_by_max_price = set(x["item_id"] for x in sorted(clean_high_value_items, key=lambda x: x.get("max_price", 0), reverse=True)[:60])
-        top_by_revenue = set(x["item_id"] for x in sorted(filtered_items, key=lambda x: x["daily_revenue"], reverse=True)[:60])
-        top_by_velocity = set(x["item_id"] for x in sorted(filtered_items, key=lambda x: x["sale_velocity"], reverse=True)[:60])
+        data_by_world.setdefault(wname, []).append(item_obj)
 
-
-        merged_top_ids = top_by_max_price.union(top_by_revenue).union(top_by_velocity)
-        for cid in range(2, 20):
-            merged_top_ids.add(cid)
-
-        top_items = [x for x in items if x["item_id"] in merged_top_ids]
-        top_items.sort(key=lambda x: x["sale_velocity"], reverse=True)
-        final_data_by_world[wname] = top_items
-
-    # Load existing docs/data.json if present, to merge and preserve data for non-updated DCs
-    merged_data_by_world = {}
-    if os.path.exists(output_path):
-        try:
-            with open(output_path, "r", encoding="utf-8") as f:
-                existing_json = json.load(f)
-                merged_data_by_world = existing_json.get("data", {})
-        except Exception as e:
-            print(f"Notice: Could not load existing {output_path} for merging: {e}")
-
-    # Update merged_data_by_world with freshly calculated worlds
-    for wname, items in final_data_by_world.items():
-        if items:
-            merged_data_by_world[wname] = items
+    # Sort items per world by sale_velocity DESC
+    for wname in data_by_world:
+        data_by_world[wname].sort(key=lambda x: x["sale_velocity"], reverse=True)
 
     web_data = {
         "last_updated": now_str,
         "datacenters": JP_DATACENTERS,
         "dc_worlds": DC_WORLDS,
-        "data": merged_data_by_world
+        "data": data_by_world
     }
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(web_data, f, ensure_ascii=False, separators=(",", ":"))
 
     file_size_kb = os.path.getsize(output_path) / 1024
-    print(f"Exported merged web JSON to {output_path} ({file_size_kb:.0f} KB)")
+    print(f"Successfully exported clean web JSON to {output_path} ({file_size_kb:.0f} KB)")
 
 def fetch_and_save_all(target_dc=None):
     now_dt = datetime.now(timezone.utc)
@@ -340,14 +266,11 @@ def fetch_and_save_all(target_dc=None):
         except Exception as e:
             print(f"[{dc}] Error fetching recent items: {e}")
 
-    cursor.execute("SELECT item_id FROM items_pool")
+    cursor.execute("SELECT item_id FROM items_pool WHERE item_id >= 100")
     existing_pool_ids = [row[0] for row in cursor.fetchall()]
     recent_ids_all.update(existing_pool_ids)
 
-
-    for cid in range(2, 20):
-        recent_ids_all.add(cid)
-    recent_ids_all.add(36047)
+    recent_ids_all.add(36047)  # Example active item (魔導機械修理材 etc)
 
     if recent_ids_all:
         pool_batch = [(iid, now_str) for iid in recent_ids_all]
@@ -355,21 +278,17 @@ def fetch_and_save_all(target_dc=None):
     conn.commit()
 
     target_ids = list(recent_ids_all)
-
-    print(f"=== Ultra-Fast Pipeline: Fetching {len(target_ids)} active items across 32 worlds ===")
-
     target_worlds = []
     for dc in dcs:
         target_worlds.extend(DC_WORLDS.get(dc, []))
 
-    chunk_size = 15
+    chunk_size = 100
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
     all_tasks = [(world, chunk) for chunk in item_chunks for world in target_worlds]
 
-    print(f"=== Ultra-Fast Pipeline: Fetching {len(target_ids)} items ({len(all_tasks)} flat tasks) across {len(target_worlds)} worlds ===")
+    print(f"=== Fetching {len(target_ids)} items ({len(all_tasks)} tasks) across {len(target_worlds)} worlds ({','.join(dcs)}) ===")
 
     total_sales_inserted = 0
-    total_stats_inserted = 0
 
     with ThreadPoolExecutor(max_workers=16) as executor:
         futures = {executor.submit(fetch_single_world_data, world, chunk): (world, chunk) for world, chunk in all_tasks}
@@ -379,10 +298,7 @@ def fetch_and_save_all(target_dc=None):
             if not world_items_data:
                 continue
 
-            dc_name = WORLD_TO_DC.get(world_name, "Mana")
             sales_history_batch = []
-            market_stats_batch = []
-
             for item_id_str, data in world_items_data.items():
                 item_id = int(item_id_str)
                 recent_history = data.get("recentHistory", [])[:500]
@@ -395,68 +311,21 @@ def fetch_and_save_all(target_dc=None):
                     if ts > 0 and price > 0:
                         sales_history_batch.append((item_id, world_name, ts, price, qty, hq, buyer))
 
-                min_price = data.get("minPrice", 0)
-                min_price_nq = data.get("minPriceNQ", 0)
-                min_price_hq = data.get("minPriceHQ", 0)
-                avg_price = data.get("averagePrice", 0)
-                avg_price_nq = data.get("averagePriceNQ", 0)
-                avg_price_hq = data.get("averagePriceHQ", 0)
-                current_avg_price = data.get("currentAveragePrice", 0)
-                current_avg_price_nq = data.get("currentAveragePriceNQ", 0)
-                current_avg_price_hq = data.get("currentAveragePriceHQ", 0)
-                max_price = data.get("maxPrice", 0)
-                max_price_nq = data.get("maxPriceNQ", 0)
-                max_price_hq = data.get("maxPriceHQ", 0)
-                units_for_sale = data.get("unitsForSale", 0)
-                listings_count = data.get("listingsCount", 0)
-                units_sold = data.get("unitsSold", 0)
-                recent_history_count = len(recent_history)
-                sale_velocity = data.get("regularSaleVelocity", 0)
-                sale_velocity_nq = data.get("nqSaleVelocity", 0)
-                sale_velocity_hq = data.get("hqSaleVelocity", 0)
-
-                market_stats_batch.append((
-                    item_id, world_name, dc_name, now_str,
-                    min_price, min_price_nq, min_price_hq,
-                    avg_price, avg_price_nq, avg_price_hq,
-                    current_avg_price, current_avg_price_nq, current_avg_price_hq,
-                    max_price, max_price_nq, max_price_hq,
-                    units_for_sale, listings_count,
-                    units_sold, recent_history_count,
-                    sale_velocity, sale_velocity_nq, sale_velocity_hq
-                ))
-
             if sales_history_batch:
                 cursor.executemany("""
                 INSERT OR IGNORE INTO sales_history (item_id, world_name, timestamp, price_per_unit, quantity, hq, buyer_name)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
                 """, sales_history_batch)
+                total_sales_inserted += len(sales_history_batch)
 
-            if market_stats_batch:
-                cursor.executemany("""
-                INSERT OR REPLACE INTO item_market_stats (
-                    item_id, world_name, dc_name, updated_at,
-                    min_price, min_price_nq, min_price_hq,
-                    avg_price, avg_price_nq, avg_price_hq,
-                    current_avg_price, current_avg_price_nq, current_avg_price_hq,
-                    max_price, max_price_nq, max_price_hq,
-                    units_for_sale, listings_count,
-                    units_sold, recent_history_count,
-                    sale_velocity, sale_velocity_nq, sale_velocity_hq
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """, market_stats_batch)
+    conn.commit()
+    print(f"=== Sales History Updated: {total_sales_inserted:,} transactions saved ===")
 
-            conn.commit()
-            total_sales_inserted += len(sales_history_batch)
-            total_stats_inserted += len(market_stats_batch)
-
-    print(f"=== Ultra-Fast Pipeline Finished: {total_sales_inserted:,} sales & {total_stats_inserted:,} stats saved ===")
-
-    seven_days_ago = int(now_dt.timestamp()) - (7 * 86400)
     # Purge old sales history (> 7 days)
+    seven_days_ago = int(now_dt.timestamp()) - (7 * 86400)
     cursor.execute("DELETE FROM sales_history WHERE timestamp < ?", (seven_days_ago,))
-    
-    # Simple 1-week cleanup rule for items_pool: remove items with NO sales in the last 7 days (only if sales_history has sufficient data)
+
+    # Pool cleanup: remove items with no sales if DB has enough data
     cursor.execute("SELECT COUNT(*) FROM sales_history WHERE timestamp >= ?", (seven_days_ago,))
     recent_sales_total = cursor.fetchone()[0]
     if recent_sales_total > 500:
