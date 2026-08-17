@@ -150,7 +150,7 @@ def export_web_json(conn, output_path="docs/data.json"):
 
     # Retrieve all transaction logs from sales_history within past 7 days
     cursor.execute("""
-    SELECT item_id, world_name, price_per_unit, quantity, hq, timestamp
+    SELECT item_id, world_name, price_per_unit, quantity, hq, timestamp, buyer_name
     FROM sales_history 
     WHERE timestamp >= ?
     ORDER BY timestamp DESC
@@ -160,16 +160,17 @@ def export_web_json(conn, output_path="docs/data.json"):
     history_by_item_world = {}
 
     for row in cursor.fetchall():
-        iid, wname, price, qty, hq, ts = row
+        iid, wname, price, qty, hq, ts, buyer = row
         sales_by_item_world.setdefault((iid, wname), []).append({"price": price, "qty": qty, "ts": ts})
         
         hist_list = history_by_item_world.setdefault((iid, wname), [])
-        if len(hist_list) < 15:
+        if len(hist_list) < 50:
             hist_list.append({
                 "price": price,
                 "qty": qty,
                 "hq": bool(hq),
-                "ts": ts
+                "ts": ts,
+                "buyer": buyer or ""
             })
 
     # Group calculated metrics by world
@@ -233,18 +234,33 @@ def export_web_json(conn, output_path="docs/data.json"):
     for wname in data_by_world:
         data_by_world[wname].sort(key=lambda x: x["sale_velocity"], reverse=True)
 
+    # Load existing docs/data.json if present, to preserve data for non-updated DCs
+    merged_data_by_world = {}
+    if os.path.exists(output_path):
+        try:
+            with open(output_path, "r", encoding="utf-8") as f:
+                existing_json = json.load(f)
+                merged_data_by_world = existing_json.get("data", {})
+        except Exception as e:
+            print(f"Notice: Could not load existing {output_path} for merging: {e}")
+
+    # Update merged_data_by_world with freshly calculated worlds
+    for wname, items in data_by_world.items():
+        if items:
+            merged_data_by_world[wname] = items
+
     web_data = {
         "last_updated": now_str,
         "datacenters": JP_DATACENTERS,
         "dc_worlds": DC_WORLDS,
-        "data": data_by_world
+        "data": merged_data_by_world
     }
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(web_data, f, ensure_ascii=False, separators=(",", ":"))
 
     file_size_kb = os.path.getsize(output_path) / 1024
-    print(f"Successfully exported clean web JSON to {output_path} ({file_size_kb:.0f} KB)")
+    print(f"Successfully exported clean merged web JSON to {output_path} ({file_size_kb:.0f} KB)")
 
 def fetch_and_save_all(target_dc=None):
     now_dt = datetime.now(timezone.utc)
@@ -268,6 +284,9 @@ def fetch_and_save_all(target_dc=None):
 
     cursor.execute("SELECT item_id FROM items_pool WHERE item_id >= 100")
     existing_pool_ids = [row[0] for row in cursor.fetchall()]
+    if not existing_pool_ids:
+        items_search = get_items_search()
+        existing_pool_ids = [iid for iid in items_search.keys() if iid >= 100]
     recent_ids_all.update(existing_pool_ids)
 
     recent_ids_all.add(36047)  # Example active item (魔導機械修理材 etc)
