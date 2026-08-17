@@ -248,7 +248,7 @@ def export_web_json(conn, output_path="docs/data.json"):
             sale_trades = int(hist_count)
         else:
             final_min, final_avg, final_max = (min_p, avg_p, max_p)
-            sale_trades = int(rh_count) if (rh_count and rh_count > 0) else (1 if (real_vel > 0 or u_sale > 0) else 0)
+            sale_trades = 0
 
         daily_revenue = round((final_avg or 0) * real_vel)
         item_history = history_by_item.get((iid, wname), [])
