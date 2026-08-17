@@ -137,16 +137,16 @@ def resolve_item_metadata_batch(conn, item_ids):
 def fetch_single_world_data(world_name, target_ids):
     headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=500"
-    for attempt in range(3):
+    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=20"
+    for attempt in range(2):
         try:
             d_res = requests.get(detail_url, headers=headers, timeout=8)
             if d_res.status_code == 200:
                 return world_name, d_res.json().get('items', {})
             elif d_res.status_code == 429:
-                time.sleep(1)
+                time.sleep(0.3)
         except Exception:
-            time.sleep(0.5)
+            time.sleep(0.3)
     return world_name, {}
 
 def export_web_json(conn, output_path="docs/data.json"):
@@ -171,45 +171,61 @@ def export_web_json(conn, output_path="docs/data.json"):
         actual_days = 7.0
 
     cursor.execute("""
-    SELECT item_id, world_name, SUM(quantity) as total_qty, COUNT(*) as trade_count
-    FROM sales_history
-    WHERE timestamp >= ?
-    GROUP BY item_id, world_name
-    """, (seven_days_ago_ts,))
-    velocity_calc = {(row[0], row[1]): round(row[2] / actual_days, 1) for row in cursor.fetchall()}
-
-    cursor.execute("""
-    SELECT item_id, world_name, price_per_unit 
+    SELECT item_id, world_name, price_per_unit, quantity, timestamp
     FROM sales_history 
     WHERE timestamp >= ?
     """, (seven_days_ago_ts,))
-    sales_raw = {}
+    
+    sales_by_item = {}
     for row in cursor.fetchall():
-        sales_raw.setdefault((row[0], row[1]), []).append(row[2])
+        iid, wname, price, qty, ts = row
+        sales_by_item.setdefault((iid, wname), []).append({"price": price, "qty": qty, "ts": ts})
 
+    velocity_calc = {}
     sales_stats = {}
-    for key, prices in sales_raw.items():
-        min_p = min(prices)
-        max_p = max(prices)
-        if len(prices) >= 5:
-            sp = sorted(prices)
+
+    for key, items_list in sales_by_item.items():
+        if not items_list:
+            continue
+        
+        prices = [x["price"] for x in items_list]
+        med = sorted(prices)[len(prices) // 2]
+        
+        # Eliminate extreme RMT / money transfer outliers (e.g. 150M G trade on 200G item)
+        if med < 1_000_000 and len(items_list) >= 2:
+            clean_items = [x for x in items_list if not (x["price"] > 20 * med and x["price"] > 1_000_000)]
+            if clean_items:
+                items_list = clean_items
+
+        clean_prices = [x["price"] for x in items_list]
+        total_qty = sum(x["qty"] for x in items_list)
+        trade_cnt = len(items_list)
+
+        velocity_calc[key] = round(total_qty / actual_days, 1)
+
+        min_p = min(clean_prices)
+        max_p = max(clean_prices)
+        if len(clean_prices) >= 5:
+            sp = sorted(clean_prices)
             cut = max(1, int(len(sp) * 0.10))
             trimmed = sp[cut: len(sp) - cut] if (len(sp) - 2 * cut) > 0 else sp
             avg_p = round(sum(trimmed) / float(len(trimmed)))
         else:
-            sp = sorted(prices)
+            sp = sorted(clean_prices)
             avg_p = sp[len(sp) // 2]
-        sales_stats[key] = (min_p, avg_p, max_p, len(prices))
+        
+        sales_stats[key] = (min_p, avg_p, max_p, trade_cnt)
+
 
     cursor.execute("""
-    SELECT item_id, world_name, dc_name, min_price, avg_price, max_price, units_for_sale, listings_count, sale_velocity, updated_at
+    SELECT item_id, world_name, dc_name, min_price, avg_price, max_price, units_for_sale, listings_count, sale_velocity, recent_history_count, updated_at
     FROM item_market_stats
     """)
     rows = cursor.fetchall()
 
     data_by_world = {}
     for r in rows:
-        iid, wname, dcname, min_p, avg_p, max_p, u_sale, l_count, vel, updated = r
+        iid, wname, dcname, min_p, avg_p, max_p, u_sale, l_count, vel, rh_count, updated = r
         meta = meta_dict.get(iid, {})
         item_name = meta.get("name") or items_search.get(iid) or f"Item #{iid}"
         icon_url = icons_map.get(iid) or meta.get("icon") or compute_xivapi_icon_url(iid)
@@ -218,33 +234,37 @@ def export_web_json(conn, output_path="docs/data.json"):
         real_vel = velocity_calc.get((iid, wname), round(vel or 0, 1))
         if (iid, wname) in sales_stats:
             final_min, final_avg, final_max, hist_count = sales_stats[(iid, wname)]
+            sale_trades = int(hist_count)
         else:
-            final_min, final_avg, final_max, hist_count = (min_p, avg_p, max_p, 0)
+            final_min, final_avg, final_max = (min_p, avg_p, max_p)
+            sale_trades = int(rh_count) if (rh_count and rh_count > 0) else (1 if (real_vel > 0 or u_sale > 0) else 0)
 
-        daily_revenue = round(final_avg * real_vel) if hist_count > 0 else 0
-        sale_trades = int(hist_count)
+
+        daily_revenue = round((final_avg or 0) * real_vel)
+
+
 
         item_obj = {
             "item_id": iid,
             "item_name": item_name,
             "icon_url": icon_url,
             "category_name": category_name,
-            "min_price": final_min,
-            "avg_price": final_avg,
-            "max_price": final_max,
-            "units_for_sale": u_sale,
-            "listings_count": l_count,
+            "min_price": final_min or 0,
+            "avg_price": final_avg or 0,
+            "max_price": final_max or 0,
+            "units_for_sale": u_sale or 0,
+            "listings_count": l_count or 0,
             "sale_velocity": real_vel,
             "sale_trades": sale_trades,
             "daily_revenue": daily_revenue,
             "updated_at": updated
         }
-        if sale_trades > 0:
+        if sale_trades > 0 or real_vel > 0 or u_sale > 0:
             data_by_world.setdefault(wname, []).append(item_obj)
 
     final_data_by_world = {}
     for wname, items in data_by_world.items():
-        filtered_items = [x for x in items if x["sale_velocity"] >= 10 or (2 <= x["item_id"] <= 19)]
+        filtered_items = items
         clean_high_value_items = [
             x for x in items 
             if x.get("max_price", 0) > 0 and ((x.get("avg_price", 0) / float(x["max_price"])) >= 0.35)
@@ -252,6 +272,7 @@ def export_web_json(conn, output_path="docs/data.json"):
         top_by_max_price = set(x["item_id"] for x in sorted(clean_high_value_items, key=lambda x: x.get("max_price", 0), reverse=True)[:60])
         top_by_revenue = set(x["item_id"] for x in sorted(filtered_items, key=lambda x: x["daily_revenue"], reverse=True)[:60])
         top_by_velocity = set(x["item_id"] for x in sorted(filtered_items, key=lambda x: x["sale_velocity"], reverse=True)[:60])
+
 
         merged_top_ids = top_by_max_price.union(top_by_revenue).union(top_by_velocity)
         for cid in range(2, 20):
@@ -294,6 +315,11 @@ def fetch_and_save_all(target_dc=None):
         except Exception as e:
             print(f"[{dc}] Error fetching recent items: {e}")
 
+    cursor.execute("SELECT item_id FROM items_pool")
+    existing_pool_ids = [row[0] for row in cursor.fetchall()]
+    recent_ids_all.update(existing_pool_ids)
+
+
     for cid in range(2, 20):
         recent_ids_all.add(cid)
     recent_ids_all.add(36047)
@@ -304,35 +330,33 @@ def fetch_and_save_all(target_dc=None):
     conn.commit()
 
     target_ids = list(recent_ids_all)
+
     print(f"=== Ultra-Fast Pipeline: Fetching {len(target_ids)} active items across 32 worlds ===")
 
     target_worlds = []
     for dc in dcs:
         target_worlds.extend(DC_WORLDS.get(dc, []))
 
-    chunk_size = 50
+    chunk_size = 15
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
+    all_tasks = [(world, chunk) for chunk in item_chunks for world in target_worlds]
+
+    print(f"=== Ultra-Fast Pipeline: Fetching {len(target_ids)} items ({len(all_tasks)} flat tasks) across {len(target_worlds)} worlds ===")
 
     total_sales_inserted = 0
     total_stats_inserted = 0
 
-    for chunk_idx, chunk_ids in enumerate(item_chunks, 1):
-        world_results = {}
-        with ThreadPoolExecutor(max_workers=6) as executor:
-            futures = [executor.submit(fetch_single_world_data, w, chunk_ids) for w in target_worlds]
-            for future in as_completed(futures):
-                w_name, w_items = future.result()
-                world_results[w_name] = w_items
+    with ThreadPoolExecutor(max_workers=16) as executor:
+        futures = {executor.submit(fetch_single_world_data, world, chunk): (world, chunk) for world, chunk in all_tasks}
 
-        sales_history_batch = []
-        market_stats_batch = []
-
-        for world_name in target_worlds:
-            world_items_data = world_results.get(world_name, {})
+        for future in as_completed(futures):
+            world_name, world_items_data = future.result()
             if not world_items_data:
                 continue
 
             dc_name = WORLD_TO_DC.get(world_name, "Mana")
+            sales_history_batch = []
+            market_stats_batch = []
 
             for item_id_str, data in world_items_data.items():
                 item_id = int(item_id_str)
@@ -377,33 +401,44 @@ def fetch_and_save_all(target_dc=None):
                     sale_velocity, sale_velocity_nq, sale_velocity_hq
                 ))
 
-        if sales_history_batch:
-            cursor.executemany("""
-            INSERT OR IGNORE INTO sales_history (item_id, world_name, timestamp, price_per_unit, quantity, hq, buyer_name)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, sales_history_batch)
+            if sales_history_batch:
+                cursor.executemany("""
+                INSERT OR IGNORE INTO sales_history (item_id, world_name, timestamp, price_per_unit, quantity, hq, buyer_name)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """, sales_history_batch)
 
-        if market_stats_batch:
-            cursor.executemany("""
-            INSERT OR REPLACE INTO item_market_stats (
-                item_id, world_name, dc_name, updated_at,
-                min_price, min_price_nq, min_price_hq,
-                avg_price, avg_price_nq, avg_price_hq,
-                current_avg_price, current_avg_price_nq, current_avg_price_hq,
-                max_price, max_price_nq, max_price_hq,
-                units_for_sale, listings_count,
-                units_sold, recent_history_count,
-                sale_velocity, sale_velocity_nq, sale_velocity_hq
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, market_stats_batch)
+            if market_stats_batch:
+                cursor.executemany("""
+                INSERT OR REPLACE INTO item_market_stats (
+                    item_id, world_name, dc_name, updated_at,
+                    min_price, min_price_nq, min_price_hq,
+                    avg_price, avg_price_nq, avg_price_hq,
+                    current_avg_price, current_avg_price_nq, current_avg_price_hq,
+                    max_price, max_price_nq, max_price_hq,
+                    units_for_sale, listings_count,
+                    units_sold, recent_history_count,
+                    sale_velocity, sale_velocity_nq, sale_velocity_hq
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, market_stats_batch)
 
-        conn.commit()
-        total_sales_inserted += len(sales_history_batch)
-        total_stats_inserted += len(market_stats_batch)
+            conn.commit()
+            total_sales_inserted += len(sales_history_batch)
+            total_stats_inserted += len(market_stats_batch)
 
     print(f"=== Ultra-Fast Pipeline Finished: {total_sales_inserted:,} sales & {total_stats_inserted:,} stats saved ===")
 
-    cursor.execute("DELETE FROM sales_history WHERE timestamp < ?", (int(now_dt.timestamp()) - (7 * 86400),))
+    seven_days_ago = int(now_dt.timestamp()) - (7 * 86400)
+    # Purge old sales history (> 7 days)
+    cursor.execute("DELETE FROM sales_history WHERE timestamp < ?", (seven_days_ago,))
+    
+    # Simple 1-week cleanup rule for items_pool: remove items with NO sales in the last 7 days
+    cursor.execute("""
+    DELETE FROM items_pool 
+    WHERE item_id NOT IN (
+        SELECT DISTINCT item_id FROM sales_history WHERE timestamp >= ?
+    )
+    """, (seven_days_ago,))
+
     conn.commit()
 
     cursor.execute("SELECT DISTINCT item_id FROM items_pool")

@@ -568,6 +568,42 @@
       margin-right: 0.35rem;
     }
 
+    .item-card-sub {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4rem;
+      margin-top: 0.2rem;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .category-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .period-badge {
+      color: var(--accent-blue);
+      background: rgba(0, 210, 255, 0.08);
+      border: 1px solid rgba(0, 210, 255, 0.18);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.66rem;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
     .item-stats-row {
       display: flex;
       align-items: center;
@@ -1254,9 +1290,9 @@
         <div class="sort-toggle-group">
           <button class="sort-toggle-btn active" data-sort="velocity" onclick="setGlobalSort('velocity')">売買数</button>
           <button class="sort-toggle-btn" data-sort="revenue" onclick="setGlobalSort('revenue')">流通ギル</button>
-          <button class="sort-toggle-btn" data-sort="avg_price" onclick="setGlobalSort('avg_price')">平均単価</button>
           <button class="sort-toggle-btn" data-sort="max_price" onclick="setGlobalSort('max_price')">💎 高額取引</button>
         </div>
+
       </div>
 
       <!-- 3. Crystal Exclusion Toggle Filter -->
@@ -1497,6 +1533,30 @@
       return `${year}-${month}-${day} ${hours}:${minutes}`;
     }
 
+    function getAggregationPeriodStr(rawTimeStr) {
+      if (!rawTimeStr) {
+        const dEnd = new Date();
+        const dStart = new Date(dEnd.getTime() - (7 * 86400 * 1000));
+        return `${dStart.getMonth() + 1}/${dStart.getDate()}～${dEnd.getMonth() + 1}/${dEnd.getDate()}`;
+      }
+      let str = String(rawTimeStr).trim();
+      if (!str.endsWith('Z') && !str.includes('+')) {
+        str = str.replace(' ', 'T') + 'Z';
+      }
+      const dEnd = new Date(str);
+      if (isNaN(dEnd.getTime())) {
+        const dNow = new Date();
+        const dStart = new Date(dNow.getTime() - (7 * 86400 * 1000));
+        return `${dStart.getMonth() + 1}/${dStart.getDate()}～${dNow.getMonth() + 1}/${dNow.getDate()}`;
+      }
+      const dStart = new Date(dEnd.getTime() - (7 * 86400 * 1000));
+      const startStr = `${dStart.getMonth() + 1}/${dStart.getDate()}`;
+      const endStr = `${dEnd.getMonth() + 1}/${dEnd.getDate()}`;
+      return `${startStr}～${endStr}`;
+    }
+
+    let currentPeriodText = '';
+
     function formatChartLabelLocal(rawTimeStr) {
       if (!rawTimeStr) return '';
       let str = String(rawTimeStr).trim();
@@ -1534,11 +1594,18 @@
         if (!res.ok) throw new Error('Data fetch failed');
         const data = await res.json();
 
+        if (data.last_updated) {
+          currentPeriodText = getAggregationPeriodStr(data.last_updated);
+        }
+
         const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
+
         if (lastUpdatedEl) {
           const formattedLastUpdated = formatTimeLocal(data.last_updated);
-          lastUpdatedEl.innerHTML = `<span class="status-dot"></span> 最終更新: ${formattedLastUpdated}`;
+          const periodBadgeHtml = currentPeriodText ? `<span style="color:var(--accent-blue); font-weight:600;"><i class="fa-regular fa-calendar-days"></i> 集計期間: ${currentPeriodText}</span> <span style="opacity:0.35; margin:0 6px;">|</span> ` : '';
+          lastUpdatedEl.innerHTML = `<span class="status-dot"></span> ${periodBadgeHtml}最終更新: ${formattedLastUpdated}`;
         }
+
 
         // データに更新がない場合は再描画を行わない（チカチカ防止）
         if (lastLoadedTime && lastLoadedTime === data.last_updated) {
@@ -1609,13 +1676,8 @@
           validItems.sort((a, b) => ((b.avg_price || 0) * (b.sale_velocity || 0)) - ((a.avg_price || 0) * (a.sale_velocity || 0)));
           worldItems.length = 0;
           worldItems.push(...validItems);
-        } else if (activeSortMode === 'avg_price') {
-          // 平均単価モード: 1日1個以上売れている品目に限定してソート
-          let validItems = worldItems.filter(item => (item.sale_velocity || 0) >= 1.0);
-          validItems.sort((a, b) => (b.avg_price || 0) - (a.avg_price || 0));
-          worldItems.length = 0;
-          worldItems.push(...validItems);
         } else if (activeSortMode === 'max_price') {
+
           // 高額取引モード: 売買実績があり(件数>0)、平均価格が最高値の35%以上ある本物の高額取引品に厳選ソート
           let cleanItems = worldItems.filter(item => (item.max_price || 0) > 0 && (item.sale_trades || 0) > 0 && (((item.avg_price || 0) / item.max_price) >= 0.35));
           cleanItems.sort((a, b) => (b.max_price || 0) - (a.max_price || 0));
@@ -1663,17 +1725,22 @@
               <div class="item-card-header">
                 ${iconImg}
                 <div class="item-header-text">
-                  <span class="item-card-title">
+                  <div class="item-card-title">
                     <span class="rank-tag">#${idx + 1}</span>
                     <span>${cleanTitle}</span>
                     <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" title="Lodestoneで検索" onclick="event.stopPropagation()">
                       <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
-                  </span>
+                  </div>
+                  <div class="item-card-sub">
+                    <span class="category-tag">${escapeHtml(item.category_name || '一般')}</span>
+                  </div>
+
                 </div>
               </div>
 
               <!-- 市場ステータス -->
+
               <div class="item-section-box latest-box">
                 <!-- 上段 (2段構造): 1段目=売買数&売買件数(2列), 2段目=流通ギル(全幅) -->
                 <div style="display:flex; flex-direction:column; gap:3px; margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08);">
@@ -1734,7 +1801,8 @@
 
       document.getElementById('modalItemIcon').src = iconUrl;
       document.getElementById('modalItemName').innerHTML = `${escapeHtml(itemName)}`;
-      document.getElementById('modalItemMeta').innerText = `ID: ${itemId} | カテゴリ: ${categoryName || '一般'}`;
+      const periodMeta = currentPeriodText ? ` | 集計: ${currentPeriodText}` : '';
+      document.getElementById('modalItemMeta').innerText = `ID: ${itemId} | カテゴリ: ${categoryName || '一般'}${periodMeta}`;
       document.getElementById('modalLodestoneLink').href = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(itemName)}`;
 
       // 1. DC内全ワールドの最安値・最高値ワールドの集計
@@ -1832,6 +1900,35 @@
           return;
         }
 
+        // リアルタイム履歴から外れ値(1.5億GなどのRMT高額取引)を除外してライブ集計数値を動的補正
+        let cleanHistory = history;
+        if (history.length >= 2) {
+          const prices = history.map(h => h.pricePerUnit || 0).filter(p => p > 0).sort((a, b) => a - b);
+          if (prices.length > 0) {
+            const med = prices[Math.floor(prices.length / 2)];
+            if (med < 1000000) {
+              cleanHistory = history.filter(h => !((h.pricePerUnit || 0) > 20 * med && (h.pricePerUnit || 0) > 1000000));
+            }
+          }
+        }
+
+        if (cleanHistory.length > 0) {
+          const prices = cleanHistory.map(h => h.pricePerUnit || 0);
+          const liveMin = Math.min(...prices);
+          const liveMax = Math.max(...prices);
+          const liveAvg = Math.round(prices.reduce((a, b) => a + b, 0) / prices.length);
+
+          const minEl = document.getElementById('modalMinPrice');
+          if (minEl && liveMin < Infinity) minEl.innerText = `${liveMin.toLocaleString()}G`;
+          const minAvgEl = document.getElementById('modalMinAvgPrice');
+          if (minAvgEl && liveAvg > 0) minAvgEl.innerText = `${liveAvg.toLocaleString()}G`;
+          const maxAvgEl = document.getElementById('modalMaxAvgPrice');
+          if (maxAvgEl && liveAvg > 0) maxAvgEl.innerText = `${liveAvg.toLocaleString()}G`;
+          const maxEl = document.getElementById('modalMaxPrice');
+          if (maxEl && liveMax > 0) maxEl.innerText = `${liveMax.toLocaleString()}G`;
+        }
+
+
         tbody.innerHTML = history.map(h => {
           const formattedTime = formatTimeLocal(new Date(h.timestamp * 1000).toISOString());
           const hqBadge = h.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
@@ -1928,9 +2025,9 @@
         <div class="drawer-sort-grid">
           <button class="drawer-sort-btn active" data-drawer-sort="velocity" onclick="selectDrawerSort('velocity')">売買数順</button>
           <button class="drawer-sort-btn" data-drawer-sort="revenue" onclick="selectDrawerSort('revenue')">流通ギル順</button>
-          <button class="drawer-sort-btn" data-drawer-sort="avg_price" onclick="selectDrawerSort('avg_price')">平均単価順</button>
           <button class="drawer-sort-btn" data-drawer-sort="max_price" onclick="selectDrawerSort('max_price')">💎 高額取引</button>
         </div>
+
       </div>
 
       <!-- 4. Crystal Filter Toggle -->
