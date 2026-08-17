@@ -1821,8 +1821,8 @@
       document.getElementById('itemDetailModal').classList.add('active');
       document.body.style.overflow = 'hidden';
 
-      // 4. リアルタイム履歴データの非同期取得
-      fetchModalHistory(worldName, itemId);
+      // 4. 蓄積DB履歴データの直接レンダリング
+      renderModalHistory(worldName, itemId);
     }
 
     function computeDcMinMaxSummary(itemId) {
@@ -1872,91 +1872,40 @@
       document.getElementById('modalMaxPrice').innerText = maxVal > 0 ? `${maxVal.toLocaleString()}G` : '-G';
     }
 
-    async function fetchModalHistory(worldName, itemId) {
+    function renderModalHistory(worldName, itemId) {
       const tbody = document.getElementById('modalHistoryTbody');
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="5" style="text-align:center; padding:2rem; color:var(--text-muted);">
-            <i class="fa-solid fa-spinner fa-spin fa-lg"></i> Universalis から ${worldName} の直近取引履歴を取得中...
-          </td>
-        </tr>
-      `;
+      const worldItems = allData[worldName] || [];
+      const item = worldItems.find(x => x.item_id === itemId);
+      const history = (item && item.history) ? item.history : [];
 
-      try {
-        const url = `https://universalis.app/api/v2/${worldName}/${itemId}?entries=30`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error('API fetch failed');
-        const data = await res.json();
-        const history = data.recentHistory || [];
-
-        if (history.length === 0) {
-          tbody.innerHTML = `
-            <tr>
-              <td colspan="5" style="text-align:center; padding:2rem; color:var(--text-muted);">
-                直近の取引履歴データがありません
-              </td>
-            </tr>
-          `;
-          return;
-        }
-
-        // リアルタイム履歴から外れ値(1.5億GなどのRMT高額取引)を除外してライブ集計数値を動的補正
-        let cleanHistory = history;
-        if (history.length >= 2) {
-          const prices = history.map(h => h.pricePerUnit || 0).filter(p => p > 0).sort((a, b) => a - b);
-          if (prices.length > 0) {
-            const med = prices[Math.floor(prices.length / 2)];
-            if (med < 1000000) {
-              cleanHistory = history.filter(h => !((h.pricePerUnit || 0) > 20 * med && (h.pricePerUnit || 0) > 1000000));
-            }
-          }
-        }
-
-        if (cleanHistory.length > 0) {
-          const prices = cleanHistory.map(h => h.pricePerUnit || 0);
-          const liveMin = Math.min(...prices);
-          const liveMax = Math.max(...prices);
-          const liveAvg = Math.round(prices.reduce((a, b) => a + b, 0) / prices.length);
-
-          const minEl = document.getElementById('modalMinPrice');
-          if (minEl && liveMin < Infinity) minEl.innerText = `${liveMin.toLocaleString()}G`;
-          const minAvgEl = document.getElementById('modalMinAvgPrice');
-          if (minAvgEl && liveAvg > 0) minAvgEl.innerText = `${liveAvg.toLocaleString()}G`;
-          const maxAvgEl = document.getElementById('modalMaxAvgPrice');
-          if (maxAvgEl && liveAvg > 0) maxAvgEl.innerText = `${liveAvg.toLocaleString()}G`;
-          const maxEl = document.getElementById('modalMaxPrice');
-          if (maxEl && liveMax > 0) maxEl.innerText = `${liveMax.toLocaleString()}G`;
-        }
-
-
-        tbody.innerHTML = history.map(h => {
-          const formattedTime = formatTimeLocal(new Date(h.timestamp * 1000).toISOString());
-          const hqBadge = h.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
-          const price = (h.pricePerUnit || 0).toLocaleString();
-          const qty = (h.quantity || 0).toLocaleString();
-          const totalPrice = ((h.pricePerUnit || 0) * (h.quantity || 0)).toLocaleString();
-
-          return `
-            <tr>
-              <td style="font-size:0.78rem; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> ${formattedTime}</td>
-              <td>${hqBadge}</td>
-              <td style="font-weight:700; color:var(--text-main);">${price}G</td>
-              <td>${qty}個</td>
-              <td style="font-weight:700; color:#ffb703;">${totalPrice}G</td>
-            </tr>
-          `;
-        }).join('');
-
-      } catch (err) {
-        console.error("Modal history fetch error:", err);
+      if (!history || history.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="5" style="text-align:center; padding:2rem; color:#ef4444;">
-              <i class="fa-solid fa-circle-exclamation"></i> 履歴データの取得に失敗しました
+            <td colspan="5" style="text-align:center; padding:2rem; color:var(--text-muted);">
+              直近7日間の取引履歴データがありません
             </td>
           </tr>
         `;
+        return;
       }
+
+      tbody.innerHTML = history.map(h => {
+        const formattedTime = formatTimeLocal(new Date(h.ts * 1000).toISOString());
+        const hqBadge = h.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
+        const price = (h.price || 0).toLocaleString();
+        const qty = (h.qty || 0).toLocaleString();
+        const totalPrice = ((h.price || 0) * (h.qty || 0)).toLocaleString();
+
+        return `
+          <tr>
+            <td style="font-size:0.78rem; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> ${formattedTime}</td>
+            <td>${hqBadge}</td>
+            <td style="font-weight:700; color:var(--text-main);">${price}G</td>
+            <td>${qty}個</td>
+            <td style="font-weight:700; color:#ffb703;">${totalPrice}G</td>
+          </tr>
+        `;
+      }).join('');
     }
 
     function slideModalWorldTabs(direction) {
@@ -1972,7 +1921,7 @@
         btn.classList.toggle('active', btn.innerText.includes(worldName));
       });
       if (currentModalItemId) {
-        fetchModalHistory(worldName, currentModalItemId);
+        renderModalHistory(worldName, currentModalItemId);
       }
     }
 

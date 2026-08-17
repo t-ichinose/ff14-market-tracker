@@ -171,15 +171,26 @@ def export_web_json(conn, output_path="docs/data.json"):
         actual_days = 7.0
 
     cursor.execute("""
-    SELECT item_id, world_name, price_per_unit, quantity, timestamp
+    SELECT item_id, world_name, price_per_unit, quantity, hq, timestamp
     FROM sales_history 
     WHERE timestamp >= ?
+    ORDER BY timestamp DESC
     """, (seven_days_ago_ts,))
     
     sales_by_item = {}
+    history_by_item = {}
     for row in cursor.fetchall():
-        iid, wname, price, qty, ts = row
+        iid, wname, price, qty, hq, ts = row
         sales_by_item.setdefault((iid, wname), []).append({"price": price, "qty": qty, "ts": ts})
+        
+        hist_list = history_by_item.setdefault((iid, wname), [])
+        if len(hist_list) < 15:
+            hist_list.append({
+                "price": price,
+                "qty": qty,
+                "hq": bool(hq),
+                "ts": ts
+            })
 
     velocity_calc = {}
     sales_stats = {}
@@ -239,10 +250,8 @@ def export_web_json(conn, output_path="docs/data.json"):
             final_min, final_avg, final_max = (min_p, avg_p, max_p)
             sale_trades = int(rh_count) if (rh_count and rh_count > 0) else (1 if (real_vel > 0 or u_sale > 0) else 0)
 
-
         daily_revenue = round((final_avg or 0) * real_vel)
-
-
+        item_history = history_by_item.get((iid, wname), [])
 
         item_obj = {
             "item_id": iid,
@@ -257,6 +266,7 @@ def export_web_json(conn, output_path="docs/data.json"):
             "sale_velocity": real_vel,
             "sale_trades": sale_trades,
             "daily_revenue": daily_revenue,
+            "history": item_history,
             "updated_at": updated
         }
         if sale_trades > 0 or real_vel > 0 or u_sale > 0:
