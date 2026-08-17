@@ -292,18 +292,33 @@ def export_web_json(conn, output_path="docs/data.json"):
         top_items.sort(key=lambda x: x["sale_velocity"], reverse=True)
         final_data_by_world[wname] = top_items
 
+    # Load existing docs/data.json if present, to merge and preserve data for non-updated DCs
+    merged_data_by_world = {}
+    if os.path.exists(output_path):
+        try:
+            with open(output_path, "r", encoding="utf-8") as f:
+                existing_json = json.load(f)
+                merged_data_by_world = existing_json.get("data", {})
+        except Exception as e:
+            print(f"Notice: Could not load existing {output_path} for merging: {e}")
+
+    # Update merged_data_by_world with freshly calculated worlds
+    for wname, items in final_data_by_world.items():
+        if items:
+            merged_data_by_world[wname] = items
+
     web_data = {
         "last_updated": now_str,
         "datacenters": JP_DATACENTERS,
         "dc_worlds": DC_WORLDS,
-        "data": final_data_by_world
+        "data": merged_data_by_world
     }
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(web_data, f, ensure_ascii=False, separators=(",", ":"))
 
     file_size_kb = os.path.getsize(output_path) / 1024
-    print(f"Exported streamlined web JSON to {output_path} ({file_size_kb:.0f} KB)")
+    print(f"Exported merged web JSON to {output_path} ({file_size_kb:.0f} KB)")
 
 def fetch_and_save_all(target_dc=None):
     now_dt = datetime.now(timezone.utc)
