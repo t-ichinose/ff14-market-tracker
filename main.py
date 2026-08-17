@@ -137,7 +137,7 @@ def resolve_item_metadata_batch(conn, item_ids):
 def fetch_single_world_data(world_name, target_ids):
     headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=20"
+    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=50"
     for attempt in range(2):
         try:
             d_res = requests.get(detail_url, headers=headers, timeout=8)
@@ -441,13 +441,16 @@ def fetch_and_save_all(target_dc=None):
     # Purge old sales history (> 7 days)
     cursor.execute("DELETE FROM sales_history WHERE timestamp < ?", (seven_days_ago,))
     
-    # Simple 1-week cleanup rule for items_pool: remove items with NO sales in the last 7 days
-    cursor.execute("""
-    DELETE FROM items_pool 
-    WHERE item_id NOT IN (
-        SELECT DISTINCT item_id FROM sales_history WHERE timestamp >= ?
-    )
-    """, (seven_days_ago,))
+    # Simple 1-week cleanup rule for items_pool: remove items with NO sales in the last 7 days (only if sales_history has sufficient data)
+    cursor.execute("SELECT COUNT(*) FROM sales_history WHERE timestamp >= ?", (seven_days_ago,))
+    recent_sales_total = cursor.fetchone()[0]
+    if recent_sales_total > 500:
+        cursor.execute("""
+        DELETE FROM items_pool 
+        WHERE item_id NOT IN (
+            SELECT DISTINCT item_id FROM sales_history WHERE timestamp >= ?
+        )
+        """, (seven_days_ago,))
 
     conn.commit()
 
