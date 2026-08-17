@@ -1732,10 +1732,6 @@
                       <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
                   </div>
-                  <div class="item-card-sub">
-                    <span class="category-tag">${escapeHtml(item.category_name || '一般')}</span>
-                  </div>
-
                 </div>
               </div>
 
@@ -1800,7 +1796,7 @@
       document.getElementById('modalItemIcon').src = iconUrl;
       document.getElementById('modalItemName').innerHTML = `${escapeHtml(itemName)}`;
       const periodMeta = currentPeriodText ? ` | 集計: ${currentPeriodText}` : '';
-      document.getElementById('modalItemMeta').innerText = `ID: ${itemId} | カテゴリ: ${categoryName || '一般'}${periodMeta}`;
+      document.getElementById('modalItemMeta').innerText = `ID: ${itemId}${periodMeta}`;
       document.getElementById('modalLodestoneLink').href = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(itemName)}`;
 
       // 1. DC内全ワールドの最安値・最高値ワールドの集計
