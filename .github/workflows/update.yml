@@ -31,9 +31,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: data/
-          key: market-db-${{ runner.os }}-${{ github.run_id }}
+          key: market-db-${{ runner.os }}-v2
           restore-keys: |
-            market-db-${{ runner.os }}-
+            market-db-${{ runner.os }}-v2
 
       - name: Determine Target DC for Rotation
         id: dc_select
