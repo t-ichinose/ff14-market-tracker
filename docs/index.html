@@ -98,40 +98,169 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .header-badges {
+    /* View Mode Switcher Buttons */
+    .view-mode-tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.35rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
       display: flex;
       align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .view-mode-tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .view-mode-tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(255, 183, 3, 0.2));
+      border-color: rgba(255, 183, 3, 0.4);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(255, 183, 3, 0.2);
+    }
+
+    /* Arbitrage Grid & Card Styles */
+    .arbitrage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .arbitrage-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-direction: column;
       gap: 0.6rem;
-      flex-wrap: wrap;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      position: relative;
     }
 
-    .status-badge {
-      display: inline-flex;
+    .arbitrage-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 183, 3, 0.5);
+      box-shadow: 0 8px 24px rgba(255, 183, 3, 0.15);
+    }
+
+    .arbitrage-card-header {
+      display: flex;
       align-items: center;
-      gap: 0.4rem;
-      background: rgba(0, 210, 255, 0.1);
-      border: 1px solid rgba(0, 210, 255, 0.2);
-      color: var(--accent-blue);
-      padding: 0.35rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
+      gap: 0.65rem;
+    }
+
+    .arb-target-banner {
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(0, 210, 255, 0.08));
+      border: 1px solid rgba(74, 222, 128, 0.22);
+      border-radius: 8px;
+      padding: 0.38rem 0.75rem;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      white-space: nowrap;
+    }
+
+    .arb-route-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .arb-route-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .arb-route-box.buy-box {
+      border-left: 3px solid var(--accent-green);
+      padding-left: 0.5rem;
+    }
+
+    .arb-route-box.sell-box {
+      border-left: 3px solid var(--accent-blue);
+      padding-left: 0.5rem;
+    }
+
+    .arb-box-lbl {
+      font-size: 0.65rem;
+      color: var(--text-muted);
       font-weight: 600;
+      white-space: nowrap;
     }
 
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent-blue);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-blue);
-      animation: pulse 2s infinite;
+    .arb-box-world {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    @keyframes pulse {
-      0% { opacity: 0.4; }
-      50% { opacity: 1; }
-      100% { opacity: 0.4; }
+    .arb-box-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      white-space: nowrap;
     }
+
+    .arb-route-arrow {
+      color: var(--accent-gold);
+      font-size: 1.1rem;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    .arb-profit-summary {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr 1.25fr;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(255, 183, 3, 0.06);
+      border: 1px solid rgba(255, 183, 3, 0.2);
+      border-radius: 8px;
+      padding: 0.45rem 0.6rem;
+      font-size: 0.72rem;
+    }
+
+    .arb-stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      overflow: hidden;
+    }
+
+    .arb-stat-item.gold-highlight {
+      background: rgba(255, 183, 3, 0.12);
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 183, 3, 0.3);
+    }
+
 
     /* DC Top Navigation Tabs */
     .dc-tabs-container {
@@ -1269,31 +1398,41 @@
         </div>
       </div>
 
-      <!-- Compact Inline DC Selection Tabs -->
-      <div class="dc-tabs-container" style="margin-bottom:0; padding:0.25rem; border-radius:10px;">
-        <button class="dc-tab-btn active" data-dc="Mana" onclick="switchDc('Mana')" style="padding:0.35rem 0.75rem; font-size:0.85rem; min-width:auto;">
-          <i class="fa-solid fa-server" style="color: #60a5fa;"></i> Mana
-        </button>
-        <button class="dc-tab-btn" data-dc="Elemental" onclick="switchDc('Elemental')" style="padding:0.35rem 0.75rem; font-size:0.85rem; min-width:auto;">
-          <i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental
-        </button>
-        <button class="dc-tab-btn" data-dc="Gaia" onclick="switchDc('Gaia')" style="padding:0.35rem 0.75rem; font-size:0.85rem; min-width:auto;">
-          <i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia
-        </button>
-        <button class="dc-tab-btn" data-dc="Meteor" onclick="switchDc('Meteor')" style="padding:0.35rem 0.75rem; font-size:0.85rem; min-width:auto;">
-          <i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor
-        </button>
-      </div>
+      <div class="header-badges" style="display: flex; align-items: center; gap: 0.6rem;">
+        <!-- Fixed Mode Switcher Tabs right to the left of 集計期間 / 最終更新 -->
+        <div class="view-mode-tabs" style="display: flex; gap: 0.3rem; background: rgba(0, 0, 0, 0.35); padding: 3px; border-radius: 10px; border: 1px solid var(--card-border);">
+          <button class="view-mode-tab-btn active" id="modeBtnAnalytics" onclick="switchMainViewMode('analytics')">
+            <i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> 市場分析
+          </button>
+          <button class="view-mode-tab-btn" id="modeBtnArbitrage" onclick="switchMainViewMode('arbitrage')">
+            <i class="fa-solid fa-gem" style="color: var(--accent-gold);"></i> 💎 金策ナビ
+          </button>
+        </div>
 
-      <div class="header-badges">
         <div class="status-badge" id="lastUpdatedBadge" style="padding:0.25rem 0.6rem; font-size:0.75rem;">
           <span class="status-dot"></span> 最終更新: 読み込み中...
         </div>
       </div>
     </header>
 
-    <!-- Unified Single-Row Controls Bar: World Nav Tabs -> Sort Controls -> Search Box -->
-    <div class="controls-bar">
+    <!-- Unified Single-Row Controls Bar: DC Selection -> World Nav Tabs -> Sort Controls -> Crystal Filter -> Search Box -->
+    <div class="controls-bar" id="analyticsControlsBar">
+      <!-- 0. Compact Inline DC Selection Tabs (Integrated into controls bar) -->
+      <div class="dc-tabs-container" id="dcTabsContainer" style="margin-bottom:0; padding:2px; border-radius:8px; gap:2px; flex-shrink:0; background:rgba(0,0,0,0.25); border:1px solid var(--card-border);">
+        <button class="dc-tab-btn active" data-dc="Mana" onclick="switchDc('Mana')" style="padding:0.25rem 0.55rem; font-size:0.78rem; min-width:auto; border-radius:6px;">
+          <i class="fa-solid fa-server" style="color: #60a5fa;"></i> Mana
+        </button>
+        <button class="dc-tab-btn" data-dc="Elemental" onclick="switchDc('Elemental')" style="padding:0.25rem 0.55rem; font-size:0.78rem; min-width:auto; border-radius:6px;">
+          <i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental
+        </button>
+        <button class="dc-tab-btn" data-dc="Gaia" onclick="switchDc('Gaia')" style="padding:0.25rem 0.55rem; font-size:0.78rem; min-width:auto; border-radius:6px;">
+          <i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia
+        </button>
+        <button class="dc-tab-btn" data-dc="Meteor" onclick="switchDc('Meteor')" style="padding:0.25rem 0.55rem; font-size:0.78rem; min-width:auto; border-radius:6px;">
+          <i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor
+        </button>
+      </div>
+
       <!-- 1. World Nav Tabs -->
       <div class="world-nav-wrapper">
         <div class="world-nav-bar" id="worldNavBar">
@@ -1309,12 +1448,11 @@
           <button class="sort-toggle-btn" data-sort="revenue" onclick="setGlobalSort('revenue')">流通ギル</button>
           <button class="sort-toggle-btn" data-sort="max_price" onclick="setGlobalSort('max_price')">💎 高額取引</button>
         </div>
-
       </div>
 
-      <!-- 3. Crystal Exclusion Toggle Filter -->
-      <button class="filter-toggle-btn active" id="crystalFilterBtn" onclick="toggleCrystalFilter()" title="シャード・クリスタル・クラスター類の表示/除外を切り替え">
-        <i class="fa-solid fa-gem"></i> クリスタル除外: ON
+      <!-- 3. Crystal Exclusion Toggle Filter (Omit "クリスタル" label for compact display) -->
+      <button class="filter-toggle-btn active" id="crystalFilterBtn" onclick="toggleCrystalFilter()" title="シャード・クリスタル・クラスター類の表示/除外を切り替え" style="padding: 0.35rem 0.6rem;">
+        <i class="fa-solid fa-gem"></i> ON
       </button>
 
       <!-- 4. Search Box (Compact Width) -->
@@ -1325,7 +1463,7 @@
     </div>
 
     <!-- World 8 Columns Grid Container with Arrow Buttons -->
-    <div class="grid-scroll-wrapper">
+    <div class="grid-scroll-wrapper" id="analyticsGridWrapper">
       <button class="grid-slide-btn grid-slide-left" onclick="slideWorldGrid(-1)" title="左へ移動">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
@@ -1338,6 +1476,64 @@
         <i class="fa-solid fa-chevron-right"></i>
       </button>
     </div>
+
+    <!-- NEW: Arbitrage Profitability Analyzer Section (せどり金策ナビ) -->
+    <div class="arbitrage-section" id="arbitrageSection" style="display: none; flex-direction: column; gap: 0.5rem; flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 2rem;">
+      <!-- Arbitrage Controls Bar (Matches analyticsControlsBar thickness and styling) -->
+      <div class="controls-bar" id="arbitrageControlsBar" style="flex-wrap: nowrap; justify-content: flex-start; gap: 0.8rem;">
+        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--accent-gold); white-space: nowrap;">
+          <i class="fa-solid fa-house-user"></i> ホーム:
+          <select id="arbHomeWorldSelect" class="search-input" style="width: auto; padding: 0.25rem 0.5rem; font-size: 0.78rem; font-weight: 700; color: #ffffff;" onchange="updateArbitrageFilters()">
+            <!-- Populated by JS -->
+          </select>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-muted); white-space: nowrap;">
+          <i class="fa-solid fa-arrow-down-wide-short"></i> 並び替え:
+          <select id="arbSortSelect" class="search-input" style="width: auto; padding: 0.25rem 0.5rem; font-size: 0.78rem; font-weight:700; color:var(--accent-gold);" onchange="updateArbitrageFilters()">
+            <option value="unitProfit" selected>💎 1個純利益額順 (高額順)</option>
+            <option value="dailyProfit">💰 推定日商利益順</option>
+          </select>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-muted); white-space: nowrap;">
+          <i class="fa-solid fa-compass"></i> 仕入れ範囲:
+          <select id="arbScopeSelect" class="search-input" style="width: auto; padding: 0.25rem 0.5rem; font-size: 0.78rem;" onchange="updateArbitrageFilters()">
+            <option value="all" selected>全4DC (全32ワールド)</option>
+            <option value="same_dc">同DC内のみ</option>
+          </select>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-muted); white-space: nowrap;">
+          <i class="fa-solid fa-percent"></i> 最低粗利益率:
+          <select id="arbMinRoiSelect" class="search-input" style="width: auto; padding: 0.25rem 0.5rem; font-size: 0.78rem;" onchange="updateArbitrageFilters()">
+            <option value="10">10% 以上</option>
+            <option value="15" selected>15% 以上</option>
+            <option value="20">20% 以上</option>
+            <option value="30">30% 以上</option>
+            <option value="50">50% 以上</option>
+          </select>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-muted); white-space: nowrap;">
+          <i class="fa-solid fa-bolt"></i> 最低ホーム売買数:
+          <select id="arbMinVelSelect" class="search-input" style="width: auto; padding: 0.25rem 0.5rem; font-size: 0.78rem;" onchange="updateArbitrageFilters()">
+            <option value="1" selected>1 個/日 以上</option>
+            <option value="5">5 個/日 以上</option>
+            <option value="10">10 個/日 以上</option>
+            <option value="50">50 個/日 以上</option>
+            <option value="100">100 個/日 以上</option>
+            <option value="200">200 個/日 以上</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Arbitrage Cards Grid -->
+      <div class="arbitrage-grid" id="arbitrageCardGrid">
+        <!-- JS Populated Arbitrage Cards -->
+      </div>
+    </div>
+
   </div>
 
   <!-- Item Detail & Sales History Modal -->
@@ -1487,7 +1683,7 @@
       const btn = document.getElementById('crystalFilterBtn');
       if (btn) {
         btn.classList.toggle('active', excludeCrystals);
-        btn.innerHTML = `<i class="fa-solid fa-gem"></i> クリスタル除外: ${excludeCrystals ? 'ON' : 'OFF'}`;
+        btn.innerHTML = `<i class="fa-solid fa-gem"></i> ${excludeCrystals ? 'ON' : 'OFF'}`;
       }
       renderWorldGrid();
     }
@@ -1724,8 +1920,8 @@
           const cMax = (item.max_price || 0).toLocaleString();
           const cStock = (item.units_for_sale || 0).toLocaleString();
           const cVel = (item.sale_velocity || 0).toLocaleString();
-          const cTrades = (item.sale_trades || 0).toLocaleString();
-
+          const cTrades = Math.round((item.sale_trades || 0) / 7.0).toLocaleString();
+          
           // 日商（流通ギル = 平均単価 × 日当売買数）
           const dailyRevenue = Math.round((item.avg_price || 0) * (item.sale_velocity || 0)).toLocaleString();
 
@@ -1771,8 +1967,9 @@
                   <!-- 行2: 左=件数 | 右=平均値 -->
                   <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 8px;">
                     <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-receipt" style="color: #a855f7; width: 12px; text-align: center;"></i> 件数:</span>
-                    <strong style="color: #a855f7; font-size: 0.76rem;">${cTrades}件</strong>
+                    <strong style="color: #a855f7; font-size: 0.76rem;">${cTrades}件/日</strong>
                   </div>
+
                   <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between;">
                     <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-scale-balanced" style="color: #c084fc; width: 12px; text-align: center;"></i> 平均:</span>
                     <strong style="color: #c084fc; font-size: 0.76rem;">${cAvg}G</strong>
@@ -1849,52 +2046,64 @@
       renderModalHistory(worldName, itemId);
     }
 
-    function computeDcMinMaxSummary(itemId) {
-      let minVal = Infinity, minWorld = '-';
-      let minAvgVal = Infinity, minAvgWorld = '-';
-      let maxAvgVal = -1, maxAvgWorld = '-';
-      let maxVal = -1, maxWorld = '-';
+    function findDcForWorld(worldName) {
+      if (!worldName || !dcWorldsMap) return "";
+      for (const [dc, worlds] of Object.entries(dcWorldsMap)) {
+        if (worlds.includes(worldName)) return dc;
+      }
+      return "";
+    }
 
-      const worlds = dcWorldsMap[activeDc] || [];
-      for (const w of worlds) {
-        const wItems = allData[w] || [];
-        const found = wItems.find(x => x.item_id === itemId);
-        if (found) {
-          // 最安値
-          if (found.min_price > 0 && found.min_price < minVal) {
-            minVal = found.min_price;
-            minWorld = w;
-          }
-          // 最安平均
-          if (found.avg_price > 0 && found.avg_price < minAvgVal) {
-            minAvgVal = found.avg_price;
-            minAvgWorld = w;
-          }
-          // 最高平均
-          if (found.avg_price > maxAvgVal) {
-            maxAvgVal = found.avg_price;
-            maxAvgWorld = w;
-          }
-          // 最高値
-          if (found.max_price > maxVal) {
-            maxVal = found.max_price;
-            maxWorld = w;
+    function computeDcMinMaxSummary(itemId) {
+      let minVal = Infinity, minWorldStr = '-';
+      let minAvgVal = Infinity, minAvgWorldStr = '-';
+      let maxAvgVal = -1, maxAvgWorldStr = '-';
+      let maxVal = -1, maxWorldStr = '-';
+
+      // 全データセンター (全32ワールド) を横断して比較
+      for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
+        for (const w of worlds) {
+          const wItems = allData[w] || [];
+          const found = wItems.find(x => x.item_id === itemId);
+          if (found) {
+            const worldLabel = `${dc} - ${w}`;
+            // 最安値
+            if (found.min_price > 0 && found.min_price < minVal) {
+              minVal = found.min_price;
+              minWorldStr = worldLabel;
+            }
+            // 最安平均
+            if (found.avg_price > 0 && found.avg_price < minAvgVal) {
+              minAvgVal = found.avg_price;
+              minAvgWorldStr = worldLabel;
+            }
+            // 最高平均
+            if (found.avg_price > maxAvgVal) {
+              maxAvgVal = found.avg_price;
+              maxAvgWorldStr = worldLabel;
+            }
+            // 最高値
+            if (found.max_price > maxVal) {
+              maxVal = found.max_price;
+              maxWorldStr = worldLabel;
+            }
           }
         }
       }
 
-      document.getElementById('modalMinWorld').innerText = minWorld !== '-' ? minWorld : 'データなし';
+      document.getElementById('modalMinWorld').innerText = minWorldStr !== '-' ? minWorldStr : 'データなし';
       document.getElementById('modalMinPrice').innerText = minVal !== Infinity ? `${minVal.toLocaleString()}G` : '-G';
 
-      document.getElementById('modalMinAvgWorld').innerText = minAvgWorld !== '-' ? minAvgWorld : 'データなし';
+      document.getElementById('modalMinAvgWorld').innerText = minAvgWorldStr !== '-' ? minAvgWorldStr : 'データなし';
       document.getElementById('modalMinAvgPrice').innerText = minAvgVal !== Infinity ? `${Math.round(minAvgVal).toLocaleString()}G` : '-G';
 
-      document.getElementById('modalMaxAvgWorld').innerText = maxAvgWorld !== '-' ? maxAvgWorld : 'データなし';
+      document.getElementById('modalMaxAvgWorld').innerText = maxAvgWorldStr !== '-' ? maxAvgWorldStr : 'データなし';
       document.getElementById('modalMaxAvgPrice').innerText = maxAvgVal > 0 ? `${Math.round(maxAvgVal).toLocaleString()}G` : '-G';
 
-      document.getElementById('modalMaxWorld').innerText = maxWorld !== '-' ? maxWorld : 'データなし';
+      document.getElementById('modalMaxWorld').innerText = maxWorldStr !== '-' ? maxWorldStr : 'データなし';
       document.getElementById('modalMaxPrice').innerText = maxVal > 0 ? `${maxVal.toLocaleString()}G` : '-G';
     }
+
 
     function renderModalHistory(worldName, itemId) {
       const tbody = document.getElementById('modalHistoryTbody');
@@ -1961,6 +2170,232 @@
         closeItemModal();
       }
     }
+
+    let activeMainViewMode = 'analytics';
+
+    function switchMainViewMode(mode) {
+      activeMainViewMode = mode;
+      document.getElementById('modeBtnAnalytics').classList.toggle('active', mode === 'analytics');
+      document.getElementById('modeBtnArbitrage').classList.toggle('active', mode === 'arbitrage');
+
+      const dcTabs = document.getElementById('dcTabsContainer');
+      const controlsBar = document.getElementById('analyticsControlsBar');
+      const analyticsWrapper = document.getElementById('analyticsGridWrapper');
+      const arbSection = document.getElementById('arbitrageSection');
+
+      if (mode === 'analytics') {
+        if (controlsBar) controlsBar.style.display = 'flex';
+        if (analyticsWrapper) analyticsWrapper.style.display = 'flex';
+        if (arbSection) arbSection.style.display = 'none';
+        renderWorldGrid();
+      } else {
+        if (controlsBar) controlsBar.style.display = 'none';
+        if (analyticsWrapper) analyticsWrapper.style.display = 'none';
+        if (arbSection) arbSection.style.display = 'flex';
+        populateArbitrageHomeWorldSelect();
+        renderArbitrageGrid();
+      }
+    }
+
+    function populateArbitrageHomeWorldSelect() {
+      const select = document.getElementById('arbHomeWorldSelect');
+      if (!select || select.children.length > 0) return;
+
+      let html = '';
+      for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
+        html += `<optgroup label="[ ${dc} DC ]">`;
+        for (const w of worlds) {
+          const isSelected = (w === 'Chocobo') ? 'selected' : '';
+          html += `<option value="${w}" ${isSelected}>${dc} - ${w}</option>`;
+        }
+        html += `</optgroup>`;
+      }
+      select.innerHTML = html;
+    }
+
+    function updateArbitrageFilters() {
+      renderArbitrageGrid();
+    }
+
+    function renderArbitrageGrid() {
+      const container = document.getElementById('arbitrageCardGrid');
+      if (!container) return;
+
+      if (Object.keys(allData).length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:3rem; color:var(--text-muted); grid-column:1/-1;">データを読み込み中...</div>`;
+        return;
+      }
+
+      const homeWorldSelect = document.getElementById('arbHomeWorldSelect');
+      const arbHomeWorld = homeWorldSelect ? homeWorldSelect.value : 'Chocobo';
+      const arbSort = document.getElementById('arbSortSelect')?.value || 'unitProfit';
+      const arbScope = document.getElementById('arbScopeSelect')?.value || 'all';
+      const arbMinRoi = parseFloat(document.getElementById('arbMinRoiSelect')?.value || '15');
+      const arbMinVel = parseFloat(document.getElementById('arbMinVelSelect')?.value || '1');
+
+      const homeItems = allData[arbHomeWorld] || [];
+      const homeDc = findDcForWorld(arbHomeWorld);
+
+      const homeItemMap = new Map();
+      for (const item of homeItems) {
+        if ((item.sale_velocity || 0) >= arbMinVel && (item.sale_trades || 0) > 0) {
+          homeItemMap.set(item.item_id, item);
+        }
+      }
+
+      let allowedWorlds = [];
+      if (arbScope === 'same_dc') {
+        allowedWorlds = (dcWorldsMap[homeDc] || []).filter(w => w !== arbHomeWorld);
+      } else {
+        for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
+          for (const w of worlds) {
+            if (w !== arbHomeWorld) allowedWorlds.push(w);
+          }
+        }
+      }
+
+      const opportunities = [];
+
+      for (const [itemId, homeItem] of homeItemMap.entries()) {
+        if (excludeCrystals && isCrystalItem(homeItem)) continue;
+
+        let bestOp = null;
+        let maxProfit = -1;
+
+        for (const sourceWorld of allowedWorlds) {
+          const sourceItems = allData[sourceWorld] || [];
+          const sourceItem = sourceItems.find(x => x.item_id === itemId);
+          if (!sourceItem) continue;
+
+          // 平均相場ベースで固定比較
+          const buyPrice = sourceItem.avg_price || 0;
+          const sellPrice = homeItem.avg_price || 0;
+
+          if (buyPrice <= 0 || sellPrice <= 0) continue;
+
+          const netCost = buyPrice * 1.05;
+          const netReturn = sellPrice * 0.95;
+          const unitProfit = Math.round(netReturn - netCost);
+
+          if (unitProfit <= 0) continue;
+
+          const roiPercent = ((unitProfit / netCost) * 100);
+          if (roiPercent < arbMinRoi) continue;
+
+          const dailyExpectedProfit = Math.round(unitProfit * (homeItem.sale_velocity || 0));
+
+          // 各商品で最も純利益が大きい仕入れ元ワールドを選定
+          if (unitProfit > maxProfit) {
+            maxProfit = unitProfit;
+            bestOp = {
+              itemId,
+              homeItem,
+              sourceItem,
+              sourceWorld,
+              sourceDc: findDcForWorld(sourceWorld),
+              buyPrice,
+              sellPrice,
+              netCost,
+              netReturn,
+              unitProfit,
+              roiPercent: Math.round(roiPercent * 10) / 10,
+              dailyExpectedProfit
+            };
+          }
+        }
+
+        if (bestOp) {
+          opportunities.push(bestOp);
+        }
+      }
+
+      // ソート順の適用 (1個純利益順 or 推定日商利益順)
+      if (arbSort === 'unitProfit') {
+        opportunities.sort((a, b) => b.unitProfit - a.unitProfit);
+      } else {
+        opportunities.sort((a, b) => b.dailyExpectedProfit - a.dailyExpectedProfit);
+      }
+
+      if (opportunities.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:4rem; color:var(--text-muted); grid-column: 1 / -1;">
+            <i class="fa-solid fa-filter-circle-xmark fa-3x" style="color:var(--text-muted); margin-bottom:1rem;"></i><br>
+            条件に合う金策チャンスが見つかりませんでした。<br>
+            <span style="font-size:0.8rem; opacity:0.7;">（最低利益率や売買数、仕入れ範囲の条件を緩めてみてください）</span>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = opportunities.slice(0, 40).map((op, idx) => {
+        const item = op.homeItem;
+        let displayTitle = item.item_name || `Item #${op.itemId}`;
+        let cleanTitle = escapeHtml(displayTitle).replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
+        const primaryIcon = (item.icon_url && !item.icon_url.includes("021001_hr1")) ? item.icon_url : getComputedIconUrl(op.itemId);
+        const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
+
+        const targetBuyGuide = Math.round(op.buyPrice * 1.05).toLocaleString();
+        const targetSellGuide = op.sellPrice.toLocaleString();
+
+        return `
+          <div class="arbitrage-card" onclick="openItemModal(${op.itemId}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${arbHomeWorld}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}')" title="クリックで取引履歴と詳細を表示">
+            <div class="arbitrage-card-header">
+              <img class="item-icon" src="${primaryIcon}" alt="" onerror="this.src='https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png'">
+              <div class="item-header-text">
+                <div class="item-card-title">
+                  <span class="rank-tag" style="color:var(--accent-gold);">#${idx + 1}</span>
+                  <span style="font-weight:700;">${cleanTitle}</span>
+                  <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" title="Lodestoneで検索" onclick="event.stopPropagation()">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+                <div class="item-card-sub">
+                  <span class="category-tag">${escapeHtml(item.category_name || '一般')}</span>
+                  <span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-fire"></i> 高回転金策</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="arb-target-banner">
+              <span><span style="color:var(--text-muted); font-weight:600;">仕入:</span> <strong style="color:var(--accent-green);">${targetBuyGuide} G 以下</strong></span>
+              <span style="color:var(--text-muted); opacity:0.5;">➔</span>
+              <span><span style="color:var(--text-muted); font-weight:600;">販売:</span> <strong style="color:#ffb703;">${targetSellGuide} G 以上</strong></span>
+            </div>
+
+            <div class="arb-route-grid">
+              <div class="arb-route-box buy-box">
+                <div class="arb-box-lbl"><i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> 仕入れ先 (最安平均)</div>
+                <div class="arb-box-world">${op.sourceDc} - ${op.sourceWorld}</div>
+                <div class="arb-box-price">${op.buyPrice.toLocaleString()} G</div>
+              </div>
+              <div class="arb-route-arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+              <div class="arb-route-box sell-box">
+                <div class="arb-box-lbl"><i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> 販売先 (ホーム平均)</div>
+                <div class="arb-box-world">${homeDc} - ${arbHomeWorld}</div>
+                <div class="arb-box-price">${op.sellPrice.toLocaleString()} G</div>
+              </div>
+            </div>
+
+            <div class="arb-profit-summary">
+              <div class="arb-stat-item">
+                <span class="lbl" style="color:#94a3b8; font-size:0.65rem;">1個純利益:</span>
+                <strong style="color:var(--accent-green); font-size:0.78rem;">+${op.unitProfit.toLocaleString()} G</strong>
+                <span style="font-size:0.65rem; color:#4ade80;">(+${op.roiPercent}%)</span>
+              </div>
+              <div class="arb-stat-item">
+                <span class="lbl" style="color:#94a3b8; font-size:0.65rem;">ホーム売買数:</span>
+                <strong style="color:var(--accent-blue); font-size:0.78rem;">${(item.sale_velocity || 0)} 個/日</strong>
+              </div>
+              <div class="arb-stat-item gold-highlight">
+                <span class="lbl" style="color:#fef08a; font-size:0.65rem;">💰 推定日商利益:</span>
+                <strong style="color:#ffb703; font-size:0.86rem; font-weight:800;">+${op.dailyExpectedProfit.toLocaleString()} G/日</strong>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
   </script>
 
   <!-- Slide-in Drawer Menu & Overlay (Mobile Optimization) -->
