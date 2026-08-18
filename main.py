@@ -107,22 +107,27 @@ def resolve_item_metadata_batch(conn, item_ids):
     """, meta_rows)
     conn.commit()
 
-def fetch_single_world_data(world_name, target_ids):
+def fetch_single_dc_data(dc_name, target_ids):
     headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=20"
+    detail_url = f"https://universalis.app/api/v2/{dc_name}/{ids_str}?entries=20"
     for attempt in range(3):
         try:
             d_res = requests.get(detail_url, headers=headers, timeout=(5.0, 15.0))
             if d_res.status_code == 200:
-                return world_name, d_res.json().get('items', {})
-            print(f"⚠️ [{world_name}] API HTTP {d_res.status_code}. Retrying ({attempt + 1}/3)...")
+                data = d_res.json()
+                if "items" in data:
+                    return dc_name, data["items"]
+                elif "itemID" in data:
+                    return dc_name, {str(data["itemID"]): data}
+                return dc_name, {}
+            print(f"⚠️ [{dc_name}] API HTTP {d_res.status_code}. Retrying ({attempt + 1}/3)...", flush=True)
             time.sleep(0.5 * (2 ** attempt))
         except Exception as e:
-            print(f"⚠️ [{world_name}] Network Error ({e}). Retrying ({attempt + 1}/3)...")
+            print(f"⚠️ [{dc_name}] Network Error ({e}). Retrying ({attempt + 1}/3)...", flush=True)
             time.sleep(0.5 * (2 ** attempt))
-    print(f"❌ [API ERROR] Failed to fetch chunk for {world_name} after 3 attempts.")
-    return world_name, {}
+    print(f"❌ [API ERROR] Failed to fetch chunk for DC {dc_name} after 3 attempts.", flush=True)
+    return dc_name, {}
 
 def export_web_json(conn, output_path="docs/data.json"):
     """
@@ -262,7 +267,7 @@ def export_web_json(conn, output_path="docs/data.json"):
         json.dump(web_data, f, ensure_ascii=False, separators=(",", ":"))
 
     file_size_kb = os.path.getsize(output_path) / 1024
-    print(f"Successfully exported clean merged web JSON to {output_path} ({file_size_kb:.0f} KB)")
+    print(f"Successfully exported clean merged web JSON to {output_path} ({file_size_kb:.0f} KB)", flush=True)
 
 def fetch_and_save_all(target_dc=None):
     now_dt = datetime.now(timezone.utc)
@@ -282,7 +287,7 @@ def fetch_and_save_all(target_dc=None):
                 ids = res.json().get('items', [])[:200]
                 recent_ids_all.update(ids)
         except Exception as e:
-            print(f"[{dc}] Error fetching recent items: {e}")
+            print(f"[{dc}] Error fetching recent items: {e}", flush=True)
 
     cursor.execute("SELECT item_id FROM items_pool WHERE item_id >= 100")
     existing_pool_ids = [row[0] for row in cursor.fetchall()]
@@ -299,40 +304,37 @@ def fetch_and_save_all(target_dc=None):
     conn.commit()
 
     target_ids = list(recent_ids_all)
-    target_worlds = []
-    for dc in dcs:
-        target_worlds.extend(DC_WORLDS.get(dc, []))
 
     chunk_size = 50
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
-    all_tasks = [(world, chunk) for chunk in item_chunks for world in target_worlds]
+    all_tasks = [(dc, chunk) for chunk in item_chunks for dc in dcs]
 
-    print(f"=== Fetching {len(target_ids)} items ({len(all_tasks)} tasks) across {len(target_worlds)} worlds ({','.join(dcs)}) ===")
+    print(f"=== Fetching {len(target_ids)} items ({len(all_tasks)} DC tasks) across {len(dcs)} DCs ({','.join(dcs)}) ===", flush=True)
 
     total_sales_inserted = 0
-    failed_worlds = set()
-    succeeded_worlds = set()
+    failed_dcs = set()
+    succeeded_dcs = set()
 
     completed_count = 0
     total_tasks = len(all_tasks)
 
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = {executor.submit(fetch_single_world_data, world, chunk): (world, chunk) for world, chunk in all_tasks}
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        futures = {executor.submit(fetch_single_dc_data, dc, chunk): (dc, chunk) for dc, chunk in all_tasks}
 
         for future in as_completed(futures):
             completed_count += 1
-            world_name, world_items_data = future.result()
-            if completed_count % 10 == 0 or completed_count == total_tasks:
+            dc_name, items_data = future.result()
+            if completed_count % 5 == 0 or completed_count == total_tasks:
                 print(f"⏳ Progress: {completed_count}/{total_tasks} tasks completed ({(completed_count/total_tasks)*100:.0f}%)", flush=True)
 
-            if not world_items_data:
-                failed_worlds.add(world_name)
+            if not items_data:
+                failed_dcs.add(dc_name)
                 continue
 
-            succeeded_worlds.add(world_name)
+            succeeded_dcs.add(dc_name)
 
             sales_history_batch = []
-            for item_id_str, data in world_items_data.items():
+            for item_id_str, data in items_data.items():
                 item_id = int(item_id_str)
                 recent_history = data.get("recentHistory", [])[:500]
                 for h in recent_history:
@@ -341,7 +343,8 @@ def fetch_and_save_all(target_dc=None):
                     qty = h.get("quantity", 0)
                     hq = 1 if h.get("hq") else 0
                     buyer = h.get("buyerName", "")
-                    if ts > 0 and price > 0:
+                    world_name = h.get("worldName", "")
+                    if ts > 0 and price > 0 and world_name:
                         sales_history_batch.append((item_id, world_name, ts, price, qty, hq, buyer))
 
             if sales_history_batch:
@@ -352,10 +355,10 @@ def fetch_and_save_all(target_dc=None):
                 total_sales_inserted += len(sales_history_batch)
 
     conn.commit()
-    print(f"=== Fetch Summary: Succeeded {len(succeeded_worlds)} worlds, Failed {len(failed_worlds)} worlds ===")
-    if failed_worlds:
-        print(f"⚠️ Failed Worlds: {', '.join(sorted(failed_worlds))}")
-    print(f"=== Sales History Updated: {total_sales_inserted:,} transactions saved ===")
+    print(f"=== Fetch Summary: Succeeded {len(succeeded_dcs)} DCs, Failed {len(failed_dcs)} DCs ===", flush=True)
+    if failed_dcs:
+        print(f"⚠️ Failed DCs: {', '.join(sorted(failed_dcs))}", flush=True)
+    print(f"=== Sales History Updated: {total_sales_inserted:,} transactions saved ===", flush=True)
 
     # Purge old sales history (> 7 days)
     seven_days_ago = int(now_dt.timestamp()) - (7 * 86400)
