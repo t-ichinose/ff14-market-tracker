@@ -110,10 +110,10 @@ def resolve_item_metadata_batch(conn, item_ids):
 def fetch_single_world_data(world_name, target_ids):
     headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=50"
+    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=20"
     for attempt in range(3):
         try:
-            d_res = requests.get(detail_url, headers=headers, timeout=(3.0, 6.0))
+            d_res = requests.get(detail_url, headers=headers, timeout=(5.0, 15.0))
             if d_res.status_code == 200:
                 return world_name, d_res.json().get('items', {})
             print(f"⚠️ [{world_name}] API HTTP {d_res.status_code}. Retrying ({attempt + 1}/3)...")
@@ -303,7 +303,7 @@ def fetch_and_save_all(target_dc=None):
     for dc in dcs:
         target_worlds.extend(DC_WORLDS.get(dc, []))
 
-    chunk_size = 100
+    chunk_size = 50
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
     all_tasks = [(world, chunk) for chunk in item_chunks for world in target_worlds]
 
@@ -313,7 +313,7 @@ def fetch_and_save_all(target_dc=None):
     failed_worlds = set()
     succeeded_worlds = set()
 
-    with ThreadPoolExecutor(max_workers=8) as executor:
+    with ThreadPoolExecutor(max_workers=5) as executor:
         futures = {executor.submit(fetch_single_world_data, world, chunk): (world, chunk) for world, chunk in all_tasks}
 
         for future in as_completed(futures):
