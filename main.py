@@ -309,7 +309,7 @@ def fetch_and_save_all(target_dc=None):
     for dc in dcs:
         target_worlds.extend(DC_WORLDS.get(dc, []))
 
-    chunk_size = 20
+    chunk_size = 50
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
     all_tasks = [(world, chunk) for chunk in item_chunks for world in target_worlds]
 

@@ -2,8 +2,8 @@ name: Scheduled Market Research Update
 
 on:
   schedule:
-    # 30分間隔で確実に全4DCを一括更新 (毎時7分, 37分)
-    - cron: '7,37 * * * *'
+    # 15分間隔で各DCを交代（ローテーション）実行
+    - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
     inputs:
       target_dc:
@@ -13,6 +13,7 @@ on:
         type: choice
         options:
           - All
+          - Auto
           - Mana
           - Elemental
           - Gaia
@@ -51,13 +52,23 @@ jobs:
         id: dc_select
         run: |
           INPUT_DC="${{ inputs.target_dc }}"
-          if [ -n "$INPUT_DC" ]; then
+          if [ -n "$INPUT_DC" ] && [ "$INPUT_DC" != "Auto" ]; then
             TARGET_DC="$INPUT_DC"
           else
-            TARGET_DC="All"
+            MINUTE=$(date +%M)
+            if [ "$MINUTE" -ge 7 ] && [ "$MINUTE" -lt 22 ]; then
+              TARGET_DC="Elemental"
+            elif [ "$MINUTE" -ge 22 ] && [ "$MINUTE" -lt 37 ]; then
+              TARGET_DC="Gaia"
+            elif [ "$MINUTE" -ge 37 ] && [ "$MINUTE" -lt 52 ]; then
+              TARGET_DC="Mana"
+            else
+              TARGET_DC="Meteor"
+            fi
           fi
           echo "TARGET_DC=$TARGET_DC" >> $GITHUB_ENV
           echo "Selected Target DC: $TARGET_DC"
+
 
       - name: Run Market Research Pipeline
         env:
