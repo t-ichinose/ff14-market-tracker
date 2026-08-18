@@ -1018,6 +1018,35 @@
       transition: all 0.2s ease;
     }
 
+    .modal-dc-tabs {
+      display: flex;
+      gap: 3px;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 3px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }
+
+    .modal-dc-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.25rem 0.65rem;
+      border-radius: 7px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .modal-dc-tab-btn.active {
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(0, 210, 255, 0.3);
+    }
+
     .modal-tab-slide-btn:hover {
       background: var(--accent-blue);
       color: #000000;
@@ -1599,11 +1628,41 @@
           </div>
         </div>
 
-        <!-- 2. ワールド切替タブ & 直近取引履歴 -->
-        <div>
-          <div style="font-size:0.85rem; font-weight:700; color:#ffffff; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem;">
-            <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-blue);"></i> 直近の売買取引履歴 (DB蓄積データ)
+        <!-- 1.5 日別加重平均価格推移セクション (Option A) -->
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); border-radius: 12px; padding: 0.75rem 1rem; margin-bottom: 1rem;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.4rem;">
+            <div style="font-size:0.83rem; font-weight:700; color:#ffffff; display:flex; align-items:center; gap:0.4rem;">
+              <i class="fa-solid fa-chart-line" style="color:var(--accent-green);"></i> 日別加重平均価格・販売量推移 (直近7日間)
+              <span id="modalTrendWorldBadge" style="color:var(--accent-blue); font-size:0.75rem; opacity:0.9;"></span>
+            </div>
+            <div id="modalTrendBadge" style="font-size:0.75rem; font-weight:700;">
+              <!-- JS Populated -->
+            </div>
           </div>
+          <div style="position:relative; width:100%; height:130px; margin-bottom:0.5rem;" id="modalChartWrapper">
+            <canvas id="modalTrendCanvas" width="700" height="130" style="width:100%; height:100%; display:block;"></canvas>
+          </div>
+          <div id="modalTrendSummary" style="display:flex; justify-content:space-between; gap:4px; border-top:1px solid rgba(255,255,255,0.06); padding-top:6px; font-size:0.68rem; color:var(--text-muted); overflow-x:auto;">
+            <!-- JS Populated Daily Metrics Summary -->
+          </div>
+        </div>
+
+        <!-- 2. DC & ワールド切替タブ & 直近取引履歴 -->
+        <div>
+          <div style="font-size:0.85rem; font-weight:700; color:#ffffff; margin-bottom:0.6rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.6rem;">
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-blue);"></i> 直近の売買取引履歴 (DB蓄積データ)
+            </div>
+
+            <!-- Modal DC Selection Tabs -->
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-server"></i> DC切替:</span>
+              <div class="modal-dc-tabs" id="modalDcTabs">
+                <!-- JS Populated -->
+              </div>
+            </div>
+          </div>
+
           <!-- ワールド選択ボタン一覧 (左右アローボタン付き) -->
           <div style="position:relative; display:flex; align-items:center; width:100%; gap:6px;">
             <button class="modal-tab-slide-btn" onclick="slideModalWorldTabs(-1)" title="左へスライド">
@@ -1934,15 +1993,25 @@
 
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
 
+          const { trendPct } = getOrComputeDailyTrend(item);
+          const trendBadge = (trendPct > 0)
+            ? `<span style="color:#4ade80; font-weight:700; font-size:0.65rem;" title="7日平均価格推移"><i class="fa-solid fa-arrow-trend-up"></i> +${trendPct}%</span>`
+            : (trendPct < 0)
+            ? `<span style="color:#f87171; font-weight:700; font-size:0.65rem;" title="7日平均価格推移"><i class="fa-solid fa-arrow-trend-down"></i> ${trendPct}%</span>`
+            : `<span style="color:#94a3b8; font-size:0.65rem;" title="7日平均価格推移">➡️ 0%</span>`;
+
+          const sparklineHtml = generateSparklineSvg(item, 48, 14);
+
           return `
             <div class="item-card" data-velocity="${item.sale_velocity || 0}" data-avg_price="${item.avg_price || 0}" data-min_price="${item.min_price || 0}" onclick="openItemModal(${item.item_id}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${worldName}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}')" title="クリックで取引履歴と詳細を表示">
-              <!-- ヘッダー: アイコン + 順位 + 品名 + 外部リンク -->
+              <!-- ヘッダー: アイコン + 順位 + 品名 + トレンドスパークライン + 外部リンク -->
               <div class="item-card-header">
                 ${iconImg}
                 <div class="item-header-text">
                   <div class="item-card-title">
                     <span class="rank-tag">#${idx + 1}</span>
-                    <span>${cleanTitle}</span>
+                    <span style="font-weight:700;">${cleanTitle}</span>
+                    <span style="display:inline-flex; align-items:center; gap:4px; margin-left:auto;">${sparklineHtml} ${trendBadge}</span>
                     <a href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" title="Lodestoneで検索" onclick="event.stopPropagation()">
                       <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
@@ -2015,6 +2084,7 @@
 
     let currentModalItemId = null;
     let currentModalWorld = null;
+    let currentModalDc = null;
 
     function openItemModal(itemId, itemName, iconUrl, worldName, categoryName) {
       currentModalItemId = itemId;
@@ -2026,17 +2096,14 @@
       document.getElementById('modalItemMeta').innerText = `ID: ${itemId}${periodMeta}`;
       document.getElementById('modalLodestoneLink').href = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(itemName)}`;
 
-      // 1. DC内全ワールドの最安値・最高値ワールドの集計
+      // 1. 全32ワールドの最安値・最高値ワールドの集計
       computeDcMinMaxSummary(itemId);
 
-      // 2. ワールド切り替えタブのレンダリング
-      const worlds = dcWorldsMap[activeDc] || [];
-      const tabsEl = document.getElementById('modalWorldTabs');
-      tabsEl.innerHTML = worlds.map(w => `
-        <button class="modal-world-tab-btn ${w === worldName ? 'active' : ''}" onclick="switchModalWorld('${w}')">
-          <i class="fa-solid fa-globe"></i> ${w}
-        </button>
-      `).join('');
+      // 2. 対象ワールドのDCを取得してモーダル内DCタブとワールドタブを更新
+      const itemDc = findDcForWorld(worldName) || activeDc || 'Mana';
+      currentModalDc = itemDc;
+      renderModalDcTabs(itemDc);
+      renderModalWorldTabs(itemDc, worldName);
 
       // 3. モーダル表示
       document.getElementById('itemDetailModal').classList.add('active');
@@ -2105,7 +2172,239 @@
     }
 
 
+    function getOrComputeDailyTrend(item) {
+      if (item && item.daily_trend && item.daily_trend.length > 0) {
+        return { trend: item.daily_trend, trendPct: item.trend_pct || 0 };
+      }
+
+      const history = (item && item.history) ? item.history : [];
+      if (!history || history.length === 0) {
+        return { trend: [], trendPct: 0 };
+      }
+
+      // JS側で蓄積データ history (最大50件) から直近7日間の日別加重平均を即時動的計算
+      const today = new Date();
+      const daysLabels = [];
+      const dayMap = new Map();
+
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(today.getTime() - i * 86400 * 1000);
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        const lbl = `${month}/${day}`;
+        daysLabels.push(lbl);
+        dayMap.set(lbl, { totalRev: 0, totalQty: 0 });
+      }
+
+      for (const h of history) {
+        if (!h.ts) continue;
+        const d = new Date(h.ts * 1000);
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        const lbl = `${month}/${day}`;
+
+        if (dayMap.has(lbl)) {
+          const entry = dayMap.get(lbl);
+          const price = h.price || 0;
+          const qty = h.qty || 1;
+          entry.totalRev += price * qty;
+          entry.totalQty += qty;
+        }
+      }
+
+      const trend = [];
+      const validAvgs = [];
+
+      for (const lbl of daysLabels) {
+        const entry = dayMap.get(lbl);
+        const wavg = entry.totalQty > 0 ? Math.round(entry.totalRev / entry.totalQty) : 0;
+        trend.push({ date: lbl, weighted_avg: wavg, volume: entry.totalQty });
+        if (wavg > 0) validAvgs.push(wavg);
+      }
+
+      let trendPct = 0;
+      if (validAvgs.length >= 2 && validAvgs[0] > 0) {
+        trendPct = Math.round(((validAvgs[validAvgs.length - 1] - validAvgs[0]) / validAvgs[0]) * 1000) / 10;
+      }
+
+      return { trend, trendPct };
+    }
+
+    function generateSparklineSvg(item, width = 64, height = 18) {
+      const { trend } = getOrComputeDailyTrend(item);
+      if (!trend || trend.length < 2) return '';
+      const validPoints = trend.map(d => d.weighted_avg || 0);
+      const nonZero = validPoints.filter(p => p > 0);
+      if (nonZero.length < 2) return '';
+
+      const minP = Math.min(...nonZero);
+      const maxP = Math.max(...nonZero);
+      const range = (maxP - minP) || 1;
+
+      const coords = validPoints.map((p, idx) => {
+        const x = (idx / (validPoints.length - 1)) * (width - 6) + 3;
+        const val = p > 0 ? p : minP;
+        const y = height - 3 - (((val - minP) / range) * (height - 6));
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      });
+
+      const firstP = nonZero[0];
+      const lastP = nonZero[nonZero.length - 1];
+      const isUp = (lastP >= firstP);
+      const color = isUp ? '#4ade80' : '#f87171';
+
+      return `
+        <svg width="${width}" height="${height}" style="vertical-align:middle; overflow:visible;">
+          <polyline fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" points="${coords.join(' ')}" />
+        </svg>
+      `;
+    }
+
+    function drawModalTrendChart(worldName, itemId) {
+      const canvas = document.getElementById('modalTrendCanvas');
+      const badgeEl = document.getElementById('modalTrendBadge');
+      const summaryEl = document.getElementById('modalTrendSummary');
+      const worldBadgeEl = document.getElementById('modalTrendWorldBadge');
+
+      if (worldBadgeEl) worldBadgeEl.innerText = `(${worldName})`;
+
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width = canvas.parentElement.offsetWidth || 700;
+      const h = canvas.height = 130;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const worldItems = allData[worldName] || [];
+      const item = worldItems.find(x => x.item_id === itemId);
+      const { trend, trendPct } = getOrComputeDailyTrend(item);
+
+      if (badgeEl) {
+        if (trendPct > 0) {
+          badgeEl.innerHTML = `<span style="color:#4ade80;"><i class="fa-solid fa-arrow-trend-up"></i> 7日推移: +${trendPct}% (値上がり)</span>`;
+        } else if (trendPct < 0) {
+          badgeEl.innerHTML = `<span style="color:#f87171;"><i class="fa-solid fa-arrow-trend-down"></i> 7日推移: ${trendPct}% (値下がり)</span>`;
+        } else {
+          badgeEl.innerHTML = `<span style="color:#94a3b8;">➡️ 7日推移: 安定相場 (0.0%)</span>`;
+        }
+      }
+
+      if (!trend || trend.length === 0) {
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("直近7日間の推移データはありません", w / 2, h / 2);
+        if (summaryEl) summaryEl.innerHTML = "";
+        return;
+      }
+
+      // Render summary row
+      if (summaryEl) {
+        summaryEl.innerHTML = trend.map(d => `
+          <div style="flex:1; text-align:center; min-width:55px;">
+            <div style="font-weight:700; color:#94a3b8;">${d.date}</div>
+            <div style="color:var(--accent-green); font-weight:700;">${d.weighted_avg > 0 ? d.weighted_avg.toLocaleString() + 'G' : '-'}</div>
+            <div style="color:var(--accent-blue); font-size:0.64rem;">${d.volume}個</div>
+          </div>
+        `).join('');
+      }
+
+      const paddingLeft = 45;
+      const paddingRight = 20;
+      const paddingTop = 15;
+      const paddingBottom = 25;
+      const plotW = w - paddingLeft - paddingRight;
+      const plotH = h - paddingTop - paddingBottom;
+
+      const validPrices = trend.map(t => t.weighted_avg).filter(p => p > 0);
+      const validVolumes = trend.map(t => t.volume);
+      const maxVol = Math.max(...validVolumes, 1);
+
+      const minP = validPrices.length > 0 ? Math.min(...validPrices) : 1;
+      const maxP = validPrices.length > 0 ? Math.max(...validPrices) : 100;
+      const pRange = (maxP - minP) || (maxP * 0.1) || 1;
+
+      const numPoints = trend.length;
+      const stepX = plotW / Math.max(1, numPoints - 1);
+
+      // Draw grid lines
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(paddingLeft, paddingTop);
+      ctx.lineTo(w - paddingRight, paddingTop);
+      ctx.moveTo(paddingLeft, paddingTop + plotH / 2);
+      ctx.lineTo(w - paddingRight, paddingTop + plotH / 2);
+      ctx.moveTo(paddingLeft, h - paddingBottom);
+      ctx.lineTo(w - paddingRight, h - paddingBottom);
+      ctx.stroke();
+
+      // Draw volume bars (Subtle Blue)
+      trend.forEach((d, idx) => {
+        const x = paddingLeft + idx * stepX;
+        const barW = Math.min(18, stepX * 0.4);
+        const barH = (d.volume / maxVol) * (plotH * 0.6);
+        const y = h - paddingBottom - barH;
+
+        ctx.fillStyle = "rgba(96, 165, 250, 0.25)";
+        ctx.fillRect(x - barW / 2, y, barW, barH);
+      });
+
+      // Draw price line
+      const points = [];
+      trend.forEach((d, idx) => {
+        const x = paddingLeft + idx * stepX;
+        const val = d.weighted_avg > 0 ? d.weighted_avg : minP;
+        const y = h - paddingBottom - (((val - minP) / pRange) * plotH);
+        points.push({ x, y, val: d.weighted_avg, date: d.date });
+      });
+
+      const lineColor = trendPct >= 0 ? "#4ade80" : "#f87171";
+
+      // Line gradient fill
+      const grad = ctx.createLinearGradient(0, paddingTop, 0, h - paddingBottom);
+      grad.addColorStop(0, trendPct >= 0 ? "rgba(74, 222, 128, 0.25)" : "rgba(248, 113, 113, 0.25)");
+      grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.lineTo(points[points.length - 1].x, h - paddingBottom);
+      ctx.lineTo(points[0].x, h - paddingBottom);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Draw stroke
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.strokeStyle = lineColor;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Draw dots & dates
+      points.forEach((pt) => {
+        ctx.fillStyle = lineColor;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Date text
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = "10px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(pt.date, pt.x, h - 8);
+      });
+    }
+
     function renderModalHistory(worldName, itemId) {
+      drawModalTrendChart(worldName, itemId);
+
       const tbody = document.getElementById('modalHistoryTbody');
       const worldItems = allData[worldName] || [];
       const item = worldItems.find(x => x.item_id === itemId);
@@ -2150,11 +2449,52 @@
       }
     }
 
+    function renderModalDcTabs(activeDcName) {
+      const container = document.getElementById('modalDcTabs');
+      if (!container) return;
+
+      const dcs = Object.keys(dcWorldsMap || {});
+      container.innerHTML = dcs.map(dc => `
+        <button class="modal-dc-tab-btn ${dc === activeDcName ? 'active' : ''}" onclick="switchModalDc('${dc}')">
+          <i class="fa-solid fa-server"></i> ${dc}
+        </button>
+      `).join('');
+    }
+
+    function renderModalWorldTabs(dcName, activeWorldName) {
+      const worlds = dcWorldsMap[dcName] || [];
+      const tabsEl = document.getElementById('modalWorldTabs');
+      if (!tabsEl) return;
+
+      tabsEl.innerHTML = worlds.map(w => `
+        <button class="modal-world-tab-btn ${w === activeWorldName ? 'active' : ''}" onclick="switchModalWorld('${w}')">
+          <i class="fa-solid fa-globe"></i> ${w}
+        </button>
+      `).join('');
+    }
+
+    function switchModalDc(dcName) {
+      currentModalDc = dcName;
+      renderModalDcTabs(dcName);
+
+      const worlds = dcWorldsMap[dcName] || [];
+      const targetWorld = worlds.includes(currentModalWorld) ? currentModalWorld : (worlds[0] || '');
+      currentModalWorld = targetWorld;
+
+      renderModalWorldTabs(dcName, targetWorld);
+
+      if (currentModalItemId && targetWorld) {
+        renderModalHistory(targetWorld, currentModalItemId);
+      }
+    }
+
     function switchModalWorld(worldName) {
       currentModalWorld = worldName;
-      document.querySelectorAll('.modal-world-tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText.includes(worldName));
-      });
+      if (!currentModalDc) {
+        currentModalDc = findDcForWorld(worldName) || 'Mana';
+      }
+      renderModalWorldTabs(currentModalDc, worldName);
+
       if (currentModalItemId) {
         renderModalHistory(worldName, currentModalItemId);
       }
@@ -2337,6 +2677,14 @@
         const targetBuyGuide = Math.round(op.buyPrice * 1.05).toLocaleString();
         const targetSellGuide = op.sellPrice.toLocaleString();
 
+        const { trendPct } = getOrComputeDailyTrend(item);
+        const trendBadge = (trendPct > 0)
+          ? `<span style="color:#4ade80; font-weight:700; font-size:0.65rem;" title="7日平均価格推移"><i class="fa-solid fa-arrow-trend-up"></i> +${trendPct}%</span>`
+          : (trendPct < 0)
+          ? `<span style="color:#f87171; font-weight:700; font-size:0.65rem;" title="7日平均価格推移"><i class="fa-solid fa-arrow-trend-down"></i> ${trendPct}%</span>`
+          : `<span style="color:#94a3b8; font-size:0.65rem;" title="7日平均価格推移">➡️ 0%</span>`;
+        const sparklineHtml = generateSparklineSvg(item, 48, 14);
+
         return `
           <div class="arbitrage-card" onclick="openItemModal(${op.itemId}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${arbHomeWorld}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}')" title="クリックで取引履歴と詳細を表示">
             <div class="arbitrage-card-header">
@@ -2349,9 +2697,14 @@
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                   </a>
                 </div>
-                <div class="item-card-sub">
-                  <span class="category-tag">${escapeHtml(item.category_name || '一般')}</span>
-                  <span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-fire"></i> 高回転金策</span>
+                <div class="item-card-sub" style="display:flex; align-items:center; justify-content:space-between;">
+                  <div>
+                    <span class="category-tag">${escapeHtml(item.category_name || '一般')}</span>
+                    <span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-fire"></i> 高回転金策</span>
+                  </div>
+                  <div style="display:inline-flex; align-items:center; gap:4px;">
+                    ${sparklineHtml} ${trendBadge}
+                  </div>
                 </div>
               </div>
             </div>

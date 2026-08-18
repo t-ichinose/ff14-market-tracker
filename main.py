@@ -4,7 +4,7 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 JP_DATACENTERS = ["Mana", "Elemental", "Gaia", "Meteor"]
@@ -110,7 +110,7 @@ def resolve_item_metadata_batch(conn, item_ids):
 def fetch_single_dc_data(dc_name, target_ids):
     headers = {'User-Agent': 'FFXIVMarketTracker/3.0 (https://github.com/t-ichinose/ff14-market-tracker)'}
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin=604800"
+    detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin=604800&entriesToReturn=5000"
     for attempt in range(3):
         try:
             time.sleep(0.10)  # Politeness delay between requests
@@ -122,12 +122,12 @@ def fetch_single_dc_data(dc_name, target_ids):
                 elif "itemID" in data:
                     return dc_name, {str(data["itemID"]): data}
                 return dc_name, {}
-            print(f"⚠️ [{dc_name}] API HTTP {d_res.status_code}. Retrying ({attempt + 1}/3)...", flush=True)
+            print(f"[WARNING] [{dc_name}] API HTTP {d_res.status_code}. Retrying ({attempt + 1}/3)...", flush=True)
             time.sleep(1.0 * (2 ** attempt))
         except Exception as e:
-            print(f"⚠️ [{dc_name}] Network Error ({e}). Retrying ({attempt + 1}/3)...", flush=True)
+            print(f"[WARNING] [{dc_name}] Network Error ({e}). Retrying ({attempt + 1}/3)...", flush=True)
             time.sleep(1.0 * (2 ** attempt))
-    print(f"❌ [API ERROR] Failed to fetch chunk for DC {dc_name} after 3 attempts.", flush=True)
+    print(f"[API ERROR] Failed to fetch chunk for DC {dc_name} after 3 attempts.", flush=True)
     return dc_name, {}
 
 def export_web_json(conn, output_path="docs/data.json"):
@@ -216,6 +216,30 @@ def export_web_json(conn, output_path="docs/data.json"):
 
         daily_revenue = round(avg_p * real_vel)
 
+        # Calculate 7-day daily weighted average trends (in JST)
+        jst = timezone(timedelta(hours=9))
+        now_jst = now_dt.astimezone(jst)
+        today_date_jst = now_jst.date()
+        days_labels = [(today_date_jst - timedelta(days=i)).strftime("%m/%d") for i in range(6, -1, -1)]
+        
+        daily_trend = []
+        valid_avgs = []
+        for d_lbl in days_labels:
+            day_txs = [x for x in items_list if datetime.fromtimestamp(x["ts"], tz=jst).strftime("%m/%d") == d_lbl]
+            if day_txs:
+                d_qty = sum(x["qty"] for x in day_txs)
+                d_rev = sum(x["price"] * x["qty"] for x in day_txs)
+                d_wavg = round(d_rev / float(d_qty)) if d_qty > 0 else 0
+                daily_trend.append({"date": d_lbl, "weighted_avg": d_wavg, "volume": d_qty})
+                if d_wavg > 0:
+                    valid_avgs.append(d_wavg)
+            else:
+                daily_trend.append({"date": d_lbl, "weighted_avg": 0, "volume": 0})
+
+        trend_pct = 0.0
+        if len(valid_avgs) >= 2 and valid_avgs[0] > 0:
+            trend_pct = round(((valid_avgs[-1] - valid_avgs[0]) / float(valid_avgs[0])) * 100.0, 1)
+
         meta = meta_dict.get(iid, {})
         item_name = meta.get("name") or items_search.get(iid) or f"Item #{iid}"
         icon_url = icons_map.get(iid) or meta.get("icon") or compute_xivapi_icon_url(iid)
@@ -232,6 +256,8 @@ def export_web_json(conn, output_path="docs/data.json"):
             "sale_velocity": real_vel,
             "sale_trades": trade_cnt,
             "daily_revenue": daily_revenue,
+            "daily_trend": daily_trend,
+            "trend_pct": trend_pct,
             "history": history_by_item_world.get((iid, wname), []),
             "updated_at": now_str
         }
@@ -326,7 +352,7 @@ def fetch_and_save_all(target_dc=None):
             completed_count += 1
             dc_name, items_data = future.result()
             if completed_count % 5 == 0 or completed_count == total_tasks:
-                print(f"⏳ Progress: {completed_count}/{total_tasks} tasks completed ({(completed_count/total_tasks)*100:.0f}%)", flush=True)
+                print(f"Progress: {completed_count}/{total_tasks} tasks completed ({(completed_count/total_tasks)*100:.0f}%)", flush=True)
 
             if not items_data:
                 failed_dcs.add(dc_name)
