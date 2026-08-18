@@ -2,12 +2,22 @@ name: Scheduled Market Research Update
 
 on:
   schedule:
-    # 15分ごとに4DCをローテーション実行 (00分:Elemental, 15分:Gaia, 30分:Mana, 45分:Meteor)
-    - cron: '*/15 * * * *'
-  workflow_dispatch: # 手動実行ボタン
-  push:
-    branches:
-      - main
+    # 混雑回避のため7分, 22分, 37分, 52分に分散実行 (15分間隔)
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+    inputs:
+      target_dc:
+        description: 'Target Datacenter to update'
+        required: true
+        default: 'Auto'
+        type: choice
+        options:
+          - Auto
+          - All
+          - Mana
+          - Elemental
+          - Gaia
+          - Meteor
 
 permissions:
   contents: write
@@ -34,29 +44,38 @@ jobs:
         uses: actions/cache@v4
         with:
           path: data/
-          key: market-db-${{ runner.os }}-v3
+          key: market-db-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
-            market-db-${{ runner.os }}-v3
+            market-db-${{ runner.os }}-
 
       - name: Determine Target DC for Rotation
         id: dc_select
         run: |
-          MINUTE=$(date +%M)
-          if [ "$MINUTE" -lt 15 ]; then
-            TARGET_DC="Elemental"
-          elif [ "$MINUTE" -lt 30 ]; then
-            TARGET_DC="Gaia"
-          elif [ "$MINUTE" -lt 45 ]; then
-            TARGET_DC="Mana"
+          INPUT_DC="${{ inputs.target_dc }}"
+          if [ -n "$INPUT_DC" ] && [ "$INPUT_DC" != "Auto" ]; then
+            TARGET_DC="$INPUT_DC"
           else
-            TARGET_DC="Meteor"
+            MINUTE=$(date +%M)
+            if [ "$MINUTE" -ge 7 ] && [ "$MINUTE" -lt 22 ]; then
+              TARGET_DC="Elemental"
+            elif [ "$MINUTE" -ge 22 ] && [ "$MINUTE" -lt 37 ]; then
+              TARGET_DC="Gaia"
+            elif [ "$MINUTE" -ge 37 ] && [ "$MINUTE" -lt 52 ]; then
+              TARGET_DC="Mana"
+            else
+              TARGET_DC="Meteor"
+            fi
           fi
           echo "TARGET_DC=$TARGET_DC" >> $GITHUB_ENV
-          echo "Selected Target DC: $TARGET_DC (Minute: $MINUTE)"
+          echo "Selected Target DC: $TARGET_DC"
 
       - name: Run Market Research Pipeline
         run: |
-          python main.py --dc $TARGET_DC
+          if [ "$TARGET_DC" = "All" ]; then
+            python main.py
+          else
+            python main.py --dc $TARGET_DC
+          fi
 
       - name: Commit and push updated web data
         run: |
@@ -64,3 +83,4 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/
           git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update FFXIV Market Research Data ($TARGET_DC) [skip ci]" && git pull origin main --rebase && git push)
+
