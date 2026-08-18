@@ -305,7 +305,7 @@ def fetch_and_save_all(target_dc=None):
 
     target_ids = list(recent_ids_all)
 
-    chunk_size = 50
+    chunk_size = 20
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
     all_tasks = [(dc, chunk) for chunk in item_chunks for dc in dcs]
 
@@ -318,7 +318,7 @@ def fetch_and_save_all(target_dc=None):
     completed_count = 0
     total_tasks = len(all_tasks)
 
-    with ThreadPoolExecutor(max_workers=4) as executor:
+    with ThreadPoolExecutor(max_workers=3) as executor:
         futures = {executor.submit(fetch_single_dc_data, dc, chunk): (dc, chunk) for dc, chunk in all_tasks}
 
         for future in as_completed(futures):
