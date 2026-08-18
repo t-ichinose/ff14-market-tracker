@@ -111,17 +111,17 @@ def fetch_single_world_data(world_name, target_ids):
     headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
     detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=50"
-    for attempt in range(4):
+    for attempt in range(3):
         try:
-            d_res = requests.get(detail_url, headers=headers, timeout=12)
+            d_res = requests.get(detail_url, headers=headers, timeout=(3.0, 6.0))
             if d_res.status_code == 200:
                 return world_name, d_res.json().get('items', {})
-            print(f"⚠️ [{world_name}] API HTTP {d_res.status_code}. Retrying ({attempt + 1}/4)...")
-            time.sleep(1.0 * (2 ** attempt))
+            print(f"⚠️ [{world_name}] API HTTP {d_res.status_code}. Retrying ({attempt + 1}/3)...")
+            time.sleep(0.5 * (2 ** attempt))
         except Exception as e:
-            print(f"⚠️ [{world_name}] Network Error ({e}). Retrying ({attempt + 1}/4)...")
-            time.sleep(1.0 * (2 ** attempt))
-    print(f"❌ [API ERROR] Failed to fetch data for {world_name} after 4 attempts.")
+            print(f"⚠️ [{world_name}] Network Error ({e}). Retrying ({attempt + 1}/3)...")
+            time.sleep(0.5 * (2 ** attempt))
+    print(f"❌ [API ERROR] Failed to fetch chunk for {world_name} after 3 attempts.")
     return world_name, {}
 
 def export_web_json(conn, output_path="docs/data.json"):
@@ -313,7 +313,7 @@ def fetch_and_save_all(target_dc=None):
     failed_worlds = set()
     succeeded_worlds = set()
 
-    with ThreadPoolExecutor(max_workers=4) as executor:
+    with ThreadPoolExecutor(max_workers=8) as executor:
         futures = {executor.submit(fetch_single_world_data, world, chunk): (world, chunk) for world, chunk in all_tasks}
 
         for future in as_completed(futures):
