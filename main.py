@@ -108,11 +108,12 @@ def resolve_item_metadata_batch(conn, item_ids):
     conn.commit()
 
 def fetch_single_dc_data(dc_name, target_ids):
-    headers = DEFAULT_HEADERS
+    headers = {'User-Agent': 'FFXIVMarketTracker/3.0 (https://github.com/t-ichinose/ff14-market-tracker)'}
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/{dc_name}/{ids_str}?entries=20"
+    detail_url = f"https://universalis.app/api/v2/{dc_name}/{ids_str}?entries=15"
     for attempt in range(3):
         try:
+            time.sleep(0.25)  # Enforce max 4 requests/sec to honor Universalis API rate limits
             d_res = requests.get(detail_url, headers=headers, timeout=(5.0, 15.0))
             if d_res.status_code == 200:
                 data = d_res.json()
@@ -122,10 +123,10 @@ def fetch_single_dc_data(dc_name, target_ids):
                     return dc_name, {str(data["itemID"]): data}
                 return dc_name, {}
             print(f"⚠️ [{dc_name}] API HTTP {d_res.status_code}. Retrying ({attempt + 1}/3)...", flush=True)
-            time.sleep(0.5 * (2 ** attempt))
+            time.sleep(1.0 * (2 ** attempt))
         except Exception as e:
             print(f"⚠️ [{dc_name}] Network Error ({e}). Retrying ({attempt + 1}/3)...", flush=True)
-            time.sleep(0.5 * (2 ** attempt))
+            time.sleep(1.0 * (2 ** attempt))
     print(f"❌ [API ERROR] Failed to fetch chunk for DC {dc_name} after 3 attempts.", flush=True)
     return dc_name, {}
 
@@ -274,7 +275,7 @@ def fetch_and_save_all(target_dc=None):
     now_str = now_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     conn = init_db("data/market_data.db")
     cursor = conn.cursor()
-    headers = DEFAULT_HEADERS
+    headers = {'User-Agent': 'FFXIVMarketTracker/3.0 (https://github.com/t-ichinose/ff14-market-tracker)'}
 
     dcs = [target_dc] if target_dc and target_dc in JP_DATACENTERS else JP_DATACENTERS
 
@@ -305,7 +306,7 @@ def fetch_and_save_all(target_dc=None):
 
     target_ids = list(recent_ids_all)
 
-    chunk_size = 20
+    chunk_size = 25
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
     all_tasks = [(dc, chunk) for chunk in item_chunks for dc in dcs]
 
@@ -318,7 +319,7 @@ def fetch_and_save_all(target_dc=None):
     completed_count = 0
     total_tasks = len(all_tasks)
 
-    with ThreadPoolExecutor(max_workers=3) as executor:
+    with ThreadPoolExecutor(max_workers=2) as executor:
         futures = {executor.submit(fetch_single_dc_data, dc, chunk): (dc, chunk) for dc, chunk in all_tasks}
 
         for future in as_completed(futures):
