@@ -5,6 +5,9 @@ on:
     # 15分ごとに4DCをローテーション実行 (00分:Elemental, 15分:Gaia, 30分:Mana, 45分:Meteor)
     - cron: '*/15 * * * *'
   workflow_dispatch: # 手動実行ボタン
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
