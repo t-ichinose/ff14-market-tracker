@@ -111,15 +111,15 @@ def fetch_single_world_data(world_name, target_ids):
     headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
     detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=50"
-    for attempt in range(2):
+    for attempt in range(4):
         try:
-            d_res = requests.get(detail_url, headers=headers, timeout=8)
+            d_res = requests.get(detail_url, headers=headers, timeout=12)
             if d_res.status_code == 200:
                 return world_name, d_res.json().get('items', {})
-            elif d_res.status_code == 429:
-                time.sleep(0.3)
+            elif d_res.status_code in (429, 500, 502, 503, 504):
+                time.sleep(1.0 * (2 ** attempt))
         except Exception:
-            time.sleep(0.3)
+            time.sleep(1.0 * (2 ** attempt))
     return world_name, {}
 
 def export_web_json(conn, output_path="docs/data.json"):
@@ -309,7 +309,7 @@ def fetch_and_save_all(target_dc=None):
 
     total_sales_inserted = 0
 
-    with ThreadPoolExecutor(max_workers=16) as executor:
+    with ThreadPoolExecutor(max_workers=4) as executor:
         futures = {executor.submit(fetch_single_world_data, world, chunk): (world, chunk) for world, chunk in all_tasks}
 
         for future in as_completed(futures):
