@@ -34,7 +34,12 @@
       padding: 0;
     }
 
-    body {
+    html, body {
+      height: 100vh;
+      max-height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
       font-family: 'Inter', sans-serif;
       background: var(--bg-dark);
       background-image: 
@@ -42,13 +47,16 @@
         radial-gradient(at 100% 100%, rgba(0, 210, 255, 0.12) 0px, transparent 50%);
       background-attachment: fixed;
       color: var(--text-main);
-      min-height: 100vh;
-      padding: 1.25rem 1rem;
     }
 
     .container {
       max-width: 1850px;
       margin: 0 auto;
+      height: 100vh;
+      padding: 0.5rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
     }
 
     header {
@@ -56,8 +64,9 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.2rem;
-      gap: 1rem;
+      margin-bottom: 0.5rem;
+      gap: 0.8rem;
+      flex-shrink: 0;
     }
 
     .brand {
@@ -172,17 +181,18 @@
     .controls-bar {
       display: flex;
       gap: 0.8rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.5rem;
       align-items: center;
       justify-content: space-between;
       flex-wrap: nowrap;
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
-      padding: 0.45rem 0.8rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 14px;
-      min-height: 46px;
+      min-height: 44px;
       box-sizing: border-box;
+      flex-shrink: 0;
     }
 
     .world-nav-wrapper {
@@ -375,11 +385,12 @@
       display: flex;
       gap: 1rem;
       overflow-x: auto;
-      padding-bottom: 1rem;
-      min-height: 650px;
+      height: 100%;
+      min-height: 0;
       -ms-overflow-style: none;
       scrollbar-width: none;
       scroll-behavior: smooth;
+      align-items: stretch;
     }
 
     .world-grid::-webkit-scrollbar {
@@ -396,8 +407,8 @@
       border-radius: 16px;
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 250px);
-      min-height: 620px;
+      height: 100%;
+      min-height: 0;
       box-sizing: border-box;
     }
 
@@ -412,6 +423,10 @@
     .grid-scroll-wrapper {
       position: relative;
       width: 100%;
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
     }
 
     .grid-slide-btn {
@@ -484,11 +499,12 @@
 
     .world-item-list {
       flex: 1;
+      min-height: 0;
       overflow-y: auto;
-      padding: 0.85rem;
+      padding: 0.75rem 0.75rem 1.2rem 0.75rem;
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      gap: 0.75rem;
     }
 
     .world-item-list::-webkit-scrollbar {
@@ -504,12 +520,12 @@
     .item-card {
       background: rgba(15, 23, 42, 0.7);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 0.9rem;
+      border-radius: 12px;
+      padding: 0.7rem 0.75rem;
       transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
       display: flex;
       flex-direction: column;
-      gap: 0.55rem;
+      gap: 0.5rem;
       cursor: pointer;
     }
 
@@ -1248,32 +1264,33 @@
       <div class="brand">
         <div class="brand-icon"><i class="fa-solid fa-chart-simple"></i></div>
         <div>
-          <h1>FF14 Market Tracker</h1>
-          <div style="font-size:0.75rem; color:var(--text-muted);">Japan Datacenters & All 32 Worlds Comparison</div>
+          <h1 style="font-size: 1.35rem; line-height: 1.1;">FF14 Market Tracker</h1>
+          <div style="font-size:0.7rem; color:var(--text-muted);">Japan Datacenters & All 32 Worlds Comparison</div>
         </div>
       </div>
+
+      <!-- Compact Inline DC Selection Tabs -->
+      <div class="dc-tabs-container" style="margin-bottom:0; padding:0.25rem; border-radius:10px;">
+        <button class="dc-tab-btn active" data-dc="Mana" onclick="switchDc('Mana')" style="padding:0.35rem 0.75rem; font-size:0.85rem; min-width:auto;">
+          <i class="fa-solid fa-server" style="color: #60a5fa;"></i> Mana
+        </button>
+        <button class="dc-tab-btn" data-dc="Elemental" onclick="switchDc('Elemental')" style="padding:0.35rem 0.75rem; font-size:0.85rem; min-width:auto;">
+          <i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental
+        </button>
+        <button class="dc-tab-btn" data-dc="Gaia" onclick="switchDc('Gaia')" style="padding:0.35rem 0.75rem; font-size:0.85rem; min-width:auto;">
+          <i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia
+        </button>
+        <button class="dc-tab-btn" data-dc="Meteor" onclick="switchDc('Meteor')" style="padding:0.35rem 0.75rem; font-size:0.85rem; min-width:auto;">
+          <i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor
+        </button>
+      </div>
+
       <div class="header-badges">
-        <div class="status-badge" id="lastUpdatedBadge">
+        <div class="status-badge" id="lastUpdatedBadge" style="padding:0.25rem 0.6rem; font-size:0.75rem;">
           <span class="status-dot"></span> 最終更新: 読み込み中...
         </div>
       </div>
     </header>
-
-    <!-- DC Selection Tabs -->
-    <div class="dc-tabs-container">
-      <button class="dc-tab-btn active" data-dc="Mana" onclick="switchDc('Mana')">
-        <i class="fa-solid fa-server" style="color: #60a5fa;"></i> Mana (8 Worlds)
-      </button>
-      <button class="dc-tab-btn" data-dc="Elemental" onclick="switchDc('Elemental')">
-        <i class="fa-solid fa-server" style="color: #a855f7;"></i> Elemental (8 Worlds)
-      </button>
-      <button class="dc-tab-btn" data-dc="Gaia" onclick="switchDc('Gaia')">
-        <i class="fa-solid fa-server" style="color: #ec4899;"></i> Gaia (8 Worlds)
-      </button>
-      <button class="dc-tab-btn" data-dc="Meteor" onclick="switchDc('Meteor')">
-        <i class="fa-solid fa-server" style="color: var(--accent-gold);"></i> Meteor (8 Worlds)
-      </button>
-    </div>
 
     <!-- Unified Single-Row Controls Bar: World Nav Tabs -> Sort Controls -> Search Box -->
     <div class="controls-bar">
@@ -1411,6 +1428,7 @@
             <thead>
               <tr>
                 <th>取引日時 (JST)</th>
+                <th>購入者</th>
                 <th>品質</th>
                 <th>単価 (G)</th>
                 <th>数量</th>
@@ -1722,6 +1740,7 @@
 
           return `
             <div class="item-card" data-velocity="${item.sale_velocity || 0}" data-avg_price="${item.avg_price || 0}" data-min_price="${item.min_price || 0}" onclick="openItemModal(${item.item_id}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${worldName}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}')" title="クリックで取引履歴と詳細を表示">
+              <!-- ヘッダー: アイコン + 順位 + 品名 + 外部リンク -->
               <div class="item-card-header">
                 ${iconImg}
                 <div class="item-header-text">
@@ -1735,29 +1754,40 @@
                 </div>
               </div>
 
-              <!-- 市場ステータス -->
-
-              <div class="item-section-box latest-box">
-                <!-- 上段 (2段構造): 1段目=売買数&売買件数(2列), 2段目=流通ギル(全幅) -->
-                <div style="display:flex; flex-direction:column; gap:3px; margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4px;">
-                    <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="lbl" style="font-size:0.68rem;"><i class="fa-solid fa-bolt" style="color:var(--accent-blue);"></i> 売買数:</span> <strong style="color:var(--accent-blue); font-size:0.76rem;">${cVel}個/日</strong></div>
-                    <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="lbl" style="font-size:0.68rem;"><i class="fa-solid fa-receipt" style="color:#a855f7;"></i> 売買件数:</span> <strong style="color:#a855f7; font-size:0.76rem;">${cTrades}件</strong></div>
-                  </div>
-                  <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="lbl" style="font-size:0.68rem;"><i class="fa-solid fa-coins" style="color:#ffb703;"></i> 流通ギル:</span> <strong style="color:#ffb703; font-size:0.76rem;">${dailyRevenue}G/日</strong></div>
-                </div>
-
-                <!-- 下段: 3カラム テーブル形式 (最安値 / 平均値 / 最高値) -->
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; gap: 4px 2px; background: rgba(0, 0, 0, 0.25); border-radius: 6px; padding: 6px 2px; border: 1px solid rgba(255, 255, 255, 0.05);">
-                  <!-- ラベルヘッダー行 -->
-                  <div style="font-size: 0.68rem; color: #94a3b8;"><i class="fa-solid fa-tag" style="color:#38bdf8;"></i> 最安値</div>
-                  <div style="font-size: 0.68rem; color: #94a3b8;"><i class="fa-solid fa-scale-balanced" style="color:#c084fc;"></i> 平均値</div>
-                  <div style="font-size: 0.68rem; color: #94a3b8;"><i class="fa-solid fa-arrow-trend-up" style="color:#f472b6;"></i> 最高値</div>
+              <!-- 内枠: 左右完全同期3行グリッド (1行目=売買数/最安, 2行目=件数/平均, 3行目=流通/最高) -->
+              <div class="item-section-box latest-box" style="padding: 6px 10px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; row-gap: 4px; column-gap: 12px; align-items: center;">
                   
-                  <!-- 数値データ行 (真下) -->
-                  <div style="font-weight: 700; font-size: 0.78rem; color: #38bdf8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${cMin}G</div>
-                  <div style="font-weight: 700; font-size: 0.78rem; color: #c084fc; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${cAvg}G</div>
-                  <div style="font-weight: 700; font-size: 0.78rem; color: #f472b6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${cMax}G</div>
+                  <!-- 行1: 左=売買数 | 右=最安値 -->
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 8px;">
+                    <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-bolt" style="color: var(--accent-blue); width: 12px; text-align: center;"></i> 売買数:</span>
+                    <strong style="color: var(--accent-blue); font-size: 0.76rem;">${cVel}個/日</strong>
+                  </div>
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between;">
+                    <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-tag" style="color: #38bdf8; width: 12px; text-align: center;"></i> 最安:</span>
+                    <strong style="color: #38bdf8; font-size: 0.76rem;">${cMin}G</strong>
+                  </div>
+
+                  <!-- 行2: 左=件数 | 右=平均値 -->
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 8px;">
+                    <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-receipt" style="color: #a855f7; width: 12px; text-align: center;"></i> 件数:</span>
+                    <strong style="color: #a855f7; font-size: 0.76rem;">${cTrades}件</strong>
+                  </div>
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between;">
+                    <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-scale-balanced" style="color: #c084fc; width: 12px; text-align: center;"></i> 平均:</span>
+                    <strong style="color: #c084fc; font-size: 0.76rem;">${cAvg}G</strong>
+                  </div>
+
+                  <!-- 行3: 左=流通ギル | 右=最高値 -->
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 8px;">
+                    <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-coins" style="color: #ffb703; width: 12px; text-align: center;"></i> 流通:</span>
+                    <strong style="color: #ffb703; font-size: 0.76rem;">${dailyRevenue}G/日</strong>
+                  </div>
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between;">
+                    <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-arrow-trend-up" style="color: #f472b6; width: 12px; text-align: center;"></i> 最高:</span>
+                    <strong style="color: #f472b6; font-size: 0.76rem;">${cMax}G</strong>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -1875,7 +1905,7 @@
       if (!history || history.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="5" style="text-align:center; padding:2rem; color:var(--text-muted);">
+            <td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">
               直近7日間の取引履歴データがありません
             </td>
           </tr>
@@ -1885,6 +1915,7 @@
 
       tbody.innerHTML = history.map(h => {
         const formattedTime = formatTimeLocal(new Date(h.ts * 1000).toISOString());
+        const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.75rem;">-</span>`;
         const hqBadge = h.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
         const price = (h.price || 0).toLocaleString();
         const qty = (h.qty || 0).toLocaleString();
@@ -1893,6 +1924,7 @@
         return `
           <tr>
             <td style="font-size:0.78rem; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> ${formattedTime}</td>
+            <td style="font-size:0.78rem; font-weight:600; color:var(--accent-blue);">${buyerName}</td>
             <td>${hqBadge}</td>
             <td style="font-weight:700; color:var(--text-main);">${price}G</td>
             <td>${qty}個</td>
