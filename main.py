@@ -285,7 +285,7 @@ def fetch_and_save_all(target_dc=None):
         try:
             res = requests.get(recent_url, headers=headers, timeout=10)
             if res.ok:
-                ids = res.json().get('items', [])[:200]
+                ids = res.json().get('items', [])[:50]
                 recent_ids_all.update(ids)
         except Exception as e:
             print(f"[{dc}] Error fetching recent items: {e}", flush=True)
@@ -309,9 +309,10 @@ def fetch_and_save_all(target_dc=None):
     for dc in dcs:
         target_worlds.extend(DC_WORLDS.get(dc, []))
 
-    chunk_size = 50
+    chunk_size = 20
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
     all_tasks = [(world, chunk) for chunk in item_chunks for world in target_worlds]
+
 
     print(f"=== Fetching {len(target_ids)} items ({len(all_tasks)} world tasks) across {len(target_worlds)} worlds ({','.join(dcs)}) ===", flush=True)
 
