@@ -116,10 +116,12 @@ def fetch_single_world_data(world_name, target_ids):
             d_res = requests.get(detail_url, headers=headers, timeout=12)
             if d_res.status_code == 200:
                 return world_name, d_res.json().get('items', {})
-            elif d_res.status_code in (429, 500, 502, 503, 504):
-                time.sleep(1.0 * (2 ** attempt))
-        except Exception:
+            print(f"⚠️ [{world_name}] API HTTP {d_res.status_code}. Retrying ({attempt + 1}/4)...")
             time.sleep(1.0 * (2 ** attempt))
+        except Exception as e:
+            print(f"⚠️ [{world_name}] Network Error ({e}). Retrying ({attempt + 1}/4)...")
+            time.sleep(1.0 * (2 ** attempt))
+    print(f"❌ [API ERROR] Failed to fetch data for {world_name} after 4 attempts.")
     return world_name, {}
 
 def export_web_json(conn, output_path="docs/data.json"):
@@ -308,6 +310,8 @@ def fetch_and_save_all(target_dc=None):
     print(f"=== Fetching {len(target_ids)} items ({len(all_tasks)} tasks) across {len(target_worlds)} worlds ({','.join(dcs)}) ===")
 
     total_sales_inserted = 0
+    failed_worlds = set()
+    succeeded_worlds = set()
 
     with ThreadPoolExecutor(max_workers=4) as executor:
         futures = {executor.submit(fetch_single_world_data, world, chunk): (world, chunk) for world, chunk in all_tasks}
@@ -315,7 +319,10 @@ def fetch_and_save_all(target_dc=None):
         for future in as_completed(futures):
             world_name, world_items_data = future.result()
             if not world_items_data:
+                failed_worlds.add(world_name)
                 continue
+
+            succeeded_worlds.add(world_name)
 
             sales_history_batch = []
             for item_id_str, data in world_items_data.items():
@@ -338,6 +345,9 @@ def fetch_and_save_all(target_dc=None):
                 total_sales_inserted += len(sales_history_batch)
 
     conn.commit()
+    print(f"=== Fetch Summary: Succeeded {len(succeeded_worlds)} worlds, Failed {len(failed_worlds)} worlds ===")
+    if failed_worlds:
+        print(f"⚠️ Failed Worlds: {', '.join(sorted(failed_worlds))}")
     print(f"=== Sales History Updated: {total_sales_inserted:,} transactions saved ===")
 
     # Purge old sales history (> 7 days)
