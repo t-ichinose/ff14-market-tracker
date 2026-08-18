@@ -313,11 +313,18 @@ def fetch_and_save_all(target_dc=None):
     failed_worlds = set()
     succeeded_worlds = set()
 
+    completed_count = 0
+    total_tasks = len(all_tasks)
+
     with ThreadPoolExecutor(max_workers=5) as executor:
         futures = {executor.submit(fetch_single_world_data, world, chunk): (world, chunk) for world, chunk in all_tasks}
 
         for future in as_completed(futures):
+            completed_count += 1
             world_name, world_items_data = future.result()
+            if completed_count % 10 == 0 or completed_count == total_tasks:
+                print(f"⏳ Progress: {completed_count}/{total_tasks} tasks completed ({(completed_count/total_tasks)*100:.0f}%)", flush=True)
+
             if not world_items_data:
                 failed_worlds.add(world_name)
                 continue

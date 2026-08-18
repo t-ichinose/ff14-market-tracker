@@ -70,11 +70,13 @@ jobs:
           echo "Selected Target DC: $TARGET_DC"
 
       - name: Run Market Research Pipeline
+        env:
+          PYTHONUNBUFFERED: "1"
         run: |
           if [ "$TARGET_DC" = "All" ]; then
-            python main.py
+            python -u main.py
           else
-            python main.py --dc $TARGET_DC
+            python -u main.py --dc $TARGET_DC
           fi
 
       - name: Commit and push updated web data
