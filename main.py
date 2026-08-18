@@ -110,7 +110,7 @@ def resolve_item_metadata_batch(conn, item_ids):
 def fetch_single_world_data(world_name, target_ids):
     headers = {'User-Agent': 'FFXIVMarketTracker/3.0 (https://github.com/t-ichinose/ff14-market-tracker)'}
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=15"
+    detail_url = f"https://universalis.app/api/v2/{world_name}/{ids_str}?entries=30"
     for attempt in range(3):
         try:
             time.sleep(0.15)  # Politeness delay between requests
