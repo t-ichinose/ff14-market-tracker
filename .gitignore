@@ -10,3 +10,5 @@ data/
 *.db-shm
 *.db-wal
 docs/data.json
+*.txt
+!requirements.txt

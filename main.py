@@ -56,27 +56,22 @@ def init_db(db_path="data/market_data.db"):
     conn.commit()
     return conn
 
-def get_items_search():
-    p = "docs/items_search.json"
-    if os.path.exists(p):
+def _load_json_int_key_map(path):
+    """Load a JSON file and return a dict with integer keys."""
+    if os.path.exists(path):
         try:
-            with open(p, "r", encoding="utf-8") as f:
+            with open(path, "r", encoding="utf-8") as f:
                 d = json.load(f)
                 return {int(k): v for k, v in d.items() if str(k).isdigit()}
         except Exception:
             pass
     return {}
 
+def get_items_search():
+    return _load_json_int_key_map("docs/items_search.json")
+
 def get_icons_map():
-    p = "docs/icons_map.json"
-    if os.path.exists(p):
-        try:
-            with open(p, "r", encoding="utf-8") as f:
-                d = json.load(f)
-                return {int(k): v for k, v in d.items() if str(k).isdigit()}
-        except Exception:
-            pass
-    return {}
+    return _load_json_int_key_map("docs/icons_map.json")
 
 def compute_xivapi_icon_url(icon_id: int) -> str:
     try:
@@ -108,7 +103,7 @@ def resolve_item_metadata_batch(conn, item_ids):
     conn.commit()
 
 def fetch_single_dc_data(dc_name, target_ids):
-    headers = {'User-Agent': 'FFXIVMarketTracker/3.0 (https://github.com/t-ichinose/ff14-market-tracker)'}
+    headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
     detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin=604800&entriesToReturn=5000"
     for attempt in range(3):
@@ -209,6 +204,23 @@ def export_web_json(conn, output_path="docs/data.json"):
 
         global_bounds_by_item[iid] = (lower_bound, upper_bound, g_med)
 
+    # Pre-compute JST timezone constants once (outside the per-item loop)
+    jst = timezone(timedelta(hours=9))
+    now_jst = now_dt.astimezone(jst)
+    today_date_jst = now_jst.date()
+    start_date_jst = today_date_jst - timedelta(days=6)
+    start_midnight_dt = datetime(start_date_jst.year, start_date_jst.month, start_date_jst.day, tzinfo=jst)
+    start_midnight_ts = int(start_midnight_dt.timestamp())
+    days_labels = [(today_date_jst - timedelta(days=i)).strftime("%m/%d") for i in range(6, -1, -1)]
+
+    # Pre-compute day boundary timestamps for numeric comparison (much faster than strftime per-tx)
+    day_boundaries = []
+    for i in range(6, -1, -1):
+        d = today_date_jst - timedelta(days=i)
+        d_start = int(datetime(d.year, d.month, d.day, tzinfo=jst).timestamp())
+        d_end = d_start + 86400
+        day_boundaries.append((days_labels[6 - i], d_start, d_end))
+
     # Group calculated metrics by world
     data_by_world = {}
 
@@ -254,22 +266,14 @@ def export_web_json(conn, output_path="docs/data.json"):
 
         daily_revenue = round(avg_p * real_vel)
 
-        # Calculate JST Midnight anchored 7-day daily weighted average trends
-        jst = timezone(timedelta(hours=9))
-        now_jst = now_dt.astimezone(jst)
-        today_date_jst = now_jst.date()
-        start_date_jst = today_date_jst - timedelta(days=6)
-        start_midnight_dt = datetime(start_date_jst.year, start_date_jst.month, start_date_jst.day, tzinfo=jst)
-        start_midnight_ts = int(start_midnight_dt.timestamp())
-
-        # Filter out transaction logs before 00:00:00 JST of 7 days ago (e.g. before 08/14 00:00:00 JST)
+        # Filter out transaction logs before JST midnight of 7 days ago
         items_list = [x for x in items_list if x["ts"] >= start_midnight_ts]
-        days_labels = [(today_date_jst - timedelta(days=i)).strftime("%m/%d") for i in range(6, -1, -1)]
         
+        # Calculate daily weighted average trends using pre-computed day boundaries (numeric comparison)
         daily_trend = []
         valid_avgs = []
-        for d_lbl in days_labels:
-            day_txs = [x for x in items_list if datetime.fromtimestamp(x["ts"], tz=jst).strftime("%m/%d") == d_lbl]
+        for d_lbl, d_start_ts, d_end_ts in day_boundaries:
+            day_txs = [x for x in items_list if d_start_ts <= x["ts"] < d_end_ts]
             if day_txs:
                 d_qty = sum(x["qty"] for x in day_txs)
                 d_rev = sum(x["price"] * x["qty"] for x in day_txs)
@@ -336,8 +340,10 @@ def export_web_json(conn, output_path="docs/data.json"):
         "data": merged_data_by_world
     }
 
-    with open(output_path, "w", encoding="utf-8") as f:
+    tmp_path = output_path + ".tmp"
+    with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(web_data, f, ensure_ascii=False, separators=(",", ":"))
+    os.replace(tmp_path, output_path)
 
     file_size_kb = os.path.getsize(output_path) / 1024
     print(f"Successfully exported clean merged web JSON to {output_path} ({file_size_kb:.0f} KB)", flush=True)
@@ -347,7 +353,7 @@ def fetch_and_save_all(target_dc=None):
     now_str = now_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     conn = init_db("data/market_data.db")
     cursor = conn.cursor()
-    headers = {'User-Agent': 'FFXIVMarketTracker/3.0 (https://github.com/t-ichinose/ff14-market-tracker)'}
+    headers = DEFAULT_HEADERS
 
     dcs = [target_dc] if target_dc and target_dc in JP_DATACENTERS else JP_DATACENTERS
 
@@ -369,7 +375,7 @@ def fetch_and_save_all(target_dc=None):
         existing_pool_ids = [iid for iid in items_search.keys() if iid >= 100]
     recent_ids_all.update(existing_pool_ids)
 
-    recent_ids_all.add(36047)  # Example active item (魔導機械修理材 etc)
+
 
     if recent_ids_all:
         pool_batch = [(iid, now_str) for iid in recent_ids_all]

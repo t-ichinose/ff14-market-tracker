@@ -1948,20 +1948,7 @@
 
     let currentPeriodText = '';
 
-    function formatChartLabelLocal(rawTimeStr) {
-      if (!rawTimeStr) return '';
-      let str = String(rawTimeStr).trim();
-      if (!str.endsWith('Z') && !str.includes('+')) {
-        str = str.replace(' ', 'T') + 'Z';
-      }
-      const d = new Date(str);
-      if (isNaN(d.getTime())) return rawTimeStr.replace(/^\d{4}-/, '');
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      const hours = String(d.getHours()).padStart(2, '0');
-      const minutes = String(d.getMinutes()).padStart(2, '0');
-      return `${month}-${day} ${hours}:${minutes}`;
-    }
+
 
     function escapeHtml(str) {
       if (!str) return '';
@@ -2024,7 +2011,6 @@
     function renderWorldGrid(forceFull = false) {
       const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
       const worlds = dcWorldsMap[activeDc] || [];
-      const dcItems = allData[activeDc] || [];
 
       // Render World Quick Nav Bar
       const navBar = document.getElementById('worldNavBar');
@@ -2034,19 +2020,6 @@
         </button>
       `).join('');
 
-      // Filter items by crystal exclusion toggle & search term
-      let filteredItems = dcItems;
-
-      if (excludeCrystals) {
-        filteredItems = filteredItems.filter(item => !isCrystalItem(item));
-      }
-
-      if (searchTerm) {
-        filteredItems = filteredItems.filter(item => 
-          (item.item_name && item.item_name.toLowerCase().includes(searchTerm)) ||
-          item.item_id.toString().includes(searchTerm)
-        );
-      }
 
       // Build World Grid Columns (8 Worlds, Top 30 Items Each)
       const grid = document.getElementById('worldGrid');
@@ -2061,28 +2034,24 @@
         });
 
         // Sort worldItems by activeSortMode with appropriate noise reduction filters
+        let sortedItems;
         if (activeSortMode === 'revenue') {
           // 流通ギルモード: 1日1個以上売れている実績ある品目(フォーチュンカロット等)に絞り込んでソート
-          let validItems = worldItems.filter(item => (item.sale_velocity || 0) >= 1.0 || isCrystalItem(item));
-          validItems.sort((a, b) => ((b.avg_price || 0) * (b.sale_velocity || 0)) - ((a.avg_price || 0) * (a.sale_velocity || 0)));
-          worldItems.length = 0;
-          worldItems.push(...validItems);
+          sortedItems = worldItems.filter(item => (item.sale_velocity || 0) >= 1.0 || isCrystalItem(item))
+            .sort((a, b) => ((b.avg_price || 0) * (b.sale_velocity || 0)) - ((a.avg_price || 0) * (a.sale_velocity || 0)));
         } else if (activeSortMode === 'max_price') {
-
           // 高額取引モード: 売買実績があり(件数>0)、平均価格が最高値の35%以上ある本物の高額取引品に厳選ソート
-          let cleanItems = worldItems.filter(item => (item.max_price || 0) > 0 && (item.sale_trades || 0) > 0 && (((item.avg_price || 0) / item.max_price) >= 0.35));
-          cleanItems.sort((a, b) => (b.max_price || 0) - (a.max_price || 0));
-          worldItems.length = 0;
-          worldItems.push(...cleanItems);
+          sortedItems = worldItems.filter(item => (item.max_price || 0) > 0 && (item.sale_trades || 0) > 0 && (((item.avg_price || 0) / item.max_price) >= 0.35))
+            .sort((a, b) => (b.max_price || 0) - (a.max_price || 0));
         } else if (activeSortMode === 'min_price') {
-          worldItems.sort((a, b) => (b.min_price || 0) - (a.min_price || 0));
+          sortedItems = [...worldItems].sort((a, b) => (b.min_price || 0) - (a.min_price || 0));
         } else {
           // Default: velocity (sale_velocity)
-          worldItems.sort((a, b) => (b.sale_velocity || 0) - (a.sale_velocity || 0));
+          sortedItems = [...worldItems].sort((a, b) => (b.sale_velocity || 0) - (a.sale_velocity || 0));
         }
 
         // 上位30件に絞って超高速表示！
-        const displayItems = worldItems.slice(0, 30);
+        const displayItems = sortedItems.slice(0, 30);
 
         const cardListHtml = displayItems.length === 0 ? `
           <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.82rem;">
@@ -2112,11 +2081,7 @@
           const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(displayTitle)}`;
 
           const { trendPct } = getOrComputeDailyTrend(item);
-          const trendBadge = (trendPct > 0)
-            ? `<span style="color:#4ade80; font-weight:700; font-size:0.65rem;" title="7日平均価格推移"><i class="fa-solid fa-arrow-trend-up"></i> +${trendPct}%</span>`
-            : (trendPct < 0)
-            ? `<span style="color:#f87171; font-weight:700; font-size:0.65rem;" title="7日平均価格推移"><i class="fa-solid fa-arrow-trend-down"></i> ${trendPct}%</span>`
-            : `<span style="color:#94a3b8; font-size:0.65rem;" title="7日平均価格推移">➡️ 0%</span>`;
+          const trendBadge = buildTrendBadgeHtml(trendPct, { fontSize: '0.65rem', title: '7日平均価格推移' });
 
           const sparklineHtml = generateSparklineSvg(item, 48, 14);
 
@@ -2382,8 +2347,40 @@
       return { trend, trendPct };
     }
 
+    function buildTrendBadgeHtml(trendPct, options = {}) {
+      const fontSize = options.fontSize || '0.65rem';
+      const titleAttr = options.title ? `title="${options.title}"` : '';
+      const suffix = options.labelSuffix ? ` ${options.labelSuffix}` : '';
+      if (trendPct > 0) {
+        return `<span style="color:#4ade80; font-weight:700; font-size:${fontSize};" ${titleAttr}><i class="fa-solid fa-arrow-trend-up"></i> +${trendPct}%${suffix}</span>`;
+      } else if (trendPct < 0) {
+        return `<span style="color:#f87171; font-weight:700; font-size:${fontSize};" ${titleAttr}><i class="fa-solid fa-arrow-trend-down"></i> ${trendPct}%${suffix}</span>`;
+      }
+      return `<span style="color:#94a3b8; font-size:${fontSize};" ${titleAttr}>➡️ 0%${suffix}</span>`;
+    }
+
+    function buildHistoryRowHtml(h) {
+      const formattedTime = formatTimeLocal(new Date(h.ts * 1000).toISOString());
+      const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.75rem;">-</span>`;
+      const hqBadge = h.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
+      const price = (h.price || 0).toLocaleString();
+      const qty = (h.qty || 0).toLocaleString();
+      const totalPrice = ((h.price || 0) * (h.qty || 0)).toLocaleString();
+
+      return `
+        <tr>
+          <td style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> ${formattedTime}</td>
+          <td style="font-size:0.75rem; font-weight:600; color:var(--accent-blue);">${buyerName}</td>
+          <td>${hqBadge}</td>
+          <td style="font-weight:700; color:var(--text-main);">${price}G</td>
+          <td>${qty}個</td>
+          <td style="font-weight:700; color:#ffb703;">${totalPrice}G</td>
+        </tr>
+      `;
+    }
+
     function generateSparklineSvg(item, width = 64, height = 18) {
-      const { trend } = getOrComputeDailyTrend(item);
+      const { trend, trendPct } = getOrComputeDailyTrend(item);
       if (!trend || trend.length < 2) return '';
       const validPoints = trend.map(d => d.weighted_avg || 0);
       const nonZero = validPoints.filter(p => p > 0);
@@ -2400,7 +2397,6 @@
         return `${x.toFixed(1)},${y.toFixed(1)}`;
       });
 
-      const { trendPct } = getOrComputeDailyTrend(item);
       const isUp = (trendPct >= 0);
       const color = isUp ? '#4ade80' : '#f87171';
 
@@ -2411,97 +2407,80 @@
       `;
     }
 
-    function drawModalTrendChart(worldName, itemId) {
-      const canvas = document.getElementById('modalTrendCanvas');
-      const badgeEl = document.getElementById('modalTrendBadge');
-      const summaryEl = document.getElementById('modalTrendSummary');
-      const worldBadgeEl = document.getElementById('modalTrendWorldBadge');
-
-      if (worldBadgeEl) worldBadgeEl.innerText = `(${worldName})`;
-
+    function drawTrendChart(canvasId, summaryId, trend, trendPct, options = {}) {
+      const canvas = document.getElementById(canvasId);
+      const summaryEl = document.getElementById(summaryId);
       if (!canvas) return;
+
       const ctx = canvas.getContext('2d');
-      const w = canvas.width = canvas.parentElement.offsetWidth || 700;
-      const h = canvas.height = 130;
+      const defaultW = options.defaultWidth || 580;
+      const h = canvas.height = options.height || 120;
+      const w = canvas.width = canvas.parentElement ? (canvas.parentElement.offsetWidth || defaultW) : defaultW;
 
       ctx.clearRect(0, 0, w, h);
 
-      const worldItems = allData[worldName] || [];
-      const item = worldItems.find(x => x.item_id === itemId);
-      const { trend, trendPct } = getOrComputeDailyTrend(item);
-
-      if (badgeEl) {
-        if (trendPct > 0) {
-          badgeEl.innerHTML = `<span style="color:#4ade80;"><i class="fa-solid fa-arrow-trend-up"></i> 7日推移: +${trendPct}% (値上がり)</span>`;
-        } else if (trendPct < 0) {
-          badgeEl.innerHTML = `<span style="color:#f87171;"><i class="fa-solid fa-arrow-trend-down"></i> 7日推移: ${trendPct}% (値下がり)</span>`;
-        } else {
-          badgeEl.innerHTML = `<span style="color:#94a3b8;">➡️ 7日推移: 安定相場 (0.0%)</span>`;
-        }
-      }
-
       if (!trend || trend.length === 0) {
-        ctx.fillStyle = "#94a3b8";
-        ctx.font = "12px sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText("直近7日間の推移データはありません", w / 2, h / 2);
         if (summaryEl) summaryEl.innerHTML = "";
         return;
       }
 
-      // Render summary row
       if (summaryEl) {
+        const minW = options.summaryMinW || '45px';
+        const fontSizeDate = options.summaryDateFontSize || '0.65rem';
+        const fontSizeVal = options.summaryValFontSize || '0.65rem';
+        const fontSizeVol = options.summaryVolFontSize || '0.6rem';
+
         summaryEl.innerHTML = trend.map(d => `
-          <div style="flex:1; text-align:center; min-width:55px;">
-            <div style="font-weight:700; color:#94a3b8;">${d.date}</div>
-            <div style="color:var(--accent-green); font-weight:700;">${d.weighted_avg > 0 ? d.weighted_avg.toLocaleString() + 'G' : '-'}</div>
-            <div style="color:var(--accent-blue); font-size:0.64rem;">${d.volume}個</div>
+          <div style="flex:1; text-align:center; min-width:${minW};">
+            <div style="font-weight:700; color:#94a3b8; font-size:${fontSizeDate};">${d.date}</div>
+            <div style="color:var(--accent-green); font-weight:700; font-size:${fontSizeVal};">${d.weighted_avg > 0 ? d.weighted_avg.toLocaleString() + 'G' : '-'}</div>
+            <div style="color:var(--accent-blue); font-size:${fontSizeVol};">${d.volume > 0 ? d.volume + '個' : '0個'}</div>
           </div>
         `).join('');
       }
 
-      const paddingLeft = 45;
-      const paddingRight = 20;
-      const paddingTop = 15;
-      const paddingBottom = 25;
-      const plotW = w - paddingLeft - paddingRight;
-      const plotH = h - paddingTop - paddingBottom;
-
-      const validPrices = trend.map(t => t.weighted_avg).filter(p => p > 0);
-      const validVolumes = trend.map(t => t.volume);
+      const validPrices = trend.map(d => d.weighted_avg || 0).filter(p => p > 0);
+      const validVolumes = trend.map(d => d.volume || 0);
       const maxVol = Math.max(...validVolumes, 1);
 
-      const minP = validPrices.length > 0 ? Math.min(...validPrices) : 1;
-      const maxP = validPrices.length > 0 ? Math.max(...validPrices) : 100;
+      if (validPrices.length === 0) return;
+
+      const minP = Math.min(...validPrices);
+      const maxP = Math.max(...validPrices);
       const pRange = (maxP - minP) || (maxP * 0.1) || 1;
 
+      const paddingLeft = options.paddingLeft || 35;
+      const paddingRight = options.paddingRight || 15;
+      const paddingTop = options.paddingTop || 12;
+      const paddingBottom = options.paddingBottom || 22;
+      const plotW = w - paddingLeft - paddingRight;
+      const plotH = h - paddingTop - paddingBottom;
       const numPoints = trend.length;
       const stepX = plotW / Math.max(1, numPoints - 1);
 
-      // Draw grid lines
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(paddingLeft, paddingTop);
-      ctx.lineTo(w - paddingRight, paddingTop);
-      ctx.moveTo(paddingLeft, paddingTop + plotH / 2);
-      ctx.lineTo(w - paddingRight, paddingTop + plotH / 2);
-      ctx.moveTo(paddingLeft, h - paddingBottom);
-      ctx.lineTo(w - paddingRight, h - paddingBottom);
-      ctx.stroke();
+      if (options.drawGrid) {
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(paddingLeft, paddingTop);
+        ctx.lineTo(w - paddingRight, paddingTop);
+        ctx.moveTo(paddingLeft, paddingTop + plotH / 2);
+        ctx.lineTo(w - paddingRight, paddingTop + plotH / 2);
+        ctx.moveTo(paddingLeft, h - paddingBottom);
+        ctx.lineTo(w - paddingRight, h - paddingBottom);
+        ctx.stroke();
+      }
 
-      // Draw volume bars (Subtle Blue)
       trend.forEach((d, idx) => {
         const x = paddingLeft + idx * stepX;
-        const barW = Math.min(18, stepX * 0.4);
-        const barH = (d.volume / maxVol) * (plotH * 0.6);
+        const barW = Math.min(options.maxBarW || 16, stepX * 0.4);
+        const barH = (d.volume / maxVol) * (plotH * (options.barHFactor || 0.55));
         const y = h - paddingBottom - barH;
 
         ctx.fillStyle = "rgba(96, 165, 250, 0.25)";
         ctx.fillRect(x - barW / 2, y, barW, barH);
       });
 
-      // Draw price line
       const points = [];
       trend.forEach((d, idx) => {
         const x = paddingLeft + idx * stepX;
@@ -2512,7 +2491,6 @@
 
       const lineColor = trendPct >= 0 ? "#4ade80" : "#f87171";
 
-      // Line gradient fill
       const grad = ctx.createLinearGradient(0, paddingTop, 0, h - paddingBottom);
       grad.addColorStop(0, trendPct >= 0 ? "rgba(74, 222, 128, 0.25)" : "rgba(248, 113, 113, 0.25)");
       grad.addColorStop(1, "rgba(0, 0, 0, 0)");
@@ -2528,28 +2506,50 @@
       ctx.fillStyle = grad;
       ctx.fill();
 
-      // Draw stroke
       ctx.beginPath();
       ctx.moveTo(points[0].x, points[0].y);
       for (let i = 1; i < points.length; i++) {
         ctx.lineTo(points[i].x, points[i].y);
       }
       ctx.strokeStyle = lineColor;
-      ctx.lineWidth = 2.5;
+      ctx.lineWidth = options.lineWidth || 2;
       ctx.stroke();
 
-      // Draw dots & dates
+      const dotRadius = options.dotRadius || 3;
+      const dateYOffset = options.dateYOffset || 6;
+      const dateFontSize = options.dateFontSize || "9px";
+
       points.forEach((pt) => {
         ctx.fillStyle = lineColor;
         ctx.beginPath();
-        ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
+        ctx.arc(pt.x, pt.y, dotRadius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Date text
         ctx.fillStyle = "#94a3b8";
-        ctx.font = "10px sans-serif";
+        ctx.font = `${dateFontSize} sans-serif`;
         ctx.textAlign = "center";
-        ctx.fillText(pt.date, pt.x, h - 8);
+        ctx.fillText(pt.date, pt.x, h - dateYOffset);
+      });
+    }
+
+    function drawModalTrendChart(worldName, itemId) {
+      const badgeEl = document.getElementById('modalTrendBadge');
+      const worldBadgeEl = document.getElementById('modalTrendWorldBadge');
+
+      if (worldBadgeEl) worldBadgeEl.innerText = `(${worldName})`;
+
+      const worldItems = allData[worldName] || [];
+      const item = worldItems.find(x => x.item_id === itemId);
+      const { trend, trendPct } = getOrComputeDailyTrend(item);
+
+      if (badgeEl) {
+        badgeEl.innerHTML = buildTrendBadgeHtml(trendPct, { fontSize: '0.85rem', title: '7日推移', labelSuffix: (trendPct > 0 ? '(値上がり)' : (trendPct < 0 ? '(値下がり)' : '(安定相場)')) });
+      }
+
+      drawTrendChart('modalTrendCanvas', 'modalTrendSummary', trend, trendPct, {
+        defaultWidth: 700, height: 130, paddingLeft: 45, paddingRight: 20, paddingTop: 15, paddingBottom: 25,
+        summaryMinW: '55px', summaryDateFontSize: '0.7rem', summaryValFontSize: '0.75rem', summaryVolFontSize: '0.64rem',
+        drawGrid: true, maxBarW: 18, barHFactor: 0.6, lineWidth: 2.5, dotRadius: 3.5, dateYOffset: 8, dateFontSize: '10px'
       });
     }
 
@@ -2572,25 +2572,7 @@
         return;
       }
 
-      tbody.innerHTML = history.map(h => {
-        const formattedTime = formatTimeLocal(new Date(h.ts * 1000).toISOString());
-        const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.75rem;">-</span>`;
-        const hqBadge = h.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
-        const price = (h.price || 0).toLocaleString();
-        const qty = (h.qty || 0).toLocaleString();
-        const totalPrice = ((h.price || 0) * (h.qty || 0)).toLocaleString();
-
-        return `
-          <tr>
-            <td style="font-size:0.78rem; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> ${formattedTime}</td>
-            <td style="font-size:0.78rem; font-weight:600; color:var(--accent-blue);">${buyerName}</td>
-            <td>${hqBadge}</td>
-            <td style="font-weight:700; color:var(--text-main);">${price}G</td>
-            <td>${qty}個</td>
-            <td style="font-weight:700; color:#ffb703;">${totalPrice}G</td>
-          </tr>
-        `;
-      }).join('');
+      tbody.innerHTML = history.map(buildHistoryRowHtml).join('');
     }
 
     function slideModalWorldTabs(direction) {
@@ -2913,11 +2895,7 @@
       const trades = (item.sale_trades !== undefined ? item.sale_trades : (item.history ? item.history.length : 0));
 
       const { trend, trendPct } = getOrComputeDailyTrend(item);
-      const trendBadge = (trendPct > 0)
-        ? `<span style="color:#4ade80; font-weight:700;"><i class="fa-solid fa-arrow-trend-up"></i> +${trendPct}% (高騰)</span>`
-        : (trendPct < 0)
-        ? `<span style="color:#f87171; font-weight:700;"><i class="fa-solid fa-arrow-trend-down"></i> ${trendPct}% (値下がり)</span>`
-        : `<span style="color:#94a3b8;">➡️ 0%</span>`;
+      const trendBadge = buildTrendBadgeHtml(trendPct, { fontSize: '0.75rem', labelSuffix: (trendPct > 0 ? '(高騰)' : (trendPct < 0 ? '(値下がり)' : '')) });
 
       const canvasId = `arbCanvas_${colId}`;
       const summaryId = `arbSummary_${colId}`;
@@ -2933,25 +2911,7 @@
           </tr>
         `;
       } else {
-        historyRowsHtml = history.slice(0, 25).map(h => {
-          const formattedTime = formatTimeLocal(new Date(h.ts * 1000).toISOString());
-          const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.75rem;">-</span>`;
-          const hqBadge = h.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
-          const price = (h.price || 0).toLocaleString();
-          const qty = (h.qty || 0).toLocaleString();
-          const totalPrice = ((h.price || 0) * (h.qty || 0)).toLocaleString();
-
-          return `
-            <tr>
-              <td style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> ${formattedTime}</td>
-              <td style="font-size:0.75rem; font-weight:600; color:var(--accent-blue);">${buyerName}</td>
-              <td>${hqBadge}</td>
-              <td style="font-weight:700; color:var(--text-main);">${price}G</td>
-              <td>${qty}個</td>
-              <td style="font-weight:700; color:#ffb703;">${totalPrice}G</td>
-            </tr>
-          `;
-        }).join('');
+        historyRowsHtml = history.slice(0, 25).map(buildHistoryRowHtml).join('');
       }
 
       container.innerHTML = `
@@ -3213,7 +3173,7 @@
       if (arbScope === 'same_dc') {
         allowedWorlds = (dcWorldsMap[homeDc] || []).filter(w => w !== arbHomeWorld);
       } else {
-        for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
+        for (const worlds of Object.values(dcWorldsMap || {})) {
           for (const w of worlds) {
             if (w !== arbHomeWorld) allowedWorlds.push(w);
           }
@@ -3222,6 +3182,13 @@
 
       const opportunities = [];
 
+      // Pre-build Map index per allowed world for O(1) item lookup (instead of O(K) find per iteration)
+      const worldItemMaps = {};
+      for (const w of allowedWorlds) {
+        const items = allData[w] || [];
+        worldItemMaps[w] = new Map(items.map(x => [x.item_id, x]));
+      }
+
       for (const [itemId, homeItem] of homeItemMap.entries()) {
         if (excludeCrystals && isCrystalItem(homeItem)) continue;
 
@@ -3229,8 +3196,7 @@
         let maxProfit = -1;
 
         for (const sourceWorld of allowedWorlds) {
-          const sourceItems = allData[sourceWorld] || [];
-          const sourceItem = sourceItems.find(x => x.item_id === itemId);
+          const sourceItem = worldItemMaps[sourceWorld].get(itemId);
           if (!sourceItem) continue;
 
           // 直近3日平均相場ベースでリアルタイム比較
@@ -3308,22 +3274,14 @@
         const sourceTrendObj = getOrComputeDailyTrend(sourceItem);
         const sourceTrendPct = sourceTrendObj.trendPct;
         const sourceSparkline = generateSparklineSvg(sourceItem, 44, 12);
-        const sourceBadge = (sourceTrendPct > 0)
-          ? `<span style="color:#4ade80; font-weight:700; font-size:0.64rem;"><i class="fa-solid fa-arrow-trend-up"></i> +${sourceTrendPct}%</span>`
-          : (sourceTrendPct < 0)
-          ? `<span style="color:#f87171; font-weight:700; font-size:0.64rem;"><i class="fa-solid fa-arrow-trend-down"></i> ${sourceTrendPct}%</span>`
-          : `<span style="color:#94a3b8; font-size:0.64rem;">➡️ 0%</span>`;
+        const sourceBadge = buildTrendBadgeHtml(sourceTrendPct, { fontSize: '0.64rem' });
 
         const homeItems = allData[arbHomeWorld] || [];
         const homeItem = homeItems.find(x => x.item_id === op.itemId) || item;
         const homeTrendObj = getOrComputeDailyTrend(homeItem);
         const homeTrendPct = homeTrendObj.trendPct;
         const homeSparkline = generateSparklineSvg(homeItem, 44, 12);
-        const homeBadge = (homeTrendPct > 0)
-          ? `<span style="color:#4ade80; font-weight:700; font-size:0.64rem;"><i class="fa-solid fa-arrow-trend-up"></i> +${homeTrendPct}%</span>`
-          : (homeTrendPct < 0)
-          ? `<span style="color:#f87171; font-weight:700; font-size:0.64rem;"><i class="fa-solid fa-arrow-trend-down"></i> ${homeTrendPct}%</span>`
-          : `<span style="color:#94a3b8; font-size:0.64rem;">➡️ 0%</span>`;
+        const homeBadge = buildTrendBadgeHtml(homeTrendPct, { fontSize: '0.64rem' });
 
         return `
           <div class="arbitrage-card" onclick="openArbitrageModal(${op.itemId}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${op.sourceDc}', '${op.sourceWorld}', '${homeDc}', '${arbHomeWorld}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}', ${op.unitProfit}, ${op.roiPercent})" title="クリックで仕入れ先・販売先の詳細比較を表示">
