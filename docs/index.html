@@ -854,12 +854,16 @@
 
     .modal-header {
       padding: 1.2rem 1.5rem;
-      background: rgba(11, 17, 30, 0.9);
+      background: rgba(11, 17, 30, 0.95);
       border-bottom: 1px solid var(--card-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 25;
+      backdrop-filter: blur(12px);
     }
 
     .modal-title-box {
@@ -1597,6 +1601,36 @@
         padding: 0.75rem;
         gap: 0.7rem;
       }
+      .arb-modal-mobile-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 3px;
+        border-radius: 10px;
+        border: 1px solid var(--card-border);
+        margin-bottom: 0.4rem;
+      }
+      .arb-modal-tab-btn {
+        padding: 0.45rem;
+        border-radius: 7px;
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        transition: all 0.2s ease;
+      }
+      .arb-modal-tab-btn.active {
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      }
       .arb-target-banner {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -1960,6 +1994,16 @@
         <!-- 0. 目標仕入・販売価格ナビバナー -->
         <div id="arbModalTargetBanner" style="background:linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.12)); border:1px solid rgba(56, 189, 248, 0.25); border-radius:12px; padding:0.75rem 1.2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.8rem;">
           <!-- JS Populated -->
+        </div>
+
+        <!-- Mobile Dual-Side Switcher Sub-Tabs (Visible on <= 768px) -->
+        <div class="arb-modal-mobile-tabs" id="arbModalMobileTabs">
+          <button class="arb-modal-tab-btn active" id="arbTabBuyBtn" onclick="switchArbModalSideTab('buy')">
+            <i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> 仕入先 (<span id="arbTabBuyWorld">-</span>)
+          </button>
+          <button class="arb-modal-tab-btn" id="arbTabSellBtn" onclick="switchArbModalSideTab('sell')">
+            <i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> 販売先 (<span id="arbTabSellWorld">-</span>)
+          </button>
         </div>
 
         <div class="arb-modal-dual-grid">
@@ -2917,10 +2961,41 @@
         </div>
       `;
 
+      // モバイルサブタブのワールド名更新
+      const tabBuyW = document.getElementById('arbTabBuyWorld');
+      const tabSellW = document.getElementById('arbTabSellWorld');
+      if (tabBuyW) tabBuyW.innerText = currentArbSourceWorld;
+      if (tabSellW) tabSellW.innerText = currentArbHomeWorld;
+
       document.getElementById('arbModalRouteBadge').innerHTML = `
         <i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> ${currentArbSourceDc} - ${currentArbSourceWorld} ➔ 
         <i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> ${currentArbHomeDc} - ${currentArbHomeWorld}
       `;
+
+      // モバイル時のカラム可視性更新
+      if (window.innerWidth <= 768) {
+        switchArbModalSideTab(currentArbMobileTab);
+      }
+    }
+
+    let currentArbMobileTab = 'buy';
+    function switchArbModalSideTab(side) {
+      currentArbMobileTab = side;
+      const buyCol = document.getElementById('arbBuySideCol');
+      const sellCol = document.getElementById('arbSellSideCol');
+      const buyBtn = document.getElementById('arbTabBuyBtn');
+      const sellBtn = document.getElementById('arbTabSellBtn');
+
+      if (window.innerWidth <= 768) {
+        if (buyCol) buyCol.style.display = (side === 'buy') ? 'flex' : 'none';
+        if (sellCol) sellCol.style.display = (side === 'sell') ? 'flex' : 'none';
+      } else {
+        if (buyCol) buyCol.style.display = 'flex';
+        if (sellCol) sellCol.style.display = 'flex';
+      }
+
+      if (buyBtn) buyBtn.classList.toggle('active', side === 'buy');
+      if (sellBtn) sellBtn.classList.toggle('active', side === 'sell');
     }
 
     function switchArbSourceWorld(newSourceWorld) {
@@ -2972,7 +3047,14 @@
 
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
+      switchArbModalSideTab(currentArbMobileTab);
     }
+
+    window.addEventListener('resize', () => {
+      if (document.getElementById('arbitrageDetailModal')?.classList.contains('active')) {
+        switchArbModalSideTab(currentArbMobileTab);
+      }
+    });
 
     function renderArbWorldSide(colId, dcName, worldName, itemId, isSourceWorld) {
       const container = document.getElementById(colId);
