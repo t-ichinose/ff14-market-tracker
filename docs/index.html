@@ -1628,8 +1628,9 @@
         gap: 0.35rem !important;
       }
       .modal-body {
-        padding: 0.75rem 0.85rem 3.5rem 0.85rem !important;
+        padding: 0.75rem 0.85rem 4.5rem 0.85rem !important;
         gap: 0.75rem;
+        flex: 1 !important;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch;
         touch-action: pan-y;
@@ -1691,6 +1692,8 @@
         flex: 0 0 100% !important;
         width: 100% !important;
         min-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
         scroll-snap-align: start !important;
         scroll-snap-stop: always !important;
         box-sizing: border-box !important;
@@ -1978,33 +1981,20 @@
           </div>
         </div>
 
-        <!-- 2. DC & ワールド切替タブ & 直近取引履歴 -->
+        <!-- 2. サーバー選択プルダウン & 直近取引履歴 -->
         <div>
           <div style="font-size:0.85rem; font-weight:700; color:#ffffff; margin-bottom:0.6rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.6rem;">
             <div style="display:flex; align-items:center; gap:0.4rem;">
-              <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-blue);"></i> 直近の売買取引履歴 (DB蓄積データ)
+              <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-blue);"></i> 直近の売買取引履歴
             </div>
 
-            <!-- Modal DC Selection Tabs -->
-            <div style="display:flex; align-items:center; gap:0.4rem;">
-              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-server"></i> DC切替:</span>
-              <div class="modal-dc-tabs" id="modalDcTabs">
-                <!-- JS Populated -->
-              </div>
+            <!-- Single Server Select Dropdown -->
+            <div style="display:flex; align-items:center; gap:0.45rem;">
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-earth-asia"></i> サーバー選択:</span>
+              <select id="modalWorldSelect" onchange="switchModalWorld(this.value)" style="background:rgba(18, 26, 43, 0.95); border:1px solid var(--accent-blue); color:var(--accent-blue); font-size:0.8rem; font-weight:700; padding:4px 10px; border-radius:8px; cursor:pointer; outline:none;">
+                <!-- JSで動的生成 -->
+              </select>
             </div>
-          </div>
-
-          <!-- ワールド選択ボタン一覧 (左右アローボタン付き) -->
-          <div style="position:relative; display:flex; align-items:center; width:100%; gap:6px;">
-            <button class="modal-tab-slide-btn" onclick="slideModalWorldTabs(-1)" title="左へスライド">
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <div class="modal-world-tabs" id="modalWorldTabs" style="flex:1;">
-              <!-- JSで各ワールドボタン生成 -->
-            </div>
-            <button class="modal-tab-slide-btn" onclick="slideModalWorldTabs(1)" title="右へスライド">
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
           </div>
         </div>
 
@@ -2046,7 +2036,6 @@
             </div>
             <div style="font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem; margin-top:3px;">
               <span>ID: <span id="arbModalItemId">-</span></span>
-              <span id="arbModalCategory" class="category-tag">一般</span>
               <span style="color:#ffb703; font-weight:700;" id="arbModalRouteBadge">仕入 ➔ 販売</span>
             </div>
           </div>
@@ -2453,11 +2442,10 @@
       // 1. 全32ワールドの最安値・最高値ワールドの集計
       computeDcMinMaxSummary(itemId);
 
-      // 2. 対象ワールドのDCを取得してモーダル内DCタブとワールドタブを更新
+      // 2. サーバー選択プルダウンの初期化
       const itemDc = findDcForWorld(worldName) || activeDc || 'Mana';
       currentModalDc = itemDc;
-      renderModalDcTabs(itemDc);
-      renderModalWorldTabs(itemDc, worldName);
+      populateModalWorldSelect(worldName);
 
       // 3. モーダル表示
       document.getElementById('itemDetailModal').classList.add('active');
@@ -2803,6 +2791,22 @@
       });
     }
 
+    function populateModalWorldSelect(selectedWorld) {
+      const select = document.getElementById('modalWorldSelect');
+      if (!select) return;
+
+      let options = '';
+      for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
+        options += `<optgroup label="${dc} DC">`;
+        for (const w of worlds) {
+          const isSel = (w === selectedWorld) ? 'selected' : '';
+          options += `<option value="${w}" ${isSel}>${w} (${dc})</option>`;
+        }
+        options += `</optgroup>`;
+      }
+      select.innerHTML = options;
+    }
+
     function drawModalTrendChart(worldName, itemId) {
       const badgeEl = document.getElementById('modalTrendBadge');
       const worldBadgeEl = document.getElementById('modalTrendWorldBadge');
@@ -2894,12 +2898,11 @@
 
     function switchModalWorld(worldName) {
       currentModalWorld = worldName;
-      if (!currentModalDc) {
-        currentModalDc = findDcForWorld(worldName) || 'Mana';
-      }
-      renderModalWorldTabs(currentModalDc, worldName);
+      currentModalDc = findDcForWorld(worldName) || activeDc;
 
-      if (currentModalItemId) {
+      populateModalWorldSelect(worldName);
+
+      if (currentModalItemId && worldName) {
         renderModalHistory(worldName, currentModalItemId);
       }
     }
