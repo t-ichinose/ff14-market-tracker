@@ -1457,6 +1457,34 @@
         gap: 0.4rem;
         cursor: pointer;
       }
+      .mobile-mode-switcher {
+        display: flex;
+        gap: 3px;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 2px;
+        border-radius: 8px;
+        border: 1px solid var(--card-border);
+      }
+      .mobile-mode-btn {
+        padding: 0.35rem 0.65rem;
+        border-radius: 6px;
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: all 0.2s ease;
+      }
+      .mobile-mode-btn.active {
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        font-weight: 700;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
       .world-grid {
         display: flex;
         flex-direction: column;
@@ -1468,6 +1496,79 @@
       }
       .grid-slide-btn {
         display: none !important;
+      }
+      .arbitrage-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem;
+      }
+      .arbitrage-card {
+        padding: 0.75rem 0.85rem;
+      }
+      .arb-route-grid {
+        gap: 0.3rem;
+        padding: 0.4rem 0.6rem;
+      }
+      .arb-box-lbl {
+        font-size: 0.6rem;
+      }
+      .arb-box-world {
+        font-size: 0.75rem;
+      }
+      .arb-box-price {
+        font-size: 0.8rem;
+      }
+      .arb-profit-summary {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.35rem;
+      }
+      .arb-stat-item.gold-highlight {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.35rem 0.6rem;
+      }
+      /* Mobile Modal Optimizations */
+      .modal-card {
+        max-height: 94vh;
+        border-radius: 14px;
+        margin: 0 0.25rem;
+      }
+      .modal-header {
+        padding: 0.75rem 0.95rem;
+      }
+      .modal-body {
+        padding: 0.75rem 0.95rem;
+        gap: 0.75rem;
+      }
+      .modal-item-icon {
+        width: 38px;
+        height: 38px;
+      }
+      .modal-item-name {
+        font-size: 1rem;
+      }
+      .arb-world-column-card {
+        padding: 0.75rem;
+        gap: 0.7rem;
+      }
+      .arb-target-banner {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.5rem !important;
+        padding: 0.6rem 0.8rem !important;
+      }
+      .arb-target-banner > div {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .history-table th, .history-table td {
+        padding: 5px 6px;
+        font-size: 0.72rem;
+      }
+      .history-table-container {
+        max-height: 200px;
+        -webkit-overflow-scrolling: touch;
       }
     }
   </style>
@@ -1483,8 +1584,19 @@
           <div class="mobile-active-info" id="mobileActiveBadge">Mana (全ワールド)</div>
         </div>
       </div>
+
+      <!-- Mobile Mode Switcher -->
+      <div class="mobile-mode-switcher">
+        <button class="mobile-mode-btn active" id="mobileModeBtnAnalytics" onclick="switchMainViewMode('analytics')">
+          <i class="fa-solid fa-chart-line" style="color:var(--accent-blue);"></i> 分析
+        </button>
+        <button class="mobile-mode-btn" id="mobileModeBtnArbitrage" onclick="switchMainViewMode('arbitrage')">
+          <i class="fa-solid fa-gem" style="color:var(--accent-gold);"></i> 金策
+        </button>
+      </div>
+
       <button class="mobile-drawer-trigger" onclick="openMobileDrawer()" title="メニューを開く">
-        <i class="fa-solid fa-sliders"></i> フィルター・設定
+        <i class="fa-solid fa-sliders"></i> フィルター
       </button>
     </div>
 
@@ -3089,8 +3201,15 @@
 
     function switchMainViewMode(mode) {
       activeMainViewMode = mode;
-      document.getElementById('modeBtnAnalytics').classList.toggle('active', mode === 'analytics');
-      document.getElementById('modeBtnArbitrage').classList.toggle('active', mode === 'arbitrage');
+      const btnAna = document.getElementById('modeBtnAnalytics');
+      const btnArb = document.getElementById('modeBtnArbitrage');
+      const mobBtnAna = document.getElementById('mobileModeBtnAnalytics');
+      const mobBtnArb = document.getElementById('mobileModeBtnArbitrage');
+
+      if (btnAna) btnAna.classList.toggle('active', mode === 'analytics');
+      if (btnArb) btnArb.classList.toggle('active', mode === 'arbitrage');
+      if (mobBtnAna) mobBtnAna.classList.toggle('active', mode === 'analytics');
+      if (mobBtnArb) mobBtnArb.classList.toggle('active', mode === 'arbitrage');
 
       const dcTabs = document.getElementById('dcTabsContainer');
       const controlsBar = document.getElementById('analyticsControlsBar');
@@ -3113,7 +3232,7 @@
 
     function populateArbitrageHomeWorldSelect() {
       const select = document.getElementById('arbHomeWorldSelect');
-      if (!select || select.children.length > 0) return;
+      const drawerSelect = document.getElementById('drawerArbHomeSelect');
 
       let html = '';
       for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
@@ -3124,7 +3243,38 @@
         }
         html += `</optgroup>`;
       }
-      select.innerHTML = html;
+
+      if (select && select.children.length === 0) {
+        select.innerHTML = html;
+      }
+      if (drawerSelect && drawerSelect.children.length === 0) {
+        drawerSelect.innerHTML = html;
+      }
+    }
+
+    function syncDrawerArbSelect(targetId, val) {
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.value = val;
+        updateArbitrageFilters();
+      }
+      updateDrawerUI();
+    }
+
+    function syncDrawerArbValuesFromDesktop() {
+      const ids = [
+        ['arbHomeWorldSelect', 'drawerArbHomeSelect'],
+        ['arbSortSelect', 'drawerArbSortSelect'],
+        ['arbScopeSelect', 'drawerArbScopeSelect'],
+        ['arbMinRoiSelect', 'drawerArbMinRoiSelect']
+      ];
+      ids.forEach(([deskId, drawId]) => {
+        const desk = document.getElementById(deskId);
+        const draw = document.getElementById(drawId);
+        if (desk && draw && desk.value) {
+          draw.value = desk.value;
+        }
+      });
     }
 
     function updateArbitrageFilters() {
@@ -3400,6 +3550,43 @@
           <input type="text" id="drawerSearchInput" class="search-input" placeholder="検索 (名前/ID)..." oninput="syncDrawerSearch(this.value)">
         </div>
       </div>
+
+      <!-- 6. Arbitrage Controls Section (Visible when in Arbitrage Mode) -->
+      <div id="drawerArbitrageSection" style="display:none; border-top:1px solid var(--card-border); padding-top:0.8rem; margin-top:0.8rem;">
+        <div class="drawer-section-title"><i class="fa-solid fa-gem" style="color:var(--accent-gold);"></i> 金策ナビ設定</div>
+        <div style="display:flex; flex-direction:column; gap:0.65rem;">
+          <div>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.2rem;"><i class="fa-solid fa-house-user" style="color:var(--accent-gold);"></i> ホームワールド</div>
+            <select id="drawerArbHomeSelect" class="search-input" style="width:100%; padding:0.45rem; font-size:0.8rem; font-weight:700; color:var(--accent-gold);" onchange="syncDrawerArbSelect('arbHomeWorldSelect', this.value)"></select>
+          </div>
+          <div>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.2rem;"><i class="fa-solid fa-arrow-down-wide-short"></i> 並び替え順</div>
+            <select id="drawerArbSortSelect" class="search-input" style="width:100%; padding:0.45rem; font-size:0.78rem;" onchange="syncDrawerArbSelect('arbSortSelect', this.value)">
+              <option value="unitProfit" selected>💎 1個純利益額順 (高額順)</option>
+              <option value="dailyProfit">💰 推定日商利益順</option>
+            </select>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem;">
+            <div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:0.2rem;"><i class="fa-solid fa-compass"></i> 仕入れ範囲</div>
+              <select id="drawerArbScopeSelect" class="search-input" style="width:100%; padding:0.45rem; font-size:0.75rem;" onchange="syncDrawerArbSelect('arbScopeSelect', this.value)">
+                <option value="all" selected>全4DC (32ワールド)</option>
+                <option value="same_dc">同DC内のみ</option>
+              </select>
+            </div>
+            <div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:0.2rem;"><i class="fa-solid fa-percent"></i> 最低粗利益率</div>
+              <select id="drawerArbMinRoiSelect" class="search-input" style="width:100%; padding:0.45rem; font-size:0.75rem;" onchange="syncDrawerArbSelect('arbMinRoiSelect', this.value)">
+                <option value="10">10% 以上</option>
+                <option value="15" selected>15% 以上</option>
+                <option value="20">20% 以上</option>
+                <option value="30">30% 以上</option>
+                <option value="50">50% 以上</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -3456,8 +3643,23 @@
       // Sync Active Badge in Mobile Header
       const activeBadge = document.getElementById('mobileActiveBadge');
       if (activeBadge) {
-        const wText = currentSelectedWorld || '全ワールド';
-        activeBadge.textContent = `${curDc} (${wText})`;
+        if (activeMainViewMode === 'arbitrage') {
+          const homeW = document.getElementById('arbHomeWorldSelect')?.value || 'Chocobo';
+          activeBadge.textContent = `金策ナビ (${homeW})`;
+        } else {
+          const wText = currentSelectedWorld || '全ワールド';
+          activeBadge.textContent = `${curDc} (${wText})`;
+        }
+      }
+
+      // Show/Hide Drawer Arbitrage Section based on activeMainViewMode
+      const drawerArbSec = document.getElementById('drawerArbitrageSection');
+      if (drawerArbSec) {
+        drawerArbSec.style.display = (activeMainViewMode === 'arbitrage') ? 'block' : 'none';
+        if (activeMainViewMode === 'arbitrage') {
+          populateArbitrageHomeWorldSelect();
+          syncDrawerArbValuesFromDesktop();
+        }
       }
     }
 
