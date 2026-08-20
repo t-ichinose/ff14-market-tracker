@@ -254,10 +254,16 @@ def export_web_json(conn, output_path="docs/data.json"):
 
         daily_revenue = round(avg_p * real_vel)
 
-        # Calculate 7-day daily weighted average trends (in JST)
+        # Calculate JST Midnight anchored 7-day daily weighted average trends
         jst = timezone(timedelta(hours=9))
         now_jst = now_dt.astimezone(jst)
         today_date_jst = now_jst.date()
+        start_date_jst = today_date_jst - timedelta(days=6)
+        start_midnight_dt = datetime(start_date_jst.year, start_date_jst.month, start_date_jst.day, tzinfo=jst)
+        start_midnight_ts = int(start_midnight_dt.timestamp())
+
+        # Filter out transaction logs before 00:00:00 JST of 7 days ago (e.g. before 08/14 00:00:00 JST)
+        items_list = [x for x in items_list if x["ts"] >= start_midnight_ts]
         days_labels = [(today_date_jst - timedelta(days=i)).strftime("%m/%d") for i in range(6, -1, -1)]
         
         daily_trend = []
@@ -426,11 +432,13 @@ def fetch_and_save_all(target_dc=None):
     print(f"=== Sales History Updated: {total_sales_inserted:,} transactions saved ===", flush=True)
 
 
-    # Purge old sales history (> 7 days)
-    seven_days_ago = int(now_dt.timestamp()) - (7 * 86400)
-    cursor.execute("DELETE FROM sales_history WHERE timestamp < ?", (seven_days_ago,))
+    # Purge old sales history (> 10 days retention)
+    ten_days_ago = int(now_dt.timestamp()) - (10 * 86400)
+    cursor.execute("DELETE FROM sales_history WHERE timestamp < ?", (ten_days_ago,))
+    cursor.execute("PRAGMA optimize;")
 
     # Pool cleanup: remove items with no sales if DB has enough data
+    seven_days_ago = int(now_dt.timestamp()) - (7 * 86400)
     cursor.execute("SELECT COUNT(*) FROM sales_history WHERE timestamp >= ?", (seven_days_ago,))
     recent_sales_total = cursor.fetchone()[0]
     if recent_sales_total > 500:
