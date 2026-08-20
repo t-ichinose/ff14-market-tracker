@@ -181,6 +181,34 @@ def export_web_json(conn, output_path="docs/data.json"):
                 "buyer": buyer or ""
             })
 
+    # 1. Compute Global Median & Noise Bounds for each item_id across all 32 worlds
+    global_bounds_by_item = {}
+    item_all_prices = {}
+
+    for (iid, wname), items_list in sales_by_item_world.items():
+        for x in items_list:
+            if x["price"] > 0:
+                item_all_prices.setdefault(iid, []).append(x["price"])
+
+    for iid, all_prices in item_all_prices.items():
+        if not all_prices:
+            continue
+        sorted_p = sorted(all_prices)
+        g_med = sorted_p[len(sorted_p) // 2]
+
+        # Upper bound (RMT / Gil Transfer Filter)
+        if g_med <= 1_000:
+            upper_bound = max(10_000.0, 20.0 * g_med)
+        elif g_med <= 100_000:
+            upper_bound = 10.0 * g_med
+        else:
+            upper_bound = max(300_000_000.0, 5.0 * g_med)
+
+        # Lower bound (1G dump sales / error sales filter)
+        lower_bound = max(1.0, 0.05 * g_med)
+
+        global_bounds_by_item[iid] = (lower_bound, upper_bound, g_med)
+
     # Group calculated metrics by world
     data_by_world = {}
 
@@ -188,31 +216,41 @@ def export_web_json(conn, output_path="docs/data.json"):
         if not items_list:
             continue
 
-        prices = [x["price"] for x in items_list]
-        med = sorted(prices)[len(prices) // 2]
+        lower_bound, upper_bound, g_med = global_bounds_by_item.get(iid, (1.0, 300_000_000.0, 1000.0))
+
+        # Global Cross-World Noise Filter: Exclude 1G dump sales and RMT/Gil transfers
+        clean_items = [x for x in items_list if lower_bound <= x["price"] <= upper_bound]
         
-        # Outlier filtering for extreme money transfers / RMT
-        if med < 1_000_000 and len(items_list) >= 2:
-            clean_items = [x for x in items_list if not (x["price"] > 20 * med and x["price"] > 1_000_000)]
-            if clean_items:
-                items_list = clean_items
+        # Also clean history list for modal display
+        hist_raw = history_by_item_world.get((iid, wname), [])
+        clean_hist = [h for h in hist_raw if lower_bound <= h["price"] <= upper_bound]
 
-        clean_prices = [x["price"] for x in items_list]
-        total_qty = sum(x["qty"] for x in items_list)
-        trade_cnt = len(items_list)
-
-        real_vel = round(total_qty / actual_days, 1)
-        min_p = min(clean_prices)
-        max_p = max(clean_prices)
-
-        if len(clean_prices) >= 5:
-            sp = sorted(clean_prices)
-            cut = max(1, int(len(sp) * 0.10))
-            trimmed = sp[cut: len(sp) - cut] if (len(sp) - 2 * cut) > 0 else sp
-            avg_p = round(sum(trimmed) / float(len(trimmed)))
+        if not clean_items:
+            # If all transactions in this world were RMT/outliers, treat world as having 0 valid sales
+            clean_prices = []
+            total_qty = 0
+            trade_cnt = 0
+            real_vel = 0.0
+            min_p = 0
+            max_p = 0
+            avg_p = 0
         else:
-            sp = sorted(clean_prices)
-            avg_p = sp[len(sp) // 2]
+            items_list = clean_items
+            clean_prices = [x["price"] for x in items_list]
+            total_qty = sum(x["qty"] for x in items_list)
+            trade_cnt = len(items_list)
+            real_vel = round(total_qty / actual_days, 1)
+            min_p = min(clean_prices)
+            max_p = max(clean_prices)
+
+            if len(clean_prices) >= 5:
+                sp = sorted(clean_prices)
+                cut = max(1, int(len(sp) * 0.10))
+                trimmed = sp[cut: len(sp) - cut] if (len(sp) - 2 * cut) > 0 else sp
+                avg_p = round(sum(trimmed) / float(len(trimmed)))
+            else:
+                sp = sorted(clean_prices)
+                avg_p = sp[len(sp) // 2]
 
         daily_revenue = round(avg_p * real_vel)
 
@@ -258,7 +296,7 @@ def export_web_json(conn, output_path="docs/data.json"):
             "daily_revenue": daily_revenue,
             "daily_trend": daily_trend,
             "trend_pct": trend_pct,
-            "history": history_by_item_world.get((iid, wname), []),
+            "history": clean_hist,
             "updated_at": now_str
         }
 
