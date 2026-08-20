@@ -3102,7 +3102,8 @@
       document.getElementById('arbModalItemIcon').src = itemIcon || getComputedIconUrl(itemId);
       document.getElementById('arbModalItemTitle').innerText = itemTitle || 'アイテム詳細';
       document.getElementById('arbModalItemId').innerText = itemId || '-';
-      document.getElementById('arbModalCategory').innerText = categoryName || '一般';
+      const catEl = document.getElementById('arbModalCategory');
+      if (catEl) catEl.innerText = categoryName || '一般';
 
       const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(itemTitle || '')}`;
       document.getElementById('arbModalLodestoneLink').href = lodestoneUrl;
