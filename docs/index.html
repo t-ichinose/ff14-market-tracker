@@ -1181,13 +1181,13 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      background: rgba(15, 23, 42, 0.96);
-      backdrop-filter: blur(8px);
+      background: #0f172a !important;
+      backdrop-filter: none !important;
       padding: 0.65rem 1rem;
       color: var(--text-muted);
       font-weight: 600;
       font-size: 0.75rem;
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 2px solid var(--card-border);
     }
 
     .history-table td {
@@ -1579,8 +1579,18 @@
       }
       /* 100% Full-Screen Mobile Page Overlay */
       .modal-backdrop {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
         padding: 0 !important;
+        margin: 0 !important;
         background: var(--bg-main) !important;
+        z-index: 10000 !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
       }
       .modal-card, .modal-card.arb-modal-wide {
         width: 100vw !important;
@@ -1622,6 +1632,7 @@
         gap: 0.75rem;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
       }
       .modal-item-icon {
         width: 36px;
@@ -1664,6 +1675,8 @@
         display: flex !important;
         flex-direction: row !important;
         overflow-x: auto !important;
+        overflow-y: hidden !important;
+        touch-action: pan-x !important;
         scroll-snap-type: x mandatory !important;
         -webkit-overflow-scrolling: touch;
         gap: 0.75rem !important;
