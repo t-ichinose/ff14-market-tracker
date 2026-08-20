@@ -890,6 +890,15 @@
       gap: 0.6rem;
     }
 
+    .modal-body {
+      padding: 1.2rem;
+      overflow-y: auto;
+      max-height: calc(90vh - 70px);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
     .modal-close-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -911,12 +920,12 @@
       border-color: rgba(239, 68, 68, 0.4);
     }
 
-    .modal-body {
-      padding: 1.2rem 1.5rem;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
+    .modal-close-btn .btn-text {
+      display: none;
+    }
+
+    .arb-modal-mobile-tabs {
+      display: none !important;
     }
 
     /* DC内ハイライト比較カード (4カラム: 最安値・最安平均・最高平均・最高値) */
@@ -1627,10 +1636,18 @@
         align-items: center !important;
         gap: 0.35rem !important;
       }
+      .modal-close-btn .btn-text {
+        display: inline !important;
+      }
+      .modal-close-btn .fa-xmark::before {
+        content: "\f053" !important;
+      }
       .modal-body {
         padding: 0.75rem 0.85rem 4.5rem 0.85rem !important;
         gap: 0.75rem;
         flex: 1 !important;
+        max-height: none !important;
+        height: auto !important;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch;
         touch-action: pan-y;
@@ -1643,7 +1660,7 @@
         font-size: 0.98rem;
       }
       .arb-modal-mobile-tabs {
-        display: grid;
+        display: grid !important;
         grid-template-columns: 1fr 1fr;
         gap: 4px;
         background: rgba(0, 0, 0, 0.45);
@@ -1919,8 +1936,8 @@
           <a id="modalLodestoneLink" href="#" target="_blank" rel="noopener" class="lodestone-link-icon" style="font-size:1.1rem; padding:6px;" title="Lodestoneで開く">
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
           </a>
-          <button class="modal-close-btn" onclick="closeItemModal()" title="戻る">
-            <i class="fa-solid fa-chevron-left"></i> 戻る
+          <button class="modal-close-btn" onclick="closeItemModal()" title="閉じる">
+            <i class="fa-solid fa-xmark"></i><span class="btn-text"> 戻る</span>
           </button>
         </div>
       </div>
@@ -2040,8 +2057,8 @@
             </div>
           </div>
         </div>
-        <button class="modal-close-btn" onclick="closeArbitrageModal()" title="戻る">
-          <i class="fa-solid fa-chevron-left"></i> 戻る
+        <button class="modal-close-btn" onclick="closeArbitrageModal()" title="閉じる">
+          <i class="fa-solid fa-xmark"></i><span class="btn-text"> 戻る</span>
         </button>
       </div>
 
