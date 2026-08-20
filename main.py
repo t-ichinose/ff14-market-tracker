@@ -204,8 +204,8 @@ def export_web_json(conn, output_path="docs/data.json"):
         else:
             upper_bound = max(300_000_000.0, 5.0 * g_med)
 
-        # Lower bound (1G dump sales / error sales filter)
-        lower_bound = max(1.0, 0.05 * g_med)
+        # Lower bound (1G dump sales / 1/10th digit typo error sales filter)
+        lower_bound = max(1.0, 0.20 * g_med)
 
         global_bounds_by_item[iid] = (lower_bound, upper_bound, g_med)
 
@@ -281,8 +281,10 @@ def export_web_json(conn, output_path="docs/data.json"):
                 daily_trend.append({"date": d_lbl, "weighted_avg": 0, "volume": 0})
 
         trend_pct = 0.0
-        if len(valid_avgs) >= 2 and valid_avgs[0] > 0:
-            trend_pct = round(((valid_avgs[-1] - valid_avgs[0]) / float(valid_avgs[0])) * 100.0, 1)
+        # Intuitive Trend: Compare Latest Active Day's Avg (latest_p) vs 7-Day Baseline Avg (avg_p)
+        if valid_avgs and avg_p > 0:
+            latest_p = valid_avgs[-1]
+            trend_pct = round(((latest_p - avg_p) / float(avg_p)) * 100.0, 1)
 
         meta = meta_dict.get(iid, {})
         item_name = meta.get("name") or items_search.get(iid) or f"Item #{iid}"

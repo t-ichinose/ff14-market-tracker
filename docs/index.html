@@ -937,6 +937,76 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 0.4rem;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dc-summary-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+      filter: brightness(1.15);
+    }
+
+    .modal-card.arb-modal-wide {
+      max-width: 1320px;
+    }
+
+    .arb-modal-dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 1024px) {
+      .arb-modal-dual-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .arb-world-column-card {
+      background: rgba(11, 17, 30, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .arb-world-column-card.buy-side {
+      border-top: 4px solid var(--accent-green);
+    }
+
+    .arb-world-column-card.sell-side {
+      border-top: 4px solid var(--accent-blue);
+    }
+
+    .copy-icon-btn {
+      background: rgba(255, 183, 3, 0.12);
+      border: 1px solid rgba(255, 183, 3, 0.35);
+      color: #ffb703;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .copy-icon-btn:hover {
+      background: #ffb703;
+      color: #000000;
+      box-shadow: 0 0 10px rgba(255, 183, 3, 0.5);
+      transform: scale(1.05);
+    }
+
+    .copy-icon-btn.copied {
+      background: rgba(74, 222, 128, 0.2);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
     }
 
     .dc-summary-card.min-card {
@@ -1595,7 +1665,7 @@
       <div class="modal-body">
         <!-- 1. DC内ハイライト比較 (最安値 ➔ 最高値 ➔ 最安平均 ➔ 最高平均) -->
         <div class="dc-summary-grid">
-          <div class="dc-summary-card min-card">
+          <div class="dc-summary-card min-card" id="modalMinCard">
             <div>
               <div class="dc-summary-label"><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 最安値ワールド</div>
               <div class="dc-summary-world" id="modalMinWorld">-</div>
@@ -1603,7 +1673,7 @@
             <div class="dc-summary-price" id="modalMinPrice">-G</div>
           </div>
 
-          <div class="dc-summary-card max-card">
+          <div class="dc-summary-card max-card" id="modalMaxCard">
             <div>
               <div class="dc-summary-label"><i class="fa-solid fa-arrow-trend-up" style="color:#ef4444;"></i> 最高値ワールド</div>
               <div class="dc-summary-world" id="modalMaxWorld">-</div>
@@ -1611,7 +1681,7 @@
             <div class="dc-summary-price" id="modalMaxPrice">-G</div>
           </div>
 
-          <div class="dc-summary-card min-avg-card">
+          <div class="dc-summary-card min-avg-card" id="modalMinAvgCard">
             <div>
               <div class="dc-summary-label"><i class="fa-solid fa-scale-balanced" style="color:#c084fc;"></i> 最安平均ワールド</div>
               <div class="dc-summary-world" id="modalMinAvgWorld">-</div>
@@ -1619,7 +1689,7 @@
             <div class="dc-summary-price" id="modalMinAvgPrice">-G</div>
           </div>
 
-          <div class="dc-summary-card max-avg-card">
+          <div class="dc-summary-card max-avg-card" id="modalMaxAvgCard">
             <div>
               <div class="dc-summary-label"><i class="fa-solid fa-scale-balanced" style="color:#f472b6;"></i> 最高平均ワールド</div>
               <div class="dc-summary-world" id="modalMaxAvgWorld">-</div>
@@ -1694,6 +1764,54 @@
               <!-- JSで取引履歴を読み込み表示 -->
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 金策ナビ専用 左右2ワールド並列比較モーダル (Arbitrage Detail Modal) -->
+  <div class="modal-backdrop" id="arbitrageDetailModal" onclick="closeArbitrageModalOnBackdrop(event)">
+    <div class="modal-card arb-modal-wide" onclick="event.stopPropagation()">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <img class="modal-item-icon" id="arbModalItemIcon" src="" alt="">
+          <div>
+            <div class="modal-item-name">
+              <span id="arbModalItemTitle">アイテム名</span>
+              <a id="arbModalLodestoneLink" href="#" target="_blank" rel="noopener" class="lodestone-link-icon" style="font-size:1.1rem; padding:4px;" title="Lodestoneで開く">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:0.6rem; margin-top:3px;">
+              <span>ID: <span id="arbModalItemId">-</span></span>
+              <span id="arbModalCategory" class="category-tag">一般</span>
+              <span style="color:#ffb703; font-weight:700;" id="arbModalRouteBadge">仕入 ➔ 販売</span>
+            </div>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeArbitrageModal()" title="閉じる">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (2-Column Grid) -->
+      <div class="modal-body">
+        <!-- 0. 目標仕入・販売価格ナビバナー -->
+        <div id="arbModalTargetBanner" style="background:linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.12)); border:1px solid rgba(56, 189, 248, 0.25); border-radius:12px; padding:0.75rem 1.2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.8rem;">
+          <!-- JS Populated -->
+        </div>
+
+        <div class="arb-modal-dual-grid">
+          <!-- 左カラム: 仕入れ先ワールド -->
+          <div class="arb-world-column-card buy-side" id="arbBuySideCol">
+            <!-- JS Populated -->
+          </div>
+
+          <!-- 右カラム: 販売先 (ホーム) ワールド -->
+          <div class="arb-world-column-card sell-side" id="arbSellSideCol">
+            <!-- JS Populated -->
+          </div>
         </div>
       </div>
     </div>
@@ -2121,11 +2239,22 @@
       return "";
     }
 
+    function switchModalDcAndWorld(dcName, worldName) {
+      if (!dcName || !worldName) return;
+      currentModalDc = dcName;
+      currentModalWorld = worldName;
+      renderModalDcTabs(dcName);
+      renderModalWorldTabs(dcName, worldName);
+      if (currentModalItemId && worldName) {
+        renderModalHistory(worldName, currentModalItemId);
+      }
+    }
+
     function computeDcMinMaxSummary(itemId) {
-      let minVal = Infinity, minWorldStr = '-';
-      let minAvgVal = Infinity, minAvgWorldStr = '-';
-      let maxAvgVal = -1, maxAvgWorldStr = '-';
-      let maxVal = -1, maxWorldStr = '-';
+      let minVal = Infinity, minWorldStr = '-', minDc = '', minW = '';
+      let minAvgVal = Infinity, minAvgWorldStr = '-', minAvgDc = '', minAvgW = '';
+      let maxAvgVal = -1, maxAvgWorldStr = '-', maxAvgDc = '', maxAvgW = '';
+      let maxVal = -1, maxWorldStr = '-', maxDc = '', maxW = '';
 
       // 全データセンター (全32ワールド) を横断して比較
       for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
@@ -2138,21 +2267,25 @@
             if (found.min_price > 0 && found.min_price < minVal) {
               minVal = found.min_price;
               minWorldStr = worldLabel;
+              minDc = dc; minW = w;
             }
             // 最安平均
             if (found.avg_price > 0 && found.avg_price < minAvgVal) {
               minAvgVal = found.avg_price;
               minAvgWorldStr = worldLabel;
+              minAvgDc = dc; minAvgW = w;
             }
             // 最高平均
             if (found.avg_price > maxAvgVal) {
               maxAvgVal = found.avg_price;
               maxAvgWorldStr = worldLabel;
+              maxAvgDc = dc; maxAvgW = w;
             }
             // 最高値
             if (found.max_price > maxVal) {
               maxVal = found.max_price;
               maxWorldStr = worldLabel;
+              maxDc = dc; maxW = w;
             }
           }
         }
@@ -2169,6 +2302,25 @@
 
       document.getElementById('modalMaxWorld').innerText = maxWorldStr !== '-' ? maxWorldStr : 'データなし';
       document.getElementById('modalMaxPrice').innerText = maxVal > 0 ? `${maxVal.toLocaleString()}G` : '-G';
+
+      function bindCardClick(cardId, dc, w) {
+        const cardEl = document.getElementById(cardId);
+        if (!cardEl) return;
+        if (dc && w) {
+          cardEl.style.cursor = 'pointer';
+          cardEl.onclick = () => switchModalDcAndWorld(dc, w);
+          cardEl.title = `クリックで ${dc} - ${w} のタブに切替`;
+        } else {
+          cardEl.style.cursor = 'default';
+          cardEl.onclick = null;
+          cardEl.title = '';
+        }
+      }
+
+      bindCardClick('modalMinCard', minDc, minW);
+      bindCardClick('modalMaxCard', maxDc, maxW);
+      bindCardClick('modalMinAvgCard', minAvgDc, minAvgW);
+      bindCardClick('modalMaxAvgCard', maxAvgDc, maxAvgW);
     }
 
 
@@ -2248,9 +2400,8 @@
         return `${x.toFixed(1)},${y.toFixed(1)}`;
       });
 
-      const firstP = nonZero[0];
-      const lastP = nonZero[nonZero.length - 1];
-      const isUp = (lastP >= firstP);
+      const { trendPct } = getOrComputeDailyTrend(item);
+      const isUp = (trendPct >= 0);
       const color = isUp ? '#4ade80' : '#f87171';
 
       return `
@@ -2511,6 +2662,469 @@
       }
     }
 
+    let currentArbItemId = null;
+    let currentArbSourceDc = null;
+    let currentArbSourceWorld = null;
+    let originalArbSourceDc = null;
+    let originalArbSourceWorld = null;
+    let currentArbHomeDc = null;
+    let currentArbHomeWorld = null;
+
+    function closeArbitrageModal() {
+      document.getElementById('arbitrageDetailModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeArbitrageModalOnBackdrop(e) {
+      if (e.target.id === 'arbitrageDetailModal') {
+        closeArbitrageModal();
+      }
+    }
+
+    function copyArbTargetToClipboard() {
+      const sourceItems = allData[currentArbSourceWorld] || [];
+      const sourceItem = sourceItems.find(x => x.item_id === currentArbItemId);
+
+      const homeItems = allData[currentArbHomeWorld] || [];
+      const homeItem = homeItems.find(x => x.item_id === currentArbItemId);
+
+      if (!sourceItem || !homeItem) return;
+
+      const buyPrice = getRecent3DayAvg(sourceItem) || sourceItem.min_price || 0;
+      const sellPrice = getRecent3DayAvg(homeItem) || homeItem.min_price || 0;
+
+      const maxBuyTarget = Math.round(buyPrice * 1.05);
+      const targetSellPrice = sellPrice;
+
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const todayStr = `${year}/${month}/${day}`;
+
+      const rawTitle = document.getElementById('arbModalItemTitle')?.innerText || 'アイテム名';
+      const cleanTitle = rawTitle.replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
+
+      // TSV Format: Date \t ItemName \t TargetBuy \t TargetSell
+      const tsvText = `${todayStr}\t${cleanTitle}\t${maxBuyTarget}\t${targetSellPrice}`;
+
+      navigator.clipboard.writeText(tsvText).then(() => {
+        const btn = document.getElementById('arbModalCopyBtn');
+        if (btn) {
+          btn.classList.add('copied');
+          btn.innerHTML = `<i class="fa-solid fa-check"></i>`;
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = `<i class="fa-regular fa-copy"></i>`;
+          }, 1500);
+        }
+      }).catch(err => {
+        console.error('Clipboard copy failed:', err);
+      });
+    }
+
+    function updateArbModalTargetBanner() {
+      const banner = document.getElementById('arbModalTargetBanner');
+      if (!banner) return;
+
+      const sourceItems = allData[currentArbSourceWorld] || [];
+      const sourceItem = sourceItems.find(x => x.item_id === currentArbItemId);
+
+      const homeItems = allData[currentArbHomeWorld] || [];
+      const homeItem = homeItems.find(x => x.item_id === currentArbItemId);
+
+      if (!sourceItem || !homeItem) {
+        banner.innerHTML = `<div style="color:var(--text-muted); font-size:0.8rem;">仕入れ先または販売先のデータが見つかりません</div>`;
+        return;
+      }
+
+      const buyPrice = getRecent3DayAvg(sourceItem) || sourceItem.min_price || 0;
+      const sellPrice = getRecent3DayAvg(homeItem) || homeItem.min_price || 0;
+
+      const maxBuyTarget = Math.round(buyPrice * 1.05);
+      const targetSellPrice = sellPrice;
+
+      const netCost = buyPrice * 1.05;
+      const netReturn = sellPrice * 0.95;
+      const unitProfit = Math.round(netReturn - netCost);
+      const roiPercent = netCost > 0 ? Math.round(((unitProfit / netCost) * 100) * 10) / 10 : 0;
+
+      const profitColor = unitProfit >= 0 ? 'var(--accent-green)' : '#f87171';
+
+      banner.innerHTML = `
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+          <div style="background:rgba(74, 222, 128, 0.15); border:1px solid rgba(74, 222, 128, 0.3); padding:4px 12px; border-radius:8px; font-size:0.82rem; font-weight:700; color:var(--accent-green);">
+            <i class="fa-solid fa-cart-shopping"></i> 目標仕入ライン: <span style="font-family:'Outfit'; font-size:0.98rem; margin-left:3px; color:#ffffff;">${maxBuyTarget.toLocaleString()} G 以下</span>
+          </div>
+          <div style="font-size:1.1rem; color:var(--text-muted); font-weight:800;">➔</div>
+          <div style="background:rgba(56, 189, 248, 0.15); border:1px solid rgba(56, 189, 248, 0.3); padding:4px 12px; border-radius:8px; font-size:0.82rem; font-weight:700; color:var(--accent-blue);">
+            <i class="fa-solid fa-house"></i> 目標販売ライン: <span style="font-family:'Outfit'; font-size:0.98rem; margin-left:3px; color:#ffffff;">${targetSellPrice.toLocaleString()} G 以上</span>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.7rem; flex-wrap:wrap;">
+          <div style="display:flex; align-items:center; gap:0.6rem; font-size:0.85rem; font-weight:800; color:${profitColor};">
+            <span><i class="fa-solid fa-coins" style="color:#ffb703;"></i> 利回り:</span>
+            <span style="font-family:'Outfit'; font-size:1.1rem; color:#ffffff;">+${unitProfit.toLocaleString()} G</span>
+            <span style="font-size:0.8rem; background:rgba(255,183,3,0.15); border:1px solid rgba(255,183,3,0.3); color:#ffb703; padding:2px 8px; border-radius:10px;">+${roiPercent}% ROI</span>
+          </div>
+
+          <button id="arbModalCopyBtn" onclick="copyArbTargetToClipboard()" class="copy-icon-btn" title="スプレッドシート用形式（今日の日付、アイテム名、目標仕入、目標販売）で4セル分割コピー">
+            <i class="fa-regular fa-copy"></i>
+          </button>
+        </div>
+      `;
+
+      document.getElementById('arbModalRouteBadge').innerHTML = `
+        <i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> ${currentArbSourceDc} - ${currentArbSourceWorld} ➔ 
+        <i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> ${currentArbHomeDc} - ${currentArbHomeWorld}
+      `;
+    }
+
+    function switchArbSourceWorld(newSourceWorld) {
+      if (!newSourceWorld || newSourceWorld === currentArbSourceWorld) return;
+
+      const newDc = findDcForWorld(newSourceWorld) || 'Mana';
+      currentArbSourceDc = newDc;
+      currentArbSourceWorld = newSourceWorld;
+
+      updateArbModalTargetBanner();
+      renderArbWorldSide('arbBuySideCol', newDc, newSourceWorld, currentArbItemId, true);
+    }
+
+    function switchArbHomeWorld(newHomeWorld) {
+      if (!newHomeWorld || newHomeWorld === currentArbHomeWorld) return;
+
+      const newDc = findDcForWorld(newHomeWorld) || 'Mana';
+      currentArbHomeDc = newDc;
+      currentArbHomeWorld = newHomeWorld;
+
+      updateArbModalTargetBanner();
+      renderArbWorldSide('arbSellSideCol', newDc, newHomeWorld, currentArbItemId, false);
+    }
+
+    function openArbitrageModal(itemId, itemTitle, itemIcon, sourceDc, sourceWorld, homeDc, homeWorld, categoryName, unitProfit, roiPercent) {
+      const modal = document.getElementById('arbitrageDetailModal');
+      if (!modal) return;
+
+      currentArbItemId = itemId;
+      currentArbSourceDc = sourceDc;
+      currentArbSourceWorld = sourceWorld;
+      originalArbSourceDc = sourceDc;
+      originalArbSourceWorld = sourceWorld;
+      currentArbHomeDc = homeDc;
+      currentArbHomeWorld = homeWorld;
+
+      document.getElementById('arbModalItemIcon').src = itemIcon || getComputedIconUrl(itemId);
+      document.getElementById('arbModalItemTitle').innerText = itemTitle || 'アイテム詳細';
+      document.getElementById('arbModalItemId').innerText = itemId || '-';
+      document.getElementById('arbModalCategory').innerText = categoryName || '一般';
+
+      const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(itemTitle || '')}`;
+      document.getElementById('arbModalLodestoneLink').href = lodestoneUrl;
+
+      updateArbModalTargetBanner();
+
+      renderArbWorldSide('arbBuySideCol', sourceDc, sourceWorld, itemId, true);
+      renderArbWorldSide('arbSellSideCol', homeDc, homeWorld, itemId, false);
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function renderArbWorldSide(colId, dcName, worldName, itemId, isSourceWorld) {
+      const container = document.getElementById(colId);
+      if (!container) return;
+
+      const worldItems = allData[worldName] || [];
+      const item = worldItems.find(x => x.item_id === itemId);
+
+      let headerTitle = '';
+      if (isSourceWorld) {
+        let options = '';
+        for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
+          options += `<optgroup label="${dc} DC">`;
+          for (const w of worlds) {
+            const selected = (w === worldName) ? 'selected' : '';
+            const isOrigMin = (w === originalArbSourceWorld) ? ' 👑 最安' : '';
+            options += `<option value="${w}" ${selected}>${w} (${dc})${isOrigMin}</option>`;
+          }
+          options += `</optgroup>`;
+        }
+        const sourceSelectHtml = `
+          <select id="arbModalSourceSelect" onchange="switchArbSourceWorld(this.value)" style="background:rgba(18, 26, 43, 0.9); border:1px solid var(--accent-green); color:var(--accent-green); font-size:0.8rem; font-weight:700; padding:3px 8px; border-radius:8px; cursor:pointer; outline:none;">
+            ${options}
+          </select>
+        `;
+
+        headerTitle = `
+          <div style="display:flex; flex-direction:column; gap:0.35rem; margin-bottom:0.15rem;">
+            <div style="font-weight:800; font-size:1.05rem; color:var(--accent-green); display:flex; align-items:center; justify-content:space-between;">
+              <span style="display:flex; align-items:center; gap:0.5rem;"><i class="fa-solid fa-cart-shopping"></i> 仕入れ先: ${dcName} - ${worldName}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.45rem;">
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-arrows-rotate"></i> サーバ切替:</span>
+              ${sourceSelectHtml}
+            </div>
+          </div>
+        `;
+      } else {
+        let options = '';
+        for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
+          options += `<optgroup label="${dc} DC">`;
+          for (const w of worlds) {
+            const selected = (w === worldName) ? 'selected' : '';
+            options += `<option value="${w}" ${selected}>${w} (${dc})</option>`;
+          }
+          options += `</optgroup>`;
+        }
+        const homeSelectHtml = `
+          <select id="arbModalHomeSelect" onchange="switchArbHomeWorld(this.value)" style="background:rgba(18, 26, 43, 0.9); border:1px solid var(--accent-blue); color:var(--accent-blue); font-size:0.8rem; font-weight:700; padding:3px 8px; border-radius:8px; cursor:pointer; outline:none;">
+            ${options}
+          </select>
+        `;
+
+        headerTitle = `
+          <div style="display:flex; flex-direction:column; gap:0.35rem; margin-bottom:0.15rem;">
+            <div style="font-weight:800; font-size:1.05rem; color:var(--accent-blue); display:flex; align-items:center; justify-content:space-between;">
+              <span style="display:flex; align-items:center; gap:0.5rem;"><i class="fa-solid fa-house"></i> 販売先 (ホーム): ${dcName} - ${worldName}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.45rem;">
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;"><i class="fa-solid fa-arrows-rotate"></i> サーバ切替:</span>
+              ${homeSelectHtml}
+            </div>
+          </div>
+        `;
+      }
+
+      if (!item) {
+        container.innerHTML = `
+          ${headerTitle}
+          <div style="text-align:center; padding:3rem 1rem; color:var(--text-muted);">
+            ワールド (${worldName}) の取引データが存在しません
+          </div>
+        `;
+        return;
+      }
+
+      const minP = (item.min_price || 0).toLocaleString();
+      const avg3d = getRecent3DayAvg(item).toLocaleString();
+      const vel = (item.sale_velocity || 0);
+      const trades = (item.sale_trades !== undefined ? item.sale_trades : (item.history ? item.history.length : 0));
+
+      const { trend, trendPct } = getOrComputeDailyTrend(item);
+      const trendBadge = (trendPct > 0)
+        ? `<span style="color:#4ade80; font-weight:700;"><i class="fa-solid fa-arrow-trend-up"></i> +${trendPct}% (高騰)</span>`
+        : (trendPct < 0)
+        ? `<span style="color:#f87171; font-weight:700;"><i class="fa-solid fa-arrow-trend-down"></i> ${trendPct}% (値下がり)</span>`
+        : `<span style="color:#94a3b8;">➡️ 0%</span>`;
+
+      const canvasId = `arbCanvas_${colId}`;
+      const summaryId = `arbSummary_${colId}`;
+
+      const history = item.history || [];
+      let historyRowsHtml = '';
+      if (!history || history.length === 0) {
+        historyRowsHtml = `
+          <tr>
+            <td colspan="6" style="text-align:center; padding:1.5rem; color:var(--text-muted);">
+              直近7日間の取引履歴がありません
+            </td>
+          </tr>
+        `;
+      } else {
+        historyRowsHtml = history.slice(0, 25).map(h => {
+          const formattedTime = formatTimeLocal(new Date(h.ts * 1000).toISOString());
+          const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.75rem;">-</span>`;
+          const hqBadge = h.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
+          const price = (h.price || 0).toLocaleString();
+          const qty = (h.qty || 0).toLocaleString();
+          const totalPrice = ((h.price || 0) * (h.qty || 0)).toLocaleString();
+
+          return `
+            <tr>
+              <td style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> ${formattedTime}</td>
+              <td style="font-size:0.75rem; font-weight:600; color:var(--accent-blue);">${buyerName}</td>
+              <td>${hqBadge}</td>
+              <td style="font-weight:700; color:var(--text-main);">${price}G</td>
+              <td>${qty}個</td>
+              <td style="font-weight:700; color:#ffb703;">${totalPrice}G</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      container.innerHTML = `
+        ${headerTitle}
+
+        <!-- 4指標ミニグリッド -->
+        <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:6px; background:rgba(0,0,0,0.3); padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <div>
+            <div style="font-size:0.65rem; color:var(--text-muted);">最安価格</div>
+            <div style="font-size:0.82rem; font-weight:700; color:${isSourceWorld ? 'var(--accent-green)' : '#38bdf8'};">${minP}G</div>
+          </div>
+          <div>
+            <div style="font-size:0.65rem; color:var(--text-muted);">直近3日平均</div>
+            <div style="font-size:0.82rem; font-weight:700; color:#c084fc;">${avg3d}G</div>
+          </div>
+          <div>
+            <div style="font-size:0.65rem; color:var(--text-muted);">販売速度</div>
+            <div style="font-size:0.82rem; font-weight:700; color:var(--accent-blue);">${vel}個/日</div>
+          </div>
+          <div>
+            <div style="font-size:0.65rem; color:var(--text-muted);">7日売買数</div>
+            <div style="font-size:0.82rem; font-weight:700; color:#ffb703;">${trades}件</div>
+          </div>
+        </div>
+
+        <!-- 日別加重平均価格・販売量推移グラフ (7日間) -->
+        <div style="background:rgba(15, 23, 42, 0.7); border:1px solid var(--card-border); border-radius:10px; padding:0.65rem 0.85rem;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.4rem; font-size:0.75rem;">
+            <span style="font-weight:700; color:#ffffff;"><i class="fa-solid fa-chart-line" style="color:var(--accent-green);"></i> 日別加重平均価格・販売量推移 (直近7日間)</span>
+            ${trendBadge}
+          </div>
+          <div style="position:relative; width:100%; height:120px; margin-bottom:0.4rem;">
+            <canvas id="${canvasId}" width="580" height="120" style="width:100%; height:100%; display:block;"></canvas>
+          </div>
+          <div id="${summaryId}" style="display:flex; justify-content:space-between; gap:4px; border-top:1px solid rgba(255,255,255,0.06); padding-top:6px; font-size:0.65rem; color:var(--text-muted); overflow-x:auto;">
+            <!-- JS Populated Daily Metrics Summary -->
+          </div>
+        </div>
+
+        <!-- 取引履歴テーブル -->
+        <div>
+          <div style="font-size:0.78rem; font-weight:700; color:#ffffff; margin-bottom:0.4rem; display:flex; align-items:center; gap:0.4rem;">
+            <i class="fa-solid fa-receipt" style="color:var(--accent-purple);"></i> 直近の売買取引履歴 (${worldName})
+          </div>
+          <div class="history-table-container" style="max-height: 240px;">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>日時 (JST)</th>
+                  <th>購入者</th>
+                  <th>品質</th>
+                  <th>単価 (G)</th>
+                  <th>数量</th>
+                  <th>合計 (G)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${historyRowsHtml}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      setTimeout(() => {
+        drawArbSideChart(canvasId, summaryId, trend, trendPct);
+      }, 0);
+    }
+
+    function drawArbSideChart(canvasId, summaryId, trend, trendPct) {
+      const canvas = document.getElementById(canvasId);
+      const summaryEl = document.getElementById(summaryId);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width = canvas.parentElement.offsetWidth || 580;
+      const h = canvas.height = 120;
+      ctx.clearRect(0, 0, w, h);
+
+      if (!trend || trend.length === 0) {
+        if (summaryEl) summaryEl.innerHTML = "";
+        return;
+      }
+
+      // Populate 3-tier daily summary row below canvas
+      if (summaryEl) {
+        summaryEl.innerHTML = trend.map(d => `
+          <div style="flex:1; text-align:center; min-width:45px;">
+            <div style="font-weight:700; color:#94a3b8; font-size:0.65rem;">${d.date}</div>
+            <div style="color:var(--accent-green); font-weight:700; font-size:0.65rem;">${d.weighted_avg > 0 ? d.weighted_avg.toLocaleString() + 'G' : '-'}</div>
+            <div style="color:var(--accent-blue); font-size:0.6rem;">${d.volume > 0 ? d.volume + '個' : '0個'}</div>
+          </div>
+        `).join('');
+      }
+
+      const validPrices = trend.map(d => d.weighted_avg || 0).filter(p => p > 0);
+      const validVolumes = trend.map(d => d.volume || 0);
+      const maxVol = Math.max(...validVolumes, 1);
+
+      if (validPrices.length === 0) return;
+
+      const minP = Math.min(...validPrices);
+      const maxP = Math.max(...validPrices);
+      const pRange = (maxP - minP) || (maxP * 0.1) || 1;
+
+      const paddingLeft = 35;
+      const paddingRight = 15;
+      const paddingTop = 12;
+      const paddingBottom = 22;
+      const plotW = w - paddingLeft - paddingRight;
+      const plotH = h - paddingTop - paddingBottom;
+
+      const numPoints = trend.length;
+      const stepX = plotW / Math.max(1, numPoints - 1);
+
+      // Draw volume bars (Subtle Blue) behind line chart
+      trend.forEach((d, idx) => {
+        const x = paddingLeft + idx * stepX;
+        const barW = Math.min(16, stepX * 0.4);
+        const barH = (d.volume / maxVol) * (plotH * 0.55);
+        const y = h - paddingBottom - barH;
+
+        ctx.fillStyle = "rgba(96, 165, 250, 0.25)";
+        ctx.fillRect(x - barW / 2, y, barW, barH);
+      });
+
+      // Draw price line
+      const points = [];
+      trend.forEach((d, idx) => {
+        const x = paddingLeft + idx * stepX;
+        const val = d.weighted_avg > 0 ? d.weighted_avg : minP;
+        const y = h - paddingBottom - (((val - minP) / pRange) * plotH);
+        points.push({ x, y, val: d.weighted_avg, date: d.date });
+      });
+
+      const lineColor = trendPct >= 0 ? "#4ade80" : "#f87171";
+
+      const grad = ctx.createLinearGradient(0, paddingTop, 0, h - paddingBottom);
+      grad.addColorStop(0, trendPct >= 0 ? "rgba(74, 222, 128, 0.25)" : "rgba(248, 113, 113, 0.25)");
+      grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.lineTo(points[points.length - 1].x, h - paddingBottom);
+      ctx.lineTo(points[0].x, h - paddingBottom);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.strokeStyle = lineColor;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      points.forEach((pt) => {
+        ctx.fillStyle = lineColor;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = "9px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(pt.date, pt.x, h - 6);
+      });
+    }
+
     let activeMainViewMode = 'analytics';
 
     function switchMainViewMode(mode) {
@@ -2555,6 +3169,18 @@
 
     function updateArbitrageFilters() {
       renderArbitrageGrid();
+    }
+
+    function getRecent3DayAvg(item) {
+      if (!item) return 0;
+      const { trend } = getOrComputeDailyTrend(item);
+      if (trend && trend.length >= 3) {
+        const last3 = trend.slice(-3);
+        const rQty = last3.reduce((acc, d) => acc + (d.volume || 0), 0);
+        const rRev = last3.reduce((acc, d) => acc + ((d.weighted_avg || 0) * (d.volume || 0)), 0);
+        if (rQty > 0) return Math.round(rRev / rQty);
+      }
+      return item.avg_price || 0;
     }
 
     function renderArbitrageGrid() {
@@ -2607,9 +3233,9 @@
           const sourceItem = sourceItems.find(x => x.item_id === itemId);
           if (!sourceItem) continue;
 
-          // 平均相場ベースで固定比較
-          const buyPrice = sourceItem.avg_price || 0;
-          const sellPrice = homeItem.avg_price || 0;
+          // 直近3日平均相場ベースでリアルタイム比較
+          const buyPrice = getRecent3DayAvg(sourceItem) || sourceItem.avg_price || 0;
+          const sellPrice = getRecent3DayAvg(homeItem) || homeItem.avg_price || 0;
 
           if (buyPrice <= 0 || sellPrice <= 0) continue;
 
@@ -2677,16 +3303,30 @@
         const targetBuyGuide = Math.round(op.buyPrice * 1.05).toLocaleString();
         const targetSellGuide = op.sellPrice.toLocaleString();
 
-        const { trendPct } = getOrComputeDailyTrend(item);
-        const trendBadge = (trendPct > 0)
-          ? `<span style="color:#4ade80; font-weight:700; font-size:0.65rem;" title="7日平均価格推移"><i class="fa-solid fa-arrow-trend-up"></i> +${trendPct}%</span>`
-          : (trendPct < 0)
-          ? `<span style="color:#f87171; font-weight:700; font-size:0.65rem;" title="7日平均価格推移"><i class="fa-solid fa-arrow-trend-down"></i> ${trendPct}%</span>`
-          : `<span style="color:#94a3b8; font-size:0.65rem;" title="7日平均価格推移">➡️ 0%</span>`;
-        const sparklineHtml = generateSparklineSvg(item, 48, 14);
+        const sourceItems = allData[op.sourceWorld] || [];
+        const sourceItem = sourceItems.find(x => x.item_id === op.itemId) || item;
+        const sourceTrendObj = getOrComputeDailyTrend(sourceItem);
+        const sourceTrendPct = sourceTrendObj.trendPct;
+        const sourceSparkline = generateSparklineSvg(sourceItem, 44, 12);
+        const sourceBadge = (sourceTrendPct > 0)
+          ? `<span style="color:#4ade80; font-weight:700; font-size:0.64rem;"><i class="fa-solid fa-arrow-trend-up"></i> +${sourceTrendPct}%</span>`
+          : (sourceTrendPct < 0)
+          ? `<span style="color:#f87171; font-weight:700; font-size:0.64rem;"><i class="fa-solid fa-arrow-trend-down"></i> ${sourceTrendPct}%</span>`
+          : `<span style="color:#94a3b8; font-size:0.64rem;">➡️ 0%</span>`;
+
+        const homeItems = allData[arbHomeWorld] || [];
+        const homeItem = homeItems.find(x => x.item_id === op.itemId) || item;
+        const homeTrendObj = getOrComputeDailyTrend(homeItem);
+        const homeTrendPct = homeTrendObj.trendPct;
+        const homeSparkline = generateSparklineSvg(homeItem, 44, 12);
+        const homeBadge = (homeTrendPct > 0)
+          ? `<span style="color:#4ade80; font-weight:700; font-size:0.64rem;"><i class="fa-solid fa-arrow-trend-up"></i> +${homeTrendPct}%</span>`
+          : (homeTrendPct < 0)
+          ? `<span style="color:#f87171; font-weight:700; font-size:0.64rem;"><i class="fa-solid fa-arrow-trend-down"></i> ${homeTrendPct}%</span>`
+          : `<span style="color:#94a3b8; font-size:0.64rem;">➡️ 0%</span>`;
 
         return `
-          <div class="arbitrage-card" onclick="openItemModal(${op.itemId}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${arbHomeWorld}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}')" title="クリックで取引履歴と詳細を表示">
+          <div class="arbitrage-card" onclick="openArbitrageModal(${op.itemId}, '${escapeHtml(cleanTitle).replace(/'/g, "\\'")}', '${primaryIcon}', '${op.sourceDc}', '${op.sourceWorld}', '${homeDc}', '${arbHomeWorld}', '${escapeHtml(item.category_name || '').replace(/'/g, "\\'")}', ${op.unitProfit}, ${op.roiPercent})" title="クリックで仕入れ先・販売先の詳細比較を表示">
             <div class="arbitrage-card-header">
               <img class="item-icon" src="${primaryIcon}" alt="" onerror="this.src='https://v2.xivapi.com/api/asset?path=ui/icon/020000/021001_hr1.tex&format=png'">
               <div class="item-header-text">
@@ -2697,22 +3337,7 @@
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                   </a>
                 </div>
-                <div class="item-card-sub" style="display:flex; align-items:center; justify-content:space-between;">
-                  <div>
-                    <span class="category-tag">${escapeHtml(item.category_name || '一般')}</span>
-                    <span style="color:var(--accent-gold); font-weight:700;"><i class="fa-solid fa-fire"></i> 高回転金策</span>
-                  </div>
-                  <div style="display:inline-flex; align-items:center; gap:4px;">
-                    ${sparklineHtml} ${trendBadge}
-                  </div>
-                </div>
               </div>
-            </div>
-
-            <div class="arb-target-banner">
-              <span><span style="color:var(--text-muted); font-weight:600;">仕入:</span> <strong style="color:var(--accent-green);">${targetBuyGuide} G 以下</strong></span>
-              <span style="color:var(--text-muted); opacity:0.5;">➔</span>
-              <span><span style="color:var(--text-muted); font-weight:600;">販売:</span> <strong style="color:#ffb703;">${targetSellGuide} G 以上</strong></span>
             </div>
 
             <div class="arb-route-grid">
@@ -2720,12 +3345,20 @@
                 <div class="arb-box-lbl"><i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> 仕入れ先 (最安平均)</div>
                 <div class="arb-box-world">${op.sourceDc} - ${op.sourceWorld}</div>
                 <div class="arb-box-price">${op.buyPrice.toLocaleString()} G</div>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-top:4px; padding-top:4px; border-top:1px solid rgba(255,255,255,0.07);">
+                  ${sourceSparkline}
+                  ${sourceBadge}
+                </div>
               </div>
               <div class="arb-route-arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
               <div class="arb-route-box sell-box">
                 <div class="arb-box-lbl"><i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> 販売先 (ホーム平均)</div>
                 <div class="arb-box-world">${homeDc} - ${arbHomeWorld}</div>
                 <div class="arb-box-price">${op.sellPrice.toLocaleString()} G</div>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-top:4px; padding-top:4px; border-top:1px solid rgba(255,255,255,0.07);">
+                  ${homeSparkline}
+                  ${homeBadge}
+                </div>
               </div>
             </div>
 
