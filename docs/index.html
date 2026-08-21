@@ -2872,15 +2872,20 @@
         const fontSizeVal = options.summaryValFontSize || '0.65rem';
         const fontSizeVol = options.summaryVolFontSize || '0.6rem';
 
-        summaryEl.style.position = 'relative';
+        summaryEl.style.display = 'flex';
+        summaryEl.style.justifyContent = 'space-between';
+        summaryEl.style.alignItems = 'flex-start';
         summaryEl.style.width = '100%';
-        summaryEl.style.height = '38px';
+        summaryEl.style.boxSizing = 'border-box';
+        summaryEl.style.paddingLeft = `${paddingLeft}px`;
+        summaryEl.style.paddingRight = `${paddingRight}px`;
+        summaryEl.style.marginTop = '4px';
+        summaryEl.style.height = 'auto';
 
-        summaryEl.innerHTML = trend.map((d, idx) => {
-          const ptX = points[idx] ? points[idx].x : (paddingLeft + idx * stepX);
+        summaryEl.innerHTML = trend.map((d) => {
           const formattedVal = d.weighted_avg > 0 ? (d.weighted_avg >= 10000 ? Math.round(d.weighted_avg / 1000) + 'k' : d.weighted_avg.toLocaleString()) + 'G' : '-';
           return `
-            <div style="position:absolute; left:${ptX.toFixed(1)}px; transform:translateX(-50%); text-align:center; white-space:nowrap;">
+            <div style="flex:0 0 auto; width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:visible; white-space:nowrap;">
               <div style="font-weight:700; color:#94a3b8; font-size:${fontSizeDate};">${d.date}</div>
               <div style="color:var(--accent-green); font-weight:700; font-size:${fontSizeVal};">${formattedVal}</div>
               <div style="color:var(--accent-blue); font-size:${fontSizeVol};">${d.volume > 0 ? d.volume + '個' : '0個'}</div>
