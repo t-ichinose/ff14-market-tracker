@@ -2309,6 +2309,7 @@
     let allData = {};
     let activeDc = "Mana";
     let activeSortMode = "velocity";
+    let activeMainViewMode = "analytics";
     let excludeCrystals = true; // デフォルトでクリスタル類を除外
     let dcWorldsMap = {
       "Elemental": ["Carbuncle", "Gungnir", "Kujata", "Typhon", "Atomos", "Tonberry", "Aegis", "Garuda"],
@@ -3103,7 +3104,6 @@
       if (tbody) tbody.innerHTML = history.length > 0 ? history.map(buildHistoryRowHtml).join('') : '<tr><td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">データなし</td></tr>';
     }
 
-    let activeMainViewMode = 'analytics';
     function switchMainViewMode(mode) {
       activeMainViewMode = mode;
       pcMonitorItemId = null;
