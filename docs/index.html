@@ -2885,7 +2885,7 @@
         summaryEl.innerHTML = trend.map((d) => {
           const formattedVal = d.weighted_avg > 0 ? (d.weighted_avg >= 10000 ? Math.round(d.weighted_avg / 1000) + 'k' : d.weighted_avg.toLocaleString()) + 'G' : '-';
           return `
-            <div style="flex:0 0 auto; width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:visible; white-space:nowrap;">
+            <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
               <div style="font-weight:700; color:#94a3b8; font-size:${fontSizeDate};">${d.date}</div>
               <div style="color:var(--accent-green); font-weight:700; font-size:${fontSizeVal};">${formattedVal}</div>
               <div style="color:var(--accent-blue); font-size:${fontSizeVol};">${d.volume > 0 ? d.volume + '個' : '0個'}</div>
