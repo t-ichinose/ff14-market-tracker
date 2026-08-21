@@ -2761,11 +2761,13 @@
     }
 
     function renderWorldGrid(forceFull = false) {
-      const worlds = dcWorldsMap[activeDc] || [];
+      const worlds = (dcWorldsMap && dcWorldsMap[activeDc]) ? dcWorldsMap[activeDc] : ['Chocobo', 'Anima', 'Asura', 'Hades', 'Ixion', 'Masamune', 'Pandaemonium', 'Titan'];
       const grid = document.getElementById('worldGrid');
       if (!grid) return;
       
-      const renderWorlds = (window.innerWidth >= 769) ? [worlds.find(w => w === (currentModalWorld || worlds[0])) || worlds[0]] : worlds;
+      const defaultWorld = (worlds && worlds.length > 0) ? worlds[0] : 'Chocobo';
+      const targetWorld = (currentModalWorld && worlds.includes(currentModalWorld)) ? currentModalWorld : defaultWorld;
+      const renderWorlds = (window.innerWidth >= 769) ? [targetWorld] : worlds;
       
       const pcWorldSelectEl = document.getElementById('pcWorldSelect');
       if (pcWorldSelectEl) {
