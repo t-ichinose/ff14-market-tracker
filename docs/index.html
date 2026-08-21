@@ -2866,6 +2866,28 @@
         ctx.textAlign = "center";
         ctx.fillText(pt.date, pt.x, h - dateYOffset);
       });
+
+      if (summaryEl) {
+        const fontSizeDate = options.summaryDateFontSize || '0.65rem';
+        const fontSizeVal = options.summaryValFontSize || '0.65rem';
+        const fontSizeVol = options.summaryVolFontSize || '0.6rem';
+
+        summaryEl.style.position = 'relative';
+        summaryEl.style.width = '100%';
+        summaryEl.style.height = '38px';
+
+        summaryEl.innerHTML = trend.map((d, idx) => {
+          const ptX = points[idx] ? points[idx].x : (paddingLeft + idx * stepX);
+          const formattedVal = d.weighted_avg > 0 ? (d.weighted_avg >= 10000 ? Math.round(d.weighted_avg / 1000) + 'k' : d.weighted_avg.toLocaleString()) + 'G' : '-';
+          return `
+            <div style="position:absolute; left:${ptX.toFixed(1)}px; transform:translateX(-50%); text-align:center; white-space:nowrap;">
+              <div style="font-weight:700; color:#94a3b8; font-size:${fontSizeDate};">${d.date}</div>
+              <div style="color:var(--accent-green); font-weight:700; font-size:${fontSizeVal};">${formattedVal}</div>
+              <div style="color:var(--accent-blue); font-size:${fontSizeVol};">${d.volume > 0 ? d.volume + '個' : '0個'}</div>
+            </div>
+          `;
+        }).join('');
+      }
     }
 
     function populateModalWorldSelect(selectedWorld) {
@@ -4662,9 +4684,7 @@
               </div>
               <div style="width:100%; position:relative;">
                 <canvas id="pcArbSourceCanvas" style="width:100%; height:105px; display:block;"></canvas>
-                <div style="display:flex; justify-content:space-between; gap:2px; margin-top:2px; padding-top:3px; border-top:1px solid rgba(255,255,255,0.06);">
-                  ${buildTrendSummaryHtml(sourceTrendObj.trend)}
-                </div>
+                <div id="pcArbSourceSummary" style="position:relative; width:100%; height:38px; margin-top:2px; padding-top:3px; border-top:1px solid rgba(255,255,255,0.06);"></div>
               </div>
             </div>
 
@@ -4738,9 +4758,7 @@
               </div>
               <div style="width:100%; position:relative;">
                 <canvas id="pcArbHomeCanvas" style="width:100%; height:105px; display:block;"></canvas>
-                <div style="display:flex; justify-content:space-between; gap:2px; margin-top:2px; padding-top:3px; border-top:1px solid rgba(255,255,255,0.06);">
-                  ${buildTrendSummaryHtml(homeTrendObj.trend)}
-                </div>
+                <div id="pcArbHomeSummary" style="position:relative; width:100%; height:38px; margin-top:2px; padding-top:3px; border-top:1px solid rgba(255,255,255,0.06);"></div>
               </div>
             </div>
 
@@ -4779,9 +4797,9 @@
 
       wrapper.innerHTML = html;
 
-      // 両窓の7日間相場推移チャートを描画 (パディングと高さを最適調整し見切れゼロへ)
-      drawTrendChart('pcArbSourceCanvas', null, sourceTrendObj.trend, sourceTrendObj.trendPct, { height: 105, paddingLeft: 20, paddingRight: 10, paddingTop: 12, paddingBottom: 16 });
-      drawTrendChart('pcArbHomeCanvas', null, homeTrendObj.trend, homeTrendObj.trendPct, { height: 105, paddingLeft: 20, paddingRight: 10, paddingTop: 12, paddingBottom: 16 });
+      // 両窓の7日間相場推移チャートを描画 (プロット点pt.xの直上直下に100%縦同期)
+      drawTrendChart('pcArbSourceCanvas', 'pcArbSourceSummary', sourceTrendObj.trend, sourceTrendObj.trendPct, { height: 105, paddingLeft: 20, paddingRight: 10, paddingTop: 12, paddingBottom: 16 });
+      drawTrendChart('pcArbHomeCanvas', 'pcArbHomeSummary', homeTrendObj.trend, homeTrendObj.trendPct, { height: 105, paddingLeft: 20, paddingRight: 10, paddingTop: 12, paddingBottom: 16 });
     }
 
     function updateArbitrageFilters() {
