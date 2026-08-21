@@ -2785,13 +2785,14 @@
       const maxP = Math.max(...validPrices);
       const pRange = (maxP - minP) || (maxP * 0.1) || 1;
 
-      const paddingLeft = options.paddingLeft || 30;
-      const paddingRight = options.paddingRight || 12;
+      const numPoints = trend.length;
+      const colWidthHalf = w / (2 * Math.max(1, numPoints));
+      const paddingLeft = options.paddingLeft || colWidthHalf;
+      const paddingRight = options.paddingRight || colWidthHalf;
       const paddingTop = options.paddingTop || 12;
       const paddingBottom = options.paddingBottom || 18;
       const plotW = w - paddingLeft - paddingRight;
       const plotH = h - paddingTop - paddingBottom;
-      const numPoints = trend.length;
       const stepX = plotW / Math.max(1, numPoints - 1);
 
       if (options.drawGrid) {
@@ -2872,23 +2873,23 @@
         const fontSizeVal = options.summaryValFontSize || '0.65rem';
         const fontSizeVol = options.summaryVolFontSize || '0.6rem';
 
+        summaryEl.style.position = 'static';
         summaryEl.style.display = 'flex';
         summaryEl.style.justifyContent = 'space-between';
-        summaryEl.style.alignItems = 'flex-start';
+        summaryEl.style.alignItems = 'center';
         summaryEl.style.width = '100%';
         summaryEl.style.boxSizing = 'border-box';
-        summaryEl.style.paddingLeft = `${paddingLeft}px`;
-        summaryEl.style.paddingRight = `${paddingRight}px`;
+        summaryEl.style.paddingLeft = '0px';
+        summaryEl.style.paddingRight = '0px';
         summaryEl.style.marginTop = '4px';
-        summaryEl.style.height = 'auto';
 
         summaryEl.innerHTML = trend.map((d) => {
           const formattedVal = d.weighted_avg > 0 ? (d.weighted_avg >= 10000 ? Math.round(d.weighted_avg / 1000) + 'k' : d.weighted_avg.toLocaleString()) + 'G' : '-';
           return `
-            <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
-              <div style="font-weight:700; color:#94a3b8; font-size:${fontSizeDate};">${d.date}</div>
-              <div style="color:var(--accent-green); font-weight:700; font-size:${fontSizeVal};">${formattedVal}</div>
-              <div style="color:var(--accent-blue); font-size:${fontSizeVol};">${d.volume > 0 ? d.volume + '個' : '0個'}</div>
+            <div style="flex:1; min-width:0; text-align:center; white-space:nowrap; overflow:hidden;">
+              <span style="font-weight:700; color:#94a3b8; font-size:${fontSizeDate}; display:block;">${d.date}</span>
+              <span style="color:var(--accent-green); font-weight:700; font-size:${fontSizeVal}; display:block; margin:1px 0;">${formattedVal}</span>
+              <span style="color:var(--accent-blue); font-size:${fontSizeVol}; display:block;">${d.volume > 0 ? d.volume + '個' : '0個'}</span>
             </div>
           `;
         }).join('');
@@ -2926,7 +2927,7 @@
       }
 
       drawTrendChart('modalTrendCanvas', 'modalTrendSummary', trend, trendPct, {
-        defaultWidth: 700, height: 130, paddingLeft: 45, paddingRight: 20, paddingTop: 15, paddingBottom: 25,
+        defaultWidth: 700, height: 130, paddingTop: 15, paddingBottom: 25,
         summaryMinW: '55px', summaryDateFontSize: '0.7rem', summaryValFontSize: '0.75rem', summaryVolFontSize: '0.64rem',
         drawGrid: true, maxBarW: 18, barHFactor: 0.6, lineWidth: 2.5, dotRadius: 3.5, dateYOffset: 8, dateFontSize: '10px'
       });
@@ -3435,7 +3436,7 @@
       }
 
       drawTrendChart('pcMonitorCanvas', 'pcMonitorTrendSummary', trend, trendPct, {
-        defaultWidth: 680, height: 120, paddingLeft: 45, paddingRight: 20, paddingTop: 15, paddingBottom: 25,
+        defaultWidth: 680, height: 120, paddingTop: 15, paddingBottom: 25,
         summaryMinW: '50px', summaryDateFontSize: '0.68rem', summaryValFontSize: '0.72rem', summaryVolFontSize: '0.62rem',
         drawGrid: true, maxBarW: 16, barHFactor: 0.6, lineWidth: 2.2, dotRadius: 3, dateYOffset: 8, dateFontSize: '10px'
       });
@@ -3692,130 +3693,7 @@
       `;
     }
 
-    function drawTrendChart(canvasId, summaryId, trend, trendPct, options = {}) {
-      const canvas = document.getElementById(canvasId);
-      const summaryEl = document.getElementById(summaryId);
-      if (!canvas) return;
 
-      const ctx = canvas.getContext('2d');
-      const defaultW = options.defaultWidth || 580;
-      const h = canvas.height = options.height || 120;
-      const w = canvas.width = canvas.parentElement ? (canvas.parentElement.offsetWidth || defaultW) : defaultW;
-
-      ctx.clearRect(0, 0, w, h);
-
-      if (!trend || trend.length === 0) {
-        if (summaryEl) summaryEl.innerHTML = "";
-        return;
-      }
-
-      if (summaryEl) {
-        const minW = options.summaryMinW || '45px';
-        const fontSizeDate = options.summaryDateFontSize || '0.65rem';
-        const fontSizeVal = options.summaryValFontSize || '0.65rem';
-        const fontSizeVol = options.summaryVolFontSize || '0.6rem';
-
-        summaryEl.innerHTML = trend.map(d => `
-          <div style="flex:1; text-align:center; min-width:${minW};">
-            <div style="font-weight:700; color:#94a3b8; font-size:${fontSizeDate};">${d.date}</div>
-            <div style="color:var(--accent-green); font-weight:700; font-size:${fontSizeVal};">${d.weighted_avg > 0 ? d.weighted_avg.toLocaleString() + 'G' : '-'}</div>
-            <div style="color:var(--accent-blue); font-size:${fontSizeVol};">${d.volume > 0 ? d.volume + '個' : '0個'}</div>
-          </div>
-        `).join('');
-      }
-
-      const validPrices = trend.map(d => d.weighted_avg || 0).filter(p => p > 0);
-      const validVolumes = trend.map(d => d.volume || 0);
-      const maxVol = Math.max(...validVolumes, 1);
-
-      if (validPrices.length === 0) return;
-
-      const minP = Math.min(...validPrices);
-      const maxP = Math.max(...validPrices);
-      const pRange = (maxP - minP) || (maxP * 0.1) || 1;
-
-      const paddingLeft = options.paddingLeft || 35;
-      const paddingRight = options.paddingRight || 15;
-      const paddingTop = options.paddingTop || 12;
-      const paddingBottom = options.paddingBottom || 22;
-      const plotW = w - paddingLeft - paddingRight;
-      const plotH = h - paddingTop - paddingBottom;
-      const numPoints = trend.length;
-      const stepX = plotW / Math.max(1, numPoints - 1);
-
-      if (options.drawGrid) {
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(paddingLeft, paddingTop);
-        ctx.lineTo(w - paddingRight, paddingTop);
-        ctx.moveTo(paddingLeft, paddingTop + plotH / 2);
-        ctx.lineTo(w - paddingRight, paddingTop + plotH / 2);
-        ctx.moveTo(paddingLeft, h - paddingBottom);
-        ctx.lineTo(w - paddingRight, h - paddingBottom);
-        ctx.stroke();
-      }
-
-      trend.forEach((d, idx) => {
-        const x = paddingLeft + idx * stepX;
-        const barW = Math.min(options.maxBarW || 16, stepX * 0.4);
-        const barH = (d.volume / maxVol) * (plotH * (options.barHFactor || 0.55));
-        const y = h - paddingBottom - barH;
-
-        ctx.fillStyle = "rgba(96, 165, 250, 0.25)";
-        ctx.fillRect(x - barW / 2, y, barW, barH);
-      });
-
-      const points = [];
-      trend.forEach((d, idx) => {
-        const x = paddingLeft + idx * stepX;
-        const val = d.weighted_avg > 0 ? d.weighted_avg : minP;
-        const y = h - paddingBottom - (((val - minP) / pRange) * plotH);
-        points.push({ x, y, val: d.weighted_avg, date: d.date });
-      });
-
-      const lineColor = trendPct >= 0 ? "#4ade80" : "#f87171";
-
-      const grad = ctx.createLinearGradient(0, paddingTop, 0, h - paddingBottom);
-      grad.addColorStop(0, trendPct >= 0 ? "rgba(74, 222, 128, 0.25)" : "rgba(248, 113, 113, 0.25)");
-      grad.addColorStop(1, "rgba(0, 0, 0, 0)");
-
-      ctx.beginPath();
-      ctx.moveTo(points[0].x, points[0].y);
-      for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x, points[i].y);
-      }
-      ctx.lineTo(points[points.length - 1].x, h - paddingBottom);
-      ctx.lineTo(points[0].x, h - paddingBottom);
-      ctx.closePath();
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.moveTo(points[0].x, points[0].y);
-      for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x, points[i].y);
-      }
-      ctx.strokeStyle = lineColor;
-      ctx.lineWidth = options.lineWidth || 2;
-      ctx.stroke();
-
-      const dotRadius = options.dotRadius || 3;
-      const dateYOffset = options.dateYOffset || 6;
-      const dateFontSize = options.dateFontSize || "9px";
-
-      points.forEach((pt) => {
-        ctx.fillStyle = lineColor;
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, dotRadius, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = "#94a3b8";
-        ctx.font = `${dateFontSize} sans-serif`;
-        ctx.textAlign = "center";
-        ctx.fillText(pt.date, pt.x, h - dateYOffset);
-      });
-    }
 
     function populateModalWorldSelect(selectedWorld) {
       const select = document.getElementById('modalWorldSelect');
@@ -4561,13 +4439,21 @@
 
     function buildTrendSummaryHtml(trend) {
       if (!trend || trend.length === 0) return '<div style="color:var(--text-muted); font-size:0.65rem; text-align:center; width:100%;">データなし</div>';
-      return trend.map(d => `
-        <div style="text-align:center; flex:1;">
-          <div style="font-size:0.6rem; color:#94a3b8;">${d.dateStr ? d.dateStr.slice(5) : '-'}</div>
-          <div style="font-size:0.68rem; font-weight:700; color:#38bdf8;">${d.weighted_avg > 0 ? (d.weighted_avg >= 100000 ? Math.round(d.weighted_avg/1000) + 'k' : d.weighted_avg.toLocaleString()) : '-'}</div>
-          <div style="font-size:0.6rem; color:var(--accent-gold);">${d.volume || 0}個</div>
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:center; width:100%; box-sizing:border-box; padding:0 10px 0 20px;">
+          ${trend.map(d => {
+            const formattedVal = d.weighted_avg > 0 ? (d.weighted_avg >= 10000 ? Math.round(d.weighted_avg / 1000) + 'k' : d.weighted_avg.toLocaleString()) + 'G' : '-';
+            const dateText = d.dateStr ? d.dateStr.slice(5) : (d.date || '-');
+            return `
+              <div style="flex:1; min-width:0; text-align:center; white-space:nowrap; overflow:hidden;">
+                <span style="font-weight:700; color:#94a3b8; font-size:0.65rem; display:block;">${dateText}</span>
+                <span style="color:var(--accent-green); font-weight:700; font-size:0.65rem; display:block; margin:1px 0;">${formattedVal}</span>
+                <span style="color:var(--accent-blue); font-size:0.6rem; display:block;">${d.volume || 0}個</span>
+              </div>
+            `;
+          }).join('')}
         </div>
-      `).join('');
+      `;
     }
 
     function selectPcArbitrageItem(itemId, itemTitle, itemIcon, sourceWorld, homeWorld, categoryName, unitProfit, roiPercent) {
@@ -4802,9 +4688,9 @@
 
       wrapper.innerHTML = html;
 
-      // 両窓の7日間相場推移チャートを描画 (プロット点pt.xの直上直下に100%縦同期)
-      drawTrendChart('pcArbSourceCanvas', 'pcArbSourceSummary', sourceTrendObj.trend, sourceTrendObj.trendPct, { height: 105, paddingLeft: 20, paddingRight: 10, paddingTop: 12, paddingBottom: 16 });
-      drawTrendChart('pcArbHomeCanvas', 'pcArbHomeSummary', homeTrendObj.trend, homeTrendObj.trendPct, { height: 105, paddingLeft: 20, paddingRight: 10, paddingTop: 12, paddingBottom: 16 });
+      // 両窓の7日間相場推移チャートを描画 (自動数学パディングで左右完全垂直同期)
+      drawTrendChart('pcArbSourceCanvas', 'pcArbSourceSummary', sourceTrendObj.trend, sourceTrendObj.trendPct, { height: 105, paddingTop: 12, paddingBottom: 16 });
+      drawTrendChart('pcArbHomeCanvas', 'pcArbHomeSummary', homeTrendObj.trend, homeTrendObj.trendPct, { height: 105, paddingTop: 12, paddingBottom: 16 });
     }
 
     function updateArbitrageFilters() {
