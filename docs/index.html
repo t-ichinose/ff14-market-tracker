@@ -4511,6 +4511,7 @@
               <span style="font-size:0.88rem; color:var(--accent-green); font-weight:800; display:inline-flex; align-items:center; gap:5px;">
                 <i class="fa-solid fa-cart-shopping"></i> 仕入れ先: ${sourceWorld} <span style="font-size:0.72rem; color:#94a3b8; font-weight:normal;">(${sourceDc})</span>
               </span>
+              <span style="font-size:0.72rem; color:#94a3b8;">目標仕入値: <strong style="color:#c084fc; font-size:0.85rem;">${sourceBuyPrice > 0 ? sourceBuyPrice.toLocaleString() + 'G' : '-'}</strong></span>
             </div>
 
             <!-- 仕入れ先 4枚の指標カード -->
@@ -4520,7 +4521,7 @@
                 <div style="font-size:0.85rem; font-weight:800; color:var(--accent-green); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${sourceItem && sourceItem.min_price ? sourceItem.min_price.toLocaleString() + 'G' : '-'}</div>
               </div>
               <div style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.08); border-left:4px solid #c084fc; border-radius:8px; padding:6px 8px;">
-                <div style="font-size:0.62rem; color:#94a3b8; margin-bottom:2px;">直近3日平均</div>
+                <div style="font-size:0.62rem; color:#94a3b8; margin-bottom:2px;">目標仕入値 (3日平均)</div>
                 <div style="font-size:0.85rem; font-weight:800; color:#c084fc; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${sourceBuyPrice > 0 ? sourceBuyPrice.toLocaleString() + 'G' : '-'}</div>
               </div>
               <div style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.08); border-left:4px solid #38bdf8; border-radius:8px; padding:6px 8px;">
@@ -4586,6 +4587,7 @@
               <span style="font-size:0.88rem; color:var(--accent-blue); font-weight:800; display:inline-flex; align-items:center; gap:5px;">
                 <i class="fa-solid fa-house"></i> 販売先(ホーム): ${homeWorld} <span style="font-size:0.72rem; color:#94a3b8; font-weight:normal;">(${homeDc})</span>
               </span>
+              <span style="font-size:0.72rem; color:#94a3b8;">目標販売値: <strong style="color:#ffb703; font-size:0.85rem;">${homeSellPrice > 0 ? homeSellPrice.toLocaleString() + 'G' : '-'}</strong></span>
             </div>
 
             <!-- 販売先 4枚の指標カード -->
@@ -4595,7 +4597,7 @@
                 <div style="font-size:0.85rem; font-weight:800; color:var(--accent-green); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${homeItem && homeItem.min_price ? homeItem.min_price.toLocaleString() + 'G' : '-'}</div>
               </div>
               <div style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.08); border-left:4px solid #c084fc; border-radius:8px; padding:6px 8px;">
-                <div style="font-size:0.62rem; color:#94a3b8; margin-bottom:2px;">直近3日平均</div>
+                <div style="font-size:0.62rem; color:#94a3b8; margin-bottom:2px;">目標販売値 (3日平均)</div>
                 <div style="font-size:0.85rem; font-weight:800; color:#c084fc; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${homeSellPrice > 0 ? homeSellPrice.toLocaleString() + 'G' : '-'}</div>
               </div>
               <div style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.08); border-left:4px solid #38bdf8; border-radius:8px; padding:6px 8px;">
@@ -4894,9 +4896,9 @@
 
             <div class="arb-route-grid">
               <div class="arb-route-box buy-box">
-                <div class="arb-box-lbl"><i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> 仕入れ先 (最安平均)</div>
+                <div class="arb-box-lbl"><i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> 仕入れ先 (目標値)</div>
                 <div class="arb-box-world">${op.sourceDc} - ${op.sourceWorld}</div>
-                <div class="arb-box-price">${op.buyPrice.toLocaleString()} G</div>
+                <div class="arb-box-price" style="font-size:0.82rem;"><span style="font-size:0.62rem; color:#94a3b8; font-weight:normal;">目標仕入: </span>${op.buyPrice.toLocaleString()} G</div>
                 <div style="display:flex; align-items:center; justify-content:space-between; margin-top:4px; padding-top:4px; border-top:1px solid rgba(255,255,255,0.07);">
                   ${sourceSparkline}
                   ${sourceBadge}
@@ -4904,9 +4906,9 @@
               </div>
               <div class="arb-route-arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
               <div class="arb-route-box sell-box">
-                <div class="arb-box-lbl"><i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> 販売先 (ホーム平均)</div>
+                <div class="arb-box-lbl"><i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> 販売先 (目標値)</div>
                 <div class="arb-box-world">${homeDc} - ${arbHomeWorld}</div>
-                <div class="arb-box-price">${op.sellPrice.toLocaleString()} G</div>
+                <div class="arb-box-price" style="font-size:0.82rem;"><span style="font-size:0.62rem; color:#94a3b8; font-weight:normal;">目標販売: </span>${op.sellPrice.toLocaleString()} G</div>
                 <div style="display:flex; align-items:center; justify-content:space-between; margin-top:4px; padding-top:4px; border-top:1px solid rgba(255,255,255,0.07);">
                   ${homeSparkline}
                   ${homeBadge}
