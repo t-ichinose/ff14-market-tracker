@@ -176,9 +176,9 @@
         border: 1px solid var(--accent-blue);
         border-radius: 8px;
         color: #ffffff;
-        font-size: 0.92rem;
+        font-size: 0.78rem;
         font-weight: 700;
-        padding: 4px 8px;
+        padding: 3px 6px;
         outline: none;
         cursor: pointer;
         box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
@@ -2443,21 +2443,88 @@
     let pcArbitrageSearchTerm = '';
     let analyticsSearchTimer = null;
     let arbitrageSearchTimer = null;
+    let isComposing = false;
+
+    function preserveAndRestoreFocus(fn) {
+      const activeEl = document.activeElement;
+      const activeId = activeEl ? activeEl.id : null;
+      const startPos = activeEl && typeof activeEl.selectionStart === 'number' ? activeEl.selectionStart : null;
+      const endPos = activeEl && typeof activeEl.selectionEnd === 'number' ? activeEl.selectionEnd : null;
+
+      fn();
+
+      if (activeId && ['pcAnalyticsSearchInput', 'pcArbitrageSearchInput', 'searchInput', 'arbSearchInput'].includes(activeId)) {
+        requestAnimationFrame(() => {
+          const restoredInput = document.getElementById(activeId);
+          if (restoredInput) {
+            restoredInput.focus();
+            if (startPos !== null && endPos !== null) {
+              try {
+                restoredInput.setSelectionRange(startPos, endPos);
+              } catch (e) {}
+            }
+          }
+        });
+      }
+    }
+
+    function setupSearchImeListeners() {
+      ['pcAnalyticsSearchInput', 'pcArbitrageSearchInput', 'searchInput', 'arbSearchInput'].forEach(id => {
+        const input = document.getElementById(id);
+        if (!input || input.dataset.imeBound) return;
+        input.dataset.imeBound = "true";
+
+        input.addEventListener('compositionstart', () => {
+          isComposing = true;
+        });
+
+        input.addEventListener('compositionend', (e) => {
+          isComposing = false;
+          if (id === 'pcAnalyticsSearchInput' || id === 'searchInput') {
+            onSearchInput(e.target.value);
+          } else {
+            onArbSearchInput(e.target.value);
+          }
+        });
+      });
+    }
 
     function onSearchInput(val) {
       pcAnalyticsSearchTerm = val.toLowerCase().trim();
+      if (isComposing) return;
       clearTimeout(analyticsSearchTimer);
       analyticsSearchTimer = setTimeout(() => {
-        renderWorldGrid();
-      }, 150);
+        preserveAndRestoreFocus(() => {
+          renderWorldGrid();
+        });
+        setupSearchImeListeners();
+      }, 180);
+    }
+
+    function clearPcAnalyticsSearch() {
+      pcAnalyticsSearchTerm = '';
+      const input = document.getElementById('pcAnalyticsSearchInput') || document.getElementById('searchInput');
+      if (input) input.value = '';
+      renderWorldGrid();
     }
 
     function onArbSearchInput(val) {
       pcArbitrageSearchTerm = val.toLowerCase().trim();
+      if (isComposing) return;
       clearTimeout(arbitrageSearchTimer);
       arbitrageSearchTimer = setTimeout(() => {
-        renderArbitrageGrid();
-      }, 150);
+        preserveAndRestoreFocus(() => {
+          renderArbitrageGrid();
+        });
+        setupSearchImeListeners();
+      }, 180);
+    }
+
+    function clearPcArbitrageSearch() {
+      pcArbitrageSearchTerm = '';
+      const input = document.getElementById('pcArbitrageSearchInput') || document.getElementById('arbSearchInput');
+      if (input) input.value = '';
+      renderArbitrageGrid();
     }
 
 
@@ -2512,6 +2579,7 @@
         if (loader) loader.style.display = 'none';
 
         renderWorldGrid();
+        setupSearchImeListeners();
 
       } catch (err) {
         console.error("loadData error:", err);
@@ -2873,8 +2941,8 @@
           sortedItems = [...worldItems].sort((a, b) => (b.sale_velocity || 0) - (a.sale_velocity || 0));
         }
 
-        // 検索時は全件(最大100件)ヒット表示、通常時は上位30件表示！
-        const displayItems = activeSearch ? sortedItems.slice(0, 100) : sortedItems.slice(0, 30);
+        // 検索時はヒット全件(無制限)表示、通常時は上位30件表示！
+        const displayItems = activeSearch ? sortedItems : sortedItems.slice(0, 30);
 
         const cardListHtml = displayItems.length === 0 ? `
           <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.82rem;">
@@ -2981,11 +3049,17 @@
               </button>
             </div>
             <!-- 2行目: ワールド選択ラベル ＋ ドロップダウン -->
-            <div style="display: flex; align-items: center; gap: 8px; width: 100%;">
+            <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-bottom: 6px;">
               <span style="font-size: 0.78rem; font-weight: 700; color: #94a3b8; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;">
                 <i class="fa-solid fa-globe" style="color: var(--accent-blue);"></i> ワールド選択:
               </span>
               ${pcSelectHtml}
+            </div>
+            <!-- 3行目: ワールド選択直下の全3200品目検索ボックス -->
+            <div style="position: relative; width: 100%;">
+              <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.82rem; color: #94a3b8;"></i>
+              <input type="text" id="pcAnalyticsSearchInput" class="search-input" value="${pcAnalyticsSearchTerm}" placeholder="全3200品目から検索 (名前/ID)..." style="width: 100%; padding: 6px 28px 6px 30px; font-size: 0.88rem; font-weight: 600; border-radius: 8px;" oninput="onSearchInput(this.value)">
+              ${pcAnalyticsSearchTerm ? `<i class="fa-solid fa-xmark" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; color: #94a3b8; cursor: pointer;" onclick="clearPcAnalyticsSearch()"></i>` : ''}
             </div>
           </div>
         `;
@@ -4724,7 +4798,7 @@
           }
           optGroups += '</optgroup>';
         }
-        const pcHomeSelectHtml = '<select class="pc-world-select" id="arbHomeWorldSelect" style="flex:1; width:100%; font-size:0.82rem;" onchange="updateArbitrageFilters()">' + optGroups + '</select>';
+        const pcHomeSelectHtml = '<select class="pc-world-select" id="arbHomeWorldSelect" style="flex:1; width:100%; font-size:0.78rem;" onchange="updateArbitrageFilters()">' + optGroups + '</select>';
 
         const pcArbHeaderHtml = `
           <div class="left-pane-header">
@@ -4753,11 +4827,17 @@
               </button>
             </div>
             <!-- 2行目: ホームワールド選択ラベル ＋ ドロップダウン -->
-            <div style="display: flex; align-items: center; gap: 8px; width: 100%;">
+            <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-bottom: 6px;">
               <span style="font-size: 0.78rem; font-weight: 700; color: #94a3b8; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;">
                 <i class="fa-solid fa-house-user" style="color: var(--accent-gold);"></i> ホーム:
               </span>
               ${pcHomeSelectHtml}
+            </div>
+            <!-- 3行目: ホームワールド選択直下の全3200品目検索ボックス -->
+            <div style="position: relative; width: 100%;">
+              <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.82rem; color: #94a3b8;"></i>
+              <input type="text" id="pcArbitrageSearchInput" class="search-input" value="${pcArbitrageSearchTerm}" placeholder="全3200品目から検索 (名前/ID)..." style="width: 100%; padding: 6px 28px 6px 30px; font-size: 0.88rem; font-weight: 600; border-radius: 8px;" oninput="onArbSearchInput(this.value)">
+              ${pcArbitrageSearchTerm ? `<i class="fa-solid fa-xmark" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; color: #94a3b8; cursor: pointer;" onclick="clearPcArbitrageSearch()"></i>` : ''}
             </div>
           </div>
         `;
@@ -4803,6 +4883,10 @@
 
       for (const [itemId, homeItem] of homeItemMap.entries()) {
         if (excludeCrystals && isCrystalItem(homeItem)) continue;
+        if (pcArbitrageSearchTerm) {
+          const title = (homeItem.item_name || '').toLowerCase();
+          if (!title.includes(pcArbitrageSearchTerm) && !String(itemId).includes(pcArbitrageSearchTerm)) continue;
+        }
 
         let bestOp = null;
         let maxProfit = -1;
