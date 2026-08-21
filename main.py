@@ -167,14 +167,16 @@ def export_web_json(conn, output_path="docs/data.json"):
         sales_by_item_world.setdefault((iid, wname), []).append({"price": price, "qty": qty, "ts": ts})
         
         hist_list = history_by_item_world.setdefault((iid, wname), [])
-        if len(hist_list) < 50:
-            hist_list.append({
+        if len(hist_list) < 20:
+            item_hist = {
                 "price": price,
                 "qty": qty,
                 "hq": bool(hq),
-                "ts": ts,
-                "buyer": buyer or ""
-            })
+                "ts": ts
+            }
+            if buyer:
+                item_hist["buyer"] = buyer
+            hist_list.append(item_hist)
 
     # 1. Compute Global Median & Noise Bounds for each item_id across all 32 worlds
     global_bounds_by_item = {}
@@ -235,7 +237,7 @@ def export_web_json(conn, output_path="docs/data.json"):
         
         # Also clean history list for modal display
         hist_raw = history_by_item_world.get((iid, wname), [])
-        clean_hist = [h for h in hist_raw if lower_bound <= h["price"] <= upper_bound]
+        clean_hist = [h for h in hist_raw if lower_bound <= h["price"] <= upper_bound][:20]
 
         if not clean_items:
             # If all transactions in this world were RMT/outliers, treat world as having 0 valid sales

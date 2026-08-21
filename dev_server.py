@@ -26,7 +26,7 @@ def run_dev_server():
         try:
             socketserver.TCPServer.allow_reuse_address = True
             with socketserver.TCPServer(("127.0.0.1", port), NoCacheHTTPRequestHandler) as httpd:
-                print(f"Zero-Cache Dev Server running at http://127.0.0.1:{port} (Localhost Only)")
+                print(f"Private Localhost Server running at http://127.0.0.1:{port} (Strictly Isolated to this PC)")
                 httpd.serve_forever()
         except OSError as e:
             if "Address already in use" in str(e) or e.errno == 10048:  # 10048 = Windows WSAEADDRINUSE
