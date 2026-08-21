@@ -2529,6 +2529,23 @@
 
 
 
+    const USER_WORLD_KEY = 'ff14_user_home_world';
+
+    function getSavedUserHomeWorld() {
+      try {
+        return localStorage.getItem(USER_WORLD_KEY) || null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function saveUserHomeWorld(worldName) {
+      if (!worldName) return;
+      try {
+        localStorage.setItem(USER_WORLD_KEY, worldName);
+      } catch (e) {}
+    }
+
     function escapeHtml(str) {
       if (!str) return '';
       return String(str).replace(/[&<>"']/g, function(m) {
@@ -2573,6 +2590,13 @@
         allData = data.data || {};
         if (data.dc_worlds) {
           dcWorldsMap = data.dc_worlds;
+        }
+
+        const savedHomeWorld = getSavedUserHomeWorld();
+        if (savedHomeWorld) {
+          currentModalWorld = savedHomeWorld;
+          const foundDc = findDcForWorld(savedHomeWorld);
+          if (foundDc) activeDc = foundDc;
         }
 
         const loader = document.getElementById('loadingOverlay');
@@ -3104,6 +3128,7 @@
 
     function onPcWorldSelectChange(selectedWorld) {
       currentModalWorld = selectedWorld;
+      saveUserHomeWorld(selectedWorld);
       const foundDc = findDcForWorld(selectedWorld);
       if (foundDc) activeDc = foundDc;
       renderWorldGrid();
@@ -4434,12 +4459,13 @@
     function populateArbitrageHomeWorldSelect() {
       const select = document.getElementById('arbHomeWorldSelect');
       const drawerSelect = document.getElementById('drawerArbHomeSelect');
+      const savedHomeWorld = getSavedUserHomeWorld() || 'Chocobo';
 
       let html = '';
       for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
         html += `<optgroup label="[ ${dc} DC ]">`;
         for (const w of worlds) {
-          const isSelected = (w === 'Chocobo') ? 'selected' : '';
+          const isSelected = (w === savedHomeWorld) ? 'selected' : '';
           html += `<option value="${w}" ${isSelected}>${dc} - ${w}</option>`;
         }
         html += `</optgroup>`;
@@ -4759,6 +4785,11 @@
     }
 
     function updateArbitrageFilters() {
+      const homeWorldSelect = document.getElementById('arbHomeWorldSelect');
+      if (homeWorldSelect && homeWorldSelect.value) {
+        saveUserHomeWorld(homeWorldSelect.value);
+        currentModalWorld = homeWorldSelect.value;
+      }
       renderArbitrageGrid();
     }
 
