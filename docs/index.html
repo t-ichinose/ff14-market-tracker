@@ -2785,10 +2785,10 @@
       const maxP = Math.max(...validPrices);
       const pRange = (maxP - minP) || (maxP * 0.1) || 1;
 
-      const paddingLeft = options.paddingLeft || 35;
-      const paddingRight = options.paddingRight || 15;
+      const paddingLeft = options.paddingLeft || 30;
+      const paddingRight = options.paddingRight || 12;
       const paddingTop = options.paddingTop || 12;
-      const paddingBottom = options.paddingBottom || 22;
+      const paddingBottom = options.paddingBottom || 18;
       const plotW = w - paddingLeft - paddingRight;
       const plotH = h - paddingTop - paddingBottom;
       const numPoints = trend.length;
@@ -4661,8 +4661,8 @@
                 ${sourceBadge}
               </div>
               <div style="width:100%; position:relative;">
-                <canvas id="pcArbSourceCanvas" style="width:100%; height:95px; display:block;"></canvas>
-                <div style="display:flex; justify-content:space-between; gap:2px; margin-top:4px; padding-top:4px; border-top:1px solid rgba(255,255,255,0.06);">
+                <canvas id="pcArbSourceCanvas" style="width:100%; height:105px; display:block;"></canvas>
+                <div style="display:flex; justify-content:space-between; gap:2px; margin-top:2px; padding-top:3px; border-top:1px solid rgba(255,255,255,0.06);">
                   ${buildTrendSummaryHtml(sourceTrendObj.trend)}
                 </div>
               </div>
@@ -4737,8 +4737,8 @@
                 ${homeBadge}
               </div>
               <div style="width:100%; position:relative;">
-                <canvas id="pcArbHomeCanvas" style="width:100%; height:95px; display:block;"></canvas>
-                <div style="display:flex; justify-content:space-between; gap:2px; margin-top:4px; padding-top:4px; border-top:1px solid rgba(255,255,255,0.06);">
+                <canvas id="pcArbHomeCanvas" style="width:100%; height:105px; display:block;"></canvas>
+                <div style="display:flex; justify-content:space-between; gap:2px; margin-top:2px; padding-top:3px; border-top:1px solid rgba(255,255,255,0.06);">
                   ${buildTrendSummaryHtml(homeTrendObj.trend)}
                 </div>
               </div>
@@ -4779,9 +4779,9 @@
 
       wrapper.innerHTML = html;
 
-      // 両窓の7日間相場推移チャートを描画 (市場タブと同仕様高さ90px)
-      drawTrendChart('pcArbSourceCanvas', null, sourceTrendObj.trend, sourceTrendObj.trendPct, { height: 90, paddingLeft: 22, paddingRight: 8, paddingTop: 6, paddingBottom: 14 });
-      drawTrendChart('pcArbHomeCanvas', null, homeTrendObj.trend, homeTrendObj.trendPct, { height: 90, paddingLeft: 22, paddingRight: 8, paddingTop: 6, paddingBottom: 14 });
+      // 両窓の7日間相場推移チャートを描画 (パディングと高さを最適調整し見切れゼロへ)
+      drawTrendChart('pcArbSourceCanvas', null, sourceTrendObj.trend, sourceTrendObj.trendPct, { height: 105, paddingLeft: 20, paddingRight: 10, paddingTop: 12, paddingBottom: 16 });
+      drawTrendChart('pcArbHomeCanvas', null, homeTrendObj.trend, homeTrendObj.trendPct, { height: 105, paddingLeft: 20, paddingRight: 10, paddingTop: 12, paddingBottom: 16 });
     }
 
     function updateArbitrageFilters() {
