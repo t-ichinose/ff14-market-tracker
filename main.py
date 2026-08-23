@@ -53,6 +53,10 @@ def init_db(db_path="data/market_data.db"):
 
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_sales_lookup ON sales_history (item_id, world_name, timestamp);")
 
+    # Prune sales history older than 7 days
+    seven_days_ago_ts = int(time.time()) - (7 * 86400)
+    cursor.execute("DELETE FROM sales_history WHERE timestamp < ?", (seven_days_ago_ts,))
+
     conn.commit()
     return conn
 
