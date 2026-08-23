@@ -4,6 +4,7 @@ import json
 import os
 import sys
 import time
+import gzip
 from datetime import datetime, timezone, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -129,7 +130,7 @@ def fetch_single_dc_data(dc_name, target_ids):
     print(f"[API ERROR] Failed to fetch chunk for DC {dc_name} after 3 attempts.", flush=True)
     return dc_name, {}
 
-def export_web_json(conn, output_path="docs/data.json"):
+def export_web_json(conn, output_path="docs/data.json.gz"):
     """
     Exports full web JSON directly from sales_history database.
     Calculates card stats and recent 15 transaction history for all worlds/DCs.
@@ -203,10 +204,10 @@ def export_web_json(conn, output_path="docs/data.json"):
         elif g_med <= 100_000:
             upper_bound = 10.0 * g_med
         else:
-            upper_bound = max(300_000_000.0, 5.0 * g_med)
+            upper_bound = 5.0 * g_med
 
-        # Lower bound (1G dump sales / 1/10th digit typo error sales filter)
-        lower_bound = max(1.0, 0.20 * g_med)
+        # Lower bound (Outlier filter)
+        lower_bound = max(10.0, 0.05 * g_med)
 
         global_bounds_by_item[iid] = (lower_bound, upper_bound, g_med)
 
@@ -217,6 +218,7 @@ def export_web_json(conn, output_path="docs/data.json"):
     start_date_jst = today_date_jst - timedelta(days=6)
     start_midnight_dt = datetime(start_date_jst.year, start_date_jst.month, start_date_jst.day, tzinfo=jst)
     start_midnight_ts = int(start_midnight_dt.timestamp())
+
     days_labels = [(today_date_jst - timedelta(days=i)).strftime("%m/%d") for i in range(6, -1, -1)]
 
     # Pre-compute day boundary timestamps for numeric comparison (much faster than strftime per-tx)
@@ -324,15 +326,22 @@ def export_web_json(conn, output_path="docs/data.json"):
     for wname in data_by_world:
         data_by_world[wname].sort(key=lambda x: x["sale_velocity"], reverse=True)
 
-    # Load existing docs/data.json if present, to preserve data for non-updated DCs
+    # Load existing docs/data.json.gz or docs/data.json if present, to preserve data for non-updated DCs
     merged_data_by_world = {}
-    if os.path.exists(output_path):
-        try:
-            with open(output_path, "r", encoding="utf-8") as f:
-                existing_json = json.load(f)
-                merged_data_by_world = existing_json.get("data", {})
-        except Exception as e:
-            print(f"Notice: Could not load existing {output_path} for merging: {e}")
+    for check_file in ["docs/data.json.gz", "docs/data.json"]:
+        if os.path.exists(check_file):
+            try:
+                if check_file.endswith(".gz"):
+                    with gzip.open(check_file, "rt", encoding="utf-8") as f:
+                        existing_json = json.load(f)
+                else:
+                    with open(check_file, "r", encoding="utf-8") as f:
+                        existing_json = json.load(f)
+                if existing_json and "data" in existing_json:
+                    merged_data_by_world = existing_json.get("data", {})
+                    break
+            except Exception as e:
+                print(f"Notice: Could not load existing {check_file} for merging: {e}")
 
     # Update merged_data_by_world with freshly calculated worlds
     for wname, items in data_by_world.items():
@@ -346,13 +355,25 @@ def export_web_json(conn, output_path="docs/data.json"):
         "data": merged_data_by_world
     }
 
-    tmp_path = output_path + ".tmp"
-    with open(tmp_path, "w", encoding="utf-8") as f:
-        json.dump(web_data, f, ensure_ascii=False, separators=(",", ":"))
-    os.replace(tmp_path, output_path)
+    json_bytes = json.dumps(web_data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
 
-    file_size_kb = os.path.getsize(output_path) / 1024
-    print(f"Successfully exported clean merged web JSON to {output_path} ({file_size_kb:.0f} KB)", flush=True)
+    # Export compressed docs/data.json.gz
+    gz_output_path = "docs/data.json.gz"
+    tmp_gz_path = gz_output_path + ".tmp"
+    with gzip.open(tmp_gz_path, "wb", compresslevel=9) as f:
+        f.write(json_bytes)
+    os.replace(tmp_gz_path, gz_output_path)
+
+    # Also export uncompressed docs/data.json for local fallback
+    raw_output_path = "docs/data.json"
+    tmp_raw_path = raw_output_path + ".tmp"
+    with open(tmp_raw_path, "wb") as f:
+        f.write(json_bytes)
+    os.replace(tmp_raw_path, raw_output_path)
+
+    gz_size_kb = os.path.getsize(gz_output_path) / 1024
+    raw_size_kb = os.path.getsize(raw_output_path) / 1024
+    print(f"Successfully exported web JSON to {gz_output_path} ({gz_size_kb:.0f} KB, compressed from {raw_size_kb:.0f} KB)", flush=True)
 
 def fetch_and_save_all(target_dc=None):
     now_dt = datetime.now(timezone.utc)

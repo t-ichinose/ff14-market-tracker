@@ -2564,9 +2564,31 @@
     async function loadData() {
       try {
         const cacheBuster = `t=${Date.now()}_${Math.random()}`;
-        const res = await fetch(`data.json?${cacheBuster}`, { cache: "no-store" });
-        if (!res.ok) throw new Error('Data fetch failed');
-        const data = await res.json();
+        let data = null;
+
+        // 1. Try fetching compressed data.json.gz first
+        try {
+          const res = await fetch(`data.json.gz?${cacheBuster}`, { cache: "no-store" });
+          if (res.ok) {
+            if (window.DecompressionStream) {
+              const ds = new DecompressionStream('gzip');
+              const decompressedStream = res.body.pipeThrough(ds);
+              const text = await new Response(decompressedStream).text();
+              data = JSON.parse(text);
+            } else {
+              data = await res.json();
+            }
+          }
+        } catch (gzErr) {
+          console.warn("data.json.gz fetch failed, falling back to data.json:", gzErr);
+        }
+
+        // 2. Fallback to uncompressed data.json if .gz fetch failed
+        if (!data) {
+          const res = await fetch(`data.json?${cacheBuster}`, { cache: "no-store" });
+          if (!res.ok) throw new Error('Data fetch failed');
+          data = await res.json();
+        }
 
         if (data.last_updated) {
           currentPeriodText = getAggregationPeriodStr(data.last_updated);
