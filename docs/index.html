@@ -2566,9 +2566,14 @@
         const cacheBuster = `t=${Date.now()}_${Math.random()}`;
         let data = null;
 
-        // 1. Try fetching compressed data.json.gz first
+        // Auto-detect environment: Use live production data when running on localhost
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const prodDataUrl = 'https://t-ichinose.github.io/ff14-market-tracker/data.json.gz';
+        const targetUrl = isLocalhost ? prodDataUrl : 'data.json.gz';
+
+        // 1. Try fetching target compressed data.json.gz
         try {
-          const res = await fetch(`data.json.gz?${cacheBuster}`, { cache: "no-store" });
+          const res = await fetch(`${targetUrl}?${cacheBuster}`, { cache: "no-store" });
           if (res.ok) {
             if (window.DecompressionStream) {
               const ds = new DecompressionStream('gzip');
@@ -2580,10 +2585,22 @@
             }
           }
         } catch (gzErr) {
-          console.warn("data.json.gz fetch failed, falling back to data.json:", gzErr);
+          console.warn("Target data.json.gz fetch failed, falling back to local files:", gzErr);
         }
 
-        // 2. Fallback to uncompressed data.json if .gz fetch failed
+        // 2. Fallback to local data.json.gz if remote fetch failed
+        if (!data && isLocalhost) {
+          try {
+            const res = await fetch(`data.json.gz?${cacheBuster}`, { cache: "no-store" });
+            if (res.ok) {
+              const ds = new DecompressionStream('gzip');
+              const text = await new Response(res.body.pipeThrough(ds)).text();
+              data = JSON.parse(text);
+            }
+          } catch (e) {}
+        }
+
+        // 3. Fallback to uncompressed data.json
         if (!data) {
           const res = await fetch(`data.json?${cacheBuster}`, { cache: "no-store" });
           if (!res.ok) throw new Error('Data fetch failed');
@@ -2662,7 +2679,7 @@
       const daysLabels = [];
       const dayMap = new Map();
 
-      for (let i = 6; i >= 0; i--) {
+      for (let i = 7; i >= 0; i--) {
         const d = new Date(today.getTime() - i * 86400 * 1000);
         const month = String(d.getMonth() + 1).padStart(2, '0');
         const day = String(d.getDate()).padStart(2, '0');

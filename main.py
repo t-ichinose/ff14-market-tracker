@@ -225,19 +225,19 @@ def export_web_json(conn, output_path="docs/data.json.gz"):
     jst = timezone(timedelta(hours=9))
     now_jst = now_dt.astimezone(jst)
     today_date_jst = now_jst.date()
-    start_date_jst = today_date_jst - timedelta(days=6)
+    start_date_jst = today_date_jst - timedelta(days=7)
     start_midnight_dt = datetime(start_date_jst.year, start_date_jst.month, start_date_jst.day, tzinfo=jst)
     start_midnight_ts = int(start_midnight_dt.timestamp())
 
-    days_labels = [(today_date_jst - timedelta(days=i)).strftime("%m/%d") for i in range(6, -1, -1)]
+    days_labels = [(today_date_jst - timedelta(days=i)).strftime("%m/%d") for i in range(7, -1, -1)]
 
     # Pre-compute day boundary timestamps for numeric comparison (much faster than strftime per-tx)
     day_boundaries = []
-    for i in range(6, -1, -1):
+    for i in range(7, -1, -1):
         d = today_date_jst - timedelta(days=i)
         d_start = int(datetime(d.year, d.month, d.day, tzinfo=jst).timestamp())
         d_end = d_start + 86400
-        day_boundaries.append((days_labels[6 - i], d_start, d_end))
+        day_boundaries.append((days_labels[7 - i], d_start, d_end))
 
     # Group calculated metrics by world
     data_by_world = {}
