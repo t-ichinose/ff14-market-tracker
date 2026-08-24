@@ -157,14 +157,8 @@ def export_web_json(conn, output_path="docs/data.json.gz"):
     cursor.execute("SELECT item_id, item_name, icon_url, category_name FROM items_metadata")
     meta_dict = {row[0]: {"name": row[1], "icon": row[2], "category": row[3]} for row in cursor.fetchall()}
 
-    # Calculate actual span of days in DB (up to 7.0 days)
-    cursor.execute("SELECT MIN(timestamp), MAX(timestamp) FROM sales_history WHERE timestamp >= ?", (seven_days_ago_ts,))
-    ts_range = cursor.fetchone()
-    if ts_range and ts_range[0] and ts_range[1]:
-        calc_days = (ts_range[1] - ts_range[0]) / 86400.0
-        actual_days = min(7.0, max(1.0, calc_days))
-    else:
-        actual_days = 7.0
+    # Always use fixed 7.0 days for 1-week daily velocity calculation
+    actual_days = 7.0
 
     # Retrieve all transaction logs from sales_history within past 7 days
     cursor.execute("""
@@ -216,8 +210,8 @@ def export_web_json(conn, output_path="docs/data.json.gz"):
         else:
             upper_bound = 5.0 * g_med
 
-        # Lower bound (Outlier filter)
-        lower_bound = max(10.0, 0.05 * g_med)
+        # Lower bound (Outlier filter: exclude sales below 30% of global median)
+        lower_bound = max(10.0, 0.30 * g_med)
 
         global_bounds_by_item[iid] = (lower_bound, upper_bound, g_med)
 

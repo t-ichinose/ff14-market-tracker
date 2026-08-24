@@ -2006,7 +2006,7 @@
       <!-- 4. Search Box (Compact Width) -->
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" class="search-input" placeholder="全3200品目から検索 (名前/ID)..." oninput="onSearchInput(this.value)">
+        <input type="text" id="searchInput" class="search-input" placeholder="アイテム検索..." oninput="onSearchInput(this.value)">
       </div>
     </div>
     
@@ -2103,7 +2103,9 @@
         <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-muted); white-space: nowrap;">
           <i class="fa-solid fa-bolt"></i> 最低ホーム売買数:
           <select id="arbMinVelSelect" class="search-input" style="width: auto; padding: 0.25rem 0.5rem; font-size: 0.78rem;" onchange="updateArbitrageFilters()">
-            <option value="1" selected>1 個/日 以上</option>
+            <option value="0" selected>制限なし</option>
+            <option value="0.1">0.1 個/日 以上</option>
+            <option value="1">1 個/日 以上</option>
             <option value="5">5 個/日 以上</option>
             <option value="10">10 個/日 以上</option>
             <option value="50">50 個/日 以上</option>
@@ -2566,38 +2568,42 @@
         const cacheBuster = `t=${Date.now()}_${Math.random()}`;
         let data = null;
 
-        // Auto-detect environment: Use live production data when running on localhost
         const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const prodDataUrl = 'https://t-ichinose.github.io/ff14-market-tracker/data.json.gz';
         const targetUrl = isLocalhost ? prodDataUrl : 'data.json.gz';
 
-        // 1. Try fetching target compressed data.json.gz
+        // 1. Try fetching target compressed data.json.gz (Live Production URL when on localhost)
         try {
           const res = await fetch(`${targetUrl}?${cacheBuster}`, { cache: "no-store" });
           if (res.ok) {
             if (window.DecompressionStream) {
               const ds = new DecompressionStream('gzip');
-              const decompressedStream = res.body.pipeThrough(ds);
-              const text = await new Response(decompressedStream).text();
+              const text = await new Response(res.body.pipeThrough(ds)).text();
               data = JSON.parse(text);
             } else {
               data = await res.json();
             }
           }
-        } catch (gzErr) {
-          console.warn("Target data.json.gz fetch failed, falling back to local files:", gzErr);
+        } catch (targetErr) {
+          console.warn("Target data fetch failed, trying local fallback:", targetErr);
         }
 
-        // 2. Fallback to local data.json.gz if remote fetch failed
+        // 2. Fallback to local data.json.gz if production fetch failed
         if (!data && isLocalhost) {
           try {
             const res = await fetch(`data.json.gz?${cacheBuster}`, { cache: "no-store" });
             if (res.ok) {
-              const ds = new DecompressionStream('gzip');
-              const text = await new Response(res.body.pipeThrough(ds)).text();
-              data = JSON.parse(text);
+              if (window.DecompressionStream) {
+                const ds = new DecompressionStream('gzip');
+                const text = await new Response(res.body.pipeThrough(ds)).text();
+                data = JSON.parse(text);
+              } else {
+                data = await res.json();
+              }
             }
-          } catch (e) {}
+          } catch (localErr) {
+            console.warn("Local fallback failed:", localErr);
+          }
         }
 
         // 3. Fallback to uncompressed data.json
@@ -2747,7 +2753,7 @@
           <td style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> ${formattedTime}</td>
           <td style="font-size:0.75rem; font-weight:600; color:var(--accent-blue);">${buyerName}</td>
           <td>${hqBadge}</td>
-          <td style="font-weight:700; color:var(--text-main);">${price}G</td>
+          <td style="font-weight:700; color:var(--accent-green);">${price}G</td>
           <td>${qty}個</td>
           <td style="font-weight:700; color:#ffb703;">${totalPrice}G</td>
         </tr>
@@ -3005,7 +3011,7 @@
           }
           optGroups += '</optgroup>';
         }
-        pcSelectHtml = '<select class="pc-world-select" id="pcWorldSelect" onchange="onPcWorldSelectChange(this.value)">' + optGroups + '</select>';
+        pcSelectHtml = '<select class="pc-world-select" id="pcWorldSelect" style="flex:1; width:100%; font-size:0.88rem; font-weight:600; padding:6px 8px; border-radius:8px;" onchange="onPcWorldSelectChange(this.value)">' + optGroups + '</select>';
       }
 
       grid.innerHTML = renderWorlds.map(worldName => {
@@ -3141,7 +3147,7 @@
             </div>
             <!-- 2行目: ワールド選択ラベル ＋ ドロップダウン -->
             <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-bottom: 6px;">
-              <span style="font-size: 0.78rem; font-weight: 700; color: #94a3b8; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;">
+              <span style="font-size: 0.88rem; font-weight: 700; color: #94a3b8; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;">
                 <i class="fa-solid fa-globe" style="color: var(--accent-blue);"></i> ワールド選択:
               </span>
               ${pcSelectHtml}
@@ -3149,7 +3155,7 @@
             <!-- 3行目: ワールド選択直下の全3200品目検索ボックス -->
             <div style="position: relative; width: 100%;">
               <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.82rem; color: #94a3b8;"></i>
-              <input type="text" id="pcAnalyticsSearchInput" class="search-input" value="${pcAnalyticsSearchTerm}" placeholder="全3200品目から検索 (名前/ID)..." style="width: 100%; padding: 6px 28px 6px 30px; font-size: 0.88rem; font-weight: 600; border-radius: 8px;" oninput="onSearchInput(this.value)">
+              <input type="text" id="pcAnalyticsSearchInput" class="search-input" value="${pcAnalyticsSearchTerm}" placeholder="アイテム検索..." style="width: 100%; padding: 6px 28px 6px 30px; font-size: 0.88rem; font-weight: 600; border-radius: 8px;" oninput="onSearchInput(this.value)">
               ${pcAnalyticsSearchTerm ? `<i class="fa-solid fa-xmark" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; color: #94a3b8; cursor: pointer;" onclick="clearPcAnalyticsSearch()"></i>` : ''}
             </div>
           </div>
@@ -3261,6 +3267,334 @@
       resetPcArbitrageMonitorToDefault();
     }
 
+    let currentListingsScope = 'world'; // 'world' | 'dc' | 'all'
+    let pcHistoryHqOnly = false;
+    let pcListingsHqOnly = false;
+
+    function getDcNameForWorld(worldName) {
+      for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
+        if (worlds.includes(worldName)) return dc;
+      }
+      return 'Mana';
+    }
+
+    function setListingsScope(scope) {
+      currentListingsScope = scope;
+      fetchAndRenderActiveListings();
+    }
+
+    function togglePcHistoryHqOnly() {
+      pcHistoryHqOnly = !pcHistoryHqOnly;
+      const btn = document.getElementById('btnHistoryHqOnly');
+      if (btn) {
+        btn.style.background = pcHistoryHqOnly ? 'rgba(234, 179, 8, 0.25)' : 'rgba(255,255,255,0.08)';
+        btn.style.borderColor = pcHistoryHqOnly ? 'rgba(234, 179, 8, 0.6)' : 'rgba(255,255,255,0.15)';
+        btn.style.color = pcHistoryHqOnly ? 'var(--accent-gold)' : 'var(--text-muted)';
+      }
+      if (pcMonitorWorldName && pcMonitorItemId) {
+        renderPcMonitorHistory(pcMonitorWorldName, pcMonitorItemId);
+      }
+    }
+
+    // 出品中データ・3指標カードのメモリキャッシュ
+    const activeListingsCache = {};
+
+    function set3MinCardsLoadingState() {
+      const selPEl = document.getElementById('pcListingsSelWorldMinPrice');
+      const dcPEl = document.getElementById('pcListingsDcMinPrice');
+      const allPEl = document.getElementById('pcListingsAllWorldMinPrice');
+      if (selPEl) selPEl.innerText = '-G';
+      if (dcPEl) dcPEl.innerText = '-G';
+      if (allPEl) allPEl.innerText = '-G';
+    }
+
+    function togglePcListingsHqOnly() {
+      pcListingsHqOnly = !pcListingsHqOnly;
+      const btn = document.getElementById('btnListingsHqOnly');
+      if (btn) {
+        btn.style.background = pcListingsHqOnly ? 'rgba(234, 179, 8, 0.25)' : 'rgba(255,255,255,0.08)';
+        btn.style.borderColor = pcListingsHqOnly ? 'rgba(234, 179, 8, 0.6)' : 'rgba(255,255,255,0.15)';
+        btn.style.color = pcListingsHqOnly ? 'var(--accent-gold)' : 'var(--text-muted)';
+      }
+      if (pcMonitorWorldName && pcMonitorItemId) {
+        prefetchAndRenderAllActiveScopes(pcMonitorWorldName, pcMonitorItemId);
+      }
+    }
+
+    async function fetchAndRender3MinSummaryCards(worldName, itemId, forceRefresh = false) {
+      if (!worldName || !itemId) return;
+
+      const dcName = getDcNameForWorld(worldName);
+      const sameDcWorlds = dcWorldsMap[dcName] || [worldName];
+      const hqParam = pcListingsHqOnly ? '&hq=true' : '';
+      const summaryCacheKey = `3min_${itemId}_${worldName}_${pcListingsHqOnly ? 'hq' : 'all'}`;
+
+      const selWNameEl = document.getElementById('pcListingsSelWorldName');
+      const selPEl = document.getElementById('pcListingsSelWorldMinPrice');
+      const dcWNameEl = document.getElementById('pcListingsDcMinName');
+      const dcPEl = document.getElementById('pcListingsDcMinPrice');
+      const allWNameEl = document.getElementById('pcListingsAllWorldMinName');
+      const allPEl = document.getElementById('pcListingsAllWorldMinPrice');
+
+      const applyCardValues = (selP, dcP, dcW, globalP, globalW) => {
+        if (selWNameEl) selWNameEl.innerText = worldName;
+        if (selPEl) selPEl.innerText = selP > 0 ? `${selP.toLocaleString()}G` : '-G';
+
+        if (dcWNameEl) dcWNameEl.innerText = dcW !== '-' ? `${dcW} (${dcName})` : `${dcName} DC`;
+        if (dcPEl) dcPEl.innerText = dcP > 0 ? `${dcP.toLocaleString()}G` : '-G';
+
+        if (allWNameEl) allWNameEl.innerText = globalW !== '-' ? `${globalW} (${getDcNameForWorld(globalW)})` : '全32ワールド';
+        if (allPEl) allPEl.innerText = globalP > 0 ? `${globalP.toLocaleString()}G` : '-G';
+      };
+
+      // キャッシュが存在すればAPIを叩かず即座に適用
+      if (!forceRefresh && activeListingsCache[summaryCacheKey]) {
+        const c = activeListingsCache[summaryCacheKey];
+        applyCardValues(c.selMinPrice, c.dcMinPrice, c.dcMinWorld, c.globalMinPrice, c.globalMinWorld);
+        return;
+      }
+
+      try {
+        const urlAll = `https://universalis.app/api/v2/Japan/${itemId}?listings=100${hqParam}`;
+        const resAll = await fetch(urlAll);
+        if (!resAll.ok) return;
+        const dataAll = await resAll.json();
+        const listingsAll = dataAll.listings || [];
+
+        // 1. 全DC最安
+        const globalMinListing = listingsAll[0];
+        let globalMinPrice = globalMinListing ? (globalMinListing.pricePerUnit || 0) : 0;
+        let globalMinWorld = globalMinListing ? (globalMinListing.worldName || '-') : '-';
+
+        // 2. 同DC最安
+        const dcMinListing = listingsAll.find(l => sameDcWorlds.includes(l.worldName));
+        let dcMinPrice = dcMinListing ? (dcMinListing.pricePerUnit || 0) : 0;
+        let dcMinWorld = dcMinListing ? dcMinListing.worldName : '-';
+
+        // 3. 選択サーバー最安
+        const selMinListing = listingsAll.find(l => l.worldName === worldName);
+        let selMinPrice = selMinListing ? (selMinListing.pricePerUnit || 0) : 0;
+
+        // もし Japan TOP100 に選択ワールドが含まれていなければ個別取得
+        if (!selMinListing) {
+          const urlWorld = `https://universalis.app/api/v2/${encodeURIComponent(worldName)}/${itemId}?listings=10${hqParam}`;
+          const resW = await fetch(urlWorld);
+          if (resW.ok) {
+            const dataW = await resW.json();
+            const listingsW = dataW.listings || [];
+            if (listingsW.length > 0) {
+              selMinPrice = listingsW[0].pricePerUnit || 0;
+            }
+          }
+        }
+
+        // もし Japan TOP100 に同DCが含まれていなければ個別取得
+        if (!dcMinListing) {
+          const urlDc = `https://universalis.app/api/v2/${encodeURIComponent(dcName)}/${itemId}?listings=10${hqParam}`;
+          const resDc = await fetch(urlDc);
+          if (resDc.ok) {
+            const dataDc = await resDc.json();
+            const listingsDc = dataDc.listings || [];
+            if (listingsDc.length > 0) {
+              dcMinPrice = listingsDc[0].pricePerUnit || 0;
+              dcMinWorld = listingsDc[0].worldName || dcName;
+            }
+          }
+        }
+
+        // キャッシュに保存
+        activeListingsCache[summaryCacheKey] = {
+          selMinPrice, dcMinPrice, dcMinWorld, globalMinPrice, globalMinWorld
+        };
+
+        applyCardValues(selMinPrice, dcMinPrice, dcMinWorld, globalMinPrice, globalMinWorld);
+
+      } catch (err) {
+        console.error("fetchAndRender3MinSummaryCards error:", err);
+      }
+    }
+
+    async function fetchAndRenderActiveListings(worldName, itemId, scope, forceRefresh = false) {
+      if (worldName) pcMonitorWorldName = worldName;
+      if (itemId) pcMonitorItemId = itemId;
+      if (scope) currentListingsScope = scope;
+
+      const targetWorld = pcMonitorWorldName;
+      const targetItem = pcMonitorItemId;
+      const currentScope = currentListingsScope;
+
+      const tbody = document.getElementById('pcActiveListingsTbody');
+      const thead = document.getElementById('pcActiveListingsThead');
+      const countBadge = document.getElementById('pcListingsCountBadge');
+      const scopeTitle = document.getElementById('pcListingsScopeTitle');
+      if (!tbody || !targetWorld || !targetItem) return;
+
+      // ボタンのアクティブスタイル切替
+      ['world', 'dc', 'all'].forEach(s => {
+        const btn = document.getElementById('btnScope_' + s);
+        if (btn) {
+          if (s === currentScope) {
+            btn.style.background = 'var(--accent-blue)';
+            btn.style.color = '#ffffff';
+          } else {
+            btn.style.background = 'transparent';
+            btn.style.color = '#94a3b8';
+          }
+        }
+      });
+
+      const dcName = getDcNameForWorld(targetWorld);
+      let apiUrl = '';
+      let titleText = '';
+
+      if (currentScope === 'world') {
+        apiUrl = `https://universalis.app/api/v2/${encodeURIComponent(targetWorld)}/${targetItem}?listings=100`;
+        titleText = `(${targetWorld})`;
+      } else if (currentScope === 'dc') {
+        apiUrl = `https://universalis.app/api/v2/${encodeURIComponent(dcName)}/${targetItem}?listings=100`;
+        titleText = `(${dcName} DC)`;
+      } else {
+        apiUrl = `https://universalis.app/api/v2/Japan/${targetItem}?listings=100`;
+        titleText = `(全DC / 日本)`;
+      }
+
+      if (pcListingsHqOnly) {
+        apiUrl += '&hq=true';
+      }
+
+      if (scopeTitle) scopeTitle.innerText = titleText;
+
+      const colCount = 6;
+
+      if (thead) {
+        thead.innerHTML = `
+          <tr>
+            <th>ワールド</th>
+            <th>リテイナー</th>
+            <th>品質</th>
+            <th>単価 (G)</th>
+            <th>数量</th>
+            <th>合計金額 (G)</th>
+          </tr>
+        `;
+      }
+
+      const cacheKey = `${targetItem}_${targetWorld}_${currentScope}_${pcListingsHqOnly ? 'hq' : 'all'}`;
+
+      const renderListingsTable = (listings, unitsForSale) => {
+        if (countBadge) {
+          countBadge.innerText = `${listings.length}件 (${(unitsForSale || 0).toLocaleString()}個)`;
+        }
+
+        if (listings.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="${colCount}" style="text-align:center; padding:2rem; color:var(--text-muted);">${pcListingsHqOnly ? 'HQ品の' : ''}現在出品中の商品はありません</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = listings.slice(0, 100).map(l => {
+          const price = (l.pricePerUnit || 0).toLocaleString();
+          const qty = (l.quantity || 0).toLocaleString();
+          const total = ((l.pricePerUnit || 0) * (l.quantity || 0)).toLocaleString();
+          const hqBadge = l.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
+          const retainer = l.retainerName ? escapeHtml(l.retainerName) : '-';
+          const itemWorld = l.worldName || targetWorld;
+
+          return `
+            <tr>
+              <td style="font-size:0.72rem; font-weight:700; color:var(--accent-gold); white-space:nowrap;">${itemWorld}</td>
+              <td style="font-size:0.75rem; font-weight:600; color:var(--accent-blue); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:90px;" title="${retainer}">${retainer}</td>
+              <td>${hqBadge}</td>
+              <td style="font-weight:700; color:var(--accent-green);">${price}G</td>
+              <td style="font-weight:600;">${qty}個</td>
+              <td style="font-weight:700; color:#ffb703;">${total}G</td>
+            </tr>
+          `;
+        }).join('');
+      };
+
+      // 強制リフレッシュでない & メモリキャッシュが存在すれば0ms即時描画
+      if (!forceRefresh && activeListingsCache[cacheKey]) {
+        const cached = activeListingsCache[cacheKey];
+        renderListingsTable(cached.listings, cached.unitsForSale);
+        return;
+      }
+
+      tbody.innerHTML = `<tr><td colspan="${colCount}" style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 出品データを取得中...</td></tr>`;
+
+      try {
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error('API Error');
+        const data = await res.json();
+        let listings = data.listings || [];
+
+        if (pcListingsHqOnly) {
+          listings = listings.filter(l => Boolean(l.hq));
+        }
+
+        activeListingsCache[cacheKey] = {
+          listings: listings,
+          unitsForSale: data.unitsForSale || 0
+        };
+
+        renderListingsTable(listings, data.unitsForSale || 0);
+
+      } catch (err) {
+        console.error("fetchAndRenderActiveListings error:", err);
+        if (tbody) {
+          tbody.innerHTML = `<tr><td colspan="${colCount}" style="text-align:center; padding:1.5rem; color:#ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> 出品データ取得失敗</td></tr>`;
+        }
+      }
+    }
+
+    let lastCachedItemId = null;
+
+    async function prefetchAndRenderAllActiveScopes(worldName, itemId, forceRefresh = false) {
+      if (!worldName || !itemId) return;
+
+      // 品目が切り替わった場合（または手動更新時）は以前のアイテムのキャッシュを完全破棄（メモリ圧迫防止）
+      if (lastCachedItemId !== itemId || forceRefresh) {
+        for (const k in activeListingsCache) delete activeListingsCache[k];
+        lastCachedItemId = itemId;
+      }
+
+      // 1. 計算・再計算中の視覚的表示 (-G 表記)
+      set3MinCardsLoadingState();
+
+      // 2. 3指標カード ＆ 現在アクティブなタブを優先描画
+      fetchAndRender3MinSummaryCards(worldName, itemId, forceRefresh);
+      fetchAndRenderActiveListings(worldName, itemId, currentListingsScope, forceRefresh);
+
+      // 3. 『単一・同DC・全DC』全スコープのデータを出力・アイテム選択時に並行先行取得
+      const dcName = getDcNameForWorld(worldName);
+      const hqParam = pcListingsHqOnly ? '&hq=true' : '';
+      const hqSuffix = pcListingsHqOnly ? 'hq' : 'all';
+
+      const scopeUrls = {
+        'world': `https://universalis.app/api/v2/${encodeURIComponent(worldName)}/${itemId}?listings=100${hqParam}`,
+        'dc': `https://universalis.app/api/v2/${encodeURIComponent(dcName)}/${itemId}?listings=100${hqParam}`,
+        'all': `https://universalis.app/api/v2/Japan/${itemId}?listings=100${hqParam}`
+      };
+
+      for (const [scopeKey, url] of Object.entries(scopeUrls)) {
+        const cacheKey = `${itemId}_${worldName}_${scopeKey}_${hqSuffix}`;
+        if (forceRefresh || !activeListingsCache[cacheKey]) {
+          fetch(url)
+            .then(res => res.ok ? res.json() : null)
+            .then(data => {
+              if (data) {
+                let listings = data.listings || [];
+                if (pcListingsHqOnly) listings = listings.filter(l => Boolean(l.hq));
+                activeListingsCache[cacheKey] = {
+                  listings: listings,
+                  unitsForSale: data.unitsForSale || 0
+                };
+              }
+            })
+            .catch(e => console.error("Prefetch error for scope:", scopeKey, e));
+        }
+      }
+    }
+
     function renderPcAnalyticsMonitorPane(itemId, itemName, iconUrl, worldName) {
       const wrapper = document.getElementById('analyticsMonitorWrapper');
       if (!wrapper) return;
@@ -3269,102 +3603,186 @@
 
       wrapper.innerHTML = `
         <!-- モニターヘッダー枠 -->
-        <div style="display:flex; align-items:center; justify-content:space-between; padding-bottom:0.85rem; border-bottom:1px solid var(--card-border); margin-bottom:1rem; flex-shrink:0;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding-bottom:0.75rem; border-bottom:1px solid var(--card-border); margin-bottom:0.75rem; flex-shrink:0;">
           <div style="display:flex; align-items:center; gap:0.75rem;">
-            <img id="pcMonitorIcon" src="${iconUrl}" alt="" style="width:48px; height:48px; border-radius:10px; border:1px solid var(--card-border); background:#0b111e; object-fit:cover;">
+            <img id="pcMonitorIcon" src="${iconUrl}" alt="" style="width:44px; height:44px; border-radius:10px; border:1px solid var(--card-border); background:#0b111e; object-fit:cover;">
             <div>
-              <div style="font-size:1.25rem; font-weight:800; color:#ffffff; line-height:1.2;" id="pcMonitorTitle">${itemName}</div>
-              <div style="font-size:0.78rem; color:var(--text-muted); display:flex; align-items:center; gap:0.7rem; margin-top:4px;" id="pcMonitorMeta">
+              <div style="font-size:1.2rem; font-weight:800; color:#ffffff; line-height:1.2;" id="pcMonitorTitle">${itemName}</div>
+              <div style="font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:0.7rem; margin-top:3px;" id="pcMonitorMeta">
                 ID: ${itemId} | 選択中ワールド: ${worldName}
               </div>
             </div>
           </div>
 
-          <a id="pcMonitorLodestone" href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" style="font-size:0.85rem; padding:6px 12px; border-radius:8px; background:rgba(0, 210, 255, 0.1); border:1px solid rgba(0, 210, 255, 0.3); color:var(--accent-blue); font-weight:700; text-decoration:none;" title="Lodestoneで開く">
+          <a id="pcMonitorLodestone" href="${lodestoneUrl}" target="_blank" rel="noopener" class="lodestone-link-icon" style="font-size:0.82rem; padding:5px 10px; border-radius:8px; background:rgba(0, 210, 255, 0.1); border:1px solid rgba(0, 210, 255, 0.3); color:var(--accent-blue); font-weight:700; text-decoration:none;" title="Lodestoneで開く">
             Lodestone <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left:3px;"></i>
           </a>
         </div>
 
-        <!-- 1. 4指標ハイライト比較カード枠 (最安/最高/最安平均/最高平均) -->
-        <div class="dc-summary-grid" style="margin-bottom:1rem; flex-shrink:0;">
-          <div class="dc-summary-card min-card" id="pcMonitorMinCard">
-            <div>
-              <div class="dc-summary-label"><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 最安値ワールド</div>
-              <div class="dc-summary-world" id="pcMonitorMinWorld">-</div>
+        <!-- 左右2カラム分割モニターエリア (左: 相場推移・実績履歴 / 右: 出品中商品リアルタイム [1:1比率]) -->
+        <div class="pc-analytics-split-pane" style="display:grid; grid-template-columns: 1fr 1fr; gap:0.85rem; flex:1; min-height:0; overflow:hidden;">
+          <!-- 👈 左カラム: 3指標 + 7日推移グラフ + 売買取引履歴 -->
+          <div style="display:flex; flex-direction:column; min-height:0; overflow:hidden; gap:0.75rem;">
+            <!-- 1. 3指標ハイライト比較カード枠 (最安/平均/最高) -->
+            <div class="dc-summary-grid" style="grid-template-columns: repeat(3, 1fr); flex-shrink:0;">
+              <div class="dc-summary-card min-card" id="pcMonitorMinCard">
+                <div>
+                  <div class="dc-summary-label"><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 最安値 (${worldName})</div>
+                  <div class="dc-summary-world" id="pcMonitorMinWorld">${worldName}</div>
+                </div>
+                <div class="dc-summary-price" id="pcMonitorMinPrice">-G</div>
+              </div>
+
+              <div class="dc-summary-card min-avg-card" id="pcMonitorAvgCard">
+                <div>
+                  <div class="dc-summary-label"><i class="fa-solid fa-scale-balanced" style="color:#c084fc;"></i> 平均値 (${worldName})</div>
+                  <div class="dc-summary-world" id="pcMonitorAvgWorld">${worldName}</div>
+                </div>
+                <div class="dc-summary-price" id="pcMonitorAvgPrice">-G</div>
+              </div>
+
+              <div class="dc-summary-card max-card" id="pcMonitorMaxCard">
+                <div>
+                  <div class="dc-summary-label"><i class="fa-solid fa-arrow-trend-up" style="color:#ef4444;"></i> 最高値 (${worldName})</div>
+                  <div class="dc-summary-world" id="pcMonitorMaxWorld">${worldName}</div>
+                </div>
+                <div class="dc-summary-price" id="pcMonitorMaxPrice">-G</div>
+              </div>
             </div>
-            <div class="dc-summary-price" id="pcMonitorMinPrice">-G</div>
+
+            <!-- 2. 日別加重平均価格・販売量推移 グラフエリア -->
+            <div style="background:rgba(15, 23, 42, 0.7); border:1px solid var(--card-border); border-radius:12px; padding:0.65rem 0.85rem; flex-shrink:0;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.4rem;">
+                <div style="font-size:0.82rem; font-weight:800; color:#ffffff; display:flex; align-items:center; gap:0.4rem;">
+                  <i class="fa-solid fa-chart-line" style="color:var(--accent-green);"></i> 販売量・金額推移 (${worldName})
+                </div>
+                <span id="pcMonitorTrendBadge" style="color:#94a3b8; font-size:0.75rem;">-</span>
+              </div>
+              <div style="width:100%; position:relative;">
+                <canvas id="pcMonitorCanvas" style="width:100%; height:105px; display:block;"></canvas>
+                <div id="pcMonitorTrendSummary" style="display:flex; justify-content:space-between; gap:2px; margin-top:4px; padding-top:4px; border-top:1px solid rgba(255,255,255,0.06);"></div>
+              </div>
+            </div>
+
+            <!-- 3. 直近の売買取引履歴テーブル (6列) -->
+            <div style="flex:1; display:flex; flex-direction:column; min-height:0; overflow:hidden;">
+              <div style="font-size:0.82rem; font-weight:800; color:#ffffff; margin-bottom:0.4rem; flex-shrink:0; display:flex; align-items:center; justify-content:space-between;">
+                <div style="display:flex; align-items:center; gap:0.4rem;">
+                  <i class="fa-solid fa-receipt" style="color:var(--accent-blue);"></i> 直近の売買取引履歴一覧 (${worldName})
+                </div>
+                <button onclick="togglePcHistoryHqOnly()" id="btnHistoryHqOnly" style="padding:2px 7px; font-size:0.7rem; font-weight:700; border-radius:6px; cursor:pointer; background:${pcHistoryHqOnly ? 'rgba(234, 179, 8, 0.25)' : 'rgba(255,255,255,0.08)'}; border:1px solid ${pcHistoryHqOnly ? 'rgba(234, 179, 8, 0.6)' : 'rgba(255,255,255,0.15)'}; color:${pcHistoryHqOnly ? 'var(--accent-gold)' : 'var(--text-muted)'};" title="NQ品質の品を表示対象外（HQのみ表示）">
+                  <i class="fa-solid fa-filter"></i> NQ除外
+                </button>
+              </div>
+              <div class="history-table-container" style="flex:1; min-height:0; max-height:none !important; overflow-y:auto; border-radius:10px;">
+                <table class="history-table" style="font-size:0.7rem;">
+                  <thead>
+                    <tr>
+                      <th>取引日時 (JST)</th>
+                      <th>購入者</th>
+                      <th>品質</th>
+                      <th>単価 (G)</th>
+                      <th>数量</th>
+                      <th>合計金額 (G)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pcMonitorHistoryTbody">
+                    <tr>
+                      <td colspan="6" style="text-align:center; padding:1.5rem; color:var(--text-muted);">
+                        データ読込中...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
 
-          <div class="dc-summary-card max-card" id="pcMonitorMaxCard">
-            <div>
-              <div class="dc-summary-label"><i class="fa-solid fa-arrow-trend-up" style="color:#ef4444;"></i> 最高値ワールド</div>
-              <div class="dc-summary-world" id="pcMonitorMaxWorld">-</div>
-            </div>
-            <div class="dc-summary-price" id="pcMonitorMaxPrice">-G</div>
-          </div>
+          <!-- 👉 右カラム: リアルタイム出品中商品一覧 -->
+          <div style="display:flex; flex-direction:column; min-height:0; overflow:hidden; gap:0.75rem;">
+            <!-- 出品側 3指標ハイライトカード枠 (左カラムの4指標カードとコンテナ構造・天面高さ・サイズを100%完全同一化) -->
+            <div class="dc-summary-grid" style="grid-template-columns:repeat(3, 1fr); flex-shrink:0;">
+              <div class="dc-summary-card min-card" id="pcListingsSelWorldMinCard">
+                <div>
+                  <div class="dc-summary-label"><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 選択サーバー最安</div>
+                  <div class="dc-summary-world" id="pcListingsSelWorldName">${worldName}</div>
+                </div>
+                <div class="dc-summary-price" id="pcListingsSelWorldMinPrice">-G</div>
+              </div>
 
-          <div class="dc-summary-card min-avg-card" id="pcMonitorMinAvgCard">
-            <div>
-              <div class="dc-summary-label"><i class="fa-solid fa-scale-balanced" style="color:#c084fc;"></i> 最安平均ワールド</div>
-              <div class="dc-summary-world" id="pcMonitorMinAvgWorld">-</div>
-            </div>
-            <div class="dc-summary-price" id="pcMonitorMinAvgPrice">-G</div>
-          </div>
+              <div class="dc-summary-card min-avg-card" id="pcListingsDcMinCard">
+                <div>
+                  <div class="dc-summary-label"><i class="fa-solid fa-layer-group" style="color:#38bdf8;"></i> 同DC最安</div>
+                  <div class="dc-summary-world" id="pcListingsDcMinName">-</div>
+                </div>
+                <div class="dc-summary-price" id="pcListingsDcMinPrice">-G</div>
+              </div>
 
-          <div class="dc-summary-card max-avg-card" id="pcMonitorMaxAvgCard">
-            <div>
-              <div class="dc-summary-label"><i class="fa-solid fa-scale-balanced" style="color:#f472b6;"></i> 最高平均ワールド</div>
-              <div class="dc-summary-world" id="pcMonitorMaxAvgWorld">-</div>
+              <div class="dc-summary-card max-avg-card" id="pcListingsAllWorldMinCard">
+                <div>
+                  <div class="dc-summary-label"><i class="fa-solid fa-trophy" style="color:var(--accent-gold);"></i> 全DC最安</div>
+                  <div class="dc-summary-world" id="pcListingsAllWorldMinName">-</div>
+                </div>
+                <div class="dc-summary-price" id="pcListingsAllWorldMinPrice">-G</div>
+              </div>
             </div>
-            <div class="dc-summary-price" id="pcMonitorMaxAvgPrice">-G</div>
-          </div>
-        </div>
 
-        <!-- 2. 日別加重平均価格・販売量推移 グラフエリア -->
-        <div style="background:rgba(15, 23, 42, 0.7); border:1px solid var(--card-border); border-radius:14px; padding:0.85rem 1.1rem; margin-bottom:1rem; flex-shrink:0;">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem;">
-            <div style="font-size:0.88rem; font-weight:800; color:#ffffff; display:flex; align-items:center; gap:0.4rem;">
-              <i class="fa-solid fa-chart-line" style="color:var(--accent-green);"></i> 日別加重平均価格・販売量推移 (直近7日間)
+            <!-- 下部コンテナ: セクションタイトル ＋ コントロール群 ＋ 出品一覧テーブル -->
+            <div style="flex:1; display:flex; flex-direction:column; background:rgba(15, 23, 42, 0.65); border:1px solid var(--card-border); border-radius:12px; padding:0.75rem; min-height:0; overflow:hidden;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; padding-bottom:0.4rem; border-bottom:1px solid rgba(255,255,255,0.06); flex-shrink:0;">
+                <div style="font-size:0.82rem; font-weight:800; color:var(--accent-gold); display:flex; align-items:center; gap:0.4rem;">
+                  <i class="fa-solid fa-store"></i> 出品中の商品 <span id="pcListingsScopeTitle" style="font-size:0.72rem; color:#94a3b8; font-weight:normal;">(${worldName})</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.4rem;">
+                  <!-- NQ除外フィルターボタン -->
+                  <button onclick="togglePcListingsHqOnly()" id="btnListingsHqOnly" style="padding:2px 7px; font-size:0.7rem; font-weight:700; border-radius:6px; cursor:pointer; background:${pcListingsHqOnly ? 'rgba(234, 179, 8, 0.25)' : 'rgba(255,255,255,0.08)'}; border:1px solid ${pcListingsHqOnly ? 'rgba(234, 179, 8, 0.6)' : 'rgba(255,255,255,0.15)'}; color:${pcListingsHqOnly ? 'var(--accent-gold)' : 'var(--text-muted)'};" title="NQ品質の品を表示対象外（HQのみ表示）">
+                    <i class="fa-solid fa-filter"></i> NQ除外
+                  </button>
+
+                  <!-- 3モード切替タブ (単一 / 同DC / 全DC) -->
+                  <div style="display:inline-flex; background:rgba(0,0,0,0.4); border:1px solid var(--card-border); border-radius:6px; padding:2px; gap:2px;">
+                    <button onclick="setListingsScope('world')" id="btnScope_world" class="listings-scope-btn" style="padding:2px 6px; font-size:0.68rem; font-weight:700; border-radius:4px; border:none; cursor:pointer; background:var(--accent-blue); color:#ffffff;">単一</button>
+                    <button onclick="setListingsScope('dc')" id="btnScope_dc" class="listings-scope-btn" style="padding:2px 6px; font-size:0.68rem; font-weight:700; border-radius:4px; border:none; cursor:pointer; background:transparent; color:#94a3b8;">同DC</button>
+                    <button onclick="setListingsScope('all')" id="btnScope_all" class="listings-scope-btn" style="padding:2px 6px; font-size:0.68rem; font-weight:700; border-radius:4px; border:none; cursor:pointer; background:transparent; color:#94a3b8;">全DC</button>
+                  </div>
+
+                  <span id="pcListingsCountBadge" style="font-size:0.7rem; color:var(--text-muted); font-weight:600;">-</span>
+                  <button onclick="prefetchAndRenderAllActiveScopes(null, null, true)" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); color:var(--text-muted); padding:2px 7px; border-radius:6px; font-size:0.7rem; cursor:pointer;" title="最新情報に更新">
+                    <i class="fa-solid fa-rotate-right"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 出品一覧テーブル -->
+              <div class="history-table-container" style="flex:1; min-height:0; max-height:none !important; overflow-y:auto; border-radius:10px;">
+                <table class="history-table" style="font-size:0.7rem;">
+                  <thead id="pcActiveListingsThead">
+                    <tr>
+                      <th>ワールド</th>
+                      <th>リテイナー</th>
+                      <th>品質</th>
+                      <th>単価 (G)</th>
+                      <th>数量</th>
+                      <th>合計金額 (G)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pcActiveListingsTbody">
+                    <tr>
+                      <td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">
+                        <i class="fa-solid fa-spinner fa-spin"></i> 出品データを取得中...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <span id="pcMonitorTrendBadge" style="color:#94a3b8; font-size:0.78rem;">-</span>
-          </div>
-          <div style="width:100%; position:relative;">
-            <canvas id="pcMonitorCanvas" style="width:100%; height:120px; display:block;"></canvas>
-            <div id="pcMonitorTrendSummary" style="display:flex; justify-content:space-between; gap:2px; margin-top:8px; padding-top:6px; border-top:1px solid rgba(255,255,255,0.06);"></div>
-          </div>
-        </div>
-
-        <!-- 3. 直近の売買取引履歴テーブル (6列) -->
-        <div style="flex:1; display:flex; flex-direction:column; min-height:0; overflow:hidden;">
-          <div style="font-size:0.88rem; font-weight:800; color:#ffffff; margin-bottom:0.5rem; flex-shrink:0; display:flex; align-items:center; gap:0.4rem;">
-            <i class="fa-solid fa-receipt" style="color:var(--accent-blue);"></i> 直近の売買取引履歴一覧
-          </div>
-          <div class="history-table-container" style="flex:1; min-height:0; max-height:none !important; overflow-y:auto; border-radius:10px;">
-            <table class="history-table">
-              <thead>
-                <tr>
-                  <th>取引日時 (JST)</th>
-                  <th>購入者</th>
-                  <th>品質</th>
-                  <th>単価 (G)</th>
-                  <th>数量</th>
-                  <th>合計金額 (G)</th>
-                </tr>
-              </thead>
-              <tbody id="pcMonitorHistoryTbody">
-                <tr>
-                  <td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">
-                    データ読込中...
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       `;
 
-      computePcMonitorDcMinMaxSummary(itemId);
+      computePcMonitorDcMinMaxSummary(itemId, worldName);
       renderPcMonitorHistory(worldName, itemId);
+      prefetchAndRenderAllActiveScopes(worldName, itemId);
     }
 
     function selectPcMonitorItem(itemId, itemName, iconUrl, worldName) {
@@ -3397,76 +3815,108 @@
       renderPcAnalyticsMonitorPane(itemId, itemName, iconUrl, worldName);
     }
 
-    function computePcMonitorDcMinMaxSummary(itemId) {
-      let minVal = Infinity; let minWorldStr = '-'; let minWName = null;
-      let maxVal = -1; let maxWorldStr = '-'; let maxWName = null;
-      let minAvgVal = Infinity; let minAvgWorldStr = '-'; let minAvgWName = null;
-      let maxAvgVal = -1; let maxAvgWorldStr = '-'; let maxAvgWName = null;
+    function computePcMonitorDcMinMaxSummary(itemId, worldName) {
+      const selectedWorldItems = (allData && worldName && allData[worldName]) ? allData[worldName] : [];
+      const selItem = selectedWorldItems.find(x => x.item_id === itemId);
+
+      const minWEl = document.getElementById('pcMonitorMinWorld');
+      const minPEl = document.getElementById('pcMonitorMinPrice');
+      const avgWEl = document.getElementById('pcMonitorAvgWorld');
+      const avgPEl = document.getElementById('pcMonitorAvgPrice');
+      const maxWEl = document.getElementById('pcMonitorMaxWorld');
+      const maxPEl = document.getElementById('pcMonitorMaxPrice');
+
+      if (minWEl) minWEl.innerText = worldName || '-';
+      if (minPEl) minPEl.innerText = (selItem && selItem.min_price > 0) ? selItem.min_price.toLocaleString() + 'G' : '-G';
+
+      if (avgWEl) avgWEl.innerText = worldName || '-';
+      if (avgPEl) avgPEl.innerText = (selItem && selItem.avg_price > 0) ? Math.round(selItem.avg_price).toLocaleString() + 'G' : '-G';
+
+      if (maxWEl) maxWEl.innerText = worldName || '-';
+      if (maxPEl) maxPEl.innerText = (selItem && selItem.max_price > 0) ? selItem.max_price.toLocaleString() + 'G' : '-G';
+
+      // リージョン全32ワールド横断で「最安平均ワールド」を計算
+      let minAvgVal = Infinity;
+      let minAvgWorldStr = '-';
+      let minAvgWName = null;
+
+      for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
+        for (const w of worlds) {
+          const items = allData[w] || [];
+          const found = items.find(x => x.item_id === itemId);
+          if (found && found.avg_price > 0 && found.avg_price < minAvgVal) {
+            minAvgVal = found.avg_price;
+            minAvgWorldStr = w + ' (' + dc + ')';
+            minAvgWName = w;
+          }
+        }
+      }
+
+      const minAvgWEl = document.getElementById('pcMonitorMinAvgWorld');
+      const minAvgPEl = document.getElementById('pcMonitorMinAvgPrice');
+
+      if (minAvgWEl) minAvgWEl.innerText = minAvgWorldStr !== '-' ? minAvgWorldStr : 'データなし';
+      if (minAvgPEl) minAvgPEl.innerText = minAvgVal !== Infinity ? Math.round(minAvgVal).toLocaleString() + 'G' : '-G';
+
+      // 出品側 3指標カードの計算・反映 (選択中ワールド最安 / 全サーバー最安 / 全サーバー平均)
+      const selWorldMinEl = document.getElementById('pcListingsSelWorldMinPrice');
+      const allWorldMinEl = document.getElementById('pcListingsAllWorldMinPrice');
+      const allWorldAvgEl = document.getElementById('pcListingsAllWorldAvgPrice');
+
+      if (selWorldMinEl) {
+        selWorldMinEl.innerText = (selItem && selItem.min_price > 0) ? selItem.min_price.toLocaleString() + 'G' : '-G';
+      }
+
+      let globalMinVal = Infinity;
+      let globalMinWorld = '-';
+      let totalAvgSum = 0;
+      let avgWorldCount = 0;
 
       for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
         for (const w of worlds) {
           const items = allData[w] || [];
           const found = items.find(x => x.item_id === itemId);
           if (found) {
-            const worldLabel = w + ' (' + dc + ')';
-            if (found.min_price > 0 && found.min_price < minVal) {
-              minVal = found.min_price; minWorldStr = worldLabel; minWName = w;
+            if (found.min_price > 0 && found.min_price < globalMinVal) {
+              globalMinVal = found.min_price;
+              globalMinWorld = w;
             }
-            if (found.avg_price > 0 && found.avg_price < minAvgVal) {
-              minAvgVal = found.avg_price; minAvgWorldStr = worldLabel; minAvgWName = w;
-            }
-            if (found.avg_price > maxAvgVal) {
-              maxAvgVal = found.avg_price; maxAvgWorldStr = worldLabel; maxAvgWName = w;
-            }
-            if (found.max_price > maxVal) {
-              maxVal = found.max_price; maxWorldStr = worldLabel; maxWName = w;
+            if (found.avg_price > 0) {
+              totalAvgSum += found.avg_price;
+              avgWorldCount++;
             }
           }
         }
       }
 
-      const minWEl = document.getElementById('pcMonitorMinWorld');
-      const minPEl = document.getElementById('pcMonitorMinPrice');
-      const maxWEl = document.getElementById('pcMonitorMaxWorld');
-      const maxPEl = document.getElementById('pcMonitorMaxPrice');
-      const minAvgWEl = document.getElementById('pcMonitorMinAvgWorld');
-      const minAvgPEl = document.getElementById('pcMonitorMinAvgPrice');
-      const maxAvgWEl = document.getElementById('pcMonitorMaxAvgWorld');
-      const maxAvgPEl = document.getElementById('pcMonitorMaxAvgPrice');
-
-      if (minWEl) minWEl.innerText = minWorldStr !== '-' ? minWorldStr : 'データなし';
-      if (minPEl) minPEl.innerText = minVal !== Infinity ? minVal.toLocaleString() + 'G' : '-G';
-      if (maxWEl) maxWEl.innerText = maxWorldStr !== '-' ? maxWorldStr : 'データなし';
-      if (maxPEl) maxPEl.innerText = maxVal > 0 ? maxVal.toLocaleString() + 'G' : '-G';
-      if (minAvgWEl) minAvgWEl.innerText = minAvgWorldStr !== '-' ? minAvgWorldStr : 'データなし';
-      if (minAvgPEl) minAvgPEl.innerText = minAvgVal !== Infinity ? Math.round(minAvgVal).toLocaleString() + 'G' : '-G';
-      if (maxAvgWEl) maxAvgWEl.innerText = maxAvgWorldStr !== '-' ? maxAvgWorldStr : 'データなし';
-      if (maxAvgPEl) maxAvgPEl.innerText = maxAvgVal > 0 ? Math.round(maxAvgVal).toLocaleString() + 'G' : '-G';
-
-      function bindPcMonitorCardClick(cardId, world) {
-        const el = document.getElementById(cardId);
-        if (!el) return;
-        if (world && world !== '-') {
-          el.classList.add('clickable-card');
-          el.onclick = () => switchPcWorld(world);
-          el.title = 'クリックで ' + world + ' ワールドに切り替え';
-        } else {
-          el.classList.remove('clickable-card');
-          el.onclick = null;
-          el.title = '';
-        }
+      if (allWorldMinEl) {
+        allWorldMinEl.innerText = (globalMinVal !== Infinity) ? `${globalMinWorld}: ${globalMinVal.toLocaleString()}G` : '-G';
       }
 
-      bindPcMonitorCardClick('pcMonitorMinCard', minWName);
-      bindPcMonitorCardClick('pcMonitorMaxCard', maxWName);
-      bindPcMonitorCardClick('pcMonitorMinAvgCard', minAvgWName);
-      bindPcMonitorCardClick('pcMonitorMaxAvgCard', maxAvgWName);
+      if (allWorldAvgEl) {
+        const globalAvg = avgWorldCount > 0 ? (totalAvgSum / avgWorldCount) : 0;
+        allWorldAvgEl.innerText = (globalAvg > 0) ? `${Math.round(globalAvg).toLocaleString()}G` : '-G';
+      }
+
+      fetchAndRender3MinSummaryCards(worldName, itemId);
+      const minAvgCardEl = document.getElementById('pcMonitorMinAvgCard');
+      if (minAvgCardEl) {
+        if (minAvgWName && minAvgWName !== '-') {
+          minAvgCardEl.classList.add('clickable-card');
+          minAvgCardEl.onclick = () => switchPcWorld(minAvgWName);
+          minAvgCardEl.title = 'クリックで ' + minAvgWName + ' ワールドに切り替え';
+        } else {
+          minAvgCardEl.classList.remove('clickable-card');
+          minAvgCardEl.onclick = null;
+          minAvgCardEl.title = '';
+        }
+      }
     }
 
     function renderPcMonitorHistory(worldName, itemId) {
       const worldItems = allData[worldName] || [];
       const item = worldItems.find(x => x.item_id === itemId);
-      const history = (item && item.history) ? item.history : [];
+      let history = (item && item.history) ? item.history : [];
       const { trend, trendPct } = getOrComputeDailyTrend(item);
 
       const badgeEl = document.getElementById('pcMonitorTrendBadge');
@@ -3483,8 +3933,12 @@
       const tbody = document.getElementById('pcMonitorHistoryTbody');
       if (!tbody) return;
 
+      if (pcHistoryHqOnly) {
+        history = history.filter(h => Boolean(h.hq));
+      }
+
       if (!history || history.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">直近7日間の取引履歴データがありません</td></tr>';
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:1.5rem; color:var(--text-muted);">${pcHistoryHqOnly ? 'HQ品の' : '直近7日間の'}取引履歴データがありません</td></tr>`;
         return;
       }
 
@@ -3697,7 +4151,7 @@
           <td style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> ${formattedTime}</td>
           <td style="font-size:0.75rem; font-weight:600; color:var(--accent-blue);">${buyerName}</td>
           <td>${hqBadge}</td>
-          <td style="font-weight:700; color:var(--text-main);">${price}G</td>
+          <td style="font-weight:700; color:var(--accent-green);">${price}G</td>
           <td>${qty}個</td>
           <td style="font-weight:700; color:#ffb703;">${totalPrice}G</td>
         </tr>
@@ -4449,7 +4903,7 @@
     }
 
     let currentArbSortMode = 'unitProfit';
-    let currentArbMinVel = 1;
+    let currentArbMinVel = 0;
 
     function setArbSort(mode) {
       currentArbSortMode = mode;
@@ -4628,20 +5082,24 @@
                   <thead>
                     <tr>
                       <th>日時 (JST)</th>
+                      <th>購入者</th>
                       <th>HQ</th>
                       <th>単価 (G)</th>
                       <th>数量</th>
                     </tr>
                   </thead>
                   <tbody>
-                    ${sourceHistory.length > 0 ? sourceHistory.slice(0, 30).map(h => `
+                    ${sourceHistory.length > 0 ? sourceHistory.slice(0, 30).map(h => {
+                      const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.68rem;">-</span>`;
+                      return `
                       <tr>
                         <td style="color:var(--text-muted); font-size:0.68rem;">${formatTimeLocal(new Date(h.ts * 1000).toISOString()).slice(5)}</td>
+                        <td style="font-size:0.68rem; font-weight:600; color:var(--accent-blue); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:110px;" title="${h.buyer ? escapeHtml(h.buyer) : ''}">${buyerName}</td>
                         <td>${h.hq ? '<span class="hq-badge">HQ</span>' : '<span style="color:var(--text-muted);">NQ</span>'}</td>
                         <td style="font-weight:700;">${(h.price || 0).toLocaleString()}G</td>
                         <td>${(h.qty || 0)}個</td>
                       </tr>
-                    `).join('') : '<tr><td colspan="4" style="text-align:center; padding:1.5rem; color:var(--text-muted);">履歴なし</td></tr>'}
+                    `;}).join('') : '<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--text-muted);">履歴なし</td></tr>'}
                   </tbody>
                 </table>
               </div>
@@ -4702,20 +5160,24 @@
                   <thead>
                     <tr>
                       <th>日時 (JST)</th>
+                      <th>購入者</th>
                       <th>HQ</th>
                       <th>単価 (G)</th>
                       <th>数量</th>
                     </tr>
                   </thead>
                   <tbody>
-                    ${homeHistory.length > 0 ? homeHistory.slice(0, 30).map(h => `
+                    ${homeHistory.length > 0 ? homeHistory.slice(0, 30).map(h => {
+                      const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.68rem;">-</span>`;
+                      return `
                       <tr>
                         <td style="color:var(--text-muted); font-size:0.68rem;">${formatTimeLocal(new Date(h.ts * 1000).toISOString()).slice(5)}</td>
+                        <td style="font-size:0.68rem; font-weight:600; color:var(--accent-blue); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:110px;" title="${h.buyer ? escapeHtml(h.buyer) : ''}">${buyerName}</td>
                         <td>${h.hq ? '<span class="hq-badge">HQ</span>' : '<span style="color:var(--text-muted);">NQ</span>'}</td>
                         <td style="font-weight:700;">${(h.price || 0).toLocaleString()}G</td>
                         <td>${(h.qty || 0)}個</td>
                       </tr>
-                    `).join('') : '<tr><td colspan="4" style="text-align:center; padding:1.5rem; color:var(--text-muted);">履歴なし</td></tr>'}
+                    `;}).join('') : '<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--text-muted);">履歴なし</td></tr>'}
                   </tbody>
                 </table>
               </div>
@@ -4777,7 +5239,7 @@
           }
           optGroups += '</optgroup>';
         }
-        const pcHomeSelectHtml = '<select class="pc-world-select" id="arbHomeWorldSelect" style="flex:1; width:100%; font-size:0.78rem;" onchange="updateArbitrageFilters()">' + optGroups + '</select>';
+        const pcHomeSelectHtml = '<select class="pc-world-select" id="arbHomeWorldSelect" style="flex:1; width:100%; font-size:0.88rem; font-weight:600; padding:6px 8px; border-radius:8px;" onchange="updateArbitrageFilters()">' + optGroups + '</select>';
 
         const pcArbHeaderHtml = `
           <div class="left-pane-header">
@@ -4792,6 +5254,8 @@
               <div style="display: flex; align-items: center; gap: 4px; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 8px; border: 1px solid var(--card-border); flex: 1;">
                 <i class="fa-solid fa-bolt" style="color: var(--accent-blue); font-size: 0.72rem;"></i>
                 <select id="arbMinVelSelect" class="pc-world-select" style="padding: 2px 4px; font-size: 0.74rem; border: none; background: transparent; color: #ffffff; width: 100%; cursor: pointer;" onchange="currentArbMinVel=this.value; updateArbitrageFilters();">
+                  <option value="0" ${currentArbMinVel == 0 ? 'selected' : ''}>制限なし</option>
+                  <option value="0.1" ${currentArbMinVel == 0.1 ? 'selected' : ''}>0.1個/日以上</option>
                   <option value="1" ${currentArbMinVel == 1 ? 'selected' : ''}>1個/日以上</option>
                   <option value="5" ${currentArbMinVel == 5 ? 'selected' : ''}>5個/日以上</option>
                   <option value="10" ${currentArbMinVel == 10 ? 'selected' : ''}>10個/日以上</option>
@@ -4807,7 +5271,7 @@
             </div>
             <!-- 2行目: ホームワールド選択ラベル ＋ ドロップダウン -->
             <div style="display: flex; align-items: center; gap: 8px; width: 100%; margin-bottom: 6px;">
-              <span style="font-size: 0.78rem; font-weight: 700; color: #94a3b8; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;">
+              <span style="font-size: 0.88rem; font-weight: 700; color: #94a3b8; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;">
                 <i class="fa-solid fa-house-user" style="color: var(--accent-gold);"></i> ホーム:
               </span>
               ${pcHomeSelectHtml}
@@ -4815,7 +5279,7 @@
             <!-- 3行目: ホームワールド選択直下の全3200品目検索ボックス -->
             <div style="position: relative; width: 100%;">
               <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.82rem; color: #94a3b8;"></i>
-              <input type="text" id="pcArbitrageSearchInput" class="search-input" value="${pcArbitrageSearchTerm}" placeholder="全3200品目から検索 (名前/ID)..." style="width: 100%; padding: 6px 28px 6px 30px; font-size: 0.88rem; font-weight: 600; border-radius: 8px;" oninput="onArbSearchInput(this.value)">
+              <input type="text" id="pcArbitrageSearchInput" class="search-input" value="${pcArbitrageSearchTerm}" placeholder="アイテム検索..." style="width: 100%; padding: 6px 28px 6px 30px; font-size: 0.88rem; font-weight: 600; border-radius: 8px;" oninput="onArbSearchInput(this.value)">
               ${pcArbitrageSearchTerm ? `<i class="fa-solid fa-xmark" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 0.88rem; color: #94a3b8; cursor: pointer;" onclick="clearPcArbitrageSearch()"></i>` : ''}
             </div>
           </div>
@@ -4828,7 +5292,7 @@
       const arbSort = document.getElementById('arbSortSelect')?.value || 'unitProfit';
       const arbScope = document.getElementById('arbScopeSelect')?.value || 'all';
       const arbMinRoi = parseFloat(document.getElementById('arbMinRoiSelect')?.value || '15');
-      const arbMinVel = parseFloat(document.getElementById('arbMinVelSelect')?.value || '1');
+      const arbMinVel = parseFloat(document.getElementById('arbMinVelSelect')?.value || '0');
 
       const homeItems = allData[arbHomeWorld] || [];
       const homeDc = findDcForWorld(arbHomeWorld);
