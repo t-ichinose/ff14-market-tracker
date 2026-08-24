@@ -364,15 +364,16 @@ def export_web_json(conn, output_path="docs/data.json.gz"):
         f.write(json_bytes)
     os.replace(tmp_gz_path, gz_output_path)
 
-    # Also export uncompressed docs/data.json for local fallback
+    # Remove uncompressed docs/data.json if present to prevent accidental 100MB+ commits
     raw_output_path = "docs/data.json"
-    tmp_raw_path = raw_output_path + ".tmp"
-    with open(tmp_raw_path, "wb") as f:
-        f.write(json_bytes)
-    os.replace(tmp_raw_path, raw_output_path)
+    if os.path.exists(raw_output_path):
+        try:
+            os.remove(raw_output_path)
+        except Exception:
+            pass
 
     gz_size_kb = os.path.getsize(gz_output_path) / 1024
-    raw_size_kb = os.path.getsize(raw_output_path) / 1024
+    raw_size_kb = len(json_bytes) / 1024
     print(f"Successfully exported web JSON to {gz_output_path} ({gz_size_kb:.0f} KB, compressed from {raw_size_kb:.0f} KB)", flush=True)
 
 def fetch_and_save_all(target_dc=None):
