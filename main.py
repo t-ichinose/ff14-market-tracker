@@ -258,11 +258,12 @@ def export_web_json(conn, output_path="docs/data.json.gz"):
             min_p = 0
             max_p = 0
             avg_p = 0
+            valid_items = []
         else:
-            items_list = clean_items
-            clean_prices = [x["price"] for x in items_list]
-            total_qty = sum(x["qty"] for x in items_list)
-            trade_cnt = len(items_list)
+            valid_items = clean_items
+            clean_prices = [x["price"] for x in valid_items]
+            total_qty = sum(x["qty"] for x in valid_items)
+            trade_cnt = len(valid_items)
             real_vel = round(total_qty / actual_days, 1)
             min_p = min(clean_prices)
             max_p = max(clean_prices)
@@ -279,13 +280,13 @@ def export_web_json(conn, output_path="docs/data.json.gz"):
         daily_revenue = round(avg_p * real_vel)
 
         # Filter out transaction logs before JST midnight of 7 days ago
-        items_list = [x for x in items_list if x["ts"] >= start_midnight_ts]
+        valid_items = [x for x in valid_items if x["ts"] >= start_midnight_ts]
         
         # Calculate daily weighted average trends using pre-computed day boundaries (numeric comparison)
         daily_trend = []
         valid_avgs = []
         for d_lbl, d_start_ts, d_end_ts in day_boundaries:
-            day_txs = [x for x in items_list if d_start_ts <= x["ts"] < d_end_ts]
+            day_txs = [x for x in valid_items if d_start_ts <= x["ts"] < d_end_ts]
             if day_txs:
                 d_qty = sum(x["qty"] for x in day_txs)
                 d_rev = sum(x["price"] * x["qty"] for x in day_txs)
@@ -361,16 +362,16 @@ def export_web_json(conn, output_path="docs/data.json.gz"):
 
     json_bytes = json.dumps(web_data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
 
-    # Export compressed docs/data.json.gz
-    gz_output_path = "docs/data.json.gz"
+    # Export compressed web JSON
+    gz_output_path = output_path if output_path.endswith(".gz") else output_path + ".gz"
     tmp_gz_path = gz_output_path + ".tmp"
     with gzip.open(tmp_gz_path, "wb", compresslevel=9) as f:
         f.write(json_bytes)
     os.replace(tmp_gz_path, gz_output_path)
 
-    # Remove uncompressed docs/data.json if present to prevent accidental 100MB+ commits
-    raw_output_path = "docs/data.json"
-    if os.path.exists(raw_output_path):
+    # Remove uncompressed raw data file if present to prevent accidental 100MB+ commits
+    raw_output_path = output_path.replace(".gz", "") if output_path.endswith(".gz") else output_path
+    if raw_output_path != gz_output_path and os.path.exists(raw_output_path):
         try:
             os.remove(raw_output_path)
         except Exception:
@@ -385,7 +386,6 @@ def fetch_and_save_all(target_dc=None):
     now_str = now_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     conn = init_db("data/market_data.db")
     cursor = conn.cursor()
-    headers = DEFAULT_HEADERS
 
     dcs = [target_dc] if target_dc and target_dc in JP_DATACENTERS else JP_DATACENTERS
 
@@ -393,7 +393,7 @@ def fetch_and_save_all(target_dc=None):
     for dc in dcs:
         recent_url = f"https://universalis.app/api/v2/extra/stats/recently-updated?dcName={dc}"
         try:
-            res = requests.get(recent_url, headers=headers, timeout=10)
+            res = requests.get(recent_url, headers=DEFAULT_HEADERS, timeout=10)
             if res.ok:
                 ids = res.json().get('items', [])[:50]
                 recent_ids_all.update(ids)
@@ -472,14 +472,13 @@ def fetch_and_save_all(target_dc=None):
     print(f"=== Sales History Updated: {total_sales_inserted:,} transactions saved ===", flush=True)
 
 
-    # Purge old sales history (> 10 days retention)
-    ten_days_ago = int(now_dt.timestamp()) - (10 * 86400)
-    cursor.execute("DELETE FROM sales_history WHERE timestamp < ?", (ten_days_ago,))
+    # Purge old sales history (> 7 days retention)
+    seven_days_ago_ts = int(now_dt.timestamp()) - (7 * 86400)
+    cursor.execute("DELETE FROM sales_history WHERE timestamp < ?", (seven_days_ago_ts,))
     cursor.execute("PRAGMA optimize;")
 
     # Pool cleanup: remove items with no sales if DB has enough data
-    seven_days_ago = int(now_dt.timestamp()) - (7 * 86400)
-    cursor.execute("SELECT COUNT(*) FROM sales_history WHERE timestamp >= ?", (seven_days_ago,))
+    cursor.execute("SELECT COUNT(*) FROM sales_history WHERE timestamp >= ?", (seven_days_ago_ts,))
     recent_sales_total = cursor.fetchone()[0]
     if recent_sales_total > 500:
         cursor.execute("""
@@ -487,7 +486,7 @@ def fetch_and_save_all(target_dc=None):
         WHERE item_id NOT IN (
             SELECT DISTINCT item_id FROM sales_history WHERE timestamp >= ?
         )
-        """, (seven_days_ago,))
+        """, (seven_days_ago_ts,))
 
     conn.commit()
 
@@ -496,7 +495,7 @@ def fetch_and_save_all(target_dc=None):
     if all_pool_ids:
         resolve_item_metadata_batch(conn, all_pool_ids)
 
-    export_web_json(conn, "docs/data.json")
+    export_web_json(conn, "docs/data.json.gz")
     conn.close()
 
 if __name__ == "__main__":

@@ -645,6 +645,46 @@
       box-shadow: 0 2px 8px rgba(0, 210, 255, 0.25);
     }
 
+    /* View Toggle Group (Arbitrage Monitor Sub-tabs) */
+    .view-toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 2px;
+      box-sizing: border-box;
+    }
+
+    .view-toggle-btn {
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .view-toggle-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .view-toggle-btn.active {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0, 210, 255, 0.25);
+    }
+
     .filter-toggle-btn {
       background: rgba(255, 255, 255, 0.04);
       color: var(--text-muted);
@@ -4976,33 +5016,152 @@
       renderPcArbitrageMonitorPane(itemId, itemTitle, itemIcon, sourceWorld, homeWorld, categoryName, unitProfit, roiPercent);
     }
 
-    function renderPcArbitrageMonitorPane(itemId, itemTitle, itemIcon, sourceWorld, homeWorld, categoryName, unitProfit, roiPercent) {
+    let pcArbSourceViewMode = 'history';
+    let pcArbSourceHqOnly = false;
+    let pcArbHomeViewMode = 'history';
+    let pcArbHomeHqOnly = false;
+
+    let pcArbSelectedSourceWorld = null;
+    let pcArbSelectedHomeWorld = null;
+    let pcArbSelectedCatName = null;
+    let pcArbSelectedUnitProfit = 0;
+    let pcArbSelectedRoi = 0;
+
+    function setArbSourceViewMode(mode) {
+      pcArbSourceViewMode = mode;
+      if (pcMonitorItemId) {
+        renderPcArbitrageMonitorPane(pcMonitorItemId, pcMonitorItemName, pcMonitorIconUrl, pcArbSelectedSourceWorld, pcArbSelectedHomeWorld, pcArbSelectedCatName, pcArbSelectedUnitProfit, pcArbSelectedRoi);
+      }
+    }
+
+    function toggleArbSourceHqOnly() {
+      pcArbSourceHqOnly = !pcArbSourceHqOnly;
+      if (pcMonitorItemId) {
+        renderPcArbitrageMonitorPane(pcMonitorItemId, pcMonitorItemName, pcMonitorIconUrl, pcArbSelectedSourceWorld, pcArbSelectedHomeWorld, pcArbSelectedCatName, pcArbSelectedUnitProfit, pcArbSelectedRoi);
+      }
+    }
+
+    function setArbHomeViewMode(mode) {
+      pcArbHomeViewMode = mode;
+      if (pcMonitorItemId) {
+        renderPcArbitrageMonitorPane(pcMonitorItemId, pcMonitorItemName, pcMonitorIconUrl, pcArbSelectedSourceWorld, pcArbSelectedHomeWorld, pcArbSelectedCatName, pcArbSelectedUnitProfit, pcArbSelectedRoi);
+      }
+    }
+
+    function toggleArbHomeHqOnly() {
+      pcArbHomeHqOnly = !pcArbHomeHqOnly;
+      if (pcMonitorItemId) {
+        renderPcArbitrageMonitorPane(pcMonitorItemId, pcMonitorItemName, pcMonitorIconUrl, pcArbSelectedSourceWorld, pcArbSelectedHomeWorld, pcArbSelectedCatName, pcArbSelectedUnitProfit, pcArbSelectedRoi);
+      }
+    }
+
+    async function fetchAndRenderArbListings(containerId, worldOrRegion, itemId, hqOnly, isSource = false) {
+      const tbody = document.getElementById(containerId);
+      if (!tbody || !itemId) return;
+
+      const cacheKey = `arb_${worldOrRegion}_${itemId}_${hqOnly ? 'hq' : 'all'}`;
+      const colCount = 6;
+
+      const renderRows = (listings) => {
+        if (!listings || listings.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="${colCount}" style="text-align:center; padding:1.5rem; color:var(--text-muted);">${hqOnly ? 'HQ品の' : ''}現在出品中の商品はありません</td></tr>`;
+          return;
+        }
+        tbody.innerHTML = listings.slice(0, 50).map(l => {
+          const price = (l.pricePerUnit || 0).toLocaleString();
+          const qty = (l.quantity || 0).toLocaleString();
+          const total = ((l.pricePerUnit || 0) * (l.quantity || 0)).toLocaleString();
+          const hqBadge = l.hq ? `<span class="hq-badge">HQ</span>` : `<span style="color:var(--text-muted); font-size:0.75rem;">NQ</span>`;
+          const retainer = l.retainerName ? escapeHtml(l.retainerName) : '-';
+          const wName = l.worldName || worldOrRegion;
+
+          return `
+            <tr>
+              <td style="font-size:0.68rem; font-weight:700; color:var(--accent-gold); white-space:nowrap;">${wName}</td>
+              <td style="font-size:0.68rem; font-weight:600; color:var(--accent-blue); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:90px;" title="${retainer}">${retainer}</td>
+              <td>${hqBadge}</td>
+              <td style="font-weight:700; color:var(--accent-green);">${price}G</td>
+              <td style="font-weight:600;">${qty}個</td>
+              <td style="font-weight:700; color:#ffb703;">${total}G</td>
+            </tr>
+          `;
+        }).join('');
+      };
+
+      if (activeListingsCache[cacheKey]) {
+        let listings = activeListingsCache[cacheKey].listings || [];
+        if (hqOnly) listings = listings.filter(l => Boolean(l.hq));
+        renderRows(listings);
+        return;
+      }
+
+      tbody.innerHTML = `<tr><td colspan="${colCount}" style="text-align:center; padding:1.5rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 出品データを取得中...</td></tr>`;
+
+      try {
+        let apiUrl = `https://universalis.app/api/v2/${encodeURIComponent(worldOrRegion)}/${itemId}?listings=100`;
+        if (hqOnly) apiUrl += '&hq=true';
+
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error('API Error');
+        const data = await res.json();
+        let listings = data.listings || [];
+        if (hqOnly) listings = listings.filter(l => Boolean(l.hq));
+
+        activeListingsCache[cacheKey] = { listings, unitsForSale: data.unitsForSale || 0 };
+        renderRows(listings);
+      } catch (err) {
+        console.error('fetchAndRenderArbListings error:', err);
+        tbody.innerHTML = `<tr><td colspan="${colCount}" style="text-align:center; padding:1.5rem; color:#ef4444;">出品データの取得に失敗しました</td></tr>`;
+      }
+    }
+
+function renderPcArbitrageMonitorPane(itemId, itemTitle, itemIcon, sourceWorld, homeWorld, categoryName, unitProfit, roiPercent) {
       const wrapper = document.getElementById('arbitrageMonitorWrapper');
       if (!wrapper) return;
+
+      pcArbSelectedSourceWorld = sourceWorld;
+      pcArbSelectedHomeWorld = homeWorld;
+      pcArbSelectedCatName = categoryName;
+      pcArbSelectedUnitProfit = unitProfit;
+      pcArbSelectedRoi = roiPercent;
 
       const sourceItems = allData[sourceWorld] || [];
       const sourceItem = sourceItems.find(x => x.item_id === itemId);
       const sourceBuyPrice = sourceItem ? (getRecent3DayAvg(sourceItem) || sourceItem.avg_price || 0) : 0;
-      const sourceHistory = sourceItem ? (sourceItem.history || []) : [];
       const sourceTrendObj = getOrComputeDailyTrend(sourceItem);
 
       const homeItems = allData[homeWorld] || [];
       const homeItem = homeItems.find(x => x.item_id === itemId);
       const homeSellPrice = homeItem ? (getRecent3DayAvg(homeItem) || homeItem.avg_price || 0) : 0;
-      const homeHistory = homeItem ? (homeItem.history || []) : [];
       const homeTrendObj = getOrComputeDailyTrend(homeItem);
 
       const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(itemTitle)}`;
       const sourceDc = findDcForWorld(sourceWorld) || '';
       const homeDc = findDcForWorld(homeWorld) || '';
 
-      const dailyExpectedProfit = Math.round((unitProfit || 0) * (homeItem ? (homeItem.sale_velocity || 0) : 0));
-
       const sourceBadge = buildTrendBadgeHtml(sourceTrendObj.trendPct, { fontSize: '0.72rem' });
       const homeBadge = buildTrendBadgeHtml(homeTrendObj.trendPct, { fontSize: '0.72rem' });
 
+      // 仕入れ先 (単一ワールド: sourceWorld) 取引履歴データの取得
+      let sourceHistories = [];
+      if (pcArbSourceViewMode === 'history') {
+        sourceHistories = sourceItem ? (sourceItem.history || []) : [];
+        if (pcArbSourceHqOnly) {
+          sourceHistories = sourceHistories.filter(h => Boolean(h.hq));
+        }
+      }
+
+      // 販売先 (ホームワールド単一: homeWorld) 取引履歴データの取得
+      let homeHistories = [];
+      if (pcArbHomeViewMode === 'history') {
+        homeHistories = homeItem ? (homeItem.history || []) : [];
+        if (pcArbHomeHqOnly) {
+          homeHistories = homeHistories.filter(h => Boolean(h.hq));
+        }
+      }
+
       const html = `
-        <!-- 金策2窓モニターヘッダー (市場タブと完全同サイズ感) -->
+        <!-- 金策2窓モニターヘッダー -->
         <div style="display:flex; align-items:center; justify-content:space-between; padding-bottom:0.75rem; border-bottom:1px solid var(--card-border); margin-bottom:0.85rem; flex-shrink:0;">
           <div style="display:flex; align-items:center; gap:0.75rem;">
             <img src="${itemIcon}" alt="" style="width:48px; height:48px; border-radius:10px; border:1px solid var(--card-border); background:#0b111e; object-fit:cover;">
@@ -5028,7 +5187,7 @@
         <!-- 2窓対比メインエリア (左右50% split) -->
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; flex:1; min-height:0; overflow:hidden;">
           
-          <!-- 👈 左窓: 仕入れ元ワールド (${sourceWorld}) -->
+          <!-- 👈 左窓: 仕入れ先エリア (仕入れワールド: sourceWorld) -->
           <div style="display:flex; flex-direction:column; background:rgba(15, 23, 42, 0.7); border:1px solid rgba(74, 222, 128, 0.35); border-radius:12px; padding:0.75rem; min-height:0; overflow:hidden;">
             <!-- 仕入れ先ヘッダー -->
             <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; padding-bottom:0.4rem; border-bottom:1px solid rgba(255,255,255,0.06); flex-shrink:0;">
@@ -5072,41 +5231,69 @@
               </div>
             </div>
 
-            <!-- 直近売買履歴テーブル -->
+            <!-- 仕入れ先 テーブル表示エリア (切替タブ ＋ NQスイッチ) -->
             <div style="flex:1; min-height:0; display:flex; flex-direction:column;">
-              <div style="font-size:0.75rem; font-weight:800; color:#ffffff; margin-bottom:0.4rem; flex-shrink:0; display:flex; align-items:center; gap:4px;">
-                <i class="fa-solid fa-receipt" style="color:var(--accent-green);"></i> 直近の売買履歴
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.4rem; flex-shrink:0;">
+                <div class="view-toggle-group">
+                  <button class="view-toggle-btn ${pcArbSourceViewMode === 'history' ? 'active' : ''}" onclick="setArbSourceViewMode('history')">
+                    <i class="fa-solid fa-clock-rotate-left"></i> 取引履歴
+                  </button>
+                  <button class="view-toggle-btn ${pcArbSourceViewMode === 'listings' ? 'active' : ''}" onclick="setArbSourceViewMode('listings')">
+                    <i class="fa-solid fa-list-ul"></i> 出品一覧
+                  </button>
+                </div>
+
+                <button class="filter-toggle-btn ${pcArbSourceHqOnly ? 'active' : ''}" onclick="toggleArbSourceHqOnly()" style="padding:2px 8px; font-size:0.72rem; border-radius:6px;">
+                  <i class="fa-solid fa-filter"></i> ${pcArbSourceHqOnly ? 'HQのみ' : 'NQ含'}
+                </button>
               </div>
+
               <div class="history-table-container" style="flex:1; min-height:0; max-height:none !important; overflow-y:auto; border-radius:8px;">
                 <table class="history-table" style="font-size:0.7rem;">
-                  <thead>
-                    <tr>
-                      <th>日時 (JST)</th>
-                      <th>購入者</th>
-                      <th>HQ</th>
-                      <th>単価 (G)</th>
-                      <th>数量</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    ${sourceHistory.length > 0 ? sourceHistory.slice(0, 30).map(h => {
-                      const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.68rem;">-</span>`;
-                      return `
+                  ${pcArbSourceViewMode === 'listings' ? `
+                    <thead>
                       <tr>
-                        <td style="color:var(--text-muted); font-size:0.68rem;">${formatTimeLocal(new Date(h.ts * 1000).toISOString()).slice(5)}</td>
-                        <td style="font-size:0.68rem; font-weight:600; color:var(--accent-blue); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:110px;" title="${h.buyer ? escapeHtml(h.buyer) : ''}">${buyerName}</td>
-                        <td>${h.hq ? '<span class="hq-badge">HQ</span>' : '<span style="color:var(--text-muted);">NQ</span>'}</td>
-                        <td style="font-weight:700;">${(h.price || 0).toLocaleString()}G</td>
-                        <td>${(h.qty || 0)}個</td>
+                        <th>ワールド</th>
+                        <th>リテイナー</th>
+                        <th>品質</th>
+                        <th>単価 (G)</th>
+                        <th>数量</th>
+                        <th>合計 (G)</th>
                       </tr>
-                    `;}).join('') : '<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--text-muted);">履歴なし</td></tr>'}
-                  </tbody>
+                    </thead>
+                    <tbody id="pcArbSourceListingsTbody">
+                      <tr><td colspan="6" style="text-align:center; padding:1.5rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 出品データを取得中...</td></tr>
+                    </tbody>
+                  ` : `
+                    <thead>
+                      <tr>
+                        <th>日時 (JST)</th>
+                        <th>購入者</th>
+                        <th>HQ</th>
+                        <th>単価 (G)</th>
+                        <th>数量</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${sourceHistories.length > 0 ? sourceHistories.slice(0, 50).map(h => {
+                        const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.68rem;">-</span>`;
+                        return `
+                        <tr>
+                          <td style="color:var(--text-muted); font-size:0.68rem;">${formatTimeLocal(new Date(h.ts * 1000).toISOString()).slice(5)}</td>
+                          <td style="font-size:0.68rem; font-weight:600; color:var(--accent-blue); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:110px;" title="${h.buyer ? escapeHtml(h.buyer) : ''}">${buyerName}</td>
+                          <td>${h.hq ? '<span class="hq-badge">HQ</span>' : '<span style="color:var(--text-muted);">NQ</span>'}</td>
+                          <td style="font-weight:700;">${(h.price || 0).toLocaleString()}G</td>
+                          <td>${(h.qty || 0)}個</td>
+                        </tr>
+                      `;}).join('') : '<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--text-muted);">履歴なし</td></tr>'}
+                    </tbody>
+                  `}
                 </table>
               </div>
             </div>
           </div>
 
-          <!-- 👉 右窓: 販売先ホームワールド (${homeWorld}) -->
+          <!-- 👉 右窓: 販売先エリア (ホームワールド単一対象) -->
           <div style="display:flex; flex-direction:column; background:rgba(15, 23, 42, 0.7); border:1px solid rgba(0, 210, 255, 0.35); border-radius:12px; padding:0.75rem; min-height:0; overflow:hidden;">
             <!-- 販売先ヘッダー -->
             <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; padding-bottom:0.4rem; border-bottom:1px solid rgba(255,255,255,0.06); flex-shrink:0;">
@@ -5150,35 +5337,63 @@
               </div>
             </div>
 
-            <!-- 直近売買履歴テーブル -->
+            <!-- 販売先 テーブル表示エリア (切替タブ ＋ NQスイッチ) -->
             <div style="flex:1; min-height:0; display:flex; flex-direction:column;">
-              <div style="font-size:0.75rem; font-weight:800; color:#ffffff; margin-bottom:0.4rem; flex-shrink:0; display:flex; align-items:center; gap:4px;">
-                <i class="fa-solid fa-receipt" style="color:var(--accent-blue);"></i> 直近の売買履歴
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.4rem; flex-shrink:0;">
+                <div class="view-toggle-group">
+                  <button class="view-toggle-btn ${pcArbHomeViewMode === 'history' ? 'active' : ''}" onclick="setArbHomeViewMode('history')">
+                    <i class="fa-solid fa-clock-rotate-left"></i> 取引履歴
+                  </button>
+                  <button class="view-toggle-btn ${pcArbHomeViewMode === 'listings' ? 'active' : ''}" onclick="setArbHomeViewMode('listings')">
+                    <i class="fa-solid fa-list-ul"></i> 出品一覧
+                  </button>
+                </div>
+
+                <button class="filter-toggle-btn ${pcArbHomeHqOnly ? 'active' : ''}" onclick="toggleArbHomeHqOnly()" style="padding:2px 8px; font-size:0.72rem; border-radius:6px;">
+                  <i class="fa-solid fa-filter"></i> ${pcArbHomeHqOnly ? 'HQのみ' : 'NQ含'}
+                </button>
               </div>
+
               <div class="history-table-container" style="flex:1; min-height:0; max-height:none !important; overflow-y:auto; border-radius:8px;">
                 <table class="history-table" style="font-size:0.7rem;">
-                  <thead>
-                    <tr>
-                      <th>日時 (JST)</th>
-                      <th>購入者</th>
-                      <th>HQ</th>
-                      <th>単価 (G)</th>
-                      <th>数量</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    ${homeHistory.length > 0 ? homeHistory.slice(0, 30).map(h => {
-                      const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.68rem;">-</span>`;
-                      return `
+                  ${pcArbHomeViewMode === 'listings' ? `
+                    <thead>
                       <tr>
-                        <td style="color:var(--text-muted); font-size:0.68rem;">${formatTimeLocal(new Date(h.ts * 1000).toISOString()).slice(5)}</td>
-                        <td style="font-size:0.68rem; font-weight:600; color:var(--accent-blue); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:110px;" title="${h.buyer ? escapeHtml(h.buyer) : ''}">${buyerName}</td>
-                        <td>${h.hq ? '<span class="hq-badge">HQ</span>' : '<span style="color:var(--text-muted);">NQ</span>'}</td>
-                        <td style="font-weight:700;">${(h.price || 0).toLocaleString()}G</td>
-                        <td>${(h.qty || 0)}個</td>
+                        <th>ワールド</th>
+                        <th>リテイナー</th>
+                        <th>品質</th>
+                        <th>単価 (G)</th>
+                        <th>数量</th>
+                        <th>合計 (G)</th>
                       </tr>
-                    `;}).join('') : '<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--text-muted);">履歴なし</td></tr>'}
-                  </tbody>
+                    </thead>
+                    <tbody id="pcArbHomeListingsTbody">
+                      <tr><td colspan="6" style="text-align:center; padding:1.5rem; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> 出品データを取得中...</td></tr>
+                    </tbody>
+                  ` : `
+                    <thead>
+                      <tr>
+                        <th>日時 (JST)</th>
+                        <th>購入者</th>
+                        <th>HQ</th>
+                        <th>単価 (G)</th>
+                        <th>数量</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${homeHistories.length > 0 ? homeHistories.slice(0, 50).map(h => {
+                        const buyerName = h.buyer ? escapeHtml(h.buyer) : `<span style="color:var(--text-muted); font-size:0.68rem;">-</span>`;
+                        return `
+                        <tr>
+                          <td style="color:var(--text-muted); font-size:0.68rem;">${formatTimeLocal(new Date(h.ts * 1000).toISOString()).slice(5)}</td>
+                          <td style="font-size:0.68rem; font-weight:600; color:var(--accent-blue); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:110px;" title="${h.buyer ? escapeHtml(h.buyer) : ''}">${buyerName}</td>
+                          <td>${h.hq ? '<span class="hq-badge">HQ</span>' : '<span style="color:var(--text-muted);">NQ</span>'}</td>
+                          <td style="font-weight:700;">${(h.price || 0).toLocaleString()}G</td>
+                          <td>${(h.qty || 0)}個</td>
+                        </tr>
+                      `;}).join('') : '<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--text-muted);">履歴なし</td></tr>'}
+                    </tbody>
+                  `}
                 </table>
               </div>
             </div>
@@ -5192,9 +5407,17 @@
       // 両窓の7日間相場推移チャートを描画 (自動数学パディングで左右完全垂直同期)
       drawTrendChart('pcArbSourceCanvas', 'pcArbSourceSummary', sourceTrendObj.trend, sourceTrendObj.trendPct, { height: 105, paddingTop: 12, paddingBottom: 16 });
       drawTrendChart('pcArbHomeCanvas', 'pcArbHomeSummary', homeTrendObj.trend, homeTrendObj.trendPct, { height: 105, paddingTop: 12, paddingBottom: 16 });
+
+      // 出品モードがアクティブな場合は Universalis ライブ出品データを取得描画
+      if (pcArbSourceViewMode === 'listings') {
+        fetchAndRenderArbListings('pcArbSourceListingsTbody', 'Japan', itemId, pcArbSourceHqOnly, true);
+      }
+      if (pcArbHomeViewMode === 'listings') {
+        fetchAndRenderArbListings('pcArbHomeListingsTbody', homeWorld, itemId, pcArbHomeHqOnly, false);
+      }
     }
 
-    function updateArbitrageFilters() {
+function updateArbitrageFilters() {
       const homeWorldSelect = document.getElementById('arbHomeWorldSelect');
       if (homeWorldSelect && homeWorldSelect.value) {
         saveUserHomeWorld(homeWorldSelect.value);

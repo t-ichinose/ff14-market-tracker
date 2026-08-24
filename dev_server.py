@@ -24,8 +24,9 @@ def run_dev_server():
 
     for attempt in range(max_attempts):
         try:
-            socketserver.TCPServer.allow_reuse_address = True
-            with socketserver.TCPServer(("127.0.0.1", port), NoCacheHTTPRequestHandler) as httpd:
+            ServerClass = getattr(http.server, "ThreadingHTTPServer", socketserver.TCPServer)
+            ServerClass.allow_reuse_address = True
+            with ServerClass(("127.0.0.1", port), NoCacheHTTPRequestHandler) as httpd:
                 print(f"Private Localhost Server running at http://127.0.0.1:{port} (Strictly Isolated to this PC)")
                 httpd.serve_forever()
         except OSError as e:
