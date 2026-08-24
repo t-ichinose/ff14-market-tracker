@@ -5,6 +5,7 @@ import os
 import sys
 import time
 import gzip
+import threading
 from datetime import datetime, timezone, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -107,14 +108,23 @@ def resolve_item_metadata_batch(conn, item_ids):
     """, meta_rows)
     conn.commit()
 
+_thread_local = threading.local()
+
+def get_thread_session():
+    if not hasattr(_thread_local, "session"):
+        session = requests.Session()
+        session.headers.update(DEFAULT_HEADERS)
+        _thread_local.session = session
+    return _thread_local.session
+
 def fetch_single_dc_data(dc_name, target_ids):
-    headers = DEFAULT_HEADERS
+    session = get_thread_session()
     ids_str = ",".join(map(str, target_ids))
     detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin=604800&entriesToReturn=2000"
     for attempt in range(3):
         try:
-            time.sleep(0.10)  # Politeness delay between requests
-            d_res = requests.get(detail_url, headers=headers, timeout=(5.0, 15.0))
+            time.sleep(0.25)  # Politeness delay between requests
+            d_res = session.get(detail_url, timeout=(5.0, 15.0))
             if d_res.status_code == 200:
                 data = d_res.json()
                 if "items" in data:
