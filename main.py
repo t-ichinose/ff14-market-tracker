@@ -110,7 +110,7 @@ def resolve_item_metadata_batch(conn, item_ids):
 def fetch_single_dc_data(dc_name, target_ids):
     headers = DEFAULT_HEADERS
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin=604800&entriesToReturn=5000"
+    detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin=604800&entriesToReturn=2000"
     for attempt in range(3):
         try:
             time.sleep(0.10)  # Politeness delay between requests
