@@ -2,28 +2,18 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-
-  <script>
-    if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.location && typeof window.location.pathname === 'string') {
-      if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth > 0 && window.innerWidth <= 768)) {
-        if (!window.location.pathname.endsWith('mobile.html')) {
-          window.location.replace('mobile.html');
-        }
-      }
-    }
-  </script>
-  <title>FF14 Market Analytics - Japan Datacenters & World Tracker</title>
-  <!-- Google Fonts & Icons & Chart.js -->
+  <title>FF14 Market Tracker Mobile</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
+
     :root {
       --bg-dark: #0b0f19;
       --card-bg: rgba(22, 30, 49, 0.85);
@@ -917,97 +907,288 @@
     }
 
 
+  
+
+    /* ==========================================================================
+       MOBILE FINAL CLEAN STYLES & OVERRIDES
+       ========================================================================== */
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: fixed;
+      touch-action: pan-y;
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(121, 40, 202, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 210, 255, 0.12) 0px, transparent 50%);
+    }
+
+    .mobile-app-shell {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100vh;
+      padding: 0.4rem;
+      box-sizing: border-box;
+    }
+
+    /* Top Header Bar */
+    .mobile-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.3rem 0.2rem;
+      flex-shrink: 0;
+    }
+
+    .mobile-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .mobile-brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+    }
+
+    .mobile-header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-left: auto;
+    }
+
+    /* Production Mode Tabs Container */
+    .app-mode-tabs {
+      display: flex;
+      gap: 3px;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 3px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .app-mode-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .app-mode-btn.active {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.25) 0%, rgba(121, 40, 202, 0.25) 100%);
+      color: #ffffff;
+      border: 1px solid rgba(0, 210, 255, 0.5);
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+      text-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
+    }
+
+    .mobile-menu-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: #ffffff;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Subtab Indicator Bar */
+    .mobile-subtab-bar {
+      display: flex;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 3px;
+      margin-bottom: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .mobile-subtab-btn {
+      flex: 1;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 6px 0;
+      border-radius: 7px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .mobile-subtab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2) 0%, rgba(121, 40, 202, 0.2) 100%);
+      color: var(--accent-blue);
+      border: 1px solid rgba(0, 210, 255, 0.4);
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.25);
+    }
+
+    /* Direct Production Styling for JS-generated pc-world-select Dropdown */
+    .pc-world-select, select.pc-world-select {
+      width: 100% !important;
+      background: rgba(15, 23, 42, 0.95) !important;
+      border: 1px solid rgba(0, 210, 255, 0.4) !important;
+      color: #ffffff !important;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.78rem !important;
+      font-weight: 700 !important;
+      padding: 6px 10px 6px 30px !important;
+      border-radius: 9px !important;
+      outline: none !important;
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.15) !important;
+      cursor: pointer !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300d2ff' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 0.6rem center !important;
+      background-size: 1.1rem !important;
+      padding-right: 2rem !important;
+    }
+
+    .pc-world-select:focus {
+      border-color: var(--accent-blue) !important;
+      box-shadow: 0 0 16px rgba(0, 210, 255, 0.4) !important;
+    }
+
+    /* Main Panels Viewport */
+    .mobile-viewport {
+      display: flex;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+      position: relative;
+      background: rgba(11, 17, 30, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+    }
+
+    .mobile-panel {
+      display: none;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      touch-action: pan-y;
+      padding: 0.5rem;
+      box-sizing: border-box;
+    }
+
+    .mobile-panel.active {
+      display: block !important;
+    }
+
+    .pc-analytics-split-pane {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.75rem !important;
+      width: 100% !important;
+    }
+
+    /* Strict Card Icon 36px Unification */
+    .item-card-icon, .item-icon {
+      width: 36px !important;
+      height: 36px !important;
+      max-width: 36px !important;
+      max-height: 36px !important;
+      border-radius: 8px !important;
+      object-fit: cover !important;
+      flex-shrink: 0 !important;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="mobile-app-shell">
 
-    <header>
-      <div class="brand">
-        <div class="brand-icon"><i class="fa-solid fa-chart-simple"></i></div>
-        <div>
-          <h1 style="font-size: 1.35rem; line-height: 1.1;">FF14 Market Tracker</h1>
-          <div style="font-size:0.7rem; color:var(--text-muted);">Japan Datacenters & All 32 Worlds Comparison</div>
-        </div>
+    <!-- Hidden placeholders to satisfy JS loadData DOM element requirements without affecting UI -->
+    <span id="pcLastUpdateText" style="display:none;"></span>
+    <span id="pcDataRangeText" style="display:none;"></span>
+
+    <!-- 1. Header Bar -->
+    <div class="mobile-header-bar">
+      <div class="mobile-header-left">
+        <div class="brand-icon" style="width:28px; height:28px; background:linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.95rem;"><i class="fa-solid fa-chart-simple"></i></div>
+        <div class="mobile-brand-title">FF14 Market</div>
       </div>
 
-      <div class="header-badges" style="display: flex; align-items: center; gap: 0.6rem;">
-        <!-- Fixed Mode Switcher Tabs right to the left of 集計期間 / 最終更新 -->
-        <div class="view-mode-tabs" style="display: flex; gap: 0.3rem; background: rgba(0, 0, 0, 0.35); padding: 3px; border-radius: 10px; border: 1px solid var(--card-border);">
-          <button class="view-mode-tab-btn active" id="modeBtnAnalytics" onclick="switchMainViewMode('analytics')">
-            <i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> 市場分析
-          </button>
-          <button class="view-mode-tab-btn" id="modeBtnArbitrage" onclick="switchMainViewMode('arbitrage')">
-            <i class="fa-solid fa-gem" style="color: var(--accent-gold);"></i> 💎 金策ナビ
-          </button>
+      <!-- Right-Aligned Production Mode Tabs + Hamburger Menu -->
+      <div class="mobile-header-right">
+        <div class="app-mode-tabs">
+          <button class="app-mode-btn active" id="modeBtnAnalytics" onclick="switchMainViewMode('analytics')">市場分析</button>
+          <button class="app-mode-btn" id="modeBtnArbitrage" onclick="switchMainViewMode('arbitrage')">💎 金策ナビ</button>
         </div>
-
-        <div class="status-badge" id="lastUpdatedBadge" style="padding:0.25rem 0.6rem; font-size:0.75rem;">
-          <span class="status-dot"></span> 最終更新: 読み込み中...
-        </div>
-      </div>
-    </header>
-
-
-    
-    <!-- 2-Column Split Dashboard Container -->
-    <div class="pc-dashboard-container view-analytics" id="pcDashboardContainer">
-      <!-- 👈 左半分: 1列品目カードリスト (幅 440px・独立縦スクロール対応) -->
-      <div class="left-card-scroll-pane">
-        <!-- 市場分析用グリッドラッパー -->
-        <div class="grid-scroll-wrapper" id="analyticsGridWrapper" style="width: 100%;">
-          <div class="world-grid-scroll-container" id="worldGrid" style="display: flex; flex-direction: column; gap: 0.8rem; width: 100%;">
-            <div style="text-align:center; padding:3rem; width:100%; color:var(--text-muted);">
-              <i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>マーケットデータを読み込み中...
-            </div>
-          </div>
-        </div>
-
-        <!-- 金策ナビ用グリッドラッパー -->
-        <div class="grid-scroll-wrapper" id="arbitrageGridWrapper" style="width: 100%; display: none;">
-          <div class="world-column" id="arbitrageWorldColumn">
-            <!-- JS Populated PC Header -->
-            <div class="world-item-list" id="arbitrageCardGrid">
-              <div style="text-align:center; padding:3rem; width:100%; color:var(--text-muted);">
-                <i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>金策データを集計中...
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 👉 右半分: 常設 詳細モニターエリア (動的出力パネル 1fr) -->
-      <div class="pc-right-pane" id="pcRightMonitorPane">
-        <!-- 1. 市場分析用モニターラッパー -->
-        <div class="monitor-wrapper" id="analyticsMonitorWrapper" style="display: flex; flex-direction: column; height: 100%; width: 100%; min-height: 0; overflow: hidden;">
-          <div style="text-align:center; padding:3.5rem; color:var(--text-muted); display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%;">
-            <div style="width:84px; height:84px; border-radius:50%; background:rgba(0, 210, 255, 0.08); border:1px solid rgba(0, 210, 255, 0.25); display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; box-shadow:0 0 35px rgba(0, 210, 255, 0.15);">
-              <i class="fa-solid fa-chart-line" style="font-size:2.5rem; color:var(--accent-blue);"></i>
-            </div>
-            <div style="font-size:1.25rem; font-weight:800; color:#ffffff; margin-bottom:0.5rem;">品目を選択してください</div>
-            <div style="font-size:0.85rem; color:#94a3b8; max-width:380px; line-height:1.6;">左側のカード一覧からアイテムを選択すると全32ワールドの価格比較と推移が表示されます</div>
-          </div>
-        </div>
-
-        <!-- 2. 金策ナビ用2窓モニターラッパー -->
-        <div class="monitor-wrapper" id="arbitrageMonitorWrapper" style="display: none; flex-direction: column; height: 100%; width: 100%; min-height: 0; overflow: hidden;">
-          <div style="text-align:center; padding:3.5rem; color:var(--text-muted); display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%;">
-            <div style="width:84px; height:84px; border-radius:50%; background:rgba(251, 191, 36, 0.08); border:1px solid rgba(251, 191, 36, 0.25); display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; box-shadow:0 0 35px rgba(251, 191, 36, 0.15);">
-              <i class="fa-solid fa-scale-balanced" style="font-size:2.5rem; color:var(--accent-gold);"></i>
-            </div>
-            <div style="font-size:1.25rem; font-weight:800; color:#ffffff; margin-bottom:0.5rem;">金策品目を選択してください</div>
-            <div style="font-size:0.85rem; color:#94a3b8; max-width:380px; line-height:1.6;">左側の金策カードをクリックすると仕入れ先と販売先の2窓比較が表示されます</div>
-          </div>
-        </div>
+        
+        <button class="mobile-menu-btn" onclick="alert('メニュー')" title="メニュー">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
     </div>
 
+    <!-- 2. Subtab Indicator Bar (① ② ③) -->
+    <div class="mobile-subtab-bar">
+      <button class="mobile-subtab-btn active" id="mobSubtab0" onclick="setMobileTab(0)">
+        <i class="fa-solid fa-list-ul"></i> ① 品目一覧
+      </button>
+      <button class="mobile-subtab-btn" id="mobSubtab1" onclick="setMobileTab(1)">
+        <i class="fa-solid fa-chart-line"></i> ② 推移・比較
+      </button>
+      <button class="mobile-subtab-btn" id="mobSubtab2" onclick="setMobileTab(2)">
+        <i class="fa-solid fa-receipt"></i> ③ 出品状況
+      </button>
+    </div>
 
+    <!-- 3. Mobile Viewport -->
+    <div class="mobile-viewport" id="viewport">
+      
+      <!-- Panel 0: Single #worldGrid container. JS renderWorldGrid() will dynamically render controls + cards right here without ANY manual HTML duplication! -->
+      <div class="mobile-panel active" id="mobPanel0">
+        <div id="worldGrid" style="width:100%;">
+          <div style="text-align:center; padding:3rem; color:var(--text-muted);">データを読み込み中...</div>
+        </div>
+      </div>
+
+      <!-- Panel 1 & 2: Monitor Container for Detail Views -->
+      <div class="mobile-panel" id="mobPanel1">
+        <div id="analyticsMonitorWrapper" style="display:flex; flex-direction:column; gap:0.8rem; width:100%;">
+          <div style="text-align:center; padding:3.5rem 1rem; color:var(--text-muted);">
+            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-blue);"></i><br><br>
+            <div style="font-weight:700; color:#fff;">品目を選択してください</div>
+            <div style="font-size:0.8rem; margin-top:0.3rem;">「① 品目一覧」タブからアイテムを選択すると価格推移や全32ワールドの比較が表示されます</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-
-
   <script>
+
     async function fetchWithTimeout(resource, options = {}) {
       const { timeout = 8000 } = options;
       const controller = new AbortController();
@@ -3524,6 +3705,84 @@ function updateArbitrageFilters() {
     }
 
     loadData();
+  
+
+    /* ==========================================================================
+       MOBILE CONTROLLER (SUBTABS + FIXED ITEM HEADER SPLIT + TOUCH SWIPE)
+       ========================================================================== */
+    let currentMobileTab = 0;
+    let touchStartX = 0, touchStartY = 0;
+
+    function setMobileTab(tabIndex) {
+      if (tabIndex < 0) tabIndex = 0;
+      if (tabIndex > 2) tabIndex = 2;
+      currentMobileTab = tabIndex;
+
+      for (let i = 0; i <= 2; i++) {
+        const b = document.getElementById('mobSubtab' + i);
+        if (b) b.classList.toggle('active', i === tabIndex);
+      }
+
+      const p0 = document.getElementById('mobPanel0');
+      const p1 = document.getElementById('mobPanel1');
+      const historyPane = document.getElementById('pcAnalyticsHistoryPane');
+      const listingsPane = document.getElementById('pcAnalyticsListingsPane');
+
+      if (tabIndex === 0) {
+        if (p0) p0.classList.add('active');
+        if (p1) p1.classList.remove('active');
+      } else if (tabIndex === 1) {
+        if (p0) p0.classList.remove('active');
+        if (p1) p1.classList.add('active');
+        // Show Left Pane (History & Trends), Hide Right Pane (Listings) -- Fixed Header stays!
+        if (historyPane) historyPane.style.setProperty('display', 'flex', 'important');
+        if (listingsPane) listingsPane.style.setProperty('display', 'none', 'important');
+      } else if (tabIndex === 2) {
+        if (p0) p0.classList.remove('active');
+        if (p1) p1.classList.add('active');
+        // Show Right Pane (Listings), Hide Left Pane (History & Trends) -- Fixed Header stays!
+        if (historyPane) historyPane.style.setProperty('display', 'none', 'important');
+        if (listingsPane) listingsPane.style.setProperty('display', 'flex', 'important');
+      }
+    }
+
+    // Auto switch to Tab 1 on Item Select
+    const origSelectPcMonitorItem = typeof selectPcMonitorItem === 'function' ? selectPcMonitorItem : null;
+    selectPcMonitorItem = function(itemId, itemName, iconUrl, worldName) {
+      if (origSelectPcMonitorItem) {
+        origSelectPcMonitorItem(itemId, itemName, iconUrl, worldName);
+      }
+      setMobileTab(1);
+    };
+
+    // Touch Swipe Support
+    function setupMobileTouchEvents() {
+      const viewport = document.getElementById('viewport');
+      if (!viewport || viewport.dataset.touchBound) return;
+      viewport.dataset.touchBound = "true";
+
+      viewport.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', (e) => {
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        const deltaY = e.changedTouches[0].clientY - touchStartY;
+
+        if (Math.abs(deltaX) > 40 && Math.abs(deltaY) < 80) {
+          if (deltaX < -40) setMobileTab(currentMobileTab + 1);
+          else if (deltaX > 40) setMobileTab(currentMobileTab - 1);
+        }
+      }, { passive: true });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupMobileTouchEvents();
+      if (typeof loadData === 'function') {
+        loadData();
+      }
+    });
   </script>
 </body>
 </html>

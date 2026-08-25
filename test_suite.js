@@ -12,14 +12,13 @@ console.log("=========================================\n");
 
 const html = fs.readFileSync('docs/index.html', 'utf8');
 
-// Extract script block
-const scriptMatch = html.match(/<script>([\s\S]*?)<\/script>/);
-if (!scriptMatch) {
-  console.error("❌ ERROR: Could not find <script> block in docs/index.html");
+// Extract main script block (the largest script tag)
+const scriptBlocks = Array.from(html.matchAll(/<script>([\s\S]*?)<\/script>/g)).map(m => m[1]);
+const jsCode = scriptBlocks.sort((a, b) => b.length - a.length)[0];
+if (!jsCode) {
+  console.error("❌ ERROR: Could not find main <script> block in docs/index.html");
   process.exit(1);
 }
-
-const jsCode = scriptMatch[1];
 
 // 1. Syntax Check
 try {
