@@ -2299,36 +2299,77 @@
 
     // Main Data Loader for Mobile
     async function loadData() {
+      console.time('[MobileFastLoad] Total Load Time');
+      const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
+      if (lastUpdatedEl) {
+        lastUpdatedEl.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...`;
+      }
+
       try {
         let data = null;
 
+        // 1. Try relative same-origin data.json.gz
         try {
-          const res = await fetchWithTimeout('data.json.gz', { timeout: 20000 });
+          console.time('[MobileFastLoad] Fetch data.json.gz');
+          const res = await fetchWithTimeout('data.json.gz', { timeout: 15000 });
+          console.timeEnd('[MobileFastLoad] Fetch data.json.gz');
+
           if (res && res.ok) {
-            if (window.DecompressionStream) {
-              try {
-                const ds = new DecompressionStream('gzip');
-                const decompressedResponse = new Response(res.body.pipeThrough(ds));
-                data = await decompressedResponse.json();
-              } catch (dsErr) {
-                console.warn("DecompressionStream failed:", dsErr);
-              }
-            }
-            if (!data && window.pako) {
-              const arrayBuffer = await res.arrayBuffer();
+            console.time('[MobileFastLoad] ArrayBuffer Read');
+            const arrayBuffer = await res.arrayBuffer();
+            console.timeEnd('[MobileFastLoad] ArrayBuffer Read');
+
+            if (window.pako) {
+              console.time('[MobileFastLoad] Pako Ungzip');
               const decompressedStr = pako.ungzip(new Uint8Array(arrayBuffer), { to: 'string' });
+              console.timeEnd('[MobileFastLoad] Pako Ungzip');
+
+              console.time('[MobileFastLoad] JSON Parse');
               data = JSON.parse(decompressedStr);
+              console.timeEnd('[MobileFastLoad] JSON Parse');
+            } else if (window.DecompressionStream) {
+              console.time('[MobileFastLoad] DecompressionStream');
+              const ds = new DecompressionStream('gzip');
+              const blob = new Blob([arrayBuffer]);
+              const text = await new Response(blob.stream().pipeThrough(ds)).text();
+              console.timeEnd('[MobileFastLoad] DecompressionStream');
+
+              console.time('[MobileFastLoad] JSON Parse');
+              data = JSON.parse(text);
+              console.timeEnd('[MobileFastLoad] JSON Parse');
             }
           }
         } catch (gzErr) {
-          console.warn("data.json.gz fetch error:", gzErr);
+          console.warn("[MobileFastLoad] data.json.gz fetch error:", gzErr);
         }
 
+        // 2. Fallback to uncompressed data.json
         if (!data) {
           try {
-            const res = await fetchWithTimeout('data.json', { timeout: 20000 });
+            console.time('[MobileFastLoad] Fetch data.json (Uncompressed Fallback)');
+            const res = await fetchWithTimeout('data.json', { timeout: 15000 });
+            console.timeEnd('[MobileFastLoad] Fetch data.json (Uncompressed Fallback)');
             if (res && res.ok) data = await res.json();
           } catch (e) {}
+        }
+
+        // 3. Fallback to live production URL
+        if (!data) {
+          try {
+            console.time('[MobileFastLoad] Fetch Production Live URL Fallback');
+            const prodUrl = 'https://t-ichinose.github.io/ff14-market-tracker/data.json.gz';
+            const res = await fetchWithTimeout(prodUrl, { timeout: 20000 });
+            if (res && res.ok) {
+              const arrayBuffer = await res.arrayBuffer();
+              if (window.pako) {
+                const decompressedStr = pako.ungzip(new Uint8Array(arrayBuffer), { to: 'string' });
+                data = JSON.parse(decompressedStr);
+              }
+            }
+            console.timeEnd('[MobileFastLoad] Fetch Production Live URL Fallback');
+          } catch (prodErr) {
+            console.error("[MobileFastLoad] Live production fallback failed:", prodErr);
+          }
         }
 
         if (!data) {
@@ -2337,7 +2378,6 @@
 
         if (data && data.last_updated) {
           const currentPeriodText = getAggregationPeriodStr(data.last_updated);
-          const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
           if (lastUpdatedEl) {
             const formattedLastUpdated = formatTimeLocal(data.last_updated);
             lastUpdatedEl.innerHTML = `<i class="fa-regular fa-clock"></i> 最終更新: ${formattedLastUpdated} (${currentPeriodText})`;
@@ -2348,13 +2388,15 @@
         populateMobileWorldSelect();
         renderMobileItemList();
 
+        console.timeEnd('[MobileFastLoad] Total Load Time');
+
       } catch (err) {
         console.error('Mobile loadData error:', err);
-        const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
         if (lastUpdatedEl) {
           lastUpdatedEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-red);"></i> データ読み込み失敗 (${err.message})`;
         }
       }
+    }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
