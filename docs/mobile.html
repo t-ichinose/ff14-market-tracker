@@ -2302,9 +2302,8 @@
       try {
         let data = null;
 
-        // Fetch compressed data.json.gz
         try {
-          const res = await fetchWithTimeout('data.json.gz');
+          const res = await fetchWithTimeout('data.json.gz', { timeout: 20000 });
           if (res && res.ok) {
             if (window.DecompressionStream) {
               try {
@@ -2312,11 +2311,9 @@
                 const decompressedResponse = new Response(res.body.pipeThrough(ds));
                 data = await decompressedResponse.json();
               } catch (dsErr) {
-                console.warn("DecompressionStream failed, fallback to pako:", dsErr);
+                console.warn("DecompressionStream failed:", dsErr);
               }
             }
-            
-            // Fallback via Pako if DecompressionStream fails or unsupported
             if (!data && window.pako) {
               const arrayBuffer = await res.arrayBuffer();
               const decompressedStr = pako.ungzip(new Uint8Array(arrayBuffer), { to: 'string' });
@@ -2327,20 +2324,19 @@
           console.warn("data.json.gz fetch error:", gzErr);
         }
 
-        // Fallback to uncompressed data.json if available
         if (!data) {
           try {
-            const res = await fetchWithTimeout('data.json');
+            const res = await fetchWithTimeout('data.json', { timeout: 20000 });
             if (res && res.ok) data = await res.json();
           } catch (e) {}
         }
 
         if (!data) {
-          throw new Error('圧縮データ(data.json.gz)の解凍・取得に失敗しました');
+          throw new Error('データファイルのロード・解凍に失敗しました');
         }
 
-        if (data.last_updated) {
-          currentPeriodText = getAggregationPeriodStr(data.last_updated);
+        if (data && data.last_updated) {
+          const currentPeriodText = getAggregationPeriodStr(data.last_updated);
           const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
           if (lastUpdatedEl) {
             const formattedLastUpdated = formatTimeLocal(data.last_updated);
@@ -2348,15 +2344,12 @@
           }
         }
 
-        allData = data.worlds || data.data || {};
-        
-        if (typeof populateWorldSelects === 'function') populateWorldSelects();
-        if (typeof renderWorldGrid === 'function') renderWorldGrid();
-        if (typeof populateMobileWorldSelect === 'function') populateMobileWorldSelect();
-        if (typeof renderMobileItemList === 'function') renderMobileItemList();
+        allData = (data && (data.worlds || data.data)) ? (data.worlds || data.data) : {};
+        populateMobileWorldSelect();
+        renderMobileItemList();
 
       } catch (err) {
-        console.error('Data load error:', err);
+        console.error('Mobile loadData error:', err);
         const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
         if (lastUpdatedEl) {
           lastUpdatedEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-red);"></i> データ読み込み失敗 (${err.message})`;
@@ -2364,10 +2357,9 @@
       }
     }
 
-    // Document Ready Initialization
     document.addEventListener('DOMContentLoaded', () => {
       loadData();
     });
-  </script>
+</script>
 </body>
 </html>
