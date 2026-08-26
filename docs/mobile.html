@@ -1127,9 +1127,8 @@
 <body>
   <div class="mobile-app-shell">
 
-    <!-- Hidden placeholders to satisfy JS loadData DOM element requirements without affecting UI -->
-    <span id="pcLastUpdateText" style="display:none;"></span>
-    <span id="pcDataRangeText" style="display:none;"></span>
+    <!-- Hidden placeholders -->
+    <span id="lastUpdatedBadge" style="display:none;"></span>
 
     <!-- 1. Header Bar -->
     <div class="mobile-header-bar">
@@ -1153,13 +1152,13 @@
 
     <!-- 2. Subtab Indicator Bar (① ② ③) -->
     <div class="mobile-subtab-bar">
-      <button class="mobile-subtab-btn active" id="mobSubtab0" onclick="setMobileTab(0)">
+      <button class="mobile-subtab-btn active" id="subtab0" onclick="switchMobileSubtab(0)">
         <i class="fa-solid fa-list-ul"></i> ① 品目一覧
       </button>
-      <button class="mobile-subtab-btn" id="mobSubtab1" onclick="setMobileTab(1)">
+      <button class="mobile-subtab-btn" id="subtab1" onclick="switchMobileSubtab(1)">
         <i class="fa-solid fa-chart-line"></i> ② 推移・比較
       </button>
-      <button class="mobile-subtab-btn" id="mobSubtab2" onclick="setMobileTab(2)">
+      <button class="mobile-subtab-btn" id="subtab2" onclick="switchMobileSubtab(2)">
         <i class="fa-solid fa-receipt"></i> ③ 出品状況
       </button>
     </div>
@@ -1167,20 +1166,40 @@
     <!-- 3. Mobile Viewport -->
     <div class="mobile-viewport" id="viewport">
       
-      <!-- Panel 0: Single #worldGrid container. JS renderWorldGrid() will dynamically render controls + cards right here without ANY manual HTML duplication! -->
-      <div class="mobile-panel active" id="mobPanel0">
-        <div id="worldGrid" style="width:100%;">
+      <!-- Panel 0: Item List Tab -->
+      <div class="mobile-panel active" id="subtabPanel0">
+        <!-- Controls Bar -->
+        <div style="display:flex; align-items:center; gap:8px; padding:0.6rem 0.8rem; background:rgba(15,23,42,0.9); border-bottom:1px solid var(--card-border);">
+          <select id="mobileWorldSelect" class="pc-world-select" style="flex:1; padding:6px 10px; font-size:0.88rem; font-weight:700;" onchange="handleMobileWorldChange(this.value)">
+          </select>
+          <button class="filter-toggle-btn crystal-filter-btn active" id="mobileCrystalBtn" onclick="toggleCrystalFilter()" style="padding:6px 10px; font-size:0.8rem; border-radius:8px;">
+            <i class="fa-solid fa-gem"></i> クリスタル除外
+          </button>
+        </div>
+        <!-- Item Card Container -->
+        <div id="mobileItemList" style="width:100%; padding:0.8rem; display:flex; flex-direction:column; gap:0.75rem; overflow-y:auto; height:calc(100vh - 120px);">
           <div style="text-align:center; padding:3rem; color:var(--text-muted);">データを読み込み中...</div>
         </div>
       </div>
 
-      <!-- Panel 1 & 2: Monitor Container for Detail Views -->
-      <div class="mobile-panel" id="mobPanel1">
-        <div id="analyticsMonitorWrapper" style="display:flex; flex-direction:column; gap:0.8rem; width:100%;">
+      <!-- Panel 1: Trend / History Tab -->
+      <div class="mobile-panel" id="subtabPanel1" style="display:none;">
+        <div id="mobileTrendContent" style="width:100%; padding:0.8rem; display:flex; flex-direction:column; gap:0.8rem; overflow-y:auto; height:calc(100vh - 120px);">
           <div style="text-align:center; padding:3.5rem 1rem; color:var(--text-muted);">
             <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-blue);"></i><br><br>
             <div style="font-weight:700; color:#fff;">品目を選択してください</div>
             <div style="font-size:0.8rem; margin-top:0.3rem;">「① 品目一覧」タブからアイテムを選択すると価格推移や全32ワールドの比較が表示されます</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Listings Tab -->
+      <div class="mobile-panel" id="subtabPanel2" style="display:none;">
+        <div id="mobileListingsContent" style="width:100%; padding:0.8rem; display:flex; flex-direction:column; gap:0.8rem; overflow-y:auto; height:calc(100vh - 120px);">
+          <div style="text-align:center; padding:3.5rem 1rem; color:var(--text-muted);">
+            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-blue);"></i><br><br>
+            <div style="font-weight:700; color:#fff;">品目を選択してください</div>
+            <div style="font-size:0.8rem; margin-top:0.3rem;">「① 品目一覧」タブからアイテムを選択すると現在の出品一覧が表示されます</div>
           </div>
         </div>
       </div>
@@ -2299,99 +2318,69 @@
 
     // Main Data Loader for Mobile
     async function loadData() {
-      console.time('[MobileFastLoad] Total Load Time');
-      const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
-      if (lastUpdatedEl) {
-        lastUpdatedEl.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...`;
-      }
-
       try {
         let data = null;
 
-        // 1. Relative same-origin data.json.gz (Fastest)
+        // Fetch compressed data.json.gz
         try {
-          console.time('[MobileFastLoad] Fetch data.json.gz');
-          const res = await fetchWithTimeout('data.json.gz', { timeout: 15000 });
-          console.timeEnd('[MobileFastLoad] Fetch data.json.gz');
-
+          const res = await fetchWithTimeout('data.json.gz');
           if (res && res.ok) {
-            console.time('[MobileFastLoad] ArrayBuffer Read');
-            const arrayBuffer = await res.arrayBuffer();
-            console.timeEnd('[MobileFastLoad] ArrayBuffer Read');
-
-            if (window.pako) {
-              console.time('[MobileFastLoad] Pako Ungzip');
+            if (window.DecompressionStream) {
+              try {
+                const ds = new DecompressionStream('gzip');
+                const decompressedResponse = new Response(res.body.pipeThrough(ds));
+                data = await decompressedResponse.json();
+              } catch (dsErr) {
+                console.warn("DecompressionStream failed, fallback to pako:", dsErr);
+              }
+            }
+            
+            // Fallback via Pako if DecompressionStream fails or unsupported
+            if (!data && window.pako) {
+              const arrayBuffer = await res.arrayBuffer();
               const decompressedStr = pako.ungzip(new Uint8Array(arrayBuffer), { to: 'string' });
-              console.timeEnd('[MobileFastLoad] Pako Ungzip');
-
-              console.time('[MobileFastLoad] JSON Parse');
               data = JSON.parse(decompressedStr);
-              console.timeEnd('[MobileFastLoad] JSON Parse');
-            } else if (window.DecompressionStream) {
-              const ds = new DecompressionStream('gzip');
-              const blob = new Blob([arrayBuffer]);
-              const text = await new Response(blob.stream().pipeThrough(ds)).text();
-              data = JSON.parse(text);
             }
           }
         } catch (gzErr) {
-          console.warn("[MobileFastLoad] data.json.gz fetch error:", gzErr);
+          console.warn("data.json.gz fetch error:", gzErr);
         }
 
-        // 2. Fallback uncompressed data.json
+        // Fallback to uncompressed data.json if available
         if (!data) {
           try {
-            console.time('[MobileFastLoad] Fetch data.json (Uncompressed Fallback)');
-            const res = await fetchWithTimeout('data.json', { timeout: 15000 });
-            console.timeEnd('[MobileFastLoad] Fetch data.json (Uncompressed Fallback)');
+            const res = await fetchWithTimeout('data.json');
             if (res && res.ok) data = await res.json();
           } catch (e) {}
         }
 
-        // 3. Fallback production live URL
         if (!data) {
-          try {
-            console.time('[MobileFastLoad] Fetch Production Live URL Fallback');
-            const prodUrl = 'https://t-ichinose.github.io/ff14-market-tracker/data.json.gz';
-            const res = await fetchWithTimeout(prodUrl, { timeout: 20000 });
-            if (res && res.ok) {
-              const arrayBuffer = await res.arrayBuffer();
-              if (window.pako) {
-                const decompressedStr = pako.ungzip(new Uint8Array(arrayBuffer), { to: 'string' });
-                data = JSON.parse(decompressedStr);
-              }
-            }
-            console.timeEnd('[MobileFastLoad] Fetch Production Live URL Fallback');
-          } catch (prodErr) {
-            console.error("[MobileFastLoad] Live production fallback failed:", prodErr);
-          }
+          throw new Error('圧縮データ(data.json.gz)の解凍・取得に失敗しました');
         }
 
-        if (!data) {
-          throw new Error('データファイルのロード・解凍に失敗しました');
-        }
-
-        if (data && data.last_updated) {
-          const currentPeriodText = getAggregationPeriodStr(data.last_updated);
+        if (data.last_updated) {
+          currentPeriodText = getAggregationPeriodStr(data.last_updated);
+          const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
           if (lastUpdatedEl) {
             const formattedLastUpdated = formatTimeLocal(data.last_updated);
             lastUpdatedEl.innerHTML = `<i class="fa-regular fa-clock"></i> 最終更新: ${formattedLastUpdated} (${currentPeriodText})`;
           }
         }
 
-        allData = (data && (data.worlds || data.data)) ? (data.worlds || data.data) : {};
-        populateMobileWorldSelect();
-        renderMobileItemList();
-
-        console.timeEnd('[MobileFastLoad] Total Load Time');
+        allData = data.worlds || data.data || {};
+        
+        if (typeof populateWorldSelects === 'function') populateWorldSelects();
+        if (typeof renderWorldGrid === 'function') renderWorldGrid();
+        if (typeof populateMobileWorldSelect === 'function') populateMobileWorldSelect();
+        if (typeof renderMobileItemList === 'function') renderMobileItemList();
 
       } catch (err) {
-        console.error('Mobile loadData error:', err);
+        console.error('Data load error:', err);
+        const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
         if (lastUpdatedEl) {
           lastUpdatedEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-red);"></i> データ読み込み失敗 (${err.message})`;
         }
       }
-    }
     }
 
     // Document Ready Initialization
