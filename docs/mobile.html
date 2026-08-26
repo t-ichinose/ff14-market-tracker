@@ -2308,7 +2308,7 @@
       try {
         let data = null;
 
-        // 1. Try relative same-origin data.json.gz
+        // 1. Relative same-origin data.json.gz (Fastest)
         try {
           console.time('[MobileFastLoad] Fetch data.json.gz');
           const res = await fetchWithTimeout('data.json.gz', { timeout: 15000 });
@@ -2328,22 +2328,17 @@
               data = JSON.parse(decompressedStr);
               console.timeEnd('[MobileFastLoad] JSON Parse');
             } else if (window.DecompressionStream) {
-              console.time('[MobileFastLoad] DecompressionStream');
               const ds = new DecompressionStream('gzip');
               const blob = new Blob([arrayBuffer]);
               const text = await new Response(blob.stream().pipeThrough(ds)).text();
-              console.timeEnd('[MobileFastLoad] DecompressionStream');
-
-              console.time('[MobileFastLoad] JSON Parse');
               data = JSON.parse(text);
-              console.timeEnd('[MobileFastLoad] JSON Parse');
             }
           }
         } catch (gzErr) {
           console.warn("[MobileFastLoad] data.json.gz fetch error:", gzErr);
         }
 
-        // 2. Fallback to uncompressed data.json
+        // 2. Fallback uncompressed data.json
         if (!data) {
           try {
             console.time('[MobileFastLoad] Fetch data.json (Uncompressed Fallback)');
@@ -2353,7 +2348,7 @@
           } catch (e) {}
         }
 
-        // 3. Fallback to live production URL
+        // 3. Fallback production live URL
         if (!data) {
           try {
             console.time('[MobileFastLoad] Fetch Production Live URL Fallback');
@@ -2399,9 +2394,10 @@
     }
     }
 
+    // Document Ready Initialization
     document.addEventListener('DOMContentLoaded', () => {
       loadData();
     });
-</script>
+  </script>
 </body>
 </html>
