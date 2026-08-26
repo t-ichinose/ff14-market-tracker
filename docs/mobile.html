@@ -910,13 +910,11 @@
   
 
     /* ==========================================================================
-       MOBILE CLEAN REBUILD: ZERO SYNTAX ERROR & UNIFIED UI
+       MOBILE FINAL CLEAN STYLES & OVERRIDES
        ========================================================================== */
     html, body {
       width: 100%;
       height: 100%;
-      margin: 0;
-      padding: 0;
       overflow: hidden;
       position: fixed;
       touch-action: pan-y;
@@ -931,26 +929,24 @@
       flex-direction: column;
       width: 100%;
       height: 100vh;
+      padding: 0.4rem;
       box-sizing: border-box;
-      padding: 0.35rem;
     }
 
-    /* 3-Tier Header Container */
-    .mobile-header-container {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      width: 100%;
-      padding: 0.2rem 0.2rem 0.4rem 0.2rem;
-      flex-shrink: 0;
-    }
-
-    /* Header Row 1 (Top): Title + Mode Switch + Menu Button */
-    .header-row-top {
+    /* Top Header Bar */
+    .mobile-header-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
+      padding: 0.3rem 0.2rem;
+      flex-shrink: 0;
+    }
+
+    .mobile-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
     }
 
     .mobile-brand-title {
@@ -964,19 +960,22 @@
       white-space: nowrap;
     }
 
-    .header-top-right {
+    .mobile-header-right {
       display: flex;
       align-items: center;
       gap: 0.35rem;
+      margin-left: auto;
     }
 
+    /* Production Mode Tabs Container */
     .app-mode-tabs {
       display: flex;
       gap: 3px;
       background: rgba(0, 0, 0, 0.45);
       padding: 3px;
-      border-radius: 9px;
+      border-radius: 10px;
       border: 1px solid var(--card-border);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .app-mode-btn {
@@ -986,9 +985,10 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.72rem;
       font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 4px 9px;
+      border-radius: 7px;
       cursor: pointer;
+      transition: all 0.2s ease;
       white-space: nowrap;
     }
 
@@ -997,224 +997,121 @@
       color: #ffffff;
       border: 1px solid rgba(0, 210, 255, 0.5);
       box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+      text-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
     }
 
     .mobile-menu-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--card-border);
       color: #ffffff;
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       cursor: pointer;
-    }
-
-    /* Header Row 2 (Middle): Sort Mode Tabs + Crystal Toggle Right-Aligned */
-    .header-row-mid {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .sort-tabs-wrapper {
-      flex: 1;
-      display: flex;
-      gap: 3px;
-      background: rgba(0, 0, 0, 0.35);
-      padding: 3px;
-      border-radius: 8px;
-      border: 1px solid var(--card-border);
-    }
-
-    .sort-tab-btn {
-      flex: 1;
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 5px 0;
-      border-radius: 6px;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s ease;
-    }
-
-    .sort-tab-btn.active {
-      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2) 0%, rgba(121, 40, 202, 0.2) 100%);
-      color: var(--accent-blue);
-      border: 1px solid rgba(0, 210, 255, 0.4);
-      box-shadow: 0 0 8px rgba(0, 210, 255, 0.2);
-    }
-
-    /* Crystal Filter Button on Middle Header Right */
-    .crystal-toggle-btn {
-      background: rgba(0, 210, 255, 0.15);
-      border: 1px solid rgba(0, 210, 255, 0.4);
-      color: var(--accent-blue);
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 5px 9px;
-      border-radius: 8px;
-      cursor: pointer;
-      white-space: nowrap;
       flex-shrink: 0;
     }
 
-    .crystal-toggle-btn.off {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-    }
-
-    /* Header Row 3 (Bottom): Subtab Indicator Bar + Expand Chevron */
-    .header-row-bottom {
+    /* Subtab Indicator Bar */
+    .mobile-subtab-bar {
       display: flex;
-      align-items: center;
-      gap: 4px;
       width: 100%;
-      box-sizing: border-box;
-    }
-
-    .subtab-buttons-wrapper {
-      flex: 1;
-      display: flex;
-      gap: 3px;
       background: rgba(0, 0, 0, 0.5);
-      padding: 3px;
-      border-radius: 8px;
       border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 3px;
+      margin-bottom: 0.4rem;
+      flex-shrink: 0;
     }
 
-    .subtab-btn {
+    .mobile-subtab-btn {
       flex: 1;
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-muted);
       font-size: 0.74rem;
       font-weight: 700;
-      padding: 5px 0;
-      border-radius: 6px;
+      padding: 6px 0;
+      border-radius: 7px;
       cursor: pointer;
       text-align: center;
-    }
-
-    .subtab-btn.active {
-      background: rgba(0, 210, 255, 0.18);
-      color: #ffffff;
-      border: 1px solid rgba(0, 210, 255, 0.35);
-    }
-
-    .expand-drawer-btn {
-      background: rgba(0, 210, 255, 0.12);
-      border: 1px solid rgba(0, 210, 255, 0.35);
-      color: var(--accent-blue);
-      width: 32px;
-      height: 28px;
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      cursor: pointer;
-      flex-shrink: 0;
       transition: all 0.2s ease;
     }
 
-    .expand-drawer-btn.active {
-      background: rgba(0, 210, 255, 0.3);
-      color: #ffffff;
-      box-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
+    .mobile-subtab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2) 0%, rgba(121, 40, 202, 0.2) 100%);
+      color: var(--accent-blue);
+      border: 1px solid rgba(0, 210, 255, 0.4);
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.25);
     }
 
-    /* Expandable Control Drawer Container */
-    .mobile-control-drawer {
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(0, 210, 255, 0.3);
-      border-radius: 10px;
-      padding: 0.65rem;
-      margin-top: 0.2rem;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-    }
-
-    .drawer-field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .drawer-label {
-      font-size: 0.73rem;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    /* Ultimate Mobile Drawer Dropdown Style */
-    select.pc-world-select,
-    .pc-world-select,
-    #pcWorldSelect {
+    /* Direct Production Styling for JS-generated pc-world-select Dropdown */
+    .pc-world-select, select.pc-world-select {
       width: 100% !important;
-      background-color: rgba(15, 23, 42, 0.95) !important;
+      background: rgba(15, 23, 42, 0.95) !important;
+      border: 1px solid rgba(0, 210, 255, 0.4) !important;
+      color: #ffffff !important;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.78rem !important;
+      font-weight: 700 !important;
+      padding: 6px 10px 6px 30px !important;
+      border-radius: 9px !important;
+      outline: none !important;
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.15) !important;
+      cursor: pointer !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300d2ff' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") !important;
       background-repeat: no-repeat !important;
       background-position: right 0.6rem center !important;
       background-size: 1.1rem !important;
-      border: 1px solid rgba(0, 210, 255, 0.4) !important;
-      color: #ffffff !important;
-      font-family: 'Inter', sans-serif !important;
-      font-size: 0.8rem !important;
-      font-weight: 700 !important;
-      padding: 6px 30px 6px 10px !important;
-      border-radius: 8px !important;
-      outline: none !important;
-      box-shadow: 0 0 10px rgba(0, 210, 255, 0.2) !important;
-      cursor: pointer !important;
-      appearance: none !important;
-      -webkit-appearance: none !important;
-      box-sizing: border-box !important;
+      padding-right: 2rem !important;
     }
 
-    select.pc-world-select option {
-      background-color: #0f172a !important;
-      color: #ffffff !important;
+    .pc-world-select:focus {
+      border-color: var(--accent-blue) !important;
+      box-shadow: 0 0 16px rgba(0, 210, 255, 0.4) !important;
     }
 
-    select.pc-world-select optgroup {
-      background-color: #0b111e !important;
-      color: #00d2ff !important;
-      font-weight: bold !important;
-    }
-
-    /* Main Content Viewport (Item List Only) */
-    .mobile-main-viewport {
+    /* Main Panels Viewport */
+    .mobile-viewport {
+      display: flex;
       flex: 1;
       width: 100%;
       height: 100%;
       min-height: 0;
-      overflow-y: auto;
-      touch-action: pan-y;
+      overflow: hidden;
+      position: relative;
       background: rgba(11, 17, 30, 0.6);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 0.4rem;
+      border-radius: 14px;
+    }
+
+    .mobile-panel {
+      display: none;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      touch-action: pan-y;
+      padding: 0.5rem;
       box-sizing: border-box;
     }
 
-    /* Mobile-Dedicated Card Container List */
-    .mobile-cards-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      width: 100%;
+    .mobile-panel.active {
+      display: block !important;
     }
 
-    /* Card Icon Strict 36px Unification */
+    .pc-analytics-split-pane {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.75rem !important;
+      width: 100% !important;
+    }
+
+    /* Strict Card Icon 36px Unification */
     .item-card-icon, .item-icon {
       width: 36px !important;
       height: 36px !important;
@@ -1225,13 +1122,15 @@
       flex-shrink: 0 !important;
     }
   </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
 </head>
 <body>
   <div class="mobile-app-shell">
-
-    <!-- Hidden placeholders -->
     <span id="lastUpdatedBadge" style="display:none;"></span>
+
+    <!-- Hidden placeholders to satisfy JS loadData DOM element requirements without affecting UI -->
+    <span id="pcLastUpdateText" style="display:none;"></span>
+    <span id="pcDataRangeText" style="display:none;"></span>
 
     <!-- 1. Header Bar -->
     <div class="mobile-header-bar">
@@ -1255,13 +1154,13 @@
 
     <!-- 2. Subtab Indicator Bar (① ② ③) -->
     <div class="mobile-subtab-bar">
-      <button class="mobile-subtab-btn active" id="subtab0" onclick="switchMobileSubtab(0)">
+      <button class="mobile-subtab-btn active" id="mobSubtab0" onclick="setMobileTab(0)">
         <i class="fa-solid fa-list-ul"></i> ① 品目一覧
       </button>
-      <button class="mobile-subtab-btn" id="subtab1" onclick="switchMobileSubtab(1)">
+      <button class="mobile-subtab-btn" id="mobSubtab1" onclick="setMobileTab(1)">
         <i class="fa-solid fa-chart-line"></i> ② 推移・比較
       </button>
-      <button class="mobile-subtab-btn" id="subtab2" onclick="switchMobileSubtab(2)">
+      <button class="mobile-subtab-btn" id="mobSubtab2" onclick="setMobileTab(2)">
         <i class="fa-solid fa-receipt"></i> ③ 出品状況
       </button>
     </div>
@@ -1269,25 +1168,16 @@
     <!-- 3. Mobile Viewport -->
     <div class="mobile-viewport" id="viewport">
       
-      <!-- Panel 0: Item List Tab -->
-      <div class="mobile-panel active" id="subtabPanel0">
-        <!-- Controls Bar -->
-        <div style="display:flex; align-items:center; gap:8px; padding:0.6rem 0.8rem; background:rgba(15,23,42,0.9); border-bottom:1px solid var(--card-border);">
-          <select id="mobileWorldSelect" class="pc-world-select" style="flex:1; padding:6px 10px; font-size:0.88rem; font-weight:700;" onchange="handleMobileWorldChange(this.value)">
-          </select>
-          <button class="filter-toggle-btn crystal-filter-btn active" id="mobileCrystalBtn" onclick="toggleCrystalFilter()" style="padding:6px 10px; font-size:0.8rem; border-radius:8px;">
-            <i class="fa-solid fa-gem"></i> クリスタル除外
-          </button>
-        </div>
-        <!-- Item Card Container -->
-        <div id="mobileItemList" style="width:100%; padding:0.8rem; display:flex; flex-direction:column; gap:0.75rem; overflow-y:auto; height:calc(100vh - 120px);">
+      <!-- Panel 0: Single #worldGrid container. JS renderWorldGrid() will dynamically render controls + cards right here without ANY manual HTML duplication! -->
+      <div class="mobile-panel active" id="mobPanel0">
+        <div id="worldGrid" style="width:100%;">
           <div style="text-align:center; padding:3rem; color:var(--text-muted);">データを読み込み中...</div>
         </div>
       </div>
 
-      <!-- Panel 1: Trend / History Tab -->
-      <div class="mobile-panel" id="subtabPanel1" style="display:none;">
-        <div id="mobileTrendContent" style="width:100%; padding:0.8rem; display:flex; flex-direction:column; gap:0.8rem; overflow-y:auto; height:calc(100vh - 120px);">
+      <!-- Panel 1 & 2: Monitor Container for Detail Views -->
+      <div class="mobile-panel" id="mobPanel1">
+        <div id="analyticsMonitorWrapper" style="display:flex; flex-direction:column; gap:0.8rem; width:100%;">
           <div style="text-align:center; padding:3.5rem 1rem; color:var(--text-muted);">
             <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-blue);"></i><br><br>
             <div style="font-weight:700; color:#fff;">品目を選択してください</div>
@@ -1296,21 +1186,18 @@
         </div>
       </div>
 
-      <!-- Panel 2: Listings Tab -->
-      <div class="mobile-panel" id="subtabPanel2" style="display:none;">
-        <div id="mobileListingsContent" style="width:100%; padding:0.8rem; display:flex; flex-direction:column; gap:0.8rem; overflow-y:auto; height:calc(100vh - 120px);">
-          <div style="text-align:center; padding:3.5rem 1rem; color:var(--text-muted);">
-            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-blue);"></i><br><br>
-            <div style="font-weight:700; color:#fff;">品目を選択してください</div>
-            <div style="font-size:0.8rem; margin-top:0.3rem;">「① 品目一覧」タブからアイテムを選択すると現在の出品一覧が表示されます</div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
   <script>
+
+    // Alias function for tab click handlers
+    function setMobileTab(idx) {
+      if (typeof switchMobileSubtab === 'function') {
+        switchMobileSubtab(idx);
+      }
+    }
+
 // ==========================================
     // FF14 Market Tracker - Mobile Core Engine
     // Production Grade Refactored & Optimized
