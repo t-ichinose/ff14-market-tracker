@@ -22,7 +22,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js" defer></script>
   
   <style>
     :root {
@@ -919,6 +918,7 @@
 
 
   </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js" defer></script>
 </head>
 <body>
   <div class="container">
@@ -1310,7 +1310,7 @@
           }
         }
 
-        // 3. Fallback to live production URL if both local fetches failed
+        // 3. Fallback to live production URL if local fetches failed
         if (!data) {
           try {
             console.time('[FastLoad] Fetch Production Live URL Fallback');
@@ -1385,7 +1385,6 @@
           `;
         }
       }
-    }
     }
 
     function findDcForWorld(worldName) {
@@ -3547,8 +3546,8 @@ function updateArbitrageFilters() {
       }).join('');
     }
 
-    // 初回のみデータ読み込み（ポーリング廃止: メモリ圧迫・レートリミット防止）
-    loadData();
-  </script>
+    // Polling setInterval removed
+  loadData();
+</script>
 </body>
 </html>
