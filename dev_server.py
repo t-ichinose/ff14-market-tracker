@@ -11,10 +11,11 @@ class NoCacheHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
 
     def end_headers(self):
-        # ブラウザおよびサーバーのキャッシュを完全に禁止する無効化ヘッダー
-        self.send_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
-        self.send_header("Pragma", "no-cache")
-        self.send_header("Expires", "0")
+        # HTML/JS/CSS には no-cache、大容量 data.json.gz には条件付きキャッシュを許可して無駄な全件転送を防止
+        if self.path.endswith('.gz') or self.path.endswith('.json'):
+            self.send_header("Cache-Control", "public, max-age=300")
+        else:
+            self.send_header("Cache-Control", "no-cache, must-revalidate")
         super().end_headers()
 
 def run_dev_server():
