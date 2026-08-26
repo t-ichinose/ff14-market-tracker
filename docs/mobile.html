@@ -910,11 +910,13 @@
   
 
     /* ==========================================================================
-       MOBILE FINAL CLEAN STYLES & OVERRIDES
+       MOBILE CLEAN REBUILD: ZERO SYNTAX ERROR & UNIFIED UI
        ========================================================================== */
     html, body {
       width: 100%;
       height: 100%;
+      margin: 0;
+      padding: 0;
       overflow: hidden;
       position: fixed;
       touch-action: pan-y;
@@ -929,24 +931,26 @@
       flex-direction: column;
       width: 100%;
       height: 100vh;
-      padding: 0.4rem;
       box-sizing: border-box;
+      padding: 0.35rem;
     }
 
-    /* Top Header Bar */
-    .mobile-header-bar {
+    /* 3-Tier Header Container */
+    .mobile-header-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      width: 100%;
+      padding: 0.2rem 0.2rem 0.4rem 0.2rem;
+      flex-shrink: 0;
+    }
+
+    /* Header Row 1 (Top): Title + Mode Switch + Menu Button */
+    .header-row-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding: 0.3rem 0.2rem;
-      flex-shrink: 0;
-    }
-
-    .mobile-header-left {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
     }
 
     .mobile-brand-title {
@@ -960,22 +964,19 @@
       white-space: nowrap;
     }
 
-    .mobile-header-right {
+    .header-top-right {
       display: flex;
       align-items: center;
       gap: 0.35rem;
-      margin-left: auto;
     }
 
-    /* Production Mode Tabs Container */
     .app-mode-tabs {
       display: flex;
       gap: 3px;
       background: rgba(0, 0, 0, 0.45);
       padding: 3px;
-      border-radius: 10px;
+      border-radius: 9px;
       border: 1px solid var(--card-border);
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .app-mode-btn {
@@ -985,10 +986,9 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.72rem;
       font-weight: 700;
-      padding: 4px 9px;
-      border-radius: 7px;
+      padding: 3px 8px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: all 0.2s ease;
       white-space: nowrap;
     }
 
@@ -997,121 +997,224 @@
       color: #ffffff;
       border: 1px solid rgba(0, 210, 255, 0.5);
       box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
-      text-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
     }
 
     .mobile-menu-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--card-border);
       color: #ffffff;
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       cursor: pointer;
-      flex-shrink: 0;
     }
 
-    /* Subtab Indicator Bar */
-    .mobile-subtab-bar {
+    /* Header Row 2 (Middle): Sort Mode Tabs + Crystal Toggle Right-Aligned */
+    .header-row-mid {
       display: flex;
+      align-items: center;
+      gap: 4px;
       width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
+      box-sizing: border-box;
+    }
+
+    .sort-tabs-wrapper {
+      flex: 1;
+      display: flex;
+      gap: 3px;
+      background: rgba(0, 0, 0, 0.35);
       padding: 3px;
-      margin-bottom: 0.4rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+    }
+
+    .sort-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 5px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .sort-tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2) 0%, rgba(121, 40, 202, 0.2) 100%);
+      color: var(--accent-blue);
+      border: 1px solid rgba(0, 210, 255, 0.4);
+      box-shadow: 0 0 8px rgba(0, 210, 255, 0.2);
+    }
+
+    /* Crystal Filter Button on Middle Header Right */
+    .crystal-toggle-btn {
+      background: rgba(0, 210, 255, 0.15);
+      border: 1px solid rgba(0, 210, 255, 0.4);
+      color: var(--accent-blue);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 5px 9px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
       flex-shrink: 0;
     }
 
-    .mobile-subtab-btn {
+    .crystal-toggle-btn.off {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+    }
+
+    /* Header Row 3 (Bottom): Subtab Indicator Bar + Expand Chevron */
+    .header-row-bottom {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .subtab-buttons-wrapper {
+      flex: 1;
+      display: flex;
+      gap: 3px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 3px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+    }
+
+    .subtab-btn {
       flex: 1;
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-muted);
       font-size: 0.74rem;
       font-weight: 700;
-      padding: 6px 0;
-      border-radius: 7px;
+      padding: 5px 0;
+      border-radius: 6px;
       cursor: pointer;
       text-align: center;
+    }
+
+    .subtab-btn.active {
+      background: rgba(0, 210, 255, 0.18);
+      color: #ffffff;
+      border: 1px solid rgba(0, 210, 255, 0.35);
+    }
+
+    .expand-drawer-btn {
+      background: rgba(0, 210, 255, 0.12);
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      color: var(--accent-blue);
+      width: 32px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      cursor: pointer;
+      flex-shrink: 0;
       transition: all 0.2s ease;
     }
 
-    .mobile-subtab-btn.active {
-      background: linear-gradient(135deg, rgba(0, 210, 255, 0.2) 0%, rgba(121, 40, 202, 0.2) 100%);
-      color: var(--accent-blue);
-      border: 1px solid rgba(0, 210, 255, 0.4);
-      box-shadow: 0 0 10px rgba(0, 210, 255, 0.25);
+    .expand-drawer-btn.active {
+      background: rgba(0, 210, 255, 0.3);
+      color: #ffffff;
+      box-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
     }
 
-    /* Direct Production Styling for JS-generated pc-world-select Dropdown */
-    .pc-world-select, select.pc-world-select {
+    /* Expandable Control Drawer Container */
+    .mobile-control-drawer {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 10px;
+      padding: 0.65rem;
+      margin-top: 0.2rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .drawer-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .drawer-label {
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Ultimate Mobile Drawer Dropdown Style */
+    select.pc-world-select,
+    .pc-world-select,
+    #pcWorldSelect {
       width: 100% !important;
-      background: rgba(15, 23, 42, 0.95) !important;
-      border: 1px solid rgba(0, 210, 255, 0.4) !important;
-      color: #ffffff !important;
-      font-family: 'Inter', sans-serif !important;
-      font-size: 0.78rem !important;
-      font-weight: 700 !important;
-      padding: 6px 10px 6px 30px !important;
-      border-radius: 9px !important;
-      outline: none !important;
-      box-shadow: 0 0 12px rgba(0, 210, 255, 0.15) !important;
-      cursor: pointer !important;
-      appearance: none !important;
-      -webkit-appearance: none !important;
+      background-color: rgba(15, 23, 42, 0.95) !important;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300d2ff' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") !important;
       background-repeat: no-repeat !important;
       background-position: right 0.6rem center !important;
       background-size: 1.1rem !important;
-      padding-right: 2rem !important;
+      border: 1px solid rgba(0, 210, 255, 0.4) !important;
+      color: #ffffff !important;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.8rem !important;
+      font-weight: 700 !important;
+      padding: 6px 30px 6px 10px !important;
+      border-radius: 8px !important;
+      outline: none !important;
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.2) !important;
+      cursor: pointer !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      box-sizing: border-box !important;
     }
 
-    .pc-world-select:focus {
-      border-color: var(--accent-blue) !important;
-      box-shadow: 0 0 16px rgba(0, 210, 255, 0.4) !important;
+    select.pc-world-select option {
+      background-color: #0f172a !important;
+      color: #ffffff !important;
     }
 
-    /* Main Panels Viewport */
-    .mobile-viewport {
-      display: flex;
+    select.pc-world-select optgroup {
+      background-color: #0b111e !important;
+      color: #00d2ff !important;
+      font-weight: bold !important;
+    }
+
+    /* Main Content Viewport (Item List Only) */
+    .mobile-main-viewport {
       flex: 1;
       width: 100%;
       height: 100%;
       min-height: 0;
-      overflow: hidden;
-      position: relative;
-      background: rgba(11, 17, 30, 0.6);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-    }
-
-    .mobile-panel {
-      display: none;
-      width: 100%;
-      height: 100%;
       overflow-y: auto;
       touch-action: pan-y;
-      padding: 0.5rem;
+      background: rgba(11, 17, 30, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.4rem;
       box-sizing: border-box;
     }
 
-    .mobile-panel.active {
-      display: block !important;
+    /* Mobile-Dedicated Card Container List */
+    .mobile-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      width: 100%;
     }
 
-    .pc-analytics-split-pane {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 0.75rem !important;
-      width: 100% !important;
-    }
-
-    /* Strict Card Icon 36px Unification */
+    /* Card Icon Strict 36px Unification */
     .item-card-icon, .item-icon {
       width: 36px !important;
       height: 36px !important;
@@ -1122,7 +1225,7 @@
       flex-shrink: 0 !important;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js" defer></script>
 </head>
 <body>
   <div class="mobile-app-shell">
@@ -2318,69 +2421,99 @@
 
     // Main Data Loader for Mobile
     async function loadData() {
+      console.time('[MobileFastLoad] Total Load Time');
+      const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
+      if (lastUpdatedEl) {
+        lastUpdatedEl.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> 読み込み中...`;
+      }
+
       try {
         let data = null;
 
-        // Fetch compressed data.json.gz
+        // 1. Relative same-origin data.json.gz (Fastest)
         try {
-          const res = await fetchWithTimeout('data.json.gz');
+          console.time('[MobileFastLoad] Fetch data.json.gz');
+          const res = await fetchWithTimeout('data.json.gz', { timeout: 15000 });
+          console.timeEnd('[MobileFastLoad] Fetch data.json.gz');
+
           if (res && res.ok) {
-            if (window.DecompressionStream) {
-              try {
-                const ds = new DecompressionStream('gzip');
-                const decompressedResponse = new Response(res.body.pipeThrough(ds));
-                data = await decompressedResponse.json();
-              } catch (dsErr) {
-                console.warn("DecompressionStream failed, fallback to pako:", dsErr);
-              }
-            }
-            
-            // Fallback via Pako if DecompressionStream fails or unsupported
-            if (!data && window.pako) {
-              const arrayBuffer = await res.arrayBuffer();
+            console.time('[MobileFastLoad] ArrayBuffer Read');
+            const arrayBuffer = await res.arrayBuffer();
+            console.timeEnd('[MobileFastLoad] ArrayBuffer Read');
+
+            if (window.pako) {
+              console.time('[MobileFastLoad] Pako Ungzip');
               const decompressedStr = pako.ungzip(new Uint8Array(arrayBuffer), { to: 'string' });
+              console.timeEnd('[MobileFastLoad] Pako Ungzip');
+
+              console.time('[MobileFastLoad] JSON Parse');
               data = JSON.parse(decompressedStr);
+              console.timeEnd('[MobileFastLoad] JSON Parse');
+            } else if (window.DecompressionStream) {
+              const ds = new DecompressionStream('gzip');
+              const blob = new Blob([arrayBuffer]);
+              const text = await new Response(blob.stream().pipeThrough(ds)).text();
+              data = JSON.parse(text);
             }
           }
         } catch (gzErr) {
-          console.warn("data.json.gz fetch error:", gzErr);
+          console.warn("[MobileFastLoad] data.json.gz fetch error:", gzErr);
         }
 
-        // Fallback to uncompressed data.json if available
+        // 2. Fallback uncompressed data.json
         if (!data) {
           try {
-            const res = await fetchWithTimeout('data.json');
+            console.time('[MobileFastLoad] Fetch data.json (Uncompressed Fallback)');
+            const res = await fetchWithTimeout('data.json', { timeout: 15000 });
+            console.timeEnd('[MobileFastLoad] Fetch data.json (Uncompressed Fallback)');
             if (res && res.ok) data = await res.json();
           } catch (e) {}
         }
 
+        // 3. Fallback production live URL
         if (!data) {
-          throw new Error('圧縮データ(data.json.gz)の解凍・取得に失敗しました');
+          try {
+            console.time('[MobileFastLoad] Fetch Production Live URL Fallback');
+            const prodUrl = 'https://t-ichinose.github.io/ff14-market-tracker/data.json.gz';
+            const res = await fetchWithTimeout(prodUrl, { timeout: 20000 });
+            if (res && res.ok) {
+              const arrayBuffer = await res.arrayBuffer();
+              if (window.pako) {
+                const decompressedStr = pako.ungzip(new Uint8Array(arrayBuffer), { to: 'string' });
+                data = JSON.parse(decompressedStr);
+              }
+            }
+            console.timeEnd('[MobileFastLoad] Fetch Production Live URL Fallback');
+          } catch (prodErr) {
+            console.error("[MobileFastLoad] Live production fallback failed:", prodErr);
+          }
         }
 
-        if (data.last_updated) {
-          currentPeriodText = getAggregationPeriodStr(data.last_updated);
-          const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
+        if (!data) {
+          throw new Error('データファイルのロード・解凍に失敗しました');
+        }
+
+        if (data && data.last_updated) {
+          const currentPeriodText = getAggregationPeriodStr(data.last_updated);
           if (lastUpdatedEl) {
             const formattedLastUpdated = formatTimeLocal(data.last_updated);
             lastUpdatedEl.innerHTML = `<i class="fa-regular fa-clock"></i> 最終更新: ${formattedLastUpdated} (${currentPeriodText})`;
           }
         }
 
-        allData = data.worlds || data.data || {};
-        
-        if (typeof populateWorldSelects === 'function') populateWorldSelects();
-        if (typeof renderWorldGrid === 'function') renderWorldGrid();
+        allData = (data && (data.worlds || data.data)) ? (data.worlds || data.data) : {};
         if (typeof populateMobileWorldSelect === 'function') populateMobileWorldSelect();
         if (typeof renderMobileItemList === 'function') renderMobileItemList();
 
+        console.timeEnd('[MobileFastLoad] Total Load Time');
+
       } catch (err) {
-        console.error('Data load error:', err);
-        const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
+        console.error('Mobile loadData error:', err);
         if (lastUpdatedEl) {
           lastUpdatedEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-red);"></i> データ読み込み失敗 (${err.message})`;
         }
       }
+    }
     }
 
     // Document Ready Initialization
