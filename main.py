@@ -117,14 +117,16 @@ def get_thread_session():
         _thread_local.session = session
     return _thread_local.session
 
-def fetch_single_dc_data(dc_name, target_ids):
+def fetch_single_dc_data(dc_name, target_ids, max_attempts=4):
+    if not target_ids:
+        return dc_name, {}
     session = get_thread_session()
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin=604800&entriesToReturn=2000"
-    for attempt in range(3):
+    detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin=604800&entriesToReturn=1000"
+    for attempt in range(max_attempts):
         try:
-            time.sleep(0.25)  # Politeness delay between requests
-            d_res = session.get(detail_url, timeout=(5.0, 15.0))
+            time.sleep(0.3)  # Politeness delay between requests
+            d_res = session.get(detail_url, timeout=(5.0, 20.0))
             if d_res.status_code == 200:
                 data = d_res.json()
                 if "items" in data:
@@ -132,12 +134,24 @@ def fetch_single_dc_data(dc_name, target_ids):
                 elif "itemID" in data:
                     return dc_name, {str(data["itemID"]): data}
                 return dc_name, {}
-            print(f"[WARNING] [{dc_name}] API HTTP {d_res.status_code}. Retrying ({attempt + 1}/3)...", flush=True)
-            time.sleep(1.0 * (2 ** attempt))
+            print(f"[WARNING] [{dc_name}] API HTTP {d_res.status_code} ({len(target_ids)} items). Retrying ({attempt + 1}/{max_attempts})...", flush=True)
+            time.sleep(1.5 * (2 ** attempt))
         except Exception as e:
-            print(f"[WARNING] [{dc_name}] Network Error ({e}). Retrying ({attempt + 1}/3)...", flush=True)
-            time.sleep(1.0 * (2 ** attempt))
-    print(f"[API ERROR] Failed to fetch chunk for DC {dc_name} after 3 attempts.", flush=True)
+            print(f"[WARNING] [{dc_name}] Network Error ({e}) ({len(target_ids)} items). Retrying ({attempt + 1}/{max_attempts})...", flush=True)
+            time.sleep(1.5 * (2 ** attempt))
+
+    # Adaptive Fallback: If chunk failed after max_attempts and has > 5 items, split in half and retry
+    if len(target_ids) > 5:
+        mid = len(target_ids) // 2
+        print(f"[RETRY SPLIT] [{dc_name}] Splitting failed chunk of {len(target_ids)} items into sub-chunks ({mid} and {len(target_ids)-mid})...", flush=True)
+        _, res1 = fetch_single_dc_data(dc_name, target_ids[:mid], max_attempts=3)
+        _, res2 = fetch_single_dc_data(dc_name, target_ids[mid:], max_attempts=3)
+        combined = {}
+        combined.update(res1)
+        combined.update(res2)
+        return dc_name, combined
+
+    print(f"[API ERROR] Failed to fetch chunk for DC {dc_name} ({len(target_ids)} items) after all retries and splits.", flush=True)
     return dc_name, {}
 
 def export_web_json(conn, output_path="docs/data.json.gz"):
@@ -415,7 +429,7 @@ def fetch_and_save_all(target_dc=None):
 
     target_ids = list(recent_ids_all)
 
-    chunk_size = 50
+    chunk_size = 20
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
     all_tasks = [(dc, chunk) for chunk in item_chunks for dc in dcs]
 
