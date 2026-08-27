@@ -3333,13 +3333,11 @@ function updateArbitrageFilters() {
                 <i class="fa-solid fa-bolt" style="color: var(--accent-blue); font-size: 0.72rem;"></i>
                 <select id="arbMinVelSelect" class="pc-world-select" style="padding: 2px 4px; font-size: 0.74rem; border: none; background: transparent; color: #ffffff; width: 100%; cursor: pointer;" onchange="currentArbMinVel=this.value; updateArbitrageFilters();">
                   <option value="0" ${currentArbMinVel == 0 ? 'selected' : ''}>制限なし</option>
-                  <option value="0.1" ${currentArbMinVel == 0.1 ? 'selected' : ''}>0.1個/日以上</option>
                   <option value="1" ${currentArbMinVel == 1 ? 'selected' : ''}>1個/日以上</option>
                   <option value="5" ${currentArbMinVel == 5 ? 'selected' : ''}>5個/日以上</option>
                   <option value="10" ${currentArbMinVel == 10 ? 'selected' : ''}>10個/日以上</option>
                   <option value="20" ${currentArbMinVel == 20 ? 'selected' : ''}>20個/日以上</option>
                   <option value="50" ${currentArbMinVel == 50 ? 'selected' : ''}>50個/日以上</option>
-                  <option value="100" ${currentArbMinVel == 100 ? 'selected' : ''}>100個/日以上</option>
                 </select>
               </div>
 
