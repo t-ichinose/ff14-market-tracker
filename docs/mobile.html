@@ -1659,6 +1659,17 @@
     container.innerHTML = html;
   }
 
+  function getRecent3DayAvg(item) {
+    if (!item) return 0;
+    if (item.daily_trend && Array.isArray(item.daily_trend) && item.daily_trend.length >= 3) {
+      const last3 = item.daily_trend.slice(-3);
+      const rQty = last3.reduce((acc, d) => acc + (d.volume || d.sales || 0), 0);
+      const rRev = last3.reduce((acc, d) => acc + ((d.weighted_avg || d.avg_price || 0) * (d.volume || d.sales || 0)), 0);
+      if (rQty > 0) return Math.round(rRev / rQty);
+    }
+    return item.avg_price || item.weighted_avg || item.min_price || 0;
+  }
+
   /* Calculate Cross-World Arbitrage Data with Fixed Sales Target (Home World) */
   function calculateArbitrageItems() {
     const homeWorldData = allWorldsData[selectedWorld];
@@ -1683,7 +1694,7 @@
         if (name.includes('クリスタル') || name.includes('クラスター') || name.includes('シャード')) return;
       }
 
-      const sellPrice = hItem.min_price || 0;
+      const sellPrice = getRecent3DayAvg(hItem) || hItem.avg_price || hItem.min_price || 0;
       const salesVel = hItem.sale_velocity || hItem.sales_per_day || 0;
 
       if (sellPrice <= 0) return;
@@ -1699,20 +1710,25 @@
         if (!wData) return;
         const wItems = Array.isArray(wData) ? wData : (wData.items ? Object.values(wData.items) : Object.values(wData));
         const found = wItems.find(it => (it.item_id || it.id) == id);
-        if (found && found.min_price > 0) {
-          worldPricesList.push({ world: wName, price: found.min_price, vel: found.sale_velocity || found.sales_per_day || 0, item: found });
-          if (found.min_price < cheapestPrice) {
-            cheapestPrice = found.min_price;
-            cheapestWorld = wName;
-            cheapestItem = found;
+        if (found) {
+          const itemBuyPrice = getRecent3DayAvg(found) || found.avg_price || found.min_price || 0;
+          if (itemBuyPrice > 0) {
+            worldPricesList.push({ world: wName, price: itemBuyPrice, vel: found.sale_velocity || found.sales_per_day || 0, item: found });
+            if (itemBuyPrice < cheapestPrice) {
+              cheapestPrice = itemBuyPrice;
+              cheapestWorld = wName;
+              cheapestItem = found;
+            }
           }
         }
       });
 
       worldPricesList.sort((a, b) => a.price - b.price);
 
-      const netProfit = Math.round(sellPrice * 0.95 - cheapestPrice);
-      const profitMarginPct = cheapestPrice > 0 ? (netProfit / cheapestPrice) * 100 : 0;
+      const netCost = cheapestPrice * 1.05;
+      const netReturn = sellPrice * 0.95;
+      const netProfit = Math.round(netReturn - netCost);
+      const profitMarginPct = netCost > 0 ? (netProfit / netCost) * 100 : 0;
       const estDailyRevenue = Math.round(netProfit * salesVel);
 
       if (netProfit > 0) {
@@ -1907,7 +1923,7 @@
     const supplierTitleEl = document.getElementById('mob-nav-supplier-title');
     const supplierTargetPriceEl = document.getElementById('mob-nav-supplier-target-price');
     if (supplierTitleEl) supplierTitleEl.textContent = `${buyWorld} (${buyDc})`;
-    if (supplierTargetPriceEl) supplierTargetPriceEl.textContent = `${formatNumber(supplierItem.min_price || item.buyPrice || 0)}G`;
+    if (supplierTargetPriceEl) supplierTargetPriceEl.textContent = `${formatNumber(item.buyPrice || getRecent3DayAvg(supplierItem) || supplierItem.min_price || 0)}G`;
 
     // Populate 4 Metric Card Box Values (Matching PC Sample Screenshot)
     const minPriceEl = document.getElementById('metric-val-min-price');
@@ -1916,7 +1932,7 @@
     const volumeEl = document.getElementById('metric-val-volume');
 
     const minP = supplierItem.min_price || item.buyPrice || 0;
-    const avgP = supplierItem.avg_price || supplierItem.weighted_avg || minP;
+    const avgP = item.buyPrice || getRecent3DayAvg(supplierItem) || supplierItem.avg_price || minP;
     const vel = supplierItem.sale_velocity || supplierItem.sales_per_day || item.salesVel || 0;
     const tradesCount = supplierItem.sales_count || supplierItem.num_transactions || (supplierItem.history ? supplierItem.history.length : 0);
 
