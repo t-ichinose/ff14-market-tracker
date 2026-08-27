@@ -1151,6 +1151,9 @@
   let navTargetMode = 'history'; // 'history' or 'listings'
   let navTargetExcludeNq = false;
 
+  // In-memory cache for Universalis API listings
+  const navListingsCache = {};
+
   let rawData = {};
   let allWorldsData = {};
   let worldToDcMap = {};
@@ -2035,12 +2038,79 @@
     }
   }
 
-  // Load All-Server Lowest Listings for Nav Supplier View
+  function renderNavSupplierListingsFromData(data) {
+    const container = document.getElementById('mob-nav-history-cards-container');
+    if (!container || !data) return;
+
+    let targetListings = data.listings || [];
+
+    if (navHistoryExcludeNq) {
+      targetListings = targetListings.filter(l => Boolean(l.hq));
+    }
+
+    if (targetListings.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding:1.5rem; color:var(--text-muted); font-size:0.85rem;">該当する出品データがありません</div>';
+      return;
+    }
+
+    // Sort by pricePerUnit ascending
+    targetListings.sort((a, b) => (a.pricePerUnit || 0) - (b.pricePerUnit || 0));
+
+    let html = '';
+    targetListings.slice(0, 40).forEach((lst, idx) => {
+      const isHq = Boolean(lst.hq);
+      const hqBadge = isHq ? '<span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px; border:1px solid rgba(255,183,3,0.4);">✨ HQ</span>' : '<span style="background:rgba(255,255,255,0.06); color:#94a3b8; font-size:0.68rem; padding:2px 6px; border-radius:4px;">NQ</span>';
+      const unitPrice = formatNumber(lst.pricePerUnit || 0);
+      const qty = formatNumber(lst.quantity || 1);
+      const total = formatNumber((lst.pricePerUnit || 0) * (lst.quantity || 1));
+      const retainer = lst.retainerName ? escapeHtml(lst.retainerName) : `リテーナー #${idx+1}`;
+      
+      const wName = lst.worldName || selectedWorld;
+      const dcName = worldToDcMap[wName] || '';
+      const worldDcText = `${wName}${dcName ? ' (' + dcName + ')' : ''}`;
+
+      html += `
+        <div class="listing-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <span style="color:var(--accent-gold); font-weight:800; font-family:monospace; font-size:0.88rem;">#${idx + 1}</span>
+              ${hqBadge}
+              <span style="color:#94a3b8; font-size:0.75rem;"><i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(worldDcText)}</span>
+            </div>
+            <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
+              <i class="fa-solid fa-store" style="font-size:0.75rem;"></i> リテーナー: ${retainer}
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.25rem;">
+            <div style="display:flex; gap:0.6rem; color:var(--text-muted); font-size:0.78rem; align-items:center;">
+              <span><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 単価: <strong style="color:var(--accent-green);" class="font-mono">${unitPrice}G</strong></span>
+              <span><i class="fa-solid fa-boxes-stacked" style="color:var(--text-muted);"></i> 出品数: <strong style="color:#fff;" class="font-mono">${qty}個</strong></span>
+            </div>
+            <div style="color:var(--accent-gold); font-weight:800; font-size:0.88rem; font-family:monospace; display:flex; align-items:center; gap:0.25rem;">
+              <i class="fa-solid fa-coins" style="font-size:0.78rem;"></i> 合計: ${total}G
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  // Load All-Server Lowest Listings for Nav Supplier View (Cached)
   async function loadNavSupplierListings(item) {
     const container = document.getElementById('mob-nav-history-cards-container');
     if (!container || !item) return;
 
     const itemId = item.item_id || item.id;
+    const cacheKey = `all_${itemId}`;
+
+    if (navListingsCache[cacheKey]) {
+      renderNavSupplierListingsFromData(navListingsCache[cacheKey]);
+      return;
+    }
+
     container.innerHTML = '<div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> 全32ワールドの最新出品情報を取得中...</div>';
 
     try {
@@ -2064,60 +2134,8 @@
         throw new Error('全ワールド出品データの通信に失敗しました');
       }
 
-      let targetListings = data.listings || [];
-
-      if (navHistoryExcludeNq) {
-        targetListings = targetListings.filter(l => Boolean(l.hq));
-      }
-
-      if (targetListings.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding:1.5rem; color:var(--text-muted); font-size:0.85rem;">該当する出品データがありません</div>';
-        return;
-      }
-
-      // Sort by pricePerUnit ascending
-      targetListings.sort((a, b) => (a.pricePerUnit || 0) - (b.pricePerUnit || 0));
-
-      let html = '';
-      targetListings.slice(0, 40).forEach((lst, idx) => {
-        const isHq = Boolean(lst.hq);
-        const hqBadge = isHq ? '<span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px; border:1px solid rgba(255,183,3,0.4);">✨ HQ</span>' : '<span style="background:rgba(255,255,255,0.06); color:#94a3b8; font-size:0.68rem; padding:2px 6px; border-radius:4px;">NQ</span>';
-        const unitPrice = formatNumber(lst.pricePerUnit || 0);
-        const qty = formatNumber(lst.quantity || 1);
-        const total = formatNumber((lst.pricePerUnit || 0) * (lst.quantity || 1));
-        const retainer = lst.retainerName ? escapeHtml(lst.retainerName) : `リテーナー #${idx+1}`;
-        
-        const wName = lst.worldName || selectedWorld;
-        const dcName = worldToDcMap[wName] || '';
-        const worldDcText = `${wName}${dcName ? ' (' + dcName + ')' : ''}`;
-
-        html += `
-          <div class="listing-card">
-            <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
-              <div style="display:flex; align-items:center; gap:0.4rem;">
-                <span style="color:var(--accent-gold); font-weight:800; font-family:monospace; font-size:0.88rem;">#${idx + 1}</span>
-                ${hqBadge}
-                <span style="color:#94a3b8; font-size:0.75rem;"><i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(worldDcText)}</span>
-              </div>
-              <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
-                <i class="fa-solid fa-store" style="font-size:0.75rem;"></i> リテーナー: ${retainer}
-              </div>
-            </div>
-
-            <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.25rem;">
-              <div style="display:flex; gap:0.6rem; color:var(--text-muted); font-size:0.78rem; align-items:center;">
-                <span><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 単価: <strong style="color:var(--accent-green);" class="font-mono">${unitPrice}G</strong></span>
-                <span><i class="fa-solid fa-boxes-stacked" style="color:var(--text-muted);"></i> 出品数: <strong style="color:#fff;" class="font-mono">${qty}個</strong></span>
-              </div>
-              <div style="color:var(--accent-gold); font-weight:800; font-size:0.88rem; font-family:monospace; display:flex; align-items:center; gap:0.25rem;">
-                <i class="fa-solid fa-coins" style="font-size:0.78rem;"></i> 合計: ${total}G
-              </div>
-            </div>
-          </div>
-        `;
-      });
-
-      container.innerHTML = html;
+      navListingsCache[cacheKey] = data;
+      renderNavSupplierListingsFromData(data);
 
     } catch (err) {
       container.innerHTML = `<div style="text-align:center; padding:1.5rem; color:var(--accent-red); font-size:0.85rem;">出品データの取得に失敗しました (${err.message})</div>`;
@@ -2344,12 +2362,75 @@
     container.innerHTML = html;
   }
 
-  // Load Home World Active Listings for Nav Target View (Panel 3)
+  function renderNavTargetListingsFromData(data) {
+    const container = document.getElementById('mob-nav-target-cards-container');
+    if (!container || !data) return;
+
+    let targetListings = data.listings || [];
+
+    if (navTargetExcludeNq) {
+      targetListings = targetListings.filter(l => Boolean(l.hq));
+    }
+
+    if (targetListings.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding:1.5rem; color:var(--text-muted); font-size:0.85rem;">該当する出品データがありません</div>';
+      return;
+    }
+
+    // Sort by pricePerUnit ascending
+    targetListings.sort((a, b) => (a.pricePerUnit || 0) - (b.pricePerUnit || 0));
+
+    let html = '';
+    targetListings.slice(0, 40).forEach((lst, idx) => {
+      const isHq = Boolean(lst.hq);
+      const hqBadge = isHq ? '<span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px; border:1px solid rgba(255,183,3,0.4);">✨ HQ</span>' : '<span style="background:rgba(255,255,255,0.06); color:#94a3b8; font-size:0.68rem; padding:2px 6px; border-radius:4px;">NQ</span>';
+      const unitPrice = formatNumber(lst.pricePerUnit || 0);
+      const qty = formatNumber(lst.quantity || 1);
+      const total = formatNumber((lst.pricePerUnit || 0) * (lst.quantity || 1));
+      const retainer = lst.retainerName ? escapeHtml(lst.retainerName) : `リテーナー #${idx+1}`;
+
+      html += `
+        <div class="listing-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <span style="color:var(--accent-gold); font-weight:800; font-family:monospace; font-size:0.88rem;">#${idx + 1}</span>
+              ${hqBadge}
+              <span style="color:#94a3b8; font-size:0.75rem;"><i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> ${escapeHtml(selectedWorld)}</span>
+            </div>
+            <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
+              <i class="fa-solid fa-store" style="font-size:0.75rem;"></i> リテーナー: ${retainer}
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.25rem;">
+            <div style="display:flex; gap:0.6rem; color:var(--text-muted); font-size:0.78rem; align-items:center;">
+              <span><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 単価: <strong style="color:var(--accent-green);" class="font-mono">${unitPrice}G</strong></span>
+              <span><i class="fa-solid fa-boxes-stacked" style="color:var(--text-muted);"></i> 出品数: <strong style="color:#fff;" class="font-mono">${qty}個</strong></span>
+            </div>
+            <div style="color:var(--accent-gold); font-weight:800; font-size:0.88rem; font-family:monospace; display:flex; align-items:center; gap:0.25rem;">
+              <i class="fa-solid fa-coins" style="font-size:0.78rem;"></i> 合計: ${total}G
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  // Load Home World Active Listings for Nav Target View (Panel 3 - Cached)
   async function loadNavTargetListings(item) {
     const container = document.getElementById('mob-nav-target-cards-container');
     if (!container || !item) return;
 
     const itemId = item.item_id || item.id;
+    const cacheKey = `home_${selectedWorld}_${itemId}`;
+
+    if (navListingsCache[cacheKey]) {
+      renderNavTargetListingsFromData(navListingsCache[cacheKey]);
+      return;
+    }
+
     container.innerHTML = `<div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> ホームワールド (${escapeHtml(selectedWorld)}) の最新出品情報を取得中...</div>`;
 
     try {
@@ -2358,56 +2439,12 @@
       if (!res.ok) throw new Error('Universalis API エラー');
       const data = await res.json();
 
-      let targetListings = data.listings || [];
-
-      if (navTargetExcludeNq) {
-        targetListings = targetListings.filter(l => Boolean(l.hq));
+      if (!data || !data.listings) {
+        throw new Error('出品データの通信に失敗しました');
       }
 
-      if (targetListings.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding:1.5rem; color:var(--text-muted); font-size:0.85rem;">該当する出品データがありません</div>';
-        return;
-      }
-
-      // Sort by pricePerUnit ascending
-      targetListings.sort((a, b) => (a.pricePerUnit || 0) - (b.pricePerUnit || 0));
-
-      let html = '';
-      targetListings.slice(0, 40).forEach((lst, idx) => {
-        const isHq = Boolean(lst.hq);
-        const hqBadge = isHq ? '<span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px; border:1px solid rgba(255,183,3,0.4);">✨ HQ</span>' : '<span style="background:rgba(255,255,255,0.06); color:#94a3b8; font-size:0.68rem; padding:2px 6px; border-radius:4px;">NQ</span>';
-        const unitPrice = formatNumber(lst.pricePerUnit || 0);
-        const qty = formatNumber(lst.quantity || 1);
-        const total = formatNumber((lst.pricePerUnit || 0) * (lst.quantity || 1));
-        const retainer = lst.retainerName ? escapeHtml(lst.retainerName) : `リテーナー #${idx+1}`;
-
-        html += `
-          <div class="listing-card">
-            <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
-              <div style="display:flex; align-items:center; gap:0.4rem;">
-                <span style="color:var(--accent-gold); font-weight:800; font-family:monospace; font-size:0.88rem;">#${idx + 1}</span>
-                ${hqBadge}
-                <span style="color:#94a3b8; font-size:0.75rem;"><i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> ${escapeHtml(selectedWorld)}</span>
-              </div>
-              <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
-                <i class="fa-solid fa-store" style="font-size:0.75rem;"></i> リテーナー: ${retainer}
-              </div>
-            </div>
-
-            <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.25rem;">
-              <div style="display:flex; gap:0.6rem; color:var(--text-muted); font-size:0.78rem; align-items:center;">
-                <span><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 単価: <strong style="color:var(--accent-green);" class="font-mono">${unitPrice}G</strong></span>
-                <span><i class="fa-solid fa-boxes-stacked" style="color:var(--text-muted);"></i> 出品数: <strong style="color:#fff;" class="font-mono">${qty}個</strong></span>
-              </div>
-              <div style="color:var(--accent-gold); font-weight:800; font-size:0.88rem; font-family:monospace; display:flex; align-items:center; gap:0.25rem;">
-                <i class="fa-solid fa-coins" style="font-size:0.78rem;"></i> 合計: ${total}G
-              </div>
-            </div>
-          </div>
-        `;
-      });
-
-      container.innerHTML = html;
+      navListingsCache[cacheKey] = data;
+      renderNavTargetListingsFromData(data);
 
     } catch (err) {
       container.innerHTML = `<div style="text-align:center; padding:1.5rem; color:var(--accent-red); font-size:0.85rem;">出品データの取得に失敗しました (${err.message})</div>`;
@@ -2728,19 +2765,109 @@
     if (selectedItem) loadMobileListings(selectedItem);
   }
 
+  function renderMobileListingsFromData(item, data) {
+    const container = document.getElementById('mob-listings-container');
+    if (!container || !data) return;
+
+    const currentDc = worldToDcMap[selectedWorld] || 'Mana';
+    let rawListings = data.listings || [];
+
+    // Calculate 3 Area Lowest Prices
+    const minWorldPrice = item.min_price || (rawListings.length > 0 ? rawListings[0].pricePerUnit : null);
+    
+    const areaValWorld = document.getElementById('area-val-world');
+    const areaSubWorld = document.getElementById('area-sub-world');
+    if (areaValWorld) areaValWorld.textContent = minWorldPrice ? `${formatCompactNumber(minWorldPrice)}G` : '-';
+    if (areaSubWorld) areaSubWorld.textContent = selectedWorld;
+
+    const areaTitleDc = document.getElementById('area-title-dc');
+    const areaValDc = document.getElementById('area-val-dc');
+    const areaSubDc = document.getElementById('area-sub-dc');
+    if (areaTitleDc) areaTitleDc.textContent = `同DC最安 (${currentDc})`;
+    if (areaValDc) areaValDc.textContent = rawListings.length > 0 ? `${formatCompactNumber(rawListings[0].pricePerUnit)}G` : (minWorldPrice ? `${formatCompactNumber(minWorldPrice)}G` : '-');
+    if (areaSubDc) areaSubDc.innerHTML = rawListings.length > 0 && rawListings[0].worldName ? `<i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> ${escapeHtml(rawListings[0].worldName)}` : selectedWorld;
+
+    const areaValAll = document.getElementById('area-val-all');
+    const areaSubAll = document.getElementById('area-sub-all');
+    if (areaValAll) areaValAll.textContent = rawListings.length > 0 ? `${formatCompactNumber(rawListings[0].pricePerUnit)}G` : (minWorldPrice ? `${formatCompactNumber(minWorldPrice)}G` : '-');
+    if (areaSubAll) areaSubAll.innerHTML = rawListings.length > 0 && rawListings[0].worldName ? `<i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(rawListings[0].worldName)}` : selectedWorld;
+
+    // Filter NQ if needed
+    let targetListings = rawListings;
+    if (listingExcludeNq) {
+      targetListings = targetListings.filter(l => Boolean(l.hq));
+    }
+
+    const countLabel = document.getElementById('mob-listings-count-label');
+    if (countLabel) countLabel.textContent = `全${targetListings.length}件の出品`;
+
+    if (targetListings.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding:1.5rem; color:var(--text-muted); font-size:0.85rem;">該当する出品データがありません</div>';
+      return;
+    }
+
+    let html = '';
+    targetListings.slice(0, 40).forEach((lst, idx) => {
+      const isHq = Boolean(lst.hq);
+      const hqBadge = isHq ? '<span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px; border:1px solid rgba(255,183,3,0.4);">✨ HQ</span>' : '<span style="background:rgba(255,255,255,0.06); color:#94a3b8; font-size:0.68rem; padding:2px 6px; border-radius:4px;">NQ</span>';
+      const unitPrice = formatNumber(lst.pricePerUnit || 0);
+      const qty = formatNumber(lst.quantity || 1);
+      const total = formatNumber((lst.pricePerUnit || 0) * (lst.quantity || 1));
+      const retainer = lst.retainerName ? escapeHtml(lst.retainerName) : `リテーナー #${idx+1}`;
+      
+      const wName = lst.worldName || selectedWorld;
+      const dcName = worldToDcMap[wName] || currentDc;
+      const worldDcText = `${wName} (${dcName})`;
+
+      html += `
+        <div class="listing-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <span style="color:var(--accent-gold); font-weight:800; font-family:monospace; font-size:0.88rem;">#${idx + 1}</span>
+              ${hqBadge}
+              <span style="color:#94a3b8; font-size:0.75rem;"><i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(worldDcText)}</span>
+            </div>
+            <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
+              <i class="fa-solid fa-store" style="font-size:0.75rem;"></i> リテーナー: ${retainer}
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.25rem;">
+            <div style="display:flex; gap:0.6rem; color:var(--text-muted); font-size:0.78rem; align-items:center;">
+              <span><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 単価: <strong style="color:var(--accent-green);" class="font-mono">${unitPrice}G</strong></span>
+              <span><i class="fa-solid fa-boxes-stacked" style="color:var(--text-muted);"></i> 出品数: <strong style="color:#fff;" class="font-mono">${qty}個</strong></span>
+            </div>
+            <div style="color:var(--accent-gold); font-weight:800; font-size:0.88rem; font-family:monospace; display:flex; align-items:center; gap:0.25rem;">
+              <i class="fa-solid fa-coins" style="font-size:0.78rem;"></i> 合計: ${total}G
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
   async function loadMobileListings(item) {
     const container = document.getElementById('mob-listings-container');
     if (!container || !item) return;
 
     const itemId = item.item_id || item.id;
+    const currentDc = worldToDcMap[selectedWorld] || 'Mana';
+    let fetchParam = selectedWorld;
+    if (listingScope === 'dc') fetchParam = currentDc;
+    else if (listingScope === 'all') fetchParam = 'Japan';
+
+    const cacheKey = `market_${fetchParam}_${itemId}`;
+
+    if (navListingsCache[cacheKey]) {
+      renderMobileListingsFromData(item, navListingsCache[cacheKey]);
+      return;
+    }
+
     container.innerHTML = '<div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> 出品情報を取得中...</div>';
 
     try {
-      const currentDc = worldToDcMap[selectedWorld] || 'Mana';
-      let fetchParam = selectedWorld;
-      if (listingScope === 'dc') fetchParam = currentDc;
-      else if (listingScope === 'all') fetchParam = 'Japan';
-
       let data = null;
       const endpoints = [
         `https://universalis.app/api/v2/${fetchParam}/${itemId}?listings=60`
@@ -2763,82 +2890,8 @@
         throw new Error('Universalis API 通信エラー');
       }
 
-      let rawListings = data.listings || [];
-
-      // Calculate 3 Area Lowest Prices
-      const minWorldPrice = item.min_price || (rawListings.length > 0 ? rawListings[0].pricePerUnit : null);
-      
-      const areaValWorld = document.getElementById('area-val-world');
-      const areaSubWorld = document.getElementById('area-sub-world');
-      if (areaValWorld) areaValWorld.textContent = minWorldPrice ? `${formatCompactNumber(minWorldPrice)}G` : '-';
-      if (areaSubWorld) areaSubWorld.textContent = selectedWorld;
-
-      const areaTitleDc = document.getElementById('area-title-dc');
-      const areaValDc = document.getElementById('area-val-dc');
-      const areaSubDc = document.getElementById('area-sub-dc');
-      if (areaTitleDc) areaTitleDc.textContent = `同DC最安 (${currentDc})`;
-      if (areaValDc) areaValDc.textContent = rawListings.length > 0 ? `${formatCompactNumber(rawListings[0].pricePerUnit)}G` : (minWorldPrice ? `${formatCompactNumber(minWorldPrice)}G` : '-');
-      if (areaSubDc) areaSubDc.innerHTML = rawListings.length > 0 && rawListings[0].worldName ? `<i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> ${escapeHtml(rawListings[0].worldName)}` : selectedWorld;
-
-      const areaValAll = document.getElementById('area-val-all');
-      const areaSubAll = document.getElementById('area-sub-all');
-      if (areaValAll) areaValAll.textContent = rawListings.length > 0 ? `${formatCompactNumber(rawListings[0].pricePerUnit)}G` : (minWorldPrice ? `${formatCompactNumber(minWorldPrice)}G` : '-');
-      if (areaSubAll) areaSubAll.innerHTML = rawListings.length > 0 && rawListings[0].worldName ? `<i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(rawListings[0].worldName)}` : selectedWorld;
-
-      // Filter NQ if needed
-      let targetListings = rawListings;
-      if (listingExcludeNq) {
-        targetListings = targetListings.filter(l => Boolean(l.hq));
-      }
-
-      const countLabel = document.getElementById('mob-listings-count-label');
-      if (countLabel) countLabel.textContent = `全${targetListings.length}件の出品`;
-
-      if (targetListings.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding:1.5rem; color:var(--text-muted); font-size:0.85rem;">該当する出品データがありません</div>';
-        return;
-      }
-
-      let html = '';
-      targetListings.slice(0, 40).forEach((lst, idx) => {
-        const isHq = Boolean(lst.hq);
-        const hqBadge = isHq ? '<span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px; border:1px solid rgba(255,183,3,0.4);">✨ HQ</span>' : '<span style="background:rgba(255,255,255,0.06); color:#94a3b8; font-size:0.68rem; padding:2px 6px; border-radius:4px;">NQ</span>';
-        const unitPrice = formatNumber(lst.pricePerUnit || 0);
-        const qty = formatNumber(lst.quantity || 1);
-        const total = formatNumber((lst.pricePerUnit || 0) * (lst.quantity || 1));
-        const retainer = lst.retainerName ? escapeHtml(lst.retainerName) : `リテーナー #${idx+1}`;
-        
-        const wName = lst.worldName || selectedWorld;
-        const dcName = worldToDcMap[wName] || currentDc;
-        const worldDcText = `${wName} (${dcName})`;
-
-        html += `
-          <div class="listing-card">
-            <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
-              <div style="display:flex; align-items:center; gap:0.4rem;">
-                <span style="color:var(--accent-gold); font-weight:800; font-family:monospace; font-size:0.88rem;">#${idx + 1}</span>
-                ${hqBadge}
-                <span style="color:#94a3b8; font-size:0.75rem;"><i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(worldDcText)}</span>
-              </div>
-              <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
-                <i class="fa-solid fa-store" style="font-size:0.75rem;"></i> リテーナー: ${retainer}
-              </div>
-            </div>
-
-            <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.25rem;">
-              <div style="display:flex; gap:0.6rem; color:var(--text-muted); font-size:0.78rem; align-items:center;">
-                <span><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 単価: <strong style="color:var(--accent-green);" class="font-mono">${unitPrice}G</strong></span>
-                <span><i class="fa-solid fa-boxes-stacked" style="color:var(--text-muted);"></i> 出品数: <strong style="color:#fff;" class="font-mono">${qty}個</strong></span>
-              </div>
-              <div style="color:var(--accent-gold); font-weight:800; font-size:0.88rem; font-family:monospace; display:flex; align-items:center; gap:0.25rem;">
-                <i class="fa-solid fa-coins" style="font-size:0.78rem;"></i> 合計: ${total}G
-              </div>
-            </div>
-          </div>
-        `;
-      });
-
-      container.innerHTML = html;
+      navListingsCache[cacheKey] = data;
+      renderMobileListingsFromData(item, data);
 
     } catch (err) {
       container.innerHTML = `<div style="text-align:center; padding:1.5rem; color:var(--accent-red); font-size:0.85rem;">出品データの取得に失敗しました (${err.message})</div>`;
