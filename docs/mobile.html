@@ -259,55 +259,25 @@
       color: var(--accent-blue);
     }
 
-    /* Top Header Search Box (Replacing Menu Icon) */
-    .header-search-box {
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 6px;
-      padding: 0 0.45rem;
-      gap: 0.35rem;
-      height: 30px;
-      transition: all 0.2s;
-    }
-
-    .header-search-box:focus-within {
-      border-color: var(--accent-blue);
-      background: rgba(0, 210, 255, 0.1);
-    }
-
-    .header-search-input {
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 0.78rem;
-      width: 82px;
-      outline: none;
-    }
-
-    .header-search-input::placeholder {
-      color: var(--text-muted);
-    }
-
-    /* Row 4 World Select Bar (切り替えタブの最下部) */
-    .header-row-4-world {
+    /* Row 4 World Settings Row (ワールド選択 + 検索 + クリスタルスイッチ) */
+    .header-row-4-controls {
       display: flex;
       align-items: center;
       background: rgba(0, 0, 0, 0.4);
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 0.3rem 0.5rem;
-      gap: 0.4rem;
+      padding: 0.35rem 0.5rem;
+      gap: 0.35rem;
     }
 
     .header-world-select {
-      flex: 1;
+      flex: 1.1;
+      min-width: 0;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.18);
       color: #fff;
-      padding: 4px 8px;
+      padding: 4px 6px;
       border-radius: 6px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       outline: none;
       font-weight: 700;
     }
@@ -322,12 +292,38 @@
     .header-world-select option {
       background-color: #0f172a;
       color: #f8fafc;
-    }fafc;
-      padding: 8px 10px;
     }
 
-    .drawer-select:focus, .drawer-input:focus {
+    .header-search-box {
+      flex: 1.2;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 6px;
+      padding: 0 0.4rem;
+      gap: 0.3rem;
+      height: 29px;
+      transition: all 0.2s;
+    }
+
+    .header-search-box:focus-within {
       border-color: var(--accent-blue);
+      background: rgba(0, 210, 255, 0.1);
+    }
+
+    .header-search-input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 0.76rem;
+      width: 100%;
+      outline: none;
+    }
+
+    .header-search-input::placeholder {
+      color: var(--text-muted);
     }
 
     /* Main Viewport Sliding Panels */
@@ -849,7 +845,7 @@
 <div id="app">
   <!-- Fixed Header -->
   <header>
-    <!-- Row 1: Brand (Left) & Mode Switch + Search Box (Right - Replacing Menu Icon) -->
+    <!-- Row 1: Brand (Left) & Mode Switch (Right) -->
     <div class="header-row-1">
       <div class="brand-title">
         <div class="brand-icon-box"><i class="fa-solid fa-chart-line"></i></div>
@@ -860,16 +856,10 @@
           <button class="mode-btn active" id="mob-mode-market-btn" onclick="setAppMode('market')">市場分析</button>
           <button class="mode-btn" id="mob-mode-nav-btn" onclick="setAppMode('nav')">💎 金策ナビ</button>
         </div>
-
-        <!-- Inline Search Box Replacing Menu Icon -->
-        <div class="header-search-box">
-          <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted); font-size:0.75rem;"></i>
-          <input type="text" class="header-search-input" id="pcSearchInput" placeholder="品名検索..." oninput="onMobileSearchInput(this.value)">
-        </div>
       </div>
     </div>
 
-    <!-- Row 2: Sort Segmented Tabs & Icon-Only Crystal Filter -->
+    <!-- Row 2: Sort Segmented Tabs -->
     <div class="header-row-2">
       <!-- Market Mode Header Row 2 -->
       <div class="segmented-tabs-container" id="mob-market-sort-bar">
@@ -892,10 +882,6 @@
         <option value="10">10件/日以上</option>
         <option value="20">20件/日以上</option>
       </select>
-
-      <button class="crystal-toggle-btn" id="mob-crystal-btn" onclick="toggleMobileCrystalFilter()" title="クリスタルフィルター">
-        💎
-      </button>
     </div>
 
     <!-- Row 3: Subtabs Segmented Tabs -->
@@ -927,14 +913,20 @@
       </div>
     </div>
 
-    <!-- Row 4: World Select Bar (切り替えタブの最下部) -->
-    <div class="header-row-4-world">
-      <div style="display:flex; align-items:center; gap:0.3rem; font-size:0.78rem; font-weight:800; color:var(--accent-gold); white-space:nowrap;">
-        <i class="fa-solid fa-globe"></i> ワールド:
-      </div>
+    <!-- Row 4: World Settings Row (ワールド選択 ＋ 検索フォーム ＋ クリスタルON/OFF) -->
+    <div class="header-row-4-controls">
       <select class="header-world-select" id="pcWorldSelect" onchange="onMobileWorldChange(this.value)">
         <option value="">データ読み込み中...</option>
       </select>
+
+      <div class="header-search-box">
+        <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted); font-size:0.75rem;"></i>
+        <input type="text" class="header-search-input" id="pcSearchInput" placeholder="品名検索..." oninput="onMobileSearchInput(this.value)">
+      </div>
+
+      <button class="crystal-toggle-btn" id="mob-crystal-btn" onclick="toggleMobileCrystalFilter()" title="クリスタルフィルター">
+        💎
+      </button>
     </div>
   </header>
 
