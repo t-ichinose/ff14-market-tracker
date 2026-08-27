@@ -125,7 +125,7 @@ def fetch_single_dc_data(dc_name, target_ids, entries_within=172800, entries_to_
     detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin={entries_within}&entriesToReturn={entries_to_return}"
     for attempt in range(max_attempts):
         try:
-            time.sleep(0.3)  # Politeness delay between requests
+            time.sleep(0.15)  # Politeness delay between requests
             d_res = session.get(detail_url, timeout=(5.0, 20.0))
             if d_res.status_code == 200:
                 data = d_res.json()
@@ -442,7 +442,7 @@ def fetch_and_save_all(target_dc=None):
         print(f"=== Initial Seed Mode: DB contains {existing_sales_count:,} records. Fetching 7d transactions ===", flush=True)
 
     target_ids = list(recent_ids_all)
-    chunk_size = 15
+    chunk_size = 30
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
     all_tasks = [(dc, chunk) for chunk in item_chunks for dc in dcs]
 
@@ -455,7 +455,7 @@ def fetch_and_save_all(target_dc=None):
     completed_count = 0
     total_tasks = len(all_tasks)
 
-    with ThreadPoolExecutor(max_workers=2) as executor:
+    with ThreadPoolExecutor(max_workers=3) as executor:
         futures = {executor.submit(fetch_single_dc_data, dc, chunk, entries_within, entries_to_return): (dc, chunk) for dc, chunk in all_tasks}
 
         for future in as_completed(futures):
