@@ -8,6 +8,7 @@
   <!-- External Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
   <style>
     :root {
@@ -1874,9 +1875,18 @@
     container.innerHTML = html;
   }
 
+  function clearNavListingsCache() {
+    for (const key in navListingsCache) {
+      delete navListingsCache[key];
+    }
+  }
+
   function selectNavMobileItem(itemId) {
     const found = navFilteredItems.find(it => it.item_id == itemId);
     if (found) {
+      if (!selectedItem || (selectedItem.item_id || selectedItem.id) != itemId) {
+        clearNavListingsCache();
+      }
       selectedItem = found;
       setMobileNavTab(2);
     }
@@ -1890,6 +1900,9 @@
     const item = items.find(it => (it.item_id || it.id) == itemId);
 
     if (item) {
+      if (!selectedItem || (selectedItem.item_id || selectedItem.id) != itemId) {
+        clearNavListingsCache();
+      }
       selectedItem = item;
       setMobileTab(2);
     }
@@ -2563,6 +2576,7 @@
 
   // Clean Chart.js
   function renderMobileChart(item) {
+    if (typeof Chart === 'undefined') return;
     const canvas = document.getElementById('mobTrendChart');
     if (!canvas) return;
 
