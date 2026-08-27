@@ -1055,56 +1055,32 @@
         </div>
       </div>
 
-      <!-- Nav Panel 2: Supplier World Details (4 Metric Chips Grid + History for 仕入先サーバー) -->
+      <!-- Nav Panel 2: Supplier World Details & Listings (Arbitrage Card + Section Toggle Header) -->
       <div class="mob-panel" id="mob-nav-view-2">
+        <!-- Top Summary: Arbitrage Card (金策タブ特有のカードフォーマット) -->
         <div id="mob-nav-summary-2">
           <div class="loading-spinner">品目を選択してください</div>
         </div>
 
-        <!-- Supplier World Bar & Toggle Switch (Replacing Target Price Label) -->
-        <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.3); padding:0.4rem 0.55rem; border-radius:8px; border-left:3px solid var(--accent-green); gap:0.4rem;">
-          <div style="display:flex; align-items:center; gap:0.35rem; font-weight:800; font-size:0.83rem; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-            <i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> 仕入れ先: <span id="mob-nav-supplier-title" style="color:var(--accent-green);">-</span>
+        <!-- Section Header: History / Listings Segmented Switch & Icon-Only NQ Switch -->
+        <div class="section-header" style="margin-top:0.25rem; flex-wrap:nowrap; gap:0.35rem;">
+          <div class="section-header-title" id="mob-nav-section-title" style="color:var(--accent-purple); min-width:0; flex:1; overflow:hidden; text-overflow:ellipsis;">
+            <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-nav-history-world-name">(-)</span>
           </div>
 
           <!-- Segmented Toggle Switch for 履歴 vs 出品 -->
           <div class="segmented-tabs-container" style="flex:none; width:auto; background:rgba(0,0,0,0.4); padding:2px; border-radius:6px;">
-            <button class="segmented-tab active" id="mob-nav-mode-history-btn" style="padding:3px 8px; font-size:0.73rem;" onclick="setNavSupplierMode('history')">
+            <button class="segmented-tab active" id="mob-nav-mode-history-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavSupplierMode('history')">
               <i class="fa-solid fa-clock-rotate-left"></i> 履歴
             </button>
-            <button class="segmented-tab" id="mob-nav-mode-listings-btn" style="padding:3px 8px; font-size:0.73rem;" onclick="setNavSupplierMode('listings')">
+            <button class="segmented-tab" id="mob-nav-mode-listings-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavSupplierMode('listings')">
               <i class="fa-solid fa-list-ul"></i> 出品
             </button>
           </div>
-        </div>
 
-        <!-- 4 Key Metrics Grid -->
-        <div class="four-metrics-grid" id="mob-nav-four-metrics-container">
-          <div class="metric-card-box green-acc">
-            <span class="metric-card-label">目標仕入</span>
-            <span class="metric-card-val green" id="metric-val-buy-price">-</span>
-          </div>
-          <div class="metric-card-box purple-acc">
-            <span class="metric-card-label">目標売価</span>
-            <span class="metric-card-val purple" id="metric-val-sell-price">-</span>
-          </div>
-          <div class="metric-card-box cyan-acc">
-            <span class="metric-card-label">販売速度</span>
-            <span class="metric-card-val cyan" id="metric-val-speed">-</span>
-          </div>
-          <div class="metric-card-box gold-acc">
-            <span class="metric-card-label">7日売買数</span>
-            <span class="metric-card-val gold" id="metric-val-volume">-</span>
-          </div>
-        </div>
-
-        <!-- Trade History Section Header -->
-        <div class="section-header" style="margin-top:0.4rem;">
-          <div class="section-header-title" id="mob-nav-section-title" style="color:var(--accent-purple);">
-            <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-nav-history-world-name">(-)</span>
-          </div>
-          <button class="crystal-toggle-btn off" id="mob-nav-history-hq-btn" onclick="toggleMobileNavHistoryHqFilter()">
-            ✨ NQ非表示: OFF
+          <!-- Icon-Only NQ Filter Switch -->
+          <button class="crystal-toggle-btn off" id="mob-nav-history-hq-btn" onclick="toggleMobileNavHistoryHqFilter()" title="✨ NQ非表示切換" style="padding:3px 7px; font-size:0.75rem;">
+            ✨ NQ
           </button>
         </div>
 
@@ -1443,10 +1419,10 @@
     const btn = document.getElementById('mob-nav-history-hq-btn');
     if (btn) {
       if (navHistoryExcludeNq) {
-        btn.innerHTML = `✨ NQ非表示: ON`;
+        btn.innerHTML = `✨ NQ`;
         btn.classList.remove('off');
       } else {
-        btn.innerHTML = `✨ NQ非表示: OFF`;
+        btn.innerHTML = `✨ NQ`;
         btn.classList.add('off');
       }
     }
@@ -1922,42 +1898,105 @@
     if (selectedItem) renderNavSupplierView(selectedItem);
   }
 
-  // Render Nav Panel 2 (② 仕入先 Supplier View with 4-Metric Grid matching PC Sample)
+  function getNavCardHtml(it) {
+    if (!it) return '';
+    const itemId = it.item_id || it.id;
+    const primaryIcon = it.icon_url ? it.icon_url : getComputedIconUrl(itemId);
+    const itemName = escapeHtml(it.name || it.item_name || `Item #${itemId}`);
+    
+    const buyWorldText = `${it.buyDc || worldToDcMap[it.buyWorld] || ''} ${it.buyWorld || selectedWorld}`;
+    const buyPriceStr = formatNumber(it.buyPrice || it.min_price || 0) + ' G';
+    const buySparkline = generateSparklineSvg(it.rawItem || it, it.buyTrend || 0);
+    const buyTrendVal = it.buyTrend || 0;
+    const buyTrendStr = buyTrendVal > 0 ? `+${buyTrendVal.toFixed(1)}%` : `${buyTrendVal.toFixed(1)}%`;
+    const buyTrendClass = buyTrendVal > 0 ? 'up' : (buyTrendVal < 0 ? 'down' : 'flat');
+
+    const sellWorldText = `${it.sellDc || worldToDcMap[selectedWorld] || ''} ${it.sellWorld || selectedWorld}`;
+    const sellPriceStr = formatNumber(it.sellPrice || it.min_price || 0) + ' G';
+    const sellSparkline = generateSparklineSvg(it.rawItem || it, it.sellTrend || 0);
+    const sellTrendVal = it.sellTrend || 0;
+    const sellTrendStr = sellTrendVal > 0 ? `+${sellTrendVal.toFixed(1)}%` : `${sellTrendVal.toFixed(1)}%`;
+    const sellTrendClass = sellTrendVal > 0 ? 'up' : (sellTrendVal < 0 ? 'down' : 'flat');
+
+    const unitProfitStr = `+${formatNumber(it.unitProfit || 0)} G`;
+    const marginStr = `(+${(it.profitMarginPct || 0).toFixed(0)}%)`;
+    const salesVelStr = `${(it.salesVel || it.sale_velocity || 0).toFixed(1)} 個/日`;
+    const estDailyRevStr = `+${formatNumber(it.estDailyRevenue || 0)} G/日`;
+
+    return `
+      <div class="mob-nav-card" style="margin-bottom:0.25rem;">
+        <div class="card-top">
+          <div class="card-title-group">
+            <img src="${primaryIcon}" class="item-icon" onerror="this.src='https://xivapi.com/i/000000/000000.png'">
+            <span class="item-name">${itemName}</span>
+          </div>
+          <div class="card-right-metrics">
+            <a href="https://universalis.app/market/${itemId}" target="_blank" class="univ-link" onclick="event.stopPropagation();">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-trade-box">
+          <div class="trade-side-col supplier">
+            <span class="trade-side-title"><i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> 仕入れ先 (目標値)</span>
+            <span class="trade-side-world">${escapeHtml(buyWorldText)}</span>
+            <span class="trade-side-target-price">目標仕入: <strong>${buyPriceStr}</strong></span>
+            <div class="trade-side-bottom">
+              ${buySparkline}
+              <span class="trend-badge ${buyTrendClass}">${buyTrendStr}</span>
+            </div>
+          </div>
+
+          <div class="trade-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+          <div class="trade-side-col target">
+            <span class="trade-side-title"><i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> 販売先 (目標値)</span>
+            <span class="trade-side-world">${escapeHtml(sellWorldText)}</span>
+            <span class="trade-side-target-price">目標販売: <strong>${sellPriceStr}</strong></span>
+            <div class="trade-side-bottom">
+              ${sellSparkline}
+              <span class="trend-badge ${sellTrendClass}">${sellTrendStr}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-bottom-grid">
+          <div class="nav-profit-block">
+            <span class="nav-profit-label">1個純利益:</span>
+            <span class="nav-profit-val">${unitProfitStr}</span>
+            <span class="nav-profit-margin">${marginStr}</span>
+          </div>
+
+          <div class="nav-sales-block">
+            <span class="nav-sales-label">ホーム売買数:</span>
+            <span class="nav-sales-val">${salesVelStr}</span>
+          </div>
+
+          <div class="nav-est-block">
+            <span class="nav-est-label"><i class="fa-solid fa-sack-dollar"></i> 推定日商利益:</span>
+            <span class="nav-est-val">${estDailyRevStr}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Render Nav Panel 2 (② 仕入先 Supplier View with Arbitrage Card summary)
   function renderNavSupplierView(item) {
     if (!item) return;
 
     const itemId = item.item_id || item.id;
     const buyWorld = item.buyWorld || selectedWorld;
-    const buyDc = item.buyDc || (worldToDcMap[buyWorld] || '');
 
     // Get item data specifically on the Supplier World
     const supplierItem = getItemForWorld(itemId, buyWorld) || item;
 
-    // Render Summary Header Card for Supplier World
+    // Render Arbitrage Card Summary for Panel 2
     const summaryContainer = document.getElementById('mob-nav-summary-2');
     if (summaryContainer) {
-      summaryContainer.innerHTML = getSummaryCardHtml(supplierItem, buyWorld);
+      summaryContainer.innerHTML = getNavCardHtml(item);
     }
-
-    // Set Supplier Header Bar Labels
-    const supplierTitleEl = document.getElementById('mob-nav-supplier-title');
-    if (supplierTitleEl) supplierTitleEl.textContent = `${buyWorld} (${buyDc})`;
-
-    // Populate 4 Metric Card Box Values (目標仕入, 目標売価, 販売速度, 7日売買数)
-    const buyPriceEl = document.getElementById('metric-val-buy-price');
-    const sellPriceEl = document.getElementById('metric-val-sell-price');
-    const speedEl = document.getElementById('metric-val-speed');
-    const volumeEl = document.getElementById('metric-val-volume');
-
-    const buyP = item.buyPrice || getRecent3DayAvg(supplierItem) || supplierItem.min_price || 0;
-    const sellP = item.sellPrice || (allWorldsData[selectedWorld] ? getRecent3DayAvg(getItemForWorld(itemId, selectedWorld)) : 0) || supplierItem.min_price || 0;
-    const vel = supplierItem.sale_velocity || supplierItem.sales_per_day || item.salesVel || 0;
-    const tradesCount = supplierItem.sales_count || supplierItem.num_transactions || (supplierItem.history ? supplierItem.history.length : 0);
-
-    if (buyPriceEl) buyPriceEl.textContent = `${formatNumber(buyP)}G`;
-    if (sellPriceEl) sellPriceEl.textContent = `${formatNumber(sellP)}G`;
-    if (speedEl) speedEl.textContent = `${vel.toFixed(1)}個/日`;
-    if (volumeEl) volumeEl.textContent = `${formatNumber(tradesCount)}件`;
 
     // Set Section Header Title & View Mode
     const sectionTitleEl = document.getElementById('mob-nav-section-title');
