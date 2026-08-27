@@ -380,18 +380,28 @@
       scrollbar-gutter: stable;
       -webkit-overflow-scrolling: touch;
       padding: 0.65rem;
+      padding-bottom: max(6.5rem, calc(5rem + env(safe-area-inset-bottom, 35px))) !important;
       display: flex;
       flex-direction: column;
       gap: 0.65rem;
     }
 
-    /* Container Min-Heights */
+    /* Container Min-Heights & Bottom Clearance for Mobile Browser Toolbars */
     #mob-history-cards-container, #mob-nav-history-cards-container, #mob-nav-target-container {
       min-height: 220px;
+      padding-bottom: 3.5rem !important;
+      margin-bottom: 2rem !important;
     }
 
-    #mob-listings-container, #mobile-nav-item-cards-container {
+    #mob-listings-container, #mobile-nav-item-cards-container, #mobile-item-cards-container, #mob-nav-target-cards-container {
       min-height: 320px;
+      padding-bottom: 3.5rem !important;
+      margin-bottom: 2rem !important;
+    }
+
+    .table-scroll-wrapper, .history-table-container {
+      padding-bottom: 3.5rem !important;
+      margin-bottom: 2rem !important;
     }
 
     /* Standard Item Card */
@@ -964,6 +974,14 @@
 
   <!-- Main Viewport Slider -->
   <div id="mob-main-viewport">
+    <!-- Pull-to-Refresh Indicator Component -->
+    <div id="mob-pull-refresh-container" style="position:absolute; top:0; left:0; right:0; height:60px; display:flex; align-items:center; justify-content:center; transform:translateY(-100%); transition:transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s; z-index:999; pointer-events:none; opacity:0;">
+      <div id="mob-pull-refresh-pill" style="background:rgba(15, 23, 42, 0.95); border:1px solid var(--accent-blue); border-radius:24px; padding:7px 18px; display:flex; align-items:center; gap:8px; box-shadow:0 4px 20px rgba(0,210,255,0.4); backdrop-filter:blur(10px);">
+        <i id="mob-pull-refresh-icon" class="fa-solid fa-arrow-down" style="color:var(--accent-blue); font-size:0.9rem; transition:transform 0.2s ease;"></i>
+        <span id="mob-pull-refresh-text" style="font-size:0.8rem; font-weight:700; color:#ffffff;">引っ張って更新</span>
+      </div>
+    </div>
+
     <!-- Market Analysis Viewport Slider -->
     <div class="mob-panel-slider" id="mob-slider">
 
@@ -1294,6 +1312,8 @@
   // App Mode Switcher (市場分析 ⇆ 💎 金策ナビ)
   function setAppMode(mode) {
     appMode = mode;
+    selectedItem = null; // Always reset to unselected item state on mode switch
+
     const marketBtn = document.getElementById('mob-mode-market-btn');
     const navBtn = document.getElementById('mob-mode-nav-btn');
 
@@ -1306,6 +1326,9 @@
 
     const marketSlider = document.getElementById('mob-slider');
     const navSlider = document.getElementById('mob-nav-slider');
+
+    const view1 = document.getElementById('mob-view-1');
+    const navView1 = document.getElementById('mob-nav-view-1');
 
     if (mode === 'market') {
       marketBtn.classList.add('active');
@@ -1321,6 +1344,20 @@
       marketSlider.style.display = 'flex';
       navSlider.style.display = 'none';
 
+      // Always reset Market Mode sort to 'volume' (販売数/売買数)
+      currentSort = 'volume';
+      ['volume', 'gil', 'price'].forEach(k => {
+        const btn = document.getElementById(`mob-sort-${k}`);
+        if (btn) {
+          if (k === 'volume') btn.classList.add('active');
+          else btn.classList.remove('active');
+        }
+      });
+
+      // Always reset to Panel 1 (品目一覧) and scroll to top
+      setMobileTab(1);
+      if (view1) view1.scrollTop = 0;
+
       renderMobileItemList();
     } else {
       navBtn.classList.add('active');
@@ -1335,6 +1372,20 @@
 
       marketSlider.style.display = 'none';
       navSlider.style.display = 'flex';
+
+      // Always reset Kinsetsu Nav Mode sort to 'profit' (利益額)
+      navSort = 'profit';
+      ['profit', 'revenue'].forEach(k => {
+        const btn = document.getElementById(`mob-nav-sort-${k}`);
+        if (btn) {
+          if (k === 'profit') btn.classList.add('active');
+          else btn.classList.remove('active');
+        }
+      });
+
+      // Always reset to Panel 1 (品目一覧) and scroll to top
+      setMobileNavTab(1);
+      if (navView1) navView1.scrollTop = 0;
 
       renderNavItemList();
     }
@@ -1352,7 +1403,7 @@
   function setMobileTab(tabIndex) {
     currentTab = tabIndex;
     const slider = document.getElementById('mob-slider');
-    slider.style.transform = `translateX(-${(tabIndex - 1) * 33.33333}%)`;
+    if (slider) slider.style.transform = `translateX(-${(tabIndex - 1) * 33.33333}%)`;
 
     for (let i = 1; i <= 3; i++) {
       const btn = document.getElementById(`mob-subtab-${i}`);
@@ -1362,19 +1413,15 @@
       }
     }
 
-    if (!selectedItem && currentFilteredItems.length > 0) {
-      selectedItem = currentFilteredItems[0];
-    }
-
-    if (tabIndex === 2 && selectedItem) renderMobileDetailView(selectedItem);
-    if (tabIndex === 3 && selectedItem) renderMobileListingView(selectedItem);
+    if (tabIndex === 2) renderMobileDetailView(selectedItem);
+    if (tabIndex === 3) renderMobileListingView(selectedItem);
   }
 
   // Nav Subtab Switcher
   function setMobileNavTab(tabIndex) {
     navTab = tabIndex;
     const slider = document.getElementById('mob-nav-slider');
-    slider.style.transform = `translateX(-${(tabIndex - 1) * 33.33333}%)`;
+    if (slider) slider.style.transform = `translateX(-${(tabIndex - 1) * 33.33333}%)`;
 
     for (let i = 1; i <= 3; i++) {
       const btn = document.getElementById(`mob-nav-subtab-${i}`);
@@ -1384,12 +1431,8 @@
       }
     }
 
-    if (!selectedItem && navFilteredItems.length > 0) {
-      selectedItem = navFilteredItems[0];
-    }
-
-    if (tabIndex === 2 && selectedItem) renderNavSupplierView(selectedItem);
-    if (tabIndex === 3 && selectedItem) renderNavTargetView(selectedItem);
+    if (tabIndex === 2) renderNavSupplierView(selectedItem);
+    if (tabIndex === 3) renderNavTargetView(selectedItem);
   }
 
   // Sort Switcher: Auto Reset to Tab 1
@@ -2044,7 +2087,23 @@
 
   // Render Nav Panel 2 (② 仕入先 Supplier View with Arbitrage Card summary)
   function renderNavSupplierView(item) {
-    if (!item) return;
+    const summaryContainer = document.getElementById('mob-nav-summary-2');
+    const historyCardsContainer = document.getElementById('mob-nav-history-cards-container');
+
+    if (!item) {
+      if (summaryContainer) {
+        summaryContainer.innerHTML = `
+          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:2.5rem 1rem; text-align:center;">
+            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-gold); margin-bottom:0.8rem;"></i><br>
+            <strong style="font-size:0.95rem; color:var(--text-main);">品目が選択されていません</strong><br>
+            <span style="font-size:0.78rem; color:var(--text-muted); display:block; margin-top:0.4rem;">「品目一覧」タブから確認したい金策品目を選択してください。</span>
+          </div>`;
+      }
+      if (historyCardsContainer) {
+        historyCardsContainer.innerHTML = '<div style="text-align:center; padding:2rem 1rem; color:var(--text-muted); font-size:0.82rem;">NO DATA: 品目が選択されていません</div>';
+      }
+      return;
+    }
 
     const itemId = item.item_id || item.id;
     const buyWorld = item.buyWorld || selectedWorld;
@@ -2053,7 +2112,6 @@
     const supplierItem = getItemForWorld(itemId, buyWorld) || item;
 
     // Render Arbitrage Card Summary for Panel 2
-    const summaryContainer = document.getElementById('mob-nav-summary-2');
     if (summaryContainer) {
       summaryContainer.innerHTML = getNavCardHtml(item);
     }
@@ -2310,10 +2368,25 @@
 
   // Render Nav Panel 3 (販売先 Target Details - Fixed to Home World)
   function renderNavTargetView(item) {
-    if (!item) return;
+    const summaryContainer = document.getElementById('mob-nav-summary-3');
+    const targetCardsContainer = document.getElementById('mob-nav-target-cards-container');
+
+    if (!item) {
+      if (summaryContainer) {
+        summaryContainer.innerHTML = `
+          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:2.5rem 1rem; text-align:center;">
+            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-gold); margin-bottom:0.8rem;"></i><br>
+            <strong style="font-size:0.95rem; color:var(--text-main);">品目が選択されていません</strong><br>
+            <span style="font-size:0.78rem; color:var(--text-muted); display:block; margin-top:0.4rem;">「品目一覧」タブから確認したい金策品目を選択してください。</span>
+          </div>`;
+      }
+      if (targetCardsContainer) {
+        targetCardsContainer.innerHTML = '<div style="text-align:center; padding:2rem 1rem; color:var(--text-muted); font-size:0.82rem;">NO DATA: 品目が選択されていません</div>';
+      }
+      return;
+    }
 
     // Render Summary Arbitrage Card for Home World
-    const summaryContainer = document.getElementById('mob-nav-summary-3');
     if (summaryContainer) {
       summaryContainer.innerHTML = getNavCardHtml(item);
     }
@@ -2583,9 +2656,28 @@
 
   // Render Market Panel 2
   function renderMobileDetailView(item) {
-    if (!item) return;
-
     const summaryContainer = document.getElementById('mob-selected-summary');
+    const historyContainer = document.getElementById('mob-history-cards-container');
+
+    if (!item) {
+      if (summaryContainer) {
+        summaryContainer.innerHTML = `
+          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:2.5rem 1rem; text-align:center;">
+            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-blue); margin-bottom:0.8rem;"></i><br>
+            <strong style="font-size:0.95rem; color:var(--text-main);">品目が選択されていません</strong><br>
+            <span style="font-size:0.78rem; color:var(--text-muted); display:block; margin-top:0.4rem;">「品目一覧」タブから分析したい品目を選択してください。</span>
+          </div>`;
+      }
+      if (historyContainer) {
+        historyContainer.innerHTML = '<div style="text-align:center; padding:2rem 1rem; color:var(--text-muted); font-size:0.82rem;">NO DATA: 品目が選択されていません</div>';
+      }
+      if (trendChartInstance) {
+        trendChartInstance.destroy();
+        trendChartInstance = null;
+      }
+      return;
+    }
+
     if (summaryContainer) {
       summaryContainer.innerHTML = getSummaryCardHtml(item);
     }
@@ -2765,9 +2857,24 @@
 
   // Market Panel 3 Listing View Render
   function renderMobileListingView(item) {
-    if (!item) return;
-
     const summaryContainer = document.getElementById('mob-selected-summary-3');
+    const listingsContainer = document.getElementById('mob-listings-container');
+
+    if (!item) {
+      if (summaryContainer) {
+        summaryContainer.innerHTML = `
+          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:2.5rem 1rem; text-align:center;">
+            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-blue); margin-bottom:0.8rem;"></i><br>
+            <strong style="font-size:0.95rem; color:var(--text-main);">品目が選択されていません</strong><br>
+            <span style="font-size:0.78rem; color:var(--text-muted); display:block; margin-top:0.4rem;">「品目一覧」タブから出品状況を確認したい品目を選択してください。</span>
+          </div>`;
+      }
+      if (listingsContainer) {
+        listingsContainer.innerHTML = '<div style="text-align:center; padding:2rem 1rem; color:var(--text-muted); font-size:0.82rem;">NO DATA: 品目が選択されていません</div>';
+      }
+      return;
+    }
+
     if (summaryContainer) {
       summaryContainer.innerHTML = getSummaryCardHtml(item);
     }
@@ -2987,24 +3094,142 @@
     }
   }
 
-  // Touch & Swipe Listeners
+  // Touch, Swipe & Pull-to-Refresh Listeners
   document.addEventListener('DOMContentLoaded', () => {
     loadData();
 
     const viewport = document.getElementById('mob-main-viewport');
+    const pullContainer = document.getElementById('mob-pull-refresh-container');
+    const pullIcon = document.getElementById('mob-pull-refresh-icon');
+    const pullText = document.getElementById('mob-pull-refresh-text');
+    const pullPill = document.getElementById('mob-pull-refresh-pill');
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isPullingDown = false;
+    let isRefreshing = false;
+    let pullDistance = 0;
+    const refreshThreshold = 65;
+
+    function getActivePanel() {
+      const activeSlider = (appMode === 'market') ? document.getElementById('mob-slider') : document.getElementById('mob-nav-slider');
+      if (!activeSlider) return null;
+      const activeTabIdx = (appMode === 'market') ? currentTab : navTab;
+      return activeSlider.querySelector(`.mob-panel:nth-child(${activeTabIdx})`);
+    }
+
+    function resetPullIndicator() {
+      if (!pullContainer) return;
+      pullContainer.style.transform = 'translateY(-100%)';
+      pullContainer.style.opacity = '0';
+      setTimeout(() => {
+        if (!isRefreshing && pullIcon) {
+          pullIcon.className = 'fa-solid fa-arrow-down';
+          pullIcon.style.transform = 'rotate(0deg)';
+          pullIcon.style.color = 'var(--accent-blue)';
+          if (pullText) pullText.textContent = '引っ張って更新';
+          if (pullPill) pullPill.style.borderColor = 'var(--accent-blue)';
+        }
+      }, 200);
+    }
+
     if (viewport) {
       viewport.addEventListener('touchstart', (e) => {
+        if (isRefreshing || e.touches.length !== 1) return;
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
+
+        const activePanel = getActivePanel();
+        if (activePanel && activePanel.scrollTop <= 0) {
+          isPullingDown = true;
+          pullDistance = 0;
+        } else {
+          isPullingDown = false;
+        }
+      }, { passive: true });
+
+      viewport.addEventListener('touchmove', (e) => {
+        if (isRefreshing || e.touches.length !== 1) return;
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const diffX = currentX - touchStartX;
+        const diffY = currentY - touchStartY;
+
+        const activePanel = getActivePanel();
+        if (isPullingDown && activePanel && activePanel.scrollTop <= 0 && diffY > 0 && Math.abs(diffY) > Math.abs(diffX)) {
+          // Resistance curve for natural pull elasticity
+          pullDistance = Math.min(diffY * 0.45, 90);
+
+          if (pullContainer) {
+            pullContainer.style.opacity = '1';
+            pullContainer.style.transform = `translateY(${pullDistance - 60}px)`;
+          }
+
+          if (pullDistance >= refreshThreshold) {
+            if (pullIcon) {
+              pullIcon.className = 'fa-solid fa-arrow-up';
+              pullIcon.style.transform = 'rotate(180deg)';
+              pullIcon.style.color = 'var(--accent-gold)';
+            }
+            if (pullText) pullText.textContent = '指を離して更新';
+            if (pullPill) pullPill.style.borderColor = 'var(--accent-gold)';
+          } else {
+            if (pullIcon) {
+              pullIcon.className = 'fa-solid fa-arrow-down';
+              pullIcon.style.transform = 'rotate(0deg)';
+              pullIcon.style.color = 'var(--accent-blue)';
+            }
+            if (pullText) pullText.textContent = '引っ張って更新';
+            if (pullPill) pullPill.style.borderColor = 'var(--accent-blue)';
+          }
+        } else if (diffY < 0 || Math.abs(diffX) > Math.abs(diffY)) {
+          if (pullDistance > 0) {
+            isPullingDown = false;
+            pullDistance = 0;
+            resetPullIndicator();
+          }
+        }
       }, { passive: true });
 
       viewport.addEventListener('touchend', (e) => {
+        if (isRefreshing) return;
         const touchEndX = e.changedTouches[0].clientX;
         const touchEndY = e.changedTouches[0].clientY;
 
         const diffX = touchEndX - touchStartX;
         const diffY = touchEndY - touchStartY;
 
+        // Check pull-to-refresh completion
+        if (isPullingDown && pullDistance >= refreshThreshold) {
+          isRefreshing = true;
+          isPullingDown = false;
+          if (pullContainer) {
+            pullContainer.style.transform = 'translateY(15px)';
+            pullContainer.style.opacity = '1';
+          }
+          if (pullIcon) {
+            pullIcon.className = 'fa-solid fa-spinner fa-spin';
+            pullIcon.style.transform = 'rotate(0deg)';
+            pullIcon.style.color = 'var(--accent-gold)';
+          }
+          if (pullText) pullText.textContent = '最新データを更新中...';
+          if (pullPill) pullPill.style.borderColor = 'var(--accent-gold)';
+
+          setTimeout(() => {
+            const cleanUrl = window.location.href.split('?')[0];
+            window.location.href = cleanUrl + '?t=' + Date.now();
+          }, 500);
+          return;
+        }
+
+        // Reset pull indicator if threshold was not reached
+        if (isPullingDown) {
+          isPullingDown = false;
+          pullDistance = 0;
+          resetPullIndicator();
+        }
+
+        // Horizontal Swipe for Panel Navigation
         if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
           if (appMode === 'market') {
             if (diffX < 0 && currentTab < 3) setMobileTab(currentTab + 1);
@@ -3015,6 +3240,12 @@
           }
         }
       }, { passive: true });
+
+      viewport.addEventListener('touchcancel', () => {
+        isPullingDown = false;
+        pullDistance = 0;
+        resetPullIndicator();
+      });
     }
   });
 </script>
