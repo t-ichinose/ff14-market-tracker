@@ -22,6 +22,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: market-update
+  cancel-in-progress: false
+
 jobs:
   update-market-data:
     runs-on: ubuntu-latest
@@ -74,9 +78,20 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f docs/data.json.gz
-          if ! git diff --quiet || ! git diff --staged --quiet; then
+          for i in {1..3}; do
+            git fetch origin main
+            git reset origin/main
+            git add -f docs/data.json.gz
+            if git diff --staged --quiet; then
+              echo "No changes to commit or push."
+              break
+            fi
             git commit -m "Auto-update FFXIV Market Research Data ($TARGET_DC)"
-            git pull origin main --rebase --autostash || true
-            git push origin main
-          fi
+            if git push origin main; then
+              echo "Successfully pushed updated market data."
+              break
+            fi
+            echo "Push failed due to remote changes, retrying ($i/3)..."
+            sleep 3
+          done
+
