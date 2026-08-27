@@ -72,4 +72,9 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add -f docs/data.json.gz
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update FFXIV Market Research Data ($TARGET_DC)" && git pull origin main --rebase && git push)
+          if ! git diff --quiet || ! git diff --staged --quiet; then
+            git commit -m "Auto-update FFXIV Market Research Data ($TARGET_DC)"
+            git fetch origin main
+            git rebase -X ours origin/main || (git rebase --abort && git pull origin main --no-rebase -s recursive -X ours)
+            git push origin main
+          fi
