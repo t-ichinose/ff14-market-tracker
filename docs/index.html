@@ -939,7 +939,7 @@
             <i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> 市場分析
           </button>
           <button class="view-mode-tab-btn" id="modeBtnArbitrage" onclick="switchMainViewMode('arbitrage')">
-            <i class="fa-solid fa-gem" style="color: var(--accent-gold);"></i> 💎 金策ナビ
+            <i class="fa-solid fa-coins" style="color: var(--accent-gold);"></i> 金策ナビ
           </button>
         </div>
 
@@ -2796,7 +2796,7 @@
     function populateArbitrageHomeWorldSelect() {
       const select = document.getElementById('arbHomeWorldSelect');
 
-      const savedHomeWorld = getSavedUserHomeWorld() || 'Chocobo';
+      const savedHomeWorld = currentModalWorld || getSavedUserHomeWorld() || 'Chocobo';
 
       let html = '';
       for (const [dc, worlds] of Object.entries(dcWorldsMap || {})) {
@@ -3302,8 +3302,11 @@ function updateArbitrageFilters() {
         return;
       }
 
+      const savedWorld = currentModalWorld || getSavedUserHomeWorld() || 'Chocobo';
       const homeWorldSelect = document.getElementById('arbHomeWorldSelect');
-      const arbHomeWorld = homeWorldSelect ? homeWorldSelect.value : 'Chocobo';
+      const arbHomeWorld = (homeWorldSelect && homeWorldSelect.value) ? homeWorldSelect.value : savedWorld;
+      currentModalWorld = arbHomeWorld;
+      saveUserHomeWorld(arbHomeWorld);
 
       // PC表示用ヘッダー動的挿入
       const arbCol = document.getElementById('arbitrageWorldColumn');
