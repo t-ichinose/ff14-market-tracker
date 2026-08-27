@@ -3301,7 +3301,7 @@ function renderPcArbitrageMonitorPane(itemId, itemTitle, itemIcon, sourceWorld, 
       drawTrendChart('pcArbHomeCanvas', 'pcArbHomeSummary', homeTrendObj.trend, homeTrendObj.trendPct, { height: 105, paddingTop: 12, paddingBottom: 16 });
 
       // 出品モードがアクティブな場合は Universalis ライブ出品データを取得描画
-      const targetBuyGuide = Math.round(sourceBuyPrice * 1.05);
+      const targetBuyGuide = sourceBuyPrice;
       if (pcArbSourceViewMode === 'listings') {
         fetchAndRenderArbListings('pcArbSourceListingsTbody', 'Japan', itemId, pcArbSourceHqOnly, true, targetBuyGuide);
       }
