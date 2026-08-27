@@ -111,15 +111,18 @@
     }
 
     .mode-btn {
-      padding: 4px 11px;
+      padding: 4px 10px;
       border-radius: 16px;
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       font-weight: 700;
       border: none;
       color: var(--text-muted);
       background: transparent;
       cursor: pointer;
       transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .mode-btn.active {
@@ -853,8 +856,8 @@
       </div>
       <div class="right-header-group">
         <div class="header-mode-switch">
-          <button class="mode-btn active" id="mob-mode-market-btn" onclick="setAppMode('market')">市場分析</button>
-          <button class="mode-btn" id="mob-mode-nav-btn" onclick="setAppMode('nav')">💎 金策ナビ</button>
+          <button class="mode-btn active" id="mob-mode-market-btn" onclick="setAppMode('market')"><i class="fa-solid fa-chart-line" style="font-size:0.75rem;"></i> 市場分析</button>
+          <button class="mode-btn" id="mob-mode-nav-btn" onclick="setAppMode('nav')"><i class="fa-solid fa-coins" style="font-size:0.75rem;"></i> 金策ナビ</button>
         </div>
       </div>
     </div>
@@ -889,32 +892,33 @@
       <!-- Market Mode Subtabs -->
       <div class="subtabs-segmented-container" id="mob-market-subtabs-bar">
         <button class="subtab-segmented-btn active" id="mob-subtab-1" onclick="setMobileTab(1)">
-          <i class="fa-solid fa-list-ul"></i> ① 品目一覧
+          <i class="fa-solid fa-list-ul"></i> 品目一覧
         </button>
         <button class="subtab-segmented-btn" id="mob-subtab-2" onclick="setMobileTab(2)">
-          <i class="fa-solid fa-chart-line"></i> ② 推移・比較
+          <i class="fa-solid fa-chart-line"></i> 推移・比較
         </button>
         <button class="subtab-segmented-btn" id="mob-subtab-3" onclick="setMobileTab(3)">
-          <i class="fa-solid fa-list-check"></i> ③ 出品状況
+          <i class="fa-solid fa-list-check"></i> 出品状況
         </button>
       </div>
 
       <!-- Nav Mode Subtabs -->
       <div class="subtabs-segmented-container" id="mob-nav-subtabs-bar" style="display:none;">
         <button class="subtab-segmented-btn active" id="mob-nav-subtab-1" onclick="setMobileNavTab(1)">
-          <i class="fa-solid fa-gem"></i> ① 品目一覧
+          <i class="fa-solid fa-gem"></i> 品目一覧
         </button>
         <button class="subtab-segmented-btn" id="mob-nav-subtab-2" onclick="setMobileNavTab(2)">
-          <i class="fa-solid fa-cart-shopping"></i> ② 仕入先
+          <i class="fa-solid fa-cart-shopping"></i> 仕入先
         </button>
         <button class="subtab-segmented-btn" id="mob-nav-subtab-3" onclick="setMobileNavTab(3)">
-          <i class="fa-solid fa-store"></i> ③ 販売先
+          <i class="fa-solid fa-store"></i> 販売先
         </button>
       </div>
     </div>
 
     <!-- Row 4: World Settings Row (ワールド選択 ＋ 検索フォーム ＋ クリスタルON/OFF) -->
     <div class="header-row-4-controls">
+      <span class="world-label" style="font-size:0.78rem; font-weight:700; color:var(--text-muted); white-space:nowrap;">ワールド:</span>
       <select class="header-world-select" id="pcWorldSelect" onchange="onMobileWorldChange(this.value)">
         <option value="">データ読み込み中...</option>
       </select>
