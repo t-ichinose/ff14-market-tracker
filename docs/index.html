@@ -3478,7 +3478,7 @@ function updateArbitrageFilters() {
         return;
       }
 
-      container.innerHTML = opportunities.slice(0, 40).map((op, idx) => {
+      container.innerHTML = opportunities.slice(0, 100).map((op, idx) => {
         const item = op.homeItem;
         let displayTitle = item.item_name || `Item #${op.itemId}`;
         let cleanTitle = escapeHtml(displayTitle).replace(/\s*\[(NQ|HQ)\]\s*$/i, "").trim();
