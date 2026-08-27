@@ -259,75 +259,70 @@
       color: var(--accent-blue);
     }
 
-    .drawer-btn {
-      background: rgba(0, 210, 255, 0.1);
-      border: 1px solid var(--accent-blue);
-      color: var(--accent-blue);
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
+    /* Top Header Search Box (Replacing Menu Icon) */
+    .header-search-box {
       display: flex;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-      transition: transform 0.2s;
-    }
-
-    .drawer-btn.open {
-      transform: rotate(180deg);
-      background: rgba(0, 210, 255, 0.25);
-    }
-
-    /* Expandable Control Drawer */
-    #mobile-control-drawer {
-      display: none;
-      background: rgba(10, 15, 26, 0.98);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding: 0.6rem 0.3rem;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-
-    #mobile-control-drawer.open {
-      display: flex;
-    }
-
-    .drawer-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .drawer-label {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-weight: 700;
-    }
-
-    .drawer-select, .drawer-input {
-      width: 100%;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #fff;
-      padding: 7px 11px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 6px;
-      font-size: 0.85rem;
+      padding: 0 0.45rem;
+      gap: 0.35rem;
+      height: 30px;
+      transition: all 0.2s;
+    }
+
+    .header-search-box:focus-within {
+      border-color: var(--accent-blue);
+      background: rgba(0, 210, 255, 0.1);
+    }
+
+    .header-search-input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 0.78rem;
+      width: 82px;
       outline: none;
     }
 
-    .drawer-select optgroup {
+    .header-search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Row 4 World Select Bar (切り替えタブの最下部) */
+    .header-row-4-world {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.3rem 0.5rem;
+      gap: 0.4rem;
+    }
+
+    .header-world-select {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      outline: none;
+      font-weight: 700;
+    }
+
+    .header-world-select optgroup {
       background-color: #0b1120;
       color: var(--accent-gold);
       font-weight: 800;
       font-style: normal;
-      padding: 4px 0;
     }
 
-    .drawer-select option {
+    .header-world-select option {
       background-color: #0f172a;
       color: #f8fafc;
+    }fafc;
       padding: 8px 10px;
     }
 
@@ -854,7 +849,7 @@
 <div id="app">
   <!-- Fixed Header -->
   <header>
-    <!-- Row 1: Brand (Left) & Mode Switch + Menu (Right) -->
+    <!-- Row 1: Brand (Left) & Mode Switch + Search Box (Right - Replacing Menu Icon) -->
     <div class="header-row-1">
       <div class="brand-title">
         <div class="brand-icon-box"><i class="fa-solid fa-chart-line"></i></div>
@@ -865,7 +860,12 @@
           <button class="mode-btn active" id="mob-mode-market-btn" onclick="setAppMode('market')">市場分析</button>
           <button class="mode-btn" id="mob-mode-nav-btn" onclick="setAppMode('nav')">💎 金策ナビ</button>
         </div>
-        <button class="header-menu-btn"><i class="fa-solid fa-bars"></i></button>
+
+        <!-- Inline Search Box Replacing Menu Icon -->
+        <div class="header-search-box">
+          <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted); font-size:0.75rem;"></i>
+          <input type="text" class="header-search-input" id="pcSearchInput" placeholder="品名検索..." oninput="onMobileSearchInput(this.value)">
+        </div>
       </div>
     </div>
 
@@ -898,7 +898,7 @@
       </button>
     </div>
 
-    <!-- Row 3: Subtabs Segmented Tabs & Drawer Button -->
+    <!-- Row 3: Subtabs Segmented Tabs -->
     <div class="header-row-3">
       <!-- Market Mode Subtabs -->
       <div class="subtabs-segmented-container" id="mob-market-subtabs-bar">
@@ -925,24 +925,16 @@
           <i class="fa-solid fa-store"></i> ③ 販売先
         </button>
       </div>
-
-      <button class="drawer-btn" id="mob-drawer-toggle" onclick="toggleMobileDrawer()">
-        <i class="fa-solid fa-chevron-down"></i>
-      </button>
     </div>
 
-    <!-- Expandable Control Drawer -->
-    <div id="mobile-control-drawer">
-      <div class="drawer-row">
-        <span class="drawer-label"><i class="fa-solid fa-globe"></i> ホームワールド選択（販売先固定）</span>
-        <select class="drawer-select" id="pcWorldSelect" onchange="onMobileWorldChange(this.value)">
-          <option value="">データ読み込み中...</option>
-        </select>
+    <!-- Row 4: World Select Bar (切り替えタブの最下部) -->
+    <div class="header-row-4-world">
+      <div style="display:flex; align-items:center; gap:0.3rem; font-size:0.78rem; font-weight:800; color:var(--accent-gold); white-space:nowrap;">
+        <i class="fa-solid fa-globe"></i> ワールド:
       </div>
-      <div class="drawer-row">
-        <span class="drawer-label"><i class="fa-solid fa-magnifying-glass"></i> 品名・IDリアルタイム検索</span>
-        <input type="text" class="drawer-input" id="pcSearchInput" placeholder="品名キーワード入力..." oninput="onMobileSearchInput(this.value)">
-      </div>
+      <select class="header-world-select" id="pcWorldSelect" onchange="onMobileWorldChange(this.value)">
+        <option value="">データ読み込み中...</option>
+      </select>
     </div>
   </header>
 
