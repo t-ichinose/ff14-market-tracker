@@ -1233,6 +1233,7 @@
       if (!worldName) return;
       try {
         localStorage.setItem(USER_WORLD_KEY, worldName);
+        localStorage.setItem('ff14_selected_world', worldName);
       } catch (e) {}
     }
 
@@ -2806,8 +2807,19 @@
         html += `</optgroup>`;
       }
 
-      if (select && select.children.length === 0) {
-        select.innerHTML = html;
+      if (select) {
+        if (select.children.length === 0) {
+          select.innerHTML = html;
+        }
+        if (!select.dataset.listenerBound) {
+          select.dataset.listenerBound = "true";
+          select.addEventListener('change', (e) => {
+            if (e.target.value) {
+              saveUserHomeWorld(e.target.value);
+              renderArbitrageGrid();
+            }
+          });
+        }
       }
     }
 

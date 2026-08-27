@@ -1152,7 +1152,13 @@
   let currentTab = 1;
   let currentSort = 'volume';
   let isCrystalExcluded = true;
-  let selectedWorld = 'Anima';
+  let selectedWorld = (function() {
+    try {
+      return localStorage.getItem('ff14_user_home_world') || localStorage.getItem('ff14_selected_world') || 'Anima';
+    } catch(e) {
+      return 'Anima';
+    }
+  })();
   let searchQuery = '';
   let selectedItem = null;
   let listingScope = 'world';
@@ -1519,6 +1525,10 @@
   function onMobileWorldChange(val) {
     if (val) {
       selectedWorld = val;
+      try {
+        localStorage.setItem('ff14_user_home_world', val);
+        localStorage.setItem('ff14_selected_world', val);
+      } catch(e) {}
       if (appMode === 'market') {
         renderMobileItemList();
         if (selectedItem && currentTab === 2) renderMobileDetailView(selectedItem);
