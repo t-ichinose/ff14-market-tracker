@@ -3,7 +3,8 @@ name: Scheduled Market Research Update
 on:
   schedule:
     # 30分間隔で全4DCを一括更新 (毎時7分, 37分)
-    - cron: '7,37 * * * *'
+    - cron: '7 * * * *'
+    - cron: '37 * * * *'
   workflow_dispatch:
     inputs:
       target_dc:
@@ -58,6 +59,7 @@ jobs:
           fi
           echo "TARGET_DC=$TARGET_DC" >> $GITHUB_ENV
           echo "Selected Target DC: $TARGET_DC"
+
       - name: Run Market Research Pipeline
         env:
           PYTHONUNBUFFERED: "1"
@@ -67,6 +69,7 @@ jobs:
           else
             python -u main.py --dc $TARGET_DC
           fi
+
       - name: Commit and push updated web data
         run: |
           git config --global user.name "github-actions[bot]"
@@ -74,7 +77,6 @@ jobs:
           git add -f docs/data.json.gz
           if ! git diff --quiet || ! git diff --staged --quiet; then
             git commit -m "Auto-update FFXIV Market Research Data ($TARGET_DC)"
-            git fetch origin main
-            git rebase -X ours origin/main || (git rebase --abort && git pull origin main --no-rebase -s recursive -X ours)
+            git pull origin main --rebase --autostash || true
             git push origin main
           fi

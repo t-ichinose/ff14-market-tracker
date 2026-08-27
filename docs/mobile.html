@@ -38,6 +38,7 @@
     html, body {
       width: 100%;
       height: 100%;
+      height: 100dvh;
       overflow: hidden;
       background-color: var(--bg-dark);
       color: var(--text-main);
@@ -49,8 +50,9 @@
     #app {
       display: flex;
       flex-direction: column;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
+      height: 100dvh;
       overflow: hidden;
       position: relative;
     }
@@ -380,28 +382,28 @@
       scrollbar-gutter: stable;
       -webkit-overflow-scrolling: touch;
       padding: 0.65rem;
-      padding-bottom: max(6.5rem, calc(5rem + env(safe-area-inset-bottom, 35px))) !important;
       display: flex;
       flex-direction: column;
       gap: 0.65rem;
     }
 
-    /* Container Min-Heights & Bottom Clearance for Mobile Browser Toolbars */
+    /* Un-swallowable flex child spacer to guarantee full scroll clearance past mobile browser toolbars & safe area inset */
+    .mob-panel::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: max(7.5rem, calc(6rem + env(safe-area-inset-bottom, 30px)));
+      min-height: max(7.5rem, calc(6rem + env(safe-area-inset-bottom, 30px)));
+      flex-shrink: 0;
+    }
+
+    /* Container Min-Heights */
     #mob-history-cards-container, #mob-nav-history-cards-container, #mob-nav-target-container {
       min-height: 220px;
-      padding-bottom: 3.5rem !important;
-      margin-bottom: 2rem !important;
     }
 
     #mob-listings-container, #mobile-nav-item-cards-container, #mobile-item-cards-container, #mob-nav-target-cards-container {
       min-height: 320px;
-      padding-bottom: 3.5rem !important;
-      margin-bottom: 2rem !important;
-    }
-
-    .table-scroll-wrapper, .history-table-container {
-      padding-bottom: 3.5rem !important;
-      margin-bottom: 2rem !important;
     }
 
     /* Standard Item Card */
@@ -1000,32 +1002,34 @@
           <div class="loading-spinner">品目を選択してください</div>
         </div>
 
-        <div class="section-header">
-          <div class="section-header-title">
-            <i class="fa-solid fa-chart-line"></i> 過去1週間の価格・取引数推移
+        <div id="mob-detail-content" style="display:flex; flex-direction:column; gap:0.65rem;">
+          <div class="section-header">
+            <div class="section-header-title">
+              <i class="fa-solid fa-chart-line"></i> 過去1週間の価格・取引数推移
+            </div>
+            <span class="section-header-sub" id="mob-chart-world-name">(${selectedWorld})</span>
           </div>
-          <span class="section-header-sub" id="mob-chart-world-name">(${selectedWorld})</span>
-        </div>
-        
-        <div class="chart-container">
-          <canvas id="mobTrendChart"></canvas>
-        </div>
-
-        <div class="daily-breakdown-grid" id="mob-daily-chips-container">
-          <!-- Populated by JS -->
-        </div>
-
-        <div class="section-header" style="margin-top:0.4rem;">
-          <div class="section-header-title" style="color:var(--accent-purple);">
-            <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-history-world-name">(${selectedWorld})</span>
+          
+          <div class="chart-container">
+            <canvas id="mobTrendChart"></canvas>
           </div>
-          <button class="crystal-toggle-btn off" id="mob-history-hq-btn" onclick="toggleMobileHistoryHqFilter()">
-            ✨ NQ非表示: OFF
-          </button>
-        </div>
 
-        <div id="mob-history-cards-container" style="display:flex; flex-direction:column; gap:0.45rem;">
-          <!-- Populated by JS -->
+          <div class="daily-breakdown-grid" id="mob-daily-chips-container">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="section-header" style="margin-top:0.4rem;">
+            <div class="section-header-title" style="color:var(--accent-purple);">
+              <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-history-world-name">(${selectedWorld})</span>
+            </div>
+            <button class="crystal-toggle-btn off" id="mob-history-hq-btn" onclick="toggleMobileHistoryHqFilter()">
+              ✨ NQ非表示: OFF
+            </button>
+          </div>
+
+          <div id="mob-history-cards-container" style="display:flex; flex-direction:column; gap:0.45rem;">
+            <!-- Populated by JS -->
+          </div>
         </div>
       </div>
 
@@ -1035,44 +1039,46 @@
           <div class="loading-spinner">品目を選択してください</div>
         </div>
 
-        <div class="three-area-grid" id="mob-three-area-container" style="margin-top:0.2rem;">
-          <div class="area-card">
-            <span class="area-title">選択ワールド最安</span>
-            <span class="area-price cyan" id="area-val-world">-</span>
-            <span class="area-sub" id="area-sub-world">${selectedWorld}</span>
+        <div id="mob-listing-content" style="display:flex; flex-direction:column; gap:0.65rem;">
+          <div class="three-area-grid" id="mob-three-area-container" style="margin-top:0.2rem;">
+            <div class="area-card">
+              <span class="area-title">選択ワールド最安</span>
+              <span class="area-price cyan" id="area-val-world">-</span>
+              <span class="area-sub" id="area-sub-world">${selectedWorld}</span>
+            </div>
+            <div class="area-card">
+              <span class="area-title" id="area-title-dc">同DC最安</span>
+              <span class="area-price gold" id="area-val-dc">-</span>
+              <span class="area-sub" id="area-sub-dc">-</span>
+            </div>
+            <div class="area-card">
+              <span class="area-title">全DC最安</span>
+              <span class="area-price purple" id="area-val-all">-</span>
+              <span class="area-sub" id="area-sub-all">-</span>
+            </div>
           </div>
-          <div class="area-card">
-            <span class="area-title" id="area-title-dc">同DC最安</span>
-            <span class="area-price gold" id="area-val-dc">-</span>
-            <span class="area-sub" id="area-sub-dc">-</span>
-          </div>
-          <div class="area-card">
-            <span class="area-title">全DC最安</span>
-            <span class="area-price purple" id="area-val-all">-</span>
-            <span class="area-sub" id="area-sub-all">-</span>
-          </div>
-        </div>
 
-        <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.3); padding:0.45rem 0.5rem; border-radius:8px; margin-top:0.3rem;">
-          <div style="display:flex; gap:0.3rem; flex:1;">
-            <button class="segmented-tab active" style="padding:4px 8px; font-size:0.78rem;" id="mobScopeWorldBtn" onclick="setMobileListingScope('world')">単一</button>
-            <button class="segmented-tab" style="padding:4px 8px; font-size:0.78rem;" id="mobScopeDcBtn" onclick="setMobileListingScope('dc')">同DC</button>
-            <button class="segmented-tab" style="padding:4px 8px; font-size:0.78rem;" id="mobScopeAllBtn" onclick="setMobileListingScope('all')">全DC</button>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.3); padding:0.45rem 0.5rem; border-radius:8px; margin-top:0.3rem;">
+            <div style="display:flex; gap:0.3rem; flex:1;">
+              <button class="segmented-tab active" style="padding:4px 8px; font-size:0.78rem;" id="mobScopeWorldBtn" onclick="setMobileListingScope('world')">単一</button>
+              <button class="segmented-tab" style="padding:4px 8px; font-size:0.78rem;" id="mobScopeDcBtn" onclick="setMobileListingScope('dc')">同DC</button>
+              <button class="segmented-tab" style="padding:4px 8px; font-size:0.78rem;" id="mobScopeAllBtn" onclick="setMobileListingScope('all')">全DC</button>
+            </div>
+            <button class="crystal-toggle-btn off" id="mobHqFilterBtn" onclick="toggleMobileListingHqFilter()">
+              ✨ NQ非表示: OFF
+            </button>
           </div>
-          <button class="crystal-toggle-btn off" id="mobHqFilterBtn" onclick="toggleMobileListingHqFilter()">
-            ✨ NQ非表示: OFF
-          </button>
-        </div>
 
-        <div class="section-header" style="margin-top:0.2rem;">
-          <div class="section-header-title">
-            <i class="fa-solid fa-tags"></i> 出品状況一覧 <span class="section-header-sub" id="mob-listings-world-name">(${selectedWorld})</span>
+          <div class="section-header" style="margin-top:0.2rem;">
+            <div class="section-header-title">
+              <i class="fa-solid fa-tags"></i> 出品状況一覧 <span class="section-header-sub" id="mob-listings-world-name">(${selectedWorld})</span>
+            </div>
+            <span class="section-header-sub" id="mob-listings-count-label">全0件の出品</span>
           </div>
-          <span class="section-header-sub" id="mob-listings-count-label">全0件の出品</span>
-        </div>
 
-        <div id="mob-listings-container" style="display:flex; flex-direction:column; gap:0.55rem;">
-          <div class="loading-spinner">品目を選択すると最新の出品状況が読み込まれます</div>
+          <div id="mob-listings-container" style="display:flex; flex-direction:column; gap:0.55rem;">
+            <div class="loading-spinner">品目を選択すると最新の出品状況が読み込まれます</div>
+          </div>
         </div>
       </div>
 
@@ -1097,30 +1103,32 @@
           <div class="loading-spinner">品目を選択してください</div>
         </div>
 
-        <!-- Section Header: History / Listings Segmented Switch & Icon-Only NQ Switch -->
-        <div class="section-header" style="margin-top:0.25rem; flex-wrap:nowrap; gap:0.35rem;">
-          <div class="section-header-title" id="mob-nav-section-title" style="color:var(--accent-purple); min-width:0; flex:1; overflow:hidden; text-overflow:ellipsis;">
-            <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-nav-history-world-name">(-)</span>
+        <div id="mob-nav-supplier-content" style="display:flex; flex-direction:column; gap:0.65rem;">
+          <!-- Section Header: History / Listings Segmented Switch & Icon-Only NQ Switch -->
+          <div class="section-header" style="margin-top:0.25rem; flex-wrap:nowrap; gap:0.35rem;">
+            <div class="section-header-title" id="mob-nav-section-title" style="color:var(--accent-purple); min-width:0; flex:1; overflow:hidden; text-overflow:ellipsis;">
+              <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-nav-history-world-name">(-)</span>
+            </div>
+
+            <!-- Segmented Toggle Switch for 履歴 vs 出品 -->
+            <div class="segmented-tabs-container" style="flex:none; width:auto; background:rgba(0,0,0,0.4); padding:2px; border-radius:6px;">
+              <button class="segmented-tab active" id="mob-nav-mode-history-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavSupplierMode('history')">
+                <i class="fa-solid fa-clock-rotate-left"></i> 履歴
+              </button>
+              <button class="segmented-tab" id="mob-nav-mode-listings-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavSupplierMode('listings')">
+                <i class="fa-solid fa-list-ul"></i> 出品
+              </button>
+            </div>
+
+            <!-- Icon-Only NQ Filter Switch -->
+            <button class="crystal-toggle-btn off" id="mob-nav-history-hq-btn" onclick="toggleMobileNavHistoryHqFilter()" title="✨ NQ非表示切換" style="padding:3px 7px; font-size:0.75rem;">
+              ✨ NQ
+            </button>
           </div>
 
-          <!-- Segmented Toggle Switch for 履歴 vs 出品 -->
-          <div class="segmented-tabs-container" style="flex:none; width:auto; background:rgba(0,0,0,0.4); padding:2px; border-radius:6px;">
-            <button class="segmented-tab active" id="mob-nav-mode-history-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavSupplierMode('history')">
-              <i class="fa-solid fa-clock-rotate-left"></i> 履歴
-            </button>
-            <button class="segmented-tab" id="mob-nav-mode-listings-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavSupplierMode('listings')">
-              <i class="fa-solid fa-list-ul"></i> 出品
-            </button>
+          <div id="mob-nav-history-cards-container" style="display:flex; flex-direction:column; gap:0.45rem;">
+            <!-- Populated by JS -->
           </div>
-
-          <!-- Icon-Only NQ Filter Switch -->
-          <button class="crystal-toggle-btn off" id="mob-nav-history-hq-btn" onclick="toggleMobileNavHistoryHqFilter()" title="✨ NQ非表示切換" style="padding:3px 7px; font-size:0.75rem;">
-            ✨ NQ
-          </button>
-        </div>
-
-        <div id="mob-nav-history-cards-container" style="display:flex; flex-direction:column; gap:0.45rem;">
-          <!-- Populated by JS -->
         </div>
       </div>
 
@@ -1131,30 +1139,32 @@
           <div class="loading-spinner">品目を選択してください</div>
         </div>
 
-        <!-- Section Header: History / Listings Segmented Switch & Icon-Only NQ Switch for Home World -->
-        <div class="section-header" style="margin-top:0.25rem; flex-wrap:nowrap; gap:0.35rem;">
-          <div class="section-header-title" id="mob-nav-target-section-title" style="color:var(--accent-purple); min-width:0; flex:1; overflow:hidden; text-overflow:ellipsis;">
-            <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-nav-target-world-name">(${selectedWorld})</span>
+        <div id="mob-nav-target-content" style="display:flex; flex-direction:column; gap:0.65rem;">
+          <!-- Section Header: History / Listings Segmented Switch & Icon-Only NQ Switch for Home World -->
+          <div class="section-header" style="margin-top:0.25rem; flex-wrap:nowrap; gap:0.35rem;">
+            <div class="section-header-title" id="mob-nav-target-section-title" style="color:var(--accent-purple); min-width:0; flex:1; overflow:hidden; text-overflow:ellipsis;">
+              <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-nav-target-world-name">(${selectedWorld})</span>
+            </div>
+
+            <!-- Segmented Toggle Switch for 履歴 vs 出品 -->
+            <div class="segmented-tabs-container" style="flex:none; width:auto; background:rgba(0,0,0,0.4); padding:2px; border-radius:6px;">
+              <button class="segmented-tab active" id="mob-nav-target-mode-history-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavTargetMode('history')">
+                <i class="fa-solid fa-clock-rotate-left"></i> 履歴
+              </button>
+              <button class="segmented-tab" id="mob-nav-target-mode-listings-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavTargetMode('listings')">
+                <i class="fa-solid fa-list-ul"></i> 出品
+              </button>
+            </div>
+
+            <!-- Icon-Only NQ Filter Switch -->
+            <button class="crystal-toggle-btn off" id="mob-nav-target-hq-btn" onclick="toggleMobileNavTargetHqFilter()" title="✨ NQ非表示切換" style="padding:3px 7px; font-size:0.75rem;">
+              ✨ NQ
+            </button>
           </div>
 
-          <!-- Segmented Toggle Switch for 履歴 vs 出品 -->
-          <div class="segmented-tabs-container" style="flex:none; width:auto; background:rgba(0,0,0,0.4); padding:2px; border-radius:6px;">
-            <button class="segmented-tab active" id="mob-nav-target-mode-history-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavTargetMode('history')">
-              <i class="fa-solid fa-clock-rotate-left"></i> 履歴
-            </button>
-            <button class="segmented-tab" id="mob-nav-target-mode-listings-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavTargetMode('listings')">
-              <i class="fa-solid fa-list-ul"></i> 出品
-            </button>
+          <div id="mob-nav-target-cards-container" style="display:flex; flex-direction:column; gap:0.45rem;">
+            <!-- Populated by JS -->
           </div>
-
-          <!-- Icon-Only NQ Filter Switch -->
-          <button class="crystal-toggle-btn off" id="mob-nav-target-hq-btn" onclick="toggleMobileNavTargetHqFilter()" title="✨ NQ非表示切換" style="padding:3px 7px; font-size:0.75rem;">
-            ✨ NQ
-          </button>
-        </div>
-
-        <div id="mob-nav-target-cards-container" style="display:flex; flex-direction:column; gap:0.45rem;">
-          <!-- Populated by JS -->
         </div>
       </div>
 
@@ -1373,8 +1383,10 @@
       marketSlider.style.display = 'none';
       navSlider.style.display = 'flex';
 
-      // Always reset Kinsetsu Nav Mode sort to 'profit' (利益額)
+      // Always reset Kinsetsu Nav Mode sort to 'profit' (利益額) and modes to 'history'
       navSort = 'profit';
+      setNavSupplierMode('history');
+      setNavTargetMode('history');
       ['profit', 'revenue'].forEach(k => {
         const btn = document.getElementById(`mob-nav-sort-${k}`);
         if (btn) {
@@ -1601,23 +1613,64 @@
       return;
     }
 
-    let items = Array.isArray(worldData) ? [...worldData] : (worldData.items ? Object.values(worldData.items) : Object.values(worldData));
-
-    if (isCrystalExcluded) {
-      items = items.filter(it => {
-        const id = Number(it.item_id || it.id || 0);
-        const name = (it.item_name || it.name || '').toLowerCase();
-        if (id >= 2 && id <= 19) return false;
-        return !name.includes('クリスタル') && !name.includes('クラスター') && !name.includes('シャード');
-      });
-    }
+    let items = [];
 
     if (searchQuery) {
-      items = items.filter(it => {
-        const name = (it.item_name || it.name || '').toLowerCase();
-        const idStr = String(it.item_id || it.id || '');
-        return name.includes(searchQuery) || idStr.includes(searchQuery);
+      const masterMap = new Map();
+      for (const w in allWorldsData) {
+        const list = Array.isArray(allWorldsData[w]) ? allWorldsData[w] : (allWorldsData[w].items ? Object.values(allWorldsData[w].items) : Object.values(allWorldsData[w]));
+        for (const item of list) {
+          const name = (item.item_name || item.name || '').toLowerCase();
+          const idStr = String(item.item_id || item.id || '');
+          if (name.includes(searchQuery) || idStr.includes(searchQuery)) {
+            const iid = item.item_id || item.id;
+            if (!masterMap.has(iid)) {
+              masterMap.set(iid, item);
+            }
+          }
+        }
+      }
+
+      const targetWorldList = Array.isArray(worldData) ? worldData : (worldData.items ? Object.values(worldData.items) : Object.values(worldData));
+      const targetWorldMap = new Map(targetWorldList.map(it => [it.item_id || it.id, it]));
+
+      items = Array.from(masterMap.values()).map(mItem => {
+        const iid = mItem.item_id || mItem.id;
+        if (targetWorldMap.has(iid)) {
+          return targetWorldMap.get(iid);
+        }
+        return {
+          ...mItem,
+          min_price: 0,
+          avg_price: 0,
+          max_price: 0,
+          sale_velocity: 0,
+          sale_trades: 0,
+          daily_revenue: 0,
+          daily_trend: [],
+          history: []
+        };
       });
+
+      if (isCrystalExcluded) {
+        items = items.filter(it => {
+          const id = Number(it.item_id || it.id || 0);
+          const name = (it.item_name || it.name || '').toLowerCase();
+          if (id >= 2 && id <= 19) return false;
+          return !name.includes('クリスタル') && !name.includes('クラスター') && !name.includes('シャード');
+        });
+      }
+    } else {
+      items = Array.isArray(worldData) ? [...worldData] : (worldData.items ? Object.values(worldData.items) : Object.values(worldData));
+
+      if (isCrystalExcluded) {
+        items = items.filter(it => {
+          const id = Number(it.item_id || it.id || 0);
+          const name = (it.item_name || it.name || '').toLowerCase();
+          if (id >= 2 && id <= 19) return false;
+          return !name.includes('クリスタル') && !name.includes('クラスター') && !name.includes('シャード');
+        });
+      }
     }
 
     if (currentSort === 'volume') {
@@ -1629,15 +1682,15 @@
     }
 
     currentFilteredItems = items;
-    const top30 = items.slice(0, 30);
+    const displayItems = searchQuery ? items.slice(0, 100) : items.slice(0, 30);
 
-    if (top30.length === 0) {
+    if (displayItems.length === 0) {
       container.innerHTML = '<div class="loading-spinner">該当する品目がありません</div>';
       return;
     }
 
     let html = '';
-    top30.forEach((it, idx) => {
+    displayItems.forEach((it, idx) => {
       const itemId = it.item_id || it.id;
       const primaryIcon = it.icon_url ? it.icon_url : getComputedIconUrl(itemId || it.icon);
       const itemName = escapeHtml(it.item_name || it.name || `Item #${itemId}`);
@@ -1957,6 +2010,9 @@
         clearNavListingsCache();
       }
       selectedItem = found;
+      // Always reset supplier and target view modes to 'history' (取引履歴) when switching items
+      setNavSupplierMode('history');
+      setNavTargetMode('history');
       setMobileNavTab(2);
     }
   }
@@ -2088,22 +2144,22 @@
   // Render Nav Panel 2 (② 仕入先 Supplier View with Arbitrage Card summary)
   function renderNavSupplierView(item) {
     const summaryContainer = document.getElementById('mob-nav-summary-2');
-    const historyCardsContainer = document.getElementById('mob-nav-history-cards-container');
+    const supplierContent = document.getElementById('mob-nav-supplier-content');
 
     if (!item) {
       if (summaryContainer) {
         summaryContainer.innerHTML = `
-          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:2.5rem 1rem; text-align:center;">
-            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-gold); margin-bottom:0.8rem;"></i><br>
-            <strong style="font-size:0.95rem; color:var(--text-main);">品目が選択されていません</strong><br>
-            <span style="font-size:0.78rem; color:var(--text-muted); display:block; margin-top:0.4rem;">「品目一覧」タブから確認したい金策品目を選択してください。</span>
+          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:3.5rem 1.5rem; text-align:center; margin-top:1rem;">
+            <i class="fa-solid fa-hand-pointer fa-3x" style="color:var(--accent-gold); margin-bottom:1rem; opacity:0.9;"></i><br>
+            <strong style="font-size:1.1rem; color:var(--text-main);">品目が選択されていません</strong><br>
+            <span style="font-size:0.85rem; color:var(--text-muted); display:block; margin-top:0.6rem; line-height:1.5;">「品目一覧」タブから確認したい金策品目を選択してください。</span>
           </div>`;
       }
-      if (historyCardsContainer) {
-        historyCardsContainer.innerHTML = '<div style="text-align:center; padding:2rem 1rem; color:var(--text-muted); font-size:0.82rem;">NO DATA: 品目が選択されていません</div>';
-      }
+      if (supplierContent) supplierContent.style.display = 'none';
       return;
     }
+
+    if (supplierContent) supplierContent.style.display = 'flex';
 
     const itemId = item.item_id || item.id;
     const buyWorld = item.buyWorld || selectedWorld;
@@ -2201,7 +2257,7 @@
     if (!container || !item) return;
 
     const itemId = item.item_id || item.id;
-    const cacheKey = `all_${itemId}`;
+    const cacheKey = `all_${itemId}_${navHistoryExcludeNq ? 'hq' : 'all'}`;
 
     if (navListingsCache[cacheKey]) {
       renderNavSupplierListingsFromData(navListingsCache[cacheKey]);
@@ -2212,9 +2268,10 @@
 
     try {
       let data = null;
+      const hqParam = navHistoryExcludeNq ? '&hq=true' : '';
       const endpoints = [
-        `https://universalis.app/api/v2/Japan/${itemId}?listings=60`,
-        `https://universalis.app/api/v2/Elemental,Gaia,Mana,Meteor/${itemId}?listings=60`
+        `https://universalis.app/api/v2/Japan/${itemId}?listings=60${hqParam}`,
+        `https://universalis.app/api/v2/Elemental,Gaia,Mana,Meteor/${itemId}?listings=60${hqParam}`
       ];
 
       for (const url of endpoints) {
@@ -2369,22 +2426,22 @@
   // Render Nav Panel 3 (販売先 Target Details - Fixed to Home World)
   function renderNavTargetView(item) {
     const summaryContainer = document.getElementById('mob-nav-summary-3');
-    const targetCardsContainer = document.getElementById('mob-nav-target-cards-container');
+    const targetContent = document.getElementById('mob-nav-target-content');
 
     if (!item) {
       if (summaryContainer) {
         summaryContainer.innerHTML = `
-          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:2.5rem 1rem; text-align:center;">
-            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-gold); margin-bottom:0.8rem;"></i><br>
-            <strong style="font-size:0.95rem; color:var(--text-main);">品目が選択されていません</strong><br>
-            <span style="font-size:0.78rem; color:var(--text-muted); display:block; margin-top:0.4rem;">「品目一覧」タブから確認したい金策品目を選択してください。</span>
+          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:3.5rem 1.5rem; text-align:center; margin-top:1rem;">
+            <i class="fa-solid fa-hand-pointer fa-3x" style="color:var(--accent-gold); margin-bottom:1rem; opacity:0.9;"></i><br>
+            <strong style="font-size:1.1rem; color:var(--text-main);">品目が選択されていません</strong><br>
+            <span style="font-size:0.85rem; color:var(--text-muted); display:block; margin-top:0.6rem; line-height:1.5;">「品目一覧」タブから確認したい金策品目を選択してください。</span>
           </div>`;
       }
-      if (targetCardsContainer) {
-        targetCardsContainer.innerHTML = '<div style="text-align:center; padding:2rem 1rem; color:var(--text-muted); font-size:0.82rem;">NO DATA: 品目が選択されていません</div>';
-      }
+      if (targetContent) targetContent.style.display = 'none';
       return;
     }
+
+    if (targetContent) targetContent.style.display = 'flex';
 
     // Render Summary Arbitrage Card for Home World
     if (summaryContainer) {
@@ -2536,7 +2593,7 @@
     if (!container || !item) return;
 
     const itemId = item.item_id || item.id;
-    const cacheKey = `home_${selectedWorld}_${itemId}`;
+    const cacheKey = `home_${selectedWorld}_${itemId}_${navTargetExcludeNq ? 'hq' : 'all'}`;
 
     if (navListingsCache[cacheKey]) {
       renderNavTargetListingsFromData(navListingsCache[cacheKey]);
@@ -2546,7 +2603,8 @@
     container.innerHTML = `<div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> ホームワールド (${escapeHtml(selectedWorld)}) の最新出品情報を取得中...</div>`;
 
     try {
-      const url = `https://universalis.app/api/v2/${encodeURIComponent(selectedWorld)}/${itemId}?listings=60`;
+      const hqParam = navTargetExcludeNq ? '&hq=true' : '';
+      const url = `https://universalis.app/api/v2/${encodeURIComponent(selectedWorld)}/${itemId}?listings=60${hqParam}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error('Universalis API エラー');
       const data = await res.json();
@@ -2657,26 +2715,26 @@
   // Render Market Panel 2
   function renderMobileDetailView(item) {
     const summaryContainer = document.getElementById('mob-selected-summary');
-    const historyContainer = document.getElementById('mob-history-cards-container');
+    const detailContent = document.getElementById('mob-detail-content');
 
     if (!item) {
       if (summaryContainer) {
         summaryContainer.innerHTML = `
-          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:2.5rem 1rem; text-align:center;">
-            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-blue); margin-bottom:0.8rem;"></i><br>
-            <strong style="font-size:0.95rem; color:var(--text-main);">品目が選択されていません</strong><br>
-            <span style="font-size:0.78rem; color:var(--text-muted); display:block; margin-top:0.4rem;">「品目一覧」タブから分析したい品目を選択してください。</span>
+          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:3.5rem 1.5rem; text-align:center; margin-top:1rem;">
+            <i class="fa-solid fa-hand-pointer fa-3x" style="color:var(--accent-blue); margin-bottom:1rem; opacity:0.9;"></i><br>
+            <strong style="font-size:1.1rem; color:var(--text-main);">品目が選択されていません</strong><br>
+            <span style="font-size:0.85rem; color:var(--text-muted); display:block; margin-top:0.6rem; line-height:1.5;">「品目一覧」タブからデータを確認したい品目を選択してください。</span>
           </div>`;
       }
-      if (historyContainer) {
-        historyContainer.innerHTML = '<div style="text-align:center; padding:2rem 1rem; color:var(--text-muted); font-size:0.82rem;">NO DATA: 品目が選択されていません</div>';
-      }
+      if (detailContent) detailContent.style.display = 'none';
       if (trendChartInstance) {
         trendChartInstance.destroy();
         trendChartInstance = null;
       }
       return;
     }
+
+    if (detailContent) detailContent.style.display = 'flex';
 
     if (summaryContainer) {
       summaryContainer.innerHTML = getSummaryCardHtml(item);
@@ -2858,22 +2916,22 @@
   // Market Panel 3 Listing View Render
   function renderMobileListingView(item) {
     const summaryContainer = document.getElementById('mob-selected-summary-3');
-    const listingsContainer = document.getElementById('mob-listings-container');
+    const listingContent = document.getElementById('mob-listing-content');
 
     if (!item) {
       if (summaryContainer) {
         summaryContainer.innerHTML = `
-          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:2.5rem 1rem; text-align:center;">
-            <i class="fa-solid fa-hand-pointer fa-2x" style="color:var(--accent-blue); margin-bottom:0.8rem;"></i><br>
-            <strong style="font-size:0.95rem; color:var(--text-main);">品目が選択されていません</strong><br>
-            <span style="font-size:0.78rem; color:var(--text-muted); display:block; margin-top:0.4rem;">「品目一覧」タブから出品状況を確認したい品目を選択してください。</span>
+          <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:3.5rem 1.5rem; text-align:center; margin-top:1rem;">
+            <i class="fa-solid fa-hand-pointer fa-3x" style="color:var(--accent-blue); margin-bottom:1rem; opacity:0.9;"></i><br>
+            <strong style="font-size:1.1rem; color:var(--text-main);">品目が選択されていません</strong><br>
+            <span style="font-size:0.85rem; color:var(--text-muted); display:block; margin-top:0.6rem; line-height:1.5;">「品目一覧」タブから出品状況を確認したい品目を選択してください。</span>
           </div>`;
       }
-      if (listingsContainer) {
-        listingsContainer.innerHTML = '<div style="text-align:center; padding:2rem 1rem; color:var(--text-muted); font-size:0.82rem;">NO DATA: 品目が選択されていません</div>';
-      }
+      if (listingContent) listingContent.style.display = 'none';
       return;
     }
+
+    if (listingContent) listingContent.style.display = 'flex';
 
     if (summaryContainer) {
       summaryContainer.innerHTML = getSummaryCardHtml(item);
@@ -2882,6 +2940,7 @@
     const listingWorldEl = document.getElementById('mob-listings-world-name');
     if (listingWorldEl) listingWorldEl.textContent = `(${selectedWorld})`;
 
+    updateThreeAreaChips(item, null);
     loadMobileListings(item);
   }
 
@@ -2912,6 +2971,84 @@
     if (selectedItem) loadMobileListings(selectedItem);
   }
 
+  // Fixed 3-Area Lowest Price Cards (Selected World / Same DC / All DC) derived directly from live active listings
+  function updateThreeAreaChips(item, listingsData) {
+    if (!item) return;
+
+    const currentDc = worldToDcMap[selectedWorld] || 'Mana';
+    const rawListings = listingsData && Array.isArray(listingsData.listings) ? listingsData.listings : [];
+
+    // Filter NQ if HQ filter is ON
+    let validListings = rawListings;
+    if (listingExcludeNq) {
+      validListings = validListings.filter(l => Boolean(l.hq));
+    }
+
+    // Card 1: Selected World (選択ワールド最安)
+    let priceWorld = null;
+    const worldListings = validListings.filter(l => (l.worldName || selectedWorld) === selectedWorld);
+    if (worldListings.length > 0) {
+      priceWorld = Math.min(...worldListings.map(l => l.pricePerUnit || 0));
+    } else if (item.min_price && item.min_price > 0 && !listingExcludeNq) {
+      priceWorld = item.min_price;
+    }
+
+    // Card 2: Same DC (同DC最安)
+    let minPriceDc = null;
+    let minWorldDc = selectedWorld;
+    const dcListings = validListings.filter(l => (worldToDcMap[l.worldName || selectedWorld] || '') === currentDc);
+    if (dcListings.length > 0) {
+      let cheapestDcListing = dcListings[0];
+      dcListings.forEach(l => {
+        if ((l.pricePerUnit || 0) < (cheapestDcListing.pricePerUnit || 0)) {
+          cheapestDcListing = l;
+        }
+      });
+      minPriceDc = cheapestDcListing.pricePerUnit || 0;
+      minWorldDc = cheapestDcListing.worldName || selectedWorld;
+    } else if (priceWorld) {
+      minPriceDc = priceWorld;
+      minWorldDc = selectedWorld;
+    }
+
+    // Card 3: All DC (全DC最安)
+    let minPriceAll = null;
+    let minWorldAll = selectedWorld;
+    if (validListings.length > 0) {
+      let cheapestListing = validListings[0];
+      validListings.forEach(l => {
+        if ((l.pricePerUnit || 0) < (cheapestListing.pricePerUnit || 0)) {
+          cheapestListing = l;
+        }
+      });
+      minPriceAll = cheapestListing.pricePerUnit || 0;
+      minWorldAll = cheapestListing.worldName || selectedWorld;
+    } else if (priceWorld) {
+      minPriceAll = priceWorld;
+      minWorldAll = selectedWorld;
+    }
+
+    // Update Card 1 DOM (選択ワールド最安)
+    const areaValWorld = document.getElementById('area-val-world');
+    const areaSubWorld = document.getElementById('area-sub-world');
+    if (areaValWorld) areaValWorld.textContent = priceWorld ? `${formatCompactNumber(priceWorld)}G` : '-';
+    if (areaSubWorld) areaSubWorld.textContent = selectedWorld;
+
+    // Update Card 2 DOM (同DC最安)
+    const areaTitleDc = document.getElementById('area-title-dc');
+    const areaValDc = document.getElementById('area-val-dc');
+    const areaSubDc = document.getElementById('area-sub-dc');
+    if (areaTitleDc) areaTitleDc.textContent = `同DC最安 (${currentDc})`;
+    if (areaValDc) areaValDc.textContent = minPriceDc ? `${formatCompactNumber(minPriceDc)}G` : '-';
+    if (areaSubDc) areaSubDc.innerHTML = minWorldDc ? `<i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> ${escapeHtml(minWorldDc)}` : selectedWorld;
+
+    // Update Card 3 DOM (全DC最安)
+    const areaValAll = document.getElementById('area-val-all');
+    const areaSubAll = document.getElementById('area-sub-all');
+    if (areaValAll) areaValAll.textContent = minPriceAll ? `${formatCompactNumber(minPriceAll)}G` : '-';
+    if (areaSubAll) areaSubAll.innerHTML = minWorldAll ? `<i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(minWorldAll)}` : selectedWorld;
+  }
+
   function renderMobileListingsFromData(item, data) {
     const container = document.getElementById('mob-listings-container');
     if (!container || !data) return;
@@ -2919,30 +3056,21 @@
     const currentDc = worldToDcMap[selectedWorld] || 'Mana';
     let rawListings = data.listings || [];
 
-    // Calculate 3 Area Lowest Prices
-    const minWorldPrice = item.min_price || (rawListings.length > 0 ? rawListings[0].pricePerUnit : null);
-    
-    const areaValWorld = document.getElementById('area-val-world');
-    const areaSubWorld = document.getElementById('area-sub-world');
-    if (areaValWorld) areaValWorld.textContent = minWorldPrice ? `${formatCompactNumber(minWorldPrice)}G` : '-';
-    if (areaSubWorld) areaSubWorld.textContent = selectedWorld;
+    // Calculate & update 3 Area Lowest Price Chips consistently across Selected World, Same DC, All DC
+    updateThreeAreaChips(item, data);
 
-    const areaTitleDc = document.getElementById('area-title-dc');
-    const areaValDc = document.getElementById('area-val-dc');
-    const areaSubDc = document.getElementById('area-sub-dc');
-    if (areaTitleDc) areaTitleDc.textContent = `同DC最安 (${currentDc})`;
-    if (areaValDc) areaValDc.textContent = rawListings.length > 0 ? `${formatCompactNumber(rawListings[0].pricePerUnit)}G` : (minWorldPrice ? `${formatCompactNumber(minWorldPrice)}G` : '-');
-    if (areaSubDc) areaSubDc.innerHTML = rawListings.length > 0 && rawListings[0].worldName ? `<i class="fa-solid fa-crown" style="color:var(--accent-gold);"></i> ${escapeHtml(rawListings[0].worldName)}` : selectedWorld;
-
-    const areaValAll = document.getElementById('area-val-all');
-    const areaSubAll = document.getElementById('area-sub-all');
-    if (areaValAll) areaValAll.textContent = rawListings.length > 0 ? `${formatCompactNumber(rawListings[0].pricePerUnit)}G` : (minWorldPrice ? `${formatCompactNumber(minWorldPrice)}G` : '-');
-    if (areaSubAll) areaSubAll.innerHTML = rawListings.length > 0 && rawListings[0].worldName ? `<i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(rawListings[0].worldName)}` : selectedWorld;
-
-    // Filter NQ if needed
-    let targetListings = rawListings;
+    // Filter NQ if HQ-only filter is ON
+    let validListings = rawListings;
     if (listingExcludeNq) {
-      targetListings = targetListings.filter(l => Boolean(l.hq));
+      validListings = validListings.filter(l => Boolean(l.hq));
+    }
+
+    // Filter for the listing table list based on user's scope button (単一 / 同DC / 全DC)
+    let targetListings = validListings;
+    if (listingScope === 'world') {
+      targetListings = validListings.filter(l => (l.worldName || selectedWorld) === selectedWorld);
+    } else if (listingScope === 'dc') {
+      targetListings = validListings.filter(l => (worldToDcMap[l.worldName || selectedWorld] || '') === currentDc);
     }
 
     const countLabel = document.getElementById('mob-listings-count-label');
@@ -3000,12 +3128,7 @@
     if (!container || !item) return;
 
     const itemId = item.item_id || item.id;
-    const currentDc = worldToDcMap[selectedWorld] || 'Mana';
-    let fetchParam = selectedWorld;
-    if (listingScope === 'dc') fetchParam = currentDc;
-    else if (listingScope === 'all') fetchParam = 'Japan';
-
-    const cacheKey = `market_${fetchParam}_${itemId}`;
+    const cacheKey = `market_fulljapan_${selectedWorld}_${itemId}_${listingExcludeNq ? 'hq' : 'all'}`;
 
     if (navListingsCache[cacheKey]) {
       renderMobileListingsFromData(item, navListingsCache[cacheKey]);
@@ -3016,27 +3139,47 @@
 
     try {
       let data = null;
-      const endpoints = [
-        `https://universalis.app/api/v2/${fetchParam}/${itemId}?listings=60`
-      ];
-      if (fetchParam === 'Japan') {
-        endpoints.push(`https://universalis.app/api/v2/Elemental,Gaia,Mana,Meteor/${itemId}?listings=60`);
+      const hqParam = listingExcludeNq ? '&hq=true' : '';
+      
+      const japanUrl = `https://universalis.app/api/v2/Japan/${itemId}?listings=60${hqParam}`;
+      const worldUrl = `https://universalis.app/api/v2/${encodeURIComponent(selectedWorld)}/${itemId}?listings=30${hqParam}`;
+
+      const [resJapan, resWorld] = await Promise.all([
+        fetch(japanUrl).catch(() => null),
+        fetch(worldUrl).catch(() => null)
+      ]);
+
+      let japanListings = [];
+      let worldListings = [];
+
+      if (resJapan && resJapan.ok) {
+        const jData = await resJapan.json();
+        japanListings = jData.listings || [];
+      }
+      if (resWorld && resWorld.ok) {
+        const wData = await resWorld.json();
+        worldListings = wData.listings || [];
       }
 
-      for (const url of endpoints) {
-        try {
-          const res = await fetch(url);
-          if (res.ok) {
-            data = await res.json();
-            if (data && data.listings) break;
-          }
-        } catch(e) {}
-      }
+      const combinedMap = new Map();
+      japanListings.forEach(l => {
+        const key = `${l.worldName}_${l.retainerName}_${l.pricePerUnit}_${l.quantity}_${l.lastReviewTime}`;
+        combinedMap.set(key, l);
+      });
+      worldListings.forEach(l => {
+        const wName = l.worldName || selectedWorld;
+        const key = `${wName}_${l.retainerName}_${l.pricePerUnit}_${l.quantity}_${l.lastReviewTime}`;
+        if (!combinedMap.has(key)) {
+          combinedMap.set(key, { ...l, worldName: wName });
+        }
+      });
 
-      if (!data || !data.listings) {
+      const combinedListings = Array.from(combinedMap.values());
+      if (combinedListings.length === 0) {
         throw new Error('Universalis API 通信エラー');
       }
 
+      data = { listings: combinedListings };
       navListingsCache[cacheKey] = data;
       renderMobileListingsFromData(item, data);
 

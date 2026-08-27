@@ -81,9 +81,9 @@
         width: 440px !important;
         flex: 0 0 440px !important;
         position: sticky !important;
-        top: 75px !important;
-        height: calc(100dvh - 105px) !important;
-        max-height: calc(100dvh - 105px) !important;
+        top: 68px !important;
+        height: calc(100vh - 75px) !important;
+        max-height: calc(100vh - 75px) !important;
         display: flex !important;
         flex-direction: column !important;
         overflow: hidden !important;
@@ -91,7 +91,6 @@
         border: 1px solid var(--card-border);
         border-radius: 16px;
         padding: 0.85rem;
-        padding-bottom: 2rem !important;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
         backdrop-filter: blur(12px);
       }
@@ -135,7 +134,7 @@
         min-height: 0 !important;
         overflow-y: auto !important;
         padding-right: 4px;
-        padding-bottom: 3.5rem !important;
+        padding-bottom: 0.5rem !important;
         display: flex;
         flex-direction: column;
         gap: 0.8rem;
@@ -153,14 +152,14 @@
         flex: 1 !important;
         min-width: 0 !important;
         position: sticky !important;
-        top: 75px !important;
-        height: calc(100dvh - 105px) !important;
-        max-height: calc(100dvh - 105px) !important;
+        top: 68px !important;
+        height: calc(100vh - 75px) !important;
+        max-height: calc(100vh - 75px) !important;
         overflow: hidden !important;
         background: rgba(15, 23, 42, 0.85);
         border: 1px solid var(--card-border);
         border-radius: 16px;
-        padding: 1.1rem 1.25rem 2rem 1.25rem;
+        padding: 1.1rem 1.25rem;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
         backdrop-filter: blur(12px);
       }
@@ -168,11 +167,8 @@
         max-height: none !important;
         flex: 1 !important;
         height: 100% !important;
-        padding-bottom: 3.5rem !important;
-        margin-bottom: 1.5rem !important;
-      }
-      .pc-right-pane .history-table-container table {
-        margin-bottom: 3.5rem !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
       }
       .pc-right-pane::-webkit-scrollbar {
         width: 6px;
@@ -1701,22 +1697,67 @@
         pcSelectHtml = '<select class="pc-world-select" id="pcWorldSelect" style="flex:1; width:100%; font-size:0.88rem; font-weight:600; padding:6px 8px; border-radius:8px;" onchange="onPcWorldSelectChange(this.value)">' + optGroups + '</select>';
 
       grid.innerHTML = renderWorlds.map(worldName => {
-        // Prepare items for this world with world-specific metrics (日当たり売買数 50以上限定)
+        // Prepare items for this world with world-specific metrics
         const activeSearch = pcAnalyticsSearchTerm;
-        const worldItems = (allData[worldName] || []).filter(item => {
-          if ((item.sale_trades || 0) <= 0) return false;
-          if (excludeCrystals && isCrystalItem(item)) return false;
-          if (activeSearch && !item.item_name.toLowerCase().includes(activeSearch) && !String(item.item_id).includes(activeSearch)) return false;
-          return true;
-        });
+        let worldItems = [];
 
-        // Sort worldItems by activeSortMode with appropriate noise reduction filters
+        if (activeSearch) {
+          // 検索時: 全32ワールドのマスターから検索キーワードに一致する品目を抽出
+          const masterMap = new Map();
+          for (const w in allData) {
+            for (const item of (allData[w] || [])) {
+              const name = (item.item_name || '').toLowerCase();
+              const idStr = String(item.item_id || item.id || '');
+              if (name.includes(activeSearch) || idStr.includes(activeSearch)) {
+                const iid = item.item_id || item.id;
+                if (!masterMap.has(iid)) {
+                  masterMap.set(iid, item);
+                }
+              }
+            }
+          }
+
+          const targetWorldItems = allData[worldName] || [];
+          const targetWorldMap = new Map(targetWorldItems.map(it => [it.item_id || it.id, it]));
+
+          worldItems = Array.from(masterMap.values()).map(mItem => {
+            const iid = mItem.item_id || mItem.id;
+            if (targetWorldMap.has(iid)) {
+              return targetWorldMap.get(iid);
+            }
+            return {
+              ...mItem,
+              min_price: 0,
+              avg_price: 0,
+              max_price: 0,
+              sale_velocity: 0,
+              sale_trades: 0,
+              daily_revenue: 0,
+              daily_trend: [],
+              history: []
+            };
+          });
+
+          if (excludeCrystals) {
+            worldItems = worldItems.filter(item => !isCrystalItem(item));
+          }
+        } else {
+          worldItems = (allData[worldName] || []).filter(item => {
+            if ((item.sale_trades || 0) <= 0) return false;
+            if (excludeCrystals && isCrystalItem(item)) return false;
+            return true;
+          });
+        }
+
+        // Sort worldItems by activeSortMode
         let sortedItems;
-        if (activeSortMode === 'revenue') {
-          sortedItems = worldItems.filter(item => (item.sale_velocity || 0) >= 1.0 || isCrystalItem(item) || activeSearch)
+        if (activeSearch) {
+          sortedItems = [...worldItems].sort((a, b) => (b.sale_velocity || 0) - (a.sale_velocity || 0));
+        } else if (activeSortMode === 'revenue') {
+          sortedItems = worldItems.filter(item => (item.sale_velocity || 0) >= 1.0 || isCrystalItem(item))
             .sort((a, b) => ((b.avg_price || 0) * (b.sale_velocity || 0)) - ((a.avg_price || 0) * (a.sale_velocity || 0)));
         } else if (activeSortMode === 'max_price') {
-          sortedItems = worldItems.filter(item => (item.max_price || 0) > 0 && (item.sale_trades || 0) > 0 && ((((item.avg_price || 0) / item.max_price) >= 0.35) || activeSearch))
+          sortedItems = worldItems.filter(item => (item.max_price || 0) > 0 && (item.sale_trades || 0) > 0 && (((item.avg_price || 0) / item.max_price) >= 0.35))
             .sort((a, b) => (b.max_price || 0) - (a.max_price || 0));
         } else if (activeSortMode === 'min_price') {
           sortedItems = [...worldItems].sort((a, b) => (b.min_price || 0) - (a.min_price || 0));
@@ -2016,7 +2057,7 @@
         if (allPEl) allPEl.innerText = globalP > 0 ? `${globalP.toLocaleString()}G` : '-G';
       };
 
-      // キャッシュが存在すればAPIを叩かず即座に適用
+      // キャッシュが存在すればAPIを叩かず即座に適用 (0ms)
       if (!forceRefresh && activeListingsCache[summaryCacheKey]) {
         const c = activeListingsCache[summaryCacheKey];
         applyCardValues(c.selMinPrice, c.dcMinPrice, c.dcMinWorld, c.globalMinPrice, c.globalMinWorld);
@@ -2024,52 +2065,47 @@
       }
 
       try {
-        const urlAll = `https://universalis.app/api/v2/Japan/${itemId}?listings=100${hqParam}`;
-        const resAll = await fetch(urlAll);
-        if (!resAll.ok) return;
-        const dataAll = await resAll.json();
-        const listingsAll = dataAll.listings || [];
+        const urlAll = `https://universalis.app/api/v2/Japan/${itemId}?listings=60${hqParam}`;
+        const urlWorld = `https://universalis.app/api/v2/${encodeURIComponent(worldName)}/${itemId}?listings=20${hqParam}`;
+        const urlDc = `https://universalis.app/api/v2/${encodeURIComponent(dcName)}/${itemId}?listings=30${hqParam}`;
+
+        // 3つのエンドポイントを同時に並列リクエスト（Promise.all）して通信時間を最小化（~0.2秒）
+        const [resAll, resWorld, resDc] = await Promise.all([
+          fetch(urlAll).catch(() => null),
+          fetch(urlWorld).catch(() => null),
+          fetch(urlDc).catch(() => null)
+        ]);
+
+        let listingsAll = [];
+        let listingsWorld = [];
+        let listingsDc = [];
+
+        if (resAll && resAll.ok) {
+          const dataAll = await resAll.json();
+          listingsAll = dataAll.listings || [];
+        }
+        if (resWorld && resWorld.ok) {
+          const dataWorld = await resWorld.json();
+          listingsWorld = dataWorld.listings || [];
+        }
+        if (resDc && resDc.ok) {
+          const dataDc = await resDc.json();
+          listingsDc = dataDc.listings || [];
+        }
 
         // 1. 全DC最安
-        const globalMinListing = listingsAll[0];
+        const globalMinListing = listingsAll[0] || listingsDc[0] || listingsWorld[0];
         let globalMinPrice = globalMinListing ? (globalMinListing.pricePerUnit || 0) : 0;
         let globalMinWorld = globalMinListing ? (globalMinListing.worldName || '-') : '-';
 
         // 2. 同DC最安
-        const dcMinListing = listingsAll.find(l => sameDcWorlds.includes(l.worldName));
+        let dcMinListing = listingsAll.find(l => sameDcWorlds.includes(l.worldName)) || listingsDc[0];
         let dcMinPrice = dcMinListing ? (dcMinListing.pricePerUnit || 0) : 0;
-        let dcMinWorld = dcMinListing ? dcMinListing.worldName : '-';
+        let dcMinWorld = dcMinListing ? (dcMinListing.worldName || dcName) : '-';
 
         // 3. 選択サーバー最安
-        const selMinListing = listingsAll.find(l => l.worldName === worldName);
+        let selMinListing = listingsAll.find(l => l.worldName === worldName) || listingsDc.find(l => l.worldName === worldName) || listingsWorld[0];
         let selMinPrice = selMinListing ? (selMinListing.pricePerUnit || 0) : 0;
-
-        // もし Japan TOP100 に選択ワールドが含まれていなければ個別取得
-        if (!selMinListing) {
-          const urlWorld = `https://universalis.app/api/v2/${encodeURIComponent(worldName)}/${itemId}?listings=10${hqParam}`;
-          const resW = await fetch(urlWorld);
-          if (resW.ok) {
-            const dataW = await resW.json();
-            const listingsW = dataW.listings || [];
-            if (listingsW.length > 0) {
-              selMinPrice = listingsW[0].pricePerUnit || 0;
-            }
-          }
-        }
-
-        // もし Japan TOP100 に同DCが含まれていなければ個別取得
-        if (!dcMinListing) {
-          const urlDc = `https://universalis.app/api/v2/${encodeURIComponent(dcName)}/${itemId}?listings=10${hqParam}`;
-          const resDc = await fetch(urlDc);
-          if (resDc.ok) {
-            const dataDc = await resDc.json();
-            const listingsDc = dataDc.listings || [];
-            if (listingsDc.length > 0) {
-              dcMinPrice = listingsDc[0].pricePerUnit || 0;
-              dcMinWorld = listingsDc[0].worldName || dcName;
-            }
-          }
-        }
 
         // キャッシュに保存
         activeListingsCache[summaryCacheKey] = {
@@ -2856,6 +2892,10 @@
       pcMonitorItemName = itemTitle;
       pcMonitorIconUrl = itemIcon;
       pcMonitorWorldName = homeWorld;
+
+      // Always reset source (仕入れ) and home (販売) view modes to 'history' (取引履歴) when switching items
+      pcArbSourceViewMode = 'history';
+      pcArbHomeViewMode = 'history';
 
       // 左側カード列のハイライト枠同期＆スクロール追従
       const allCards = document.querySelectorAll('#arbitrageCardGrid .arbitrage-card');
