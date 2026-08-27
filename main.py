@@ -433,9 +433,9 @@ def fetch_and_save_all(target_dc=None):
     # If DB has existing cache (> 5,000 records), fetch last 48 hours (172800s) incrementally.
     # If DB is empty / initial seed, fetch full 7 days (604800s) with 500 limit.
     if existing_sales_count > 5000:
-        entries_within = 14400  # 4 hours (incremental update window for 1h schedule)
+        entries_within = 43200  # 12 hours (hybrid incremental update window)
         entries_to_return = 50
-        print(f"=== Incremental Mode: DB contains {existing_sales_count:,} records. Fetching last 4h transactions ===", flush=True)
+        print(f"=== Incremental Mode: DB contains {existing_sales_count:,} records. Fetching last 12h transactions (max 50) ===", flush=True)
     else:
         entries_within = 604800  # 7 days
         entries_to_return = 500
