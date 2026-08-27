@@ -134,8 +134,10 @@ def fetch_single_dc_data(dc_name, target_ids, entries_within=172800, entries_to_
                 elif "itemID" in data:
                     return dc_name, {str(data["itemID"]): data}
                 return dc_name, {}
+            print(f"[WARNING] [{dc_name}] API HTTP {d_res.status_code} ({len(target_ids)} items). Retrying ({attempt + 1}/{max_attempts})...", flush=True)
             time.sleep(1.0 * (2 ** attempt))
-        except Exception:
+        except Exception as e:
+            print(f"[WARNING] [{dc_name}] Network Error ({e}) ({len(target_ids)} items). Retrying ({attempt + 1}/{max_attempts})...", flush=True)
             time.sleep(1.0 * (2 ** attempt))
 
     # Adaptive Fallback: If chunk failed after max_attempts and has > 5 items, split in half and retry
