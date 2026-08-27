@@ -1081,12 +1081,12 @@
         <!-- 4 Key Metrics Grid -->
         <div class="four-metrics-grid" id="mob-nav-four-metrics-container">
           <div class="metric-card-box green-acc">
-            <span class="metric-card-label">最安価格</span>
-            <span class="metric-card-val green" id="metric-val-min-price">-</span>
+            <span class="metric-card-label">目標仕入</span>
+            <span class="metric-card-val green" id="metric-val-buy-price">-</span>
           </div>
           <div class="metric-card-box purple-acc">
-            <span class="metric-card-label">目標仕入値 (3日平均)</span>
-            <span class="metric-card-val purple" id="metric-val-avg-price">-</span>
+            <span class="metric-card-label">目標売価</span>
+            <span class="metric-card-val purple" id="metric-val-sell-price">-</span>
           </div>
           <div class="metric-card-box cyan-acc">
             <span class="metric-card-label">販売速度</span>
@@ -1943,19 +1943,19 @@
     const supplierTitleEl = document.getElementById('mob-nav-supplier-title');
     if (supplierTitleEl) supplierTitleEl.textContent = `${buyWorld} (${buyDc})`;
 
-    // Populate 4 Metric Card Box Values (Matching PC Sample Screenshot)
-    const minPriceEl = document.getElementById('metric-val-min-price');
-    const avgPriceEl = document.getElementById('metric-val-avg-price');
+    // Populate 4 Metric Card Box Values (目標仕入, 目標売価, 販売速度, 7日売買数)
+    const buyPriceEl = document.getElementById('metric-val-buy-price');
+    const sellPriceEl = document.getElementById('metric-val-sell-price');
     const speedEl = document.getElementById('metric-val-speed');
     const volumeEl = document.getElementById('metric-val-volume');
 
-    const minP = supplierItem.min_price || item.buyPrice || 0;
-    const avgP = item.buyPrice || getRecent3DayAvg(supplierItem) || supplierItem.avg_price || minP;
+    const buyP = item.buyPrice || getRecent3DayAvg(supplierItem) || supplierItem.min_price || 0;
+    const sellP = item.sellPrice || (allWorldsData[selectedWorld] ? getRecent3DayAvg(getItemForWorld(itemId, selectedWorld)) : 0) || supplierItem.min_price || 0;
     const vel = supplierItem.sale_velocity || supplierItem.sales_per_day || item.salesVel || 0;
     const tradesCount = supplierItem.sales_count || supplierItem.num_transactions || (supplierItem.history ? supplierItem.history.length : 0);
 
-    if (minPriceEl) minPriceEl.textContent = `${formatNumber(minP)}G`;
-    if (avgPriceEl) avgPriceEl.textContent = `${formatNumber(avgP)}G`;
+    if (buyPriceEl) buyPriceEl.textContent = `${formatNumber(buyP)}G`;
+    if (sellPriceEl) sellPriceEl.textContent = `${formatNumber(sellP)}G`;
     if (speedEl) speedEl.textContent = `${vel.toFixed(1)}個/日`;
     if (volumeEl) volumeEl.textContent = `${formatNumber(tradesCount)}件`;
 
