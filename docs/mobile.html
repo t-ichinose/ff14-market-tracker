@@ -2942,8 +2942,9 @@
   async function loadData() {
     try {
       let data = null;
+      const cacheBuster = '?t=' + Date.now();
       try {
-        const res = await fetch('data.json.gz');
+        const res = await fetch('data.json.gz' + cacheBuster, { cache: 'no-cache' });
         if (res.ok) {
           const arrayBuffer = await res.arrayBuffer();
           if (window.pako) {
@@ -2955,14 +2956,14 @@
 
       if (!data) {
         try {
-          const res = await fetch('data.json');
+          const res = await fetch('data.json' + cacheBuster, { cache: 'no-cache' });
           if (res.ok) data = await res.json();
         } catch(e) {}
       }
 
       if (!data) {
         try {
-          const res = await fetch('https://t-ichinose.github.io/ff14-market-tracker/data.json.gz');
+          const res = await fetch('https://t-ichinose.github.io/ff14-market-tracker/data.json.gz' + cacheBuster, { cache: 'no-cache' });
           if (res.ok) {
             const arrayBuffer = await res.arrayBuffer();
             if (window.pako) {

@@ -1265,7 +1265,8 @@
         // 1. Try relative same-origin data.json.gz (Fastest for local & production)
         try {
           console.time('[FastLoad] Fetch data.json.gz');
-          const res = await fetchWithTimeout('data.json.gz', { timeout: 15000 });
+          const cacheBuster = '?t=' + Date.now();
+          const res = await fetchWithTimeout('data.json.gz' + cacheBuster, { timeout: 15000, cache: 'no-cache' });
           console.timeEnd('[FastLoad] Fetch data.json.gz');
 
           if (res && res.ok) {
@@ -1301,7 +1302,7 @@
         if (!data) {
           try {
             console.time('[FastLoad] Fetch data.json (Uncompressed Fallback)');
-            const res = await fetchWithTimeout('data.json', { timeout: 15000 });
+            const res = await fetchWithTimeout('data.json?t=' + Date.now(), { timeout: 15000, cache: 'no-cache' });
             console.timeEnd('[FastLoad] Fetch data.json (Uncompressed Fallback)');
             if (res && res.ok) {
               data = await res.json();
@@ -1315,8 +1316,8 @@
         if (!data) {
           try {
             console.time('[FastLoad] Fetch Production Live URL Fallback');
-            const prodUrl = 'https://t-ichinose.github.io/ff14-market-tracker/data.json.gz';
-            const res = await fetchWithTimeout(prodUrl, { timeout: 20000 });
+            const prodUrl = 'https://t-ichinose.github.io/ff14-market-tracker/data.json.gz?t=' + Date.now();
+            const res = await fetchWithTimeout(prodUrl, { timeout: 20000, cache: 'no-cache' });
             if (res && res.ok) {
               const arrayBuffer = await res.arrayBuffer();
               if (window.pako) {
