@@ -1089,19 +1089,36 @@
         </div>
       </div>
 
-      <!-- Nav Panel 3: Sales Target World Details (Fixed to Home World) -->
+      <!-- Nav Panel 3: Sales Target World Details & Listings (Fixed to Home World) -->
       <div class="mob-panel" id="mob-nav-view-3">
+        <!-- Top Summary: Arbitrage Card (金策タブ特有のカードフォーマット) -->
         <div id="mob-nav-summary-3">
           <div class="loading-spinner">品目を選択してください</div>
         </div>
 
-        <div class="section-header">
-          <div class="section-header-title" style="color:var(--accent-gold);">
-            <i class="fa-solid fa-house"></i> ホーム販売先 (${selectedWorld}) の最新状況
+        <!-- Section Header: History / Listings Segmented Switch & Icon-Only NQ Switch for Home World -->
+        <div class="section-header" style="margin-top:0.25rem; flex-wrap:nowrap; gap:0.35rem;">
+          <div class="section-header-title" id="mob-nav-target-section-title" style="color:var(--accent-purple); min-width:0; flex:1; overflow:hidden; text-overflow:ellipsis;">
+            <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-nav-target-world-name">(${selectedWorld})</span>
           </div>
+
+          <!-- Segmented Toggle Switch for 履歴 vs 出品 -->
+          <div class="segmented-tabs-container" style="flex:none; width:auto; background:rgba(0,0,0,0.4); padding:2px; border-radius:6px;">
+            <button class="segmented-tab active" id="mob-nav-target-mode-history-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavTargetMode('history')">
+              <i class="fa-solid fa-clock-rotate-left"></i> 履歴
+            </button>
+            <button class="segmented-tab" id="mob-nav-target-mode-listings-btn" style="padding:3px 7px; font-size:0.73rem;" onclick="setNavTargetMode('listings')">
+              <i class="fa-solid fa-list-ul"></i> 出品
+            </button>
+          </div>
+
+          <!-- Icon-Only NQ Filter Switch -->
+          <button class="crystal-toggle-btn off" id="mob-nav-target-hq-btn" onclick="toggleMobileNavTargetHqFilter()" title="✨ NQ非表示切換" style="padding:3px 7px; font-size:0.75rem;">
+            ✨ NQ
+          </button>
         </div>
 
-        <div id="mob-nav-target-container" style="display:flex; flex-direction:column; gap:0.5rem;">
+        <div id="mob-nav-target-cards-container" style="display:flex; flex-direction:column; gap:0.45rem;">
           <!-- Populated by JS -->
         </div>
       </div>
@@ -1130,6 +1147,9 @@
   let navSort = 'profit'; // 'profit' or 'revenue'
   let navMinSales = 0; // Filter based on daily sales trades on Home World (0, 1, 5, 10, 20)
   let navHistoryExcludeNq = false;
+  let navSupplierMode = 'history'; // 'history' or 'listings'
+  let navTargetMode = 'history'; // 'history' or 'listings'
+  let navTargetExcludeNq = false;
 
   let rawData = {};
   let allWorldsData = {};
@@ -1880,8 +1900,6 @@
     return items.find(it => (it.item_id || it.id) == itemId) || null;
   }
 
-  let navSupplierMode = 'history'; // 'history' or 'listings'
-
   function setNavSupplierMode(mode) {
     navSupplierMode = mode;
     const historyBtn = document.getElementById('mob-nav-mode-history-btn');
@@ -2202,51 +2220,198 @@
     container.innerHTML = html;
   }
 
+  function setNavTargetMode(mode) {
+    navTargetMode = mode;
+    const historyBtn = document.getElementById('mob-nav-target-mode-history-btn');
+    const listingsBtn = document.getElementById('mob-nav-target-mode-listings-btn');
+    if (historyBtn && listingsBtn) {
+      if (mode === 'history') {
+        historyBtn.classList.add('active');
+        listingsBtn.classList.remove('active');
+      } else {
+        listingsBtn.classList.add('active');
+        historyBtn.classList.remove('active');
+      }
+    }
+    if (selectedItem) renderNavTargetView(selectedItem);
+  }
+
+  function toggleMobileNavTargetHqFilter() {
+    navTargetExcludeNq = !navTargetExcludeNq;
+    const btn = document.getElementById('mob-nav-target-hq-btn');
+    if (btn) {
+      if (navTargetExcludeNq) {
+        btn.innerHTML = `✨ NQ`;
+        btn.classList.remove('off');
+      } else {
+        btn.innerHTML = `✨ NQ`;
+        btn.classList.add('off');
+      }
+    }
+    if (selectedItem) renderNavTargetView(selectedItem);
+  }
+
   // Render Nav Panel 3 (販売先 Target Details - Fixed to Home World)
   function renderNavTargetView(item) {
     if (!item) return;
 
+    // Render Summary Arbitrage Card for Home World
     const summaryContainer = document.getElementById('mob-nav-summary-3');
     if (summaryContainer) {
-      summaryContainer.innerHTML = getSummaryCardHtml(item);
+      summaryContainer.innerHTML = getNavCardHtml(item);
     }
 
-    const container = document.getElementById('mob-nav-target-container');
+    const sectionTitleEl = document.getElementById('mob-nav-target-section-title');
+    if (sectionTitleEl) {
+      if (navTargetMode === 'history') {
+        sectionTitleEl.style.color = 'var(--accent-purple)';
+        sectionTitleEl.innerHTML = `<i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub">(${selectedWorld})</span>`;
+      } else {
+        sectionTitleEl.style.color = 'var(--accent-blue)';
+        sectionTitleEl.innerHTML = `<i class="fa-solid fa-tags"></i> 現在出品中一覧 <span class="section-header-sub">(${selectedWorld})</span>`;
+      }
+    }
+
+    if (navTargetMode === 'history') {
+      renderNavTargetHistoryList(item);
+    } else {
+      loadNavTargetListings(item);
+    }
+  }
+
+  // Trade History Cards for Home World (Panel 3)
+  function renderNavTargetHistoryList(item) {
+    const container = document.getElementById('mob-nav-target-cards-container');
     if (!container) return;
 
-    const buyPrice = item.buyPrice || 0;
-    const sellPrice = item.sellPrice || 0;
-    const netProfit = item.unitProfit || 0;
+    const itemId = item.item_id || item.id;
+    const homeItem = getItemForWorld(itemId, selectedWorld) || item.rawItem || item;
+    let history = homeItem.history || [];
 
-    let html = `
-      <div class="world-arbi-card" style="border-color:var(--accent-gold);">
-        <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
-          <div style="display:flex; align-items:center; gap:0.4rem;">
-            <span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px;">🏠 ホーム販売先</span>
-            <span style="color:#fff; font-weight:800;"><i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(selectedWorld)}</span>
+    if (!Array.isArray(history) || history.length === 0) {
+      container.innerHTML = `<div style="text-align:center; padding:1rem; color:var(--text-muted); font-size:0.8rem;">ホームワールド (${escapeHtml(selectedWorld)}) の直近取引履歴がありません</div>`;
+      return;
+    }
+
+    if (navTargetExcludeNq) {
+      history = history.filter(h => Boolean(h.hq));
+    }
+
+    if (history.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding:1rem; color:var(--text-muted); font-size:0.8rem;">HQの取引履歴データがありません</div>';
+      return;
+    }
+
+    const recent20 = history.slice(0, 20);
+    let html = '';
+
+    recent20.forEach(h => {
+      const exactTimeStr = formatTradeTimestamp(h.ts || h.timestamp);
+      const isHq = Boolean(h.hq);
+      const hqBadge = isHq ? '<span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px; border:1px solid rgba(255,183,3,0.4);">✨ HQ</span>' : '<span style="background:rgba(255,255,255,0.06); color:#94a3b8; font-size:0.68rem; padding:2px 6px; border-radius:4px;">NQ</span>';
+      const buyerName = h.buyer ? escapeHtml(h.buyer) : '購入者非公開';
+      const unitPrice = formatNumber(h.price || 0);
+      const qty = formatNumber(h.qty || h.quantity || 1);
+      const totalPrice = formatNumber((h.price || 0) * (h.qty || h.quantity || 1));
+
+      html += `
+        <div class="history-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <span style="color:var(--text-muted); font-size:0.75rem; display:flex; align-items:center; gap:0.25rem;">
+                <i class="fa-regular fa-clock" style="color:var(--accent-blue);"></i> ${exactTimeStr}
+              </span>
+              ${hqBadge}
+            </div>
+            <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
+              <i class="fa-solid fa-user" style="font-size:0.75rem;"></i> 購入者: ${buyerName}
+            </div>
           </div>
-          <div style="color:var(--accent-pink); font-weight:800; font-family:monospace; font-size:0.95rem;">
-            ${formatNumber(sellPrice)} G
+
+          <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.25rem;">
+            <div style="display:flex; gap:0.6rem; color:var(--text-muted); font-size:0.78rem; align-items:center;">
+              <span><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 単価: <strong style="color:var(--accent-green);" class="font-mono">${unitPrice}G</strong></span>
+              <span><i class="fa-solid fa-boxes-stacked" style="color:var(--text-muted);"></i> 数量: <strong style="color:#fff;" class="font-mono">${qty}個</strong></span>
+            </div>
+            <div style="color:var(--accent-gold); font-weight:800; font-size:0.88rem; font-family:monospace; display:flex; align-items:center; gap:0.25rem;">
+              <i class="fa-solid fa-coins" style="font-size:0.78rem;"></i> 合計: ${totalPrice}G
+            </div>
           </div>
         </div>
-        <div style="display:flex; flex-direction:column; gap:0.3rem; padding-top:0.35rem; font-size:0.8rem;">
-          <div style="display:flex; justify-content:space-between;">
-            <span style="color:var(--text-muted);">最安仕入ワールド (${escapeHtml(item.buyWorld || '-')}):</span>
-            <strong style="color:var(--accent-green); font-family:monospace;">${formatNumber(buyPrice)} G</strong>
-          </div>
-          <div style="display:flex; justify-content:space-between;">
-            <span style="color:var(--text-muted);">想定純利益 (手数料控除後):</span>
-            <strong style="color:var(--accent-green); font-family:monospace;">+${formatNumber(netProfit)} G</strong>
-          </div>
-          <div style="display:flex; justify-content:space-between;">
-            <span style="color:var(--text-muted);">ホーム日当売買速度:</span>
-            <strong style="color:var(--accent-blue); font-family:monospace;">${(item.salesVel || 0).toFixed(1)} 個/日</strong>
-          </div>
-        </div>
-      </div>
-    `;
+      `;
+    });
 
     container.innerHTML = html;
+  }
+
+  // Load Home World Active Listings for Nav Target View (Panel 3)
+  async function loadNavTargetListings(item) {
+    const container = document.getElementById('mob-nav-target-cards-container');
+    if (!container || !item) return;
+
+    const itemId = item.item_id || item.id;
+    container.innerHTML = `<div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> ホームワールド (${escapeHtml(selectedWorld)}) の最新出品情報を取得中...</div>`;
+
+    try {
+      const url = `https://universalis.app/api/v2/${encodeURIComponent(selectedWorld)}/${itemId}?listings=60`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Universalis API エラー');
+      const data = await res.json();
+
+      let targetListings = data.listings || [];
+
+      if (navTargetExcludeNq) {
+        targetListings = targetListings.filter(l => Boolean(l.hq));
+      }
+
+      if (targetListings.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding:1.5rem; color:var(--text-muted); font-size:0.85rem;">該当する出品データがありません</div>';
+        return;
+      }
+
+      // Sort by pricePerUnit ascending
+      targetListings.sort((a, b) => (a.pricePerUnit || 0) - (b.pricePerUnit || 0));
+
+      let html = '';
+      targetListings.slice(0, 40).forEach((lst, idx) => {
+        const isHq = Boolean(lst.hq);
+        const hqBadge = isHq ? '<span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px; border:1px solid rgba(255,183,3,0.4);">✨ HQ</span>' : '<span style="background:rgba(255,255,255,0.06); color:#94a3b8; font-size:0.68rem; padding:2px 6px; border-radius:4px;">NQ</span>';
+        const unitPrice = formatNumber(lst.pricePerUnit || 0);
+        const qty = formatNumber(lst.quantity || 1);
+        const total = formatNumber((lst.pricePerUnit || 0) * (lst.quantity || 1));
+        const retainer = lst.retainerName ? escapeHtml(lst.retainerName) : `リテーナー #${idx+1}`;
+
+        html += `
+          <div class="listing-card">
+            <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                <span style="color:var(--accent-gold); font-weight:800; font-family:monospace; font-size:0.88rem;">#${idx + 1}</span>
+                ${hqBadge}
+                <span style="color:#94a3b8; font-size:0.75rem;"><i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> ${escapeHtml(selectedWorld)}</span>
+              </div>
+              <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
+                <i class="fa-solid fa-store" style="font-size:0.75rem;"></i> リテーナー: ${retainer}
+              </div>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.25rem;">
+              <div style="display:flex; gap:0.6rem; color:var(--text-muted); font-size:0.78rem; align-items:center;">
+                <span><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 単価: <strong style="color:var(--accent-green);" class="font-mono">${unitPrice}G</strong></span>
+                <span><i class="fa-solid fa-boxes-stacked" style="color:var(--text-muted);"></i> 出品数: <strong style="color:#fff;" class="font-mono">${qty}個</strong></span>
+              </div>
+              <div style="color:var(--accent-gold); font-weight:800; font-size:0.88rem; font-family:monospace; display:flex; align-items:center; gap:0.25rem;">
+                <i class="fa-solid fa-coins" style="font-size:0.78rem;"></i> 合計: ${total}G
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+
+    } catch (err) {
+      container.innerHTML = `<div style="text-align:center; padding:1.5rem; color:var(--accent-red); font-size:0.85rem;">出品データの取得に失敗しました (${err.message})</div>`;
+    }
   }
 
   // Helper to render Card HTML for Top Item Summary
