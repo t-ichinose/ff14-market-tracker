@@ -1091,11 +1091,6 @@
           </div>
         </div>
 
-        <!-- Daily Chips for Supplier World -->
-        <div class="daily-breakdown-grid" id="mob-nav-daily-chips-container" style="margin-top:0.1rem;">
-          <!-- Populated by JS -->
-        </div>
-
         <!-- Trade History Section Header -->
         <div class="section-header" style="margin-top:0.4rem;">
           <div class="section-header-title" style="color:var(--accent-purple);">
@@ -1945,7 +1940,6 @@
     const historyWorldEl = document.getElementById('mob-nav-history-world-name');
     if (historyWorldEl) historyWorldEl.textContent = `(${buyWorld})`;
 
-    renderNavDailyBreakdownChips(supplierItem);
     renderNavHistoryList(supplierItem);
   }
 
