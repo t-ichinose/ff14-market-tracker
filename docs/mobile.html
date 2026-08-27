@@ -1987,10 +1987,25 @@
     container.innerHTML = '<div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> 全32ワールドの最新出品情報を取得中...</div>';
 
     try {
-      const url = `https://universalis.app/api/v2/Japan/${itemId}?listings=60`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('Universalis API エラー');
-      const data = await res.json();
+      let data = null;
+      const endpoints = [
+        `https://universalis.app/api/v2/Japan/${itemId}?listings=60`,
+        `https://universalis.app/api/v2/Elemental,Gaia,Mana,Meteor/${itemId}?listings=60`
+      ];
+
+      for (const url of endpoints) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            data = await res.json();
+            if (data && data.listings) break;
+          }
+        } catch(e) {}
+      }
+
+      if (!data || !data.listings) {
+        throw new Error('全ワールド出品データの通信に失敗しました');
+      }
 
       let targetListings = data.listings || [];
 
@@ -2003,6 +2018,9 @@
         return;
       }
 
+      // Sort by pricePerUnit ascending
+      targetListings.sort((a, b) => (a.pricePerUnit || 0) - (b.pricePerUnit || 0));
+
       let html = '';
       targetListings.slice(0, 40).forEach((lst, idx) => {
         const isHq = Boolean(lst.hq);
@@ -2014,7 +2032,7 @@
         
         const wName = lst.worldName || selectedWorld;
         const dcName = worldToDcMap[wName] || '';
-        const worldDcText = `${wName} (${dcName})`;
+        const worldDcText = `${wName}${dcName ? ' (' + dcName + ')' : ''}`;
 
         html += `
           <div class="listing-card">
@@ -2519,10 +2537,27 @@
       if (listingScope === 'dc') fetchParam = currentDc;
       else if (listingScope === 'all') fetchParam = 'Japan';
 
-      const url = `https://universalis.app/api/v2/${fetchParam}/${itemId}?listings=60`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('Universalis API エラー');
-      const data = await res.json();
+      let data = null;
+      const endpoints = [
+        `https://universalis.app/api/v2/${fetchParam}/${itemId}?listings=60`
+      ];
+      if (fetchParam === 'Japan') {
+        endpoints.push(`https://universalis.app/api/v2/Elemental,Gaia,Mana,Meteor/${itemId}?listings=60`);
+      }
+
+      for (const url of endpoints) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            data = await res.json();
+            if (data && data.listings) break;
+          }
+        } catch(e) {}
+      }
+
+      if (!data || !data.listings) {
+        throw new Error('Universalis API 通信エラー');
+      }
 
       let rawListings = data.listings || [];
 
