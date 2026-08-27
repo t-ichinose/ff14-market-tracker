@@ -8,7 +8,6 @@
   <!-- External Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     :root {
@@ -119,6 +118,7 @@
       color: var(--text-muted);
       background: transparent;
       cursor: pointer;
+      transition: all 0.15s;
     }
 
     .mode-btn.active {
@@ -175,6 +175,23 @@
       background: var(--accent-blue-bg);
       border-color: var(--accent-blue);
       color: var(--accent-blue);
+    }
+
+    .header-filter-select {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: var(--accent-gold);
+      padding: 4px 6px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      outline: none;
+      max-width: 120px;
+    }
+
+    .header-filter-select option {
+      background-color: #0f172a;
+      color: #f8fafc;
     }
 
     .crystal-toggle-btn {
@@ -346,15 +363,15 @@
     }
 
     /* Container Min-Heights */
-    #mob-history-cards-container {
+    #mob-history-cards-container, #mob-nav-history-cards-container, #mob-nav-target-container {
       min-height: 220px;
     }
 
-    #mob-listings-container {
+    #mob-listings-container, #mobile-nav-item-cards-container {
       min-height: 320px;
     }
 
-    /* Item Card */
+    /* Standard Item Card */
     .mob-item-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -504,6 +521,211 @@
     .detail-val.pink { color: var(--accent-pink); }
     .detail-val.green { color: var(--accent-green); }
 
+    /* Arbitrage Nav Card matching PC sample */
+    .mob-nav-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.75rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+
+    .mob-nav-card:active {
+      border-color: var(--accent-blue);
+    }
+
+    .nav-trade-box {
+      display: grid;
+      grid-template-columns: 1fr 24px 1fr;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.55rem 0.65rem;
+      gap: 0.2rem;
+    }
+
+    .trade-side-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding-left: 0.45rem;
+    }
+
+    .trade-side-col.supplier {
+      border-left: 3px solid var(--accent-green);
+    }
+
+    .trade-side-col.target {
+      border-left: 3px solid var(--accent-blue);
+    }
+
+    .trade-side-title {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .trade-side-world {
+      font-weight: 800;
+      font-size: 0.82rem;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .trade-side-target-price {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .trade-side-target-price strong {
+      font-size: 0.85rem;
+      color: #fff;
+      font-family: monospace;
+    }
+
+    .trade-side-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.15rem;
+    }
+
+    .trade-arrow {
+      color: var(--accent-gold);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    /* Bottom Summary Row */
+    .nav-bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 0.5rem 0.65rem;
+    }
+
+    .nav-profit-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-profit-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .nav-profit-val {
+      color: var(--accent-green);
+      font-weight: 800;
+      font-size: 0.88rem;
+      font-family: monospace;
+    }
+
+    .nav-profit-margin {
+      font-size: 0.7rem;
+      color: var(--accent-green);
+      opacity: 0.9;
+    }
+
+    .nav-sales-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-sales-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .nav-sales-val {
+      color: var(--accent-blue);
+      font-weight: 800;
+      font-size: 0.88rem;
+      font-family: monospace;
+    }
+
+    .nav-est-block {
+      background: rgba(255, 183, 3, 0.12);
+      border: 1px solid var(--accent-gold);
+      border-radius: 8px;
+      padding: 0.35rem 0.55rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .nav-est-label {
+      font-size: 0.7rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .nav-est-val {
+      color: var(--accent-gold);
+      font-weight: 800;
+      font-size: 0.9rem;
+      font-family: monospace;
+    }
+
+    /* 4-Metric Card Grid matching PC Supplier sample screenshot */
+    .four-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.45rem;
+      width: 100%;
+    }
+
+    .metric-card-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.5rem 0.65rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .metric-card-box.green-acc { border-left: 3.5px solid var(--accent-green); }
+    .metric-card-box.purple-acc { border-left: 3.5px solid var(--accent-purple); }
+    .metric-card-box.cyan-acc { border-left: 3.5px solid var(--accent-blue); }
+    .metric-card-box.gold-acc { border-left: 3.5px solid var(--accent-gold); }
+
+    .metric-card-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .metric-card-val {
+      font-weight: 800;
+      font-size: 0.95rem;
+      font-family: monospace;
+      white-space: nowrap;
+    }
+
+    .metric-card-val.green { color: var(--accent-green); }
+    .metric-card-val.purple { color: var(--accent-purple); }
+    .metric-card-val.cyan { color: var(--accent-blue); }
+    .metric-card-val.gold { color: var(--accent-gold); }
+
     /* Section Header */
     .section-header {
       font-size: 0.88rem;
@@ -606,8 +828,8 @@
     .chip-price { color: var(--accent-green); font-weight: 800; font-size: 0.74rem; font-family: monospace; white-space: nowrap; }
     .chip-volume { color: var(--accent-blue); font-size: 0.65rem; font-family: monospace; white-space: nowrap; }
 
-    /* History Trade Card & Listing Card */
-    .history-card, .listing-card {
+    /* History Trade Card & Listing Card & Arbitrage Card */
+    .history-card, .listing-card, .world-arbi-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 8px;
@@ -639,8 +861,8 @@
       </div>
       <div class="right-header-group">
         <div class="header-mode-switch">
-          <button class="mode-btn active">市場分析</button>
-          <button class="mode-btn">💎 金策ナビ</button>
+          <button class="mode-btn active" id="mob-mode-market-btn" onclick="setAppMode('market')">市場分析</button>
+          <button class="mode-btn" id="mob-mode-nav-btn" onclick="setAppMode('nav')">💎 金策ナビ</button>
         </div>
         <button class="header-menu-btn"><i class="fa-solid fa-bars"></i></button>
       </div>
@@ -648,11 +870,28 @@
 
     <!-- Row 2: Sort Segmented Tabs & Icon-Only Crystal Filter -->
     <div class="header-row-2">
-      <div class="segmented-tabs-container">
+      <!-- Market Mode Header Row 2 -->
+      <div class="segmented-tabs-container" id="mob-market-sort-bar">
         <button class="segmented-tab active" id="mob-sort-volume" onclick="setMobileSort('volume')">売買数</button>
         <button class="segmented-tab" id="mob-sort-gil" onclick="setMobileSort('gil')">流通ギル</button>
         <button class="segmented-tab" id="mob-sort-price" onclick="setMobileSort('price')">高額取引</button>
       </div>
+
+      <!-- Nav Mode Header Row 2 -->
+      <div class="segmented-tabs-container" id="mob-nav-sort-bar" style="display:none;">
+        <button class="segmented-tab active" id="mob-nav-sort-profit" onclick="setMobileNavSort('profit')">利益額</button>
+        <button class="segmented-tab" id="mob-nav-sort-revenue" onclick="setMobileNavSort('revenue')">日商額</button>
+      </div>
+
+      <!-- Nav Mode Sales Trades Filter Dropdown (日当たりの売上件数フィルター) -->
+      <select class="header-filter-select" id="mob-nav-limit-filter" style="display:none;" onchange="onNavFilterChange(this.value)">
+        <option value="0">件数: すべて</option>
+        <option value="1">1件/日以上</option>
+        <option value="5">5件/日以上</option>
+        <option value="10">10件/日以上</option>
+        <option value="20">20件/日以上</option>
+      </select>
+
       <button class="crystal-toggle-btn" id="mob-crystal-btn" onclick="toggleMobileCrystalFilter()" title="クリスタルフィルター">
         💎
       </button>
@@ -660,7 +899,8 @@
 
     <!-- Row 3: Subtabs Segmented Tabs & Drawer Button -->
     <div class="header-row-3">
-      <div class="subtabs-segmented-container">
+      <!-- Market Mode Subtabs -->
+      <div class="subtabs-segmented-container" id="mob-market-subtabs-bar">
         <button class="subtab-segmented-btn active" id="mob-subtab-1" onclick="setMobileTab(1)">
           <i class="fa-solid fa-list-ul"></i> ① 品目一覧
         </button>
@@ -671,6 +911,20 @@
           <i class="fa-solid fa-list-check"></i> ③ 出品状況
         </button>
       </div>
+
+      <!-- Nav Mode Subtabs -->
+      <div class="subtabs-segmented-container" id="mob-nav-subtabs-bar" style="display:none;">
+        <button class="subtab-segmented-btn active" id="mob-nav-subtab-1" onclick="setMobileNavTab(1)">
+          <i class="fa-solid fa-gem"></i> ① 品目一覧
+        </button>
+        <button class="subtab-segmented-btn" id="mob-nav-subtab-2" onclick="setMobileNavTab(2)">
+          <i class="fa-solid fa-cart-shopping"></i> ② 仕入先
+        </button>
+        <button class="subtab-segmented-btn" id="mob-nav-subtab-3" onclick="setMobileNavTab(3)">
+          <i class="fa-solid fa-store"></i> ③ 販売先
+        </button>
+      </div>
+
       <button class="drawer-btn" id="mob-drawer-toggle" onclick="toggleMobileDrawer()">
         <i class="fa-solid fa-chevron-down"></i>
       </button>
@@ -679,7 +933,7 @@
     <!-- Expandable Control Drawer -->
     <div id="mobile-control-drawer">
       <div class="drawer-row">
-        <span class="drawer-label"><i class="fa-solid fa-globe"></i> ワールド・DC選択</span>
+        <span class="drawer-label"><i class="fa-solid fa-globe"></i> ホームワールド選択（販売先固定）</span>
         <select class="drawer-select" id="pcWorldSelect" onchange="onMobileWorldChange(this.value)">
           <option value="">データ読み込み中...</option>
         </select>
@@ -693,6 +947,7 @@
 
   <!-- Main Viewport Slider -->
   <div id="mob-main-viewport">
+    <!-- Market Analysis Viewport Slider -->
     <div class="mob-panel-slider" id="mob-slider">
 
       <!-- Panel 1: Item List -->
@@ -710,7 +965,6 @@
           <div class="loading-spinner">品目を選択してください</div>
         </div>
 
-        <!-- Section 1: Clean Chart & Single-Row Daily Chips -->
         <div class="section-header">
           <div class="section-header-title">
             <i class="fa-solid fa-chart-line"></i> 過去1週間の価格・取引数推移
@@ -722,12 +976,10 @@
           <canvas id="mobTrendChart"></canvas>
         </div>
 
-        <!-- Single-Row Daily Breakdown Chips (Up to 4-Digit K format e.g. 3007KG) -->
         <div class="daily-breakdown-grid" id="mob-daily-chips-container">
           <!-- Populated by JS -->
         </div>
 
-        <!-- Section 2: Recent Trade History (With ✨ NQ非表示 Toggle Switch) -->
         <div class="section-header" style="margin-top:0.4rem;">
           <div class="section-header-title" style="color:var(--accent-purple);">
             <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-history-world-name">(${selectedWorld})</span>
@@ -744,12 +996,10 @@
 
       <!-- Panel 3: Active Listings -->
       <div class="mob-panel" id="mob-view-3">
-        <!-- Top Item Summary Card -->
         <div id="mob-selected-summary-3">
           <div class="loading-spinner">品目を選択してください</div>
         </div>
 
-        <!-- 3 Major Area Lowest Price Comparison Box -->
         <div class="three-area-grid" id="mob-three-area-container" style="margin-top:0.2rem;">
           <div class="area-card">
             <span class="area-title">選択ワールド最安</span>
@@ -768,7 +1018,6 @@
           </div>
         </div>
 
-        <!-- Scope & Filter Header Bar -->
         <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.3); padding:0.45rem 0.5rem; border-radius:8px; margin-top:0.3rem;">
           <div style="display:flex; gap:0.3rem; flex:1;">
             <button class="segmented-tab active" style="padding:4px 8px; font-size:0.78rem;" id="mobScopeWorldBtn" onclick="setMobileListingScope('world')">単一</button>
@@ -780,7 +1029,6 @@
           </button>
         </div>
 
-        <!-- Listings Section Header -->
         <div class="section-header" style="margin-top:0.2rem;">
           <div class="section-header-title">
             <i class="fa-solid fa-tags"></i> 出品状況一覧 <span class="section-header-sub" id="mob-listings-world-name">(${selectedWorld})</span>
@@ -794,11 +1042,101 @@
       </div>
 
     </div>
+
+    <!-- Money Making Navigator (💎 金策ナビ) Viewport Slider -->
+    <div class="mob-panel-slider" id="mob-nav-slider" style="display:none;">
+
+      <!-- Nav Panel 1: Arbitrage Item Ranking List (Matching PC Sample Card Image) -->
+      <div class="mob-panel" id="mob-nav-view-1">
+        <div id="mobile-nav-item-cards-container" style="display:flex; flex-direction:column; gap:0.65rem;">
+          <div class="loading-spinner">
+            <i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>ホームワールド (${selectedWorld}) 向けの転売利益データを計算中...
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav Panel 2: Supplier World Details (4 Metric Chips Grid + History for 仕入先サーバー) -->
+      <div class="mob-panel" id="mob-nav-view-2">
+        <div id="mob-nav-summary-2">
+          <div class="loading-spinner">品目を選択してください</div>
+        </div>
+
+        <!-- Supplier World Bar & 4 Metrics Card Grid (Matching PC Sample Screenshot) -->
+        <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.3); padding:0.45rem 0.6rem; border-radius:8px; border-left:3px solid var(--accent-green);">
+          <div style="display:flex; align-items:center; gap:0.35rem; font-weight:800; font-size:0.85rem; color:#fff;">
+            <i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> 仕入れ先: <span id="mob-nav-supplier-title" style="color:var(--accent-green);">-</span>
+          </div>
+          <div style="font-size:0.78rem; color:var(--text-muted);">
+            目標仕入値: <strong id="mob-nav-supplier-target-price" style="color:#fff; font-family:monospace;">-</strong>
+          </div>
+        </div>
+
+        <!-- 4 Key Metrics Grid -->
+        <div class="four-metrics-grid" id="mob-nav-four-metrics-container">
+          <div class="metric-card-box green-acc">
+            <span class="metric-card-label">最安価格</span>
+            <span class="metric-card-val green" id="metric-val-min-price">-</span>
+          </div>
+          <div class="metric-card-box purple-acc">
+            <span class="metric-card-label">目標仕入値 (3日平均)</span>
+            <span class="metric-card-val purple" id="metric-val-avg-price">-</span>
+          </div>
+          <div class="metric-card-box cyan-acc">
+            <span class="metric-card-label">販売速度</span>
+            <span class="metric-card-val cyan" id="metric-val-speed">-</span>
+          </div>
+          <div class="metric-card-box gold-acc">
+            <span class="metric-card-label">7日売買数</span>
+            <span class="metric-card-val gold" id="metric-val-volume">-</span>
+          </div>
+        </div>
+
+        <!-- Daily Chips for Supplier World -->
+        <div class="daily-breakdown-grid" id="mob-nav-daily-chips-container" style="margin-top:0.1rem;">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Trade History Section Header -->
+        <div class="section-header" style="margin-top:0.4rem;">
+          <div class="section-header-title" style="color:var(--accent-purple);">
+            <i class="fa-solid fa-clock-rotate-left"></i> 直近の取引履歴 <span class="section-header-sub" id="mob-nav-history-world-name">(-)</span>
+          </div>
+          <button class="crystal-toggle-btn off" id="mob-nav-history-hq-btn" onclick="toggleMobileNavHistoryHqFilter()">
+            ✨ NQ非表示: OFF
+          </button>
+        </div>
+
+        <div id="mob-nav-history-cards-container" style="display:flex; flex-direction:column; gap:0.45rem;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Nav Panel 3: Sales Target World Details (Fixed to Home World) -->
+      <div class="mob-panel" id="mob-nav-view-3">
+        <div id="mob-nav-summary-3">
+          <div class="loading-spinner">品目を選択してください</div>
+        </div>
+
+        <div class="section-header">
+          <div class="section-header-title" style="color:var(--accent-gold);">
+            <i class="fa-solid fa-house"></i> ホーム販売先 (${selectedWorld}) の最新状況
+          </div>
+        </div>
+
+        <div id="mob-nav-target-container" style="display:flex; flex-direction:column; gap:0.5rem;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
 <script>
-  // Mobile UI State
+  // App Mode & State
+  let appMode = 'market';
+
+  // Mobile Market UI State
   let currentTab = 1;
   let currentSort = 'volume';
   let isCrystalExcluded = true;
@@ -809,10 +1147,17 @@
   let listingExcludeNq = false;
   let historyExcludeNq = false;
 
+  // Mobile Nav UI State
+  let navTab = 1;
+  let navSort = 'profit'; // 'profit' or 'revenue'
+  let navMinSales = 0; // Filter based on daily sales trades on Home World (0, 1, 5, 10, 20)
+  let navHistoryExcludeNq = false;
+
   let rawData = {};
   let allWorldsData = {};
   let worldToDcMap = {};
   let currentFilteredItems = [];
+  let navFilteredItems = [];
   let trendChartInstance = null;
 
   // Touch Swipe Variables
@@ -825,23 +1170,18 @@
     return Math.round(num).toLocaleString('ja-JP');
   }
 
-  // 4-Digit K Number Abbreviation (e.g. 3007K for 3,007,066, 940K, 1.6K)
   function formatCompactNumber(num) {
     if (num === null || num === undefined || isNaN(num)) return '-';
     const val = Number(num);
     const absVal = Math.abs(val);
 
-    if (absVal >= 10000000) { // 10M+
+    if (absVal >= 10000000) {
       const m = val / 1000000;
       return (m >= 100 ? m.toFixed(0) : m.toFixed(1)).replace(/\.0$/, '') + 'M';
     }
-    if (absVal >= 1000) { // 1,000 to 9,999,999 -> 4-digit K format
+    if (absVal >= 10000) {
       const k = val / 1000;
-      if (k >= 100) {
-        return Math.round(k).toString() + 'K';
-      } else {
-        return k.toFixed(1).replace(/\.0$/, '') + 'K';
-      }
+      return Math.round(k).toString() + 'K';
     }
     return Math.round(val).toString();
   }
@@ -885,7 +1225,7 @@
 
     let dPath = 'M 2 7 L 38 7';
 
-    if (it.daily_trend && Array.isArray(it.daily_trend) && it.daily_trend.length >= 2) {
+    if (it && it.daily_trend && Array.isArray(it.daily_trend) && it.daily_trend.length >= 2) {
       const points = it.daily_trend;
       const prices = points.map(p => (typeof p === 'number' ? p : (p.weighted_avg || p.avg_price || p.price || 0)));
       const minP = Math.min(...prices);
@@ -904,10 +1244,11 @@
 
       dPath = `M ${pathCoords.join(' L ')}`;
     } else {
-      if (trendVal > 0) dPath = 'M 2 11 Q 12 9, 22 5 T 38 11';
+      if (trendVal > 0) dPath = 'M 2 11 Q 12 9, 22 5 T 38 3';
+      else if (trendVal < 0) dPath = 'M 2 3 Q 12 5, 22 9 T 38 11';
     }
 
-    return `<svg width="42" height="15" viewBox="0 0 40 14" style="vertical-align:middle;">
+    return `<svg width="40" height="13" viewBox="0 0 40 14" style="vertical-align:middle;">
       <path d="${dPath}" stroke="${strokeColor}" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`;
   }
@@ -926,6 +1267,55 @@
     }
   }
 
+  // App Mode Switcher (市場分析 ⇆ 💎 金策ナビ)
+  function setAppMode(mode) {
+    appMode = mode;
+    const marketBtn = document.getElementById('mob-mode-market-btn');
+    const navBtn = document.getElementById('mob-mode-nav-btn');
+
+    const marketSortBar = document.getElementById('mob-market-sort-bar');
+    const navSortBar = document.getElementById('mob-nav-sort-bar');
+    const navFilterSelect = document.getElementById('mob-nav-limit-filter');
+
+    const marketSubtabsBar = document.getElementById('mob-market-subtabs-bar');
+    const navSubtabsBar = document.getElementById('mob-nav-subtabs-bar');
+
+    const marketSlider = document.getElementById('mob-slider');
+    const navSlider = document.getElementById('mob-nav-slider');
+
+    if (mode === 'market') {
+      marketBtn.classList.add('active');
+      navBtn.classList.remove('active');
+
+      marketSortBar.style.display = 'flex';
+      navSortBar.style.display = 'none';
+      navFilterSelect.style.display = 'none';
+
+      marketSubtabsBar.style.display = 'flex';
+      navSubtabsBar.style.display = 'none';
+
+      marketSlider.style.display = 'flex';
+      navSlider.style.display = 'none';
+
+      renderMobileItemList();
+    } else {
+      navBtn.classList.add('active');
+      marketBtn.classList.remove('active');
+
+      marketSortBar.style.display = 'none';
+      navSortBar.style.display = 'flex';
+      navFilterSelect.style.display = 'block';
+
+      marketSubtabsBar.style.display = 'none';
+      navSubtabsBar.style.display = 'flex';
+
+      marketSlider.style.display = 'none';
+      navSlider.style.display = 'flex';
+
+      renderNavItemList();
+    }
+  }
+
   // Drawer Toggle
   function toggleMobileDrawer() {
     const drawer = document.getElementById('mobile-control-drawer');
@@ -934,7 +1324,7 @@
     toggleBtn.classList.toggle('open');
   }
 
-  // Subtab Switcher
+  // Market Subtab Switcher
   function setMobileTab(tabIndex) {
     currentTab = tabIndex;
     const slider = document.getElementById('mob-slider');
@@ -956,7 +1346,29 @@
     if (tabIndex === 3 && selectedItem) renderMobileListingView(selectedItem);
   }
 
-  // Sort Switcher: Auto Reset to Tab 1 (① 品目一覧)
+  // Nav Subtab Switcher
+  function setMobileNavTab(tabIndex) {
+    navTab = tabIndex;
+    const slider = document.getElementById('mob-nav-slider');
+    slider.style.transform = `translateX(-${(tabIndex - 1) * 33.33333}%)`;
+
+    for (let i = 1; i <= 3; i++) {
+      const btn = document.getElementById(`mob-nav-subtab-${i}`);
+      if (btn) {
+        if (i === tabIndex) btn.classList.add('active');
+        else btn.classList.remove('active');
+      }
+    }
+
+    if (!selectedItem && navFilteredItems.length > 0) {
+      selectedItem = navFilteredItems[0];
+    }
+
+    if (tabIndex === 2 && selectedItem) renderNavSupplierView(selectedItem);
+    if (tabIndex === 3 && selectedItem) renderNavTargetView(selectedItem);
+  }
+
+  // Sort Switcher: Auto Reset to Tab 1
   function setMobileSort(sortKey) {
     currentSort = sortKey;
     ['volume', 'gil', 'price'].forEach(k => {
@@ -967,11 +1379,31 @@
       }
     });
 
-    setMobileTab(1); // Auto reset to ① 品目一覧
+    setMobileTab(1);
     renderMobileItemList();
   }
 
-  // Icon-Only Crystal Filter Switch
+  // Nav Sort Switcher
+  function setMobileNavSort(sortKey) {
+    navSort = sortKey;
+    ['profit', 'revenue'].forEach(k => {
+      const btn = document.getElementById(`mob-nav-sort-${k}`);
+      if (btn) {
+        if (k === sortKey) btn.classList.add('active');
+        else btn.classList.remove('active');
+      }
+    });
+
+    setMobileNavTab(1);
+    renderNavItemList();
+  }
+
+  function onNavFilterChange(val) {
+    navMinSales = Number(val || 0);
+    renderNavItemList();
+  }
+
+  // Crystal Filter
   function toggleMobileCrystalFilter() {
     isCrystalExcluded = !isCrystalExcluded;
     const btn = document.getElementById('mob-crystal-btn');
@@ -982,10 +1414,12 @@
       btn.innerHTML = `💎`;
       btn.classList.add('off');
     }
-    renderMobileItemList();
+
+    if (appMode === 'market') renderMobileItemList();
+    else renderNavItemList();
   }
 
-  // Trade History NQ Filter Switch
+  // Market Trade History NQ Filter Switch
   function toggleMobileHistoryHqFilter() {
     historyExcludeNq = !historyExcludeNq;
     const btn = document.getElementById('mob-history-hq-btn');
@@ -999,6 +1433,22 @@
       }
     }
     if (selectedItem) renderMobileHistoryList(selectedItem);
+  }
+
+  // Nav Trade History NQ Filter Switch for 仕入先
+  function toggleMobileNavHistoryHqFilter() {
+    navHistoryExcludeNq = !navHistoryExcludeNq;
+    const btn = document.getElementById('mob-nav-history-hq-btn');
+    if (btn) {
+      if (navHistoryExcludeNq) {
+        btn.innerHTML = `✨ NQ非表示: ON`;
+        btn.classList.remove('off');
+      } else {
+        btn.innerHTML = `✨ NQ非表示: OFF`;
+        btn.classList.add('off');
+      }
+    }
+    if (selectedItem) renderNavSupplierView(selectedItem);
   }
 
   // Populate World Select grouped by DC (optgroup)
@@ -1051,28 +1501,25 @@
   function onMobileWorldChange(val) {
     if (val) {
       selectedWorld = val;
-      renderMobileItemList();
-      if (selectedItem) {
-        const wData = allWorldsData[selectedWorld];
-        if (wData) {
-          const items = Array.isArray(wData) ? wData : (wData.items ? Object.values(wData.items) : Object.values(wData));
-          const targetId = selectedItem.item_id || selectedItem.id;
-          const found = items.find(it => (it.item_id || it.id) == targetId);
-          if (found) selectedItem = found;
-        }
-
-        if (currentTab === 2) renderMobileDetailView(selectedItem);
-        if (currentTab === 3) renderMobileListingView(selectedItem);
+      if (appMode === 'market') {
+        renderMobileItemList();
+        if (selectedItem && currentTab === 2) renderMobileDetailView(selectedItem);
+        if (selectedItem && currentTab === 3) renderMobileListingView(selectedItem);
+      } else {
+        renderNavItemList();
+        if (selectedItem && navTab === 2) renderNavSupplierView(selectedItem);
+        if (selectedItem && navTab === 3) renderNavTargetView(selectedItem);
       }
     }
   }
 
   function onMobileSearchInput(val) {
     searchQuery = (val || '').trim().toLowerCase();
-    renderMobileItemList();
+    if (appMode === 'market') renderMobileItemList();
+    else renderNavItemList();
   }
 
-  // Render Panel 1 Item Cards
+  // Render Market Panel 1 Item Cards
   function renderMobileItemList() {
     const container = document.getElementById('mobile-item-cards-container');
     if (!container) return;
@@ -1212,7 +1659,212 @@
     container.innerHTML = html;
   }
 
-  // Item Selection -> Auto Jump to Panel 2
+  /* Calculate Cross-World Arbitrage Data with Fixed Sales Target (Home World) */
+  function calculateArbitrageItems() {
+    const homeWorldData = allWorldsData[selectedWorld];
+    if (!homeWorldData) return [];
+
+    const homeItems = Array.isArray(homeWorldData) ? homeWorldData : (homeWorldData.items ? Object.values(homeWorldData.items) : Object.values(homeWorldData));
+    const currentDc = worldToDcMap[selectedWorld] || '';
+
+    const dcWorlds = Object.keys(allWorldsData).filter(w => (worldToDcMap[w] || '') === currentDc);
+    if (dcWorlds.length === 0) dcWorlds.push(...Object.keys(allWorldsData));
+
+    const arbiList = [];
+
+    homeItems.forEach(hItem => {
+      const id = hItem.item_id || hItem.id;
+      if (!id) return;
+
+      if (isCrystalExcluded) {
+        const numId = Number(id);
+        const name = (hItem.item_name || hItem.name || '').toLowerCase();
+        if (numId >= 2 && numId <= 19) return;
+        if (name.includes('クリスタル') || name.includes('クラスター') || name.includes('シャード')) return;
+      }
+
+      const sellPrice = hItem.min_price || 0;
+      const salesVel = hItem.sale_velocity || hItem.sales_per_day || 0;
+
+      if (sellPrice <= 0) return;
+      if (salesVel < navMinSales) return;
+
+      let cheapestWorld = selectedWorld;
+      let cheapestPrice = sellPrice;
+      let cheapestItem = hItem;
+      let worldPricesList = [];
+
+      dcWorlds.forEach(wName => {
+        const wData = allWorldsData[wName];
+        if (!wData) return;
+        const wItems = Array.isArray(wData) ? wData : (wData.items ? Object.values(wData.items) : Object.values(wData));
+        const found = wItems.find(it => (it.item_id || it.id) == id);
+        if (found && found.min_price > 0) {
+          worldPricesList.push({ world: wName, price: found.min_price, vel: found.sale_velocity || found.sales_per_day || 0, item: found });
+          if (found.min_price < cheapestPrice) {
+            cheapestPrice = found.min_price;
+            cheapestWorld = wName;
+            cheapestItem = found;
+          }
+        }
+      });
+
+      worldPricesList.sort((a, b) => a.price - b.price);
+
+      const netProfit = Math.round(sellPrice * 0.95 - cheapestPrice);
+      const profitMarginPct = cheapestPrice > 0 ? (netProfit / cheapestPrice) * 100 : 0;
+      const estDailyRevenue = Math.round(netProfit * salesVel);
+
+      if (netProfit > 0) {
+        arbiList.push({
+          item_id: id,
+          name: hItem.item_name || hItem.name || `Item #${id}`,
+          icon_url: hItem.icon_url || getComputedIconUrl(id || hItem.icon),
+          buyWorld: cheapestWorld,
+          buyDc: worldToDcMap[cheapestWorld] || currentDc,
+          buyPrice: cheapestPrice,
+          buyTrend: cheapestItem.trend_pct !== undefined ? cheapestItem.trend_pct : 0,
+          sellWorld: selectedWorld,
+          sellDc: currentDc,
+          sellPrice: sellPrice,
+          sellTrend: hItem.trend_pct !== undefined ? hItem.trend_pct : 0,
+          unitProfit: netProfit,
+          profitMarginPct: profitMarginPct,
+          salesVel: salesVel,
+          estDailyRevenue: estDailyRevenue,
+          worldPrices: worldPricesList,
+          rawItem: hItem
+        });
+      }
+    });
+
+    return arbiList;
+  }
+
+  // Render Nav Panel 1 Arbitrage Items
+  function renderNavItemList() {
+    const container = document.getElementById('mobile-nav-item-cards-container');
+    if (!container) return;
+
+    let items = calculateArbitrageItems();
+
+    if (searchQuery) {
+      items = items.filter(it => {
+        const name = (it.name || '').toLowerCase();
+        const idStr = String(it.item_id);
+        return name.includes(searchQuery) || idStr.includes(searchQuery);
+      });
+    }
+
+    if (navSort === 'profit') {
+      items.sort((a, b) => b.unitProfit - a.unitProfit);
+    } else if (navSort === 'revenue') {
+      items.sort((a, b) => b.estDailyRevenue - a.estDailyRevenue);
+    }
+
+    navFilteredItems = items;
+    const top30 = items.slice(0, 30);
+
+    if (top30.length === 0) {
+      container.innerHTML = `<div class="loading-spinner">ホームワールド (${escapeHtml(selectedWorld)}) 向けの転売利益品目がありません</div>`;
+      return;
+    }
+
+    let html = '';
+    top30.forEach((it, idx) => {
+      const primaryIcon = it.icon_url ? it.icon_url : getComputedIconUrl(it.item_id);
+      const itemName = escapeHtml(it.name);
+      
+      const buyWorldText = `${it.buyDc} - ${it.buyWorld}`;
+      const buyPriceStr = formatNumber(it.buyPrice) + ' G';
+      const buySparkline = generateSparklineSvg(it.rawItem, it.buyTrend);
+      const buyTrendStr = it.buyTrend > 0 ? `+${it.buyTrend.toFixed(1)}%` : `${it.buyTrend.toFixed(1)}%`;
+      const buyTrendClass = it.buyTrend > 0 ? 'up' : (it.buyTrend < 0 ? 'down' : 'flat');
+
+      const sellWorldText = `${it.sellDc} - ${it.sellWorld}`;
+      const sellPriceStr = formatNumber(it.sellPrice) + ' G';
+      const sellSparkline = generateSparklineSvg(it.rawItem, it.sellTrend);
+      const sellTrendStr = it.sellTrend > 0 ? `+${it.sellTrend.toFixed(1)}%` : `${it.sellTrend.toFixed(1)}%`;
+      const sellTrendClass = it.sellTrend > 0 ? 'up' : (it.sellTrend < 0 ? 'down' : 'flat');
+
+      const unitProfitStr = `+${formatNumber(it.unitProfit)} G`;
+      const marginStr = `(+${it.profitMarginPct.toFixed(0)}%)`;
+      const salesVelStr = `${it.salesVel.toFixed(1)} 個/日`;
+      const estDailyRevStr = `+${formatNumber(it.estDailyRevenue)} G/日`;
+
+      html += `
+        <div class="mob-nav-card" onclick="selectNavMobileItem(${it.item_id})">
+          <div class="card-top">
+            <div class="card-title-group">
+              <img src="${primaryIcon}" class="item-icon" onerror="this.src='https://xivapi.com/i/000000/000000.png'">
+              <span class="rank-badge">#${idx + 1}</span>
+              <span class="item-name">${itemName}</span>
+            </div>
+            <div class="card-right-metrics">
+              <a href="https://universalis.app/market/${it.item_id}" target="_blank" class="univ-link" onclick="event.stopPropagation();">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Middle Buy -> Sell Target Grid -->
+          <div class="nav-trade-box">
+            <div class="trade-side-col supplier">
+              <span class="trade-side-title"><i class="fa-solid fa-cart-shopping" style="color:var(--accent-green);"></i> 仕入れ先 (目標値)</span>
+              <span class="trade-side-world">${escapeHtml(buyWorldText)}</span>
+              <span class="trade-side-target-price">目標仕入: <strong>${buyPriceStr}</strong></span>
+              <div class="trade-side-bottom">
+                ${buySparkline}
+                <span class="trend-badge ${buyTrendClass}">${buyTrendStr}</span>
+              </div>
+            </div>
+
+            <div class="trade-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+            <div class="trade-side-col target">
+              <span class="trade-side-title"><i class="fa-solid fa-house" style="color:var(--accent-blue);"></i> 販売先 (目標値)</span>
+              <span class="trade-side-world">${escapeHtml(sellWorldText)}</span>
+              <span class="trade-side-target-price">目標販売: <strong>${sellPriceStr}</strong></span>
+              <div class="trade-side-bottom">
+                ${sellSparkline}
+                <span class="trend-badge ${sellTrendClass}">${sellTrendStr}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Summary Row -->
+          <div class="nav-bottom-grid">
+            <div class="nav-profit-block">
+              <span class="nav-profit-label">1個純利益:</span>
+              <span class="nav-profit-val">${unitProfitStr}</span>
+              <span class="nav-profit-margin">${marginStr}</span>
+            </div>
+
+            <div class="nav-sales-block">
+              <span class="nav-sales-label">ホーム売買数:</span>
+              <span class="nav-sales-val">${salesVelStr}</span>
+            </div>
+
+            <div class="nav-est-block">
+              <span class="nav-est-label"><i class="fa-solid fa-sack-dollar"></i> 推定日商利益:</span>
+              <span class="nav-est-val">${estDailyRevStr}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function selectNavMobileItem(itemId) {
+    const found = navFilteredItems.find(it => it.item_id == itemId);
+    if (found) {
+      selectedItem = found;
+      setMobileNavTab(2);
+    }
+  }
+
   function selectMobileItem(itemId) {
     const worldData = allWorldsData[selectedWorld];
     if (!worldData) return;
@@ -1226,19 +1878,218 @@
     }
   }
 
+  // Helper to find raw item object for any specific world
+  function getItemForWorld(itemId, worldName) {
+    const wData = allWorldsData[worldName];
+    if (!wData) return null;
+    const items = Array.isArray(wData) ? wData : (wData.items ? Object.values(wData.items) : Object.values(wData));
+    return items.find(it => (it.item_id || it.id) == itemId) || null;
+  }
+
+  // Render Nav Panel 2 (② 仕入先 Supplier View with 4-Metric Grid matching PC Sample)
+  function renderNavSupplierView(item) {
+    if (!item) return;
+
+    const itemId = item.item_id || item.id;
+    const buyWorld = item.buyWorld || selectedWorld;
+    const buyDc = item.buyDc || (worldToDcMap[buyWorld] || '');
+
+    // Get item data specifically on the Supplier World
+    const supplierItem = getItemForWorld(itemId, buyWorld) || item;
+
+    // Render Summary Header Card for Supplier World
+    const summaryContainer = document.getElementById('mob-nav-summary-2');
+    if (summaryContainer) {
+      summaryContainer.innerHTML = getSummaryCardHtml(supplierItem, buyWorld);
+    }
+
+    // Set Supplier Header Bar Labels
+    const supplierTitleEl = document.getElementById('mob-nav-supplier-title');
+    const supplierTargetPriceEl = document.getElementById('mob-nav-supplier-target-price');
+    if (supplierTitleEl) supplierTitleEl.textContent = `${buyWorld} (${buyDc})`;
+    if (supplierTargetPriceEl) supplierTargetPriceEl.textContent = `${formatNumber(supplierItem.min_price || item.buyPrice || 0)}G`;
+
+    // Populate 4 Metric Card Box Values (Matching PC Sample Screenshot)
+    const minPriceEl = document.getElementById('metric-val-min-price');
+    const avgPriceEl = document.getElementById('metric-val-avg-price');
+    const speedEl = document.getElementById('metric-val-speed');
+    const volumeEl = document.getElementById('metric-val-volume');
+
+    const minP = supplierItem.min_price || item.buyPrice || 0;
+    const avgP = supplierItem.avg_price || supplierItem.weighted_avg || minP;
+    const vel = supplierItem.sale_velocity || supplierItem.sales_per_day || item.salesVel || 0;
+    const tradesCount = supplierItem.sales_count || supplierItem.num_transactions || (supplierItem.history ? supplierItem.history.length : 0);
+
+    if (minPriceEl) minPriceEl.textContent = `${formatNumber(minP)}G`;
+    if (avgPriceEl) avgPriceEl.textContent = `${formatNumber(avgP)}G`;
+    if (speedEl) speedEl.textContent = `${vel.toFixed(1)}個/日`;
+    if (volumeEl) volumeEl.textContent = `${formatNumber(tradesCount)}件`;
+
+    // Set History Section Header Text
+    const historyWorldEl = document.getElementById('mob-nav-history-world-name');
+    if (historyWorldEl) historyWorldEl.textContent = `(${buyWorld})`;
+
+    renderNavDailyBreakdownChips(supplierItem);
+    renderNavHistoryList(supplierItem);
+  }
+
+  // Daily Chips for Supplier World
+  function renderNavDailyBreakdownChips(item) {
+    const container = document.getElementById('mob-nav-daily-chips-container');
+    if (!container) return;
+
+    if (!item.daily_trend || !Array.isArray(item.daily_trend) || item.daily_trend.length === 0) {
+      container.innerHTML = '<div style="color:var(--text-muted); font-size:0.75rem; text-align:center;">日別データなし</div>';
+      return;
+    }
+
+    const points = item.daily_trend;
+    container.style.gridTemplateColumns = `repeat(${points.length}, 1fr)`;
+
+    let html = '';
+    points.forEach(d => {
+      const dateStr = d.date || '-';
+      const priceVal = d.weighted_avg || d.avg_price || 0;
+      const volVal = d.volume || d.sales || 0;
+
+      const priceStr = formatCompactNumber(priceVal) + 'G';
+      const volStr = formatCompactNumber(volVal) + '個';
+
+      html += `
+        <div class="daily-chip">
+          <span class="chip-date">${dateStr}</span>
+          <span class="chip-price" title="${formatNumber(priceVal)}G">${priceStr}</span>
+          <span class="chip-volume" title="${formatNumber(volVal)}個">${volStr}</span>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  // Trade History Cards for Supplier World
+  function renderNavHistoryList(item) {
+    const container = document.getElementById('mob-nav-history-cards-container');
+    if (!container) return;
+
+    let history = item.history || [];
+    if (!Array.isArray(history) || history.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding:1rem; color:var(--text-muted); font-size:0.8rem;">仕入先ワールドの直近取引履歴がありません</div>';
+      return;
+    }
+
+    if (navHistoryExcludeNq) {
+      history = history.filter(h => Boolean(h.hq));
+    }
+
+    if (history.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding:1rem; color:var(--text-muted); font-size:0.8rem;">HQの取引履歴データがありません</div>';
+      return;
+    }
+
+    const recent20 = history.slice(0, 20);
+    let html = '';
+
+    recent20.forEach(h => {
+      const exactTimeStr = formatTradeTimestamp(h.ts || h.timestamp);
+      const isHq = Boolean(h.hq);
+      const hqBadge = isHq ? '<span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px; border:1px solid rgba(255,183,3,0.4);">✨ HQ</span>' : '<span style="background:rgba(255,255,255,0.06); color:#94a3b8; font-size:0.68rem; padding:2px 6px; border-radius:4px;">NQ</span>';
+      const buyerName = h.buyer ? escapeHtml(h.buyer) : '購入者非公開';
+      const unitPrice = formatNumber(h.price || 0);
+      const qty = formatNumber(h.qty || h.quantity || 1);
+      const totalPrice = formatNumber((h.price || 0) * (h.qty || h.quantity || 1));
+
+      html += `
+        <div class="history-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <span style="color:var(--text-muted); font-size:0.75rem; display:flex; align-items:center; gap:0.25rem;">
+                <i class="fa-regular fa-clock" style="color:var(--accent-blue);"></i> ${exactTimeStr}
+              </span>
+              ${hqBadge}
+            </div>
+            <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
+              <i class="fa-solid fa-user" style="font-size:0.75rem;"></i> 購入者: ${buyerName}
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.25rem;">
+            <div style="display:flex; gap:0.6rem; color:var(--text-muted); font-size:0.78rem; align-items:center;">
+              <span><i class="fa-solid fa-tag" style="color:var(--accent-green);"></i> 単価: <strong style="color:var(--accent-green);" class="font-mono">${unitPrice}G</strong></span>
+              <span><i class="fa-solid fa-boxes-stacked" style="color:var(--text-muted);"></i> 数量: <strong style="color:#fff;" class="font-mono">${qty}個</strong></span>
+            </div>
+            <div style="color:var(--accent-gold); font-weight:800; font-size:0.88rem; font-family:monospace; display:flex; align-items:center; gap:0.25rem;">
+              <i class="fa-solid fa-coins" style="font-size:0.78rem;"></i> 合計: ${totalPrice}G
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  // Render Nav Panel 3 (販売先 Target Details - Fixed to Home World)
+  function renderNavTargetView(item) {
+    if (!item) return;
+
+    const summaryContainer = document.getElementById('mob-nav-summary-3');
+    if (summaryContainer) {
+      summaryContainer.innerHTML = getSummaryCardHtml(item);
+    }
+
+    const container = document.getElementById('mob-nav-target-container');
+    if (!container) return;
+
+    const buyPrice = item.buyPrice || 0;
+    const sellPrice = item.sellPrice || 0;
+    const netProfit = item.unitProfit || 0;
+
+    let html = `
+      <div class="world-arbi-card" style="border-color:var(--accent-gold);">
+        <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.08); padding-bottom:0.35rem;">
+          <div style="display:flex; align-items:center; gap:0.4rem;">
+            <span style="background:rgba(255,183,3,0.2); color:#ffb703; font-weight:800; font-size:0.68rem; padding:2px 6px; border-radius:4px;">🏠 ホーム販売先</span>
+            <span style="color:#fff; font-weight:800;"><i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(selectedWorld)}</span>
+          </div>
+          <div style="color:var(--accent-pink); font-weight:800; font-family:monospace; font-size:0.95rem;">
+            ${formatNumber(sellPrice)} G
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:0.3rem; padding-top:0.35rem; font-size:0.8rem;">
+          <div style="display:flex; justify-content:space-between;">
+            <span style="color:var(--text-muted);">最安仕入ワールド (${escapeHtml(item.buyWorld || '-')}):</span>
+            <strong style="color:var(--accent-green); font-family:monospace;">${formatNumber(buyPrice)} G</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="color:var(--text-muted);">想定純利益 (手数料控除後):</span>
+            <strong style="color:var(--accent-green); font-family:monospace;">+${formatNumber(netProfit)} G</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="color:var(--text-muted);">ホーム日当売買速度:</span>
+            <strong style="color:var(--accent-blue); font-family:monospace;">${(item.salesVel || 0).toFixed(1)} 個/日</strong>
+          </div>
+        </div>
+      </div>
+    `;
+
+    container.innerHTML = html;
+  }
+
   // Helper to render Card HTML for Top Item Summary
-  function getSummaryCardHtml(item) {
+  function getSummaryCardHtml(item, customWorldName) {
     const itemId = item.item_id || item.id;
     const itemName = escapeHtml(item.item_name || item.name || `Item #${itemId}`);
     const primaryIcon = item.icon_url ? item.icon_url : getComputedIconUrl(itemId || item.icon);
+    const displayWorld = customWorldName || selectedWorld;
 
-    const salesPerDay = (item.sale_velocity || item.sales_per_day || 0).toFixed(1);
+    const salesPerDay = (item.sale_velocity || item.sales_per_day || item.salesVel || 0).toFixed(1);
     const numTransactions = formatNumber(item.sale_trades || item.num_transactions || item.sales_count || 0);
     const volumePerDay = formatNumber(item.daily_revenue || item.volume_per_day || 0);
 
-    const minPrice = formatNumber(item.min_price || 0);
+    const minPrice = formatNumber(item.min_price || item.buyPrice || 0);
     const avgPrice = formatNumber(item.avg_price || 0);
-    const maxPrice = formatNumber(item.max_price || 0);
+    const maxPrice = formatNumber(item.max_price || item.sellPrice || 0);
 
     let trendVal = 0;
     if (item.trend_pct !== undefined) trendVal = item.trend_pct;
@@ -1267,7 +2118,7 @@
             <img src="${primaryIcon}" class="item-icon" onerror="this.src='https://xivapi.com/i/000000/000000.png'">
             <div style="display:flex; flex-direction:column; min-width:0;">
               <span class="item-name">${itemName}</span>
-              <span class="card-world-sub"><i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(selectedWorld)} ワールド</span>
+              <span class="card-world-sub"><i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(displayWorld)} ワールド</span>
             </div>
           </div>
           <div class="card-right-metrics">
@@ -1316,7 +2167,7 @@
     `;
   }
 
-  // Render Panel 2
+  // Render Market Panel 2
   function renderMobileDetailView(item) {
     if (!item) return;
 
@@ -1401,7 +2252,7 @@
     });
   }
 
-  // Single-Row Daily Breakdown Chips Grid with 4-Digit K Format (e.g. 3007KG, 940KG)
+  // Single-Row Daily Breakdown Chips Grid with Compact Number Formatting
   function renderDailyBreakdownChips(item) {
     const container = document.getElementById('mob-daily-chips-container');
     if (!container) return;
@@ -1497,7 +2348,7 @@
     container.innerHTML = html;
   }
 
-  // Panel 3 Listing View Render
+  // Market Panel 3 Listing View Render
   function renderMobileListingView(item) {
     if (!item) return;
 
@@ -1614,7 +2465,7 @@
                 ${hqBadge}
                 <span style="color:#94a3b8; font-size:0.75rem;"><i class="fa-solid fa-globe" style="color:var(--accent-blue);"></i> ${escapeHtml(worldDcText)}</span>
               </div>
-              <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.25rem;">
+              <div style="color:#60a5fa; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
                 <i class="fa-solid fa-store" style="font-size:0.75rem;"></i> リテーナー: ${retainer}
               </div>
             </div>
@@ -1706,10 +2557,12 @@
         const diffY = touchEndY - touchStartY;
 
         if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
-          if (diffX < 0 && currentTab < 3) {
-            setMobileTab(currentTab + 1);
-          } else if (diffX > 0 && currentTab > 1) {
-            setMobileTab(currentTab - 1);
+          if (appMode === 'market') {
+            if (diffX < 0 && currentTab < 3) setMobileTab(currentTab + 1);
+            else if (diffX > 0 && currentTab > 1) setMobileTab(currentTab - 1);
+          } else {
+            if (diffX < 0 && navTab < 3) setMobileNavTab(navTab + 1);
+            else if (diffX > 0 && navTab > 1) setMobileNavTab(navTab - 1);
           }
         }
       }, { passive: true });
