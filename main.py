@@ -117,12 +117,12 @@ def get_thread_session():
         _thread_local.session = session
     return _thread_local.session
 
-def fetch_single_dc_data(dc_name, target_ids, max_attempts=4):
+def fetch_single_dc_data(dc_name, target_ids, entries_within=172800, entries_to_return=300, max_attempts=4):
     if not target_ids:
         return dc_name, {}
     session = get_thread_session()
     ids_str = ",".join(map(str, target_ids))
-    detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin=604800&entriesToReturn=300"
+    detail_url = f"https://universalis.app/api/v2/history/{dc_name}/{ids_str}?entriesWithin={entries_within}&entriesToReturn={entries_to_return}"
     for attempt in range(max_attempts):
         try:
             time.sleep(0.3)  # Politeness delay between requests
@@ -144,8 +144,8 @@ def fetch_single_dc_data(dc_name, target_ids, max_attempts=4):
     if len(target_ids) > 5:
         mid = len(target_ids) // 2
         print(f"[RETRY SPLIT] [{dc_name}] Splitting failed chunk of {len(target_ids)} items into sub-chunks ({mid} and {len(target_ids)-mid})...", flush=True)
-        _, res1 = fetch_single_dc_data(dc_name, target_ids[:mid], max_attempts=3)
-        _, res2 = fetch_single_dc_data(dc_name, target_ids[mid:], max_attempts=3)
+        _, res1 = fetch_single_dc_data(dc_name, target_ids[:mid], entries_within=entries_within, entries_to_return=entries_to_return, max_attempts=3)
+        _, res2 = fetch_single_dc_data(dc_name, target_ids[mid:], entries_within=entries_within, entries_to_return=entries_to_return, max_attempts=3)
         combined = {}
         combined.update(res1)
         combined.update(res2)
@@ -427,8 +427,21 @@ def fetch_and_save_all(target_dc=None):
         cursor.executemany("INSERT OR IGNORE INTO items_pool (item_id, added_at) VALUES (?, ?)", pool_batch)
     conn.commit()
 
-    target_ids = list(recent_ids_all)
+    cursor.execute("SELECT COUNT(*) FROM sales_history")
+    existing_sales_count = cursor.fetchone()[0]
 
+    # If DB has existing cache (> 5,000 records), fetch last 48 hours (172800s) incrementally.
+    # If DB is empty / initial seed, fetch full 7 days (604800s) with 500 limit.
+    if existing_sales_count > 5000:
+        entries_within = 86400  # 24 hours (incremental update)
+        entries_to_return = 200
+        print(f"=== Incremental Mode: DB contains {existing_sales_count:,} records. Fetching last 24h transactions ===", flush=True)
+    else:
+        entries_within = 604800  # 7 days
+        entries_to_return = 500
+        print(f"=== Initial Seed Mode: DB contains {existing_sales_count:,} records. Fetching 7d transactions ===", flush=True)
+
+    target_ids = list(recent_ids_all)
     chunk_size = 15
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
     all_tasks = [(dc, chunk) for chunk in item_chunks for dc in dcs]
@@ -443,7 +456,7 @@ def fetch_and_save_all(target_dc=None):
     total_tasks = len(all_tasks)
 
     with ThreadPoolExecutor(max_workers=2) as executor:
-        futures = {executor.submit(fetch_single_dc_data, dc, chunk): (dc, chunk) for dc, chunk in all_tasks}
+        futures = {executor.submit(fetch_single_dc_data, dc, chunk, entries_within, entries_to_return): (dc, chunk) for dc, chunk in all_tasks}
 
         for future in as_completed(futures):
             completed_count += 1
