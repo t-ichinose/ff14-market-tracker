@@ -2968,13 +2968,13 @@ function renderPcArbitrageMonitorPane(itemId, itemTitle, itemIcon, sourceWorld, 
       pcArbSelectedRoi = roiPercent;
 
       const sourceItems = allData[sourceWorld] || [];
-      const sourceItem = sourceItems.find(x => x.item_id === itemId);
-      const sourceBuyPrice = sourceItem ? (getRecent3DayAvg(sourceItem) || sourceItem.avg_price || 0) : 0;
+      const sourceItem = sourceItems.find(x => (x.item_id || x.id) == itemId);
+      const sourceBuyPrice = sourceItem ? (getRecent3DayAvg(sourceItem) || sourceItem.avg_price || sourceItem.min_price || 0) : 0;
       const sourceTrendObj = getOrComputeDailyTrend(sourceItem);
 
       const homeItems = allData[homeWorld] || [];
-      const homeItem = homeItems.find(x => x.item_id === itemId);
-      const homeSellPrice = homeItem ? (getRecent3DayAvg(homeItem) || homeItem.avg_price || 0) : 0;
+      const homeItem = homeItems.find(x => (x.item_id || x.id) == itemId);
+      const homeSellPrice = homeItem ? (getRecent3DayAvg(homeItem) || homeItem.avg_price || homeItem.min_price || 0) : 0;
       const homeTrendObj = getOrComputeDailyTrend(homeItem);
 
       const lodestoneUrl = `https://jp.finalfantasyxiv.com/lodestone/playguide/db/item/?patch=&db_search_category=item&category2=&q=${encodeURIComponent(itemTitle)}`;
@@ -3476,14 +3476,14 @@ function updateArbitrageFilters() {
         const targetSellGuide = op.sellPrice.toLocaleString();
 
         const sourceItems = allData[op.sourceWorld] || [];
-        const sourceItem = sourceItems.find(x => x.item_id === op.itemId) || item;
+        const sourceItem = sourceItems.find(x => (x.item_id || x.id) == op.itemId) || item;
         const sourceTrendObj = getOrComputeDailyTrend(sourceItem);
         const sourceTrendPct = sourceTrendObj.trendPct;
         const sourceSparkline = generateSparklineSvg(sourceItem, 44, 12);
         const sourceBadge = buildTrendBadgeHtml(sourceTrendPct, { fontSize: '0.64rem' });
 
         const homeItems = allData[arbHomeWorld] || [];
-        const homeItem = homeItems.find(x => x.item_id === op.itemId) || item;
+        const homeItem = homeItems.find(x => (x.item_id || x.id) == op.itemId) || item;
         const homeTrendObj = getOrComputeDailyTrend(homeItem);
         const homeTrendPct = homeTrendObj.trendPct;
         const homeSparkline = generateSparklineSvg(homeItem, 44, 12);
