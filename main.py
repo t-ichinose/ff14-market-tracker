@@ -442,7 +442,7 @@ def fetch_and_save_all(target_dc=None):
         print(f"=== Initial Seed Mode: DB contains {existing_sales_count:,} records. Fetching 7d transactions ===", flush=True)
 
     target_ids = list(recent_ids_all)
-    chunk_size = 25
+    chunk_size = 50
     item_chunks = [target_ids[i:i + chunk_size] for i in range(0, len(target_ids), chunk_size)]
     all_tasks = [(dc, chunk) for chunk in item_chunks for dc in dcs]
 
