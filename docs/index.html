@@ -1820,35 +1820,35 @@
 
               <!-- 内枠: 左右完全同期3行グリッド (1行目=売買数/最安, 2行目=件数/平均, 3行目=流通/最高) -->
               <div class="item-section-box latest-box" style="padding: 6px 10px;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; row-gap: 4px; column-gap: 12px; align-items: center;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; row-gap: 4px; column-gap: 12px; align-items: stretch;">
                   
                   <!-- 行1: 左=売買数 | 右=最安値 -->
-                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 8px;">
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 8px; height: 22px; min-height: 22px;">
                     <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-bolt" style="color: var(--accent-blue); width: 12px; text-align: center;"></i> 売買数:</span>
                     <strong style="color: var(--accent-blue); font-size: 0.76rem;">${cVel}個/日</strong>
                   </div>
-                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between;">
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; height: 22px; min-height: 22px;">
                     <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-tag" style="color: #38bdf8; width: 12px; text-align: center;"></i> 最安:</span>
                     <strong style="color: #38bdf8; font-size: 0.76rem;">${cMin}G</strong>
                   </div>
 
                   <!-- 行2: 左=件数 | 右=平均値 -->
-                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 8px;">
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 8px; height: 22px; min-height: 22px;">
                     <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-receipt" style="color: #a855f7; width: 12px; text-align: center;"></i> 件数:</span>
                     <strong style="color: #a855f7; font-size: 0.76rem;">${cTrades}件/日</strong>
                   </div>
 
-                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between;">
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; height: 22px; min-height: 22px;">
                     <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-scale-balanced" style="color: #c084fc; width: 12px; text-align: center;"></i> 平均:</span>
                     <strong style="color: #c084fc; font-size: 0.76rem;">${cAvg}G</strong>
                   </div>
 
                   <!-- 行3: 左=流通ギル | 右=最高値 -->
-                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 8px;">
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 8px; height: 22px; min-height: 22px;">
                     <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-coins" style="color: #ffb703; width: 12px; text-align: center;"></i> 流通:</span>
                     <strong style="color: #ffb703; font-size: 0.76rem;">${dailyRevenue}G/日</strong>
                   </div>
-                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between;">
+                  <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.72rem; display: flex; align-items: center; justify-content: space-between; height: 22px; min-height: 22px;">
                     <span class="lbl" style="color: #94a3b8; font-size: 0.66rem; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-arrow-trend-up" style="color: #f472b6; width: 12px; text-align: center;"></i> 最高:</span>
                     <strong style="color: #f472b6; font-size: 0.76rem;">${cMax}G</strong>
                   </div>
