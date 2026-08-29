@@ -2,8 +2,8 @@ name: Scheduled Market Research Update
 
 on:
   schedule:
-    # 1時間間隔で全4DCを一括更新 (毎時7分)
-    - cron: '7 * * * *'
+    # 30分間隔で全4DCを一括更新 (毎時23分, 53分)
+    - cron: '23,53 * * * *'
   workflow_dispatch:
     inputs:
       target_dc:
